@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.itwillbs.mapper.ProjectMapper">
+  	 <insert id="insertProj">
+  	 	insert into project (work_field,proj_title,proj_progress,start_date,date_nego,work_period,
+  	 	no_recruited,deadline,proj_cost,cost_nego,pmeet_meth,meet_meth,meet_cycle,proj_content,job_level,
+  	 	career_proof,wanted_career,dlvy_msg) 
+  	 	values(#{work_field},#{proj_title},#{proj_progress},#{start_date},#{date_nego},#{work_period},
+  	 	#{no_recruited},#{deadline},#{proj_cost},#{cost_nego},#{pmeet_meth},#{meet_meth},#{meet_cycle},#{proj_content},#{job_level},
+  	 	#{career_proof},#{wanted_career},#{dlvy_msg})
+  	 </insert>
+  	 
+  
+  </mapper>
