@@ -4,7 +4,7 @@
 <html>
 <head>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 </style>
 <link href="../resources/css/main.css" rel="stylesheet" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -27,8 +27,8 @@
           <li><a href="#" class="nav-link px-3 link-body-emphasis nav-r1">프리랜서 찾기</a></li>
           <li><a href="#" class="nav-link px-3 link-body-emphasis nav-r1">프로젝트 등록</a></li>
           <li><a href="#" class="nav-link px-3 link-body-emphasis nav-r1">이용방법</a></li>
-          <li><a href="#" class="nav-link px-2 link-body-emphasis nav-r3">내 프로필</a></li>
-          <li><a href="#" class="nav-link px-2 link-body-emphasis nav-r2">내 프로젝트 등록</a></li>
+          <li><a href="#" class="nav-link px-2 link-body-emphasis nav-r4">내 프로필</a></li>
+          <li><a href="#" class="nav-link px-2 link-body-emphasis nav-r4">내 프로젝트 등록</a></li>
         </ul>
 
         <div class="dropdown text-end pro-l">
@@ -46,13 +46,11 @@
     </div>
   </header>
   
-  <div class="container-fluid pb-2">
-    <div class="d-grid gap-3" style="grid-template-columns: 1fr 2fr;">
-      <div class="bg-body-tertiary border rounded-3">
-        <img src="../resources/뽀림.png" alt="test" height="349"/>
-      </div>
-    </div>
-  </div>
+<h1>대한민국 NO.1
+IT 프리랜서 매칭 플랫폼</h1>
+
+<h2><p>강력한 어쩌고로 가장 정확하게, 쉽고 빠르게
+프로젝트 매칭을 경험하세요!</p></h2>
   
   <button class="btn rounded-3 px-3" id="b1" type="button" style="background-color: #F76A22; color: #fff">무료로 프로젝트 등록</button>
   <button class="btn btn-outline-dark rounded-3" id="b2" type="button" >회원가입</button>
