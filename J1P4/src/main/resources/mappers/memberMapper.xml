@@ -5,6 +5,9 @@
   
   <mapper namespace="com.itwillbs.mapper.MemberMapper">
   	 
-  	 
+  	 <!-- 유저정보 목록() -->
+	 <select id="memberList" resultType="com.itwillbs.domain.MemberVO">
+	 	select * from tbl_member	 
+	 </select> 	 
   
   </mapper>
