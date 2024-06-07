@@ -14,6 +14,7 @@ public class MainController {
 	
 	// 서비스 객체 주입
 	
+	// https://localhost:8088/main
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public void mainGET() {
 		logger.debug(" /main -> mainGET() 호출 ");
