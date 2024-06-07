@@ -34,19 +34,7 @@ public class MemberDAOImpl implements MemberDAO {
 	               = "com.itwillbs.mapper.MemberMapper.";
 	
 
-	@Override
-	public void insertTest(MemberVO vo) {
-		System.out.println(" DAO : insertTest(vo) 호출 ");
-		
-		// mapper 생성된 sql 구문 실행
-		//sqlSession.insert(sql구문, 전달할 값);
-		sqlSession.insert(NAMESPACE + "testJoin", vo); // 객체 단위로 정보 전달(자동으로 값들을 매핑)
-		// vo는 매개변수 MemberVO vo를 뜻하는 것임! 만약 매개변수가 없다면 하나만 들었는애 쓰면 된다.
-		
-		
-		System.out.println(" DAO : 테스트 완료! ");
-		
-	}
+
 
 
 	//회원가입
@@ -58,14 +46,7 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	
-	//로그인
-	@Override
-	public MemberVO login(MemberVO vo) {
-		
-		return sqlSession.selectOne(NAMESPACE+"memberLogin", vo);
-		
-	}
-
+	
 
 	
 	

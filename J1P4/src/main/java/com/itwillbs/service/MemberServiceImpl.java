@@ -29,19 +29,6 @@ public class MemberServiceImpl implements MemberService {
 	private MemberDAO mdao;
 
 
-	@Override
-	public void testJoin(MemberVO vo) {
-		
-		// 컨트롤러 -> 서비스 
-		logger.debug(" testJoin(MemberVO2 vo) 실행 ");
-		
-		// DAO 메서드 호출
-		mdao.insertTest(vo);
-		
-		logger.debug(" ╰(*°▽°*)╯ 테스트 성공 ! ╰(*°▽°*)╯ ");
-		
-	}
-
 	
 	//회원가입
 	@Override
@@ -51,13 +38,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
-	
-	//로그인
-	@Override
-	public MemberVO memberLogin(MemberVO loginVO) {
-		
-		return mdao.login(loginVO);
-	}
 	
 	
 	

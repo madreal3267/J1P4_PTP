@@ -31,45 +31,7 @@ public class MemberController {
 	@Inject
 	private MemberService mService;
 	
-	// http://localhost:8088/member/test
-	// 회원가입 - 회원정보 입력(GET - 정보 보여주는 형태)
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public void insertGET() {
-		logger.debug(" /test -> insertGET() 호출 ");
-		// 연결된 뷰페이지 실행 /WEB-INF/views/member/test.jsp
-		logger.debug("/views/member/insert.jsp 페이지 연결");
-	}
-	
-	
-	// 회원가입 - 입력받은 정보 처리(POST - 정보 처리하는 형태)
-	@RequestMapping(value = "/test", method = RequestMethod.POST)
-	public String insertPOST(MemberVO vo) {
-		logger.debug(" /insert -> insertPOST() 호출 ");
-		// 한글 인코딩 => web.xml에 필터를 사용해서 처리
-//		requset.setCharacterEncoding(); (x)
-		
-		// 전달정보를 저장(파라메터 - 아이디, 비밀번호, 이름, 이메일)
-		// => 컨트롤러가 자동으로 파라메터 수집
-		logger.debug(" vo : "+ vo);
-		
-		// 서비스 => DB에 회원가입 처리 메서드 호출
-		mService.testJoin(vo);
-		
-		// 연결된 뷰페이지 실행(페이지 이동) -> 로그인 페이지		
-		return "redirect:/member/test2";
-	}
-	
-	@RequestMapping(value = "/test2", method = RequestMethod.GET)
-	public void testGET() {
-		logger.debug(" /test2 -> testGET() 호출 ");
-		// 연결된 뷰페이지 실행 /WEB-INF/views/member/test.jsp
-		logger.debug("/views/member/test2.jsp 페이지 연결");
-	}
-	
-	
-	
-	
-	//---------------------------------------------------------------------------------------
+
 	//회원가입 페이지
 	// http://localhost:8088/member/insert
 	
@@ -89,34 +51,6 @@ public class MemberController {
 		return "redirect:/member/test2"; // 회원가입하기 눌렀을때 어디로 페이지 이동할지 정하는 것!
 		
 	}
-	
-//-----------------------------------------------------------------------------------------
-	
-	
-	//http://localhost:8088/member/login
-	//로그인 페이지 
-	//GET
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String loginGET() {
-		
-		return"/member/login";
-	}
-	
-	//POST
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String loginPOST(HttpSession session, MemberVO vo ) {
-		
-		MemberVO resultVO= mService.memberLogin(vo);
-		
-		if(resultVO == null ) {
-			
-			return "redirect:/member/login";
-		}
-		
-		session.setAttribute("user_id", resultVO.getUser_id());
-		return"redirect:/member/test2";
-	}
-	
 	
 	
 	

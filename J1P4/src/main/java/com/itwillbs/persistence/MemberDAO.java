@@ -10,16 +10,10 @@ import com.itwillbs.domain.MemberVO;
  */
 public interface MemberDAO {
 	
-	// 테스트
-	public void insertTest(MemberVO vo);
 	
 	//회원가입
 	
 	public void insert(MemberVO vo);
-	
-	//로그인
-	public MemberVO login(MemberVO vo);
-	
 	
 	
 	
