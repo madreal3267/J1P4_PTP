@@ -6,8 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.itwillbs.domain.ProjectVO;
 import com.itwillbs.service.EnrollProjService;
 
 @Controller
@@ -27,4 +29,22 @@ public class EnrollProjController {
 		logger.debug(" ( •̀ ω •́ )y /views/enroll/enrollProj.jsp 페이지 연결 ");
 		
 	}
+	
+	@PostMapping(value = "enrollProj")
+	public String enrollPOST(ProjectVO vo) {
+		logger.debug(" (＃°Д°) /enrollProj -> enrollPOST() 실행 ");
+		
+		eService.insertProj(vo);
+		
+		return "redirect:/enroll/enrollSuccess";
+	}
+	
+	@GetMapping(value="enrollSuccess")
+	public void enrollSuccessGET() {
+		logger.debug(" ( •̀ ω •́ )y /enrollSuccess -> enrollSuccessGET() 실행 ");
+		
+		logger.debug(" ( •̀ ω •́ )y /views/enroll/enrollSuccess.jsp 페이지 연결 ");
+		
+	}
+	
 }

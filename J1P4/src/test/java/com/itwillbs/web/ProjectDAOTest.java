@@ -37,8 +37,8 @@ public class ProjectDAOTest {
 		vo.setWork_field("개발");
 		vo.setProj_title("한번더 테스트 시도 해봄");
 		vo.setProj_progress(1);
-		vo.setDeadline(ld.now());
-		vo.setStart_date(ld.now());
+//		vo.setDeadline(ld.now());
+//		vo.setStart_date(ld.now());
 		vo.setWork_period(18);
 		vo.setNo_recruited(100);
 		vo.setProj_cost(100000);
