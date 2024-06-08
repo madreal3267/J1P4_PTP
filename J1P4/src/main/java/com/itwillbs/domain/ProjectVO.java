@@ -6,7 +6,8 @@ import lombok.Data;
 
 @Data
 public class ProjectVO {
-
+	
+	private String user_id;
 	private int proj_no;
 	private int ct_no;
 	private int free_no;
@@ -34,5 +35,6 @@ public class ProjectVO {
 	private String reject_reason;
 	private Timestamp reg_date;
 	private Timestamp mod_date;
+	private String temporary;
 	
 }

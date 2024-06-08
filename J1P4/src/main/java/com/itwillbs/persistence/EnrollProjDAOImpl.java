@@ -30,5 +30,4 @@ public class EnrollProjDAOImpl implements EnrollProjDAO {
 		logger.debug(" DAO : 프로젝트 등록 완료! ╰(*°▽°*)╯ ");
 	}
 	
-	
 }

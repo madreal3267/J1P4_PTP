@@ -11,14 +11,13 @@ font-family: "Nanum Gothic", sans-serif !important;
 </style>
 <link href="../resources/css/main.css" rel="stylesheet" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <title>프로젝트 등록 페이지</title>
 </head>
 <body>
 	<h1>enrollProj.jsp</h1>
 	
-	<form action="/enroll/enrollProj" method="post">
+	<form action="/enroll/enrollProj" method="post" name="sub1">
 	<h2><b>어떤 프로젝트 업무를 맡기고 싶으신가요?</b></h2>
 	<h3>나중에 변경 가능하니 걱정하지 마세요</h3>
 
@@ -36,7 +35,7 @@ font-family: "Nanum Gothic", sans-serif !important;
 	
 	<hr>
 	<h2><b>프로젝트 진행 분류</b></h2>
-	  <input type="text" name="proj_title" placeholder="프로젝트 제목을 입력해주세요" style="width: 500px">
+	  <input type="text" name="proj_title" placeholder="프로젝트 제목을 입력해주세요" style="width: 500px" id="butt">
 	
 	<hr>
 	<h2><b>프로젝트를 간단하게 알려주세요</b></h2>
@@ -53,12 +52,13 @@ font-family: "Nanum Gothic", sans-serif !important;
 	<hr>
 	<h2><b>예상 진행 기간</b></h2>
 	<h3>프로젝트 진행 기간을 입력해 주세요.</h3>
-	  <input type="number" name="work_period"> 일
+	  <input type="text" name="work_period"> 일
+	  <!-- 	400 에러 발생 : number 태그에서 발생 => text 태그로 교체 -->
 	  
 	<hr>
 	<h2><b>모집 인원</b></h2>
 	<h3>프로젝트에 필요한 인원을 입력해 주세요.</h3>
-	  <input type="number" name="no_recruited"> 명
+	  <input type="text" name="no_recruited"> 명
 	  
 	<hr>
 	<h2><b>모집 마감일</b></h2>
@@ -69,7 +69,7 @@ font-family: "Nanum Gothic", sans-serif !important;
 	<hr>
 	<h2><b>작업 단가</b></h2>
 	<h3>프로젝트에 지출 가능한 예산을 입력해 주세요.</h3>
-	  <input type="number" name="proj_cost"> 원 <br>
+	  <input type="text" name="proj_cost"> 원 <br>
 	  <input type="checkbox" name="cost_nego" value=1> 입력한 예산에서 조율이 가능합니다.
 	  
 	<hr>
@@ -93,11 +93,11 @@ font-family: "Nanum Gothic", sans-serif !important;
 	<h3>프리랜서가 미팅 위치 선정시 클라이언트님의 위치를 참고합니다.</h3>
 	시/도 시/군/구 드롭다운 기능 구현 찾아보기 - 공통 코드 엮기
 	
-	<hr>
+<!-- 	<hr> -->
 <!-- 	<h2><b>프로젝트 상세 내용</b></h2> -->
 <!-- 	<h3>프리랜서의 담당역할 및 업무범위를 입력해 주세요.</h3> -->
 <!-- 	  <textarea rows="10" cols="60" name="proj_content"></textarea> -->
-	<!-- 400 에러 발생 : textarea 태그에서만 발생 중 -->
+<!-- 	400 에러 발생 : textarea 태그에서 발생 중 -->
 	
 	<hr>
 	<h2><b>주요 기술 스택</b></h2>
@@ -121,7 +121,7 @@ font-family: "Nanum Gothic", sans-serif !important;
 	<hr>
 	<h2><b>희망 경력</b></h2>
 	<h3>희망하는 프리랜서의 경력을 입력해 주세요.</h3>
-	  <input type="number" name="wanted_career"> 년
+	  <input type="text" name="wanted_career"> 년
 	  
 	<hr>
 	<h2><b>경력 증빙 자료</b></h2>
@@ -139,13 +139,47 @@ font-family: "Nanum Gothic", sans-serif !important;
 <!-- 	  <textarea rows="10" cols="60" name="dlvy_msg"></textarea><br> -->
 	  	  
 	<hr>
-	  <input type="button" value="임시저장">
+	  <input type="button" value="임시저장" id="btn_submit">
 	  <!-- 임시저장 기능은 임시저장 테이블을 만들려고 했지만
 	  본테이블(Project)에 데이터를 저장하고 임시저장여부 컬럼을 추가하는 것이 좋다는 글을 봄
 	  참고링크 : https://okky.kr/questions/1033588
 	  -->
 	  <input type="submit" value="등록">
 	  
+	  <input type="hidden" value="user10" name="user_id">
+	  
 	</form>
+	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+	<script src="../resources/js/enrollPro.js" type="text/javascript"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script>
+	$(function(){
+		
+		$("#btn_submit").click(function(){
+			
+			var formData = $("sub1").serialize();
+			
+			$.ajax({
+				type:"POST",
+				data:formData,
+				url:"/enroll/enrollProj",
+				dataType:"text",
+				success: function(result) { //controller에서 return받은 message부분임
+					if(result == "ok"){
+						alert("저장 완료");
+					}else{
+						alert("저장실패");
+					}
+				},
+			    error: function() { //시스템에러
+			    	alert("오류발생");
+				}
+			});
+			
+		});
+		
+	});
+	</script>
 </body>
 </html>

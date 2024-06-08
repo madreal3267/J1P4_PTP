@@ -24,7 +24,6 @@ public class EnrollProjServiceImpl implements EnrollProjService {
 		pdao.insertProj(vo);
 		
 		logger.debug(" (●'◡'●) 프로젝트 등록 성공! (●'◡'●) ");
-	}
-	
+	}	
 	
 }
