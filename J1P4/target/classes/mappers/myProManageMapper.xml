@@ -10,4 +10,138 @@
 		select now() 
 	</select>
   
+    <!-- 관심 프로젝트 정보 조회 -->
+    <select id="interestProjectList" resultType="com.itwillbs.domain.ProjectVO">
+    	select * from project	
+<!--     	select * from project p  -->
+<!--     	join bookmark b on p.proj_no = b.proj_no -->
+<!--     	join freelancer f on b.free_id = f.free_id -->
+<!--     	where f.free_id=#{user_id}    	 -->
+    </select>  
+    
+    <!-- 제안받은 프로젝트 정보 조회 -->
+	<select id="proposedProjectList" resultType="com.itwillbs.domain.ProjectVO">
+		select * from project
+<!-- 		select * from project p -->
+<!-- 		join offer_mgmt o on p.proj_no = o.proj_no -->
+<!-- 		join freelancer f on f.free_no = o.free_no   -->
+<!-- 		where f.free_id = #{user_id} -->
+	</select>    
+
+	<!-- 지원 중 프로젝트 정보 조회-->
+	<select id="applyingProjectList" resultType="com.itwillbs.domain.ProjectVO">
+		select * from project
+<!-- 		select * from project p -->
+<!-- 		join apply_mgmt a on a.proj_no = p.proj_no -->
+<!-- 		join freelancer f on f.free_no = a.free_no	 -->
+<!-- 		where f.free_id = #{user_id} -->
+	</select>
+
+	<!-- 지원 종료 프로젝트 정보 조회 -->
+	<select id="endApplyProjectList" resultType="com.itwillbs.domain.ProjectVO">
+		select * from project
+<!-- 		select * from project p -->
+<!-- 		join apply_mgmt a on a.proj_no = p.proj_no -->
+<!-- 		join freelancer f on f.free_no = a.free_no -->
+<!-- 		where f.free_id = #{user_id} -->
+	</select>	
+	
+	<!-- 계약 진행중(미완-담당매니저,ct_no는 ct_id로) -->
+	<select id="contractProjectList" resultType="com.itwillbs.domain.ProjectVO">		
+		select * from project
+	</select>	
+	
+	<!-- 프로젝트 진행중(미완-담당매니저,진행상태+resultType) -->
+	<select id="ongoingProjectList" resultType="com.itwillbs.domain.ProjectVO">		
+		select * from project
+<!-- 		select p.proj_no, p.porj_title, c.ct_id, s.ma -->
+<!-- 		from project p -->
+<!-- 		join client c on p.ct_no = c.ct_no -->
+	</select>
+	
+	<!-- 평가 대기중(미완-작성기간) -->
+	<select id="waitEvaluationProjectList" resultType="com.itwillbs.domain.ProjectVO">
+		select * from project
+	</select>
+	
+	<!-- 완료한 프로젝트(미완-별점,평가내용) -->
+	<select id="completedProjectList" resultType="com.itwillbs.domain.ProjectVO">
+		select * from project
+	</select>
+	
+	<!-- 관심 프리랜서 -->
+	<select id="interestFreelancerList" resultType="com.itwillbs.domain.FreelancerVO">
+		select * from freelancer
+	</select>
+	
+	<!-- 제안한 프리랜서 -->
+	<select id="proposeFreelancerList" resultType="com.itwillbs.domain.FreelancerVO">
+		select * from freelancer
+	</select>
+	
+	<!-- 검수중 프로젝트-->
+	<select id="underReviewProjectList" resultType="com.itwillbs.domain.ProjectVO">
+		select * from project
+	</select>	
+	
+	<!-- 임시저장 프로젝트 -->
+	<select id="temSaveProjectList" resultType="com.itwillbs.domain.ProjectVO">
+		select * from project
+	</select>	
+	
+	<!-- 등록실패 프로젝트 -->
+	<select id="regFailedProjectList" resultType="com.itwillbs.domain.ProjectVO">
+		select * from project
+	</select>	
+	
+	<!-- 지원자 모집중 프로젝트 -->
+	<select id="recruitingProjectList" resultType="com.itwillbs.domain.ProjectVO">
+		select * from project
+	</select>	
+	
+	<!-- 계약 진행중 프로젝트 -->
+	<select id="ctContractProjectList" resultType="com.itwillbs.domain.ProjectVO">
+		select * from project
+	</select>	
+	
+	<!-- 프로젝트 진행중 목록 -->
+	<select id="ctOngoingProjectList" resultType="com.itwillbs.domain.ProjectVO">
+		select * from project
+	</select>	
+	
+	<!-- 평가대기중 프리랜서-->
+	<select id="waitEvaluationFreelancerList" resultType="com.itwillbs.domain.FreelancerVO">
+		select * from freelancer
+	</select>
+
+	<!-- 완료한 프로젝트의 평가완료 프리랜서 -->
+	<select id="completedFreelancerList" resultType="com.itwillbs.domain.FreelancerVO">
+		select * from freelancer
+	</select>	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
   </mapper>

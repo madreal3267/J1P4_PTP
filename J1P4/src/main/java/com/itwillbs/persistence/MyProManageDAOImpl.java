@@ -1,11 +1,16 @@
 package com.itwillbs.persistence;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+
+import com.itwillbs.domain.FreelancerVO;
+import com.itwillbs.domain.ProjectVO;
 
 @Repository
 public class MyProManageDAOImpl implements MyProManageDAO {
@@ -23,6 +28,132 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 		String result = sqlSession.selectOne(NAMESPACE+"getTime");
 		logger.debug("DAO : 결과 -" + result);
 		return result;
+	}
+
+	@Override
+	public List<ProjectVO> interestProjectList() {
+		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE + "interestProjectList");
+		
+		return resultVO;
+	}
+
+	@Override
+	public List<ProjectVO> proposedProjectList() {
+		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE + "proposedProjectList");
+
+		return resultVO;
+	}
+
+	@Override
+	public List<ProjectVO> applyingProjectList() {
+		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE + "applyingProjectList");
+		
+		return resultVO;
+	}
+
+	@Override
+	public List<ProjectVO> endApplyProjectList() {
+		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE + "endApplyProjectList");
+		
+		return resultVO;
+	}
+
+	@Override
+	public List<ProjectVO> contractProjectList() {
+		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"contractProjectList");
+		
+		return resultVO;
+	}
+
+	@Override
+	public List<ProjectVO> ongoingProjectList() {
+		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"ongoingProjectList");
+		
+		return resultVO;
+	}
+
+	@Override
+	public List<ProjectVO> waitEvaluationProjectList() {
+		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"waitEvaluationProjectList");
+		
+		return resultVO;
+	}
+
+	@Override
+	public List<ProjectVO> completedProjectList() {
+		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"completedProjectList");
+		
+		return resultVO;
+	}
+
+	@Override
+	public List<FreelancerVO> interestFreelancerList() {
+		List<FreelancerVO> resultVO =sqlSession.selectList(NAMESPACE+"interestFreelancerList");
+		
+		return resultVO;
+	}
+
+	@Override
+	public List<FreelancerVO> proposeFreelancerList() {
+		List<FreelancerVO> resultVO =sqlSession.selectList(NAMESPACE+"proposeFreelancerList");
+		
+		return resultVO;
+	}
+
+	@Override
+	public List<ProjectVO> underReviewProjectList() {
+		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"underReviewProjectList");
+		
+		return resultVO;
+	}
+
+	@Override
+	public List<ProjectVO> temSaveProjectList() {
+		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"temSaveProjectList");
+		
+		return resultVO;
+	}
+
+	@Override
+	public List<ProjectVO> regFailedProjectList() {
+		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"regFailedProjectList");
+		
+		return resultVO;
+	}
+
+	@Override
+	public List<ProjectVO> recruitingProjectList() {
+		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"recruitingProjectList");
+		
+		return resultVO;
+	}
+
+	@Override
+	public List<ProjectVO> ctContractProjectList() {
+		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"ctContractProjectList");
+		
+		return resultVO;
+	}
+
+	@Override
+	public List<ProjectVO> ctOngoingProjectList() {
+		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"ctOngoingProjectList");
+		
+		return resultVO;
+	}
+
+	@Override
+	public List<FreelancerVO> waitEvaluationFreelancerList() {
+		List<FreelancerVO> resultVO =sqlSession.selectList(NAMESPACE+"waitEvaluationFreelancerList");
+		
+		return resultVO;
+	}
+
+	@Override
+	public List<FreelancerVO> completedFreelancerList() {
+		List<FreelancerVO> resultVO =sqlSession.selectList(NAMESPACE+"completedFreelancerList");
+		
+		return resultVO;
 	}
 	
 	

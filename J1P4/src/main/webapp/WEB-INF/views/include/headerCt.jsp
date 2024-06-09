@@ -295,45 +295,53 @@
             <li class="header"><i class="fa fa-laptop"></i> 내 프로젝트 관리</li>
            
             <li>
-              <a href="../myProManage/interestProject">
-                <span>관심 프로젝트</span>
-                <small class="label pull-right bg-green">3</small>
+              <a href="../myProManageCt/interestFreelancer">
+                <span>관심 프리랜서</span>
               </a>
             </li>
             <li>
-              <a href="../myProManage/proposedProject">
-                <span>제안받은 프로젝트</span>
-                <small class="label pull-right bg-green">1</small>
+              <a href="../myProManageCt/proposeFreelancer">
+                <span>제안한 프리랜서</span>
               </a>
             </li>
            
             <li class="treeview">
               <a href="#">
-                <span>지원내역</span> <i class="fa fa-angle-left pull-right"></i>
+                <span>검수중</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="../myProManage/applyingProject"><i class="fa fa-circle-o"></i> 지원중</a></li>
-                <li><a href="../myProManage/endApplyProject"><i class="fa fa-circle-o"></i> 지원 종료</a></li>
+                <li><a href="../myProManageCt/underReviewProject"><i class="fa fa-circle-o"></i> 검수중 </a></li>
+                <li><a href="../myProManageCt/temSaveProject"><i class="fa fa-circle-o"></i> 임시저장</a></li>
+                <li><a href="../myProManageCt/regFailedProject"><i class="fa fa-circle-o"></i> 등록실패</a></li>
               </ul>
             </li>
             <li class="treeview">
               <a href="#">
-                <span>진행중인 프로젝트</span>
+                <span>지원자 모집중</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="../myProManage/contractProject"><i class="fa fa-circle-o"></i> 계약 진행 중</a></li>
-                <li><a href="../myProManage/ongoingProject"><i class="fa fa-circle-o text-aqua"></i> 프로젝트 진행 중</a></li>
+                <li><a href="../myProManageCt/recruitingProject"><i class="fa fa-circle-o"></i> 지원자 모집 중</a></li>
               </ul>
             </li>
             <li class="treeview">
               <a href="#">
-                <span>완료한 프로젝트</span>
+                <span>진행 중인 프로젝트</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="../myProManage/waitEvaluationProject"><i class="fa fa-circle-o"></i> 평가 대기중</a></li>
-                <li><a href="../myProManage/completedProject"><i class="fa fa-circle-o"></i> 완료한 프로젝트</a></li>
+                <li><a href="../myProManageCt/ctContractProject"><i class="fa fa-circle-o"></i> 계약 진행 중</a></li>
+                <li><a href="../myProManageCt/ctOngoingProject"><i class="fa fa-circle-o"></i> 프로젝트 진행 중</a></li>
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <span>종료된 프로젝트</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="../myProManageCt/waitEvaluationFreelancer"><i class="fa fa-circle-o"></i> 평가 대기중</a></li>
+                <li><a href="../myProManageCt/completedFreelancer"><i class="fa fa-circle-o"></i> 완료한 프로젝트</a></li>
               </ul>
             </li>
             
