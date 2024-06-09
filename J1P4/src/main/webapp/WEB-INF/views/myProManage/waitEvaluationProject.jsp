@@ -13,7 +13,7 @@
 	
 	<section>
 		<div>평가 기간 내에만 작성하실 수 있습니다. </div> 
-		
+	
 		<c:forEach var="projectVO" items="${waitEvaluationProjectList}">
 			<p> ${projectVO.proj_title }
 				${projectVO.ct_no }	
@@ -43,6 +43,7 @@
 			</div>
 		</div>			
 	</section>
+
 
 
 

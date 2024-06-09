@@ -292,7 +292,7 @@
           
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
-            <li class="header"><i class="fa fa-laptop"></i> 내 프로젝트 관리</li>
+            <li class="header"><font size="4"><i class="fa fa-laptop"></i> 내 프로젝트 관리</font></li>
            
             <li>
               <a href="../myProManage/interestProject">
@@ -343,7 +343,7 @@
       </aside>
 
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
+      <div class="content-wrapper" >
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>

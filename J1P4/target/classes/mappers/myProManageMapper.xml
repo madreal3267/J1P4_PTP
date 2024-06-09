@@ -16,7 +16,7 @@
 <!--     	select * from project p  -->
 <!--     	join bookmark b on p.proj_no = b.proj_no -->
 <!--     	join freelancer f on b.free_id = f.free_id -->
-<!--     	where f.free_id=#{user_id}    	 -->
+<!--     	where f.free_id=#{user_id}    워크벤치 작동 O-->
     </select>  
     
     <!-- 제안받은 프로젝트 정보 조회 -->
@@ -25,7 +25,7 @@
 <!-- 		select * from project p -->
 <!-- 		join offer_mgmt o on p.proj_no = o.proj_no -->
 <!-- 		join freelancer f on f.free_no = o.free_no   -->
-<!-- 		where f.free_id = #{user_id} -->
+<!-- 		where f.free_id = #{user_id}  워크벤치 작동 O-->
 	</select>    
 
 	<!-- 지원 중 프로젝트 정보 조회-->
@@ -34,7 +34,7 @@
 <!-- 		select * from project p -->
 <!-- 		join apply_mgmt a on a.proj_no = p.proj_no -->
 <!-- 		join freelancer f on f.free_no = a.free_no	 -->
-<!-- 		where f.free_id = #{user_id} -->
+<!-- 		where f.free_id = #{user_id} 워크벤치 작동 O -->
 	</select>
 
 	<!-- 지원 종료 프로젝트 정보 조회 -->
@@ -43,7 +43,7 @@
 <!-- 		select * from project p -->
 <!-- 		join apply_mgmt a on a.proj_no = p.proj_no -->
 <!-- 		join freelancer f on f.free_no = a.free_no -->
-<!-- 		where f.free_id = #{user_id} -->
+<!-- 		where f.free_id = #{user_id} and p.deadline < now() 워크 벤치 작동 O -->
 	</select>	
 	
 	<!-- 계약 진행중(미완-담당매니저,ct_no는 ct_id로) -->

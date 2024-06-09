@@ -242,6 +242,12 @@ th {
   select {
     background: #fff !important;
   }
+  /*  */
+  .content-wrapper {position: absolute;
+  					left: 50%;
+  					tranform:translate(-50%)
+  					}
+  /*  */
   .navbar {
     display: none;
   }

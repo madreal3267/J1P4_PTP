@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.domain.ProjectVO;
 import com.itwillbs.persistence.MyProManageDAO;
@@ -123,13 +124,25 @@ public class MyProManageController {
 	// 완료한 프로젝트 목록 조회
 	// http://localhost:8088/myProManage/completedProject
 	@RequestMapping(value = "/completedProject",method = RequestMethod.GET)
-	public void completedProjectList(Model model) {
+	public void completedProjectList(Model model,
+			@RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "5") int pageSize) {
 		logger.debug("/completedProject -> completedProjectList() 호출");
 		
 		List<ProjectVO> completedProjectList = myService.completedProjectList();
-		logger.debug("completedProjectList : " + completedProjectList.size());
+        int totalProjects = completedProjectList.size();
+        int totalPages = (int) Math.ceil((double) totalProjects / pageSize);
+
+        int startIndex = (page - 1) * pageSize;
+        int endIndex = Math.min(startIndex + pageSize, totalProjects);
+        List<ProjectVO> pageProjects = completedProjectList.subList(startIndex, endIndex);
+
+        model.addAttribute("pageProjects", pageProjects);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("pageSize", pageSize);
 		
-		model.addAttribute("completedProjectList", completedProjectList);		
+				
 	}		
 	
 	
