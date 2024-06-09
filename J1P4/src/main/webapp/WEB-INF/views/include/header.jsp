@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   
 <!DOCTYPE html>
 <html>
   <head>
@@ -18,23 +17,22 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins 
          folder instead of downloading all of them to reduce the load. -->
     <link href="../resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
-
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <!-- jQuery 2.1.4 -->
+    <script src="../resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
     
   </head>
-      <!-- jQuery 2.1.4 -->
-    <script src="../resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
   <body class="skin-blue sidebar-mini">
     <div class="wrapper">
-      
       <header class="main-header">
         <!-- Logo -->
-        <a href="../resources/index2.html" class="logo">
+        <a href="/admin/main" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>A</b>LT</span>
           <!-- logo for regular state and mobile devices -->
@@ -110,18 +108,6 @@
                           <p>Why not buy a new awesome theme?</p>
                         </a>
                       </li>
-                      <li>
-                        <a href="#">
-                          <div class="pull-left">
-                            <img src="../resources/dist/img/user4-128x128.jpg" class="img-circle" alt="user image"/>
-                          </div>
-                          <h4>
-                            Reviewers
-                            <small><i class="fa fa-clock-o"></i> 2 days</small>
-                          </h4>
-                          <p>Why not buy a new awesome theme?</p>
-                        </a>
-                      </li>
                     </ul>
                   </li>
                   <li class="footer"><a href="#">See All Messages</a></li>
@@ -153,7 +139,6 @@
                           <i class="fa fa-users text-red"></i> 5 new members joined
                         </a>
                       </li>
-
                       <li>
                         <a href="#">
                           <i class="fa fa-shopping-cart text-green"></i> 25 sales made
@@ -296,7 +281,6 @@
             </div>
             <div class="pull-left info">
               <p>admin</p>
-
               <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>
@@ -313,7 +297,6 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            
             
             <!-- 회원정보 관리 -->
             <li class="treeview">
@@ -386,13 +369,6 @@
             </li>
             <!-- 채팅 관리 -->
 
-            
-            
-           
-            
-            
-            
-          
           </ul>
         </section>
         <!-- /.sidebar -->

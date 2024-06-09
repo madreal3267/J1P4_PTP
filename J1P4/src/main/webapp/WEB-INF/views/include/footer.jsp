@@ -12,7 +12,6 @@
         <!-- Create the tabs -->
         <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
           <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-          
           <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
         </ul>
         <!-- Tab panes -->
@@ -174,7 +173,6 @@
            immediately after the control sidebar -->
       <div class='control-sidebar-bg'></div>
     </div><!-- ./wrapper -->
-
 
     <!-- Bootstrap 3.3.2 JS -->
     <script src="../resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
