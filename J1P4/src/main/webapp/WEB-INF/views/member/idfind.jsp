@@ -4,6 +4,16 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    
+    <script type="text/javascript">
+    var msg = "${msg}";
+    
+    if (msg != "") {
+        alert(msg);
+    }
+	</script>
+    
+    
     <title>아이디 찾기 폼</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
@@ -49,7 +59,7 @@
 <div class="form-group">
 <label for="inputPassword3" class="col-sm-2 control-label">이메일</label>
 <div class="col-sm-10">
-<input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+<input type="password" class="form-control" id="inputPassword3" placeholder="Email">
 </div>
 </div>
 <div class="form-group">
@@ -64,7 +74,7 @@
 </div>
 
 <div class="box-footer">
-<button type="submit" class="btn btn-default">회원가입</button>
+<button type="submit" class="btn btn-default">아이디 찾기</button>
 <button type="submit" class="btn btn-info pull-right">비밀번호 찾기</button>
 </div>
 

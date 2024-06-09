@@ -5,6 +5,27 @@
   
   <mapper namespace="com.itwillbs.mapper.MemberMapper">
   	 
+  	  <!-- 회원가입 -->
+  	 <insert id="join">
+  	 	insert into user (name,user_id,user_email,user_pw)
+  	 	values(#{name},#{user_id},#{user_email},#{user_pw})
+  	 </insert>
+  	 
+  	 <!-- 로그인 -->
+  	 <select id="memberLogin" resultType="com.itwillbs.domain.MemberVO">
+  	 	select * from user
+  	 	where user_id=#{user_id} and user_pw=#{user_pw}
+  	 </select>
+  	 
+  	 <!--이메일로 아이디 찾기 -->
+  	 <select id="findId" resultType="com.itwillbs.domain.MemberVO">
+		select * from user where user_email=#{user_email}
+	</select>
+
+	<!--입력한 이메일 수를 카운트해서 0이 나오면 팝업창에 "정확한 이메일 입력바람" -->
+	<select id="findIdCheck" resultType="int">
+		select count(*) from user where user_email=#{user_email}
+	</select>
   	 
   
   </mapper>

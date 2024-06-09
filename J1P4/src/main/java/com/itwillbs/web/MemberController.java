@@ -1,5 +1,6 @@
 package com.itwillbs.web;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.itwillbs.domain.MemberVO;
+import com.itwillbs.service.MemberService;
 
 @Controller
 @RequestMapping(value = "/member/*")
@@ -17,16 +19,22 @@ public class MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
-	//아이디 찾기
-	// http://localhost:8088/member/idfind
-	// http://localhost:8088/member/login
+	// 서비스 객체를 주입
+		@Inject
+		private MemberService mService;
 	
+	//로그인 페이지
+	// http://localhost:8088/member/login
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
 		
 		return"/member/login";
 	}
+
 	
+	
+	//아이디 찾기 페이지 
+	// http://localhost:8088/member/idfind
 	@RequestMapping(value = "/idfind", method = RequestMethod.GET)
 	public String search_id(HttpServletRequest request, Model model, MemberVO vo ) {
 		
@@ -34,6 +42,28 @@ public class MemberController {
 		return"/member/idfind";
 	}
 	
+	//아이디 찾기 로직
+	@RequestMapping(value="/findId", method=RequestMethod.POST)
+	public String findId(MemberVO vo,Model model) throws Exception{
+		logger.info("memberEmail"+vo.getUser_email());
+				
+		if(mService.findIdCheck(vo.getUser_email())==0) {
+		model.addAttribute("msg", "이메일이 맞는지 확인해주세요");
+		
+		return "/member/idfind";
+		
+		}else {
+		model.addAttribute("member", mService.findId(vo.getUser_email()));
+		
+		return"/member/findId";
+		}
+	}
+	
+	//Post로 처리하고, count한 값이 0이면 
+	//아이디찾기 페이지로 msg라는 String값을 보낸다.
+	//그렇지 않으면 아이디찾기 로직을 수행하고 /member/findId페이지로 이동
+	
+	//--------------------------------------------------------------
 	
 	
 
