@@ -13,6 +13,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.itwillbs.domain.ProjectVO;
+import com.itwillbs.domain.RegionVO;
+import com.itwillbs.domain.SkillVO;
 import com.itwillbs.persistence.EnrollProjDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -27,11 +29,11 @@ public class ProjectDAOTest {
 	@Inject
 	private EnrollProjDAO pdao;
 	
-	@Test
+//	@Test
 	public void testDAO() {
 		logger.debug(" DAO TEST : testDAO() 실행 ");
 		
-		LocalDate ld = null;
+//		LocalDate ld = null;
 		ProjectVO vo = new ProjectVO();
 		
 		vo.setWork_field("개발");
@@ -48,4 +50,48 @@ public class ProjectDAOTest {
 		
 		logger.debug(" DAO TEST : testDAO() 끝 ");
 	}
+	
+//	@Test
+	public void updateTest() {
+		logger.debug(" DAO TEST : updateTest() 실행 ");
+		ProjectVO uVO = new ProjectVO();
+		
+		uVO.setProj_no(51);
+		uVO.setDate_nego(1);
+		uVO.setProj_title("update 쿼리 테스트 중");
+		uVO.setWork_field("퍼블리싱");
+		
+		pdao.updateProj(uVO);
+		
+		logger.debug(" DAO TEST : updateTest() 끝 ");
+	}
+	
+//	@Test
+	public void skillTest() {
+		logger.debug(" DAO TEST : skillTest() 실행 ");
+		SkillVO sVO = new SkillVO();
+		
+		sVO.setSkill_nm("테스트");
+		sVO.setSkill_lev("뷁");
+		
+		pdao.insertSkill(sVO);
+		
+		logger.debug(" DAO TEST : skillTest() 끝 ");
+	}
+	
+	@Test
+	public void regionTest() {
+		logger.debug(" DAO TEST : regionTest() 실행 ");
+		
+		RegionVO rVO = new RegionVO();
+		
+		rVO.setRegion("부산");
+		rVO.setDistrict("연제구");
+		
+		pdao.insertReg(rVO);
+		
+		logger.debug(" DAO TEST : regionTest() 끝 ");
+		
+	}
+
 }

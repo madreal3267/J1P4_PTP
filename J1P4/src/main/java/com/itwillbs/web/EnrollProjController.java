@@ -8,8 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwillbs.domain.ProjectVO;
+import com.itwillbs.domain.RegionVO;
+import com.itwillbs.domain.SkillVO;
 import com.itwillbs.service.EnrollProjService;
 
 @Controller
@@ -24,26 +27,38 @@ public class EnrollProjController {
 	// http://localhost:8088/enroll/enrollProj
 	@GetMapping(value="enrollProj")
 	public void enrollGET() {
-		logger.debug(" ( •̀ ω •́ )y /enrollProj -> enrollGET() 실행 ");
+		logger.debug(" Controller : ( •̀ ω •́ )y /enrollProj -> enrollGET() 실행 ");
 		
-		logger.debug(" ( •̀ ω •́ )y /views/enroll/enrollProj.jsp 페이지 연결 ");
+		logger.debug(" Controller : ( •̀ ω •́ )y /views/enroll/enrollProj.jsp 페이지 연결 ");
 		
 	}
 	
-	@PostMapping(value = "enrollProj")
-	public String enrollPOST(ProjectVO vo) {
-		logger.debug(" (＃°Д°) /enrollProj -> enrollPOST() 실행 ");
+	@PostMapping(value="enrollProj")
+	public String enrollPOST(ProjectVO pVO,SkillVO sVO,RegionVO rVO) {
+		logger.debug(" Controller : (＃°Д°) /enrollProj -> enrollPOST() 실행 ");
 		
-		eService.insertProj(vo);
+		eService.insertProj(pVO);
+		eService.insertSkill(sVO);
+		eService.insertReg(rVO);
 		
 		return "redirect:/enroll/enrollSuccess";
 	}
 	
+	@PostMapping(value="saveProj")
+	public void savePOST(ProjectVO pVO, SkillVO sVO, RegionVO rVO) {
+		logger.debug(" Controller : (＃°Д°) /saveProj -> enrollPOST() 실행 ");
+		
+		eService.saveProj(pVO);
+		eService.insertSkill(sVO);
+		eService.insertReg(rVO);
+	}
+	
+	// http://localhost:8088/enroll/enrollSuccess
 	@GetMapping(value="enrollSuccess")
 	public void enrollSuccessGET() {
-		logger.debug(" ( •̀ ω •́ )y /enrollSuccess -> enrollSuccessGET() 실행 ");
+		logger.debug(" Controller : ( •̀ ω •́ )y /enrollSuccess -> enrollSuccessGET() 실행 ");
 		
-		logger.debug(" ( •̀ ω •́ )y /views/enroll/enrollSuccess.jsp 페이지 연결 ");
+		logger.debug(" Controller : ( •̀ ω •́ )y /views/enroll/enrollSuccess.jsp 페이지 연결 ");
 		
 	}
 	
