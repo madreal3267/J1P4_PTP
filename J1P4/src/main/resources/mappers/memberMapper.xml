@@ -5,6 +5,40 @@
   
   <mapper namespace="com.itwillbs.mapper.MemberMapper">
   	 
+  	 <!-- 회원가입 -->
+  	 <insert id="join">
+  	 	insert into user (name,user_id,user_email,user_pw)
+  	 	values(#{name},#{user_id},#{user_email},#{user_pw})
+  	 </insert>
   	 
+  	 <!-- 로그인 -->
+  	 <select id="memberLogin" resultType="com.itwillbs.domain.MemberVO">
+  	 	select * from user
+  	 	where user_id=#{user_id} and user_pw=#{user_pw}
+  	 </select>
+  	 
+  	 <!-- 회원가입시 이메일 인증을 위한 랜덤번호 저장 -->
+  	 <update id="updateMailKey" parameterType="com.itwillbs.domain.MemberVO">
+  	 	update user
+  	 	set mail_key=#{mail_key}
+  	 	where user_email=#{user_email} and user_id=#{user_id}
+  	 </update>
+  	 
+  	 <!-- 메일인증 했을때 mail_auth 컬럼을 기본값0에서 1로 바꿔 로그인 허용 -->
+  	 <update id="updateMailAuth" parameterType="com.itwillbs.domain.MemberVO">
+  	 	update user
+  	 	set mail_auth=1
+  	 	where mail_auth=#{mail_auth} and user_email=#{user_email} 
+  	 </update>	
+  	 
+  	 <!--  -->
+  
+  
+  
+  
+  
+  
+  
+  
   
   </mapper>

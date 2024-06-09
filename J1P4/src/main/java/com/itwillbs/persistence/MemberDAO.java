@@ -16,5 +16,9 @@ public interface MemberDAO {
 	public void insert(MemberVO vo);
 	
 	
+	//이메일 인증값 저장
+	public void updateMailKey(String user_email, String mail_key) throws Exception;
 	
+	//이메일 인증 후 로그인 허용
+	public void updateMailAuth(String user_email) throws Exception;
 }

@@ -27,6 +27,11 @@ public class MemberVO {
 	
 	private Timestamp reg_date;
 	private Timestamp update_date;
+	
+	private String mail_key;
+	private int mail_auth;
+	
+	
 
 	
 	

@@ -172,6 +172,30 @@
 		    <artifactId>HikariCP</artifactId>
 		    <version>4.0.3</version>
 		</dependency>
+		
+		
+		<!--메일라이브러리 
+		https://mvnrepository.com/artifact/javax.mail/mail -->
+		<dependency>
+   		 	<groupId>javax.mail</groupId>
+    		<artifactId>mail</artifactId>
+    		<version>1.4.7</version>
+		</dependency>
+
+
+		<!-- mail 서포트 -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+		<dependency>
+    		<groupId>org.springframework</groupId>
+   			 <artifactId>spring-context-support</artifactId>
+    		<version>5.2.0.RELEASE</version>
+		</dependency>
+
+		
+		
+		
+		
+		
 		<!-- 외부 라이브러리 추가 -->
 	</dependencies>
     <build>
