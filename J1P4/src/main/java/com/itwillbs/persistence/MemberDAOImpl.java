@@ -33,7 +33,16 @@ public class MemberDAOImpl implements MemberDAO {
 	private static final String NAMESPACE 
 	               = "com.itwillbs.mapper.MemberMapper.";
 
-
+	
+	//회원가입
+		@Override
+		public void insert(MemberVO vo) {
+			
+			sqlSession.insert(NAMESPACE+"join", vo);
+			
+		}
+	
+	
 	
 	//로그인
 	@Override

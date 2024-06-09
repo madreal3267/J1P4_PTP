@@ -10,6 +10,9 @@ import com.itwillbs.domain.MemberVO;
  */
 public interface MemberDAO {
 	
+	//회원가입
+	
+		public void insert(MemberVO vo);
 	
 	//로그인
 	public MemberVO login(MemberVO vo);
