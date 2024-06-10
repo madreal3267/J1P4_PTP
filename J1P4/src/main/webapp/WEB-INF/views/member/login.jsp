@@ -4,7 +4,9 @@
 <html>
   <head>
     <meta charset="UTF-8">
+
     <title>로그인페이지</title>
+
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
     <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -64,8 +66,10 @@
 </div>
 
 <div class="box-footer">
-<button type="submit" class="btn btn-default">회원가입</button>
-<button type="submit" class="btn btn-info pull-right">로그인</button>
+<!-- <button type="submit" class="btn btn-default">회원가입</button> -->
+<!-- <button type="submit" class="btn btn-info pull-right" >로그인</button> -->
+<a href="/member/main">로그인</a><br>
+<a href="/member/insert">회원가입</a>
 </div>
 
 </form>

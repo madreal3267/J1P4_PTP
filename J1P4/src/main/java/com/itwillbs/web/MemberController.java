@@ -32,6 +32,28 @@ public class MemberController {
 	private MemberService mService;
 
 	
+	//회원가입 페이지
+		// http://localhost:8088/member/insert
+		
+		//회원정보를 입력하는 것은 DB가 필요없으니깐 매개변수가 없는 것!
+		// 정보를 보여주는 형태는 - GET
+		@RequestMapping(value = "/insert", method = RequestMethod.GET)
+		public void insertjoinGET() {
+			
+		}
+		
+		// 입력받은 회원정보를 보여줘야 하니깐 DB가 필요!! -> 매개변수 MemberVO vo를 써준다.
+		// 입력받은 정보를 처리해야하니깐 -> POST
+		@RequestMapping(value = "/insert", method = RequestMethod.POST)
+		public String insertjoinPOST(MemberVO vo) {
+			mService.join(vo);
+			
+			return "redirect:/member/main"; // 회원가입하기 눌렀을때 어디로 페이지 이동할지 정하는 것!
+			
+		}
+	
+	
+	
 	//http://localhost:8088/member/login
 	//로그인 페이지
 	
@@ -54,7 +76,7 @@ public class MemberController {
 		}
 		
 		session.setAttribute("user_id", resultVO.getUser_id());
-		return"redirect:/member/test2";
+		return"redirect:/member/main";
 	}
 	
 	//로그인을 눌렀을때 테스트2페이랑 연결해주기 위해서 매핑을 한번 더 해야함.

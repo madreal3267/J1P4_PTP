@@ -28,7 +28,15 @@ public class MemberServiceImpl implements MemberService {
 	@Inject
 	private MemberDAO mdao;
 
+	
+	//회원가입
+	@Override
+	public void join(MemberVO vo) {
+		mdao.insert(vo);
+		
+	}
 
+	
 	
 	//로그인
 	@Override

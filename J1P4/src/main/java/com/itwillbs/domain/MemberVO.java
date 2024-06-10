@@ -13,8 +13,10 @@ import lombok.ToString;
 //@Data : 자동으로 get/set 메서드, toString 메서드 사용
 
 @Data
+
+
 public class MemberVO {
-	
+
 	
 	private String user_id;
 	private String user_pw;
@@ -24,7 +26,4 @@ public class MemberVO {
 	private Timestamp reg_date;
 	private Timestamp update_date;
 
-
-	
-	
 }
