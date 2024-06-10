@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.itwillbs.mapper.BoardMapper">
+  	 
+  	 
+  	 <!-- 프로젝트 목록 -->
+  	 <select id="projList" resultType="com.itwillbs.domain.ProjectVO">
+  	 	select * from project
+  	 	where deadline > now()
+  	 </select>
+  	 
+  	 <!-- 프로젝트 갯수 -->
+  	 <select id="pNum" resultType="int">
+  	 	select count(*)
+		from project
+		where deadline > now()
+  	 </select>
+  	 
+  	 <!-- 페이징 처리 limit?rownum? -->
+  	 <select id="pListPaging" resultType="com.itwillbs.domain.ProjectVO" parameterType="com.itwillbs.domain.Criteria">
+  	 	<![CDATA[
+			select * from 
+        	(select @rownum := @rownum + 1 as rn, project.* 
+        	from project, (select @rownum := 0)  as rowcolumn order by proj_no desc) as rownum_table  
+			where rn > (#{pageNum}-1)*#{amount} and rn <=#{pageNum}*#{amount} and deadline > now()
+			
+  	 	]]>
+  	 </select>
+  	 
+  	 <!-- 견적 순 정렬 -->
+  	 <select id="pCost" resultType="com.itwillbs.domain.ProjectVO">
+  		 <![CDATA[
+		select * from 
+        (select @rownum := @rownum + 1 as rn, project.* 
+        from project, (select @rownum := 0)  as rowcolumn order by proj_no desc) as rownum_table  
+		where rn > (#{pageNum}-1)*#{amount} and rn <=#{pageNum}*#{amount} and deadline > now()
+		order by proj_cost DESC
+		]]>
+  	 </select>
+  	
+  	 <!-- 등록 순 정렬 -->
+  	 <select id="prDate" resultType="com.itwillbs.domain.ProjectVO">
+  	 <![CDATA[
+		select * from 
+        (select @rownum := @rownum + 1 as rn, project.* 
+        from project, (select @rownum := 0)  as rowcolumn order by proj_no desc) as rownum_table  
+		where rn > (#{pageNum}-1)*#{amount} and rn <=#{pageNum}*#{amount} and deadline > now()
+		order by reg_date DESC
+		]]>
+  	 </select>
+  	 
+  	 <!-- 마감임박 순 정렬 -->
+  	 <select id="pDday" resultType="com.itwillbs.domain.ProjectVO">
+  	 <![CDATA[
+		select * from 
+        (select @rownum := @rownum + 1 as rn, project.* 
+        from project, (select @rownum := 0)  as rowcolumn order by proj_no desc) as rownum_table  
+		where rn > (#{pageNum}-1)*#{amount} and rn <=#{pageNum}*#{amount} and deadline > now()
+		order by deadline DESC
+		]]>
+  	 </select>
+  	 
+  	 
+  	 
+  	 
+  	 
+  	 
+  	 
+  	 
+  	 
+  </mapper>
