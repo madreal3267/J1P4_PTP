@@ -6,38 +6,54 @@
 
 	<h1>/myProManage/interestProject.jsp</h1> <hr>
 	
-	<section>
-	<h1>관심 프로젝트</h1>
-	관심 프로젝트로 추가한 프로젝트를 확인할 수 있습니다.	
-	</section>
-	
-	<section>
-	<p>
-	1. 관심 프로젝트로 추가한 프로젝트 목록입니다. <br>
-	2. [프로젝트 지원하기]버튼을 클릭하여 해당 프로젝트에 지원할 수 있습니다. <br>
-	</p>
-	 <select>
-	 	<option>정렬방식</option>
-	 	<option></option>
-	 	<option selected>정렬방식</option>
-	 	<option>기본 정렬 순</option>
-	 	<option>금액 높은순</option>
-	 	<option>지원 적은 순</option>
-	 	<option>최신 등록 순</option>
-	 	<option>마감 임박 순</option> 	
-	 </select>
-	 
-	 <c:forEach var="projectVO" items="${interestProjectList}">
-	 <div>
-	 	<h2>${projectVO.proj_title }</h2> 
-	 	예상 금액 ${projectVO.proj_cost } | 예상 기간 ${projectVO.work_period } <br>
-		${pojectVO.work_filed }	| 지역 el표현식 | <button>기술 el표현식</button>
-		<!-- 하트위치 -->
-		<input type="submit" value="지원하기">
-		등록일자 ${projectVO.reg_date }
-	 </div>
-	 </c:forEach>
-	</section>
+<div class="col-md-12">
+	<div class="box box-default">
+		<div class="box-header with-border">
+			<h1>관심 프로젝트</h1>
+			관심 프로젝트로 추가한 프로젝트를 확인할 수 있습니다.				
+		</div>
+	</div>
+</div>
+
+<div class="col-md-12">
+	<div class="box box-default">
+		<div class="box-header with-border">
+			<section>
+				<div>
+					1. 관심 프로젝트로 추가한 프로젝트 목록입니다. <br> 
+					2. [프로젝트 지원하기]버튼을 클릭하여 해당 프로젝트에 지원할 수 있습니다. <br>
+				</div>
+				<select>
+					<option>정렬방식</option>
+					<option></option>
+					<option selected>정렬방식</option>
+					<option>기본 정렬 순</option>
+					<option>금액 높은순</option>
+					<option>지원 적은 순</option>
+					<option>최신 등록 순</option>
+					<option>마감 임박 순</option>
+				</select>
+
+				<c:forEach var="projectVO" items="${interestProjectList}">
+					<div>
+						<h2>${projectVO.proj_title }</h2>
+						예상 금액 ${projectVO.proj_cost } | 예상 기간 ${projectVO.work_period } <br> ${pojectVO.work_filed } | 지역 el표현식 |
+						<button>기술 el표현식</button>
+						<!-- 하트위치 -->
+						<form action="/myProManage/interestProject" method="post">
+							<input type="submit" value="지원하기"> 
+						</form>
+						등록일자 ${projectVO.reg_date }
+					</div>
+
+				</c:forEach>
+			</section>
+		</div>
+	</div>
+</div>
+
+
+
 
 <!-- 외형만 복사. 작동원리 탐구 필요. -->
 <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">

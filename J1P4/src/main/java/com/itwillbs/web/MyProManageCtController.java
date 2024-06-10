@@ -35,7 +35,7 @@ public class MyProManageCtController {
 		logger.debug("interestFreelancerList : " + interestFreelancerList.size());
 		
 		model.addAttribute("interestFreelancerList", interestFreelancerList);
-	}		
+	}
 	
 	// 제안한 프리랜서 목록 조회
 	// http://localhost:8088/myProManageCt/proposeFreelancer

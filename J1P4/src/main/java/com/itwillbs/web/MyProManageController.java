@@ -49,6 +49,13 @@ public class MyProManageController {
 		model.addAttribute("interestProjectList", interestProjectList);		
 	}
 	
+	// 관심 프로젝트 목록 에서 지원하기
+	@RequestMapping(value = "/interestProject",method = RequestMethod.POST)
+	public String interestProjectApply() {
+		
+		return "redirect:/myProManage/applyingProject";
+	}
+	
 	// 제안받은 프로젝트 목록 조회
 	// http://localhost:8088/myProManage/proposedProject
 	@RequestMapping(value = "/proposedProject",method = RequestMethod.GET)

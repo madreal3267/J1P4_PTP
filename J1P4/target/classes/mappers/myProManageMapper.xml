@@ -75,8 +75,10 @@
 	</select>
 	
 	<!-- 제안한 프리랜서 -->
+	<!-- 프로젝트(프로젝트 이름) 프리랜서이름(유저-이름) 기술(기술) 경력(DB에 연차 X) 지원 여부(Y/N) -->
 	<select id="proposeFreelancerList" resultType="com.itwillbs.domain.FreelancerVO">
 		select * from freelancer
+		
 	</select>
 	
 	<!-- 검수중 프로젝트-->
