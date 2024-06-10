@@ -37,7 +37,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	
-	
 	//로그인
 	@Override
 	public MemberVO memberLogin(MemberVO loginVO) {

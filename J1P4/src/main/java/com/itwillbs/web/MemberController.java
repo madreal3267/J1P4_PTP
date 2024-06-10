@@ -3,6 +3,7 @@ package com.itwillbs.web;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -66,22 +67,27 @@ public class MemberController {
 	
 	//POST - 데이터를 처리하는 역할
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String loginPOST(HttpSession session, MemberVO vo ) {
+	public String loginPOST(HttpSession session, MemberVO vo, Model model) {
 		
+	
 		MemberVO resultVO= mService.memberLogin(vo);
 		
-		if(resultVO == null ) {
-			
+		
+		model.addAttribute("loginfail", 0);
+		if(resultVO == null) {
 			return "redirect:/member/login";
+			
 		}
 		
 		session.setAttribute("user_id", resultVO.getUser_id());
 		return"redirect:/member/main";
+		
 	}
 	
-	//로그인을 눌렀을때 테스트2페이랑 연결해주기 위해서 매핑을 한번 더 해야함.
-	//http://localhost:8088/member/test2
-	@RequestMapping(value = "/test2", method = RequestMethod.GET)
+	
+	//로그인을 눌렀을때 main페이지랑 연결해주기 위해서 매핑을 한번 더 해야함.
+	//http://localhost:8088/member/main
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public void test() {
 		
 	}

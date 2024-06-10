@@ -1,11 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+
+
 <html>
   <head>
     <meta charset="UTF-8">
 
     <title>로그인페이지</title>
+
+<script type="text/javascript">
+var loginfail = '${loginfail}';
+
+<%
+System.out.println("${loginfail}");
+%>
+
+if(loginfail==0){
+	alert("아이디비번 다시확인");
+}
+
+</script>
+
 
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
@@ -32,8 +49,8 @@
     <script src="./resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
     
     
+    
 <body>
-
 <div class="box box-info">
 <div class="box-header with-border">
 <h3 class="box-title">로그인</h3>
@@ -66,14 +83,14 @@
 </div>
 
 <div class="box-footer">
-<!-- <button type="submit" class="btn btn-default">회원가입</button> -->
-<!-- <button type="submit" class="btn btn-info pull-right" >로그인</button> -->
-<a href="/member/main">로그인</a><br>
-<a href="/member/insert">회원가입</a>
+<button type="submit" class="btn btn-default">회원가입</button>
+<button type="submit" class="btn btn-info pull-right" onclick="pop()">로그인</button>
 </div>
 
 </form>
 </div>
+
+
 
 
     <!-- Bootstrap 3.3.2 JS -->
@@ -84,6 +101,14 @@
     <script src="./resources/dist/js/app.min.js" type="text/javascript"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="./resources/dist/js/demo.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    function pop(){
+    	if("${resultVO}"==null){
+    		alert("아이디비번 다시확인");
+    	}
+    }
+    
+    </script>
   </body>
 </html>
 
