@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.itwillbs.mapper.ProjectMapper">
+  
+  <select id="getProjectsByStatus" resultType="com.itwillbs.dto.ProjectDTO">
+        SELECT p.proj_no, p.proj_title, c.ct_id, p.reg_date, p.work_period, p.proj_status
+        FROM project p
+        JOIN client c ON p.ct_no = c.ct_no
+        WHERE p.proj_status = #{status}
+        ORDER BY p.reg_date DESC
+    </select>
+
+    <select id="getAllProjects" resultType="com.itwillbs.dto.ProjectDTO">
+        SELECT p.proj_no, p.proj_title, c.ct_id, p.reg_date, p.work_period, p.proj_status
+        FROM project p
+        JOIN client c ON p.ct_no = c.ct_no
+        ORDER BY p.reg_date DESC
+    </select>
+
+    <update id="updateProjectStatus" parameterType="com.itwillbs.domain.ProjectVO">
+        UPDATE project
+        SET proj_status = #{proj_status}
+        WHERE proj_no = #{proj_no}
+    </update>
+
+    <update id="rejectProject" parameterType="com.itwillbs.domain.ProjectVO">
+        UPDATE project
+        SET proj_status = '반려', reject_reason = #{reject_reason}
+        WHERE proj_no = #{proj_no}
+    </update>
+    
+     <select id="getProjectById" parameterType="int" resultType="com.itwillbs.domain.ProjectVO">
+        SELECT * FROM project WHERE proj_no = #{proj_no}
+    </select>
+</mapper>

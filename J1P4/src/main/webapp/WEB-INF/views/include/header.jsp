@@ -321,8 +321,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> 검수중</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> 반려</a></li>
+                <li><a href="/admin/projects"><i class="fa fa-circle"></i> 전체</a></li>
               </ul>
             </li>
             <!-- 프로젝트 관리 -->
@@ -380,7 +379,7 @@
         <section class="content-header">
           <h1>
             General Form Elements
-            <small>Preview</small>
+            <small>Preview</small><br><br><br>
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>

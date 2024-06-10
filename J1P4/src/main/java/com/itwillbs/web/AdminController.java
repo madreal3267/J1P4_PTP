@@ -1,6 +1,8 @@
 package com.itwillbs.web;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -9,11 +11,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.itwillbs.domain.ProjectVO;
 import com.itwillbs.domain.UserVO;
+import com.itwillbs.dto.ProjectDTO;
 import com.itwillbs.dto.UserDTO;
+import com.itwillbs.service.ProjectService;
 import com.itwillbs.service.UserService;
 
 @Controller
@@ -25,6 +32,9 @@ public class AdminController {
 	
 	@Inject
 	private UserService uService;
+	
+	@Inject
+	private ProjectService pService;
 	
 	// 관리자 메인페이지 이동
 	// http://localhost:8088/admin/main
@@ -89,5 +99,47 @@ public class AdminController {
         model.addAttribute("type", type);
         return "admin/userList";
     }
+	
+	@GetMapping("/projects")
+	public String getProjects(@RequestParam(value = "proj_status", required = false) String proj_status, Model model) {
+        List<ProjectDTO> projects;
+        if (proj_status != null) {
+            projects = pService.getProjectsByStatus(proj_status);
+        } else {
+            projects = pService.getAllProjects();
+        }
+        model.addAttribute("projects", projects);
+        model.addAttribute("proj_status", proj_status);
+        
+        return "admin/projectList";
+    }
+	
+	@PostMapping("/project/approve")
+	public String approveProject(@RequestParam("proj_no") int proj_no) {
+		ProjectVO pvo = new ProjectVO();
+		pvo.setProj_no(proj_no);
+		pvo.setProj_status("진행 중");
+        pService.updateProjectStatus(pvo);
+        logger.debug("승인 proj_no : " + proj_no);
+        return "redirect:/admin/projects";
+    }
+	
+	@PostMapping("/project/reject")
+	public String rejectProject(@RequestParam("proj_no") int proj_no, @RequestParam("reject_reason") String reject_reason) {
+		ProjectVO pvo = new ProjectVO();
+		pvo.setProj_no(proj_no);
+		pvo.setReject_reason(reject_reason);
+        pService.rejectProject(pvo);
+        return "redirect:/admin/projects";
+    }
+	
+	 @GetMapping("/project/rejectReason")
+	    @ResponseBody
+	    public Map<String,String> getRejectReason(@RequestParam("proj_no") int proj_no) {
+		 	ProjectVO pvo = pService.getProjectById(proj_no);
+		 	Map<String,String> response = new HashMap<>();
+		 	response.put("reject_reason", pvo.getReject_reason());
+	        return response;
+	    }
 	
 }
