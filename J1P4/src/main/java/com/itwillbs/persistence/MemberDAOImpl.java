@@ -24,7 +24,6 @@ public class MemberDAOImpl implements MemberDAO {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberDAOImpl.class);
 
-	// 공용변수,디비연결,자원해제 동작 선언 => 기존코드
 
 	// root-context.xml (스프링)에서 필요한 기능을 하는 객체를 주입
 	@Inject

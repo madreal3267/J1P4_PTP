@@ -5,6 +5,10 @@
   
   <mapper namespace="com.itwillbs.mapper.MemberMapper">
   	 
-  	 
+  	  <!-- 로그인체크 -->
+  	 <select id="memberLogin" resultType="com.itwillbs.domain.MemberVO">
+  	 	select * from user 
+  	 	where user_id=#{user_id} and user_pw=#{user_pw}  	 
+  	 </select>
   
   </mapper>

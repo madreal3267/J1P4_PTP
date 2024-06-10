@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>AdminLTE 2 | Dashboard</title>
+    <title>로그인페이지</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
     <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -37,19 +37,19 @@
 <h3 class="box-title">로그인</h3>
 </div>
 
-
-<form class="form-horizontal">
+<!-- 폼에는 method=""써야하고, input태그에서는 name을 꼭 써줘야 파라미터 값을 넘겨줌 -->
+<form class="form-horizontal" method="post">
 <div class="box-body">
 <div class="form-group">
 <label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
 <div class="col-sm-10">
-<input type="text" class="form-control" id="inputEmail3" placeholder="ID">
+<input type="text" name="user_id" class="form-control" id="inputEmail3" placeholder="ID">
 </div>
 </div>
 <div class="form-group">
 <label for="inputPassword3" class="col-sm-2 control-label">비밀번호</label>
 <div class="col-sm-10">
-<input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+<input type="password" name="user_pw" class="form-control" id="inputPassword3" placeholder="Password">
 </div>
 </div>
 <div class="form-group">

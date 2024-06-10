@@ -33,15 +33,16 @@ public class MemberController {
 
 	
 	//http://localhost:8088/member/login
-	//로그인 페이지 
-	//GET
+	//로그인 페이지
+	
+	//GET - 뷰페이지를연결해줌
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginGET() {
 		
 		return"/member/login";
 	}
 	
-	//POST
+	//POST - 데이터를 처리하는 역할
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String loginPOST(HttpSession session, MemberVO vo ) {
 		
@@ -56,7 +57,12 @@ public class MemberController {
 		return"redirect:/member/test2";
 	}
 	
-	
+	//로그인을 눌렀을때 테스트2페이랑 연결해주기 위해서 매핑을 한번 더 해야함.
+	//http://localhost:8088/member/test2
+	@RequestMapping(value = "/test2", method = RequestMethod.GET)
+	public void test() {
+		
+	}
 	
 	
 } // Controller
