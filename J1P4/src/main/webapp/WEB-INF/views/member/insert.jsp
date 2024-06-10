@@ -38,14 +38,14 @@
 </div>
 
 
-<form class="form-horizontal">
+<form class="form-horizontal" method="post">
 
 <div class="box-body">
 
 <div class="form-group">
 <label for="inputEmail3" class="col-sm-2 control-label">이메일</label>
 <div class="col-sm-10">
-<input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+<input type="email" name="user_email" class="form-control" id="inputEmail3" placeholder="Email">
 </div>
 </div>
 
@@ -53,7 +53,7 @@
 <div class="form-group">
 <label for="inputEmail3" class="col-sm-2 control-label">이름</label>
 <div class="col-sm-10">
-<input type="text" class="form-control" id="inputEmail3" placeholder="Name">
+<input type="text" name="name" class="form-control" id="inputEmail3" placeholder="Name">
 </div>
 </div>
 
@@ -61,21 +61,21 @@
 <div class="form-group">
 <label for="inputPassword3" class="col-sm-2 control-label">아이디</label>
 <div class="col-sm-10">
-<input type="text" class="form-control" id="inputPassword3" placeholder="ID">
+<input type="text" name="user_id" class="form-control" id="inputPassword3" placeholder="ID">
 </div>
 </div>
 
 <div class="form-group">
 <label for="inputPassword3" class="col-sm-2 control-label">비밀번호</label>
 <div class="col-sm-10">
-<input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+<input type="password" name="user_pw" class="form-control" id="inputPassword3" placeholder="Password">
 </div>
 </div>
 
 <div class="form-group">
 <label for="inputPassword3" class="col-sm-2 control-label">비밀번호 확인</label>
 <div class="col-sm-10">
-<input type="password" class="form-control" id="inputPassword3" placeholder="PasswordCheck">
+<input type="password" name="user_pw" class="form-control" id="inputPassword3" placeholder="PasswordCheck">
 </div>
 </div>
 
@@ -86,7 +86,7 @@
 
 <!-- 버튼설정 -->
 <div class="col-md-6">
-<button type="button" class="btn btn-primary btn-block"><i class="fa fa-bell"></i>회원가입</button>
+<button type="button" class="btn btn-primary btn-block"><i class="fa fa-bell" onclick="location.href='/member/test2';"></i>회원가입</button>
 <button type="button" class="btn btn-info btn-block btn-flat"><i class="fa fa-bell"></i>구글 계정으로 회원가입</button>
 <button type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-bell"></i>카카오톡 계정으로 회원가입</button>
 </div>

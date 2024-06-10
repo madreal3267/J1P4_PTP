@@ -21,13 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.itwillbs.domain.MemberVO;
 import com.itwillbs.service.MailSendService;
-import com.itwillbs.service.MailSendService100;
 import com.itwillbs.service.MemberService;
-// @RequestMapping(value = "/member/*")
-// URI가 /member/~ 시작하는 모든 주소를 처리(매핑) ~.me, ~.bo
-// GET/POST 방식 상관 없이 모두 처리 가능
-
-//import sun.jvmstat.monitor.event.VmEvent;
 
 @Controller
 @RequestMapping(value = "/member/*")
@@ -38,8 +32,10 @@ public class MemberController {
 	// 서비스 객체를 주입
 	@Inject
 	private MemberService mService;
-	@Autowired
-	private MailSendService100 mailSend100;
+	
+	@Inject
+	private MailSendService mailSend;
+	
 	@Inject
 	private SqlSession sqlSession;
 	
@@ -63,23 +59,36 @@ public class MemberController {
 		//디비에 회원가입 정보 입력
 		mService.join(vo);
 		
-		//임의의 인증번호 생성, 이메일 발송
-		String authkey = mailSend100.sendAuthMail(vo.getUser_email());
-		vo.setMail_key(authkey);
-		
-		 Map<String, String> map = new HashMap<String, String>();
-	        map.put("user_email", vo.getUser_email());
-	        map.put("mail_key", vo.getMail_key());
-	        System.out.println(map);
-		
-		//디비에 인증번호 업데이트
-	        sqlSession.update(authkey);
-		
-		
-		
-		return "redirect:/member/test2"; // 회원가입하기 눌렀을때 어디로 페이지 이동할지 정하는 것!
+		return "redirect:/member/test2"; 
+		// 회원가입하기 눌렀을때 test2에 이메일 인증하기 버튼이 있는 페이지로 이동
 		
 	}
+		
+	
+	//로그인을 눌렀을때 테스트2페이랑 연결해주기 위해서 매핑을 한번 더 해야함.
+	//http://localhost:8088/member/test2
+	@RequestMapping(value = "/test2", method = RequestMethod.GET)
+	public void test() {
+		
+	}
+	
+	
+	//이메일 인증 메일 
+	@RequestMapping(value = "/registerEmail",method = RequestMethod.POST)
+	public String emailConfirm(String user_email, Model model)throws Exception{
+		mailSend.updateMailAuth(user_email);
+		model.addAttribute("user_email", user_email);
+		
+		return "/member/registerEmail"; //인증 성공 후 이동하는 페이지
+	}
+		
+		
+		
+
+		
+		
+		
+		
 	
 
 	

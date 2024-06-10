@@ -65,7 +65,7 @@ public class MemberDAOImpl implements MemberDAO {
 	//이메일 인증 후 로그인 허용
 	@Override
 	public void updateMailAuth(String user_email) throws Exception {
-		sqlSession.update("memberMapper.memberAuth", user_email);
+		sqlSession.update(NAMESPACE+"updateMailAuth", user_email);
 	}
 
 
