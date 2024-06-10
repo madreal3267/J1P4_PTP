@@ -88,7 +88,7 @@ font-family: "Nanum Gothic", sans-serif !important;
 
 <div>
 	<form name="sort">
-		<select name="정렬방식" id="ss" onchange="selectFx()">
+		<select name="정렬방식" id="ss" onchange="selectCh()">
 			<option value="1">최신 등록 순</option>
 			<option value="2">견적 높은 순</option>
 			<option value="3">마감 임박 순</option>
