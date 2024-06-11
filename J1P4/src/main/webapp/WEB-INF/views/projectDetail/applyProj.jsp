@@ -1,0 +1,131 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+body {
+font-family: "Nanum Gothic", sans-serif !important;
+}
+</style>
+<!-- 부트스트랩 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<meta charset="UTF-8">
+<title>프리랜서 지원하기</title>
+</head>
+<body>
+	<h1> 프리랜서 지원하기(applyProj.jsp)</h1>
+	
+	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#applyModal">
+	  지원하기
+	</button>
+
+<!-- 지원하기 모달창 -->
+<form id="fm1">
+
+<div class="modal fade" id="applyModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
+<div class="modal-content">	    
+	
+	<!-- 모달 header -->		
+	<div class="modal-header">
+	<h1 class="modal-title fs-5" id="staticBackdropLabel">프로젝트 지원하기</h1>
+	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	</div>
+	<!-- 모달 header 끝 -->		
+				
+	<!-- 모달 본문 -->   			   
+	<div class="modal-body">
+	이 프로젝트에 지원하실거가욥 (❁´◡`❁)
+	<hr>
+		
+	<c:forEach var="skill" items="${skill }" varStatus="status">
+	<div class="border border-1 rounded-3 m-2 p-4" role="group" style="width: 230px; display: inline-block;">
+	<input type="hidden" name="free_no" value=4>
+	<input type="hidden" name="proj_no" value=101>
+	<h4><span class="badge bg-success">${skill.skill_nm }</span></h4>
+	<label></label>
+	<input type="radio" value="${skill.skill_nm }" name="skillCheck${status.count}" id="radioSk${status.index}">
+	<label for="radioSk${status.index}"> 있음 </label>
+	<input type="radio" value="${skill.skill_nm } 없음" name="skillCheck${status.count}" id="radioSk_${status.count}">
+	<label for="radioSk_${status.count}"> 없음 </label>
+	</div>
+
+	</c:forEach>
+	<hr>
+	남기는 글
+	<textarea rows="10" cols="90" name="content"></textarea>
+	<!-- 모달 footer -->
+	<div class="modal-footer">
+	  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+	  <input type="button" class="btn btn-primary" id="submitButt" value="지원"
+	  data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#applyModalSucc">
+	</div>
+	<!-- 모달 footer 끝-->
+	
+	</div>
+	<!-- 모달 본문 끝 -->
+	
+</div>
+</div>
+</div>
+	
+</form>
+
+<!-- 지원 성공 후 모달 창 -->
+<div class="modal fade" id="applyModalSucc" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
+<div class="modal-content">	
+
+	<!-- 모달 header -->		
+	<div class="modal-header">
+	<h1 class="modal-title fs-5" id="staticBackdropLabel">프로젝트 지원완료</h1>
+	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	</div>
+	<!-- 모달 header 끝 -->	
+	
+	<!-- 모달 본문 -->   			   
+	<div class="modal-body">
+	<h1>지원 성공했삼</h1>
+	<h3>축하축하룽💃🏼🕺 축하축하룽👯‍♀️ 축하축하룽🧚🏻‍♀️ 축하축하룽🤸‍♀️축하축하룽🤹 축하축하룽🎷 축하축하룽🎸 축하축하룽🎤
+	축하축하룽🎻 축하축하룽🚀 축하축하룽🎡 축하축하룽🎇 축하축하룽🎉 축하축하룽🎊 축하축하룽🎀 축하축하룽🛍 축하축하룽🎁</h3>
+	
+	<!-- 모달 footer -->
+	<div class="modal-footer">
+	  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+	</div>
+	<!-- 모달 footer 끝-->
+	
+	</div>
+	<!-- 모달 본문 끝 -->
+	  
+</div>
+</div>
+</div>
+
+
+<!-- 부트스트랩 자바스크립트 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<!-- JQuery 자바스크립트 -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js' integrity='sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==' crossorigin='anonymous'></script>
+<script>
+$(function() {
+	$("#submitButt").click(function() {
+		$.ajax({
+			url : "/projectDetail/applyProj",
+			type : "POST",
+			data : $("#fm1").serialize(),
+			success : function() {
+			},
+			error : function() {
+				alert("오류발생");
+			}
+		});
+	});
+});
+</script>
+</body>
+</html>
