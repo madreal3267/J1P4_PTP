@@ -15,17 +15,21 @@
                
                     
                            <div class="jumbotron">
-  <h2> 아이디는 : </h2><br/>
-  		<ul>
-  		<c:forEach items="${member}" var="member">
-  		  	
-  		  	<li>${member.user_id} </li><br/>
+  <h2> 아이디는 : ${member.user_id } </h2><br/>
   		
-  		</c:forEach>
-  		</ul>
+  		<c:choose> 
+  			<c:when test="${empty member}">
+  			<p>조회결과가 없습니다.</p>
+  			</c:when>
+  			<c:otherwise>
+  			<p>${member.user_id }</p>
+  			</c:otherwise>
+  		
+  		</c:choose>
+  		
   	<h2>입니다</h2>
-  <button type="button" class="btn btn-primary" onclick="location.href='/member/login'">로그인페이지</button>
-  <button type="button" class="btn btn-primary" onclick="location.href='/member/main'">메인페이지</button>
+  <button type="submit" class="btn btn-primary" onclick="location.href='/member/login'">로그인페이지</button>
+  <button type="submit" class="btn btn-primary" onclick="location.href='/member/main'">메인페이지</button>
   
   
 </div>

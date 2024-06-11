@@ -2,11 +2,13 @@ package com.itwillbs.web;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -23,13 +25,41 @@ public class MemberController {
 		@Inject
 		private MemberService mService;
 	
+		
+		
 	//로그인 페이지
 	// http://localhost:8088/member/login
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login() {
+	public String loginGET() {
 		
 		return"/member/login";
 	}
+	
+	
+	//POST
+		@RequestMapping(value = "/login", method = RequestMethod.POST)
+		public String loginPOST(HttpSession session, MemberVO vo ) {
+			
+			MemberVO resultVO= mService.memberLogin(vo);
+			
+			System.out.println("resultVO : "+resultVO);
+			
+			if(resultVO == null) {
+				
+				System.out.println("로그인실패");
+				return "redirect:/member/login";
+			}
+			
+			session.setAttribute("user_id", resultVO.getUser_id());
+			
+			return"redirect:/member/main";
+		}
+		
+		
+		@GetMapping(value = "/main")
+		public void mainGET() {
+			
+		}
 
 	
 	
@@ -57,6 +87,11 @@ public class MemberController {
 		
 		return"/member/findId";
 		}
+	}
+	
+	@GetMapping(value = "/findId")
+	public void findIdGET() {
+		
 	}
 	
 	//Post로 처리하고, count한 값이 0이면 

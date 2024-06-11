@@ -23,12 +23,19 @@ public class MemberDAOImpl implements MemberDAO {
 	               = "com.itwillbs.mapper.MemberMapper.";
 	
 	
-	
-	//입력된 이메일에 해당하는 아이디 반환
+	//로그인
 	@Override
-	public List<MemberVO> findId(String memberEmail) throws Exception {
+	public MemberVO login(MemberVO vo) {
 		
-		return sqlSession.selectList(NAMESPACE+"findId", memberEmail);
+		return sqlSession.selectOne(NAMESPACE+"memberLogin", vo);
+		
+	}
+	
+	//아이디에 pk 
+	@Override
+	public MemberVO findId(String memberEmail) throws Exception {
+		
+		return sqlSession.selectOne(NAMESPACE+"findId", memberEmail);
 	}
 
 	
@@ -38,6 +45,8 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		return sqlSession.selectOne(NAMESPACE+"findIdCheck", memberEmail);
 	}
+	
+
 	
 	
 	

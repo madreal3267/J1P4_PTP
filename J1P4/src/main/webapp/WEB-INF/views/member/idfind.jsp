@@ -48,18 +48,18 @@
 </div>
 
 
-<form class="form-horizontal">
+<form action="/member/findId" class="form-horizontal" method="post"> 
 <div class="box-body">
 <div class="form-group">
 <label for="inputEmail3" class="col-sm-2 control-label">이름</label>
 <div class="col-sm-10">
-<input type="text" class="form-control" id="inputEmail3" placeholder="ID">
+<input type="text" name="name" class="form-control" id="inputEmail3" placeholder="Name">
 </div>
 </div>
 <div class="form-group">
 <label for="inputPassword3" class="col-sm-2 control-label">이메일</label>
 <div class="col-sm-10">
-<input type="password" class="form-control" id="inputPassword3" placeholder="Email">
+<input type="email" name="user_email" class="form-control" id="inputPassword3" placeholder="Email">
 </div>
 </div>
 <div class="form-group">
@@ -90,6 +90,18 @@
     <script src="./resources/dist/js/app.min.js" type="text/javascript"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="./resources/dist/js/demo.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+
+	var msg = "${msg}";
+		 
+		if (msg != "") {
+			alert(msg);
+		}
+
+</script>
+    
+    
   </body>
 </html>
 

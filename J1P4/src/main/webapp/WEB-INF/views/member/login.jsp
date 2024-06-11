@@ -45,18 +45,18 @@
 </div>
 
 
-<form class="form-horizontal">
+<form action="/member/login" class="form-horizontal" method="post">
 <div class="box-body">
 <div class="form-group">
 <label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
 <div class="col-sm-10">
-<input type="text" class="form-control" id="inputEmail3" placeholder="ID">
+<input type="text"  name="user_id" class="form-control" id="inputEmail3" placeholder="ID">
 </div>
 </div>
 <div class="form-group">
 <label for="inputPassword3" class="col-sm-2 control-label">비밀번호</label>
 <div class="col-sm-10">
-<input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+<input type="password" name="user_pw" class="form-control" id="inputPassword3" placeholder="Password">
 </div>
 </div>
 <div class="form-group">

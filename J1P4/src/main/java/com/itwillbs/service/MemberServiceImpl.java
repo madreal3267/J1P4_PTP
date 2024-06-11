@@ -26,19 +26,29 @@ public class MemberServiceImpl implements MemberService {
 	private MemberDAO mdao;
 	
 	
-	
 	@Override
-	public List<MemberVO> findId(String memberEmail) throws Exception {
+	public MemberVO memberLogin(MemberVO vo) {
+		
+		return mdao.login(vo);
+	}
+	
+	//이메일로 아이디 찾기
+	@Override
+	public MemberVO findId(String memberEmail) throws Exception {
 		
 		return mdao.findId(memberEmail);
 	}
 
 	
+	//이메일 존재여부 카운터로 체크 
 	@Override
 	public int findIdCheck(String memberEmail) throws Exception {
 		
 		return mdao.findIdCheck(memberEmail);
 	}
+
+
+	
 	
 	
 	

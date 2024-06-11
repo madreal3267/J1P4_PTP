@@ -11,8 +11,10 @@ import com.itwillbs.domain.MemberVO;
  */
 
 public interface MemberDAO {
+	//로그인
+	public MemberVO login(MemberVO vo);
 	
-	public List<MemberVO> findId(String memberEmail)throws Exception;
+	public MemberVO findId(String memberEmail)throws Exception;
 	
 	public int findIdCheck(String memberEmail)throws Exception;
 	
