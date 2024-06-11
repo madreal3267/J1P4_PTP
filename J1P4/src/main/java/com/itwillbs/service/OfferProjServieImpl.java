@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.itwillbs.domain.OfferVO;
 import com.itwillbs.domain.ProjectVO;
 import com.itwillbs.persistence.OfferProjDAO;
 
@@ -26,7 +27,7 @@ public class OfferProjServieImpl implements OfferProjServie {
 	}
 
 	@Override
-	public void insertOffer(ProjectVO vo) {
+	public void insertOffer(OfferVO vo) {
 		odao.insertOffer(vo);
 	}
 	

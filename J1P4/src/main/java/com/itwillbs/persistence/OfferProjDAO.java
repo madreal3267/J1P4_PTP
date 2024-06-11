@@ -2,6 +2,7 @@ package com.itwillbs.persistence;
 
 import java.util.List;
 
+import com.itwillbs.domain.OfferVO;
 import com.itwillbs.domain.ProjectVO;
 
 public interface OfferProjDAO {
@@ -10,6 +11,6 @@ public interface OfferProjDAO {
 	public List<ProjectVO> getProj();
 	
 	// 제안하기
-	public void insertOffer(ProjectVO vo);
+	public void insertOffer(OfferVO vo);
 	
 }

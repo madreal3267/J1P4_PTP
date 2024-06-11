@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.itwillbs.domain.OfferVO;
 import com.itwillbs.domain.ProjectVO;
 import com.itwillbs.service.OfferProjServie;
 
@@ -27,10 +28,9 @@ public class OfferController {
 	// http://localhost:8088/freelancerDetail/offerProj
 	@GetMapping(value="/offerProj")
 	public void offerProjGET(Model model) {
-		logger.debug(" Controller : ( •̀ ω •́ )y /offerProj -> enrollGET() 실행 ");
+		logger.debug(" Controller : ( •̀ ω •́ )y /offerProj -> offerProjGET() 실행 ");
 		
 		List<ProjectVO> vo = oService.getProj();
-		
 		model.addAttribute("proj",vo);
 		
 		logger.debug(" Controller : ( •̀ ω •́ )y /views/freelancerDetail/offerProj.jsp 페이지 연결 ");
@@ -38,7 +38,9 @@ public class OfferController {
 	}
 	
 	@PostMapping(value="/offerProj")
-	public void insertOfferPOST(ProjectVO vo) {
+	public void offerProjPOST(OfferVO vo) {
+		logger.debug(" Controller : ( •̀ ω •́ )y /offerProj -> offerProjPOST() 실행 ");
+		
 		oService.insertOffer(vo);
 		
 	}

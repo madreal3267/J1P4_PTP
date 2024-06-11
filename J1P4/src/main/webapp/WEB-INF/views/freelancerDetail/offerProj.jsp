@@ -24,25 +24,25 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 	  제안하기
 	</button>
 
-<!-- 제안하기 모달창 -->
-<form action="/freelancerDetail/offerProj" method="post" id="fm1">
+<!-- 제안하기 모달창 시작 -->
+<form id="fm1">
 
 <div class="modal fade" id="offerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
 <div class="modal-content">	    
 	
-	<!-- 모달 header -->		
+	<!-- 모달 header 시작 -->		
 	<div class="modal-header">
 	<h1 class="modal-title fs-5" id="staticBackdropLabel">프로젝트 제안하기</h1>
 	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	</div>
 	<!-- 모달 header 끝 -->		
 				
-	<!-- 모달 본문 -->   			   
+	<!-- 모달 본문 시작 -->   			   
 	<div class="modal-body">
 	프리랜서에게 제안할 프로젝트를 골라주떼욤 (❁´◡`❁)
 	<hr>
-		<!-- 아코디언 본문 -->
+		<!-- 아코디언 시작 본문 -->
 		<div class="accordion accordion-flush" id="accordionFlushExample">
  			<c:forEach var="proj" items="${proj }">
  			<div class="btn-group mb-2" role="group" aria-label="Button group with nested dropdown" >
@@ -69,7 +69,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 		</div>
 		<!-- 아코디언 본문 끝 -->
 		
-	<!-- 모달 footer -->
+	<!-- 모달 footer 시작 -->
 	<div class="modal-footer">
 	  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 	  <input type="button" class="btn btn-primary" id="submitButt" value="제안"
@@ -85,26 +85,27 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 </div>
 	
 </form>
+<!-- 제안하기 모달창 끝 -->
 
-<!-- 제안 성공 후 모달 창 -->
+<!-- 제안 성공 후 모달창 시작 -->
 <div class="modal fade" id="offerModalSucc" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
 <div class="modal-content">	
 
-	<!-- 모달 header -->		
+	<!-- 모달 header 시작 -->		
 	<div class="modal-header">
 	<h1 class="modal-title fs-5" id="staticBackdropLabel">프로젝트 제안완료</h1>
 	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	</div>
 	<!-- 모달 header 끝 -->	
 	
-	<!-- 모달 본문 -->   			   
+	<!-- 모달 본문 시작 -->   			   
 	<div class="modal-body">
 	<h1>제안 성공했삼</h1>
 	<h3>축하축하룽💃🏼🕺 축하축하룽👯‍♀️ 축하축하룽🧚🏻‍♀️ 축하축하룽🤸‍♀️축하축하룽🤹 축하축하룽🎷 축하축하룽🎸 축하축하룽🎤
 	축하축하룽🎻 축하축하룽🚀 축하축하룽🎡 축하축하룽🎇 축하축하룽🎉 축하축하룽🎊 축하축하룽🎀 축하축하룽🛍 축하축하룽🎁</h3>
 	
-	<!-- 모달 footer -->
+	<!-- 모달 footer 시작 -->
 	<div class="modal-footer">
 	  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
 	</div>
@@ -116,7 +117,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 </div>
 </div>
 </div>
-
+<!-- 제안 성공 후 모달창 끝 -->
 
 <!-- 부트스트랩 자바스크립트 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
