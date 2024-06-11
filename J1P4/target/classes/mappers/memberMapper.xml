@@ -24,14 +24,18 @@
   	 	where user_email=#{user_email} and user_id=#{user_id}
   	 </update>
   	 
-  	 <!-- 메일인증 했을때 mail_auth 컬럼을 기본값0에서 1로 바꿔 로그인 허용 -->
   	 <update id="updateMailAuth" parameterType="com.itwillbs.domain.MemberVO">
   	 	update user
   	 	set mail_auth=1
   	 	where mail_auth=#{mail_auth} and user_email=#{user_email} 
   	 </update>	
   	 
-  	 <!--  -->
+  	 <!-- 유형을 선택하고, 확인버튼을 눌렀을때 mail_auth=1로 바뀌고 user_cp, user_type이 업데이트된다. -->
+	 <update id="updateTypeCp">
+	  	update user
+	  	set (mail_auth=1, user_cp=#{user_cp}, user_type=#{user_type})
+	  	where user_id=#{user_id}
+	 </update>			  	 
   
   
   

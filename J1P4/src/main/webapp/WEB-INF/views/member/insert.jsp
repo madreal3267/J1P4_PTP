@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>AdminLTE 2 | Dashboard</title>
+    <title>프투프 - 회원가입</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
     <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -86,9 +86,9 @@
 
 <!-- 버튼설정 -->
 <div class="col-md-6">
-<button type="button" class="btn btn-primary btn-block"><i class="fa fa-bell" onclick="location.href='/member/test2';"></i>회원가입</button>
-<button type="button" class="btn btn-info btn-block btn-flat"><i class="fa fa-bell"></i>구글 계정으로 회원가입</button>
-<button type="button" class="btn btn-danger btn-block btn-sm"><i class="fa fa-bell"></i>카카오톡 계정으로 회원가입</button>
+<button type="submit" class="btn btn-primary btn-block"><i class="fa fa-bell" ></i>회원가입</button>
+<button type="submit" class="btn btn-info btn-block btn-flat"><i class="fa fa-bell"></i>구글 계정으로 회원가입</button>
+<button type="submit" class="btn btn-danger btn-block btn-sm"><i class="fa fa-bell"></i>카카오톡 계정으로 회원가입</button>
 </div>
 
 

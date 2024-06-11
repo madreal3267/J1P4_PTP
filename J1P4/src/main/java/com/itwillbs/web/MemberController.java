@@ -48,29 +48,32 @@ public class MemberController {
 	// 정보를 보여주는 형태는 - GET
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
 	public void insertjoinGET() {
-		
+		logger.debug("/insert -> insertjoinGET() 호출 ");
+
 	}
 	
 	// 입력받은 회원정보를 보여줘야 하니깐 DB가 필요!! -> 매개변수 MemberVO vo를 써준다.
 	// 입력받은 정보를 처리해야하니깐 -> POST
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insertjoinPOST(@ModelAttribute MemberVO vo) throws Exception {
+		logger.debug("/insert -> insertjoinPOST() 호출 ");
 		
 		//디비에 회원가입 정보 입력
-		mService.join(vo);
+		//mService.join(vo);
+		mailSend.join(vo);
 		
-		return "redirect:/member/test2"; 
-		// 회원가입하기 눌렀을때 test2에 이메일 인증하기 버튼이 있는 페이지로 이동
-		
+		// 회원가입하기 눌렀을때 mailsend에 인증메일 확인링크를 클릭해달라는 페이지로 이동
+		return "redirect:/member/mailsend"; 
 	}
 		
 	
-	//로그인을 눌렀을때 테스트2페이랑 연결해주기 위해서 매핑을 한번 더 해야함.
-	//http://localhost:8088/member/test2
-	@RequestMapping(value = "/test2", method = RequestMethod.GET)
+	//회원가입 버튼을 누르면 mailsend와  연결해주기 위해서 매핑을 한번 더 해야함.
+	//http://localhost:8088/member/mailsend
+	@RequestMapping(value = "/mailsend", method = RequestMethod.GET)
 	public void test() {
 		
 	}
+	
 	
 	
 	//이메일 인증 메일 
@@ -81,8 +84,12 @@ public class MemberController {
 		
 		return "/member/registerEmail"; //인증 성공 후 이동하는 페이지
 	}
+	
+	//이메일 인증 메일 - GET
+	@RequestMapping(value = "/registerEmail", method = RequestMethod.GET)
+	public void emailConfirmGET() {
 		
-		
+	}	
 		
 
 		

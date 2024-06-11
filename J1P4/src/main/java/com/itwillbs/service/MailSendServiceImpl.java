@@ -2,6 +2,8 @@ package com.itwillbs.service;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,10 @@ import com.itwillbs.persistence.TempKey;
 @Service
 public class MailSendServiceImpl implements MailSendService{
 	
+
+	private static final Logger logger = LoggerFactory.getLogger(MailSendServiceImpl.class);
+
+	
 	@Inject
 	private MemberDAO mdao;
 	
@@ -23,8 +29,12 @@ public class MailSendServiceImpl implements MailSendService{
 	//회원가입
 	@Override
 	public void join(MemberVO vo) throws Exception {
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		logger.debug("이메일 인증");
+
 		mdao.insert(vo);
-		
+		logger.debug("이메일 인증");
+
 		String key = new TempKey().getKey(8, false); //난수를 생성하는 키
 		
 		MailHandler mailhandler = new MailHandler(mailSender);
@@ -34,21 +44,19 @@ public class MailSendServiceImpl implements MailSendService{
 						"<br/>"+vo.getUser_id()+"님 "+
 						"<br/>캐프리에 회원가입해주셔서 감사합니다."+
 						"<br/>아래 [이메일 인증 확인]을 눌러주세요."+
-						"<a href='http://localhost:8080/member/registerEmail?user_email=" + vo.getUser_email() +
+						"<a href='http://192.168.7.2:8088/member/registerEmail?user_email=" + vo.getUser_email() +
 						"&key=" + key +
 						"' target='_blenk'>이메일 인증 확인</a>");
-		mailhandler.setFrom("[발송 이메일 주소]", "[발송자 이름]");
+		mailhandler.setFrom("seul01313@naver.com", "캐프리");
 		mailhandler.setTo(vo.getUser_email());
 		mailhandler.send();
 		
+		
+		logger.debug("이메일 인증");
+
+		
 	}
 	
-	//이메일 인증값 저장
-	@Override
-	public String updateMailKey(String user_email, String mail_key) throws Exception {
-		mdao.updateMailKey(user_email, mail_key);
-		return null;
-	}
 	
 	//로그인 성공시 1로 반환
 	@Override

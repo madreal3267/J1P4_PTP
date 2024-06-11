@@ -188,9 +188,17 @@
 		<dependency>
     		<groupId>org.springframework</groupId>
    			 <artifactId>spring-context-support</artifactId>
-    		<version>5.2.0.RELEASE</version>
+    		<version>4.3.8.RELEASE</version>
 		</dependency>
-
+	
+		<!-- 메일발송을 기능 추가 -->
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-email -->
+	<dependency>
+    	<groupId>org.apache.commons</groupId>
+    	<artifactId>commons-email</artifactId>
+    	<version>1.5</version>
+	</dependency>
+		
 		
 		
 		

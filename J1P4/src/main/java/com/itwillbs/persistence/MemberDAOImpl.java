@@ -36,7 +36,6 @@ public class MemberDAOImpl implements MemberDAO {
 
 
 
-
 	//회원가입
 	@Override
 	public void insert(MemberVO vo) {
@@ -44,7 +43,6 @@ public class MemberDAOImpl implements MemberDAO {
 		sqlSession.insert(NAMESPACE+"join", vo);
 		
 	}
-
 
 
 
