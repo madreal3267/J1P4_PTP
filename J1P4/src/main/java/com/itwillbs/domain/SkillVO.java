@@ -9,5 +9,4 @@ public class SkillVO {
 	private String skill_nm;
 	private String skill_lev;
 
-
 }

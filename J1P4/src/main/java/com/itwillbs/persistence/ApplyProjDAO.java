@@ -12,4 +12,5 @@ public interface ApplyProjDAO {
 
 	// 지원하기
 	public void insertApply(ApplyVO vo);
+	
 }

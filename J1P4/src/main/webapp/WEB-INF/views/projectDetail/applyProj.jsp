@@ -23,21 +23,21 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 	  지원하기
 	</button>
 
-<!-- 지원하기 모달창 -->
+<!-- 지원하기 모달창 시작 -->
 <form id="fm1">
 
 <div class="modal fade" id="applyModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
 <div class="modal-content">	    
 	
-	<!-- 모달 header -->		
+	<!-- 모달 header 시작 -->		
 	<div class="modal-header">
 	<h1 class="modal-title fs-5" id="staticBackdropLabel">프로젝트 지원하기</h1>
 	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	</div>
 	<!-- 모달 header 끝 -->		
 				
-	<!-- 모달 본문 -->   			   
+	<!-- 모달 본문 시작 -->   			   
 	<div class="modal-body">
 	이 프로젝트에 지원하실거가욥 (❁´◡`❁)
 	<hr>
@@ -45,20 +45,26 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 	<c:forEach var="skill" items="${skill }" varStatus="status">
 	<div class="border border-1 rounded-3 m-2 p-4" role="group" style="width: 230px; display: inline-block;">
 	<input type="hidden" name="free_no" value=4>
+	<!-- value에 원활한 테스트를 위해 임시로 상수 4를 넣음 추후 세션으로 아이디값을 받아 select로 free_no를 받아 넣을 예정 -->
 	<input type="hidden" name="proj_no" value=101>
-	<h4><span class="badge bg-success">${skill.skill_nm }</span></h4>
-	<label></label>
+	<!-- value에 원활한 테스트를 위해 임시로 상수 101을 넣음 추후 상세 페이지 주소줄에서 파라미터값을 받아 넣을 예정  -->
+	<h4><span class="badge bg-warning">${skill.skill_nm }</span></h4>
 	<input type="radio" value="${skill.skill_nm }" name="skillCheck${status.count}" id="radioSk${status.index}">
 	<label for="radioSk${status.index}"> 있음 </label>
 	<input type="radio" value="${skill.skill_nm } 없음" name="skillCheck${status.count}" id="radioSk_${status.count}">
 	<label for="radioSk_${status.count}"> 없음 </label>
+	<!-- count : 1부터 시작 / index : 0부터 시작 -->
 	</div>
 
 	</c:forEach>
 	<hr>
+	<div style="margin-bottom: 10px">
 	남기는 글
-	<textarea rows="10" cols="90" name="content"></textarea>
-	<!-- 모달 footer -->
+	</div>
+	<div>
+	<textarea rows="10" cols="88" name="content"></textarea>
+	</div>
+	<!-- 모달 footer 시작 -->
 	<div class="modal-footer">
 	  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 	  <input type="button" class="btn btn-primary" id="submitButt" value="지원"
@@ -74,26 +80,27 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 </div>
 	
 </form>
+<!-- 지원하기 모달창 시작 -->
 
-<!-- 지원 성공 후 모달 창 -->
+<!-- 지원 성공 후 모달창 시작 -->
 <div class="modal fade" id="applyModalSucc" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
 <div class="modal-content">	
 
-	<!-- 모달 header -->		
+	<!-- 모달 header 시작 -->		
 	<div class="modal-header">
 	<h1 class="modal-title fs-5" id="staticBackdropLabel">프로젝트 지원완료</h1>
 	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	</div>
 	<!-- 모달 header 끝 -->	
 	
-	<!-- 모달 본문 -->   			   
+	<!-- 모달 본문 시작 -->   			   
 	<div class="modal-body">
 	<h1>지원 성공했삼</h1>
 	<h3>축하축하룽💃🏼🕺 축하축하룽👯‍♀️ 축하축하룽🧚🏻‍♀️ 축하축하룽🤸‍♀️축하축하룽🤹 축하축하룽🎷 축하축하룽🎸 축하축하룽🎤
 	축하축하룽🎻 축하축하룽🚀 축하축하룽🎡 축하축하룽🎇 축하축하룽🎉 축하축하룽🎊 축하축하룽🎀 축하축하룽🛍 축하축하룽🎁</h3>
 	
-	<!-- 모달 footer -->
+	<!-- 모달 footer 시작 -->
 	<div class="modal-footer">
 	  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
 	</div>
@@ -105,7 +112,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 </div>
 </div>
 </div>
-
+<!-- 지원 성공 후 모달창 끝 -->
 
 <!-- 부트스트랩 자바스크립트 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

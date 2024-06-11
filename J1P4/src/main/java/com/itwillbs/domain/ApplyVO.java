@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class ApplyVO {
+	
 	private int free_no;
 	private int proj_no;
 	private String skillCheck1;

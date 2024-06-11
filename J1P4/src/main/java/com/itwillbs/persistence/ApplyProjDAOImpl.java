@@ -36,9 +36,8 @@ public class ApplyProjDAOImpl implements ApplyProjDAO {
 		logger.debug(" DAO : insertApply(vo) 호출 (❁´◡`❁) ");
 		
 		sqlSession.insert(NAMESPACE+"applyProj",vo);
-		
+
 	}
-	
 	
 	
 }
