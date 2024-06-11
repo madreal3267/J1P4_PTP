@@ -312,26 +312,7 @@ h5 {
 
 		/* 임시저장 기능 구현 */
 		var data;
-		if(!data) {
-			$(function() {
-				$("#saveButt").click(function() {
-					$.ajax({
-						url : "/enroll/saveProj",
-						type : "POST",
-						data : $("#fm1").serialize(),
-						dataType : 'json',
-						async : false,
-						success : function(result) {
-							alert(" ╰(*°▽°*)╯ 저장 완료");
-							data = result;
-						},
-						error : function() {
-							alert("오류발생");
-						}
-					});
-				});
-			});	
-		} else {
+		if(data=="ck") {
 			$(function() {
 				$("#saveButt").click(function() {
 					$.ajax({
@@ -347,6 +328,26 @@ h5 {
 					});
 				});
 			});
+			
+		} else {
+			$(function() {
+				$("#saveButt").click(function() {
+					$.ajax({
+						url : "/enroll/saveProj",
+						type : "POST",
+						data : $("#fm1").serialize(),
+						dataType : 'json',
+						async : false,
+						success : function(result) {
+							alert(" ╰(*°▽°*)╯ 저장 완료");
+							data = result.result;
+						},
+						error : function() {
+							alert("오류발생");
+						}
+					});
+				});
+			});	
 		}
 	</script>
 </body>

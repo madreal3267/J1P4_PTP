@@ -55,12 +55,11 @@ public class EnrollProjController {
 		logger.debug(" Controller : (＃°Д°) /saveProj -> enrollPOST() 실행 ");
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		eService.saveProj(pVO);
+		map.put("result", "ck");
 		
-		boolean result = eService.saveProj(pVO);
-		map.put("result", result);
 		eService.insertSkill(sVO);
 		eService.insertReg(rVO);
-		
 		
 		return map;
 	}
@@ -70,7 +69,6 @@ public class EnrollProjController {
 	public void multiSavePOST(ProjectVO pVO) {
 		logger.debug(" Controller : (＃°Д°) /multiSaveProj -> enrollPOST() 실행 ");
 		
-
 		eService.multiSaveProj(pVO);
 
 	}
