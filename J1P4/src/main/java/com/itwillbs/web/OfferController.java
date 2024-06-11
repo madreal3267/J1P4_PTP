@@ -38,10 +38,9 @@ public class OfferController {
 	}
 	
 	@PostMapping(value="/offerProj")
-	public String insertOfferPOST(ProjectVO vo) {
+	public void insertOfferPOST(ProjectVO vo) {
 		oService.insertOffer(vo);
 		
-		return "redirect:/freelancerDetail/complete";
 	}
 
 }
