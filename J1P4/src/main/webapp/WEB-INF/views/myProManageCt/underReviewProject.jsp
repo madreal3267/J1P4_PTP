@@ -4,31 +4,51 @@
 
 <%@ include file="../include/headerCt.jsp" %>
 
-	<h1>/myProManage/underReviewProject</h1> <hr>
-	
-	<section>
-	<h1>검수 중</h1>
-	현재 상담 대기중인 프로젝트를 확인할 수 있습니다.
-	</section>
-	
-	<section>
-		<table border="1">
-			<tr>
-				<td>프로젝트 이름</td>
-				<td>모집기간</td>
-				<td>진행상태</td>
-				<td>수정 / 삭제</td>
-			</tr>
-	 	<c:forEach var="projectVO" items="${underReviewProjectList}">
-			<tr>
-				<td>프로젝트 이름</td>
-				<td>모집기간</td>
-				<td>DB연결 확인 - 프로젝트 no : ${projectVO.proj_no }</td>
-				<td><button>수정</button><button>삭제</button></td>
-			</tr>
-		</c:forEach>			
-		</table>
-	</section>
+<h1>/myProManage/underReviewProject</h1>
+<hr>
+
+<div class="col-md-12">
+	<div class="box box-default">
+		<div class="box-header with-border">
+			<h1>검수 중</h1>
+			현재 상담 대기중인 프로젝트를 확인할 수 있습니다.		
+		</div>
+	</div>
+</div>
+
+<section>
+<div class="col-md-12">
+	<div class="box box-default">
+		<div class="box-header with-border">
+			<section>
+				<table class="table table-bordered bg-light">
+					<tbody>
+						<tr class="text-center">
+							<td>프로젝트 이름</td>
+							<td>모집기간</td>
+							<td>진행상태</td>
+							<td>수정 / 삭제</td>
+						</tr>
+						<c:forEach var="projectVO" items="${underReviewProjectList}">
+							<tr>
+								<td>${projectVO.proj_title }</td>
+								<td class="text-center">${projectVO.reg_date } ~ ${projectVO.deadline }</td>
+								<td class="text-center">${projectVO.proj_status }</td>
+								<td class="text-center">
+									<form method="POST" name="form">
+										<button type="submit" onclick="javascript: form.action='#'"class="btn btn-primary">수정하기</button>   
+										<button type="submit" onclick="javascript: form.action='#'" class="btn btn-danger">삭제하기</button>
+									</form>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</section>
+		</div>
+	</div>
+</div>
+</section>
 
 <%@ include file="../include/footer.jsp" %>
 	

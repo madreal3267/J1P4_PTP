@@ -54,14 +54,18 @@
 	<!-- 프로젝트 진행중(미완-담당매니저,진행상태+resultType) -->
 	<select id="ongoingProjectList" resultType="com.itwillbs.domain.ProjectVO">		
 		select * from project
-<!-- 		select p.proj_no, p.porj_title, c.ct_id, s.ma -->
-<!-- 		from project p -->
-<!-- 		join client c on p.ct_no = c.ct_no -->
+<!-- 		select p.proj_no, p.proj_title, c.ct_id, m.manager_id, p.proj_status
+			from project p 
+			join client c on p.ct_no = c.ct_no 
+			join settlement s on s.proj_no = p.proj_no
+			join manager m on m.manager_no = s.manager_no
+			where c.ct_id = ${user_id}; -->
 	</select>
 	
-	<!-- 평가 대기중(미완-작성기간) -->
+	<!-- 평가 대기중(미완-작성기간은 ui) -->
 	<select id="waitEvaluationProjectList" resultType="com.itwillbs.domain.ProjectVO">
 		select * from project
+<!-- 	select proj_title, ct_id, -->
 	</select>
 	
 	<!-- 완료한 프로젝트(미완-별점,평가내용) -->

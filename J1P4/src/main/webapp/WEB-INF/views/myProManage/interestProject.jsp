@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ include file="../include/header.jsp" %>
-
+<section class="content"> 
 	<h1>/myProManage/interestProject.jsp</h1> <hr>
 	
 <div class="col-md-12">
@@ -47,15 +47,7 @@
 					</div>
 
 				</c:forEach>
-			</section>
-		</div>
-	</div>
-</div>
-
-
-
-
-<!-- 외형만 복사. 작동원리 탐구 필요. -->
+				<!-- 외형만 복사. 작동원리 탐구 필요. -->
 <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
 	<ul class="pagination">
 		<li class="paginate_button previous disabled" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0">Previous</a></li>
@@ -68,6 +60,16 @@
 		<li class="paginate_button next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0">Next</a></li>
 	</ul>
 </div>
+				
+			</section>
+		</div>
+	</div>
+</div>
+
+</section>
+
+
+
 
 <%@ include file="../include/footer.jsp" %>
 	

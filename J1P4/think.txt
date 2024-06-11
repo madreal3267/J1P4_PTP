@@ -35,9 +35,24 @@ UI 지원 받아 완성할 수 있는 요소
 --------------------------------------------------------------------------------------------------
 
 -- 제안한 프리랜서 목록 조회
-select p.proj_title, u.name, s.skill_nm, ()
+--  offer_mgmgt 테이블에 free_no, proj_no가 둘다 존재하며
+-- 
+-- 프로젝트-클라이언트-유저-프리랜서- (프리랜서)경력,(프리랜서)기술,(프리랜서-프로젝트)지원여부
+select p.proj_title, u.name, s.skill_nm, case a.
 from prject p join client c
 on p.ct_no = c.ct_no
 join user u on u.ct_id = u.user_id
 join offer_mgmt o on o.proj_no = p.proj_no
 join skill s on s.
+where 
+
+select
+
+from freelancer f 
+join user u on u.user_id = f.free_id
+join skill s on s.free_no = f.free_no
+join apply_mgmt a a.free_no = f.free_no
+
+
+
+where u.user_id = #{user_id}
