@@ -39,6 +39,19 @@ public class MemberServiceImpl implements MemberService {
 
 
 	
+	//아이디 중복 체크
+	@Override
+	public int idCheck(String id) throws Exception {
+		int res = mdao.idCheck(id);
+		logger.debug("res :"+res);
+
+		return res;
+		
+	}
+
+	
+	
+	
 	
 
 	

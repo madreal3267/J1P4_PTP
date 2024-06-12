@@ -3,8 +3,27 @@
 <!DOCTYPE html>
 <html>
   <head>
+  
+  <style type="text/css">
+  .id_ok{
+  color:#008000;
+  display: none;;
+  }
+  .id_no{
+  color:#6A82FB;
+  display: none; 
+  }
+  
+  </style>
+  
+  
     <meta charset="UTF-8">
     <title>프투프 - 회원가입</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"></script> <!-- ajax이용시 제이쿼리cnd 사용 -->
+  
+  
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
     <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -61,7 +80,11 @@
 <div class="form-group">
 <label for="inputPassword3" class="col-sm-2 control-label">아이디</label>
 <div class="col-sm-10">
-<input type="text" name="user_id" class="form-control" id="inputPassword3" placeholder="ID">
+<input type="text" name="user_id" class="form-control" id="id"  placeholder="아이디를 입력해주세요.">
+
+<!-- id ajax 중복체크 -->
+<span class="id_ok">사용 가능한 아이디입니다.</span>
+<span class="id_no">중복된 아이디입니다.</span>
 </div>
 </div>
 
@@ -105,7 +128,83 @@
     <script src="./resources/dist/js/app.min.js" type="text/javascript"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="./resources/dist/js/demo.js" type="text/javascript"></script>
+ 
+  <script type="text/javascript">
+  
+
+  // 아이디 입력값을 가져오고, 입력값을 서버로 전송하고-> 똑같은 아이디가 있는지 체크한 후
+  // 사용 가능 여부를 아이디 입력창 아래에 표시
+  
+ $(document).ready(function(){
+	 $('#id').keydown(function(){
+		 var id = $('#id').val();
+  		 //alert("아이디");
+		 $.ajax({
+				url:"/member/idcheck",
+				type: 'post',
+				data:{id:id},
+				success:function(res){
+					
+					if(res !== 1 && id.length > 0){//사용가능
+						$('.idok').css("display", "inlice-block");
+						$('.idno').css("display", "none");
+					}else if(res ==1 && id.length > 0){//사용불가
+						$('.idno').css("display", "inlice-block");
+						$('.idok').css("display", "none");
+					}else{//아무것도 입력 안했을때
+						$('.idok').css("display", "none");
+						$('.idno').css("display", "none");
+					}
+					
+				},
+				error:function(request, error){
+					alert("에러");
+				}
+			});
+		 
+	 });
+	 
+	 
+ });
+ 
+ 
+// 	function checkId() {
+// 	var id = $('#id').val(); //id값이 "id"인 입력값을 저장
+// 	$.ajax({
+// 		url:"/member/idcheck", //controller에서 요청받을주소
+// 		type: 'post',
+// 		data:{"id":id},
+// 		success:function(res){ //컨트롤러에서 넘어온 res 값을 받음
+			
+// 			if(res == 0){//사용가능
+// 				$('.id_ok').css("display", "inlice-block");
+// 				$('.id_no').css("display", "none");
+// 			}else if(res == 1){//사용불가
+// 				$('.id_no').css("display", "inlice-block");
+// 				$('.id_ok').css("display", "none");
+// 			}else{//아무것도 입력 안했을때
+// 				$('.id_ok').css("display", "none");
+// 				$('.id_no').css("display", "none");
+// 			}
+			
+// 		},
+// 		error:function(request, error){
+// 			alert("에러");
+// 		}
+// 	});
+// }; 
+  
+ </script> 
+  
+  
   </body>
+  
+  
+  
+  
+  
+  
+  
 </html>
 
 	

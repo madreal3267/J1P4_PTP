@@ -47,7 +47,7 @@ public class MailSendServiceImpl implements MailSendService{
 						"<a href='http://192.168.7.2:8088/member/registerEmail?user_email=" + vo.getUser_email() +
 						"&key=" + key +
 						"' target='_blenk'>이메일 인증 확인</a>");
-		mailhandler.setFrom("seul01313@naver.com", "캐프리");
+		mailhandler.setFrom("itwil_j1p4@naver.com", "캐프리");
 		mailhandler.setTo(vo.getUser_email());
 		mailhandler.send();
 		

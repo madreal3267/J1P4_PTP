@@ -2,6 +2,8 @@ package com.itwillbs.persistence;
 
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+
 import com.itwillbs.domain.MemberVO;
 
 /**
@@ -15,10 +17,19 @@ public interface MemberDAO {
 	
 	public void insert(MemberVO vo);
 	
+	// 아이디 찾기
+//	public MemberVO findId(String user_id)throws Exception;
 	
 	//이메일 인증값 저장
 	public void updateMailKey(String user_email, String mail_key) throws Exception;
+
 	
 	//이메일 인증 후 로그인 허용
 	public void updateMailAuth(String user_email) throws Exception;
+	
+	
+	//아이디 중복 체크
+	public int idCheck(String id) throws Exception;
+	
 }
+

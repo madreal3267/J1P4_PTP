@@ -1,8 +1,5 @@
 package com.itwillbs.web;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -10,7 +7,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,10 +14,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwillbs.domain.MemberVO;
 import com.itwillbs.service.MailSendService;
 import com.itwillbs.service.MemberService;
+
 
 @Controller
 @RequestMapping(value = "/member/*")
@@ -90,7 +89,21 @@ public class MemberController {
 	public void emailConfirmGET() {
 		
 	}	
+	
+	
+	//아이디 중복 체크
+	//ajax로 처리할때는 @ResponseBody를 써야 응답이 가능.
+	@PostMapping(value = "/idcheck")
+	public @ResponseBody int idCheck(@RequestParam("id") String id) throws Exception {
+	
+		logger.debug("memberId :"+id);
+	
+		int res = mService.idCheck(id);
 		
+		return res;
+		
+	}
+	
 
 		
 		

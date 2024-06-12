@@ -36,8 +36,11 @@
 	  	set (mail_auth=1, user_cp=#{user_cp}, user_type=#{user_type})
 	  	where user_id=#{user_id}
 	 </update>			  	 
-  
-  
+  	
+  	<!-- 중복된 아이디가 있는지 조회 -->
+  	<select id="selectId" parameterType="String" resultType="int" >
+  		select count(user_id) from user where user_id=#{user_id}
+  	</select>
   
   
   

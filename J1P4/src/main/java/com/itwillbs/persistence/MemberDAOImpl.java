@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.itwillbs.domain.MemberVO;
@@ -58,8 +59,6 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 
-
-
 	//이메일 인증 후 로그인 허용
 	@Override
 	public void updateMailAuth(String user_email) throws Exception {
@@ -68,7 +67,27 @@ public class MemberDAOImpl implements MemberDAO {
 
 
 
+	//아이디 중복체크
+	@Override
+	public int idCheck(String id) throws Exception {
+		int res = sqlSession.selectOne(NAMESPACE+"selectId", id);
+		logger.debug("res :"+res);
 
+		return res;
+	}
+
+
+
+	
+
+
+
+	
+
+
+
+	
+	
 
 
 	
