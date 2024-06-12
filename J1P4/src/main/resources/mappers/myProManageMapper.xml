@@ -19,6 +19,11 @@
 <!--     	where f.free_id=#{user_id}    워크벤치 작동 O-->
     </select>  
     
+    <!-- 프로젝트 지원하기 -->
+    <insert id="applyProject">
+    	insert into apply_mgmt (free_no, proj_no) values (#{free_no},#{proj_no})
+    </insert>
+    
     <!-- 제안받은 프로젝트 정보 조회 -->
 	<select id="proposedProjectList" resultType="com.itwillbs.domain.ProjectVO">
 		select * from project
@@ -36,6 +41,12 @@
 <!-- 		join freelancer f on f.free_no = a.free_no	 -->
 <!-- 		where f.free_id = #{user_id} 워크벤치 작동 O -->
 	</select>
+	
+	<!-- 지원중 프로젝트 - 지원취소하기 -->
+	<delete id="deleteAppy">
+		deleate from appy_mgmt
+		where free_no=#{free_no} and proj_no=#{proj_no}
+	</delete>
 
 	<!-- 지원 종료 프로젝트 정보 조회 -->
 	<select id="endApplyProjectList" resultType="com.itwillbs.domain.ProjectVO">
@@ -62,10 +73,41 @@
 			where c.ct_id = ${user_id}; -->
 	</select>
 	
-	<!-- 평가 대기중(미완-작성기간은 ui) -->
+	<!-- 평가 대기중 -->
+	<!-- (작성 기간은 클라이언트가 ongoingCtProject에서 완료하기를 누르면 날짜가 DB에 저장되고 -->
+	<!-- 그 날짜를 불러와서 14일 정도 가능하게 작성해야 합니다. DB) -->
 	<select id="waitEvaluationProjectList" resultType="com.itwillbs.domain.ProjectVO">
 		select * from project
-<!-- 	select proj_title, ct_id, -->
+		<!-- select p.proj_title, c.ct_id, p.proj_no, p.mod_date, f.free_no
+		from project p
+		join client c on c.ct_no = p.ct_no
+		join apply_mgmt a on p.proj_no = a.proj_no  
+		join freelancer f on f.free_no = a.free_no
+		where p.proj_status ='완료' and f.free_id=#{user_id} -->
+	</select>
+
+	<!-- VO로 잘못했음. DTO로 변경 시도 -->
+	<select id="evProjList" resultType="com.itwillbs.domain.EvaluateProjectDTO">
+		<!-- select * from project -->
+		select p.proj_title, p.proj_no, f.free_no, c.ct_no, c.ct_id, p.mod_date 
+		from project p
+		join client c on c.ct_no = p.ct_no
+		join apply_mgmt a on p.proj_no = a.proj_no  
+		join freelancer f on f.free_no = a.free_no
+		where p.proj_status ='완료'<!--  and f.free_id=#{user_id} -->
+	</select>	
+	
+	<!-- 평가 대기중 - 평가하기 -->
+	<insert id="evaluate">
+		insert into project_value (valuing_free,proj_no,valued_ct,score,content)
+		values(#{free_no},#{proj_no},#{ct_no},#{score},#{content})
+	</insert>
+	
+	<!-- 프로젝트 평가 여부 체크 -->
+	<select id="checkEvaluate" resultType="int">
+	    SELECT COUNT(*) > 0
+	    FROM project_value
+	    WHERE proj_no = #{proj_no} and valuing_free = #{free_no};
 	</select>
 	
 	<!-- 완료한 프로젝트(미완-별점,평가내용) -->
@@ -123,7 +165,7 @@
 	<!-- 완료한 프로젝트의 평가완료 프리랜서 -->
 	<select id="completedFreelancerList" resultType="com.itwillbs.domain.FreelancerVO">
 		select * from freelancer
-	</select>	
+	</select>	 
 	
 	
 	

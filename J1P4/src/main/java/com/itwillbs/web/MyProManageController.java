@@ -1,5 +1,6 @@
 package com.itwillbs.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -11,8 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import com.itwillbs.domain.ApplyMgmtVO;
+import com.itwillbs.domain.EvaluateProjectDTO;
 import com.itwillbs.domain.ProjectVO;
+
 import com.itwillbs.persistence.MyProManageDAO;
 import com.itwillbs.service.MyProManageService;
 
@@ -35,11 +38,11 @@ public class MyProManageController {
 		model.addAttribute("serverTime", serverTime);
 	}
 	
-	// 관심 프로젝트 목록 조회
+	// 관심 프로젝트 목록 - 조회
 	// http://localhost:8088/myProManage/interestProject
 	@RequestMapping(value = "/interestProject", method = RequestMethod.GET)
 	public void interestProjectList(Model model) {
-		logger.debug("/interestProjectList -> interestProjectList() 호출");
+		logger.debug("/interestProjec -> interestProjectList() 호출");
 		
 		// 서비스 -> DAO 관심 프로젝트 목록 조회 메서드
 		List<ProjectVO> interestProjectList = myService.interestProjectList();
@@ -49,9 +52,12 @@ public class MyProManageController {
 		model.addAttribute("interestProjectList", interestProjectList);		
 	}
 	
-	// 관심 프로젝트 목록 에서 지원하기
+	// 관심 프로젝트 목록 - 지원하기
 	@RequestMapping(value = "/interestProject",method = RequestMethod.POST)
-	public String interestProjectApply() {
+	public String interestProjectApply(ApplyMgmtVO avo) {
+		logger.debug("/interestProject -> interestProjectAppy() 호출");
+		
+		myService.applyProject(avo);
 		
 		return "redirect:/myProManage/applyingProject";
 	}
@@ -66,7 +72,18 @@ public class MyProManageController {
 		logger.debug("proposedProjectList : " + proposedProjectList.size());
 		
 		model.addAttribute("proposedProjectList", proposedProjectList);
+		
 	}	
+	
+	// 제안받은 프로젝트 - 지원하기
+	@RequestMapping(value = "/proposedProject",method = RequestMethod.POST)
+	public String proposedProjectApply(ApplyMgmtVO avo) {
+		logger.debug("/proposedProject -> proposedProjectApply() 호출");
+		
+		myService.applyProject(avo);
+		
+		return "redirect:/myProManage/applyingProject";
+	}
 	
 	// 지원 중 프로젝트 목록 조회
 	// http://localhost:8088/myProManage/applyingProject
@@ -79,6 +96,18 @@ public class MyProManageController {
 		
 		model.addAttribute("applyingProjectList", applyingProjectList);		
 	}		
+	
+	// 지원 중 프로젝트 - 지원 취소	
+	@RequestMapping(value = "/applyingProject",method = RequestMethod.POST)
+	public void deleteApply(ApplyMgmtVO avo) {
+		logger.debug("/applyingProject -> deleteApply(applyMgmtVO avo) 호출");
+		
+		int result = myService.deleteApply(avo);
+		
+		if(result == 1) {
+			logger.debug("지원 취소되었습니다.");
+		}
+	}
 		
 	// 지원 종료 프로젝트 목록 조회
 	// http://localhost:8088/myProManage/endApplyProject
@@ -119,14 +148,47 @@ public class MyProManageController {
 	// 평가 대기중 프로젝트 목록 조회
 	// http://localhost:8088/myProManage/waitEvaluationProject	
 	@RequestMapping(value = "/waitEvaluationProject",method = RequestMethod.GET)
-	public void waitEvaluationProjectList(Model model) {
-		logger.debug("/waitEvaluationProject -> waitEvaluationProjectList() 호출");
-		
-		List<ProjectVO> waitEvaluationProjectList = myService.waitEvaluationProjectList();
-		logger.debug("waitEvaluationProjectList : " + waitEvaluationProjectList.size());
-		
-		model.addAttribute("waitEvaluationProjectList", waitEvaluationProjectList);		
+	public void waitEvaluationProjectList(EvaluateProjectDTO edto, Model model) {
+//		logger.debug("/waitEvaluationProject -> waitEvaluationProjectList() 호출");
+//		
+//		// 프로젝트 평가 여부 체크 후 프로젝트 목록 조회
+//		if(myService.checkEvaluate(edto) == 1) {
+//			logger.debug("myService.checkEvaluate(edto) : " + myService.checkEvaluate(edto));
+//			//List<ProjectVO> waitEvaluationProjectList = myService.waitEvaluationProjectList();
+//			List<EvaluateProjectDTO> waitEvaluationProjectList = myService.evaluateProjectList();
+//			logger.debug("waitEvaluationProjectList : " + waitEvaluationProjectList.size());
+//			
+//			//model.addAttribute("waitEvaluationProjectList", waitEvaluationProjectList);		
+//			model.addAttribute("waitEvaluationProjectList", waitEvaluationProjectList);	
+//		}else {
+//			
+//		}
+//	// 프로젝트 평가 여부 체크 후 프로젝트 목록 조회
+		List<EvaluateProjectDTO> waitEvaluationProjectList = myService.evaluateProjectList();
+		List<EvaluateProjectDTO> filteredEvaluationProjectList = new ArrayList<>();
+
+		for (EvaluateProjectDTO project : waitEvaluationProjectList) {
+		    if (myService.checkEvaluate(project) == 0) {
+		        filteredEvaluationProjectList.add(project);
+		    }
+		}
+
+		if (!filteredEvaluationProjectList.isEmpty()) {
+		    logger.debug("filteredEvaluationProjectList : " + filteredEvaluationProjectList.size());
+		    model.addAttribute("waitEvaluationProjectList", filteredEvaluationProjectList);
+		} else {
+		    logger.debug("No projects found for evaluation.");
+		}
 	}		
+	
+	
+	// 평가 대기중 프로젝트 - 평가하기
+	@RequestMapping(value = "/waitEvaluationProject",method = RequestMethod.POST)
+	public void evaluationProject(EvaluateProjectDTO edto) {
+		logger.debug("/waitEvaluationProject -> evaluationProject() 호출");
+		myService.evaluateProject(edto);
+		
+	}			
 	
 	// 완료한 프로젝트 목록 조회
 	// http://localhost:8088/myProManage/completedProject

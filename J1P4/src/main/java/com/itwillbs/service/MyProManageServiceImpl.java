@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.ProjectVO;
+import com.itwillbs.domain.ApplyMgmtVO;
+import com.itwillbs.domain.EvaluateProjectDTO;
 import com.itwillbs.persistence.MyProManageDAO;
 
 @Service
@@ -32,6 +34,14 @@ public class MyProManageServiceImpl implements MyProManageService {
 
 		return mpmdao.interestProjectList();
 	}
+	
+	@Override
+	public void applyProject(ApplyMgmtVO avo) {
+		logger.debug("applyProject(applyMgmtVO avo) 실행");
+		
+		mpmdao.applyProject(avo);
+		logger.debug("프로젝트 - 지원하기 성공");
+	}
 
 	@Override
 	public List<ProjectVO> proposedProjectList() {
@@ -45,6 +55,13 @@ public class MyProManageServiceImpl implements MyProManageService {
 		logger.debug("applyingProjectList() 실행");
 		
 		return mpmdao.applyingProjectList();
+	}
+
+	@Override
+	public int deleteApply(ApplyMgmtVO avo) {
+		logger.debug("deleteApply(applyMgmtVO avo) 실행");
+		
+		return mpmdao.deleteApply(avo);
 	}
 
 	@Override
@@ -150,6 +167,37 @@ public class MyProManageServiceImpl implements MyProManageService {
 		logger.debug("completedFreelancerList() 실행");
 		
 		return mpmdao.completedFreelancerList();
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	public List<EvaluateProjectDTO> evaluateProjectList() {
+		logger.debug("evaluateProjectList() 실행");
+		
+		return mpmdao.evaluateProjectList();
+	}
+
+	@Override
+	public void evaluateProject(EvaluateProjectDTO edto) {
+		logger.debug("evaluateProject(EvaluateProjectDTO edto) 실행");
+		
+		mpmdao.evaluateProject(edto);
+	}
+
+	@Override
+	public int checkEvaluate(EvaluateProjectDTO edto) {
+		logger.debug("checkEvaluate(EvaluateProjectDTO edto) 실행");
+		
+		return mpmdao.checkEvaluate(edto);
 	}
 	
 	

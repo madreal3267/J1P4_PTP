@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.ProjectVO;
+import com.itwillbs.domain.ApplyMgmtVO;
+import com.itwillbs.domain.EvaluateProjectDTO;
 
 public interface MyProManageService {
 
@@ -13,11 +15,17 @@ public interface MyProManageService {
 	// 관심 프로젝트 목록
 	public List<ProjectVO> interestProjectList();
 	
+	// 프로젝트 - 지원하기
+	public void applyProject(ApplyMgmtVO avo);
+	
 	// 제안받은 프로젝트 목록
 	public List<ProjectVO> proposedProjectList();
 	
 	// 지원 중 프로젝트 목록
 	public List<ProjectVO> applyingProjectList();
+	
+	// 지원 중 프로젝트 - 지원취소
+	public int deleteApply(ApplyMgmtVO avo);	
 	
 	// 지원 종료 프로젝트 목록
 	public List<ProjectVO> endApplyProjectList();
@@ -66,4 +74,16 @@ public interface MyProManageService {
 	
 	
 	
+	
+	
+	
+	
+	// 평가 대기중 프로젝트 리스트
+	public List<EvaluateProjectDTO> evaluateProjectList();
+	
+	// 평가 대기중 프로젝트 - 평가하기
+	public void evaluateProject(EvaluateProjectDTO edto);	
+	
+	// 프로젝트 평가 여부 체크
+	public int checkEvaluate(EvaluateProjectDTO edto);
 }

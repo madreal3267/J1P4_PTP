@@ -30,12 +30,16 @@
 	 </select>
 	 
 	 <c:forEach var="projectVO" items="${applyingProjectList}">
+	 <hr>
 	 <div>
 	 	<h2>${projectVO.proj_title }</h2> 
-	 	예상 금액 ${projectVO.proj_cost } | 예상 기간 ${projectVO.work_period } <br>
+	 	예상 금액 ${projectVO.proj_cost } 만원 | 예상 기간 ${projectVO.work_period } 개월<br>
 		${pojectVO.work_filed }	| 서울시 강남구 <!-- 지역 el표현식 --> | <button>자바<!-- 기술 el표현식 --></button>
 		<!-- 하트위치 -->
-		<input type="submit" value="지원취소">
+		<form action="/myProManage/applyingProject" method="post">
+			<input type="submit" value="지원 취소"> 
+		</form>
+
 		등록일자 ${projectVO.reg_date }
 	 </div>
 	 </c:forEach>
@@ -54,7 +58,6 @@
 		<li class="paginate_button next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0">Next</a></li>
 	</ul>
 </div>
-
 
 
 

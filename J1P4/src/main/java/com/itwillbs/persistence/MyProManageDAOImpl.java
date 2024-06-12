@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.ProjectVO;
+import com.itwillbs.domain.ApplyMgmtVO;
+import com.itwillbs.domain.EvaluateProjectDTO;
 
 @Repository
 public class MyProManageDAOImpl implements MyProManageDAO {
@@ -38,6 +40,12 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 	}
 
 	@Override
+	public void applyProject(ApplyMgmtVO avo) {
+		sqlSession.insert(NAMESPACE + "applyProject", avo);
+		
+	}
+
+	@Override
 	public List<ProjectVO> proposedProjectList() {
 		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE + "proposedProjectList");
 
@@ -50,7 +58,15 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 		
 		return resultVO;
 	}
-
+	
+	@Override
+	public int deleteApply(ApplyMgmtVO avo) {
+		
+		int result = sqlSession.delete(NAMESPACE+"deleteApply", avo);
+		
+		return result;
+	}
+	
 	@Override
 	public List<ProjectVO> endApplyProjectList() {
 		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE + "endApplyProjectList");
@@ -155,6 +171,30 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 		
 		return resultVO;
 	}
+
+
 	
+	
+	
+	
+	//DTO
+	@Override
+	public List<EvaluateProjectDTO> evaluateProjectList() {
+		List<EvaluateProjectDTO> resultDTO = sqlSession.selectList(NAMESPACE+"evProjList");
+		
+		return resultDTO;
+	}
+
+	@Override
+	public void evaluateProject(EvaluateProjectDTO edto) {
+		sqlSession.insert(NAMESPACE + "evaluate", edto);
+		
+	}
+
+	@Override
+	public int checkEvaluate(EvaluateProjectDTO edto) {
+		int result = sqlSession.selectOne(NAMESPACE + "checkEvaluate", edto);
+		return result;
+	}	
 	
 }

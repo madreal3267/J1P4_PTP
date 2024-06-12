@@ -34,7 +34,9 @@
 	 		예상 금액 ${projectVO.proj_cost } | 예상 기간 ${projectVO.work_period } <br>
 			${pojectVO.work_filed }	| 지역 el표현식 | <button>기술 el표현식</button>
 			<!-- 하트위치 -->
-			<input type="submit" value="지원하기">
+			<form action="/myProManage/proposedProject" method="post">
+							<input type="submit" value="지원하기"> 
+						</form>
 			등록일자 ${projectVO.reg_date }
 	 	</div>
 	</c:forEach>

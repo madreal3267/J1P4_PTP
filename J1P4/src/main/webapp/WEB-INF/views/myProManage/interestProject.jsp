@@ -36,8 +36,10 @@
 
 				<c:forEach var="projectVO" items="${interestProjectList}">
 					<div>
+						<hr>
 						<h2>${projectVO.proj_title }</h2>
-						예상 금액 ${projectVO.proj_cost } | 예상 기간 ${projectVO.work_period } <br> ${pojectVO.work_filed } | 지역 el표현식 |
+						예상 금액 ${projectVO.proj_cost } 만원  |  예상 기간 ${projectVO.work_period } 개월<br> 
+						${pojectVO.work_filed }  |  지역 el표현식 |
 						<button>기술 el표현식</button>
 						<!-- 하트위치 -->
 						<form action="/myProManage/interestProject" method="post">
