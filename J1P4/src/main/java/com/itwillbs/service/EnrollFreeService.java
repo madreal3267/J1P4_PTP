@@ -1,8 +1,10 @@
 package com.itwillbs.service;
 
 import com.itwillbs.domain.CareerVO;
+import com.itwillbs.domain.CompanyVO;
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.LicenseVO;
+import com.itwillbs.domain.PartnersVO;
 import com.itwillbs.domain.RegionVO;
 import com.itwillbs.domain.SkillVO;
 
@@ -22,5 +24,11 @@ public interface EnrollFreeService {
 	
 	// 프리랜서 희망 지역
 	public void insertReg(RegionVO vo);
+	
+	// 프리랜서 협력 업체
+	public void insertPartners(PartnersVO vo);
+	
+	// 프리랜서 회사 연혁
+	public void insertComp(CompanyVO vo);
 	
 }

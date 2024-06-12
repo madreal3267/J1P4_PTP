@@ -171,7 +171,7 @@ h5 {
 		<input type="text" name="qualify_date" placeholder="YYYY.MM.">
 	</div>	
 	
-	
+	<br>
 	<input type="submit" value="등록하기">
 	</form>
 	

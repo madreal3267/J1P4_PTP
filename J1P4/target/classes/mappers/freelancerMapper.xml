@@ -23,6 +23,16 @@
   	 	values ((select max(free_no) from freelancer),#{license_nm},#{qualify_date},#{issuer})
   	 </insert>
   	 
+  	 <insert id="insertPartners">
+  	 	insert into partners (free_no,partners_nm,details) 
+  	 	values ((select max(free_no) from freelancer),#{partners_nm},#{details})
+  	 </insert>
+  	 
+  	 <insert id="insertComp">
+  	 	insert into company_history (free_no,yearmonth,details)
+  	 	values ((select max(free_no) from freelancer),#{yearmonth},#{details})  	 
+  	 </insert>
+  	 
   	 <insert id="insertSkill">
 		insert into skill (free_no,skill_nm,skill_lev) 
 		values((select max(free_no) from freelancer),#{skill_nm},#{skill_lev})

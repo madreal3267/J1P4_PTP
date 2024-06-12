@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwillbs.domain.CareerVO;
+import com.itwillbs.domain.CompanyVO;
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.LicenseVO;
+import com.itwillbs.domain.PartnersVO;
 import com.itwillbs.domain.RegionVO;
 import com.itwillbs.domain.SkillVO;
 import com.itwillbs.service.EnrollFreeService;
@@ -40,6 +42,28 @@ public class EnrollFreeController {
 		fService.insertFree(fVO);
 		fService.insertCareer(cVO);
 		fService.insertLicense(lVO);
+		fService.insertSkill(sVO);
+		fService.insertReg(rVO);
+		
+		return "redirect:/enroll/enrollSuccess";
+	}
+	
+	// http://localhost:8088/enroll/enrollFreeB
+	@GetMapping(value="/enrollFreeB")
+	public void enrollFreeBGET() {
+		logger.debug(" Controller : ( •̀ ω •́ )y /enrollFreeB -> enrollFreeBGET() 실행 ");
+		
+		logger.debug(" Controller : ( •̀ ω •́ )y /views/enroll/enrollFree.jsp 페이지 연결 ");
+	}
+	
+	@PostMapping(value="/enrollFreeB")
+	public String enrollFreeBPOST(FreelancerVO fVO,CareerVO cVO, PartnersVO pVO, CompanyVO cpVO, SkillVO sVO, RegionVO rVO) {		
+		logger.debug(" Controller : ( •̀ ω •́ )y /enrollFree -> enrollFreeBPOST() 실행 ");
+		
+		fService.insertFree(fVO);
+		fService.insertCareer(cVO);
+		fService.insertPartners(pVO);
+		fService.insertComp(cpVO);
 		fService.insertSkill(sVO);
 		fService.insertReg(rVO);
 		

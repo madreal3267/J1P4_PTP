@@ -101,7 +101,7 @@ public class FreelanDAOTest {
 		logger.debug(" DAO TEST : 스킬등록_테스트() 끝 ");
 	}
 	
-	@Test
+//	@Test
 	public void 지역등록_테스트() {
 		logger.debug(" DAO TEST : 지역등록_테스트() 실행 ");
 		

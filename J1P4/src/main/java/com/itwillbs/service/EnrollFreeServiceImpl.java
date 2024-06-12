@@ -7,8 +7,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.domain.CareerVO;
+import com.itwillbs.domain.CompanyVO;
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.LicenseVO;
+import com.itwillbs.domain.PartnersVO;
 import com.itwillbs.domain.RegionVO;
 import com.itwillbs.domain.SkillVO;
 import com.itwillbs.persistence.EnrollFreeDAO;
@@ -69,6 +71,28 @@ public class EnrollFreeServiceImpl implements EnrollFreeService {
 		logger.debug(" (●'◡'●) Service: 지역 등록 성공! (●'◡'●) ");
 		
 	}
+
+	@Override
+	public void insertPartners(PartnersVO vo) {
+		logger.debug(" (●'◡'●) Service: insertReg(vo) 실행 ");
+		
+		fdao.insertPartners(vo);
+		
+		logger.debug(" (●'◡'●) Service: 협력업체 등록 성공! (●'◡'●) ");
+		
+	}
+
+	@Override
+	public void insertComp(CompanyVO vo) {
+		logger.debug(" (●'◡'●) Service: insertReg(vo) 실행 ");
+		
+		fdao.insertComp(vo);
+		
+		logger.debug(" (●'◡'●) Service: 회사연혁 등록 성공! (●'◡'●) ");
+		
+	}
+	
+	
 	
 	
 }

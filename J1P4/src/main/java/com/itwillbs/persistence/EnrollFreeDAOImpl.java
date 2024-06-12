@@ -8,8 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.itwillbs.domain.CareerVO;
+import com.itwillbs.domain.CompanyVO;
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.LicenseVO;
+import com.itwillbs.domain.PartnersVO;
 import com.itwillbs.domain.RegionVO;
 import com.itwillbs.domain.SkillVO;
 import com.itwillbs.web.EnrollFreeController;
@@ -72,6 +74,26 @@ public class EnrollFreeDAOImpl implements EnrollFreeDAO {
 		sqlSession.insert(NAMESPACE+"insertReg",vo);
 		
 		logger.debug(" DAO : 프리랜서 희망지역 등록 완료! ╰(*°▽°*)╯ ");
+	}
+	
+	// 프리랜서 협력 업체
+	@Override
+	public void insertPartners(PartnersVO vo) {
+		logger.debug(" DAO : insertReg(vo) 호출 (❁´◡`❁) ");
+		
+		sqlSession.insert(NAMESPACE+"insertPartners",vo);
+		
+		logger.debug(" DAO : 프리랜서 협력업체 등록 완료! ╰(*°▽°*)╯ ");		
+	}
+	
+	// 프리랜서 회사 연혁
+	@Override
+	public void insertComp(CompanyVO vo) {
+		logger.debug(" DAO : insertReg(vo) 호출 (❁´◡`❁) ");
+		
+		sqlSession.insert(NAMESPACE+"insertComp",vo);
+		
+		logger.debug(" DAO : 프리랜서 회사연혁 등록 완료! ╰(*°▽°*)╯ ");				
 	}
 	
 	

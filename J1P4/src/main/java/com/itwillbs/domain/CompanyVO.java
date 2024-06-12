@@ -6,6 +6,6 @@ import lombok.Data;
 public class CompanyVO {
 
 	private int free_no;
-	private String year_month;
+	private String yearmonth;
 	private String details;
 }
