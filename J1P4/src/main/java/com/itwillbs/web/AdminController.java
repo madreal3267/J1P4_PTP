@@ -1,10 +1,14 @@
 package com.itwillbs.web;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,12 +19,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.itwillbs.domain.ProjectVO;
 import com.itwillbs.domain.UserVO;
+import com.itwillbs.dto.ContractDTO;
 import com.itwillbs.dto.ProjectDTO;
+import com.itwillbs.dto.SettlementDTO;
 import com.itwillbs.dto.UserDTO;
+import com.itwillbs.service.ContractService;
 import com.itwillbs.service.ProjectService;
+import com.itwillbs.service.SettlementService;
 import com.itwillbs.service.UserService;
 
 @Controller
@@ -35,6 +44,12 @@ public class AdminController {
 	
 	@Inject
 	private ProjectService pService;
+	
+	@Inject
+	private SettlementService sService;
+	
+	@Inject
+	private ContractService cService;
 	
 	// 관리자 메인페이지 이동
 	// http://localhost:8088/admin/main
@@ -140,6 +155,69 @@ public class AdminController {
 		 	Map<String,String> response = new HashMap<>();
 		 	response.put("reject_reason", pvo.getReject_reason());
 	        return response;
+	    }
+	 
+	 @GetMapping("/settlement/paymentDetail")
+	 public String getSettlements(@RequestParam(value = "price_check", required = false) Boolean price_check,Model model) {
+		 
+		 List<SettlementDTO> settlements;
+		 
+		 if (price_check != null) {
+	            settlements = sService.getSettlementsByPriceCheck(price_check);
+	        } else {
+	            settlements = sService.getAllSettlements();
+	        }
+		 
+		 model.addAttribute("settlements", settlements);
+		 
+		 return "admin/settlementList";
+	 }
+	 
+	 
+	 
+	 
+	 
+	 
+	 @GetMapping("/list")
+	    public String getContractList(Model model) {
+	        List<ContractDTO> contractList = cService.getContracts();
+	        model.addAttribute("contractList", contractList);
+	        return "admin/contractList";
+	    }
+	 
+	 @PostMapping("/upload")
+	    public String uploadContract(@RequestParam("proj_no") int proj_no,
+	                                 @RequestParam("ct_no") int ct_no,
+	                                 @RequestParam("free_no") int free_no,
+	                                 @RequestParam("proj_title") String proj_title,
+	                                 @RequestParam("file") MultipartFile file) {
+
+	        String fileName = file.getOriginalFilename();
+	        String uploadDir = "C:/uploads/"; // Change to your directory
+
+	        try {
+	            file.transferTo(new File(uploadDir + fileName));
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+
+	        ContractDTO contract = new ContractDTO();
+	        contract.setProj_no(proj_no);
+	        contract.setCt_no(ct_no);
+	        contract.setFree_no(free_no);
+	        contract.setProj_title(proj_title);
+	        contract.setContract_file(uploadDir + fileName);
+
+	        cService.updateContract(contract);
+
+	        return "redirect:/admin/contract/list";
+	    }
+	 
+	 
+	 @GetMapping("/download")
+	    public String downloadContract(@RequestParam("contract_file") String contract_file, Model model) {
+	        model.addAttribute("contract_file", contract_file);
+	        return "admin/downloadView";
 	    }
 	
 }

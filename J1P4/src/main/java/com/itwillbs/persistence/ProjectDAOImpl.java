@@ -23,7 +23,7 @@ public class ProjectDAOImpl implements ProjectDAO {
 	private SqlSession sqlSession;
 	
 	private static final String NAMESPACE
-					= "com.itwillbs.mapper.ProjectMapper.";
+					= "com.itwillbs.mapper.AdminMapper.";
 	
 	@Override
 	public List<ProjectDTO> getProjectsByStatus(String proj_status) {

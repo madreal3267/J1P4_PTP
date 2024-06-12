@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.itwillbs.mapper.AdminMapper">
+  	 
+  	 <!-- 회원정보 관리 -->
+  	 
+<!--   	 <select id="getAllUsers" resultType="com.itwillbs.dto.UserDTO"> -->
+<!--         SELECT  -->
+<!--             f.free_no AS no,  -->
+<!--             f.free_id AS id,  -->
+<!--             u.name,  -->
+<!--             u.user_type,  -->
+<!--             u.reg_date, -->
+<!--             'freelancer' AS role -->
+<!--         FROM freelancer f -->
+<!--         JOIN user u ON f.free_id = u.user_id -->
+<!--         UNION ALL -->
+<!--         SELECT  -->
+<!--             c.ct_no AS no,  -->
+<!--             c.ct_id AS id,  -->
+<!--             u.name,  -->
+<!--             u.user_type,  -->
+<!--             u.reg_date, -->
+<!--             'client' AS role -->
+<!--         FROM client c -->
+<!--         JOIN user u ON c.ct_id = u.user_id -->
+<!--     </select> -->
+	  <select id="getAllUsers" resultType="com.itwillbs.dto.UserDTO">
+        SELECT * FROM (
+            SELECT 
+                f.free_no AS no, 
+                f.free_id AS id, 
+                u.name, 
+                u.user_type, 
+                u.reg_date,
+                'freelancer' AS role
+            FROM freelancer f
+            JOIN user u ON f.free_id = u.user_id
+            UNION ALL
+            SELECT 
+                c.ct_no AS no, 
+                c.ct_id AS id, 
+                u.name, 
+                u.user_type, 
+                u.reg_date,
+                'client' AS role
+            FROM client c
+            JOIN user u ON c.ct_id = u.user_id
+        ) AS all_users
+        ORDER BY all_users.reg_date DESC
+    </select>
+
+    <select id="getFreelancers" resultType="com.itwillbs.dto.UserDTO">
+        SELECT 
+            f.free_no AS no, 
+            f.free_id AS id, 
+            u.name, 
+            u.user_type, 
+            u.reg_date,
+            'freelancer' AS role
+        FROM freelancer f
+        JOIN user u ON f.free_id = u.user_id
+        ORDER BY u.reg_date DESC
+    </select>
+
+    <select id="getClients" resultType="com.itwillbs.dto.UserDTO">
+        SELECT 
+            c.ct_no AS no, 
+            c.ct_id AS id, 
+            u.name, 
+            u.user_type, 
+            u.reg_date,
+            'client' AS role
+        FROM client c
+        JOIN user u ON c.ct_id = u.user_id
+        ORDER BY u.reg_date DESC
+    </select>
+  	 <!-- 회원정보 관리 -->
+  	 
+  	 <!-- 프로젝트 관리 -->
+  	 <select id="getProjectsByStatus" resultType="com.itwillbs.dto.ProjectDTO">
+        SELECT p.proj_no, p.proj_title, c.ct_id, p.reg_date, p.work_period, p.proj_status
+        FROM project p
+        JOIN client c ON p.ct_no = c.ct_no
+        WHERE p.proj_status = #{status}
+        ORDER BY p.reg_date DESC
+    </select>
+
+    <select id="getAllProjects" resultType="com.itwillbs.dto.ProjectDTO">
+        SELECT p.proj_no, p.proj_title, c.ct_id, p.reg_date, p.work_period, p.proj_status
+        FROM project p
+        JOIN client c ON p.ct_no = c.ct_no
+        ORDER BY p.reg_date DESC
+    </select>
+
+    <update id="updateProjectStatus" parameterType="com.itwillbs.domain.ProjectVO">
+        UPDATE project
+        SET proj_status = #{proj_status}
+        WHERE proj_no = #{proj_no}
+    </update>
+
+    <update id="rejectProject" parameterType="com.itwillbs.domain.ProjectVO">
+        UPDATE project
+        SET proj_status = '반려', reject_reason = #{reject_reason}
+        WHERE proj_no = #{proj_no}
+    </update>
+    
+     <select id="getProjectById" parameterType="int" resultType="com.itwillbs.domain.ProjectVO">
+        SELECT * FROM project WHERE proj_no = #{proj_no}
+    </select>
+  	 <!-- 프로젝트 관리 -->
+  	 
+  	 <!-- 정산 관리 -->
+  	 <select id="getAllSettlements" resultType="com.itwillbs.dto.SettlementDTO">
+        SELECT 
+            p.proj_no, 
+            p.proj_title, 
+            c.ct_id, 
+            f.free_id, 
+            s.price, 
+            s.price_check 
+        FROM 
+            settlement s
+        JOIN 
+            project p ON s.proj_no = p.proj_no
+        JOIN 
+            client c ON s.ct_no = c.ct_no
+        JOIN 
+            freelancer f ON s.free_no = f.free_no
+        WHERE 
+            p.proj_status IN ('계약', '진행 중', '완료')
+            
+    </select>
+   
+    <select id="getSettlementsByPriceCheck" parameterType="boolean" resultType="com.itwillbs.dto.SettlementDTO">
+        SELECT 
+            p.proj_no, 
+            p.proj_title, 
+            c.ct_id, 
+            f.free_id, 
+            s.price, 
+            s.price_check 
+        FROM 
+            settlement s
+        JOIN 
+            project p ON s.proj_no = p.proj_no
+        JOIN 
+            client c ON s.ct_no = c.ct_no
+        JOIN 
+            freelancer f ON s.free_no = f.free_no
+        WHERE 
+            s.price_check = #{price_check}
+        AND 
+            p.proj_status IN ('계약', '진행 중', '완료')
+    </select>
+    <!-- 계약서 -->
+    <insert id="insertContract" parameterType="com.itwillbs.dto.ContractDTO">
+        INSERT INTO contract (proj_no, ct_no, free_no, proj_title, contract_file)
+        VALUES (#{proj_no}, #{ct_no}, #{free_no}, #{proj_title}, #{contract_file})
+    </insert>
+
+    <select id="getContracts" resultType="com.itwillbs.dto.ContractDTO">
+        SELECT proj_no, ct_no, free_no, proj_title, contract_file
+        FROM contract
+    </select>
+
+    <update id="updateContract" parameterType="com.itwillbs.dto.ContractDTO">
+        UPDATE contract
+        SET contract_file = #{contract_file}
+        WHERE proj_no = #{proj_no} AND ct_no = #{ct_no} AND free_no = #{free_no}
+    </update>
+  	 <!-- 정산 관리 -->
+  </mapper>

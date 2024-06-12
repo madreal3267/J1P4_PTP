@@ -21,7 +21,7 @@ public class UserDAOImpl implements UserDAO {
 	private SqlSession sqlSession;
 	
 	private static final String NAMESPACE
-					= "com.itwillbs.mapper.UserMapper.";
+					= "com.itwillbs.mapper.AdminMapper.";
 
 	@Override
 	public List<UserDTO> getAllUsers() {

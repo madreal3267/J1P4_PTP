@@ -3,10 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../include/header.jsp"%>
 
-<h1>userList.jsp</h1>
 
 <div class="box-header">
-    <h3 class="box-title">회원 조회 내역</h3>
+    <h3 class="box-title">정산관리</h3>
+</div>
+
+<div class="btn-group" role="group" aria-label="Settlement Filter">
+    <a href="/admin/settlement/paymentDetail" class="btn btn-default">전체</a>
+    <a href="/admin/settlement/paymentDetail?price_check=true" class="btn btn-default">대금지불</a>
+    <a href="/admin/settlement/paymentDetail?price_check=false" class="btn btn-default">대금미지불</a>
 </div>
 
 <div class="box-body">
@@ -35,33 +40,32 @@
                 <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                     <thead>
                         <tr role="row">
-                            <c:choose>
-                                <c:when test="${not empty users and users[0].role == 'freelancer'}">
-                                    <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">프리랜서 번호</th>
-                                </c:when>
-                                <c:when test="${not empty users and users[0].role == 'client'}">
-                                    <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">클라이언트 번호</th>
-                                </c:when>
-                                <c:otherwise>
-                                    <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">번호</th>
-                                </c:otherwise>
-                            </c:choose>
-                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">아이디</th>
-                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">이름</th>
-                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">유저 유형</th>
-                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">가입날짜</th>
-                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">역할</th>
+                            
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">프로젝트 번호</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">제목</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">클라이언트 아이디</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">프리랜서 아이디</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">대금</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">대금지불여부</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="item" items="${users}">
+                        <c:forEach var="item" items="${settlements}">
                             <tr>
-                                <td>${item.no}</td>
-                                <td>${item.id}</td>
-                                <td>${item.name}</td>
-                                <td>${item.user_type}</td>
-                                <td>${item.formattedRegDate}</td>
-                                <td>${item.role}</td>
+                                <td>${item.proj_no}</td>
+                                <td>${item.proj_title}</td>
+                                <td>${item.ct_id}</td>
+                                <td>${item.free_id}</td>
+                                <td>${item.price}</td>
+                                <td><c:choose>
+                                <c:when test="${item.price_check == false}">
+                                No
+                                </c:when>
+                                <c:otherwise>
+                                Yes
+                                </c:otherwise>
+                                </c:choose></td>
+                                
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -105,7 +109,6 @@
         </div>
     </div>
 </div>
-
+	
+	
 <%@ include file="../include/footer.jsp"%>
-
-
