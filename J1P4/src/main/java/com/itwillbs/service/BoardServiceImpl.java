@@ -57,6 +57,22 @@ public class BoardServiceImpl implements BoardService {
 	public List<ProjectVO> pDdayDesc(Criteria cri) {
 		return bdao.pDdayDesc(cri);
 	}
+
+	@Override
+	public List<ProjectVO> proSort(Criteria cri) {
+		return bdao.proSort(cri);
+	}
+
+	@Override
+	public List<ProjectVO> proLSort(Criteria cri) {
+		return bdao.proLSort(cri);
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 

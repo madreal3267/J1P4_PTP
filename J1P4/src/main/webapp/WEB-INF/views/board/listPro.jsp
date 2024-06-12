@@ -6,8 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+<!--  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
   <style>
@@ -16,6 +17,61 @@ body {
 font-family: "Nanum Gothic", sans-serif !important;
 }
 </style>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#ss").change(function(){
+		var sn = $('#ss').val();
+		console.log(sn)
+		
+		$.ajax({
+			url: "/board/listProto",
+			type: 'GET',
+			data: { "sn":sn },
+			success: function(data){
+			
+			var proList = $('#pList');
+			proList.empty();
+			
+			var show = "";
+						
+
+				 
+			[].forEach.call(data, function(element, index, array){
+						console.log(element, index);
+						
+					 
+
+						show += '<div style="width : full; margin: 2px 3px; padding: 12px; background-color: #dddddd; border-radius: 7px; border: 1px solid black;"> <div style="display: grid; grid-template-columns: 1fr 1fr;"> <div style="display: flex;"> <div style="background-color: white; border: 1px solid #333; border-radius: 5px; padding: 3px 12px; margin-right: 6px;">모집중</div> <div style="background-color: white; border: 1px solid #333; border-radius: 5px; padding: 3px 12px;">NEW!</div> </div> <div style="display: flex; justify-content: end;"> 하트 </div> </div>'+
+								'<div style="font-weight: bold; font-size: 20px; margin: 6px 0;">'+
+								data[index].proj_title+
+								'</div> <div style="margin-bottom: 6px;"> 예상금액 <span style="font-weight: bold;">'+
+								data[index].proj_cost+'원</span> | 예상 기간 <span style="font-weight: bold;">'+
+								data[index].deadline+'일</span> </div>'+
+						    
+						   		 '<div style="display: grid; grid-template-columns: 1fr 1fr;"> <div style="display: flex; font-weight: bold;"> <span style="display: flex; align-items: center;">'+
+						   		 data[index].work_field+
+						         ' | 서울시 강남구 |</span> <div style="margin: 0 6px; padding: 3px 12px; border: 1px solid #333; border-radius: 5px; background-color: white;">'+
+						         'JAVA'+
+						         '</div> <div style="padding: 3px 12px; border: 1px solid #333; border-radius: 5px; background-color: white;">'+
+						         'MySql'+
+						         '</div> </div> <div style="display: flex; justify-content: end;"> <span style="font-size: 14px; color : #444">'+
+						         data[index].reg_date+
+						         '</span> </div> </div> </div>';
+						
+			});
+
+			proList.append(show); 
+
+				
+			},	
+		      error: function() {
+		          alert("에러 발생");
+		      }
+		});
+	});
+});
+
+</script>
 </head>
 <body>
 	<h1> 프로젝트 찾기 </h1>
@@ -88,40 +144,62 @@ font-family: "Nanum Gothic", sans-serif !important;
 
 <div>
 	<form name="sort">
-		<select name="정렬방식" id="ss" onchange="selectCh()">
-			<option value="1">최신 등록 순</option>
-			<option value="2">견적 높은 순</option>
-			<option value="3">마감 임박 순</option>
+		<select name="sn" id="ss">
+			<option value="reg_date">최신 등록 순</option>
+			<option value="proj_cost">견적 높은 순</option>
+			<option value="deadline">마감 임박 순</option>
 		</select>
 	</form>
 </div>
 	
-	<fieldset>
-	모집중
-	new<!-- 날짜 계산 해야 할듯 --> 
-	북마크 하트<br>
+<fieldset  id="pList">
 
-	<table border="1">
-		<tr>
-			<td>프로젝트 제목</td>
-			<td>예상 금액</td>
-			<td>모집 마감일</td>
-			<td>업무분야</td>
-			<td>등록일자</td>
-		</tr>
-	<c:forEach var="v" items="${list }">
-		<tr>
-			<td>${v.proj_title }</td>
-			<td>${v.proj_cost }</td>
-			<td>${v.deadline }</td>
-			<td>${v.work_field }</td>
-			<td>${v.reg_date }</td>
-		</tr>
-	</c:forEach>
 
-	</table>
-	</fieldset>
-	
+<!-- 회색 박스 -->
+<c:forEach var="v" items="${list }">
+<div style="width : full; margin: 2px 3px; padding: 12px; background-color: #dddddd; border-radius: 7px; border: 1px solid black;">
+    <!-- 모집중, NEW!, 하트 영역 -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr;">
+        <div style="display: flex;">
+            <div style="background-color: white; border: 1px solid #333; border-radius: 5px; padding: 3px 12px; margin-right: 6px;">모집중</div>
+            <div style="background-color: white; border: 1px solid #333; border-radius: 5px; padding: 3px 12px;">NEW!</div>
+        </div>
+        <div style="display: flex; justify-content: end;">
+            하트
+        </div>
+    </div>
+
+    <!-- 제목 -->
+    <div style="font-weight: bold; font-size: 20px; margin: 6px 0;">
+        ${v.proj_title }
+    </div>
+
+    <!-- 예상 금액/ 예상 기간 -->
+    <div style="margin-bottom: 6px;">
+        예상금액 <span style="font-weight: bold;">${v.proj_cost }원</span> | 예상 기간 <span style="font-weight: bold;">${v.deadline }일</span>
+    </div>
+    
+    <!-- 기타 정보 / 등록일자 -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr;">
+        <div style="display: flex; font-weight: bold;">
+            <span style="display: flex; align-items: center;">${v.work_field } | 서울시 강남구 |</span>
+            <div style="margin: 0 6px; padding: 3px 12px; border: 1px solid #333; border-radius: 5px; background-color: white;">
+                JAVA
+            </div>
+            <div style="padding: 3px 12px; border: 1px solid #333; border-radius: 5px; background-color: white;">
+                MySql
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: end;">
+            <span style="font-size: 14px; color : #444">${v.reg_date }</span>
+        </div>
+    </div>
+    
+</div>
+</c:forEach>
+
+
 	<!-- 페이징 처리 -->
 	<div class="float-center">
 	    <ul class="pagination">
@@ -144,11 +222,54 @@ font-family: "Nanum Gothic", sans-serif !important;
 	        </c:if>
 	    </ul>
 	</div>
-
+	
 <form id='actionForm' action="/board/listPro" method='get'>
 	<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
 	<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
 </form>
+
+</fieldset>
+
+<div style="width : full; margin: 2px 3px; padding: 12px; background-color: #dddddd; border-radius: 7px; border: 1px solid black;">
+    <!-- 모집중, NEW!, 하트 영역 -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr;">
+        <div style="display: flex;">
+            <div style="background-color: white; border: 1px solid #333; border-radius: 5px; padding: 3px 12px; margin-right: 6px;">모집중</div>
+            <div style="background-color: white; border: 1px solid #333; border-radius: 5px; padding: 3px 12px;">NEW!</div>
+        </div>
+        <div style="display: flex; justify-content: end;">
+            하트
+        </div>
+    </div>
+
+    <!-- 제목 -->
+    <div style="font-weight: bold; font-size: 20px; margin: 6px 0;">
+        선불시스템 및 웹/앱 구축
+    </div>
+
+    <!-- 예상 금액/ 예상 기간 -->
+    <div style="margin-bottom: 6px;">
+        예상금액 <span style="font-weight: bold;">ㅇㅇㅇ원</span> | 예상 기간 <span style="font-weight: bold;">90일</span>
+    </div>
+    
+    <!-- 기타 정보 / 등록일자 -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr;">
+        <div style="display: flex; font-weight: bold;">
+            <span style="display: flex; align-items: center;">개발 | 서울시 강남구 |</span>
+            <div style="margin: 0 6px; padding: 3px 12px; border: 1px solid #333; border-radius: 5px; background-color: white;">
+                JAVA
+            </div>
+            <div style="padding: 3px 12px; border: 1px solid #333; border-radius: 5px; background-color: white;">
+                MySql
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: end;">
+            <span style="font-size: 14px; color : #444">등록일자 0000.00.00</span>
+        </div>
+    </div>
+    
+</div>
 
 <script>
 

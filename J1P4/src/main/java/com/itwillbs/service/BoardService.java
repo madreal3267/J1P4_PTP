@@ -22,6 +22,8 @@ public interface BoardService {
 	public List<ProjectVO> pDdayDesc(Criteria cri);
 	
 	//프로젝트 필터
+	public List<ProjectVO> proSort(Criteria cri);
+	public List<ProjectVO> proLSort(Criteria cri);
 	
 	// 북마크 등록
 	

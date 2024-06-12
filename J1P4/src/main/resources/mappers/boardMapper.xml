@@ -63,8 +63,37 @@
 		]]>
   	 </select>
   	 
+  	 <!-- 정렬 쿼리 -->
+  	 <select id="proSort" resultType="com.itwillbs.domain.ProjectVO">
+  	 <![CDATA[
+		select * from 
+        (select @rownum := @rownum + 1 as rn, project.* 
+        from project, (select @rownum := 0)  as rowcolumn order by proj_no desc) as rownum_table  
+		where rn > (#{pageNum}-1)*#{amount} and rn <=#{pageNum}*#{amount} and deadline > now()
+		order by #{sn} DESC
+		]]>
+  	 </select>
+  	 
+  	 <!-- 정렬 limit 쿼리 -->
+  	 <select id="proLSort" resultType="com.itwillbs.domain.ProjectVO">
+		select * 
+		from project
+		order by ${sn} DESC
+		limit #{amount} offset #{pageNum}
+  	 </select>
   	 
   	 
+  	 <!-- 게시판 필터 -->
+  	 <select id="fiPaging" resultType="com.itwillbs.domain.ProjectVO">
+  	 	select *
+  	 	from project
+  	 	<if test="keyword != null">
+  	 	where work_filed like #{keyword}
+  	 	</if>
+  	 	order by #{} DESC
+  	 	limit #{skip},#{amount}
+  	 	
+  	 </select>
   	 
   	 
   	 

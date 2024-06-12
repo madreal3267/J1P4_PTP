@@ -58,6 +58,18 @@ public class BoardDAOImpl implements BoardDAO{
 		return null;
 	}
 
+	@Override
+	public List<ProjectVO> proSort(Criteria cri) {
+		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"proSort",cri);
+		return null;
+	}
+
+	@Override
+	public List<ProjectVO> proLSort(Criteria cri) {
+		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"proLSort",cri);
+		return resultVO;
+	}
+
 	
 	
 
