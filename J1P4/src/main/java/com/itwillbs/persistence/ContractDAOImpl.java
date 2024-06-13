@@ -20,21 +20,25 @@ public class ContractDAOImpl implements ContractDAO {
 	private SqlSession sqlSession;
 	
 	private static final String NAMESPACE = "com.itwillbs.mapper.AdminMapper.";
+
 	
-	@Override
+
+    @Override
     public void insertContract(ContractDTO contract) {
         sqlSession.insert(NAMESPACE + "insertContract", contract);
     }
 
     @Override
-    public List<ContractDTO> getContracts() {
-        return sqlSession.selectList(NAMESPACE + "getContracts");
+    public ContractDTO selectContractById(int contract_no) {
+        return sqlSession.selectOne(NAMESPACE + "selectContractById", contract_no);
     }
 
     @Override
-    public void updateContract(ContractDTO contract) {
-        sqlSession.update(NAMESPACE + "updateContract", contract);
+    public List<ContractDTO> selectAllContracts() {
+        return sqlSession.selectList(NAMESPACE + "selectAllContracts");
     }
+	
+	
 	
 	
 	

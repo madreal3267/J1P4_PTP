@@ -8,7 +8,7 @@ import com.itwillbs.dto.ContractDTO;
 
 public interface ContractService {
 		
-	public void insertContract(ContractDTO contract);
-    public List<ContractDTO> getContracts();
-    public void updateContract(ContractDTO contract);
+	public void saveContract(ContractDTO contract);
+    public ContractDTO getContractById(int contract_no);
+    public List<ContractDTO> getAllContracts();
 }

@@ -1,17 +1,24 @@
 package com.itwillbs.web;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itwillbs.domain.ProjectVO;
 import com.itwillbs.domain.UserVO;
@@ -48,8 +56,15 @@ public class AdminController {
 	@Inject
 	private SettlementService sService;
 	
-	@Inject
+	@Autowired
 	private ContractService cService;
+	
+	
+
+	
+	
+	
+	
 	
 	// 관리자 메인페이지 이동
 	// http://localhost:8088/admin/main
@@ -173,51 +188,76 @@ public class AdminController {
 		 return "admin/settlementList";
 	 }
 	 
+	 @Value("${file.upload-dir}")
+	    private String uploadDir;
 	 
+	 @Autowired
+	    private ServletContext servletContext;
 	 
-	 
-	 
-	 
-	 @GetMapping("/list")
-	    public String getContractList(Model model) {
-	        List<ContractDTO> contractList = cService.getContracts();
-	        model.addAttribute("contractList", contractList);
+	 @GetMapping("/contracts")
+	    public String getContracts(Model model) {
+	        List<ContractDTO> contracts = cService.getAllContracts();
+	        model.addAttribute("contracts", contracts);
 	        return "admin/contractList";
 	    }
-	 
-	 @PostMapping("/upload")
-	    public String uploadContract(@RequestParam("proj_no") int proj_no,
-	                                 @RequestParam("ct_no") int ct_no,
-	                                 @RequestParam("free_no") int free_no,
-	                                 @RequestParam("proj_title") String proj_title,
+
+	 @PostMapping("/contracts/upload")
+	    public String uploadContract(@RequestParam("proj_no") int projNo,
+	                                 @RequestParam("contract_title") String contractTitle,
 	                                 @RequestParam("file") MultipartFile file) {
+	        if (!file.isEmpty()) {
+	            try {
+	                // 절대 경로로 변환
+	                String realPath = servletContext.getRealPath(uploadDir);
+	                File uploadDirFile = new File(realPath);
+	                if (!uploadDirFile.exists()) {
+	                    uploadDirFile.mkdirs(); // 경로가 존재하지 않으면 생성
+	                }
 
-	        String fileName = file.getOriginalFilename();
-	        String uploadDir = "C:/uploads/"; // Change to your directory
+	                // 파일을 저장할 경로를 지정
+	                String filePath = realPath + File.separator + file.getOriginalFilename();
+	                File dest = new File(filePath);
+	                file.transferTo(dest);
 
-	        try {
-	            file.transferTo(new File(uploadDir + fileName));
-	        } catch (IOException e) {
-	            e.printStackTrace();
+	                // ContractDTO 객체를 생성하고 필요한 정보를 설정
+	                ContractDTO contract = new ContractDTO();
+	                contract.setProj_no(projNo);
+	                contract.setContract_title(contractTitle);
+	                contract.setContract_path(filePath);
+	                contract.setUpload_date(new Date(System.currentTimeMillis()));
+
+	                // 서비스 호출
+	                cService.saveContract(contract);
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
 	        }
-
-	        ContractDTO contract = new ContractDTO();
-	        contract.setProj_no(proj_no);
-	        contract.setCt_no(ct_no);
-	        contract.setFree_no(free_no);
-	        contract.setProj_title(proj_title);
-	        contract.setContract_file(uploadDir + fileName);
-
-	        cService.updateContract(contract);
-
-	        return "redirect:/admin/contract/list";
+	        return "redirect:/admin/contracts";
 	    }
 	 
 	 
-	 @GetMapping("/download")
-	    public String downloadContract(@RequestParam("contract_file") String contract_file, Model model) {
-	        model.addAttribute("contract_file", contract_file);
-	        return "admin/downloadView";
-	    }
-	
+	 @GetMapping("/contract/download")
+	 public void downloadFile(@RequestParam("contract_no") int contractNo, HttpServletResponse response) {
+	     ContractDTO contract = cService.getContractById(contractNo);
+	     if (contract == null) {
+	         throw new IllegalArgumentException("Invalid contract ID: " + contractNo);
+	     }
+
+	     File file = new File(contract.getContract_path());
+	     if (!file.exists()) {
+	         throw new IllegalArgumentException("File not found: " + contract.getContract_path());
+	     }
+
+	     response.setContentType("application/pdf");
+	     response.setHeader("Content-Disposition", "attachment; filename=\"" + file.getName() + "\"");
+
+	     try (InputStream is = new FileInputStream(file)) {
+	         org.apache.commons.io.IOUtils.copy(is, response.getOutputStream());
+	         response.flushBuffer();
+	     } catch (IOException e) {
+	         e.printStackTrace();
+	     }
+	 }
 }
+	 
+

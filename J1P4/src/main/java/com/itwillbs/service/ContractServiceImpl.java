@@ -2,6 +2,7 @@ package com.itwillbs.service;
 
 import java.util.List;
 
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -16,19 +17,21 @@ public class ContractServiceImpl implements ContractService{
 	private ContractDAO cdao;
 	
 	
-	 @Override
-	    public void insertContract(ContractDTO contract) {
-	        cdao.insertContract(contract);
+	 
+
+	    @Override
+	    public void saveContract(ContractDTO contract) {
+	    	cdao.insertContract(contract);
 	    }
 
 	    @Override
-	    public List<ContractDTO> getContracts() {
-	        return cdao.getContracts();
+	    public ContractDTO getContractById(int contract_no) {
+	        return cdao.selectContractById(contract_no);
 	    }
 
 	    @Override
-	    public void updateContract(ContractDTO contract) {
-	    	cdao.updateContract(contract);
+	    public List<ContractDTO> getAllContracts() {
+	        return cdao.selectAllContracts();
 	    }
 	
 	

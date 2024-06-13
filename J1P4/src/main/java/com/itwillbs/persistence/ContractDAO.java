@@ -9,7 +9,7 @@ import com.itwillbs.dto.ContractDTO;
 public interface ContractDAO {
 	
 	public void insertContract(ContractDTO contract);
-    public List<ContractDTO> getContracts();
-    public void updateContract(ContractDTO contract);
+    public ContractDTO selectContractById(int contract_no);
+    public List<ContractDTO> selectAllContracts();
 	
 }

@@ -21,7 +21,15 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.itwillbs.web" />
+	<context:component-scan base-package="com.itwillbs.web"/>
+	
+	<!-- Property Placeholder Configuration -->
+    <context:property-placeholder location="classpath:application.properties"/>
+	
+	<!-- Multipart Resolver for file uploads -->
+<!--     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" /> -->
+	
+	
 	
 	
 	

@@ -158,19 +158,27 @@
     </select>
     <!-- 계약서 -->
     <insert id="insertContract" parameterType="com.itwillbs.dto.ContractDTO">
-        INSERT INTO contract (proj_no, ct_no, free_no, proj_title, contract_file)
-        VALUES (#{proj_no}, #{ct_no}, #{free_no}, #{proj_title}, #{contract_file})
+        INSERT INTO contract (proj_no, contract_title, contract_path, upload_date)
+        VALUES (#{proj_no}, #{contract_title}, #{contract_path}, #{upload_date})
     </insert>
 
-    <select id="getContracts" resultType="com.itwillbs.dto.ContractDTO">
-        SELECT proj_no, ct_no, free_no, proj_title, contract_file
-        FROM contract
+    <select id="selectContractById" parameterType="int" resultType="com.itwillbs.dto.ContractDTO">
+        SELECT c.contract_no, c.proj_no, c.contract_title, c.contract_path, c.upload_date, 
+               p.proj_title, cl.ct_id, f.free_id
+        FROM contract c
+        JOIN project p ON c.proj_no = p.proj_no
+        JOIN client cl ON p.ct_no = cl.ct_no
+        JOIN freelancer f ON p.free_no = f.free_no
+        WHERE c.contract_no = #{contract_no}
     </select>
 
-    <update id="updateContract" parameterType="com.itwillbs.dto.ContractDTO">
-        UPDATE contract
-        SET contract_file = #{contract_file}
-        WHERE proj_no = #{proj_no} AND ct_no = #{ct_no} AND free_no = #{free_no}
-    </update>
+    <select id="selectAllContracts" resultType="com.itwillbs.dto.ContractDTO">
+        SELECT c.contract_no, c.proj_no, c.contract_title, c.contract_path, c.upload_date, 
+               p.proj_title, cl.ct_id, f.free_id
+        FROM contract c
+        JOIN project p ON c.proj_no = p.proj_no
+        JOIN client cl ON p.ct_no = cl.ct_no
+        JOIN freelancer f ON p.free_no = f.free_no
+    </select>
   	 <!-- 정산 관리 -->
   </mapper>
