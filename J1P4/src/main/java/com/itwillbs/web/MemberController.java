@@ -93,10 +93,10 @@ public class MemberController {
 	
 	//아이디 중복 체크
 	//ajax로 처리할때는 @ResponseBody를 써야 응답이 가능.
-	@PostMapping(value = "/idcheck")
-	public @ResponseBody int idCheck(@RequestParam("id") String id) throws Exception {
+	@GetMapping(value = "/idcheck")
+	public @ResponseBody int idCheck(@RequestParam("userid") String id) throws Exception {
 	
-		logger.debug("memberId :"+id);
+		logger.debug("id :"+id);
 	
 		int res = mService.idCheck(id);
 		

@@ -2,21 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-  <head>
-  
-  <style type="text/css">
-  .id_ok{
-  color:#008000;
-  display: none;;
-  }
-  .id_no{
-  color:#6A82FB;
-  display: none; 
-  }
-  
-  </style>
-  
-  
+  <head> 
     <meta charset="UTF-8">
     <title>프투프 - 회원가입</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -57,7 +43,7 @@
 </div>
 
 
-<form class="form-horizontal" method="post">
+<form class="form-horizontal" method="post" name="form_join">
 
 <div class="box-body">
 
@@ -80,25 +66,24 @@
 <div class="form-group">
 <label for="inputPassword3" class="col-sm-2 control-label">아이디</label>
 <div class="col-sm-10">
-<input type="text" name="user_id" class="form-control" id="id"  placeholder="아이디를 입력해주세요.">
-
-<!-- id ajax 중복체크 -->
-<span class="id_ok">사용 가능한 아이디입니다.</span>
-<span class="id_no">중복된 아이디입니다.</span>
+<input type="text" name="user_id" class="form-control" id="userid"  placeholder="아이디를 입력해주세요.">
+<span id=check></span>
 </div>
 </div>
 
 <div class="form-group">
 <label for="inputPassword3" class="col-sm-2 control-label">비밀번호</label>
 <div class="col-sm-10">
-<input type="password" name="user_pw" class="form-control" id="inputPassword3" placeholder="Password">
+<input type="password" name="user_pw" class="pass" id="pw1" placeholder="Password">
+<span id=checkpass2></span>
 </div>
 </div>
 
 <div class="form-group">
 <label for="inputPassword3" class="col-sm-2 control-label">비밀번호 확인</label>
 <div class="col-sm-10">
-<input type="password" name="user_pw" class="form-control" id="inputPassword3" placeholder="PasswordCheck">
+<input type="password" name="user_pw" class="pass" id="pw2" placeholder="PasswordCheck">
+<span id=checkpass></span>
 </div>
 </div>
 
@@ -136,25 +121,30 @@
   // 사용 가능 여부를 아이디 입력창 아래에 표시
   
  $(document).ready(function(){
-	 $('#id').keydown(function(){
-		 var id = $('#id').val();
+	 
+	 $('#userid').keyup(function(){
+		 var userid = $('#userid').val();
   		 //alert("아이디");
 		 $.ajax({
 				url:"/member/idcheck",
-				type: 'post',
-				data:{id:id},
+				type: "get",
+				data:{userid:userid},
 				success:function(res){
 					
-					if(res !== 1 && id.length > 0){//사용가능
-						$('.idok').css("display", "inlice-block");
-						$('.idno').css("display", "none");
-					}else if(res ==1 && id.length > 0){//사용불가
-						$('.idno').css("display", "inlice-block");
-						$('.idok').css("display", "none");
-					}else{//아무것도 입력 안했을때
-						$('.idok').css("display", "none");
-						$('.idno').css("display", "none");
+					let input_id = document.form_join.user_id.value; //name=user_id값
+					
+					//아이디 유효성검사
+					let check_id = /^[a-z0-9_-]{6,12}$/;
+		 			let memberid = $('#userid').val();
+		 			
+					if(input_id.length==0){ //아무것도 입력안한상태
+ 						$('#check').html('입력하세요.').css('color','black')
+					}else if((res ==1)  || (!check_id.test(memberid))){ // 사용불가
+						$('#check').html('중복된 아이디거나, 조건에 맞지않음').css('color','red')
+					}else if(res != 1){//사용가능
+						$('#check').html('사용 가능한 아이디입니다.').css('color','green')
 					}
+					
 					
 				},
 				error:function(request, error){
@@ -164,36 +154,43 @@
 		 
 	 });
 	 
+	
+	 //비밀번호 유효성검사 , 비밀번호 재확인
+	 $('.pass').keyup(function(){
+		 
+		 let check_pw = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,20}$/;
+		 let memberpw = $('#pw1').val();
+		 
+		 var pass1 = $('#pw1').val();
+		 var pass2 = $('#pw2').val();
+		 
+
+		//비밀번호 조건 일치/불일치
+		if(!check_pw.test(memberpw)){
+			$('#checkpass2').html('조건불일치').css('color', 'black');
+		}else{
+			$('#checkpass2').html('조건일치일치@@@@').css('color', 'green');
+		}
+		
+		//비밀번호 재확인
+		if(check_pw.test(memberpw)){
+			if(!pass1=="" || !pass2==""){
+			if(pass1 == pass2){
+				$('#checkpass').html('비밀번호 일치').css('color','green')
+			}else if(pass1 != pass2){
+				$('#checkpass').html('비밀번호 불일치').css('color', 'red');
+			}
+			
+			}
+		}		
+			
+		
+		 
+	 });
+		 
 	 
  });
  
- 
-// 	function checkId() {
-// 	var id = $('#id').val(); //id값이 "id"인 입력값을 저장
-// 	$.ajax({
-// 		url:"/member/idcheck", //controller에서 요청받을주소
-// 		type: 'post',
-// 		data:{"id":id},
-// 		success:function(res){ //컨트롤러에서 넘어온 res 값을 받음
-			
-// 			if(res == 0){//사용가능
-// 				$('.id_ok').css("display", "inlice-block");
-// 				$('.id_no').css("display", "none");
-// 			}else if(res == 1){//사용불가
-// 				$('.id_no').css("display", "inlice-block");
-// 				$('.id_ok').css("display", "none");
-// 			}else{//아무것도 입력 안했을때
-// 				$('.id_ok').css("display", "none");
-// 				$('.id_no').css("display", "none");
-// 			}
-			
-// 		},
-// 		error:function(request, error){
-// 			alert("에러");
-// 		}
-// 	});
-// }; 
-  
  </script> 
   
   

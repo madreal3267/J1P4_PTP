@@ -69,8 +69,8 @@ public class MemberDAOImpl implements MemberDAO {
 
 	//아이디 중복체크
 	@Override
-	public int idCheck(String id) throws Exception {
-		int res = sqlSession.selectOne(NAMESPACE+"selectId", id);
+	public int idCheck(String user_id) throws Exception {
+		int res = sqlSession.selectOne(NAMESPACE+"selectId", user_id);
 		logger.debug("res :"+res);
 
 		return res;

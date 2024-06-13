@@ -13,11 +13,8 @@ public interface MemberService {
 	//회원가입
 	public void join(MemberVO vo);
 	
-	//아이디 찾기
-//	public MemberVO findId(String user_id)throws Exception;
-	
 	//아이디 중복 체크
-	public int idCheck(String id) throws Exception;
+	public int idCheck(String user_id) throws Exception;
 
 	
 }

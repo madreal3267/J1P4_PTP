@@ -17,9 +17,6 @@ public interface MemberDAO {
 	
 	public void insert(MemberVO vo);
 	
-	// 아이디 찾기
-//	public MemberVO findId(String user_id)throws Exception;
-	
 	//이메일 인증값 저장
 	public void updateMailKey(String user_email, String mail_key) throws Exception;
 
@@ -29,7 +26,7 @@ public interface MemberDAO {
 	
 	
 	//아이디 중복 체크
-	public int idCheck(String id) throws Exception;
+	public int idCheck(String user_id) throws Exception;
 	
 }
 
