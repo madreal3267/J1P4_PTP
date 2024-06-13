@@ -22,81 +22,52 @@
   	 <!-- 페이징 처리 limit?rownum? -->
   	 <select id="pListPaging" resultType="com.itwillbs.domain.ProjectVO" parameterType="com.itwillbs.domain.Criteria">
   	 	<![CDATA[
-			select * from 
-        	(select @rownum := @rownum + 1 as rn, project.* 
-        	from project, (select @rownum := 0)  as rowcolumn order by proj_no desc) as rownum_table  
-			where rn > (#{pageNum}-1)*#{amount} and rn <=#{pageNum}*#{amount} and deadline > now()
+			select * 
+			from project
+			where deadline > now()
+			order by reg_date DESC
+			limit #{amount} offset #{offset}
 			
   	 	]]>
   	 </select>
   	 
-  	 <!-- 견적 순 정렬 -->
-  	 <select id="pCost" resultType="com.itwillbs.domain.ProjectVO">
-  		 <![CDATA[
-		select * from 
-        (select @rownum := @rownum + 1 as rn, project.* 
-        from project, (select @rownum := 0)  as rowcolumn order by proj_no desc) as rownum_table  
-		where rn > (#{pageNum}-1)*#{amount} and rn <=#{pageNum}*#{amount} and deadline > now()
-		order by proj_cost DESC
-		]]>
-  	 </select>
-  	
-  	 <!-- 등록 순 정렬 -->
-  	 <select id="prDate" resultType="com.itwillbs.domain.ProjectVO">
-  	 <![CDATA[
-		select * from 
-        (select @rownum := @rownum + 1 as rn, project.* 
-        from project, (select @rownum := 0)  as rowcolumn order by proj_no desc) as rownum_table  
-		where rn > (#{pageNum}-1)*#{amount} and rn <=#{pageNum}*#{amount} and deadline > now()
-		order by reg_date DESC
-		]]>
-  	 </select>
-  	 
-  	 <!-- 마감임박 순 정렬 -->
-  	 <select id="pDday" resultType="com.itwillbs.domain.ProjectVO">
-  	 <![CDATA[
-		select * from 
-        (select @rownum := @rownum + 1 as rn, project.* 
-        from project, (select @rownum := 0)  as rowcolumn order by proj_no desc) as rownum_table  
-		where rn > (#{pageNum}-1)*#{amount} and rn <=#{pageNum}*#{amount} and deadline > now()
-		order by deadline DESC
-		]]>
-  	 </select>
-  	 
-  	 <!-- 정렬 쿼리 -->
-  	 <select id="proSort" resultType="com.itwillbs.domain.ProjectVO">
-  	 <![CDATA[
-		select * from 
-        (select @rownum := @rownum + 1 as rn, project.* 
-        from project, (select @rownum := 0)  as rowcolumn order by proj_no desc) as rownum_table  
-		where rn > (#{pageNum}-1)*#{amount} and rn <=#{pageNum}*#{amount} and deadline > now()
-		order by #{sn} DESC
-		]]>
-  	 </select>
-  	 
   	 <!-- 정렬 limit 쿼리 -->
   	 <select id="proLSort" resultType="com.itwillbs.domain.ProjectVO">
-		select * 
-		from project
-		order by ${sn} DESC
-		limit #{amount} offset #{pageNum}
+	  	 <![CDATA[
+			select * 
+			from project
+			where deadline > now()
+			order by ${sn} DESC
+			limit ${amount} offset #{offset}
+		]]>
   	 </select>
   	 
   	 
   	 <!-- 게시판 필터 -->
-  	 <select id="fiPaging" resultType="com.itwillbs.domain.ProjectVO">
-  	 	select *
-  	 	from project
-  	 	<if test="keyword != null">
-  	 	where work_filed like #{keyword}
-  	 	</if>
-  	 	order by #{} DESC
-  	 	limit #{skip},#{amount}
-  	 	
+  	 <select id="proFi" resultType="com.itwillbs.domain.ProjectVO">
+  	 	<![CDATA[
+			select * 
+			from project
+			where deadline > now() and work_field = #{work_field}
+			order by reg_date DESC
+			limit #{amount} offset #{offset}
+  	 	]]>
   	 </select>
   	 
+  	 <!-- 필터된 게시물 숫자 -->
+  	 <select id="fiNum" resultType="int" parameterType="com.itwillbs.domain.ProjectVO" >
+  		 <![CDATA[
+  	 	select count(*)
+		from project
+		where deadline > now() and work_field = #{work_field}
+		]]>
+  	 </select>
   	 
-  	 
+  	 <!-- 프로젝트 상세페이지  -->
+  	 <select id="dePro" resultType="com.itwillbs.domain.ProjectVO">
+  	 	select * from project
+  	 	where proj_no=#{proj_no}
+  	 </select>
   	 
   	 
   	 

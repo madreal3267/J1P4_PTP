@@ -40,34 +40,33 @@ public class BoardDAOImpl implements BoardDAO{
 		return resultVO;
 	}
 	
-	@Override
-	public List<ProjectVO> pCostDesc(Criteria cri) {
-		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"pCost",cri);
-		return null;
-	}
-
-	@Override
-	public List<ProjectVO> prDateDesc(Criteria cri) {
-		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"prDate",cri);
-		return null;
-	}
-
-	@Override
-	public List<ProjectVO> pDdayDesc(Criteria cri) {
-		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"pDday",cri);
-		return null;
-	}
-
-	@Override
-	public List<ProjectVO> proSort(Criteria cri) {
-		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"proSort",cri);
-		return null;
-	}
 
 	@Override
 	public List<ProjectVO> proLSort(Criteria cri) {
 		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"proLSort",cri);
 		return resultVO;
+	}
+
+	@Override
+	public List<ProjectVO> proFi(Criteria cri) {
+		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"proFi",cri);
+		return resultVO;
+	}
+
+	@Override
+	public int fiNum(ProjectVO vo) {
+		int result = sqlSession.selectOne(NAMESPACE+"fiNum",vo);
+		return result;
+	}
+
+	@Override
+	public ProjectVO dePro(int proj_no) {
+		return sqlSession.selectOne(NAMESPACE+"dePro",proj_no);
+	}
+
+	@Override
+	public ProjectVO dePro(ProjectVO vo) {
+		return sqlSession.selectOne(NAMESPACE+"dePro",vo);
 	}
 
 	

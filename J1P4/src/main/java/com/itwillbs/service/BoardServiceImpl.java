@@ -43,29 +43,25 @@ public class BoardServiceImpl implements BoardService {
 		return bdao.pListPaging(cri);
 	}
 
-	@Override
-	public List<ProjectVO> pCostDesc(Criteria cri) {
-		return bdao.pCostDesc(cri);
-	}
-
-	@Override
-	public List<ProjectVO> prDateDesc(Criteria cri) {
-		return bdao.prDateDesc(cri);
-	}
-
-	@Override
-	public List<ProjectVO> pDdayDesc(Criteria cri) {
-		return bdao.pDdayDesc(cri);
-	}
-
-	@Override
-	public List<ProjectVO> proSort(Criteria cri) {
-		return bdao.proSort(cri);
-	}
 
 	@Override
 	public List<ProjectVO> proLSort(Criteria cri) {
 		return bdao.proLSort(cri);
+	}
+
+	@Override
+	public List<ProjectVO> proFi(Criteria cri) {
+		return bdao.proFi(cri);
+	}
+
+	@Override
+	public int fiNum(ProjectVO vo) {
+		return bdao.fiNum(vo);
+	}
+
+	@Override
+	public ProjectVO dePro(int proj_no) {
+		return bdao.dePro(proj_no);
 	}
 	
 	

@@ -21,6 +21,7 @@ public class PageDTO {
 		
 		this.startPage = this.endPage - 9;
 		
+		
 		// 실제 끝 페이지
 		int realEnd = (int)(Math.ceil((total*1.0)/cri.getAmount()));
 		

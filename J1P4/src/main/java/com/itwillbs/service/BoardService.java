@@ -17,13 +17,14 @@ public interface BoardService {
 	public List<ProjectVO> pListPaging(Criteria cri);
 	
 	// 프로젝트 정렬
-	public List<ProjectVO> pCostDesc(Criteria cri);
-	public List<ProjectVO> prDateDesc(Criteria cri);
-	public List<ProjectVO> pDdayDesc(Criteria cri);
+	public List<ProjectVO> proLSort(Criteria cri);
 	
 	//프로젝트 필터
-	public List<ProjectVO> proSort(Criteria cri);
-	public List<ProjectVO> proLSort(Criteria cri);
+	public List<ProjectVO> proFi(Criteria cri);
+	public int fiNum(ProjectVO vo);
+	
+	// 회원정보 조회
+	public ProjectVO dePro(int proj_no);
 	
 	// 북마크 등록
 	

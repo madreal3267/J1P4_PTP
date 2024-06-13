@@ -49,50 +49,131 @@ public class BoardController {
 //		
 //	}
 	@GetMapping(value = "/listPro")
-	public void list(Criteria cri, Model model) {
-
-		model.addAttribute("list", bService.pListPaging(cri));
-		model.addAttribute("pageMaker", new PageDTO(cri, 123));
-
+	public void list(Criteria cri, Model model, HttpServletRequest request) {
+		
 		int pNum = bService.pNum();
 		model.addAttribute("pNum", pNum);
+		
+		int pageNum = 1;
+		int amount = 6;
+		
+		if(request.getParameter("pageNum") != null) {
+			pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		}
+		if(request.getParameter("amount") != null) {
+			amount = Integer.parseInt(request.getParameter("amount"));
+		}
+		
+		
+		
+		int offset = (pageNum-1)*amount;
+
+		cri.setAmount(amount);
+
+		cri.setOffset(offset);
+		
+		logger.debug("pageNum : "+pageNum);
+		logger.debug("offset : "+offset);
+		
+		model.addAttribute("list", bService.pListPaging(cri));
+		model.addAttribute("pageMaker", new PageDTO(cri, pNum));
 
 
 	}
 
 	@GetMapping(value = "/listProto")
 	@ResponseBody
-	public List<ProjectVO> getRejectReason(@RequestParam("sn") String sn,ProjectVO pvo, Criteria cri) {
+	public List<ProjectVO> getRejectReason(@RequestParam("pageNum") int pageNum,@RequestParam("amount") int amount, @RequestParam("sn") String sn,ProjectVO pvo, Criteria cri, HttpServletRequest request) {
 		logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		logger.debug(sn);
+		
+		
+		if(request.getParameter("pageNum") != null) {
+			pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		}
+		if(request.getParameter("amount") != null) {
+			amount = Integer.parseInt(request.getParameter("amount"));
+		}
+		
+		logger.debug("pageNum : "+pageNum);
+		
+		int offset = (pageNum-1)*amount;
+
+		cri.setAmount(amount);
+
+		cri.setOffset(offset);
 
 		List<ProjectVO> result = bService.proLSort(cri);
 		logger.debug("22 "+result);
 
 		return result;
 	}
-	
-//	@GetMapping(value = "/listProto")
-//	@ResponseBody
-//	public List<ProjectVO> getRejectReason(@RequestParam("sn") String sn,ProjectVO pvo, Criteria cri) {
-//		logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-//		logger.debug(sn);
-//		
-//		List result = bService.proLSort(cri);
-//		
-//		return result;
-//	}
 
 	/*
-	 * @GetMapping(value = "/listProto")
+	 * @GetMapping(value = "/listProP")
 	 * 
-	 * @ResponseBody public List<ProjectVO> list(Criteria cri,Model
-	 * model, @RequestParam("sn") String sn) throws Exception {
+	 * @ResponseBody public List<ProjectVO> getRejectReason(@RequestParam("pageNum")
+	 * int pageNum,@RequestParam("amount") int amount,@RequestParam("sn") String sn
+	 * ,ProjectVO pvo, Criteria cri,HttpServletRequest request) {
 	 * logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-
-	 * return bService.pCostDesc(cri); }
+	 * logger.debug(sn); logger.debug("amount : "+amount);
+	 * logger.debug("pageNum : "+pageNum);
+	 * 
+	 * 
+	 * if(request.getParameter("pageNum") != null) { pageNum =
+	 * Integer.parseInt(request.getParameter("pageNum")); }
+	 * if(request.getParameter("amount") != null) { amount =
+	 * Integer.parseInt(request.getParameter("amount")); }
+	 * 
+	 * 
+	 * 
+	 * int offset = (pageNum-1)*amount;
+	 * 
+	 * cri.setAmount(amount);
+	 * 
+	 * cri.setOffset(offset);
+	 * 
+	 * logger.debug("pageNum : "+pageNum); logger.debug("offset : "+offset);
+	 * 
+	 * List<ProjectVO> result = bService.proLSort(cri); logger.debug("22 "+result);
+	 * 
+	 * return result; }
 	 */
+	
+	@RequestMapping(value = "/listPro",method = RequestMethod.POST)
+	public void fiterList(@RequestParam("work_field") String work_field, Model model,ProjectVO pvo, Criteria cri) {
+		logger.debug("work_field : "+work_field);
+		
+		
+		List<ProjectVO> list = bService.proFi(cri);
+		model.addAttribute("list", list);
+		
+		pvo.setWork_field(work_field);
 
+		int fiNum = bService.fiNum(pvo);
+		model.addAttribute("pNum", fiNum);
+		logger.debug("fiNum : "+fiNum);
+		
+		model.addAttribute("pageMaker", new PageDTO(cri, fiNum));
+
+		
+	}
+	
+	@GetMapping(value = "/detailList")
+	public String detailGET(HttpSession session, Model model) {
+		// 프로젝트 리스트 상세정보
+		int proj_no = (Integer)session.getAttribute("proj_no");
+		
+		ProjectVO resultVO = bService.dePro(proj_no);
+		model.addAttribute(resultVO);
+		// 로그인 여부 조회
+		
+		// 뷰페이지 이동
+		return "/board/detailList";
+	}
+	
+	
+	//테스트용 페이지
 	@GetMapping(value = "/list")
 	public void pNumGET(Model model) {
 		logger.debug(" /list -> pNumGET() 호출 ");
@@ -101,5 +182,12 @@ public class BoardController {
 		model.addAttribute("pNum", pNum);
 
 	}
+	
+	@RequestMapping(value = "/detailList")
+	public void detailListGET() {
+		
+	}
+	
+	
 
 }

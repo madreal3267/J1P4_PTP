@@ -15,7 +15,7 @@ public class Criteria {
 	private String sn;
 	
 	public Criteria() {
-		this(1,10);
+		this(1,6);
 	}
 	
 	public Criteria(int pageNum, int amount) {
@@ -23,5 +23,7 @@ public class Criteria {
 		this.amount = amount;
 	}
 	
+	public int offset;
+	public String work_field;
 	
 }

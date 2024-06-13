@@ -17,13 +17,17 @@ public interface BoardDAO {
 	public List<ProjectVO> pListPaging(Criteria cri);
 	
 	// 프로젝트 정렬하기
-	public List<ProjectVO> pCostDesc(Criteria cri);
-	public List<ProjectVO> prDateDesc(Criteria cri);
-	public List<ProjectVO> pDdayDesc(Criteria cri);
+	public List<ProjectVO> proLSort(Criteria cri);
 	
 	// 프로젝트 필터
-	public List<ProjectVO> proSort(Criteria cri);
-	public List<ProjectVO> proLSort(Criteria cri);
+	public List<ProjectVO> proFi(Criteria cri);
+	// 필터된 갯수
+	public int fiNum(ProjectVO vo);
+	
+	// 프로젝트 상세페이지 이동
+	public ProjectVO dePro(int proj_no);
+	public ProjectVO dePro(ProjectVO vo);
+	
 	// 북마크 등록
 	
 	// 북마크 삭제
