@@ -110,14 +110,45 @@
 	    WHERE proj_no = #{proj_no} and valuing_free = #{free_no};
 	</select>
 	
-	<!-- 완료한 프로젝트(미완-별점,평가내용) -->
-	<select id="completedProjectList" resultType="com.itwillbs.domain.ProjectVO">
-		select * from project
+	<!-- 완료한 프로젝트(별점,평가내용) -->
+	<select id="completedProjectList" resultType="com.itwillbs.domain.EvaluateProjectDTO">
+		<!-- select * from project -->
+		select p.proj_title, pv.proj_no, pv.valuing_free, pv.valued_ct, c.ct_id, p.mod_date, pv.score, pv.content
+		from project_value pv
+		join project p on p.proj_no = pv.proj_no
+		join client c on p.ct_no = c.ct_no
+		where p.proj_status ='완료'<!--  and f.free_id=#{user_id} -->		
 	</select>
 	
-	<!-- 관심 프리랜서 -->
-	<select id="interestFreelancerList" resultType="com.itwillbs.domain.FreelancerVO">
-		select * from freelancer
+	<!-- 관심 프리랜서 시작 -->
+	
+	<!-- 사용자의 기본 정보와 경력, 지역, 기술 등의 정보 -->
+	<select id="freeInfo" resultType="com.itwillbs.domain.freeInfoDTO">
+		SELECT u.user_id, u.name, f.work_field, f.school_type, r.region, r.district, f.oneline_bio, 
+			MAX(TRUNCATE(DATEDIFF(NOW(), c.join_date) / 365, 0) + 1) AS yeoncha, 
+			GROUP_CONCAT(distinct s.skill_nm SEPARATOR ', ') AS skills, 
+		CASE
+        	WHEN FIND_IN_SET('시니어', GROUP_CONCAT(DISTINCT c.job_lev)) > 0 THEN '시니어'
+        	WHEN FIND_IN_SET('미들', GROUP_CONCAT(DISTINCT c.job_lev)) > 0 THEN '미들'
+        	WHEN FIND_IN_SET('주니어', GROUP_CONCAT(DISTINCT c.job_lev)) > 0 THEN '주니어'
+        ELSE NULL END AS job_level,
+	       	(select  COUNT(c.free_no) AS career_count
+				from freelancer f 
+				join user u ON u.user_id = f.free_id
+				left join career c ON c.free_no = f.free_no
+				where u.user_id = 'freelancer301') AS career_count,
+			(select  COUNT(p.free_no) AS portfolio_count
+				from freelancer f 
+				join user u ON u.user_id = f.free_id
+				left join portfolio p ON p.free_no = f.free_no
+				where u.user_id = 'freelancer301') AS portfolio_count
+		FROM freelancer f 
+		JOIN user u ON u.user_id = f.free_id 
+		JOIN career c ON c.free_no = f.free_no 
+		JOIN region r ON r.free_no = f.free_no 
+		JOIN skill s ON s.free_no = f.free_no 
+		WHERE u.user_id = 'freelancer301' <!--예시! #{user_id}로 변경 -->
+		GROUP BY u.user_id, u.name, f.work_field, f.school_type, r.region, r.district, f.oneline_bio
 	</select>
 	
 	<!-- 제안한 프리랜서 -->

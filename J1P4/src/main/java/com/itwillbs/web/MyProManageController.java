@@ -163,19 +163,19 @@ public class MyProManageController {
 //		}else {
 //			
 //		}
-//	// 프로젝트 평가 여부 체크 후 프로젝트 목록 조회
+//	// 프로젝트 평가 여부 체크 후 평가 대기중 프로젝트 목록 조회
 		List<EvaluateProjectDTO> waitEvaluationProjectList = myService.evaluateProjectList();
-		List<EvaluateProjectDTO> filteredEvaluationProjectList = new ArrayList<>();
+		List<EvaluateProjectDTO> filteredProjList = new ArrayList<>();
 
 		for (EvaluateProjectDTO project : waitEvaluationProjectList) {
 		    if (myService.checkEvaluate(project) == 0) {
-		        filteredEvaluationProjectList.add(project);
+		        filteredProjList.add(project);
 		    }
 		}
 
-		if (!filteredEvaluationProjectList.isEmpty()) {
-		    logger.debug("filteredEvaluationProjectList : " + filteredEvaluationProjectList.size());
-		    model.addAttribute("waitEvaluationProjectList", filteredEvaluationProjectList);
+		if (!filteredProjList.isEmpty()) {
+		    logger.debug("filteredProjList : " + filteredProjList.size());
+		    model.addAttribute("waitEvaluationProjectList", filteredProjList);
 		} else {
 		    logger.debug("No projects found for evaluation.");
 		}
@@ -193,25 +193,50 @@ public class MyProManageController {
 	// 완료한 프로젝트 목록 조회
 	// http://localhost:8088/myProManage/completedProject
 	@RequestMapping(value = "/completedProject",method = RequestMethod.GET)
-	public void completedProjectList(Model model,
+	public void completedProjectList(EvaluateProjectDTO edto, Model model,
 			@RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "5") int pageSize) {
 		logger.debug("/completedProject -> completedProjectList() 호출");
 		
-		List<ProjectVO> completedProjectList = myService.completedProjectList();
-        int totalProjects = completedProjectList.size();
-        int totalPages = (int) Math.ceil((double) totalProjects / pageSize);
+//		List<ProjectVO> completedProjectList = myService.completedProjectList();
+//        int totalProjects = completedProjectList.size();
+//        int totalPages = (int) Math.ceil((double) totalProjects / pageSize);
+//
+//        int startIndex = (page - 1) * pageSize;
+//        int endIndex = Math.min(startIndex + pageSize, totalProjects);
+//        List<ProjectVO> pageProjects = completedProjectList.subList(startIndex, endIndex);
+//
+//        model.addAttribute("pageProjects", pageProjects);
+//        model.addAttribute("currentPage", page);
+//        model.addAttribute("totalPages", totalPages);
+//        model.addAttribute("pageSize", pageSize);
+		List<EvaluateProjectDTO> completedProjectList = myService.completedProjectList();
+		List<EvaluateProjectDTO> filteredProjList = new ArrayList<>();
 
-        int startIndex = (page - 1) * pageSize;
-        int endIndex = Math.min(startIndex + pageSize, totalProjects);
-        List<ProjectVO> pageProjects = completedProjectList.subList(startIndex, endIndex);
-
-        model.addAttribute("pageProjects", pageProjects);
-        model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", totalPages);
-        model.addAttribute("pageSize", pageSize);
+		for (EvaluateProjectDTO project : completedProjectList) {
+		    if (myService.checkEvaluate(project) == 1) {
+		        filteredProjList.add(project);
+		    }
+		}
+		int totalProjects = filteredProjList.size();
+		int totalPages = (int) Math.ceil((double) totalProjects / pageSize);
 		
-				
+		int startIndex = (page - 1) * pageSize;
+		int endIndex = Math.min(startIndex + pageSize, totalProjects);
+		List<EvaluateProjectDTO> pageProjects = filteredProjList.subList(startIndex, endIndex);
+		
+		model.addAttribute("pageProjects", pageProjects);
+		model.addAttribute("currentPage", page);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("pageSize", pageSize);
+
+		if (!filteredProjList.isEmpty()) {
+		    logger.debug("filteredProjList : " + filteredProjList.size());
+		    model.addAttribute("completedProjectList", filteredProjList);
+		} else {
+		    logger.debug("No projects found for evaluation.");
+		}		
+		
 	}		
 	
 	

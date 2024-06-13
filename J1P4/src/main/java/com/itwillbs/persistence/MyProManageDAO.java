@@ -6,6 +6,7 @@ import com.itwillbs.domain.ApplyMgmtVO;
 import com.itwillbs.domain.EvaluateProjectDTO;
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.ProjectVO;
+import com.itwillbs.domain.freeInfoDTO;
 
 public interface MyProManageDAO {
 
@@ -39,14 +40,11 @@ public interface MyProManageDAO {
 	// 평가 대기중 프로젝트 목록
 	public List<ProjectVO> waitEvaluationProjectList();
 	
-	// 평가 대기중 프로젝트 - 등록하기
-	
-	
 	// 완료한 프로젝트 목록
-	public List<ProjectVO> completedProjectList();
+	//public List<ProjectVO> completedProjectList();
 	
 	// 관심 프리랜서 목록
-	public List<FreelancerVO> interestFreelancerList();
+	//public List<FreelancerVO> interestFreelancerList();
 	
 	// 제안한 프리랜서 목록
 	public List<FreelancerVO> proposeFreelancerList();
@@ -90,4 +88,10 @@ public interface MyProManageDAO {
 	
 	// 프로젝트 평가 여부 체크
 	public int checkEvaluate(EvaluateProjectDTO edto);
+	
+	// 완료한 프로젝트 목록
+	public List<EvaluateProjectDTO> completedProjectList();
+	
+	// 관심 프리랜서 목록
+	public List<freeInfoDTO> interestFreelancerList();
 }

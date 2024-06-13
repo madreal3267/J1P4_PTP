@@ -20,19 +20,19 @@
 		 	<option>최근 업데이트 순</option>	
 		</select>
 	 
-	 	<c:forEach var="freelancerVO" items="${interestFreelancerList}">
-			<div>
-				[프로필사진]<!-- DB.user 정보 -->
-				[이름]<!-- DB.user 정보 -->
-				분야 ${freelancerVO.work_field } | [레벨] 
-				[경력]
-				[학력]
-				[지역]
-				[기술명1]|[기술명2]|[기술명3]
-				[근무경력]
-				[포트폴리오]
-				[한줄소개] ${freelancerVO.oneline_bio } <br>
-				[DB 출력 확인입니다. ${freelancerVO.free_id },  ${freelancerVO.reg_date }]
+	 	<c:forEach var="free" items="${interestFreelancerList}">
+	 		<hr>
+			<div style=" background-color: white; padding:10px; width: 300px; height: auto; cursor: pointer;" onclick="#">
+				[프로필사진]<br><!-- DB.user 정보 -->
+				<b>${free.name }</b>
+				분야 <b>${free.work_field }</b> | [레벨] <b>${free.job_level }</b><br>
+				경력 <b>${free.yeoncha }</b> 년차 |
+				학력 <b>${free.school_type }</b>
+				지역 <b>${free.region } ${free.district }</b><br>
+				<button type="button" class="btn btn-warning" >${free.skills }</button><br>
+				근무경력 | 포트폴리오 <br>
+				${free.career_count } | ${free.portfolio_count }
+				[한줄소개] ${free.oneline_bio } <br>
 			</div>
 		</c:forEach>
 	</section>

@@ -1,5 +1,6 @@
 package com.itwillbs.persistence;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.ProjectVO;
+import com.itwillbs.domain.freeInfoDTO;
 import com.itwillbs.domain.ApplyMgmtVO;
 import com.itwillbs.domain.EvaluateProjectDTO;
 
@@ -95,19 +97,19 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 		return resultVO;
 	}
 
-	@Override
-	public List<ProjectVO> completedProjectList() {
-		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"completedProjectList");
-		
-		return resultVO;
-	}
+//	@Override
+//	public List<ProjectVO> completedProjectList() {
+//		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"completedProjectList");
+//		
+//		return resultVO;
+//	}
 
-	@Override
-	public List<FreelancerVO> interestFreelancerList() {
-		List<FreelancerVO> resultVO =sqlSession.selectList(NAMESPACE+"interestFreelancerList");
-		
-		return resultVO;
-	}
+//	@Override
+//	public List<FreelancerVO> interestFreelancerList() {
+//		List<FreelancerVO> resultVO =sqlSession.selectList(NAMESPACE+"interestFreelancerList");
+//		
+//		return resultVO;
+//	}
 
 	@Override
 	public List<FreelancerVO> proposeFreelancerList() {
@@ -177,24 +179,45 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 	
 	
 	
-	//DTO
+	// DTO 로 변경 하여 재적용
+	// 평가 대기중 프로젝트 리스트
 	@Override
 	public List<EvaluateProjectDTO> evaluateProjectList() {
 		List<EvaluateProjectDTO> resultDTO = sqlSession.selectList(NAMESPACE+"evProjList");
 		
 		return resultDTO;
 	}
-
+	
+	// 평가 대기중 프로젝트 - 평가하기
 	@Override
 	public void evaluateProject(EvaluateProjectDTO edto) {
 		sqlSession.insert(NAMESPACE + "evaluate", edto);
 		
 	}
-
+	
+	// 프로젝트 평가 여부 체크
 	@Override
 	public int checkEvaluate(EvaluateProjectDTO edto) {
 		int result = sqlSession.selectOne(NAMESPACE + "checkEvaluate", edto);
 		return result;
+	}
+	
+	// 완료한 프로젝트 목록
+	@Override
+	public List<EvaluateProjectDTO> completedProjectList() {
+		List<EvaluateProjectDTO> resultDTO = sqlSession.selectList(NAMESPACE+"completedProjectList");
+		return resultDTO;
+	}
+	
+	// 관심 프리랜서 목록
+	@Override
+	public List<freeInfoDTO> interestFreelancerList() {
+		List<freeInfoDTO> result = sqlSession.selectList(NAMESPACE+"freeInfo");
+	    logger.debug("result : " + result.size());
+	   
+	    return result;
+		
 	}	
+
 	
 }

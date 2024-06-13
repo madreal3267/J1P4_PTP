@@ -28,12 +28,10 @@
 			<c:forEach var="projectVO" items="${pageProjects}">
 				<div class="box-header with-border">
 					<h4>${projectVO.proj_title }</h4>
-					${projectVO.ct_no }<br> 
-					project_value의 score
-					<%-- ${score } --%>
-					<button>수정하기</button> <br> 
-					project_value의 content
-					<%-- ${content } --%>
+					${projectVO.ct_id } 클라이언트<br> 
+					${projectVO.score }	점
+					<button class="pull-right">수정하기</button> <br> 
+					 평가${projectVO.content }
 				</div>
 			</c:forEach>
 		</div>

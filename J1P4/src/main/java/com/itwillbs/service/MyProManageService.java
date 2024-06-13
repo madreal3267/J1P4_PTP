@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.ProjectVO;
+import com.itwillbs.domain.freeInfoDTO;
 import com.itwillbs.domain.ApplyMgmtVO;
 import com.itwillbs.domain.EvaluateProjectDTO;
 
@@ -40,10 +41,10 @@ public interface MyProManageService {
 	public List<ProjectVO> waitEvaluationProjectList();
 	
 	// 완료한 프로젝트 목록
-	public List<ProjectVO> completedProjectList();
+	//public List<ProjectVO> completedProjectList();
 	
 	// 관심 프리랜서 목록
-	public List<FreelancerVO> interestFreelancerList();
+	//public List<FreelancerVO> interestFreelancerList();
 	
 	// 제안한 프리랜서 목록
 	public List<FreelancerVO> proposeFreelancerList();
@@ -77,7 +78,7 @@ public interface MyProManageService {
 	
 	
 	
-	
+	// DTO 변경 적용 중
 	// 평가 대기중 프로젝트 리스트
 	public List<EvaluateProjectDTO> evaluateProjectList();
 	
@@ -86,4 +87,14 @@ public interface MyProManageService {
 	
 	// 프로젝트 평가 여부 체크
 	public int checkEvaluate(EvaluateProjectDTO edto);
+	
+	// 완료한 프로젝트 목록
+	public List<EvaluateProjectDTO> completedProjectList();
+	
+	// 관심 프리랜서 목록
+	public List<freeInfoDTO> interestFreelancerList();
+	
+	
+	
+	
 }

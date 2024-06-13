@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.ProjectVO;
+import com.itwillbs.domain.freeInfoDTO;
 import com.itwillbs.domain.ApplyMgmtVO;
 import com.itwillbs.domain.EvaluateProjectDTO;
 import com.itwillbs.persistence.MyProManageDAO;
@@ -92,19 +93,19 @@ public class MyProManageServiceImpl implements MyProManageService {
 		return mpmdao.waitEvaluationProjectList();
 	}
 
-	@Override
-	public List<ProjectVO> completedProjectList() {
-		logger.debug("completedProjectList() 실행");
-		
-		return mpmdao.completedProjectList();
-	}
+//	@Override
+//	public List<ProjectVO> completedProjectList() {
+//		logger.debug("completedProjectList() 실행");
+//		
+//		return mpmdao.completedProjectList();
+//	}
 
-	@Override
-	public List<FreelancerVO> interestFreelancerList() {
-		logger.debug("interestFreelancerList() 실행");
-		
-		return mpmdao.interestFreelancerList();
-	}
+//	@Override
+//	public List<FreelancerVO> interestFreelancerList() {
+//		logger.debug("interestFreelancerList() 실행");
+//		
+//		return mpmdao.interestFreelancerList();
+//	}
 
 	@Override
 	public List<FreelancerVO> proposeFreelancerList() {
@@ -199,6 +200,19 @@ public class MyProManageServiceImpl implements MyProManageService {
 		
 		return mpmdao.checkEvaluate(edto);
 	}
+
+	@Override
+	public List<EvaluateProjectDTO> completedProjectList() {
+			logger.debug("completedProjectList() 실행");
+			
+			return mpmdao.completedProjectList();
+	}
 	
+	@Override
+	public List<freeInfoDTO> interestFreelancerList() {
+		logger.debug("interestFreelancerList() 실행");
+		
+		return mpmdao.interestFreelancerList();
+	}
 	
 }
