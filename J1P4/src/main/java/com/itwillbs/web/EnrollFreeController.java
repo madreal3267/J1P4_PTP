@@ -70,6 +70,7 @@ public class EnrollFreeController {
 		return "redirect:/enroll/enrollSuccess";
 	}
 	
+	// 등록 성공 후
 	@GetMapping(value="/enrollSuccess")
 	public void enrollSuccessGET() {
 		logger.debug(" Controller : ( •̀ ω •́ )y /enrollFree -> enrollSuccessGET() 실행 ");
