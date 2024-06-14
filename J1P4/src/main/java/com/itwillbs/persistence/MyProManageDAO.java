@@ -7,6 +7,7 @@ import com.itwillbs.domain.EvaluateProjectDTO;
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.ProjectVO;
 import com.itwillbs.domain.freeInfoDTO;
+import com.itwillbs.domain.proposeFreeDTO;
 
 public interface MyProManageDAO {
 
@@ -47,7 +48,7 @@ public interface MyProManageDAO {
 	//public List<FreelancerVO> interestFreelancerList();
 	
 	// 제안한 프리랜서 목록
-	public List<FreelancerVO> proposeFreelancerList();
+	// public List<FreelancerVO> proposeFreelancerList();
 	
 	// 검수중 프로젝트 목록
 	public List<ProjectVO> underReviewProjectList();
@@ -94,4 +95,7 @@ public interface MyProManageDAO {
 	
 	// 관심 프리랜서 목록
 	public List<freeInfoDTO> interestFreelancerList();
+	
+	// 제안한 프리랜서 목록
+	public List<proposeFreeDTO> proposeFreelancerList();
 }

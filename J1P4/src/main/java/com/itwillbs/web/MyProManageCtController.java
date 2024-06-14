@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.ProjectVO;
 import com.itwillbs.domain.freeInfoDTO;
+import com.itwillbs.domain.proposeFreeDTO;
 import com.itwillbs.persistence.MyProManageDAO;
 import com.itwillbs.service.MyProManageService;
 
@@ -44,7 +45,7 @@ public class MyProManageCtController {
 	public void proposeFreelancerList(Model model) {
 		logger.debug("/proposeFreelancer -> proposeFreelancerList() 호출");
 		
-		List<FreelancerVO> proposeFreelancerList = myService.proposeFreelancerList();
+		List<proposeFreeDTO> proposeFreelancerList = myService.proposeFreelancerList();
 		logger.debug("proposeFreelancerList : " + proposeFreelancerList.size());
 		
 		model.addAttribute("proposeFreelancerList", proposeFreelancerList);

@@ -152,10 +152,26 @@
 	</select>
 	
 	<!-- 제안한 프리랜서 -->
-	<!-- 프로젝트(프로젝트 이름) 프리랜서이름(유저-이름) 기술(기술) 경력(DB에 연차 X) 지원 여부(Y/N) -->
-	<select id="proposeFreelancerList" resultType="com.itwillbs.domain.FreelancerVO">
-		select * from freelancer
-		
+	<select id="proposeFreelancerList" resultType="com.itwillbs.domain.proposeFreeDTO">
+	<!-- select * from freelancer -->
+		SELECT p.proj_title, u.name, 
+		    COALESCE(GROUP_CONCAT(DISTINCT s.skill_nm SEPARATOR ' | '), 'No Skills') AS skills, 
+		    COALESCE(MAX(TRUNCATE(DATEDIFF(NOW(), c.join_date) / 365, 0) + 1), 0) AS yeoncha, 
+		    CASE 
+		        WHEN MAX(a.proj_no = p.proj_no AND a.free_no = f.free_no) = 1 THEN 'Y' 
+		        ELSE 'N' 
+		    END AS apply_YN
+		FROM freelancer f 
+		JOIN offer_mgmt o ON o.free_no = f.free_no 
+		JOIN project p ON p.proj_no = o.proj_no
+		JOIN client ct ON ct.ct_no = p.ct_no
+		JOIN user u ON u.user_id = f.free_id 
+		LEFT JOIN skill s ON s.free_no = f.free_no 
+		LEFT JOIN career c ON c.free_no = f.free_no
+		LEFT JOIN apply_mgmt a ON p.proj_no = a.proj_no AND a.free_no = f.free_no
+		WHERE ct.ct_id = 'user_10'
+		GROUP BY p.proj_title, u.name, p.proj_no
+		ORDER BY p.proj_no
 	</select>
 	
 	<!-- 검수중 프로젝트-->

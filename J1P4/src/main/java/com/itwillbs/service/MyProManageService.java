@@ -5,6 +5,7 @@ import java.util.List;
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.ProjectVO;
 import com.itwillbs.domain.freeInfoDTO;
+import com.itwillbs.domain.proposeFreeDTO;
 import com.itwillbs.domain.ApplyMgmtVO;
 import com.itwillbs.domain.EvaluateProjectDTO;
 
@@ -47,7 +48,7 @@ public interface MyProManageService {
 	//public List<FreelancerVO> interestFreelancerList();
 	
 	// 제안한 프리랜서 목록
-	public List<FreelancerVO> proposeFreelancerList();
+	// public List<FreelancerVO> proposeFreelancerList();
 	
 	// 검수중 프로젝트 목록
 	public List<ProjectVO> underReviewProjectList();
@@ -94,6 +95,8 @@ public interface MyProManageService {
 	// 관심 프리랜서 목록
 	public List<freeInfoDTO> interestFreelancerList();
 	
+	// 제안한 프리랜서 목록
+	public List<proposeFreeDTO> proposeFreelancerList();	
 	
 	
 	

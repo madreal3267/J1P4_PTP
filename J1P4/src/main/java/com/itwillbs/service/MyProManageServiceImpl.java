@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.ProjectVO;
 import com.itwillbs.domain.freeInfoDTO;
+import com.itwillbs.domain.proposeFreeDTO;
 import com.itwillbs.domain.ApplyMgmtVO;
 import com.itwillbs.domain.EvaluateProjectDTO;
 import com.itwillbs.persistence.MyProManageDAO;
@@ -107,12 +108,12 @@ public class MyProManageServiceImpl implements MyProManageService {
 //		return mpmdao.interestFreelancerList();
 //	}
 
-	@Override
-	public List<FreelancerVO> proposeFreelancerList() {
-		logger.debug("proposeFreelancerList() 실행");
-		
-		return mpmdao.proposeFreelancerList();
-	}
+//	@Override
+//	public List<FreelancerVO> proposeFreelancerList() {
+//		logger.debug("proposeFreelancerList() 실행");
+//		
+//		return mpmdao.proposeFreelancerList();
+//	}
 
 	@Override
 	public List<ProjectVO> underReviewProjectList() {
@@ -215,4 +216,10 @@ public class MyProManageServiceImpl implements MyProManageService {
 		return mpmdao.interestFreelancerList();
 	}
 	
+	@Override
+	public List<proposeFreeDTO> proposeFreelancerList() {
+		logger.debug("proposeFreelancerList() 실행");
+		
+		return mpmdao.proposeFreelancerList();
+	}
 }

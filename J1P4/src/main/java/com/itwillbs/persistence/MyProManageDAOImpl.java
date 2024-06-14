@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.ProjectVO;
 import com.itwillbs.domain.freeInfoDTO;
+import com.itwillbs.domain.proposeFreeDTO;
 import com.itwillbs.domain.ApplyMgmtVO;
 import com.itwillbs.domain.EvaluateProjectDTO;
 
@@ -111,12 +112,12 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 //		return resultVO;
 //	}
 
-	@Override
-	public List<FreelancerVO> proposeFreelancerList() {
-		List<FreelancerVO> resultVO =sqlSession.selectList(NAMESPACE+"proposeFreelancerList");
-		
-		return resultVO;
-	}
+//	@Override
+//	public List<FreelancerVO> proposeFreelancerList() {
+//		List<FreelancerVO> resultVO =sqlSession.selectList(NAMESPACE+"proposeFreelancerList");
+//		
+//		return resultVO;
+//	}
 
 	@Override
 	public List<ProjectVO> underReviewProjectList() {
@@ -217,7 +218,17 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 	   
 	    return result;
 		
-	}	
+	}
 
+	// 제안한 프리랜서 목록
+	@Override
+	public List<proposeFreeDTO> proposeFreelancerList() {
+		List<proposeFreeDTO> result = sqlSession.selectList(NAMESPACE+"proposeFreelancerList");
+	    logger.debug("result : " + result.size());
+	   
+	    return result;
+	}	
+	
+	
 	
 }
