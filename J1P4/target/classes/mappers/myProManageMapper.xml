@@ -234,6 +234,13 @@
 		where p.proj_status = '완료' and c.ct_id = 'user_10';<!--예시! #{user_id}로 변경 -->
 	</select>
 
+<!--  -->
+
+
+
+
+
+
 	<!-- 완료한 프로젝트의 평가완료 프리랜서 -->
 	<select id="completedFreelancerList" resultType="com.itwillbs.domain.FreelancerVO">
 		select * from freelancer
