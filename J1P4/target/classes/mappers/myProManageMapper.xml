@@ -176,17 +176,29 @@
 	
 	<!-- 검수중 프로젝트-->
 	<select id="underReviewProjectList" resultType="com.itwillbs.domain.ProjectVO">
-		select * from project
+		<!-- select * from project -->
+		select p.proj_title, p.reg_date, p.deadline, p.proj_status
+		from project p 
+		join client c on c.ct_no = p.ct_no
+		where p.proj_status = '검수 단계' and c.ct_id ='user_10'<!--예시! #{user_id}로 변경 -->
 	</select>	
 	
 	<!-- 임시저장 프로젝트 -->
 	<select id="temSaveProjectList" resultType="com.itwillbs.domain.ProjectVO">
-		select * from project
+		<!-- select * from project -->
+		select p.*
+		from project p 
+		join client c on c.ct_no = p.ct_no
+		where p.proj_status = '임시 저장' and c.ct_id ='user_10'<!--예시! #{user_id}로 변경 -->
 	</select>	
 	
 	<!-- 등록실패 프로젝트 -->
 	<select id="regFailedProjectList" resultType="com.itwillbs.domain.ProjectVO">
-		select * from project
+		<!-- select * from project -->
+		select p.*
+		from project p 
+		join client c on c.ct_no = p.ct_no
+		where p.proj_status = '등록 실패' and c.ct_id ='user_10'<!--예시! #{user_id}로 변경 -->
 	</select>	
 	
 	<!-- 지원자 모집중 프로젝트 -->
@@ -199,14 +211,27 @@
 		select * from project
 	</select>	
 	
-	<!-- 프로젝트 진행중 목록 -->
-	<select id="ctOngoingProjectList" resultType="com.itwillbs.domain.ProjectVO">
-		select * from project
+	<!-- 프로젝트 진행중 목록 조회-->
+	<select id="ctOngoingProjectList" resultType="com.itwillbs.domain.ctOngoingProjectDTO">
+		<!-- select * from project -->
+		select p.proj_no, p.proj_title, m.manager_nm, p.proj_status
+		from project p 
+		join client c on p.ct_no = c.ct_no
+		join settlement s on s.proj_no = p.proj_no
+		join manager m on s.manager_no = m.manager_no
+		where (p.proj_status = '진행 중' or p.proj_status = '계약')and c.ct_id = 'user_10'<!--예시! #{user_id}로 변경 -->
 	</select>	
 	
-	<!-- 평가대기중 프리랜서-->
-	<select id="waitEvaluationFreelancerList" resultType="com.itwillbs.domain.FreelancerVO">
-		select * from freelancer
+	<!-- 평가대기중 프리랜서 목록 조회-->
+	<select id="waitEvaluationFreelancerList" resultType="com.itwillbs.domain.EvaluateFreelancerDTO">
+		<!-- select * from freelancer -->
+		select u.name, p.proj_title, p.mod_date
+		from project p
+		join client c on c.ct_no = p.ct_no
+		join apply_mgmt a on a.proj_no = p.proj_no
+		join freelancer f on f.free_no = a.free_no
+		join user u on u.user_id = f.free_id
+		where p.proj_status = '완료' and c.ct_id = 'user_10';<!--예시! #{user_id}로 변경 -->
 	</select>
 
 	<!-- 완료한 프로젝트의 평가완료 프리랜서 -->

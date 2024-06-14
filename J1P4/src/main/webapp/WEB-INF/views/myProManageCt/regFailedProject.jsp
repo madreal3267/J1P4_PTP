@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 
 <%@ include file="../include/headerCt.jsp" %>
 
@@ -36,8 +38,8 @@
 							<tr>
 								<td rowspan="2">${projectVO.proj_no }</td>
 								<td>${projectVO.proj_title }</td>
-								<td>${projectVO.reg_date }</td>
-								<td>관리자가 반려한 날짜<!-- 반려하면 DB에 날짜가 저장? --></td>
+								<td><fmt:formatDate value="${projectVO.reg_date }" pattern="yyyy-mm-dd"/></td>
+								<td><fmt:formatDate value="${projectVO.mod_date }" pattern="yyyy-mm-dd"/></td>
 								<td rowspan="2" class="text-center">
 									<form method="POST" name="form">
 										<button type="submit" onclick="javascript: form.action='#'" class="btn btn-primary">수정하기</button>

@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.ProjectVO;
+import com.itwillbs.domain.ctOngoingProjectDTO;
 import com.itwillbs.domain.freeInfoDTO;
 import com.itwillbs.domain.proposeFreeDTO;
 import com.itwillbs.domain.ApplyMgmtVO;
+import com.itwillbs.domain.EvaluateFreelancerDTO;
 import com.itwillbs.domain.EvaluateProjectDTO;
 import com.itwillbs.persistence.MyProManageDAO;
 
@@ -150,19 +152,19 @@ public class MyProManageServiceImpl implements MyProManageService {
 		return mpmdao.ctContractProjectList();
 	}
 
-	@Override
-	public List<ProjectVO> ctOngoingProjectList() {
-		logger.debug("ctOngoingProjectList() 실행");
-		
-		return mpmdao.ctOngoingProjectList();
-	}
+//	@Override
+//	public List<ProjectVO> ctOngoingProjectList() {
+//		logger.debug("ctOngoingProjectList() 실행");
+//		
+//		return mpmdao.ctOngoingProjectList();
+//	}
 
-	@Override
-	public List<FreelancerVO> waitEvaluationFreelancerList() {
-		logger.debug("waitEvaluationFreelancerList() 실행");
-		
-		return mpmdao.waitEvaluationFreelancerList();
-	}
+//	@Override
+//	public List<FreelancerVO> waitEvaluationFreelancerList() {
+//		logger.debug("waitEvaluationFreelancerList() 실행");
+//		
+//		return mpmdao.waitEvaluationFreelancerList();
+//	}
 
 	@Override
 	public List<FreelancerVO> completedFreelancerList() {
@@ -221,5 +223,20 @@ public class MyProManageServiceImpl implements MyProManageService {
 		logger.debug("proposeFreelancerList() 실행");
 		
 		return mpmdao.proposeFreelancerList();
+	}
+	
+	@Override
+	public List<ctOngoingProjectDTO> ctOngoingProjectList() {
+		logger.debug("ctOngoingProjectList() 실행");
+		
+		return mpmdao.ctOngoingProjectList();
+	}
+	
+	// 평가 대기중 프리랜서 목록 조회
+	@Override
+	public List<EvaluateFreelancerDTO> waitEvaluationFreelancerList() {
+		logger.debug("waitEvaluationFreelancerList() 실행");
+		
+		return mpmdao.waitEvaluationFreelancerList();
 	}
 }

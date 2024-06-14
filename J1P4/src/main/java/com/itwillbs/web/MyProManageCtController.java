@@ -11,8 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.itwillbs.domain.EvaluateFreelancerDTO;
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.ProjectVO;
+import com.itwillbs.domain.ctOngoingProjectDTO;
 import com.itwillbs.domain.freeInfoDTO;
 import com.itwillbs.domain.proposeFreeDTO;
 import com.itwillbs.persistence.MyProManageDAO;
@@ -117,7 +119,7 @@ public class MyProManageCtController {
 	public void ctOngoingProjectList(Model model) {
 		logger.debug("/ctOngoingProject -> ctOngoingProjectList() 호출");
 		
-		List<ProjectVO> ctOngoingProjectList = myService.ctOngoingProjectList();
+		List<ctOngoingProjectDTO> ctOngoingProjectList = myService.ctOngoingProjectList();
 		logger.debug("ctOngoingProjectList : " + ctOngoingProjectList.size());
 		
 		model.addAttribute("ctOngoingProjectList", ctOngoingProjectList);		
@@ -129,7 +131,7 @@ public class MyProManageCtController {
 	public void waitEvaluationFreelancerList(Model model) {
 		logger.debug("/waitEvaluationFreelancer -> waitEvaluationFreelancerList() 호출");
 		
-		List<FreelancerVO> waitEvaluationFreelancerList = myService.waitEvaluationFreelancerList();
+		List<EvaluateFreelancerDTO> waitEvaluationFreelancerList = myService.waitEvaluationFreelancerList();
 		logger.debug("waitEvaluationFreelancerList : " + waitEvaluationFreelancerList.size());
 		
 		model.addAttribute("waitEvaluationFreelancerList", waitEvaluationFreelancerList);		

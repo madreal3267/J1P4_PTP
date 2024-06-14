@@ -12,9 +12,11 @@ import org.springframework.stereotype.Repository;
 
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.ProjectVO;
+import com.itwillbs.domain.ctOngoingProjectDTO;
 import com.itwillbs.domain.freeInfoDTO;
 import com.itwillbs.domain.proposeFreeDTO;
 import com.itwillbs.domain.ApplyMgmtVO;
+import com.itwillbs.domain.EvaluateFreelancerDTO;
 import com.itwillbs.domain.EvaluateProjectDTO;
 
 @Repository
@@ -154,19 +156,19 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 		return resultVO;
 	}
 
-	@Override
-	public List<ProjectVO> ctOngoingProjectList() {
-		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"ctOngoingProjectList");
-		
-		return resultVO;
-	}
+//	@Override
+//	public List<ProjectVO> ctOngoingProjectList() {
+//		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"ctOngoingProjectList");
+//		
+//		return resultVO;
+//	}
 
-	@Override
-	public List<FreelancerVO> waitEvaluationFreelancerList() {
-		List<FreelancerVO> resultVO =sqlSession.selectList(NAMESPACE+"waitEvaluationFreelancerList");
-		
-		return resultVO;
-	}
+//	@Override
+//	public List<FreelancerVO> waitEvaluationFreelancerList() {
+//		List<FreelancerVO> resultVO =sqlSession.selectList(NAMESPACE+"waitEvaluationFreelancerList");
+//		
+//		return resultVO;
+//	}
 
 	@Override
 	public List<FreelancerVO> completedFreelancerList() {
@@ -210,7 +212,7 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 		return resultDTO;
 	}
 	
-	// 관심 프리랜서 목록
+	// 관심 프리랜서 목록 조회
 	@Override
 	public List<freeInfoDTO> interestFreelancerList() {
 		List<freeInfoDTO> result = sqlSession.selectList(NAMESPACE+"freeInfo");
@@ -220,15 +222,31 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 		
 	}
 
-	// 제안한 프리랜서 목록
+	// 제안한 프리랜서 목록 조회
 	@Override
 	public List<proposeFreeDTO> proposeFreelancerList() {
 		List<proposeFreeDTO> result = sqlSession.selectList(NAMESPACE+"proposeFreelancerList");
 	    logger.debug("result : " + result.size());
 	   
 	    return result;
+	}
+
+	// 진행중 프로젝트 목록 조회
+	@Override
+	public List<ctOngoingProjectDTO> ctOngoingProjectList() {
+		List<ctOngoingProjectDTO> resultDTO = sqlSession.selectList(NAMESPACE+"ctOngoingProjectList");
+		logger.debug("resultDTO : "+ resultDTO.size());
+		
+		return resultDTO;
 	}	
 	
-	
+	// 평가 대기중 프리랜서 목록 조회
+	@Override
+	public List<EvaluateFreelancerDTO> waitEvaluationFreelancerList() {
+		List<EvaluateFreelancerDTO> resultDTO =sqlSession.selectList(NAMESPACE+"waitEvaluationFreelancerList");
+		
+		return resultDTO;
+	}
+
 	
 }

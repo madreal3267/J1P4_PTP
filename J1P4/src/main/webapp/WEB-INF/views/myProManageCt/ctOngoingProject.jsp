@@ -6,29 +6,50 @@
 
 	<h1>/myProManageCt/ctOngoingProject.jsp</h1> <br>
 	
-	<section>
-		<h1>프로젝트 진행 중</h1>
-		진행 중 프로젝트를 확인할 수 있습니다.
-	</section>
-	
-	<section>
-		<table border="1">
-			<tr>
-				<td>프로젝트 번호</td>
-				<td>프로젝트 이름</td>
-				<td>담당 매니저</td>
-				<td>진행 상태</td>
-			</tr>
-		<c:forEach var="projectVO" items="${ctOngoingProjectList}">
-			<tr>
-				<td>${projectVO.proj_no }</td>
-				<td>${projectVO.proj_title }</td>
-				<td>[매퍼 보완]</td>
-				<td><button>완료하기</button></td>
-			</tr>		
-		</c:forEach>
-		</table>
-	</section>
+<section>
+	<div class="col-md-12">
+		<div class="box box-default">
+			<div class="box-header with-border">
+				<h1>프로젝트 진행 중</h1>
+				진행 중 프로젝트를 확인할 수 있습니다..
+			</div>
+		</div>
+	</div>
+</section>	
+<div class="col-md-12">
+	<div class="box box-default">
+		<div class="box-header with-border">
+			<section>
+				<table class="table table-bordered bg-light table-striped">
+					<tr class="text-center">
+						<td>프로젝트 번호</td>
+						<td>프로젝트 이름</td>
+						<td>담당 매니저</td>
+						<td>진행 상태</td>
+					</tr>
+					<c:forEach var="copDTO" items="${ctOngoingProjectList}">
+						<tr>
+							<td>${copDTO.proj_no }</td>
+							<td>${copDTO.proj_title }</td>
+							<td>${copDTO.manager_nm }</td>
+							<td>
+		                        <c:choose>
+		                            <c:when test="${copDTO.proj_status == '계약'}">
+		                                <button>결제하기</button>
+		                            </c:when>
+		                            <c:otherwise>
+		                               <button>완료하기</button>
+		                            </c:otherwise>
+		                        </c:choose>
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</section>
+		</div>
+	</div>
+</div>
+
 
 <!-- 외형만 복사. 작동원리 탐구 필요. -->
 <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">

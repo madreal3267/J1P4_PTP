@@ -6,20 +6,25 @@
 
 	<h1>/myProManageCt/interestFreelancer.jsp</h1> <hr>
 	
-	<section>
-	<h1>관심 프리랜서 관리</h1>
-	북마크한 프리랜서를 관리할 수 있습니다.	
-	</section>
+<section>	
+	<div class="col-md-12">
+		<div class="box box-default">
+			<div class="box-header with-border">
+				<h1>관심 프리랜서 관리</h1>
+				북마크한 프리랜서를 관리할 수 있습니다.	
+			</div>
+		</div>
+	</div>	
+</section>
 	
 	<section>
-		<select>
+		<select class="pull-right">
 	 		<option>정렬방식</option>
 	 		<option></option>
 		 	<option selected>정렬방식</option>
 		 	<option>포트폴리오 많은 순</option>
 		 	<option>최근 업데이트 순</option>	
 		</select>
-	 
 	 	<c:forEach var="free" items="${interestFreelancerList}">
 	 		<hr>
 			<div style=" background-color: white; padding:10px; width: 300px; height: auto; cursor: pointer;" onclick="#">

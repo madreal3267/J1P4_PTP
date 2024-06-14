@@ -15,10 +15,6 @@
 		</div>
 	</div>
 </div>
-
-<c:set var="prevProjectName" value="" />
-<c:set var="projectCount" value="0" />
-
 <div class="col-md-12">
     <div class="box box-default">
         <div class="box-header with-border">

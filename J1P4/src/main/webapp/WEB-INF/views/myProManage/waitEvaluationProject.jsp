@@ -45,7 +45,7 @@
 											<input type="radio" id="rating10" name="score" value="10"><label for="rating10" title="5점"></label> 
 											<input type="radio" id="rating9" name="score" value="9"><label class="half" for="rating9" title="4.5점"></label> 
 											<input type="radio" id="rating8" name="score" value="8"><label for="rating8" title="4점"></label> 
-											<input type="radio" id="rating7" name="rating" value="7"><label class="half" for="rating7" title="3.5점"></label> 
+											<input type="radio" id="rating7" name="score" value="7"><label class="half" for="rating7" title="3.5점"></label> 
 											<input type="radio" id="rating6" name="score" value="6"><label for="rating6" title="3점"></label> 
 											<input type="radio" id="rating5" name="score" value="5"><label class="half" for="rating5" title="2.5점"></label> 
 											<input type="radio" id="rating4" name="score" value="4"><label for="rating4" title="2점"></label> 

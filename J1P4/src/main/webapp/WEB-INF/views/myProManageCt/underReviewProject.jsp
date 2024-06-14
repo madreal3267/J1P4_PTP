@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ include file="../include/headerCt.jsp" %>
 
@@ -32,8 +33,11 @@
 						<c:forEach var="projectVO" items="${underReviewProjectList}">
 							<tr>
 								<td>${projectVO.proj_title }</td>
-								<td class="text-center">${projectVO.reg_date } ~ ${projectVO.deadline }</td>
-								<td class="text-center">${projectVO.proj_status }</td>
+								<td class="text-center">
+									<fmt:formatDate value="${projectVO.reg_date }" pattern="yyyy-mm-dd"/>
+									~ ${projectVO.deadline }
+								</td>
+								<td class="text-center">${projectVO.proj_status } </td>
 								<td class="text-center">
 									<form method="POST" name="form">
 										<button type="submit" onclick="javascript: form.action='#'"class="btn btn-primary">수정하기</button>   
