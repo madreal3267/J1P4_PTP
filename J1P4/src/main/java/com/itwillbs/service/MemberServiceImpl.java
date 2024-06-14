@@ -47,6 +47,22 @@ public class MemberServiceImpl implements MemberService {
 		return mdao.findIdCheck(memberEmail);
 	}
 
+	//아이디로 회원이 맞는지 체크
+	@Override
+	public void findpw(MemberVO vo) throws Exception {
+		
+		 mdao.findpw(vo);
+	}
+
+	//비번변경 - 저장된 이메일과 난수를 가진 유저의 비밀번호를 변경 
+	@Override
+	public void chagepw(MemberVO vo) throws Exception {
+		mdao.chagepw(vo);
+		
+	}
+	
+	
+	
 
 	
 	

@@ -18,7 +18,7 @@ public class MemberVO {
 	private Timestamp reg_date;
 	private Timestamp update_date;
 	
-	private String mail_key;
+	private String mail_key; //난수
 	private int mail_auth;
 	
 }

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>비밀번호 찾기 폼</title>
+<title>비밀번호 재설정 페이지</title>
 <meta
 	content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
 	name='viewport'>
@@ -37,32 +37,48 @@
 </head>
 <!-- jQuery 2.1.4 -->
 <script src="./resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script type="text/javascript">
+String email = request.getParameter("user_email")
+String key = request.getParameter("key")
+
+</script>
+
 
 
 <body>
 
 	<div class="box box-info">
 		<div class="box-header with-border">
-			<h3 class="box-title">비밀번호 찾기</h3>
+			<h3 class="box-title">비밀번호 재설정</h3>
 		</div>
 
 
-		<form class="form-horizontal" action="/member/findpw" method="post">
+		<form class="form-horizontal" action="/member/main" method="post">
 			<div class="box-body">
+			
+				<input type="hidden" name="user_email" value="email" >
+				<input type="hidden" name="mail_key"  value="key">
+				 
+				 
+				
 				<div class="form-group">
-					<label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
+					<label for="inputEmail3" class="col-sm-2 control-label">새 비밀번호</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="user_id"
-							id="inputEmail3" placeholder="ID">
+						<input type="text" class="form-control" name="user_pw"
+							id="inputEmail3" placeholder="password">
+
 					</div>
 				</div>
+				
+				
 				<div class="form-group">
-					<label for="inputPassword3" class="col-sm-2 control-label">이메일</label>
+					<label for="inputPassword3" class="col-sm-2 control-label">새 비밀번호 확인</label>
 					<div class="col-sm-10">
-						<input type="email" class="form-control" name="user_email"
-							id="inputPassword3" placeholder="Email">
+						<input type="password" class="form-control" name="user_pw"
+							id="inputPassword3" placeholder="PasswordCheck">
 					</div>
 				</div>
+				
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
 						<div class="checkbox">
@@ -74,11 +90,7 @@
 			</div>
 
 			<div class="box-footer">
-				<button type="submit" class="btn btn-default">비밀번호 재설정</button>
-				<button type="submit" class="btn btn-default">회원가입</button>
-				<button type="submit" class="btn btn-info pull-right">아이디
-					찾기</button>
-
+				<button type="submit" class="btn btn-default">비밀번호 재설정하기</button>
 			</div>
 
 		</form>

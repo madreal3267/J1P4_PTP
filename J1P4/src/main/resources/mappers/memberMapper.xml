@@ -26,6 +26,24 @@
 	<select id="findIdCheck" resultType="int">
 		select count(*) from user where user_email=#{user_email}
 	</select>
+	
+	
+	<!-- 난수저장 -->
+	<update id="mailkey">
+		update user
+		set mail_key=#{mail_key}
+		where user_id=#{user_id} 
+	</update>
+	
+	<!-- 난수비교 -->
+	<!-- 저장된 이메일과 난수를 가진 유저의 비밀번호를 바꾸는 쿼리  -->
+	<update id="mailkey2">
+	update user
+	set user_pw=#{user_pw}
+	where user_id=(select user_id from user where user_email=#{user_email} and mail_key=#{mail_key}) 
+	</update>
+	
+	
   	 
   
   </mapper>

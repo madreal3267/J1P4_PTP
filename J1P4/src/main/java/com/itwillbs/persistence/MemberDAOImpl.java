@@ -23,6 +23,10 @@ public class MemberDAOImpl implements MemberDAO {
 	               = "com.itwillbs.mapper.MemberMapper.";
 	
 	
+	
+	
+
+
 	//로그인
 	@Override
 	public MemberVO login(MemberVO vo) {
@@ -45,6 +49,25 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		return sqlSession.selectOne(NAMESPACE+"findIdCheck", memberEmail);
 	}
+
+	// 비번 - 가입한 유저가 맞는지 -> 맞으면 난수 생성 디비저장
+	@Override
+	public void findpw(MemberVO vo) throws Exception {
+		
+		sqlSession.update(NAMESPACE+"mailkey", vo);
+	}
+
+	
+	//비번변경 - 저장된 이메일과 난수를 가진 유저의 비밀번호를 변경 
+	@Override
+	public void chagepw(MemberVO vo) throws Exception {
+		sqlSession.update(NAMESPACE+"mailkey2", vo);
+		
+	}
+	
+	
+	
+	
 	
 
 	

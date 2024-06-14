@@ -6,13 +6,18 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.itwillbs.domain.MemberVO;
+import com.itwillbs.persistence.MailHandler;
+import com.itwillbs.persistence.TempKey;
 import com.itwillbs.service.MemberService;
 
 @Controller
@@ -24,6 +29,9 @@ public class MemberController {
 	// 서비스 객체를 주입
 		@Inject
 		private MemberService mService;
+		
+		@Autowired
+		private JavaMailSender mailSender;
 	
 		
 		
@@ -99,6 +107,85 @@ public class MemberController {
 	//그렇지 않으면 아이디찾기 로직을 수행하고 /member/findId페이지로 이동
 	
 	//--------------------------------------------------------------
+	
+	
+//	//비밀번호 찾기 페이지 
+//	// http://localhost:8088/member/pwfind
+//	@RequestMapping(value = "/pwfind", method = RequestMethod.GET)
+//	public String search_pw(HttpServletRequest request, Model model, MemberVO vo ) {
+//			
+//			
+//			return"/member/pwfind";
+//		}
+	//비밀번호 찾기 페이지 
+	// http://localhost:8088/member/pwfind
+	@RequestMapping(value = "/pwfind", method = RequestMethod.GET)
+	public void search_pw() {
+		
+	}
+	
+	
+	//비밀번호 재설정페이지로 이동 -> 난수 저장
+	@RequestMapping(value = "/findpw", method = RequestMethod.POST)
+	public String findpw(MemberVO vo, Model model) throws Exception {
+		
+		System.out.println(vo);
+		logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@"+vo);
+		logger.info("@@@@@@@@@@@@@@@@@"+vo.getUser_id());
+		
+		if(vo.getUser_id() != null) {
+			String key = new TempKey().getKey(8, false); //난수를 생성하는 키
+			System.out.println("key:"+ key);
+			vo.setMail_key(key);
+			
+			mService.findpw(vo);
+			
+			MailHandler mailhandler = new MailHandler(mailSender);
+			mailhandler.setSubject("[캐프리 비밀번호 재설정 메일입니다.]"); //메일제목
+			mailhandler.setText(
+					"<h1>메일인증</h1>" +
+							"<br/>"+vo.getUser_id()+"님 "+
+							"<br/>비밀번호 변경을 위해서"+
+							"<br/>아래 [비밀번호 변경하기]를 눌러주세요."+
+							"<a href='http://192.168.7.2:8088/member/findpw?user_email=" + vo.getUser_email() +
+							"&key=" + key +
+							"' target='_blenk'>비밀번호 변경하기</a>");
+			mailhandler.setFrom("itwil_j1p4@naver.com", "캐프리");
+			mailhandler.setTo(vo.getUser_email());
+			mailhandler.send();
+			
+			
+			
+			logger.debug("이메일 인증");
+			
+			return"/member/findpw2";
+			
+		}else {
+			String msg ="아이디가 없습니다";
+			model.addAttribute("msg", msg);
+			
+			return "/member/pwfind";
+			
+		}
+		
+	}
+	
+	@GetMapping(value = "/findpw")
+	public void findpw() {
+		
+	}
+	
+	@PostMapping(value = "/main")
+	public void main() {
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 

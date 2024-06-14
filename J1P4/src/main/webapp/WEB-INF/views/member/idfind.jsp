@@ -75,7 +75,7 @@
 
 <div class="box-footer">
 <button type="submit" class="btn btn-default">아이디 찾기</button>
-<button type="submit" class="btn btn-info pull-right">비밀번호 찾기</button>
+<button type="submit" class="btn btn-info pull-right" onclick="location.href='/member/pwfind'">비밀번호 찾기</button>
 </div>
 
 </form>
