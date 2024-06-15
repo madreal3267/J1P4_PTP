@@ -145,7 +145,7 @@ public class MyProManageCtController {
 	@RequestMapping(value = "/waitEvaluationFreelancer",method = RequestMethod.POST)
 	public void evaluationFreelancer(EvaluateProjectDTO edto) {
 		logger.debug("/waitEvaluationFreelancer -> evaluationFreelancer(EvaluateProjectDTO edto) 호출");
-		myService.evaluateFreelancer(edto);
+		//myService.evaluateFreelancer(edto);
 		
 	}			
 	
