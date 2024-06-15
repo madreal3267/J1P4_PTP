@@ -28,7 +28,7 @@
 	</select>
 	
 	
-	<!-- 난수저장 -->
+	<!-- 난수생성 후 저장 -->
 	<update id="mailkey">
 		update user
 		set mail_key=#{mail_key}

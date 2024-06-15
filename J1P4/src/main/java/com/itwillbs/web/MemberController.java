@@ -147,7 +147,7 @@ public class MemberController {
 							"<br/>"+vo.getUser_id()+"님 "+
 							"<br/>비밀번호 변경을 위해서"+
 							"<br/>아래 [비밀번호 변경하기]를 눌러주세요."+
-							"<a href='http://192.168.7.2:8088/member/findpw?user_email=" + vo.getUser_email() +
+							"<a href='http://192.168.0.26:8088/member/findpw?user_email=" + vo.getUser_email() +
 							"&key=" + key +
 							"' target='_blenk'>비밀번호 변경하기</a>");
 			mailhandler.setFrom("itwil_j1p4@naver.com", "캐프리");
@@ -155,10 +155,10 @@ public class MemberController {
 			mailhandler.send();
 			
 			
-			
 			logger.debug("이메일 인증");
 			
 			return"/member/findpw2";
+			
 			
 		}else {
 			String msg ="아이디가 없습니다";
@@ -175,14 +175,24 @@ public class MemberController {
 		
 	}
 	
+	//변경한 비밀번호 DB에 전달
+
 	@PostMapping(value = "/main")
-	public void main() {
+	public void main(MemberVO vo, Model model) throws Exception {
+		logger.debug("비번변경 Post()호출");
+		String result = vo.getMail_key();
+		String key = new TempKey().getKey(8, false); 
+		if(result == key) {
+			mService.chagepw(vo);
+			
+			logger.debug("비밀번호 변경완료");
+		}else {
+			
+			String msg ="비밀번호 변경실패";
+			model.addAttribute("msg", msg);
+		}
 		
 	}
-	
-	
-	
-	
 	
 	
 	
