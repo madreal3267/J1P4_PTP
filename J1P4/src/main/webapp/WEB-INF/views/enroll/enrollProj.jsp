@@ -170,24 +170,12 @@ h5 {
 		<hr>
 		<h2>주요 기술 스택</h2>
 		<h5>프리랜서가 필수로 보유해야하는 기술을 입력해 주세요.</h5>
-		<div class="btn-group" role="group"
-			aria-label="Basic checkbox toggle button group">
-			<select name="skill_nm" id="skillSelect">
-				<option></option>
-				<option value="자바">자바</option>
-				<option value="파이썬">파이썬</option>
-				<option value="CSS">CSS</option>
-				<option value="MySQL">MySQL</option>
-			</select> <select name="skill_lev" id="levSelect">
-				<option></option>
-				<option value="초급">초급</option>
-				<option value="중급">중급</option>
-				<option value="고급">고급</option>
-			</select>
-		</div>
-
-		<input type="button" value="추가하기" id="addButt">
-		<!-- 	값을 선택했을 때 뷰페이지에 출력되는 기능 찾아보기 - 공통 코드 엮기 -->
+		<div class="listPt"></div>
+		<!-- [추가하기] 클릭 시 추가되는 기술 리스트 출력되는 공간-->
+		<div id="inputPt"></div>
+		<!-- [+보유기술 추가] 클릭 시 [select 버튼] 출력되는 공간 -->
+		
+		<button type="button" class="addSkill">+ 보유기술 추가</button>
 
 		<hr>
 		<h2>구인 등급</h2>
@@ -227,22 +215,22 @@ h5 {
 
 		<hr>
 <!-- 		<button type="button" id="saveButt" onclick="saveTemp()">임시저장</button> -->
-		<input type="button" id="saveButt" value="임시저장"> <input
+		<input type="button" class="saveButt" value="임시저장"> <input
 			type="submit" value="등록">
 
 	</form>
 	<!-- 폼 태그 끝 -->
 
-	<!-- select2 (검색되는 select) 자바스크립트 -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-	<!-- 부트스트랩 자바스크립트 -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-		crossorigin="anonymous"></script>
+<!-- select2 (검색되는 select) 자바스크립트 -->
+<script
+	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<!-- 부트스트랩 자바스크립트 -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous"></script>
 
-	<script type="text/javascript">
+<script type="text/javascript">
 		/* 시군구 - select */
 		var cnt = new Array();
 
@@ -298,42 +286,86 @@ h5 {
 			}
 		}
 
-		/* 주요기술 스택 - select2(검색되는 select) 적용 */
-		$(document).ready(function() {
-			$('#skillSelect').select2();
-		});
+		/* [+보유기술 추가] 클릭 */
+		$(function() {
+			$('.addSkill').click(function(){
+				
+				/* [+보유기술 추가] 클릭 시 [select 버튼]+[추가하기] 출력 */
+				$('#inputPt').html(
+				 '<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group"><select name="skill_nm" class="selectSk" ><option disabled hidden selected></option><option value="자바">자바</option><option value="파이썬">파이썬</option><option value="CSS">CSS</option><option value="MySQL">MySQL</option></select><select name="skill_lev" class="selectLev"><option disabled hidden selected></option><option value="초급">초급</option><option value="중급">중급</option><option value="고급">고급</option></select><button type="butoon" class="addButt removeAdd">추가하기</button></div>'		
+				);
 
-		$(document).ready(function() {
-			$('#skillSelect').select2({
-				placeholFder : "스킬을 선택해주세요."
+				/* 주요기술 스택 - select2(검색되는 select) 적용 */
+				$(function() {
+					$('.selectSk').select2();
+				});
+		
+				$(function() {
+					$('.selectSk').select2({
+						placeholder : "스킬을 선택해주세요."
+					});
+		
+				});
+				
+				/* [추가하기] 클릭 */
+				$(function() {
+					$('.addButt').click(function(){
+						let skill = $('.selectSk').val()
+						let level = $('.selectLev').val();
+// 						arr = {
+// 							skill : $('.selectSk').val(),
+// 							level : $('.selectLev').val()}
+// 						alert(JSON.stringify(arr));
+
+						/* 하나라도 미입력 시 추가 불가능 */
+						if(skill==null || level==null){
+							alert("안돼 돌아가");
+							return;
+						}
+						
+						/* [추가하기] 클릭 시 추가되는 기술 리스트 출력 */
+						$('.listPt').prepend('<p><div class="border border-1 rounded-3 m-2 p-4" role="group" style="width: 230px; display: inline-block;"><input type="hidden" value='+$('.listPt').children("p").length+' name="count"><input type="hidden" value='+skill+' name="skill_nm"><input type="hidden" value='+level+' name="skill_lev"><span class="badge bg-warning m-3">'
+						+skill+'</span><span class="badge bg-warning m-3">'+level+'</span><button class="removeSk btn-close" aria-label="Close"></button></div></p>');
+		
+					});
+					
+				});
+				
+				/* 리스트에 추가된 기술 삭제 */
+				$(document).on('click','.removeSk',function(){
+			        $(this).parent().remove()
+			    })
+			    
+			    /* [추가하기] 클릭 동시에 버튼 삭제 */
+				$(document).on('click','.removeAdd',function(){
+			        $(this).parent().remove()
+			    })
+				
 			});
-
+					
 		});
+		
 
 		/* 임시저장 기능 구현 */
-		var data;
-		if(!data) {
-			$(function() {
-				$("#saveButt").click(function() {
+		var data = true;
+
+		$(function() {
+			$(".saveButt").click(function() {
+				if(data) {
 					$.ajax({
 						url : "/enroll/saveProj",
 						type : "POST",
 						data : $("#fm1").serialize(),
-						dataType : 'json',
 						async : false,
-						success : function(result) {
+						success : function(a) {
 							alert(" ╰(*°▽°*)╯ 저장 완료");
-							data = result;
+							data = a.result;
 						},
 						error : function() {
 							alert("오류발생");
 						}
 					});
-				});
-			});	
-		} else {
-			$(function() {
-				$("#saveButt").click(function() {
+				} else {
 					$.ajax({
 						url : "/enroll/multiSaveProj",
 						type : "POST",
@@ -342,12 +374,13 @@ h5 {
 							alert(" ╰(*°▽°*)╯ 최초 임시저장 후 저장 완료");
 						},
 						error : function() {
-							alert("오류발생");
+							alert("오류발생 - 최초 임시 저장 후");
 						}
 					});
-				});
+				}
+		
 			});
-		}
+		});	
 	</script>
 </body>
 </html>

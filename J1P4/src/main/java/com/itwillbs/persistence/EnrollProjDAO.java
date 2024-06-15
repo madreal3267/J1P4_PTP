@@ -23,6 +23,11 @@ public interface EnrollProjDAO {
 	
 	// 최초 임시 저장 후 임시저장
 	public void multiSaveProj(ProjectVO vo);
-
+	
+	// 최초 임시 저장 후 스킬저장
+	public void multiSaveSk(SkillVO vo);
+	
+	// 최초 임시 저장 후 지역저장
+	public void multiSaveReg(RegionVO vo);
 	
 }

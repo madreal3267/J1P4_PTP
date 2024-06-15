@@ -42,7 +42,7 @@ public class EnrollProjDAOImpl implements EnrollProjDAO {
 		
 		logger.debug(" DAO : 프로젝트 임시저장 완료! ╰(*°▽°*)╯ ");
 		
-		return true;
+		return false;
 	}
 
 	// 임시 저장 프로젝트 수정 후 등록
@@ -75,16 +75,39 @@ public class EnrollProjDAOImpl implements EnrollProjDAO {
 		logger.debug(" DAO : 지역 등록 완료! ╰(*°▽°*)╯ ");
 	}
 
+	// 최초 임시 저장 후 임시저장
 	@Override
 	public void multiSaveProj(ProjectVO vo) {
-		logger.debug(" DAO : insertReg(vo) 호출 (❁´◡`❁) ");
+		logger.debug(" DAO : multiSaveProj(vo) 호출 (❁´◡`❁) ");
 		
 		sqlSession.insert(NAMESPACE + "multiSaveProj", vo);
 		
-		logger.debug(" DAO : 지역 등록 완료! ╰(*°▽°*)╯ ");
+		logger.debug(" DAO : 임시 저장 수정 완료! ╰(*°▽°*)╯ ");
 	}
 
-	// 최초 임시 저장 후 임시저장
+	// 최초 임시 저장 후 스킬저장
+	@Override
+	public void multiSaveSk(SkillVO vo) {
+		logger.debug(" DAO : multiSaveSk(vo) 호출 (❁´◡`❁) ");
+		
+		sqlSession.insert(NAMESPACE + "multiSaveSk", vo);
+		
+		logger.debug(" DAO : 임시 저장 스킬 수정 완료! ╰(*°▽°*)╯ ");
+		
+	}
+
+	// 최초 임시 저장 후 지역저장
+	@Override
+	public void multiSaveReg(RegionVO vo) {
+		logger.debug(" DAO : multiSaveReg(vo) 호출 (❁´◡`❁) ");
+		
+		sqlSession.insert(NAMESPACE + "multiSaveReg", vo);
+		
+		logger.debug(" DAO : 임시 저장 지역 수정 완료! ╰(*°▽°*)╯ ");
+		
+	}
+
+	
 	
 	
 	

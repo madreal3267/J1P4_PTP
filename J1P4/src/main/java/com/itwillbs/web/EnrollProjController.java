@@ -67,11 +67,12 @@ public class EnrollProjController {
 	
 	@PostMapping(value="/multiSaveProj")
 	@ResponseBody
-	public void multiSavePOST(ProjectVO pVO) {
+	public void multiSavePOST(ProjectVO pVO,SkillVO sVO,RegionVO rVO) {
 		logger.debug(" Controller : (＃°Д°) /multiSaveProj -> enrollPOST() 실행 ");
 		
-
 		eService.multiSaveProj(pVO);
+		eService.multiSaveSk(sVO);
+		eService.multiSaveReg(rVO);
 
 	}
 	

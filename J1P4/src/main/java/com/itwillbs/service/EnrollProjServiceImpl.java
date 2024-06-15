@@ -69,10 +69,31 @@ public class EnrollProjServiceImpl implements EnrollProjService {
 		
 		logger.debug(" (●'◡'●) Service: 임시 저장 또 성공! (●'◡'●) ");
 		
+	}
+
+	// 임시저장 후 스킬 수정
+	@Override
+	public void multiSaveSk(SkillVO vo) {
+		logger.debug(" (●'◡'●) Service: multiSaveSk(vo) 실행 ");
+		
+		pdao.multiSaveSk(vo);
+		
+		logger.debug(" (●'◡'●) Service: 임시 저장 스킬 수정 성공! (●'◡'●) ");
+		
+		
+	}
+	
+	
+	// 임시저장 후 지역 수정
+	@Override
+	public void multiSaveReg(RegionVO vo) {
+		logger.debug(" (●'◡'●) Service: multiSaveReg(vo) 실행 ");
+		
+		pdao.multiSaveReg(vo);
+		
+		logger.debug(" (●'◡'●) Service: 임시 저장 지역 수정 성공! (●'◡'●) ");
+		
 	}	
-	
-	
-	
 	
 	
 }
