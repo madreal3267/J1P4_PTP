@@ -35,7 +35,7 @@
 				</select>
 
 				<c:forEach var="projectVO" items="${interestProjectList}">
-					<div>
+					<div>                         
 						<hr>
 						<h2>${projectVO.proj_title }</h2>
 						예상 금액 ${projectVO.proj_cost } 만원  |  예상 기간 ${projectVO.work_period } 개월<br> 

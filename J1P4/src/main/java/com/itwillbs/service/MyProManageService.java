@@ -39,19 +39,7 @@ public interface MyProManageService {
 	
 	// 프로젝트 진행 중 목록
 	public List<ProjectVO> ongoingProjectList();
-	
-	// 평가 대기중 프로젝트 목록
-	public List<ProjectVO> waitEvaluationProjectList();
-	
-	// 완료한 프로젝트 목록
-	//public List<ProjectVO> completedProjectList();
-	
-	// 관심 프리랜서 목록
-	//public List<FreelancerVO> interestFreelancerList();
-	
-	// 제안한 프리랜서 목록
-	// public List<FreelancerVO> proposeFreelancerList();
-	
+
 	// 검수중 프로젝트 목록
 	public List<ProjectVO> underReviewProjectList();
 	
@@ -74,7 +62,7 @@ public interface MyProManageService {
 	// public List<FreelancerVO> waitEvaluationFreelancerList();
 	
 	// 완료한 프로젝트의 평가완료 프리랜서 목록
-	public List<FreelancerVO> completedFreelancerList();
+    // public List<FreelancerVO> completedFreelancerList();
 	
 	
 	
@@ -105,4 +93,13 @@ public interface MyProManageService {
 	
 	// 평가 대기중 프리랜서 목록
 	public List<EvaluateFreelancerDTO> waitEvaluationFreelancerList();
+	
+	// 평개 대기중 프리랜서 - 평가하기
+	public void evaluateFreelancer(EvaluateFreelancerDTO edto);
+	
+	// 프리랜서 평가 여부 체크
+	public int checkEvaluateFree(EvaluateFreelancerDTO edto);
+	
+	// 완료한 프로젝트의 평가완료 프리랜서 목록
+	public List<EvaluateFreelancerDTO> completedFreelancerList();
 }

@@ -42,7 +42,7 @@ public class MyProManageController {
 	// http://localhost:8088/myProManage/interestProject
 	@RequestMapping(value = "/interestProject", method = RequestMethod.GET)
 	public void interestProjectList(Model model) {
-		logger.debug("/interestProjec -> interestProjectList() 호출");
+		logger.debug("/interestProject -> interestProjectList() 호출");
 		
 		// 서비스 -> DAO 관심 프로젝트 목록 조회 메서드
 		List<ProjectVO> interestProjectList = myService.interestProjectList();
@@ -148,22 +148,10 @@ public class MyProManageController {
 	// 평가 대기중 프로젝트 목록 조회
 	// http://localhost:8088/myProManage/waitEvaluationProject	
 	@RequestMapping(value = "/waitEvaluationProject",method = RequestMethod.GET)
-	public void waitEvaluationProjectList(EvaluateProjectDTO edto, Model model) {
-//		logger.debug("/waitEvaluationProject -> waitEvaluationProjectList() 호출");
-//		
-//		// 프로젝트 평가 여부 체크 후 프로젝트 목록 조회
-//		if(myService.checkEvaluate(edto) == 1) {
-//			logger.debug("myService.checkEvaluate(edto) : " + myService.checkEvaluate(edto));
-//			//List<ProjectVO> waitEvaluationProjectList = myService.waitEvaluationProjectList();
-//			List<EvaluateProjectDTO> waitEvaluationProjectList = myService.evaluateProjectList();
-//			logger.debug("waitEvaluationProjectList : " + waitEvaluationProjectList.size());
-//			
-//			//model.addAttribute("waitEvaluationProjectList", waitEvaluationProjectList);		
-//			model.addAttribute("waitEvaluationProjectList", waitEvaluationProjectList);	
-//		}else {
-//			
-//		}
-//	// 프로젝트 평가 여부 체크 후 평가 대기중 프로젝트 목록 조회
+	public void waitEvaluationProjectList(Model model) {
+		logger.debug("/waitEvaluationProject -> waitEvaluationProjectList() 호출");
+		
+	// 프로젝트 평가 여부 체크 후 평가 대기중 프로젝트 목록 조회
 		List<EvaluateProjectDTO> waitEvaluationProjectList = myService.evaluateProjectList();
 		List<EvaluateProjectDTO> filteredProjList = new ArrayList<>();
 
@@ -198,18 +186,6 @@ public class MyProManageController {
             @RequestParam(defaultValue = "5") int pageSize) {
 		logger.debug("/completedProject -> completedProjectList() 호출");
 		
-//		List<ProjectVO> completedProjectList = myService.completedProjectList();
-//        int totalProjects = completedProjectList.size();
-//        int totalPages = (int) Math.ceil((double) totalProjects / pageSize);
-//
-//        int startIndex = (page - 1) * pageSize;
-//        int endIndex = Math.min(startIndex + pageSize, totalProjects);
-//        List<ProjectVO> pageProjects = completedProjectList.subList(startIndex, endIndex);
-//
-//        model.addAttribute("pageProjects", pageProjects);
-//        model.addAttribute("currentPage", page);
-//        model.addAttribute("totalPages", totalPages);
-//        model.addAttribute("pageSize", pageSize);
 		List<EvaluateProjectDTO> completedProjectList = myService.completedProjectList();
 		List<EvaluateProjectDTO> filteredProjList = new ArrayList<>();
 

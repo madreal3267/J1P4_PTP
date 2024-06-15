@@ -43,7 +43,7 @@
 										</button>
 										<h4 class="modal-title text-center">프리랜서 평가하기</h4>
 									</div>
-									<div class="modal-body text-center">
+									<div class="modal-body">
 										별점을 매겨주세요<br>
 										<fieldset class="rate">
 											<input type="radio" id="rating10" name="score" value="10"><label for="rating10" title="5점"></label> 

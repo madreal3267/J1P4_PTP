@@ -5,23 +5,28 @@
 <%@ include file="../include/headerCt.jsp" %>
 
 	<h1>/myProManageCt/completedFreelancer.jsp</h1> <br>
-	
-	<section>
+
+
+<div class="col-md-12">
+	<div class="box box-default">
+		<div class="box-header with-border">
 		<h1>완료한 프로젝트</h1>
 		프리랜서에게 정산이 완료된 프로젝트를 확인 할 수 있습니다.
-	</section>
-	
+		</div>
+	</div>
+</div>
+
 	<section>
 		<div> 1. 평가를 완료한 프리랜서 목록입니다.<br>
 			  2. 프리랜서가 남긴 평가는 [프로필 관리] > [프리랜서의 평가]에서 확인할 수 있습니다.<br>
 			  3. 공정하게 평가를 작성할 수 있도록 상호 평가가 완료되거나 작성 기한이 종료된 뒤에 평가가 공개됩니다 .
 		</div> 
 		
-		<c:forEach var="freelancerVO" items="${completedFreelancerList}">
-			<p > <h4>[매퍼 보완]프리랜서</h4>
-				 프로젝트 제목<!-- 프로젝트와 조인 필요 --> <br>
-				 freelancer_value의 score <%-- ${score } --%> <button>수정하기</button ><br>
-				 freelancer_value의 content <%-- ${content } --%>	
+		<c:forEach var="cflDTO" items="${completedFreelancerList}">
+			<p> <h4>${cflDTO.name }</h4>
+				  ${cflDTO.proj_title }<br>
+				 ${cflDTO.score } <%-- ${score } --%> <button>수정하기</button ><br>
+				 ${cflDTO.content} <%-- ${content } --%>	
 			</p>
 		</c:forEach>
 		

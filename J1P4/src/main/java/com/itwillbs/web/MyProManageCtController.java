@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.itwillbs.domain.EvaluateFreelancerDTO;
+import com.itwillbs.domain.EvaluateProjectDTO;
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.ProjectVO;
 import com.itwillbs.domain.ctOngoingProjectDTO;
@@ -40,6 +41,9 @@ public class MyProManageCtController {
 		
 		model.addAttribute("interestFreelancerList", interestFreelancerList);
 	}
+	
+	// 프로젝트 지원하기
+	
 	
 	// 제안한 프리랜서 목록 조회
 	// http://localhost:8088/myProManageCt/proposeFreelancer
@@ -137,13 +141,21 @@ public class MyProManageCtController {
 		model.addAttribute("waitEvaluationFreelancerList", waitEvaluationFreelancerList);		
 	}	
 	
+	// 평가 대기중 프리랜서 - 평가하기
+	@RequestMapping(value = "/waitEvaluationFreelancer",method = RequestMethod.POST)
+	public void evaluationFreelancer(EvaluateProjectDTO edto) {
+		logger.debug("/waitEvaluationFreelancer -> evaluationFreelancer(EvaluateProjectDTO edto) 호출");
+		myService.evaluateFreelancer(edto);
+		
+	}			
+	
 	// 완료한 프로젝트의 평가완료 프리랜서 목록 조회
 	// http://localhost:8088/myProManageCt/completedFreelancer
 	@RequestMapping(value = "/completedFreelancer",method = RequestMethod.GET)
-	public void completedFreelancer(Model model) {
+	public void completedFreelancerList(Model model) {
 		logger.debug("/completedFreelancer -> completedFreelancerList() 호출");
 		
-		List<FreelancerVO> completedFreelancerList = myService.completedFreelancerList();
+		List<EvaluateFreelancerDTO> completedFreelancerList = myService.completedFreelancerList();
 		logger.debug("completedFreelancerList : " + completedFreelancerList.size());
 		
 		model.addAttribute("completedFreelancerList", completedFreelancerList);		
