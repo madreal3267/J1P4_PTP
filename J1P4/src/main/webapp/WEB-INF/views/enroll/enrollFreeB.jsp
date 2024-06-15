@@ -100,22 +100,6 @@ h5 {
 	<div id="inputPt"></div>
 	<!-- [+보유기술 추가] 클릭 시 [select 버튼] 출력되는 공간 -->
 	
-<!-- 		<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group"> -->
-<!-- 		<select name="skill_nm" class="selectSk" > -->
-<!-- 				<option disabled hidden selected></option> -->
-<!-- 				<option value="자바">자바</option> -->
-<!-- 				<option value="파이썬">파이썬</option> -->
-<!-- 				<option value="CSS">CSS</option> -->
-<!-- 				<option value="MySQL">MySQL</option> -->
-<!-- 			</select> -->
-<!-- 			<select name="skill_lev" class="selectLev"> -->
-<!-- 				<option disabled hidden selected></option> -->
-<!-- 				<option value="초급">초급</option> -->
-<!-- 				<option value="중급">중급</option> -->
-<!-- 				<option value="고급">고급</option> -->
-<!-- 			</select> -->
-<!-- 	<button type="button" class="addButt removeCom2">추가하기</button> -->
-<!-- 	</div> -->
 	<button type="button" class="addSkill">+ 보유기술 추가</button>
 	
 	<hr>
