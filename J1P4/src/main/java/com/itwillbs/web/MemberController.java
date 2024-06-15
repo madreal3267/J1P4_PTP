@@ -38,7 +38,6 @@ public class MemberController {
 	@Inject
 	private SqlSession sqlSession;
 	
-	
 
 	//회원가입 페이지
 	// http://localhost:8088/member/insert
