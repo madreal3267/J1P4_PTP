@@ -172,21 +172,30 @@ public class AdminController {
 	        return response;
 	    }
 	 
-	 @GetMapping("/settlement/paymentDetail")
-	 public String getSettlements(@RequestParam(value = "price_check", required = false) Boolean price_check,Model model) {
-		 
-		 List<SettlementDTO> settlements;
-		 
-		 if (price_check != null) {
-	            settlements = sService.getSettlementsByPriceCheck(price_check);
+	 @GetMapping("/settlements")
+	    public String getSettlements(Model model,
+	                                 @RequestParam(value = "priceCheck", required = false) Boolean priceCheck,
+	                                 @RequestParam(value = "settlementCheck", required = false) Boolean settlementCheck) {
+	        List<SettlementDTO> settlements;
+
+	        if (priceCheck != null) {
+	            settlements = sService.getSettlementsByPriceCheck(priceCheck);
+	        } else if (settlementCheck != null) {
+	            settlements = sService.getSettlementsBySettlementCheck(settlementCheck);
 	        } else {
 	            settlements = sService.getAllSettlements();
 	        }
-		 
-		 model.addAttribute("settlements", settlements);
-		 
-		 return "admin/settlementList";
-	 }
+
+	        model.addAttribute("settlements", settlements);
+	        return "admin/settlementList";
+	    }
+
+	    @PostMapping("/settlements/process")
+	    public String processSettlement(@RequestParam("settlement_no") int settlementNo) {
+	        SettlementDTO settlement = sService.getSettlementById(settlementNo);
+	        sService.processSettlement(settlement);
+	        return "redirect:/admin/settlements";
+	    }
 	 
 	 @Value("${file.upload-dir}")
 	    private String uploadDir;

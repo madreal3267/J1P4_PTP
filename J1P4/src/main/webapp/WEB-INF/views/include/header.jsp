@@ -334,7 +334,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="/admin/settlement/paymentDetail"><i class="fa fa-circle-o"></i> 대금내역</a></li>
+                <li><a href="/admin/settlements"><i class="fa fa-circle-o"></i> 대금내역</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i> 정산금액</a></li>
                 <li><a href="/admin/contracts"><i class="fa fa-circle-o"></i> 계약서</a></li>
               </ul>
