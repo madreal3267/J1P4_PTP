@@ -36,18 +36,7 @@ public class BoardController {
 	@Inject
 	private BoardService bService;
 
-	// http://localhost:8088/board/listPro
-//	@RequestMapping(value = "/listPro",method = RequestMethod.GET)
-//	public void projListGET(Model model) {
-//		logger.debug(" /list -> projListGET() 호출 ");
-//		
-//		List<ProjectVO> bvo = bService.projList();
-//		logger.debug(" boardList : "+bvo.size());
-//		
-//		
-//		model.addAttribute("bvo", bService.projList());
-//		
-//	}
+	// 기본 페이지
 	@GetMapping(value = "/listPro")
 	public void list(Criteria cri, Model model, HttpServletRequest request) {
 		
@@ -64,8 +53,6 @@ public class BoardController {
 			amount = Integer.parseInt(request.getParameter("amount"));
 		}
 		
-		
-		
 		int offset = (pageNum-1)*amount;
 
 		cri.setAmount(amount);
@@ -80,7 +67,39 @@ public class BoardController {
 
 
 	}
-
+	// 정렬 후 페이지
+	@GetMapping(value = "/listProP")
+	public String listPage(Criteria cri, Model model, HttpServletRequest request,@RequestParam("sn") String sn) {
+		
+		int pNum = bService.pNum();
+		model.addAttribute("pNum", pNum);
+		
+		int pageNum = 1;
+		int amount = 6;
+		
+		if(request.getParameter("pageNum") != null) {
+			pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		}
+		if(request.getParameter("amount") != null) {
+			amount = Integer.parseInt(request.getParameter("amount"));
+		}
+		
+		int offset = (pageNum-1)*amount;
+		
+		cri.setAmount(amount);
+		
+		cri.setOffset(offset);
+		
+		logger.debug("pageNum : "+pageNum);
+		logger.debug("offset : "+offset);
+		model.addAttribute("list", bService.proLSort(cri));
+		model.addAttribute("pageMaker", new PageDTO(cri, pNum));
+		
+		return "/board/listPro";
+		
+	}
+	
+	// 정렬하기
 	@GetMapping(value = "/listProto")
 	@ResponseBody
 	public List<ProjectVO> getRejectReason(@RequestParam("pageNum") int pageNum,@RequestParam("amount") int amount, @RequestParam("sn") String sn,ProjectVO pvo, Criteria cri, HttpServletRequest request) {
@@ -95,51 +114,26 @@ public class BoardController {
 			amount = Integer.parseInt(request.getParameter("amount"));
 		}
 		
-		logger.debug("pageNum : "+pageNum);
+		logger.debug("pageNum@ : "+pageNum);
+		logger.debug("amount@ : "+amount);
 		
 		int offset = (pageNum-1)*amount;
+		logger.debug("offset@ : "+offset);
 
 		cri.setAmount(amount);
+		logger.debug("1111111 ");
 
 		cri.setOffset(offset);
+		logger.debug("22222222 ");
 
-		List<ProjectVO> result = bService.proLSort(cri);
-		logger.debug("22 "+result);
+		List<ProjectVO> list = bService.proLSort(cri); 
+		logger.debug("22 "+list); 
 
-		return result;
+		return list;
 	}
 
-	/*
-	 * @GetMapping(value = "/listProP")
-	 * 
-	 * @ResponseBody public List<ProjectVO> getRejectReason(@RequestParam("pageNum")
-	 * int pageNum,@RequestParam("amount") int amount,@RequestParam("sn") String sn
-	 * ,ProjectVO pvo, Criteria cri,HttpServletRequest request) {
-	 * logger.debug("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-	 * logger.debug(sn); logger.debug("amount : "+amount);
-	 * logger.debug("pageNum : "+pageNum);
-	 * 
-	 * 
-	 * if(request.getParameter("pageNum") != null) { pageNum =
-	 * Integer.parseInt(request.getParameter("pageNum")); }
-	 * if(request.getParameter("amount") != null) { amount =
-	 * Integer.parseInt(request.getParameter("amount")); }
-	 * 
-	 * 
-	 * 
-	 * int offset = (pageNum-1)*amount;
-	 * 
-	 * cri.setAmount(amount);
-	 * 
-	 * cri.setOffset(offset);
-	 * 
-	 * logger.debug("pageNum : "+pageNum); logger.debug("offset : "+offset);
-	 * 
-	 * List<ProjectVO> result = bService.proLSort(cri); logger.debug("22 "+result);
-	 * 
-	 * return result; }
-	 */
 	
+	// 필터
 	@RequestMapping(value = "/listPro",method = RequestMethod.POST)
 	public void fiterList(@RequestParam("work_field") String work_field, Model model,ProjectVO pvo, Criteria cri) {
 		logger.debug("work_field : "+work_field);
@@ -155,14 +149,14 @@ public class BoardController {
 		logger.debug("fiNum : "+fiNum);
 		
 		model.addAttribute("pageMaker", new PageDTO(cri, fiNum));
+	
 
 		
 	}
 	
 	@GetMapping(value = "/detailList")
-	public String detailGET(HttpSession session, Model model) {
+	public String detailGET(@RequestParam("proj_no") int proj_no, Model model) {
 		// 프로젝트 리스트 상세정보
-		int proj_no = (Integer)session.getAttribute("proj_no");
 		
 		ProjectVO resultVO = bService.dePro(proj_no);
 		model.addAttribute(resultVO);
@@ -173,19 +167,38 @@ public class BoardController {
 	}
 	
 	
-	//테스트용 페이지
-	@GetMapping(value = "/list")
-	public void pNumGET(Model model) {
-		logger.debug(" /list -> pNumGET() 호출 ");
-
-		int pNum = bService.pNum();
-		model.addAttribute("pNum", pNum);
-
-	}
 	
-	@RequestMapping(value = "/detailList")
-	public void detailListGET() {
+	// http://localhost:8088/board/listFree
+	@GetMapping(value = "/listFree")
+	public void flist(Criteria cri, Model model, HttpServletRequest request) {
 		
+		int fNum = bService.fNum();
+		model.addAttribute("fNum", fNum);
+		
+		int pageNum = 1;
+		int amount = 6;
+		
+		if(request.getParameter("pageNum") != null) {
+			pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		}
+		if(request.getParameter("amount") != null) {
+			amount = Integer.parseInt(request.getParameter("amount"));
+		}
+		
+		
+		int offset = (pageNum-1)*amount;
+
+		cri.setAmount(amount);
+
+		cri.setOffset(offset);
+		
+		logger.debug("pageNum : "+pageNum);
+		logger.debug("offset : "+offset);
+		
+		model.addAttribute("list", bService.fListPaging(cri));
+		model.addAttribute("pageMaker", new PageDTO(cri, fNum));
+
+
 	}
 	
 	

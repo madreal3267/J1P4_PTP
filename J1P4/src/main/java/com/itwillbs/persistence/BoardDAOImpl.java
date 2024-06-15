@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.itwillbs.domain.Criteria;
+import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.ProjectVO;
 
 @Repository
@@ -67,6 +68,18 @@ public class BoardDAOImpl implements BoardDAO{
 	@Override
 	public ProjectVO dePro(ProjectVO vo) {
 		return sqlSession.selectOne(NAMESPACE+"dePro",vo);
+	}
+
+	@Override
+	public List<FreelancerVO> fListPaging(Criteria cri) {
+		List<FreelancerVO> resultVO = sqlSession.selectList(NAMESPACE+"fListPaging",cri);
+		return resultVO;
+	}
+
+	@Override
+	public int fNum() {
+		int result = sqlSession.selectOne(NAMESPACE+"fNum");
+		return result;
 	}
 
 	

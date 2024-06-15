@@ -3,6 +3,7 @@ package com.itwillbs.persistence;
 import java.util.List;
 
 import com.itwillbs.domain.Criteria;
+import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.ProjectVO;
 
 public interface BoardDAO {
@@ -31,5 +32,15 @@ public interface BoardDAO {
 	// 북마크 등록
 	
 	// 북마크 삭제
+	
+	// 프리랜서 페이징
+	public List<FreelancerVO> fListPaging(Criteria cri);
+	// 프리랜서 수
+	public int fNum();
+	// 프리랜서 정렬
+	
+	// 프리랜서 필터
+	
+	// 프리랜서 상세페이지
 
 }

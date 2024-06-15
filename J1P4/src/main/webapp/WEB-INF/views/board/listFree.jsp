@@ -19,18 +19,11 @@ font-family: "Nanum Gothic", sans-serif !important;
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
-	if(${!empty param.sn}){
-	$("#sn2").val( $("#ss").val() );		
-	}
-
 	$("#ss").change(function(){
 		var sn = $('#ss').val();
 		var pageNum = $('#pageNum').val();
 		var amount = $('#amount').val();
 		console.log(sn)
-		
-		$("#sn2").val( $("#ss").val() );
-		
 		
 		$.ajax({
 			url: "/board/listProto",
@@ -60,7 +53,7 @@ $(document).ready(function(){
 								data[index].proj_title+
 								'</div> <div style="margin-bottom: 6px;"> 예상금액 <span style="font-weight: bold;">'+
 								data[index].proj_cost+'원</span> | 예상 기간 <span style="font-weight: bold;">'+
-								dDay.getFullYear()+'년'+(dDay.getMonth()+1)+'월'+dDay.getDate()+'일</span> </div>'+
+								dDay.getFullYear()+'년'+dDay.getMonth()+'월'+dDay.getDate()+'일</span> </div>'+
 						    
 						   		 '<div style="display: grid; grid-template-columns: 1fr 1fr;"> <div style="display: flex; font-weight: bold;"> <span style="display: flex; align-items: center;">'+
 						   		 data[index].work_field+
@@ -69,7 +62,7 @@ $(document).ready(function(){
 						         '</div> <div style="padding: 3px 12px; border: 1px solid #333; border-radius: 5px; background-color: white;">'+
 						         'MySql'+
 						         '</div> </div> <div style="display: flex; justify-content: end;"> <span style="font-size: 14px; color : #444">'+
-						         rDay.getFullYear()+'년'+(rDay.getMonth()+1)+'월'+rDay.getDate()+'일'+
+						         rDay.getFullYear()+'년'+rDay.getMonth()+'월'+rDay.getDate()+'일'+
 						         '</span> </div> </div> </div>';
 						
 			});
@@ -87,12 +80,13 @@ $(document).ready(function(){
 
 });
 
+ 
 
 </script>
 </head>
 <body>
-	<h1> 프로젝트 찾기 </h1>
-	${pNum} 개의 프로젝트가 등록되었습니다. <br>
+	<h1> 프리랜서 찾기 </h1>
+	${fNum}명의 프리랜서가 있습니다. <br>
 	
 	<!-- 필터 -->
 <form action="/board/listPro" method="post">	
@@ -169,15 +163,11 @@ $(document).ready(function(){
 
 <div>
 	<form id="sort">
-		<select name="sn" id="ss" >
-	<!-- 		<option value="reg_date">최신 등록 순</option>
+		<select name="sn" id="ss">
+			<option value="reg_date">최신 등록 순</option>
 			<option value="proj_cost">견적 높은 순</option>
-			<option value="deadline">마감 임박 순</option> -->
-			<option value="reg_date" <c:if test="${param.sn eq 'reg_date'}" >selected</c:if>>최신 등록 순</option>
-			<option value="proj_cost" <c:if test="${param.sn eq 'proj_cost'}" >selected</c:if>>견적 높은 순</option>
-			<option value="deadline" <c:if test="${param.sn eq 'deadline'}" >selected</c:if>>마감 임박 순</option>
+			<option value="deadline">마감 임박 순</option>
 		</select>
-		 <input type="hidden" name="sn">
 	</form>
 </div>
 	
@@ -185,7 +175,7 @@ $(document).ready(function(){
 
 <!-- 회색 박스 -->
 <c:forEach var="v" items="${list }">
-<div OnClick="location.href ='/board/detailList?proj_no=${v.proj_no}'" style="width : full; margin: 2px 3px; padding: 12px; background-color: #dddddd; border-radius: 7px; border: 1px solid black;">
+<div style="width : full; margin: 2px 3px; padding: 12px; background-color: #dddddd; border-radius: 7px; border: 1px solid black;">
     <!-- 모집중, NEW!, 하트 영역 -->
     <div style="display: grid; grid-template-columns: 1fr 1fr;">
         <div style="display: flex;">
@@ -199,12 +189,12 @@ $(document).ready(function(){
 
     <!-- 제목 -->
     <div style="font-weight: bold; font-size: 20px; margin: 6px 0;">
-        ${v.proj_title }
+        이름
     </div>
 
     <!-- 예상 금액/ 예상 기간 -->
     <div style="margin-bottom: 6px;">
-        예상금액 <span style="font-weight: bold;">${v.proj_cost }원</span> | 예상 기간 <span style="font-weight: bold;">${v.deadline }일</span>
+        예상금액 <span style="font-weight: bold;">${v.proj_cost }원</span> | 예상 기간 <span style="font-weight: bold;">일</span>
     </div>
     
     <!-- 기타 정보 / 등록일자 -->
@@ -252,10 +242,9 @@ $(document).ready(function(){
     </ul>
 </div>
 	
-<form id='actionForm' action="/board/listProP" method='get'>
+<form id='actionForm' action="/board/listFree" method='get'>
 	<input id="pageNum" type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
 	<input id ="amount" type='hidden' name='amount' value='${pageMaker.cri.amount}'>
-	<input id ="sn2" type='hidden' name='sn' value='reg_date'>
 </form>
 
 
@@ -325,7 +314,72 @@ $(document).ready(function(){
             sel.options[i] = new Option(cnt[add][i], cnt[add][i]);
          }
       }
-     
+ 
+ $(document).ready(function(){
+	$('.page-link').on('click', function(e) {
+
+		e.preventDefault();
+		var sn = $('#ss').val();
+		var pageNum = $('#pageNum').val();
+		var amount = $('#amount').val();
+		console.log(sn)
+
+		$.ajax({
+
+			url: "/board/listProto",
+			type: 'GET',
+			data: { "sn":sn,
+					"pageNum":pageNum,
+					"amount":amount},
+			success: function(data){
+				console.log(data);
+			
+			var proList = $('#pList');
+			proList.empty();
+			
+			var show = "";
+
+				 
+			[].forEach.call(data, function(element, index, array){
+						console.log(element, index);
+						
+						/* Date dd = new Date(data[index].deadline); */
+		 				var dDay = new Date(data[index].deadline);
+						var rDay = new Date(data[index].reg_date);
+						
+					 
+
+						show += '<div style="width : full; margin: 2px 3px; padding: 12px; background-color: #dddddd; border-radius: 7px; border: 1px solid black;"> <div style="display: grid; grid-template-columns: 1fr 1fr;"> <div style="display: flex;"> <div style="background-color: white; border: 1px solid #333; border-radius: 5px; padding: 3px 12px; margin-right: 6px;">모집중</div> <div style="background-color: white; border: 1px solid #333; border-radius: 5px; padding: 3px 12px;">NEW!</div> </div> <div style="display: flex; justify-content: end;"> 하트 </div> </div>'+
+								'<div style="font-weight: bold; font-size: 20px; margin: 6px 0;">'+
+								data[index].proj_title+
+								'</div> <div style="margin-bottom: 6px;"> 예상금액 <span style="font-weight: bold;">'+
+								data[index].proj_cost+'원</span> | 예상 기간 <span style="font-weight: bold;">'+
+								dDay.getFullYear()+'년'+dDay.getMonth()+'월'+dDay.getDate()+'일</span> </div>'+
+						    
+						   		 '<div style="display: grid; grid-template-columns: 1fr 1fr;"> <div style="display: flex; font-weight: bold;"> <span style="display: flex; align-items: center;">'+
+						   		 data[index].work_field+
+						         ' | 서울시 강남구 |</span> <div style="margin: 0 6px; padding: 3px 12px; border: 1px solid #333; border-radius: 5px; background-color: white;">'+
+						         'JAVA'+
+						         '</div> <div style="padding: 3px 12px; border: 1px solid #333; border-radius: 5px; background-color: white;">'+
+						         'MySql'+
+						         '</div> </div> <div style="display: flex; justify-content: end;"> <span style="font-size: 14px; color : #444">'+
+						         rDay.getFullYear()+'년'+rDay.getMonth()+'월'+rDay.getDate()+'일'+
+						         '</span> </div> </div> </div>';
+						
+			});
+
+			proList.append(show); 
+
+				
+			},
+			error: function() {
+		          alert("에러 발생");
+		      }
+
+		});
+
+	});
+});     
 
 </script>
 </body>

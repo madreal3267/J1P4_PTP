@@ -69,6 +69,21 @@
   	 	where proj_no=#{proj_no}
   	 </select>
   	 
+  	   	 <!-- 프리랜서 수 -->
+  	 <select id="fNum" resultType="int">
+  	 	select count(*)
+		from freelancer
+  	 </select>
   	 
+  	 <!-- 프리랜서 페이징 처리 -->
+  	 <select id="fListPaging" resultType="com.itwillbs.domain.FreelancerVO" parameterType="com.itwillbs.domain.Criteria">
+  	 	<![CDATA[
+			select * 
+			from freelancer
+			order by reg_date DESC
+			limit #{amount} offset #{offset}
+			
+  	 	]]>
+  	 </select>
   	 
   </mapper>
