@@ -6,7 +6,11 @@
   <mapper namespace="com.itwillbs.mapper.ApplyMapper">
   	 
   	 <select id="getSkill" resultType="com.itwillbs.domain.SkillVO">
-  	 	select skill_nm, skill_lev from skill where proj_no = 101
+  	 	select SUBSTRING_INDEX (SUBSTRING_INDEX(skill.skill_nm,',',numbers.n),',',-1) skill_nm, SUBSTRING_INDEX (SUBSTRING_INDEX(skill.skill_lev,',',numbers.n),',',-1) skill_lev 
+  	 	from (select 1 n union all select 2 union all select 3 union all select 4 union all select 5 union all
+  	 	select 6 union all select 7 union all select 8 union all select 9 union all select 10) numbers INNER JOIN skill 
+  	 	on char_length (skill.skill_nm) - char_length(replace(skill.skill_nm,',',''))>=numbers.n-1
+  	 	where proj_no = 141;
   	 </select>
   	 
   	 <insert id="applyProj">

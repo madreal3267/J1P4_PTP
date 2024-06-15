@@ -39,8 +39,14 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 				
 	<!-- 모달 본문 시작 -->   			   
 	<div class="modal-body">
-	이 프로젝트에 지원하실거가욥 (❁´◡`❁)
+	<div class="m-2">
+	최근 프로필 업데이트일은 ㅇㅇㅇ입니다. 
+	<a href="" >내 프로필 관리 ></a>
+	</div>
 	<hr>
+	<div class="m-2">
+	해당 스펙 및 경험이 있다면 체크 부탁드립니다. (❁´◡`❁)
+	</div>
 		
 	<c:forEach var="skill" items="${skill }" varStatus="status">
 	<div class="border border-1 rounded-3 m-2 p-4" role="group" style="width: 230px; display: inline-block;">
@@ -58,11 +64,11 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 
 	</c:forEach>
 	<hr>
-	<div style="margin-bottom: 10px">
+	<div class="m-2">
 	남기는 글
 	</div>
 	<div>
-	<textarea rows="10" cols="88" name="content"></textarea>
+	<textarea rows="10" cols="88" name="content" class="m-2"></textarea>
 	</div>
 	<!-- 모달 footer 시작 -->
 	<div class="modal-footer">
@@ -95,8 +101,9 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 	<!-- 모달 header 끝 -->	
 	
 	<!-- 모달 본문 시작 -->   			   
-	<div class="modal-body">
-	<h1>지원 성공했삼</h1>
+	<div class="modal-body" style="text-align: center;">
+	<h3>프로젝트 지원이 완료되었습니다.</h3>
+	<h5>지원한 프로젝트 현황은 [내 프로젝트 관리]에서 확인 가능합니다.</h5>
 	<h3>축하축하룽💃🏼🕺 축하축하룽👯‍♀️ 축하축하룽🧚🏻‍♀️ 축하축하룽🤸‍♀️축하축하룽🤹 축하축하룽🎷 축하축하룽🎸 축하축하룽🎤
 	축하축하룽🎻 축하축하룽🚀 축하축하룽🎡 축하축하룽🎇 축하축하룽🎉 축하축하룽🎊 축하축하룽🎀 축하축하룽🛍 축하축하룽🎁</h3>
 	
