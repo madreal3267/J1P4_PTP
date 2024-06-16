@@ -11,10 +11,14 @@
 	</select>
   
     <!-- 관심 프로젝트 정보 조회 -->
-    <select id="interestProjectList" resultType="com.itwillbs.domain.ProjectVO">
-     	select * from project p 
+    <select id="interestProjectList" resultType="com.itwillbs.domain.ProjectDTO">
+     	select p.proj_title, p.proj_cost, p.work_period, p.work_field, 
+     		   r.region, r.district, s.skill_nm, p.reg_date, f.free_no, p.proj_no
+     	from project p 
     	join bookmark b on p.proj_no = b.proj_no
     	join freelancer f on b.free_no = f.free_no
+    	join skill s on s.proj_no = b.proj_no
+    	join region r on r.proj_no = b.proj_no
     	where f.free_id= 'user_9' <!-- #{user_id} -->
     </select>  
     
@@ -24,32 +28,44 @@
     </insert>
     
     <!-- 제안받은 프로젝트 정보 조회 -->
-	<select id="proposedProjectList" resultType="com.itwillbs.domain.ProjectVO">
- 		select p.proj_title, p.ct_no, p.work_field, p.reg_date from project p
+	<select id="proposedProjectList" resultType="com.itwillbs.domain.ProjectDTO">
+     	select p.proj_title, p.proj_cost, p.work_period, p.work_field, 
+     		   r.region, r.district, s.skill_nm, p.reg_date, f.free_no, p.proj_no
+        from project p
 		join offer_mgmt o on p.proj_no = o.proj_no 
 		join freelancer f on f.free_no = o.free_no  
+    	join skill s on s.proj_no = o.proj_no
+    	join region r on r.proj_no = o.proj_no        
 		where f.free_id = 'user_9'<!--  #{user_id} --> 
 	</select>    
 
 	<!-- 지원 중 프로젝트 정보 조회-->
-	<select id="applyingProjectList" resultType="com.itwillbs.domain.ProjectVO">
-		select * from project p
-		join apply_mgmt a on a.proj_no = p.proj_no
-		join freelancer f on f.free_no = a.free_no	
-		where f.free_id = 'user_100'<!--  #{user_id} -->
+	<select id="applyingProjectList" resultType="com.itwillbs.domain.ProjectDTO">
+     	select p.proj_title, p.proj_cost, p.work_period, p.work_field, 
+     		   r.region, r.district, s.skill_nm, p.reg_date, f.free_no, p.proj_no
+        from project p
+		join apply_mgmt a on p.proj_no = a.proj_no 
+		join freelancer f on f.free_no = a.free_no  
+    	join skill s on s.proj_no = a.proj_no
+    	join region r on r.proj_no = a.proj_no        
+		where f.free_id = 'user_9'<!--  #{user_id} -->
 	</select>
 	
 	<!-- 지원중 프로젝트 - 지원취소하기 -->
-	<delete id="deleteAppy">
-		deleate from appy_mgmt
+	<delete id="deleteApply">
+		delete from apply_mgmt
 		where free_no=#{free_no} and proj_no=#{proj_no}
 	</delete>
 
 	<!-- 지원 종료 프로젝트 정보 조회 -->
-	<select id="endApplyProjectList" resultType="com.itwillbs.domain.ProjectVO">	
-		select * from project p 
-		join apply_mgmt a on a.proj_no = p.proj_no
+	<select id="endApplyProjectList" resultType="com.itwillbs.domain.ProjectDTO">	
+     	select p.proj_title, p.proj_cost, p.work_period, p.work_field, 
+     		   r.region, r.district, s.skill_nm, p.reg_date, f.free_no, p.proj_no 
+		from project p 
+		join apply_mgmt a on p.proj_no = a.proj_no
 		join freelancer f on f.free_no = a.free_no
+		join skill s on s.proj_no = a.proj_no
+    	join region r on r.proj_no = a.proj_no 
 		where now() > p.deadline and f.free_id = 'user_100'<!-- #{user_id} -->
 	</select>
 	
@@ -58,20 +74,18 @@
 		select * from project
 	</select>	
 	
-	<!-- 프로젝트 진행중(미완-담당매니저,진행상태+resultType) -->
-	<select id="ongoingProjectList" resultType="com.itwillbs.domain.ProjectVO">		
-		select * from project
-<!-- 		select p.proj_no, p.proj_title, c.ct_id, m.manager_id, p.proj_status
-			from project p 
-			join client c on p.ct_no = c.ct_no 
-			join settlement s on s.proj_no = p.proj_no
-			join manager m on m.manager_no = s.manager_no
-			where c.ct_id = ${user_id}; -->
+	<!-- 프로젝트 진행중 -->
+	<select id="ongoingProjectList" resultType="com.itwillbs.domain.ProjectDTO">		
+		select p.proj_no, p.proj_title, c.ct_id, m.manager_nm, p.proj_status
+		from project p 
+		join client c on c.ct_no = p.ct_no
+		join apply_mgmt a on a.proj_no = p.proj_no
+		join freelancer f on a.free_no = f.free_no
+		left join settlement s on s.proj_no = p.proj_no
+		left join manager m on s.manager_no = m.manager_no
+		where (p.proj_status = '계약' or p.proj_status = '진행 중') and f.free_id = 'user_9'<!-- #{user_id} -->
 	</select>
 
-
-
-	<!-- VO로 잘못했음. DTO로 변경 시도 -->
 	<!-- 평가 대기중 프로젝트 목록 -->
 	<select id="evProjList" resultType="com.itwillbs.domain.EvaluateProjectDTO">
 		<!-- select * from project -->
@@ -91,25 +105,30 @@
 	
 	<!-- 프로젝트 평가 여부 체크 -->
 	<select id="checkEvaluate" resultType="int">
-	    SELECT COUNT(*)
+	    SELECT COUNT(*) > 0 
 	    FROM project_value
-	    WHERE proj_no = #{proj_no} and valuing_free = #{free_no};
+	    WHERE proj_no = #{proj_no} and valuing_free = #{free_no}
 	</select>
 	
-	<!-- 완료한 프로젝트(별점,평가내용) -->
+	<!-- 완료한 프로젝트 -->
 	<select id="completedProjectList" resultType="com.itwillbs.domain.EvaluateProjectDTO">
 		<!-- select * from project -->
-		select p.proj_title, pv.proj_no, pv.valuing_free, pv.valued_ct, c.ct_id, p.mod_date, pv.score, pv.content
+		select p.proj_title, pv.proj_no, f.free_no, pv.valued_ct, c.ct_id, p.mod_date, pv.score, pv.content
 		from project_value pv
 		join project p on p.proj_no = pv.proj_no
 		join client c on p.ct_no = c.ct_no
 		join freelancer f on f.free_no = pv.valuing_free 
-		where p.proj_status ='완료'and f.free_id='user_3'<!--  and f.free_id=#{user_id} -->		
+		where p.proj_status ='완료' and f.free_id='user_3'<!--  and f.free_id=#{user_id} -->		
 	</select>
 	
-	<!-- 관심 프리랜서 시작 -->
+	<!-- 완료한 프로젝트 - 프로젝트 평가 수정하기 -->
+	<update id="updateEvaluate">
+		update project_value 
+		set score=#{score}, content=#{content}
+		where valuing_free=#{free_no} and proj_no=#{proj_no}
+	</update>
 	
-	<!-- 사용자의 기본 정보와 경력, 지역, 기술 등의 정보 -->
+	<!-- 관심 프리랜서 시작 -->
 	<select id="freeInfo" resultType="com.itwillbs.domain.freeInfoDTO">
 		SELECT u.user_id, u.name, f.work_field, f.school_type, r.region, r.district, f.oneline_bio, 
 			MAX(TRUNCATE(DATEDIFF(NOW(), c.join_date) / 365, 0) + 1) AS yeoncha, 
@@ -162,7 +181,7 @@
 	
 	<!-- 검수중 프로젝트-->
 	<select id="underReviewProjectList" resultType="com.itwillbs.domain.ProjectVO">
-		select p.proj_title, p.reg_date, p.deadline, p.proj_status
+		select p.proj_title, p.reg_date, p.deadline, p.proj_status, p.proj_no,
 		from project p 
 		join client c on c.ct_no = p.ct_no
 		where p.proj_status = '검수 단계' and c.ct_id ='user_10'<!--예시! #{user_id}로 변경 -->
@@ -206,7 +225,7 @@
 	
 	<!-- 평가대기중 프리랜서 목록 조회-->
 	<select id="waitEvaluationFreelancerList" resultType="com.itwillbs.domain.EvaluateFreelancerDTO">
-		select u.name, p.proj_title, p.mod_date, f.free_no, c.ct_no
+		select u.name, p.proj_title, p.mod_date, f.free_no, c.ct_no, p.proj_no
 		from project p
 		join client c on c.ct_no = p.ct_no
 		join apply_mgmt a on a.proj_no = p.proj_no
@@ -217,7 +236,7 @@
 
 	<!-- 프리랜서 평가 여부 체크 -->
 	<select id="checkFreeEvaluate" resultType="int">
-	    SELECT COUNT(*)
+	    SELECT COUNT(*) > 0
 	    FROM freelancer_value
 	    WHERE valuing_ct = #{ct_no} and valued_free = #{free_no};
 	</select>	
@@ -230,7 +249,7 @@
 	
 	<!-- 완료한 프로젝트 평가완료 프리랜서 -->
 	<select id="completedProjectFreeList" resultType="com.itwillbs.domain.EvaluateFreelancerDTO">
-		select u.name, p.proj_title, fv.score, fv.content
+		select u.name, p.proj_title, fv.score, fv.content, f.free_no, c.ct_no, p.proj_no
 		from freelancer_value fv
 		join freelancer f on fv.valued_free = f.free_no
 		join user u on f.free_id = u.user_id
@@ -239,7 +258,12 @@
 		where p.proj_status ='완료' and c.ct_id = 'user_10'<!--예시! #{user_id}로 변경 -->		
 	</select>
 
-
+	<!-- 완료한 프로젝트 - 프리랜서 평가 수정하기 -->
+	<update id="updateEvaluateFree">
+		update freelancer_value 
+		set score=#{score}, content=#{content}
+		where valued_free=#{free_no} and valuing_ct=#{ct_no} and proj_no=#{proj_no}
+	</update>
 
 
 

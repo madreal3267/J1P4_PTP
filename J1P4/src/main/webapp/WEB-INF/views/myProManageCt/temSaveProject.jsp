@@ -11,8 +11,8 @@
 	작성 중 임시 저장한 프로젝트를 확인할 수 있습니다.
 	</section>
 	<c:forEach var="tspl" items="${temSaveProjectList}">
-		<div style=" background-color: white; padding:10px; width: 300px; height: auto; cursor: pointer; display:inline-block;" class="text-center">
-			<b><h4>${tspl.proj_title }</h4></b>		
+		<div style=" background-color: white; padding:10px; width: 300px; height: 160px; cursor: pointer; display:inline-block;" class="text-center">
+			<h4><b>${tspl.proj_title }</b></h4>		
 			분야 | ${tspl.work_field }  작업기간 | ${tspl.work_period } <br>
 			단가 | ${tspl.proj_cost }  작업 내용 | ${tspl.proj_content } <br>
 			${tspl.reg_date }<br>

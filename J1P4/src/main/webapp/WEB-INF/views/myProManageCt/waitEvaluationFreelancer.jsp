@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ include file="../include/headerCt.jsp" %>
 
@@ -24,11 +25,8 @@
 				<c:forEach var="freeDTO" items="${waitEvaluationFreelancerList}">
 					<p>
 						<b>${freeDTO.name }</b><br>
-						<!-- 유저테이블과 조인후 이름가져오기 -->
-						${freeDTO.proj_title}
-						<!-- 프로젝트 테이블과 조인후 제목 가져오기 -->
-						${freeDTO.mod_date}
-						<!-- 프로젝트 진행중에서 완료하기 누른 날부터 일주일  -->
+						${freeDTO.proj_title}<br>
+						작성기간 <fmt:formatDate value="${freeDTO.mod_date }" pattern="yyyy-mm-dd"/>
 						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-${freeDTO.free_no}">평가하기</button>
 					</p>
 
@@ -61,6 +59,7 @@
 										<textarea name="content" placeholder="프리랜서를 평가해주세요" rows="4" cols="50"></textarea>
 										<input type="hidden" name="ct_no" value="${freeDTO.ct_no }">									
 										<input type="hidden" name="free_no" value="${freeDTO.free_no }">											
+										<input type="hidden" name="proj_no" value="${freeDTO.proj_no}">											
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-default pull-left" data-dismiss="modal">취소</button>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ include file="../include/header.jsp" %>
 
@@ -24,7 +25,9 @@
 
 				<c:forEach var="projectVO" items="${waitEvaluationProjectList}">
 					<p>
-						${projectVO.proj_title } ${projectVO.ct_id } ${projectVO.mod_date }
+						<b>${projectVO.proj_title }</b><br>
+						${projectVO.ct_id } <br>
+						작성기간 <fmt:formatDate value="${projectVO.mod_date }" pattern="yyyy-mm-dd"/>
 						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-${projectVO.ct_no}">평가하기</button>
 					</p>
 

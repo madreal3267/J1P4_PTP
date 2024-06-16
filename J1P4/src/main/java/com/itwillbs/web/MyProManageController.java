@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.itwillbs.domain.ApplyMgmtVO;
 import com.itwillbs.domain.EvaluateProjectDTO;
+import com.itwillbs.domain.ProjectDTO;
 import com.itwillbs.domain.ProjectVO;
 
 import com.itwillbs.persistence.MyProManageDAO;
@@ -45,7 +47,7 @@ public class MyProManageController {
 		logger.debug("/interestProject -> interestProjectList() 호출");
 		
 		// 서비스 -> DAO 관심 프로젝트 목록 조회 메서드
-		List<ProjectVO> interestProjectList = myService.interestProjectList();
+		List<ProjectDTO> interestProjectList = myService.interestProjectList();
 		logger.debug("interestProjectList : " + interestProjectList.size());
 		
 		// DAO 데이터 -> 뷰페이지
@@ -55,7 +57,7 @@ public class MyProManageController {
 	// 관심 프로젝트 목록 - 지원하기
 	@RequestMapping(value = "/interestProject",method = RequestMethod.POST)
 	public String interestProjectApply(ApplyMgmtVO avo) {
-		logger.debug("/interestProject -> interestProjectAppy() 호출");
+		logger.debug("/interestProject -> interestProjectApply() 호출");
 		
 		myService.applyProject(avo);
 		
@@ -68,7 +70,7 @@ public class MyProManageController {
 	public void proposedProjectList(Model model) {
 		logger.debug("/proposedProject -> propoesedProjectList() 호출");
 		
-		List<ProjectVO> proposedProjectList = myService.proposedProjectList();
+		List<ProjectDTO> proposedProjectList = myService.proposedProjectList();
 		logger.debug("proposedProjectList : " + proposedProjectList.size());
 		
 		model.addAttribute("proposedProjectList", proposedProjectList);
@@ -91,15 +93,15 @@ public class MyProManageController {
 	public void applyingProjectList(Model model) {
 		logger.debug("/applyingProject -> applyingProjectList() 호출");
 		
-		List<ProjectVO> applyingProjectList = myService.applyingProjectList();
+		List<ProjectDTO> applyingProjectList = myService.applyingProjectList();
 		logger.debug("applyingProjectList : " + applyingProjectList.size());
 		
 		model.addAttribute("applyingProjectList", applyingProjectList);		
 	}		
 	
-	// 지원 중 프로젝트 - 지원 취소	
+	// 지원 중 프로젝트 목록 - 지원 취소	
 	@RequestMapping(value = "/applyingProject",method = RequestMethod.POST)
-	public void deleteApply(ApplyMgmtVO avo) {
+	public String deleteApply(ApplyMgmtVO avo) {
 		logger.debug("/applyingProject -> deleteApply(applyMgmtVO avo) 호출");
 		
 		int result = myService.deleteApply(avo);
@@ -107,6 +109,7 @@ public class MyProManageController {
 		if(result == 1) {
 			logger.debug("지원 취소되었습니다.");
 		}
+		return "redirect:/myProManage/applyingProject";
 	}
 		
 	// 지원 종료 프로젝트 목록 조회
@@ -115,11 +118,24 @@ public class MyProManageController {
 	public void endApplyProjectList(Model model) {
 		logger.debug("/endApplyProject -> endApplyProjectList() 호출");
 		
-		List<ProjectVO> endApplyProjectList = myService.endApplyProjectList();
+		List<ProjectDTO> endApplyProjectList = myService.endApplyProjectList();
 		logger.debug("endApplyProjectList : " + endApplyProjectList.size());
 		
 		model.addAttribute("endApplyProjectList", endApplyProjectList);		
 	}	
+	
+	// 지원 종료 프로젝트 목록 - 지원 종료 목록에서 삭제	
+	@RequestMapping(value = "/endApplyProject",method = RequestMethod.POST)
+	public String deleteEndApply(ApplyMgmtVO avo) {
+		logger.debug("/endApplyProject -> deleteEndApply(applyMgmtVO avo) 호출");
+		
+		int result = myService.deleteApply(avo);
+		
+		if(result == 1) {
+			logger.debug("지원 목록에서 삭제하였습니다.");
+		}
+		return "redirect:/myProManage/endApplyProject";
+	}
 	
 	// 계약 진행 중 프로젝트 목록 조회
 	// http://localhost:8088/myProManage/contractProject	
@@ -139,7 +155,7 @@ public class MyProManageController {
 	public void ongoingProjectList(Model model) {
 		logger.debug("/ongoingProject -> ongoingProjectList() 호출");
 		
-		List<ProjectVO> ongoingProjectList = myService.ongoingProjectList();
+		List<ProjectDTO> ongoingProjectList = myService.ongoingProjectList();
 		logger.debug("ongoingProjectList : " + ongoingProjectList.size());
 		
 		model.addAttribute("ongoingProjectList", ongoingProjectList);		
@@ -169,7 +185,6 @@ public class MyProManageController {
 		}
 	}		
 	
-	
 	// 평가 대기중 프로젝트 - 평가하기
 	@RequestMapping(value = "/waitEvaluationProject",method = RequestMethod.POST)
 	public void evaluationProject(EvaluateProjectDTO edto) {
@@ -194,6 +209,7 @@ public class MyProManageController {
 		        filteredProjList.add(project);
 		    }
 		}
+		logger.debug("q(≧▽≦q)q(≧▽≦q)q(≧▽≦q)q(≧▽≦q)q(≧▽≦q)" + filteredProjList.size());
 		int totalProjects = filteredProjList.size();
 		int totalPages = (int) Math.ceil((double) totalProjects / pageSize);
 		
@@ -213,8 +229,17 @@ public class MyProManageController {
 		    logger.debug("No projects found for evaluation.");
 		}		
 		
-	}		
+	}	
 	
+	// 완료한 프로젝트 평가 수정하기
+	@RequestMapping(value = "/completedProject",method = RequestMethod.POST)
+	public String updateEvaluate(EvaluateProjectDTO edto) {
+		logger.debug("/completedProject -> updateEvaluate(EvaluateProjectDTO edto) 호출");
+		
+		myService.updateEvaluate(edto);
+		
+		return "redirect:/myProManage/completedProject";
+	}
 	
 	
 	

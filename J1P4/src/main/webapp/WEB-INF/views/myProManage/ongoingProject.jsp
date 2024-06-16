@@ -39,8 +39,8 @@
 								<tr>
 									<td>${onpro.proj_no }</td>
 									<td>${onpro.proj_title }</td>
-									<td>${onpro.ct_no }</td>
-									<td>담당 매니저</td>
+									<td>${onpro.ct_id }</td>
+									<td>${onpro.manager_nm }</td>
 									<td>${onpro.proj_status }</td>
 								</tr>
 							</c:forEach>

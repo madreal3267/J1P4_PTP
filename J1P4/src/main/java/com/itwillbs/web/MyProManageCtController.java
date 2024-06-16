@@ -143,10 +143,11 @@ public class MyProManageCtController {
 	
 	// 평가 대기중 프리랜서 - 평가하기
 	@RequestMapping(value = "/waitEvaluationFreelancer",method = RequestMethod.POST)
-	public void evaluationFreelancer(EvaluateProjectDTO edto) {
+	public String evaluationFreelancer(EvaluateFreelancerDTO edto) {
 		logger.debug("/waitEvaluationFreelancer -> evaluationFreelancer(EvaluateProjectDTO edto) 호출");
-		//myService.evaluateFreelancer(edto);
+		myService.evaluateFreelancer(edto);
 		
+		return "redirect:/myProManageCt/waitEvaluationFreelancer";
 	}			
 	
 	// 완료한 프로젝트의 평가완료 프리랜서 목록 조회
@@ -161,6 +162,15 @@ public class MyProManageCtController {
 		model.addAttribute("completedFreelancerList", completedFreelancerList);		
 	}	
 	
+	// 완료한 프로젝트 - 프리랜서 평가 수정하기
+	@RequestMapping(value = "/completedFreelancer",method = RequestMethod.POST)
+	public String updateEvaluateFree(EvaluateFreelancerDTO edto) {
+		logger.debug("/completedFreelancer -> updateEvaluateFree(EvaluateFreelancerDTO edto) 호출");
+		
+		myService.updateEvaluateFree(edto);
+		
+		return "redirect:/myProManageCt/completedFreelancer";
+	}	
 	
 	
 	

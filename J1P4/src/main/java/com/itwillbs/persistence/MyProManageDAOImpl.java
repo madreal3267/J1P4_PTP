@@ -8,9 +8,11 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.object.RdbmsOperation;
 import org.springframework.stereotype.Repository;
 
 import com.itwillbs.domain.FreelancerVO;
+import com.itwillbs.domain.ProjectDTO;
 import com.itwillbs.domain.ProjectVO;
 import com.itwillbs.domain.ctOngoingProjectDTO;
 import com.itwillbs.domain.freeInfoDTO;
@@ -39,13 +41,13 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 
 	// 관심있는 프로젝트 리스트
 	@Override
-	public List<ProjectVO> interestProjectList() {
-		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE + "interestProjectList");
+	public List<ProjectDTO> interestProjectList() {
+		List<ProjectDTO> resultDTO = sqlSession.selectList(NAMESPACE + "interestProjectList");
 		
-		return resultVO;
+		return resultDTO;
 	}
 
-	// 관심있는 프로젝트 리스트 - 지원하기 
+	// 프로젝트 리스트 - 지원하기 
 	@Override
 	public void applyProject(ApplyMgmtVO avo) {
 		sqlSession.insert(NAMESPACE + "applyProject", avo);
@@ -54,24 +56,23 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 
 	// 제안받은 프로젝트 리스트
 	@Override
-	public List<ProjectVO> proposedProjectList() {
-		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE + "proposedProjectList");
+	public List<ProjectDTO> proposedProjectList() {
+		List<ProjectDTO> resultDTO = sqlSession.selectList(NAMESPACE + "proposedProjectList");
 
-		return resultVO;
+		return resultDTO;
 	}
 
 	// 지원중 프로젝트 리스트
 	@Override
-	public List<ProjectVO> applyingProjectList() {
-		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE + "applyingProjectList");
+	public List<ProjectDTO> applyingProjectList() {
+		List<ProjectDTO> resultDTO = sqlSession.selectList(NAMESPACE + "applyingProjectList");
 		
-		return resultVO;
+		return resultDTO;
 	}
 	
-	// 지원중 프로젝트 리스트 - 지원취소
+	// 프로젝트 리스트 - 지원취소
 	@Override
 	public int deleteApply(ApplyMgmtVO avo) {
-		
 		int result = sqlSession.delete(NAMESPACE+"deleteApply", avo);
 		
 		return result;
@@ -79,13 +80,13 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 	
 	// 지원종료 프로젝트 리스트
 	@Override
-	public List<ProjectVO> endApplyProjectList() {
-		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE + "endApplyProjectList");
+	public List<ProjectDTO> endApplyProjectList() {
+		List<ProjectDTO> resultDTO = sqlSession.selectList(NAMESPACE + "endApplyProjectList");
 		
-		return resultVO;
+		return resultDTO;
 	}
 
-	// 계약중 프로젝트 리스트
+	// 계약중 프로젝트 리스트 미완성미완성미안선애 에잲애
 	@Override
 	public List<ProjectVO> contractProjectList() {
 		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"contractProjectList");
@@ -95,10 +96,10 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 
 	// 진행중 프로젝트 리스트
 	@Override
-	public List<ProjectVO> ongoingProjectList() {
-		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"ongoingProjectList");
+	public List<ProjectDTO> ongoingProjectList() {
+		List<ProjectDTO> resultDTO = sqlSession.selectList(NAMESPACE+"ongoingProjectList");
 		
-		return resultVO;
+		return resultDTO;
 	}
 
 	// 평가 대기중 프로젝트 리스트
@@ -173,7 +174,7 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 		logger.debug("result : " + result );
 		return result;
 	}
-	
+
 	// 완료한 프로젝트 목록
 	@Override
 	public List<EvaluateProjectDTO> completedProjectList() {
@@ -181,6 +182,13 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 		return resultDTO;
 	}
 	
+	// 프로젝트 평가 수정하기
+	@Override
+	public void updateEvaluate(EvaluateProjectDTO edto) {
+		sqlSession.update(NAMESPACE+"updateEvaluate", edto);
+		
+	}
+
 	// 관심 프리랜서 목록 조회
 	@Override
 	public List<freeInfoDTO> interestFreelancerList() {
@@ -238,4 +246,14 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 		
 		return resultDTO;
 	}
+
+	// 완료된 프로젝트 - 프리랜서 평가 수정하기
+	@Override
+	public void updateEvaluateFree(EvaluateFreelancerDTO edto) {
+		logger.debug("(/≧▽≦)/(/≧▽≦)/(/≧▽≦)/");
+		logger.debug("(/≧▽≦)/(/≧▽≦)/(/≧▽≦)/(/≧▽≦)/"+edto);
+		sqlSession.update(NAMESPACE+"updateEvaluateFree", edto);
+									
+	}
+	
 }

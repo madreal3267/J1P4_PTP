@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.domain.FreelancerVO;
+import com.itwillbs.domain.ProjectDTO;
 import com.itwillbs.domain.ProjectVO;
 import com.itwillbs.domain.ctOngoingProjectDTO;
 import com.itwillbs.domain.freeInfoDTO;
@@ -34,7 +35,7 @@ public class MyProManageServiceImpl implements MyProManageService {
 	
 	// 관심 프로젝트 목록
 	@Override
-	public List<ProjectVO> interestProjectList() {
+	public List<ProjectDTO> interestProjectList() {
 		logger.debug("interestProjectList() 실행");
 		
 		return mpmdao.interestProjectList();
@@ -51,7 +52,7 @@ public class MyProManageServiceImpl implements MyProManageService {
 
 	// 제안받은 프로젝트 목록
 	@Override
-	public List<ProjectVO> proposedProjectList() {
+	public List<ProjectDTO> proposedProjectList() {
 		logger.debug("proposedProjectList() 실행");
 		
 		return mpmdao.proposedProjectList();
@@ -59,13 +60,13 @@ public class MyProManageServiceImpl implements MyProManageService {
 	
 	// 지원 중 프로젝트 목록
 	@Override
-	public List<ProjectVO> applyingProjectList() {
+	public List<ProjectDTO> applyingProjectList() {
 		logger.debug("applyingProjectList() 실행");
 		
 		return mpmdao.applyingProjectList();
 	}
 
-	// 지원 중 프로젝트 - 지원취소
+	// 프로젝트 목록 - 지원취소
 	@Override
 	public int deleteApply(ApplyMgmtVO avo) {
 		logger.debug("deleteApply(applyMgmtVO avo) 실행");
@@ -75,7 +76,7 @@ public class MyProManageServiceImpl implements MyProManageService {
 
 	// 지원 종료 프로젝트 목록
 	@Override
-	public List<ProjectVO> endApplyProjectList() {
+	public List<ProjectDTO> endApplyProjectList() {
 		logger.debug("endApplyProjectList() 실행");
 		
 		return mpmdao.endApplyProjectList();
@@ -91,7 +92,7 @@ public class MyProManageServiceImpl implements MyProManageService {
 
 	// 프로젝트 진행 중 목록
 	@Override
-	public List<ProjectVO> ongoingProjectList() {
+	public List<ProjectDTO> ongoingProjectList() {
 		logger.debug("ongoingProjectList() 실행");
 		
 		return mpmdao.ongoingProjectList();
@@ -138,13 +139,15 @@ public class MyProManageServiceImpl implements MyProManageService {
 	}
 
 	// VO -> DTO 로 변경하여 재구성중
+	// 평가 대기중 프로젝트 리스트	
 	@Override
 	public List<EvaluateProjectDTO> evaluateProjectList() {
 		logger.debug("evaluateProjectList() 실행");
 		
 		return mpmdao.evaluateProjectList();
 	}
-
+	
+	// 평가 대기중 프로젝트 - 평가하기
 	@Override
 	public void evaluateProject(EvaluateProjectDTO edto) {
 		logger.debug("evaluateProject(EvaluateProjectDTO edto) 실행");
@@ -152,18 +155,28 @@ public class MyProManageServiceImpl implements MyProManageService {
 		mpmdao.evaluateProject(edto);
 	}
 
+	// 프로젝트 평가 여부 체크
 	@Override
 	public int checkEvaluate(EvaluateProjectDTO edto) {
 		logger.debug("checkEvaluate(EvaluateProjectDTO edto) 실행");
 		
 		return mpmdao.checkEvaluate(edto);
 	}
-
+	
+	// 완료한 프로젝트 목록
 	@Override
 	public List<EvaluateProjectDTO> completedProjectList() {
 			logger.debug("completedProjectList() 실행");
 			
 			return mpmdao.completedProjectList();
+	}
+	
+	// 프로젝트 평가 수정하기
+	@Override
+	public void updateEvaluate(EvaluateProjectDTO edto) {
+		logger.debug("updateEvaluate(ProjectDTO pdto) 실행");
+		
+		 mpmdao.updateEvaluate(edto);
 	}
 	
 	@Override
@@ -218,4 +231,13 @@ public class MyProManageServiceImpl implements MyProManageService {
 		
 		return mpmdao.completedFreelancerList();
 	}
+
+	// 평가 완료한 프로젝트 - 프리랜서 평가 수정하기
+	@Override
+	public void updateEvaluateFree(EvaluateFreelancerDTO edto) {
+		logger.debug("updateEvaluateFree(EvaluateFreelancerDTO edto) 실행");
+		
+		mpmdao.updateEvaluateFree(edto);
+	}
+	
 }

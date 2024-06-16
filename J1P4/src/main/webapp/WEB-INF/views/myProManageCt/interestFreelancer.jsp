@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%@ include file="../include/headerCt.jsp" %>
 
@@ -27,14 +28,23 @@
 		</select>
 	 	<c:forEach var="free" items="${interestFreelancerList}">
 	 		<hr>
-			<div style=" background-color: white; padding:10px; width: 300px; height: auto; cursor: pointer;" onclick="#">
+			<div style=" background-color: white; padding:10px; width: 400px; height: auto; cursor: pointer;" onclick="#">
 				[프로필사진]<br><!-- DB.user 정보 -->
 				<b>${free.name }</b>
 				분야 <b>${free.work_field }</b> | [레벨] <b>${free.job_level }</b><br>
 				경력 <b>${free.yeoncha }</b> 년차 |
 				학력 <b>${free.school_type }</b>
 				지역 <b>${free.region } ${free.district }</b><br>
-				<button type="button" class="btn btn-warning" >${free.skills }</button><br>
+				
+				<%-- <button type="button" class="btn btn-warning" >${free.skills }</button><br> --%>
+				
+				<!-- 스킬 버튼 생성 test -->
+					<c:set var="skillList" value="${free.skills }" />
+						<c:forEach items="${fn:split(skillList, ',')}" var="skill">
+						    <button type="button" class="btn btn-warning" ><c:out value="${skill}" /></button>
+						</c:forEach><br>				
+				<!-- 스킬 버튼 생성 test -->
+				
 				근무경력 | 포트폴리오 <br>
 				${free.career_count } | ${free.portfolio_count }
 				[한줄소개] ${free.oneline_bio } <br>

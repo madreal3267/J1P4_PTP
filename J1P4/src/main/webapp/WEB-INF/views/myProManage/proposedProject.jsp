@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ include file="../include/header.jsp" %>
 
@@ -28,16 +29,18 @@
 	 	<option>마감 임박 순</option> 	
 	 </select>
 	 
-	<c:forEach var="projectVO" items="${proposedProjectList}">
+	<c:forEach var="projDTO" items="${proposedProjectList}">
 	 	<div>
-	 		<h2>${projectVO.proj_title }</h2> 
-	 		예상 금액 ${projectVO.proj_cost } | 예상 기간 ${projectVO.work_period } <br>
-			${pojectVO.work_filed }	| 지역 el표현식 | <button>기술 el표현식</button>
+	 		<h2>${projDTO.proj_title }</h2> 
+	 		예상 금액 ${projDTO.proj_cost } | 예상 기간 ${ProjectDTO.work_period } <br>
+			${projDTO.work_field }	| ${projDTO.region } ${projDTO.district } | <button>${projDTO.skill_nm }</button>
 			<!-- 하트위치 -->
 			<form action="/myProManage/proposedProject" method="post">
-							<input type="submit" value="지원하기"> 
-						</form>
-			등록일자 ${projectVO.reg_date }
+				<input type="hidden" name="free_no" value="${projDTO.free_no }">
+				<input type="hidden" name="proj_no" value="${projDTO.proj_no }">
+				<input type="submit" value="지원하기"> 
+			</form>
+			등록일자 <fmt:formatDate value="${projDTO.reg_date }" pattern="yyyy-mm-dd"/>
 	 	</div>
 	</c:forEach>
 	</section>

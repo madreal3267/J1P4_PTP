@@ -3,6 +3,7 @@ package com.itwillbs.service;
 import java.util.List;
 
 import com.itwillbs.domain.FreelancerVO;
+import com.itwillbs.domain.ProjectDTO;
 import com.itwillbs.domain.ProjectVO;
 import com.itwillbs.domain.ctOngoingProjectDTO;
 import com.itwillbs.domain.freeInfoDTO;
@@ -17,28 +18,28 @@ public interface MyProManageService {
 	public String getDBTime();
 	
 	// 관심 프로젝트 목록
-	public List<ProjectVO> interestProjectList();
+	public List<ProjectDTO> interestProjectList();
 	
 	// 프로젝트 - 지원하기
 	public void applyProject(ApplyMgmtVO avo);
 	
 	// 제안받은 프로젝트 목록
-	public List<ProjectVO> proposedProjectList();
+	public List<ProjectDTO> proposedProjectList();
 	
 	// 지원 중 프로젝트 목록
-	public List<ProjectVO> applyingProjectList();
+	public List<ProjectDTO> applyingProjectList();
 	
-	// 지원 중 프로젝트 - 지원취소
+	// 프로젝트 목록 - 지원취소
 	public int deleteApply(ApplyMgmtVO avo);	
 	
 	// 지원 종료 프로젝트 목록
-	public List<ProjectVO> endApplyProjectList();
+	public List<ProjectDTO> endApplyProjectList();
 	
 	// 계약 진행 중 프로젝트 목록
 	public List<ProjectVO> contractProjectList();
 	
 	// 프로젝트 진행 중 목록
-	public List<ProjectVO> ongoingProjectList();
+	public List<ProjectDTO> ongoingProjectList();
 
 	// 검수중 프로젝트 목록
 	public List<ProjectVO> underReviewProjectList();
@@ -82,6 +83,9 @@ public interface MyProManageService {
 	// 완료한 프로젝트 목록
 	public List<EvaluateProjectDTO> completedProjectList();
 	
+	// 프로젝트 평가 수정하기
+	public void updateEvaluate(EvaluateProjectDTO edto);
+	
 	// 관심 프리랜서 목록
 	public List<freeInfoDTO> interestFreelancerList();
 	
@@ -102,4 +106,8 @@ public interface MyProManageService {
 	
 	// 완료한 프로젝트의 평가완료 프리랜서 목록
 	public List<EvaluateFreelancerDTO> completedFreelancerList();
+	
+	// 프리랜서 평가 수정하기
+	public void updateEvaluateFree(EvaluateFreelancerDTO edto);		
+	
 }

@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ include file="../include/header.jsp" %>
 
@@ -28,14 +29,18 @@
 	 	<option>마감 임박 순</option> 	
 	 </select>
 	 
-	<c:forEach var="projectVO" items="${endApplyProjectList}">
+	<c:forEach var="projDTO" items="${endApplyProjectList}">
 	 <div>
-	 	<h2>${projectVO.proj_title }</h2> 
-	 	예상 금액 ${projectVO.proj_cost } | 예상 기간 ${projectVO.work_period } <br>
-		${pojectVO.work_filed }	| 서울시 강남구 <!-- 지역 el표현식 --> | <button>자바<!-- 기술 el표현식 --></button>
-		<!-- 하트위치 -->
-		<input type="submit" value="목록에서 삭제" >
-		등록일자 ${projectVO.reg_date }
+	 	<h2>${projDTO.proj_title }</h2> 
+	 	예상 금액 ${projDTO.proj_cost } | 예상 기간 ${projDTO.work_period } <br>
+		${projDTO.work_field }	|  ${projDTO.region } ${projDTO.district }  |  
+		<button>${projDTO.skill_nm }</button>
+		<form action="/myProManage/endApplyProject" method="post">
+			<input type="hidden" name="free_no" value="${projDTO.free_no }">
+			<input type="hidden" name="proj_no" value="${projDTO.proj_no }">
+			<input type="submit" value="목록에서 삭제" >
+		</form>
+		등록일자 <fmt:formatDate value="${projDTO.reg_date }" pattern="yyyy-mm-dd"/>
 	 </div>
 	 </c:forEach>
 	</section>
