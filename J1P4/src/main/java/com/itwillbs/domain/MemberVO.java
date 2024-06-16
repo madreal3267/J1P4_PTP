@@ -20,5 +20,6 @@ public class MemberVO {
 	
 	private String mail_key; //난수
 	private int mail_auth;
+
 	
 }

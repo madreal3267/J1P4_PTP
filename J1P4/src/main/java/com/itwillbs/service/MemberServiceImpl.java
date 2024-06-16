@@ -51,7 +51,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void findpw(MemberVO vo) throws Exception {
 		
-		 mdao.findpw(vo);
+		mdao.findpw(vo);
 	}
 
 	//비번변경 - 저장된 이메일과 난수를 가진 유저의 비밀번호를 변경 
@@ -60,6 +60,24 @@ public class MemberServiceImpl implements MemberService {
 		mdao.chagepw(vo);
 		
 	}
+	
+	//아이디가 존재하는지 비교
+	@Override
+	public MemberVO findUserById(String user_id) throws Exception {
+
+		
+        return mdao.findUserById(user_id);
+	}
+	
+	//난수가 존재하는지 비교
+	@Override
+	public MemberVO findUserByMailKey(String mail_key) throws Exception {
+		
+		return mdao.findUserByMailKey(mail_key);
+	}
+	
+	
+	
 	
 	
 	

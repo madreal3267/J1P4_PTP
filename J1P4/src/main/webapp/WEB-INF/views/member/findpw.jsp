@@ -97,6 +97,7 @@ String key = request.getParameter("key")
 	</div>
 
 
+
 	<!-- Bootstrap 3.3.2 JS -->
 	<script src="./resources/bootstrap/js/bootstrap.min.js"
 		type="text/javascript"></script>

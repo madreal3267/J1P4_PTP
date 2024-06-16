@@ -53,9 +53,9 @@ public class MemberDAOImpl implements MemberDAO {
 	// 비번 - 가입한 유저가 맞는지 -> 맞으면 난수 생성 디비저장
 	@Override
 	public void findpw(MemberVO vo) throws Exception {
-		
 		sqlSession.update(NAMESPACE+"mailkey", vo);
 	}
+	
 
 	
 	//비번변경 - 저장된 이메일과 난수를 가진 유저의 비밀번호를 변경 
@@ -64,6 +64,23 @@ public class MemberDAOImpl implements MemberDAO {
 		sqlSession.update(NAMESPACE+"mailkey2", vo);
 		
 	}
+	//아이디가 존재하는지 비교
+	@Override
+	public MemberVO findUserById(String user_id) throws Exception {
+		
+		return sqlSession.selectOne(NAMESPACE+"findUserById", user_id);
+	
+	}
+	
+	//난수가 존재하는지 비교
+	@Override
+	public MemberVO findUserByMailKey(String mail_key) throws Exception {
+		
+		return sqlSession.selectOne(NAMESPACE+"findUserByMailKey", mail_key);
+	}
+	
+	
+
 	
 	
 	

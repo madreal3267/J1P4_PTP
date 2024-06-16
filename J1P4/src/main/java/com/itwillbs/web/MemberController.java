@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwillbs.domain.MemberVO;
 import com.itwillbs.persistence.MailHandler;
@@ -127,14 +128,21 @@ public class MemberController {
 	
 	//비밀번호 재설정페이지로 이동 -> 난수 저장
 	@RequestMapping(value = "/findpw", method = RequestMethod.POST)
-	public String findpw(MemberVO vo, Model model) throws Exception {
+	public String findpw(@RequestParam("user_id") String user_id, MemberVO vo, Model model) throws Exception {
+		 
+//		vo.setUser_id(user_id);
 		
 		System.out.println(vo);
-		logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@"+vo);
-		logger.info("@@@@@@@@@@@@@@@@@"+vo.getUser_id());
+//		logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@"+vo);
+//		logger.info("@@@@@@@@@@@@@@@@@"+vo.getUser_id());
+		logger.info("///////////////////////"+user_id);
 		
-		if(vo.getUser_id() != null) {
-			String key = new TempKey().getKey(8, false); //난수를 생성하는 키
+        MemberVO member = mService.findUserById(user_id);
+        if (member != null) {
+            // user_id가 존재하는 경우 처리 로직
+            model.addAttribute("message", "User ID exists.");
+            
+            String key = new TempKey().getKey(8, false); //난수를 생성하는 키
 			System.out.println("key:"+ key);
 			vo.setMail_key(key);
 			
@@ -149,24 +157,28 @@ public class MemberController {
 							"<br/>아래 [비밀번호 변경하기]를 눌러주세요."+
 							"<a href='http://192.168.0.26:8088/member/findpw?user_email=" + vo.getUser_email() +
 							"&key=" + key +
-							"' target='_blenk'>비밀번호 변경하기</a>");
+							"' target='_blank'>비밀번호 변경하기</a>");
 			mailhandler.setFrom("itwil_j1p4@naver.com", "캐프리");
 			mailhandler.setTo(vo.getUser_email());
 			mailhandler.send();
 			
 			
 			logger.debug("이메일 인증");
-			
+            
+            
+            
 			return"/member/findpw2";
-			
-			
-		}else {
+
+        } else {
+            // user_id가 존재하지 않는 경우 처리 로직
+        	logger.debug("아이디없음");
 			String msg ="아이디가 없습니다";
 			model.addAttribute("msg", msg);
 			
 			return "/member/pwfind";
-			
-		}
+        }
+    
+		
 		
 	}
 	
@@ -178,11 +190,12 @@ public class MemberController {
 	//변경한 비밀번호 DB에 전달
 
 	@PostMapping(value = "/main")
-	public void main(MemberVO vo, Model model) throws Exception {
+	public void main(MemberVO vo, Model model, String mail_key) throws Exception {
 		logger.debug("비번변경 Post()호출");
-		String result = vo.getMail_key();
+		logger.info("///////////////////////"+ mail_key);
+		MemberVO result = mService.findUserByMailKey(mail_key);
 		String key = new TempKey().getKey(8, false); 
-		if(result == key) {
+		if(result != null && result.getMail_key().equals(mail_key)) {
 			mService.chagepw(vo);
 			
 			logger.debug("비밀번호 변경완료");

@@ -95,6 +95,15 @@
 	<!-- AdminLTE for demo purposes -->
 	<script src="./resources/dist/js/demo.js" type="text/javascript"></script>
 </body>
+
+<script type="text/javascript">
+    var msg = "${msg}";
+    
+    if (msg != "") {
+        alert(msg);
+    }
+</script>
+
 </html>
 
 

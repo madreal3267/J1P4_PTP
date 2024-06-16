@@ -44,6 +44,18 @@
 	</update>
 	
 	
+	<!-- 아이디 존재하는지 비교하기 -->
+    <select id="findUserById" parameterType="String" resultType="com.itwillbs.domain.MemberVO">
+        SELECT * FROM user WHERE user_id = #{user_id}
+    </select>
+	
+	<!-- 난수가 존재하는지 비교하기 -->
+    <select id="findUserByMailKey" parameterType="String" resultType="com.itwillbs.domain.MemberVO">
+        SELECT * FROM user WHERE mail_key = #{mail_key}
+    </select>
+	
+	
+	
   	 
   
   </mapper>
