@@ -2,41 +2,50 @@
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
 
-<div class="container light-style flex-grow-1 container-p-y" >
+<div class="container light-style flex-grow-1 container-p-y" style="width:1100px;">
   <div class="card overflow-hidden"  style="box-shadow: ;">
 <div class="row no-gutters row-bordered row-border-light" >
 	<!-- 사이드 메뉴 시작 -->
-	<div class="col-md-3 pt-0">
-		<div class="list-group list-group-flush account-settings-links">
-			<h4 class="font-weight-bold py-3 mb-4 m-4">프로젝트 등록하기</h4>
+	<div class="col-md-3 pt-0" style="position: fixed; width: 300px; z-index: 9999; ">
+		<div class="list-group list-group-flush account-settings-links mx-2">
+			<h4 class="font-weight-bold py-1 m-3" style=" position: relative; bottom: 1px;">프로젝트 등록하기</h4>
 			<a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">기본 정보</a>
 			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-detail">상세 정보</a>
 			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-hope">지원자 희망 조건</a>
 		</div>
 	</div>
 	<!-- 사이드 메뉴 끝 -->
-<div class="col-md-9">
+<div class="col-md-10">
 <div class="tab-content">
 
 <!-- 기본 정보 탭 시작 -->
-<div class="tab-pane fade active show" id="account-general">
+<div class="tab-pane fade active show" id="account-general" >
+	 <div class="toast-container position-fixed top-70 start-50 p-3">
+	  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+	    
+	    <div class="toast-body" style="text-align: center;">
+	      임시 저장 완료 ( •̀ ω •́ )y
+	    </div>
+	    
+	  </div>
+	</div>
 	
-<hr class="border-light m-0">
+<hr class="border-light m-0" >
 	<!-- card body 시작 -->
-	<div class="card-body ">
+	<div class="card-body border-start" style="position: relative; left: 280px; ">
+			<div style="position: relative; right: 16px; bottom: 5px;" class="px-4 py-2 border-bottom"><h4 class="font-weight-bold">기본 정보</h4></div>
 		<!-- 폼 그룹 시작 -->
-		<div class="form-group">
 <!-- 			<div class="alert alert-warning mt-3"> -->
 <!-- 			임시 저장 프로젝트를 불러오거나, 등록했던 프로젝트를 다시 등록해 보세요. -->
 <!-- 			<a href="javascript:void(0)">프로젝트 선택하기 ></a> -->
 <!-- 			</div> -->
-			<h4>기본 정보</h4>
-		<hr>
-		<h5>프로젝트를 간단하게 알려주세요</h5>
+		<div class="form-group mx-4 my-3">
+
+		<h5 class="my-3">프로젝트를 간단하게 알려주세요</h5>
 		<input type="radio" name="proj_progress" value=0 id="radioPj1" class="mb-1">
-		<label for="radioPj1" class="form-label">신규 프로젝트를 진행하려 합니다</label><br>
+		<label for="radioPj1" class="form-label mx-2 h6">신규 프로젝트를 진행하려 합니다</label><br>
 		<input type="radio" name="proj_progress" value=1 id="radioPj2" class="mb-1"> 
-		<label for="radioPj2" class="form-label">운영 중인 서비스의 리뉴얼 또는 유지보수를 하려 합니다</label>
+		<label for="radioPj2" class="form-label mx-2 h6">운영 중인 서비스의 리뉴얼 또는 유지보수를 하려 합니다</label>
 		</div>
 		<!-- 폼 그룹 끝 -->
 		<hr>
@@ -87,7 +96,20 @@
 		</div>
 		<!-- 폼 그룹 끝 -->		
 		
+		<textarea rows="100" cols="30"></textarea>
 		
+		<h2>어떤 프로젝트 업무를 맡기고 싶으신가요?</h2>
+		<h5>나중에 변경 가능하니 걱정하지 마세요</h5>
+		<input type="radio" value="개발" class="btn-check" name="work_field"
+			id="radioWf1"> <label class="btn btn-outline-dark"
+			for="radioWf1">⚙️ 개발</label> <input type="radio" value="기획"
+			class="btn-check" name="work_field" id="radioWf2"> <label
+			class="btn btn-outline-dark" for="radioWf2">🛠️ 기획</label> <input
+			type="radio" value="디자인" class="btn-check" name="work_field"
+			id="radioWf3"> <label class="btn btn-outline-dark"
+			for="radioWf3">🎨 디자인</label> <input type="radio" value="퍼블리싱"
+			class="btn-check" name="work_field" id="radioWf4"> <label
+			class="btn btn-outline-dark" for="radioWf4">🖋️ 퍼블리싱</label>
 		
 		
 	</div>
@@ -96,8 +118,8 @@
 <!-- 기본 정보 탭 끝 -->
 
 <!-- 상세 정보 탭 시작 -->
-<div class="tab-pane fade" id="account-detail">
-<div class="card-body pb-2">
+<div class="tab-pane fade" id="account-detail"">
+<div class="card-body pb-2" style="position: relative; left: 300px;">
 <div class="form-group">
 <label class="form-label">Current password</label>
 <input type="password" class="form-control">
@@ -113,7 +135,7 @@
 </div>
 </div>
 <div class="tab-pane fade" id="account-hope">
-<div class="card-body pb-2">
+<div class="card-body pb-2" style="position: relative; left: 300px;">
 <div class="form-group">
 <label class="form-label">Bio</label>
 <textarea class="form-control" rows="5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nunc arcu, dignissim sit amet sollicitudin iaculis, vehicula id urna. Sed luctus urna nunc. Donec fermentum, magna sit amet rutrum pretium, turpis dolor molestie diam, ut lacinia diam risus eleifend sapien. Curabitur ac nibh nulla. Maecenas nec augue placerat, viverra tellus non, pulvinar risus.</textarea>
@@ -142,7 +164,7 @@
 </div>
 <div class="form-group">
 <label class="form-label">Website</label>
-<input type="text" class="form-control" value>
+<input type="text" class="form-control">
 </div>
 </div>
 </div>
@@ -154,19 +176,20 @@
 </div>
   </div>
   	<!-- 임시저장, 등록 버튼 -->
+
+
+
+
+
 	<div class="text-right mt-3">
-	<button type="button" class="btn btn-default">임시저장</button>&nbsp;
+	<button type="button" class="btn btn-default" id="liveToastBtn">임시저장</button>&nbsp;
 	<button type="button" class="btn btn-primary">등록</button>
 	</div>
 
 </div>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- select2 (검색되는 select) 자바스크립트 -->
-<script
-	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<!-- 부트스트랩 자바스크립트 -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script type="text/javascript">
 		/* 시군구 - select */
 		var cnt = new Array();
@@ -281,43 +304,18 @@
 			});
 					
 		});
+	
 		
-
-		/* 임시저장 기능 구현 */
-		var data = true;
-
-		$(function() {
-			$(".saveButt").click(function() {
-				if(data) {
-					$.ajax({
-						url : "/enroll/saveProj",
-						type : "POST",
-						data : $("#fm1").serialize(),
-						async : false,
-						success : function(a) {
-							alert(" ╰(*°▽°*)╯ 저장 완료");
-							data = a.result;
-						},
-						error : function() {
-							alert("오류발생");
-						}
-					});
-				} else {
-					$.ajax({
-						url : "/enroll/multiSaveProj",
-						type : "POST",
-						data : $("#fm1").serialize(),
-						success : function() {
-							alert(" ╰(*°▽°*)╯ 최초 임시저장 후 저장 완료");
-						},
-						error : function() {
-							alert("오류발생 - 최초 임시 저장 후");
-						}
-					});
-				}
 		
-			});
-		});	
+		const toastTrigger = document.getElementById('liveToastBtn')
+		const toastLiveExample = document.getElementById('liveToast')
+
+		if (toastTrigger) {
+		  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+		  toastTrigger.addEventListener('click', () => {
+		    toastBootstrap.show()
+		  })
+		}
 	</script>
 </body>
 </html>

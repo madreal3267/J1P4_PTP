@@ -1,40 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <style>
 @import
-	url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap')
-	;
-
-body {
-	font-family: "Nanum Gothic", sans-serif !important;
-}
-
-h2 {
-	font-weight: bolder !important;
-}
-
-h5 {
-	color: gray !important;
-}
+url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+body { font-family: "Nanum Gothic", sans-serif !important; }
+h2 { font-weight: bolder !important; }
+h5 { color: gray !important; }
 </style>
-<script
-	src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'
-	integrity='sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=='
-	crossorigin='anonymous'></script>
+<!-- jQuery -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js' integrity='sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==' crossorigin='anonymous'></script>
+<!-- enrollProj.css -->
 <link href="../resources/css/enrollProj.css" rel="stylesheet" />
-<link
-	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
-	rel="stylesheet" />
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-	crossorigin="anonymous">
+<!-- select2(검색되는 select) -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<!-- 부트스트랩 css 5.3.3 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <meta charset="UTF-8">
 <title>프로젝트 등록 페이지</title>
 </head>
@@ -48,46 +32,43 @@ h5 {
 	</div>
 
 	<hr>
-
+	<div>
 	<form action="/enroll/enrollProj" method="post" id="fm1" name="fm1">
-		<input type="hidden" value="user_10" name="user_id"> <input
-			type="hidden" value=119 name="proj_no">
-
-		<!-- 사용자 아이디 정보 저장 -> ct_no 저장에 필요 -> 세션 담아와서 value 값에 담기 -->
-
+		<input type="hidden" value="user_10" name="user_id">
+		<input type="hidden" value=119 name="proj_no">
+		<!-- 사용자 아이디 정보 세션에 담아서 hidden 으로 전달 -> project 테이블 컬럼 ct_no 저장에 필요하기 때문 -->
+		<!-- 기능 구현 중 받아올 수 있는 세션이 없어서 임의로 user_10을 담아서 테스트 중 추후 수정 필요 -->
+		
+		
 		<h2>어떤 프로젝트 업무를 맡기고 싶으신가요?</h2>
 		<h5>나중에 변경 가능하니 걱정하지 마세요</h5>
-		<input type="radio" value="개발" class="btn-check" name="work_field"
-			id="radioWf1"> <label class="btn btn-outline-dark"
-			for="radioWf1">⚙️ 개발</label> <input type="radio" value="기획"
-			class="btn-check" name="work_field" id="radioWf2"> <label
-			class="btn btn-outline-dark" for="radioWf2">🛠️ 기획</label> <input
-			type="radio" value="디자인" class="btn-check" name="work_field"
-			id="radioWf3"> <label class="btn btn-outline-dark"
-			for="radioWf3">🎨 디자인</label> <input type="radio" value="퍼블리싱"
-			class="btn-check" name="work_field" id="radioWf4"> <label
-			class="btn btn-outline-dark" for="radioWf4">🖋️ 퍼블리싱</label>
+		<input type="radio" value="개발" name="work_field" class="btn-check" id="radioWf1">
+		<label for="radioWf1" class="btn btn-outline-dark">⚙️ 개발</label>
+		<input type="radio" value="기획" name="work_field" class="btn-check" id="radioWf2">
+		<label for="radioWf2" class="btn btn-outline-dark">🛠️ 기획</label>
+		<input type="radio" value="디자인" name="work_field" class="btn-check" id="radioWf3">
+		<label for="radioWf3" class="btn btn-outline-dark">🎨 디자인</label>
+		<input type="radio" value="퍼블리싱" name="work_field" class="btn-check" id="radioWf4">
+		<label for="radioWf4" class="btn btn-outline-dark">🖋️ 퍼블리싱</label>
 
 		<hr>
 		<h2>프로젝트 진행 분류</h2>
-		<input type="text" name="proj_title" placeholder="프로젝트 제목을 입력해주세요"
-			style="width: 500px">
+		<input type="text" name="proj_title" placeholder="프로젝트 제목을 입력해주세요" style="width: 500px">
 
 		<hr>
 		<h2>프로젝트를 간단하게 알려주세요</h2>
-		<input type="radio" name="proj_progress" value=0 id="radioPj1">
-		<label for="radioPj1">신규 프로젝트를 진행하려 합니다</label><br> <input
-			type="radio" name="proj_progress" value=1 id="radioPj2"> <label
-			for="radioPj2">운영 중인 서비스의 리뉴얼 또는 유지보수를 하려 합니다</label>
+		<input type="radio" value=0 name="proj_progress" id="radioPj1">
+		<label for="radioPj1">신규 프로젝트를 진행하려 합니다</label><br>
+		<input type="radio" value=1 name="proj_progress" id="radioPj2">
+		<label for="radioPj2">운영 중인 서비스의 리뉴얼 또는 유지보수를 하려 합니다</label>
 
 		<hr>
 		<h2>예상 시작일</h2>
-		<h5>
-			프리랜서가 프로젝트에 착수하는 날짜입니다.<br> 해당 날짜에 프로젝트 시작이 가능한 프리랜서들이 지원하게 됩니다.
-		</h5>
+		<h5>프리랜서가 프로젝트에 착수하는 날짜입니다.<br>
+		해당 날짜에 프로젝트 시작이 가능한 프리랜서들이 지원하게 됩니다.</h5>
 		<input type="date" name="start_date" style="width: 200px"> <br>
-		<input type="checkbox" name="date_nego" value=1 id="ckDate"> <label
-			for="ckDate">프로젝트 착수 일자의 협의가 가능합니다.</label>
+		<input type="checkbox" name="date_nego" value=1 id="ckDate">
+		<label for="ckDate">프로젝트 착수 일자의 협의가 가능합니다.</label>
 
 		<hr>
 		<h2>예상 진행 기간</h2>
@@ -101,47 +82,45 @@ h5 {
 
 		<hr>
 		<h2>모집 마감일</h2>
-		<h5>
-			프리랜서 모집을 마감할 날짜입니다.<br> 해당 날짜에 프리랜서 모집이 자동으로 종료됩니다.
-		</h5>
+		<h5>프리랜서 모집을 마감할 날짜입니다.<br> 해당 날짜에 프리랜서 모집이 자동으로 종료됩니다.</h5>
 		<input type="date" name="deadline" style="width: 200px"> <br>
 
 		<hr>
 		<h2>작업 단가</h2>
 		<h5>프로젝트에 지출 가능한 예산을 입력해 주세요.</h5>
-		<input type="text" name="proj_cost"> 원 <br> <input
-			type="checkbox" name="cost_nego" value=1 id="ckNego"> <label
-			for="ckNego">입력한 예산에서 조율이 가능합니다.</label>
+		<input type="text" name="proj_cost"> 원 <br>
+		<input type="checkbox" value=1 name="cost_nego" id="ckNego">
+		<label for="ckNego">입력한 예산에서 조율이 가능합니다.</label>
 
 		<hr>
 		<h2>사전 미팅 방식</h2>
 		<h5>클라이언트님에게 편한 미팅 방식으로 프리랜서와의 미팅 조율을 도와드립니다.</h5>
-		<input type="radio" name="pmeet_meth" value="온라인" id="radioPme1">
-		<label for="radioPme1">온라인 (카카오톡, 화상미팅 등)</label> <br> <input
-			type="radio" name="pmeet_meth" value="오프라인" id="radioPme2"> <label
-			for="radioPme2">오프라인</label>
+		<input type="radio" value="온라인" name="pmeet_meth" id="radioPme1">
+		<label for="radioPme1">온라인 (카카오톡, 화상미팅 등)</label> <br>
+		<input type="radio" value="오프라인" name="pmeet_meth" id="radioPme2">
+		<label for="radioPme2">오프라인</label>
 
 		<hr>
 		<h2>프로젝트 진행 중 미팅</h2>
 		<h5>미팅 방식</h5>
-		<input type="radio" name="meet_meth" value="온라인" id="radioMe1">
-		<label for="radioMe1">온라인 (카카오톡, 화상미팅 등)</label> <br> <input
-			type="radio" name="meet_meth" value="오프라인" id="radioMe2"> <label
-			for="radioMe2">오프라인</label>
+		<input type="radio" value="온라인" name="meet_meth" id="radioMe1">
+		<label for="radioMe1">온라인 (카카오톡, 화상미팅 등)</label> <br>
+		<input type="radio" value="오프라인" name="meet_meth" id="radioMe2">
+		<label for="radioMe2">오프라인</label>
+		
 		<h5>미팅 주기</h5>
-		<input type="radio" name="meet_cycle" value="주 1회" id="radioCy1">
-		<label for="radioCy1">주 1회</label> <br> <input type="radio"
-			name="meet_cycle" value="주 2회" id="radioCy2"> <label
-			for="radioCy2">주 2회</label> <br> <input type="radio"
-			name="meet_cycle" value="필요시 요청" id="radioCy3"> <label
-			for="radioCy3">필요시 요청</label>
+		<input type="radio" value="주 1회" name="meet_cycle" id="radioCy1">
+		<label for="radioCy1">주 1회</label> <br>
+		<input type="radio" value="주 2회" name="meet_cycle" id="radioCy2">
+		<label for="radioCy2">주 2회</label> <br>
+		<input type="radio" value="필요시 요청" name="meet_cycle" id="radioCy3">
+		<label for="radioCy3">필요시 요청</label>
 
 		<hr>
 		<h2>클라이언트 위치</h2>
 		<h5>프리랜서가 미팅 위치 선정시 클라이언트님의 위치를 참고합니다.</h5>
-		<select name='region' onchange="change(this.selectedIndex);"
-			class=input>
-			<option value='전체'>전체</option>
+		<select name='region' onchange="change(this.selectedIndex);" class=input>
+			<option value=''>전체</option>
 			<option value='서울'>서울특별시</option>
 			<option value='부산'>부산광역시</option>
 			<option value='대구'>대구광역시</option>
@@ -158,7 +137,8 @@ h5 {
 			<option value='경북'>경상북도</option>
 			<option value='경남'>경상남도</option>
 			<option value='제주'>제주도</option>
-		</select> <select name='district' class=select>
+		</select>
+		<select name='district' class=select>
 			<option value=''>전체</option>
 		</select>
 
@@ -175,21 +155,18 @@ h5 {
 		<div id="inputPt"></div>
 		<!-- [+보유기술 추가] 클릭 시 [select 버튼] 출력되는 공간 -->
 		
-		<button type="button" class="addSkill">+ 보유기술 추가</button>
+		<div role="button" class="addSkill">+ 보유기술 추가</div>
 
 		<hr>
 		<h2>구인 등급</h2>
 		<h5>프리랜서의 레벨을 선택해 주세요.</h5>
-		<div class="btn-group" role="group"
-			aria-label="Basic checkbox toggle button group">
-			<input type="radio" value="주니어" class="btn-check" name="job_level"
-				id="radioLev1"> <label class="btn btn-outline-dark"
-				for="radioLev1">주니어</label> <input type="radio" value="미들"
-				class="btn-check" name="job_level" id="radioLev2"> <label
-				class="btn btn-outline-dark" for="radioLev2">미들</label> <input
-				type="radio" value="시니어" class="btn-check" name="job_level"
-				id="radioLev3"> <label class="btn btn-outline-dark"
-				for="radioLev3">시니어</label>
+		<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+			<input type="radio" value="주니어" name="job_level" class="btn-check" id="radioLev1">
+			<label for="radioLev1" class="btn btn-outline-dark">주니어</label>
+			<input type="radio" value="미들" name="job_level" class="btn-check" id="radioLev2">
+			<label for="radioLev2" class="btn btn-outline-dark">미들</label>
+			<input type="radio" value="시니어" name="job_level" class="btn-check" id="radioLev3">
+			<label for="radioLev3" class="btn btn-outline-dark">시니어</label>
 		</div>
 
 		<hr>
@@ -199,13 +176,11 @@ h5 {
 
 		<hr>
 		<h2>경력 증빙 자료</h2>
-		<div class="btn-group" role="group"
-			aria-label="Basic checkbox toggle button group">
-			<input type="radio" value=1 class="btn-check" name="career_proof"
-				id="radioCp1"> <label class="btn btn-outline-dark"
-				for="radioCp1">필수</label> <input type="radio" value=0
-				class="btn-check" name="career_proof" id="radioCp2"> <label
-				class="btn btn-outline-dark" for="radioCp2">무관</label>
+		<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+			<input type="radio" value=1 name="career_proof" class="btn-check" id="radioCp1">
+			<label for="radioCp1" class="btn btn-outline-dark">필수</label>
+			<input type="radio" value=0 name="career_proof" class="btn-check" id="radioCp2">
+			<label for="radioCp2" class="btn btn-outline-dark">무관</label>
 		</div>
 
 		<hr>
@@ -214,22 +189,17 @@ h5 {
 		<textarea rows="10" cols="60" name="dlvy_msg"></textarea>
 
 		<hr>
-<!-- 		<button type="button" id="saveButt" onclick="saveTemp()">임시저장</button> -->
-		<input type="button" class="saveButt" value="임시저장"> <input
-			type="submit" value="등록">
+		<input type="button" class="saveButt" value="임시저장">
+		<input type="submit" value="등록">
 
 	</form>
 	<!-- 폼 태그 끝 -->
-
+	</div>
+	
 <!-- select2 (검색되는 select) 자바스크립트 -->
-<script
-	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<!-- 부트스트랩 자바스크립트 -->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-	crossorigin="anonymous"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<!-- 부트스트랩 5.3.3 자바스크립트 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script type="text/javascript">
 		/* 시군구 - select */
 		var cnt = new Array();
@@ -292,7 +262,26 @@ h5 {
 				
 				/* [+보유기술 추가] 클릭 시 [select 버튼]+[추가하기] 출력 */
 				$('#inputPt').html(
-				 '<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group"><select name="skill_nm" class="selectSk" ><option disabled hidden selected></option><option value="자바">자바</option><option value="파이썬">파이썬</option><option value="CSS">CSS</option><option value="MySQL">MySQL</option></select><select name="skill_lev" class="selectLev"><option disabled hidden selected></option><option value="초급">초급</option><option value="중급">중급</option><option value="고급">고급</option></select><button type="butoon" class="addButt removeAdd">추가하기</button></div>'		
+				 '<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">'+
+				 '<select name="skill_nm" class="selectSk" ><option disabled hidden selected></option>'+
+				 '<option value=".NET">.NET</option><option value="AA">AA</option><option value="Adobe Photoshop">Adobe Photoshop</option><option value="AfterEffect">AfterEffect</option>'+
+				 '<option value="Ajax">Ajax</option><option value="Android">Android</option><option value="Angular.js">Angular.js</option><option value="Apache">Apache</option>'+
+				 '<option value="Bootstrap">Bootstrap</option><option value="C">C</option><option value="C#">C#</option><option value="C++">C++</option>'+
+				 '<option value="CentOS">CentOS</option><option value="Cloud">Cloud</option><option value="CSS">CSS</option><option value="DA">DA</option>'+
+				 '<option value="Flutter">Flutter</option><option value="Git">Git</option><option value="GitHub">GitHub</option><option value="Governance">Governance</option>'+
+				 '<option value="HTML">HTML</option><option value="IOS">IOS</option><option value="ISP">ISP</option><option value="JAVA">JAVA</option>'+
+				 '<option value="Javascript">Javascript</option><option value="JQuery">JQuery</option><option value="JSON">JSON</option><option value="JSP">JSP</option>'+
+				 '<option value="Linux">Linux</option><option value="MacOS">MacOS</option><option value="MariaDB">MariaDB</option><option value="Maven">Maven</option>'+
+				 '<option value="MyBatis">MyBatis</option><option value="MySQL">MySQL</option><option value="Node.js">Node.js</option><option value="Oracle">Oracle</option>'+
+				 '<option value="PHP">PHP</option><option value="PL">PL</option><option value="PM">PM</option>'+
+				 '<option value="PowerPoint">PowerPoint</option><option value="Python">Python</option><option value="React.js">React.js</option>'+
+				 '<option value="Spring">Spring</option><option value="Spring Boot">Spring Boot</option><option value="Tomcat">Tomcat</option>'+
+				 '<option value="Unity">Unity</option><option value="Unix">Unix</option><option value="VisualStudio">VisualStudio</option>'+
+				 '<option value="Vue.js">Vue.js</option><option value="Windows">Windows</option><option value="모바일 웹/앱">모바일 웹/앱</option><option value="앱디자인">앱디자인</option>'+
+				 '<option value="웹디자인">웹디자인</option><option value="전자정부프레임워크">전자정부프레임워크</option><option value="한글">한글</option></select>'+
+				 '<select name="skill_lev" class="selectLev"><option disabled hidden selected></option>'+
+				 '<option value="초급">초급</option><option value="중급">중급</option><option value="고급">고급</option></select>'+
+				 '<button type="butoon" class="addButt removeAdd">추가하기</button></div>'		
 				);
 
 				/* 주요기술 스택 - select2(검색되는 select) 적용 */
@@ -312,10 +301,6 @@ h5 {
 					$('.addButt').click(function(){
 						let skill = $('.selectSk').val()
 						let level = $('.selectLev').val();
-// 						arr = {
-// 							skill : $('.selectSk').val(),
-// 							level : $('.selectLev').val()}
-// 						alert(JSON.stringify(arr));
 
 						/* 하나라도 미입력 시 추가 불가능 */
 						if(skill==null || level==null){
@@ -324,8 +309,13 @@ h5 {
 						}
 						
 						/* [추가하기] 클릭 시 추가되는 기술 리스트 출력 */
-						$('.listPt').prepend('<p><div class="border border-1 rounded-3 m-2 p-4" role="group" style="width: 230px; display: inline-block;"><input type="hidden" value='+$('.listPt').children("p").length+' name="count"><input type="hidden" value='+skill+' name="skill_nm"><input type="hidden" value='+level+' name="skill_lev"><span class="badge bg-warning m-3">'
-						+skill+'</span><span class="badge bg-warning m-3">'+level+'</span><button class="removeSk btn-close" aria-label="Close"></button></div></p>');
+						$('.listPt').prepend(
+						 '<p><div class="border border-1 rounded-3" role="group" style="width: 400px; display: inline-block; position: relative;">'+
+						 '<input type="hidden" value='+$('.listPt').children("p").length+' name="count">'+
+						 '<input type="hidden" value='+skill+' name="skill_nm"><input type="hidden" value='+level+' name="skill_lev">'+
+						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+skill+'</span></h4><h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+level+'</span></h4>'+
+						 '<button class="removeSk btn-close" aria-label="Close" style="width: 1px; position: absolute; top: 21px; left: 360px;"></button></div></p>'
+						);
 		
 					});
 					
@@ -351,6 +341,7 @@ h5 {
 
 		$(function() {
 			$(".saveButt").click(function() {
+				/* 최초 임시 저장 - insert문 실행 */
 				if(data) {
 					$.ajax({
 						url : "/enroll/saveProj",
@@ -366,6 +357,7 @@ h5 {
 						}
 					});
 				} else {
+					/* 최초 임시 저장 이후 임시 저장 - update문 실행*/
 					$.ajax({
 						url : "/enroll/multiSaveProj",
 						type : "POST",
@@ -381,6 +373,6 @@ h5 {
 		
 			});
 		});	
-	</script>
+</script>
 </body>
 </html>
