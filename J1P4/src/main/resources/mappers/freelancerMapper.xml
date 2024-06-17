@@ -25,12 +25,12 @@
   	 
   	 <insert id="insertPartners">
   	 	insert into partners (free_no,partners_nm,details) 
-  	 	values ((select max(free_no) from freelancer),#{partners_nm},#{details})
+  	 	values ((select max(free_no) from freelancer),#{partners_nm},#{Pdetails})
   	 </insert>
   	 
   	 <insert id="insertComp">
   	 	insert into company_history (free_no,yearmonth,details)
-  	 	values ((select max(free_no) from freelancer),#{yearmonth},#{details})  	 
+  	 	values ((select max(free_no) from freelancer),#{yearmonth},#{Hdetails})  	 
   	 </insert>
   	 
   	 <insert id="insertSkill">

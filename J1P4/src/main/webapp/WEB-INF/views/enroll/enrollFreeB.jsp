@@ -100,7 +100,7 @@ h5 {
 	<div id="inputPt"></div>
 	<!-- [+보유기술 추가] 클릭 시 [select 버튼] 출력되는 공간 -->
 	
-	<button type="button" class="addSkill">+ 보유기술 추가</button>
+	<div role="button" class="addSkill">+ 보유기술 추가</div>
 	
 	<hr>
 	<h2>경력</h2>		
@@ -115,31 +115,33 @@ h5 {
 	</div>
 	<br>
 	<b>경력</b><br>
-	<div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
-			<input type="text" name="company_nm" placeholder="회사명*" style="width: 512px">
-			<textarea rows="5" cols="60" placeholder="&#13;&#10&#13;&#10; 담당업무*" name="responsibility"></textarea>
-			<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-			<input type="text" name="join_date" placeholder="입사연월" class="datePicker" >
-			<input type="text" name="quit_date" placeholder="퇴사연월" class="datePicker" >
-			</div>
-	</div>
+	<div class="listCa"></div>
+	<!-- [추가하기] 클릭 시 추가되는 경력 리스트 출력되는 공간-->
+	<div class="inputCa"></div>
+	<!-- [+경력 추가] 클릭 시 [input text] 출력되는 공간 -->
 	<br>		
-	<input type="button" value="추가하기" id="addButt2">
+	<div role="button" class="addCareer">+ 경력 추가</div>
 	<br>
 	<hr>
 	<h2>회사연혁</h2>		
 	<b>회사연혁</b><br>
-	<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-		<input type="text" name="yearmonth" placeholder="YYYY.MM." style="width: 300px;">
-		<input type="text" name="details" placeholder="상세내용*">
-	</div>	
+	<div class="listHi"></div>
+	<!-- [추가하기] 클릭 시 추가되는 기술 리스트 출력되는 공간-->
+	<div class="inputHi"></div>
+	<!-- [+보유기술 추가] 클릭 시 [select 버튼] 출력되는 공간 -->
+	
+	<div role="button" class="addHistory">+ 회사연혁 추가</div>
+
 	<hr>
 	<h2>협력업체 및 기관</h2>		
 	<b>협력업체 및 기관<</b><br>
-	<div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
-		<input type="text" name="partners_nm" placeholder="파트너사 및 협력기관 명*" style="width:500px;">
-		<input type="text" name="details" placeholder="협력 관계 설명*" style="width:500px;">
-	</div>	
+	<div class="listPa"></div>
+	<!-- [추가하기] 클릭 시 추가되는 기술 리스트 출력되는 공간-->
+	<div class="inputPa"></div>
+	<!-- [+보유기술 추가] 클릭 시 [select 버튼] 출력되는 공간 -->
+	
+	<div role="button" class="addPartner">+ 협력업체 및 기관 추가</div>
+
 	
 	<br>
 	<input type="submit" value="등록하기">
@@ -207,7 +209,26 @@ h5 {
 				
 				/* [+보유기술 추가] 클릭 시 [select 버튼]+[추가하기] 출력 */
 				$('#inputPt').html(
-				 '<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group"><select name="skill_nm" class="selectSk" ><option disabled hidden selected></option><option value="자바">자바</option><option value="파이썬">파이썬</option><option value="CSS">CSS</option><option value="MySQL">MySQL</option></select><select name="skill_lev" class="selectLev"><option disabled hidden selected></option><option value="초급">초급</option><option value="중급">중급</option><option value="고급">고급</option></select><button type="butoon" class="addButt removeAdd">추가하기</button></div>'		
+				'<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">'+
+				 '<select name="skill_nm" class="selectSk"><option disabled hidden selected></option>'+
+				 '<option value=".NET">.NET</option><option value="AA">AA</option><option value="Adobe Photoshop">Adobe Photoshop</option><option value="AfterEffect">AfterEffect</option>'+
+				 '<option value="Ajax">Ajax</option><option value="Android">Android</option><option value="Angular.js">Angular.js</option><option value="Apache">Apache</option>'+
+				 '<option value="Bootstrap">Bootstrap</option><option value="C">C</option><option value="C#">C#</option><option value="C++">C++</option>'+
+				 '<option value="CentOS">CentOS</option><option value="Cloud">Cloud</option><option value="CSS">CSS</option><option value="DA">DA</option>'+
+				 '<option value="Flutter">Flutter</option><option value="Git">Git</option><option value="GitHub">GitHub</option><option value="Governance">Governance</option>'+
+				 '<option value="HTML">HTML</option><option value="IOS">IOS</option><option value="ISP">ISP</option><option value="JAVA">JAVA</option>'+
+				 '<option value="Javascript">Javascript</option><option value="JQuery">JQuery</option><option value="JSON">JSON</option><option value="JSP">JSP</option>'+
+				 '<option value="Linux">Linux</option><option value="MacOS">MacOS</option><option value="MariaDB">MariaDB</option><option value="Maven">Maven</option>'+
+				 '<option value="MyBatis">MyBatis</option><option value="MySQL">MySQL</option><option value="Node.js">Node.js</option><option value="Oracle">Oracle</option>'+
+				 '<option value="PHP">PHP</option><option value="PL">PL</option><option value="PM">PM</option>'+
+				 '<option value="PowerPoint">PowerPoint</option><option value="Python">Python</option><option value="React.js">React.js</option>'+
+				 '<option value="Spring">Spring</option><option value="Spring Boot">Spring Boot</option><option value="Tomcat">Tomcat</option>'+
+				 '<option value="Unity">Unity</option><option value="Unix">Unix</option><option value="VisualStudio">VisualStudio</option>'+
+				 '<option value="Vue.js">Vue.js</option><option value="Windows">Windows</option><option value="모바일 웹/앱">모바일 웹/앱</option><option value="앱디자인">앱디자인</option>'+
+				 '<option value="웹디자인">웹디자인</option><option value="전자정부프레임워크">전자정부프레임워크</option><option value="한글">한글</option></select>'+
+				 '<select name="skill_lev" class="selectLev"><option disabled hidden selected></option>'+
+				 '<option value="초급">초급</option><option value="중급">중급</option><option value="고급">고급</option></select>'+
+				 '<button type="button" class="addButt removeAdd">추가하기</button></div>'
 				);
 
 				/* 주요기술 스택 - select2(검색되는 select) 적용 */
@@ -227,10 +248,6 @@ h5 {
 					$('.addButt').click(function(){
 						let skill = $('.selectSk').val()
 						let level = $('.selectLev').val();
-// 						arr = {
-// 							skill : $('.selectSk').val(),
-// 							level : $('.selectLev').val()}
-// 						alert(JSON.stringify(arr));
 
 						/* 하나라도 미입력 시 추가 불가능 */
 						if(skill==null || level==null){
@@ -239,8 +256,12 @@ h5 {
 						}
 						
 						/* [추가하기] 클릭 시 추가되는 기술 리스트 출력 */
-						$('.listPt').prepend('<p><div class="border border-1 rounded-3 m-2 p-4" role="group" style="width: 230px; display: inline-block;"><input type="hidden" value='+$('.listPt').children("p").length+' name="count"><input type="hidden" value='+skill+' name="skill_nm"><input type="hidden" value='+level+' name="skill_lev"><span class="badge bg-warning m-3">'
-						+skill+'</span><span class="badge bg-warning m-3">'+level+'</span><button class="removeSk btn-close" aria-label="Close"></button></div></p>');
+						$('.listPt').prepend(
+						 '<p><div class="border border-1 rounded-3" role="group" style="width: 400px; display: inline-block; position: relative;">'+
+						 '<input type="hidden" value="'+skill+'" name="skill_nm"><input type="hidden" value='+level+' name="skill_lev">'+
+						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+skill+'</span></h4><h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+level+'</span></h4>'+
+						 '<button class="removeSk btn-close" aria-label="Close" style="width: 1px; position: absolute; top: 21px; left: 360px;"></button></div></p>'		
+						);
 		
 					});
 					
@@ -249,15 +270,189 @@ h5 {
 				/* 리스트에 추가된 기술 삭제 */
 				$(document).on('click','.removeSk',function(){
 			        $(this).parent().remove()
-			    })
+			    });
 			    
 			    /* [추가하기] 클릭 동시에 버튼 삭제 */
 				$(document).on('click','.removeAdd',function(){
 			        $(this).parent().remove()
-			    })
+			    });
 				
 			});
 					
+		});
+		
+		/* [+경력 추가] 클릭 */
+		$(function() {
+			$('.addCareer').click(function(){
+				/* [+경력 추가] 클릭 시 [input text]+[추가하기] 출력 */
+				$('.inputCa').html(
+				'<div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">'+
+				'<input type="text" name="company_nm" class="textCn" placeholder="회사명*" style="width: 512px">'+
+				'<textarea rows="5" cols="60" class="textRs" placeholder="&#13;&#10&#13;&#10; 담당업무*" name="responsibility"></textarea>'+
+				'<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">'+
+				'<input type="text" name="join_date" class="textJd" placeholder="입사연월">'+
+				'<input type="text" name="quit_date" class="textQd" placeholder="퇴사연월"></div>'+
+				'<br><button type="button" class="addButt2 removeAdd2">추가하기</button></div>'
+				);
+				
+				/* [추가하기] 클릭 */
+				$(function() {
+					$('.addButt2').click(function(){
+						let comNm = $('.textCn').val();
+						let comRs = $('.textRs').val();
+						let comJd = $('.textJd').val();
+						let comQd = $('.textQd').val();
+						
+						/* 하나라도 미입력 시 추가 불가능 */
+						if(comNm==""){
+							alert("안돼 돌아가");
+							return;
+						}
+						if(comRs==""){
+							alert("안돼 돌아가");
+							return;
+						}
+						if(comJd==""){
+							alert("안돼 돌아가");
+							return;
+						}
+						
+// 						alert(comNm+comRs+comJd+comQd);
+						
+						/* [추가하기] 클릭 시 추가되는 경력 리스트 출력 */
+						$('.listCa').prepend(
+						 '<p><div class="border border-1 rounded-3" role="group" style="width: 400px; display: inline-block; position: relative;">'+
+						 '<input type="hidden" value="'+comNm+'" name="company_nm"><input type="hidden" value="'+comRs+'" name="responsibility">'+
+						 '<input type="hidden" value="'+comJd+'" name="join_date"><input type="hidden" value="'+comQd+'" name="quit_date">'+
+						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+comNm+'</span></h4><h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+comRs+'</span></h4>'+
+						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+comJd+'</span></h4><h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+comQd+'</span></h4>'+
+						 '<button class="removeCa btn-close" aria-label="Close" style="width: 1px; position: absolute; top: 21px; left: 360px;"></button></div></p>'		
+						);
+		
+					});
+					
+				});
+				
+				/* 리스트에 추가된 경력 삭제 */
+				$(document).on('click','.removeCa',function(){
+			        $(this).parent().remove()
+			    });
+				
+			    /* [추가하기] 클릭 동시에 버튼 삭제 */
+				$(document).on('click','.removeAdd2',function(){
+			        $(this).parent().remove()
+			    });
+				
+			});
+			
+		});
+		
+		/* [+회사연혁 추가] 클릭 */
+		$(function() {
+			$('.addHistory').click(function(){
+				/* [+회사연혁 추가] 클릭 시 [input text]+[추가하기] 출력 */
+				$('.inputHi').html(
+				'<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">'+
+				'<input type="text" name="yearmonth" class="ym" placeholder="YYYY.MM." style="width: 300px;">'+
+				'<input type="text" name="details" class="detail" placeholder="상세내용*">'+
+				'<br><button type="button" class="addButt3 removeAdd3">추가하기</button></div>'
+				);
+				
+				/* [추가하기] 클릭 */
+				$(function() {
+					$('.addButt3').click(function(){
+						let ym = $('.ym').val()
+						let detail = $('.detail').val();
+						
+						/* 하나라도 미입력 시 추가 불가능 */
+						if(ym==""){
+							alert("안돼 돌아가");
+							return;
+						}
+						if(detail==""){
+							alert("안돼 돌아가");
+							return;
+						}
+						
+						/* [추가하기] 클릭 시 추가되는 경력 리스트 출력 */
+						$('.listHi').prepend(
+						 '<p><div class="border border-1 rounded-3" role="group" style="width: 400px; display: inline-block; position: relative;">'+
+						 '<input type="hidden" value="'+ym+'" name="yearmonth"><input type="hidden" value="'+detail+'" name="Hdetails">'+
+						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+ym+'</span></h4>'+
+						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+detail+'</span></h4>'+
+						 '<button class="removeHi btn-close" aria-label="Close" style="width: 1px; position: absolute; top: 21px; left: 360px;"></button></div></p>'		
+						);
+		
+					});
+					
+				});
+				
+				/* 리스트에 추가된 경력 삭제 */
+				$(document).on('click','.removeHi',function(){
+			        $(this).parent().remove()
+			    });
+				
+			    /* [추가하기] 클릭 동시에 버튼 삭제 */
+				$(document).on('click','.removeAdd3',function(){
+			        $(this).parent().remove()
+			    });
+				
+			});
+			
+		});
+		
+		/* [+협력업체 추가] 클릭 */
+		$(function() {
+			$('.addPartner').click(function(){
+				/* [+협력업체 추가] 클릭 시 [input text]+[추가하기] 출력 */
+				$('.inputPa').html(
+				'<div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">'+
+				'<input type="text" name="partners_nm" class="partNm" placeholder="파트너사 및 협력기관 명*" style="width:500px;">'+
+				'<input type="text" name="details" class="partDe" placeholder="협력 관계 설명*" style="width:500px;">'+
+				'<br><button type="button" class="addButt4 removeAdd4">추가하기</button></div>'
+				);
+				
+				/* [추가하기] 클릭 */
+				$(function() {
+					$('.addButt4').click(function(){
+						let partNm = $('.partNm').val()
+						let partDe = $('.partDe').val();
+						
+						/* 하나라도 미입력 시 추가 불가능 */
+						if(partNm==""){
+							alert("안돼 돌아가");
+							return;
+						}
+						if(partDe==""){
+							alert("안돼 돌아가");
+							return;
+						}
+						
+						/* [추가하기] 클릭 시 추가되는 경력 리스트 출력 */
+						$('.listPa').prepend(
+						 '<p><div class="border border-1 rounded-3" role="group" style="width: 400px; display: inline-block; position: relative;">'+
+						 '<input type="hidden" value="'+partNm+'" name="partners_nm"><input type="hidden" value="'+partDe+'" name="Pdetails">'+
+						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+partNm+'</span></h4>'+
+						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+partDe+'</span></h4>'+
+						 '<button class="removePa btn-close" aria-label="Close" style="width: 1px; position: absolute; top: 21px; left: 360px;"></button></div></p>'		
+						);
+		
+					});
+					
+				});
+				
+				/* 리스트에 추가된 경력 삭제 */
+				$(document).on('click','.removePa',function(){
+			        $(this).parent().remove();
+			    });
+				
+			    /* [추가하기] 클릭 동시에 버튼 삭제 */
+				$(document).on('click','.removeAdd4',function(){
+			        $(this).parent().remove();
+			    });
+				
+			});
+			
 		});
 		
 		

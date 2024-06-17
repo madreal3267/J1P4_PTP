@@ -7,6 +7,6 @@ public class PartnersVO {
 
 	private int free_no;
 	private String partners_nm;
-	private String details;
+	private String Pdetails;
 	
 }
