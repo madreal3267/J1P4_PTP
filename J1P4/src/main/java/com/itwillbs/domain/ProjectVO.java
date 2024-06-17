@@ -1,5 +1,6 @@
 package com.itwillbs.domain;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import lombok.Data;
@@ -14,11 +15,11 @@ public class ProjectVO {
 	private String work_field;
 	private String proj_title;
 	private int proj_progress;
-	private String start_date;
+	private Date start_date;
 	private int date_nego;
 	private int work_period;
 	private int no_recruited;
-	private String deadline;
+	private Date deadline;
 	private int proj_cost;
 	private int cost_nego;
 	private String pmeet_meth;

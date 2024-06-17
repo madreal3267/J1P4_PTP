@@ -26,7 +26,7 @@ public class EnrollProjServiceImpl implements EnrollProjService {
 		
 		pdao.insertProj(vo);
 		
-		logger.debug(" (●'◡'●) Service: 프로젝트 등록 성공! (●'◡'●) ");
+		logger.debug(" (●'◡'●) Service: 프로젝트 등록 성공! (●'◡'●) "+vo);
 	}
 
 	// 프로젝트 임시저장
@@ -39,8 +39,8 @@ public class EnrollProjServiceImpl implements EnrollProjService {
 		return pdao.saveProj(vo);
 		
 
-	// 스킬 등록
 	}
+	// 스킬 등록
 	@Override
 	public void insertSkill(SkillVO vo) {
 		logger.debug(" (●'◡'●) Service: insertSkill(vo) 실행 ");

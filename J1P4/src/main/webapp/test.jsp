@@ -3,11 +3,11 @@
 <%@ include file="header.jsp" %>
 
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px;">
-  <div class="card overflow-hidden"  style="box-shadow: ;">
-<div class="row no-gutters row-bordered row-border-light" >
+ <div class="card overflow-hidden">
+  <div class="row no-gutters row-bordered row-border-light">
 	<!-- 사이드 메뉴 시작 -->
-	<div class="col-md-3 pt-0" style="position: fixed; width: 300px; z-index: 9999; ">
-		<div class="list-group list-group-flush account-settings-links mx-2">
+	<div class="col-md-3 pt-0">
+		<div class="list-group list-group-flush account-settings-links mx-2" style="width:300px;">
 			<h4 class="font-weight-bold py-1 m-3" style=" position: relative; bottom: 1px;">프로젝트 등록하기</h4>
 			<a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">기본 정보</a>
 			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-detail">상세 정보</a>
@@ -32,7 +32,7 @@
 	
 <hr class="border-light m-0" >
 	<!-- card body 시작 -->
-	<div class="card-body border-start" style="position: relative; left: 280px; ">
+	<div class="card-body border-start" style="position: relative; left: 280px; bottom:230px; ">
 			<div style="position: relative; right: 16px; bottom: 5px;" class="px-4 py-2 border-bottom"><h4 class="font-weight-bold">기본 정보</h4></div>
 		<!-- 폼 그룹 시작 -->
 <!-- 			<div class="alert alert-warning mt-3"> -->
@@ -118,7 +118,7 @@
 <!-- 기본 정보 탭 끝 -->
 
 <!-- 상세 정보 탭 시작 -->
-<div class="tab-pane fade" id="account-detail"">
+<div class="tab-pane fade" id="account-detail">
 <div class="card-body pb-2" style="position: relative; left: 300px;">
 <div class="form-group">
 <label class="form-label">Current password</label>
