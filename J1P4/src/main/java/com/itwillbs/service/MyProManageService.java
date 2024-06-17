@@ -108,6 +108,9 @@ public interface MyProManageService {
 	public List<EvaluateFreelancerDTO> completedFreelancerList();
 	
 	// 프리랜서 평가 수정하기
-	public void updateEvaluateFree(EvaluateFreelancerDTO edto);		
+	public void updateEvaluateFree(EvaluateFreelancerDTO edto);
+
+
+
 	
 }

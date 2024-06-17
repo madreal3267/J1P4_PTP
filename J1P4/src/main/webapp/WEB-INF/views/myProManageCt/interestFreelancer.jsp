@@ -29,7 +29,7 @@
 	 	<c:forEach var="free" items="${interestFreelancerList}">
 	 		<hr>
 			<div style=" background-color: white; padding:10px; width: 400px; height: auto; cursor: pointer;" onclick="#">
-				[프로필사진]<br><!-- DB.user 정보 -->
+				[프로필사진]
 				<b>${free.name }</b>
 				분야 <b>${free.work_field }</b> | [레벨] <b>${free.job_level }</b><br>
 				경력 <b>${free.yeoncha }</b> 년차 |

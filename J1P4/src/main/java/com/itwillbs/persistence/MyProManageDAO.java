@@ -104,5 +104,6 @@ public interface MyProManageDAO {
 	// 프리랜서 평가 수정하기
 	public void updateEvaluateFree(EvaluateFreelancerDTO edto);	
 	
+
 	
 }

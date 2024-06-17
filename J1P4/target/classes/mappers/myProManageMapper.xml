@@ -13,7 +13,7 @@
     <!-- 관심 프로젝트 정보 조회 -->
     <select id="interestProjectList" resultType="com.itwillbs.domain.ProjectDTO">
      	select p.proj_title, p.proj_cost, p.work_period, p.work_field, 
-     		   r.region, r.district, s.skill_nm, p.reg_date, f.free_no, p.proj_no
+     		   r.region, r.district, s.skill_nm, p.reg_date, f.free_no, p.proj_no, proj_status
      	from project p 
     	join bookmark b on p.proj_no = b.proj_no
     	join freelancer f on b.free_no = f.free_no
@@ -181,7 +181,7 @@
 	
 	<!-- 검수중 프로젝트-->
 	<select id="underReviewProjectList" resultType="com.itwillbs.domain.ProjectVO">
-		select p.proj_title, p.reg_date, p.deadline, p.proj_status, p.proj_no,
+		select p.proj_title, p.reg_date, p.deadline, p.proj_status, p.proj_no
 		from project p 
 		join client c on c.ct_no = p.ct_no
 		where p.proj_status = '검수 단계' and c.ct_id ='user_10'<!--예시! #{user_id}로 변경 -->
@@ -266,9 +266,24 @@
 	</update>
 
 
-
+	<!-- 북마크 여부 확인 -->
+	<select id="isBookmarked">
+	SELECT COUNT(*) > 0
+	FROM bookmarks 
+	WHERE proj_no = #{proj_no} and free_no=#{free_no}
+	</select>
 	
+	<!-- 북마크 추가 -->
+	<insert id="addBookmark">
+		INSERT INTO bookmark (free_no,proj_no,ct_no) 
+		VALUES (#{free_no},#{proj_no},#{ct_no})
+	</insert>
 	
+	<!-- 북마크 삭제 -->	
+	<delete id="removeBookmark">
+		DELETE FROM bookmark 
+		WHERE proj_no = #{proj_no} AND free_no = #{free_no}
+	</delete>
 	
 	
 	

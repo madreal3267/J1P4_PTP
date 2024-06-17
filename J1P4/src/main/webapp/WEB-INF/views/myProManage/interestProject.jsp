@@ -2,8 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%@ include file="../include/header.jsp" %>
+
 <section class="content"> 
 	<h1>/myProManage/interestProject.jsp</h1> <hr>
 	
@@ -38,11 +40,29 @@
 				<c:forEach var="projDTO" items="${interestProjectList}">
 					<div>                         
 						<hr>
+						<c:choose>
+                			<c:when test="${projDTO.proj_status == '계약'}">
+                   				 <span class="badge btn-warning">모집중</span>
+               				 </c:when>
+                			<c:otherwise>
+                    			<span class="badge btn-primary">모집종료</span>
+               				 </c:otherwise>
+           				 </c:choose>
 						<h2>${projDTO.proj_title }</h2>
 						예상 금액 ${projDTO.proj_cost } 만원  |  예상 기간 ${projDTO.work_period } 개월<br> 
 						${projDTO.work_field }  |  ${projDTO.region } ${projDTO.district }  |
-						<button>${projDTO.skill_nm }</button>
-						<!-- 하트위치 -->
+						
+			<!-- 스킬 버튼 생성 test -->
+					<c:set var="skillList" value="${projDTO.skill_nm }" />
+						<c:forEach items="${fn:split(skillList, ',')}" var="skill">
+						    <button type="button" class="btn btn-warning" ><c:out value="${skill}" /></button>
+						</c:forEach><br>				
+			<!-- 스킬 버튼 생성 test -->
+			
+
+			
+						
+			<!-- 프로젝트 지원하기  -->
 						<form action="/myProManage/interestProject" method="post">
 							<input type="hidden" name="free_no" value="${projDTO.free_no }">
 							<input type="hidden" name="proj_no" value="${projDTO.proj_no }">

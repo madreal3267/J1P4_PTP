@@ -5,7 +5,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>J1P4 프로젝트(AdminLTE 2)</title>
+    <title>J1P4 프로젝트(프리랜서 페이지)</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
     <link href="../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
