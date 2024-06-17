@@ -5,6 +5,42 @@
   
   <mapper namespace="com.itwillbs.mapper.freelancerMapper">
   	 
+  	 <insert id="insertFree">
+  	 	insert into freelancer (free_id,work_field,work_check,work_date,proj_cost,oneline_bio,
+  	 	bio,school_type,school_nm,major,grad_status,entrance,graduation)
+  	 	values (#{free_id},#{work_field},#{work_check},#{work_date},#{proj_cost},#{oneline_bio},
+  	 	#{bio},#{school_type},#{school_nm},#{major},#{grad_status},#{entrance},#{graduation})
+  	 </insert>
   	 
+  	 <insert id="insertCareer">
+  	 	insert into career (free_no,company_nm,join_date,quit_date,responsibility,job_lev)
+  	 	values ((select max(free_no) from freelancer),#{company_nm},
+  	 	#{join_date},#{quit_date},#{responsibility},#{job_lev})
+  	 </insert>
+  	 
+  	 <insert id="insertLicense">
+  	 	insert into license (free_no,license_nm,qualify_date,issuer)
+  	 	values ((select max(free_no) from freelancer),#{license_nm},#{qualify_date},#{issuer})
+  	 </insert>
+  	 
+  	 <insert id="insertPartners">
+  	 	insert into partners (free_no,partners_nm,details) 
+  	 	values ((select max(free_no) from freelancer),#{partners_nm},#{details})
+  	 </insert>
+  	 
+  	 <insert id="insertComp">
+  	 	insert into company_history (free_no,yearmonth,details)
+  	 	values ((select max(free_no) from freelancer),#{yearmonth},#{details})  	 
+  	 </insert>
+  	 
+  	 <insert id="insertSkill">
+		insert into skill (free_no,skill_nm,skill_lev) 
+		values((select max(free_no) from freelancer),#{skill_nm},#{skill_lev})
+	</insert>
+	
+	<insert id="insertReg">
+		insert into region (free_no,region,district)
+		values((select max(free_no) from freelancer),#{region},#{district})
+	</insert>
   
   </mapper>

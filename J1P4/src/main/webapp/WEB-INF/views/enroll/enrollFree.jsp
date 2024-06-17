@@ -5,8 +5,7 @@
 <head>
 <style>
 @import
-	url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap')
-	;
+	url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
 body {
 	font-family: "Nanum Gothic", sans-serif !important;
@@ -28,6 +27,7 @@ h5 {
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <!-- 부트스트랩 CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <meta charset="UTF-8">
 <title>프리랜서 등록 페이지</title>
 </head>
@@ -36,6 +36,7 @@ h5 {
 	<hr>
 	
 	<form action="" method="post" name="fm1" id="fm1">
+	<input type="hidden" value="user_100" name="free_id">
 	<h2>업무조건</h2>
 		<h4>업무 가능 분야</h4>
 			<input type="radio" value="개발" class="btn-check" name="work_field" id="radioWf1">
@@ -50,11 +51,11 @@ h5 {
 		<br>
 		<h4>업무 상태</h4>
 		<b>업무 가능 여부</b>
-		<input type="radio" value="1" name="work_check"> 가능
-		<input type="radio" value="0" name="work_check"> 불가능
+		<input type="radio" value=1 name="work_check"> 가능
+		<input type="radio" value=0 name="work_check"> 불가능
 		<br>
 		<b>업무시작 가능일</b>
-		<input type="datetime" name="work_date">
+		<input type="date" name="work_date">
 		</div>
 		<br>
 		<div>
@@ -62,8 +63,7 @@ h5 {
 		<b>희망 프로젝트 대금</b>
 		<input type="text" name="proj_cost">원 <br>
 		<b>희망 지역</b>
-		<select name='region' onchange="change(this.selectedIndex);"
-			class=input>
+		<select name='region' onchange="change(this.selectedIndex);" class=input>
 			<option value='전체'>전체</option>
 			<option value='서울'>서울특별시</option>
 			<option value='부산'>부산광역시</option>
@@ -81,16 +81,107 @@ h5 {
 			<option value='경북'>경상북도</option>
 			<option value='경남'>경상남도</option>
 			<option value='제주'>제주도</option>
-		</select> <select name='district' class=select>
+		</select>
+		<select name='district' class=select>
 			<option value=''>전체</option>
 		</select>
 		</div>
 	<hr>
-	<h2></h2>		
+	<h2>소개정보</h2>		
+	<b>한줄 소개</b><br>
+		<input type="text" name="oneline_bio" style="width: 510px"><br>
+	<b>자기 소개서</b><br>
+	<textarea rows="10" cols="60" name="bio"></textarea>
+	<hr>
+	<h2>보유기술</h2>		
+	<b>보유 중인 기술</b><br>
+	<div class="listPt"></div>
+	<!-- [추가하기] 클릭 시 추가되는 기술 리스트 출력되는 공간-->
+	<div id="inputPt"></div>
+	<!-- [+보유기술 추가] 클릭 시 [select 버튼] 출력되는 공간 -->
 	
+<!-- 		<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group"> -->
+<!-- 		<select name="skill_nm" class="selectSk" > -->
+<!-- 				<option disabled hidden selected></option> -->
+<!-- 				<option value="자바">자바</option> -->
+<!-- 				<option value="파이썬">파이썬</option> -->
+<!-- 				<option value="CSS">CSS</option> -->
+<!-- 				<option value="MySQL">MySQL</option> -->
+<!-- 			</select> -->
+<!-- 			<select name="skill_lev" class="selectLev"> -->
+<!-- 				<option disabled hidden selected></option> -->
+<!-- 				<option value="초급">초급</option> -->
+<!-- 				<option value="중급">중급</option> -->
+<!-- 				<option value="고급">고급</option> -->
+<!-- 			</select> -->
+<!-- 	<button type="button" class="addButt removeCom2">추가하기</button> -->
+<!-- 	</div> -->
+	<button type="button" class="addSkill">+ 보유기술 추가</button>
 	
+	<hr>
+	<h2>경력</h2>		
+	<b>전문성</b><br>
+	<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+			<input type="radio" value="주니어" class="btn-check" name="job_lev" id="radioJl1">
+			<label class="btn btn-outline-dark" for="radioJl1">주니어</label>
+			<input type="radio" value="미들" class="btn-check" name="job_lev" id="radioJl2">
+			<label class="btn btn-outline-dark" for="radioJl2">미들</label>
+			<input type="radio" value="시니어" class="btn-check" name="job_lev" id="radioJl3">
+			<label class="btn btn-outline-dark" for="radioJl3">시니어</label>
+	</div>
+	<br>
+	<b>경력</b><br>
+	<div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+			<input type="text" name="company_nm" placeholder="회사명*" style="width: 512px">
+			<textarea rows="5" cols="60" placeholder="&#13;&#10&#13;&#10; 담당업무*" name="responsibility"></textarea>
+			<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+			<input type="text" name="join_date" placeholder="입사연월" class="datePicker" >
+			<input type="text" name="quit_date" placeholder="퇴사연월" class="datePicker" >
+			</div>
+	</div>
+	<br>		
+	<input type="button" value="추가하기" id="addButt2" >
+	<hr>
+	<h2>학력</h2>		
+	<b>최종학력</b><br>
+	<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+			<input type="radio" value="고등학교" class="btn-check" name="school_type" id="radioGs1">
+			<label class="btn btn-outline-dark" for="radioGs1">고등학교</label>
+			<input type="radio" value="대학교(2,3년제)" class="btn-check" name="school_type" id="radioGs2">
+			<label class="btn btn-outline-dark" for="radioGs2">대학(2,3년제)</label>
+			<input type="radio" value="대학교(4년제)" class="btn-check" name="school_type" id="radioGs3">
+			<label class="btn btn-outline-dark" for="radioGs3">대학교(4년제)</label>
+			<input type="radio" value="대학원(석사)" class="btn-check" name="school_type" id="radioGs4">
+			<label class="btn btn-outline-dark" for="radioGs4">대학원(석사)</label>
+			<input type="radio" value="대학원(박사)" class="btn-check" name="school_type" id="radioGs5">
+			<label class="btn btn-outline-dark" for="radioGs5">대학원(박사)</label>
+	</div>
+	<br>
+	학교명* <input type="text" name="school_nm"><br>
+	전공명* <input type="text" name="major"><br>
+	재학기간 <input type="text" name="entrance"> ~ <input type="text" name="graduation">
+	<select name="grad_status">
+		<option disabled hidden selected>졸업상태</option>
+		<option value="졸업">졸업</option>
+		<option value="재학">재학</option>
+		<option value="수료">수료</option>
+		<option value="휴학">휴학</option>
+		<option value="중퇴/자퇴">중퇴/자퇴</option>
+	</select>
+	<hr>
+	<h2>자격증</h2>		
+	<b>자격증</b><br>
+	<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+		<input type="text" name="license_nm" placeholder="자격증명*" style="width: 300px;">
+		<input type="text" name="issuer" placeholder="기관명*">
+		<input type="text" name="qualify_date" placeholder="YYYY.MM.">
+	</div>	
+	
+	<br>
+	<input type="submit" value="등록하기">
 	</form>
 	
+<!-- 자바스크립트 시작 -->	
 <script type="text/javascript">
 		/* 시군구 - select */
 		var cnt = new Array();
@@ -145,7 +236,69 @@ h5 {
 				sel.options[i] = new Option(cnt[add][i], cnt[add][i]);
 			}
 		}
+		
+		/* [+보유기술 추가] 클릭 */
+		$(function() {
+			$('.addSkill').click(function(){
+				
+				/* [+보유기술 추가] 클릭 시 [select 버튼]+[추가하기] 출력 */
+				$('#inputPt').html(
+				 '<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group"><select name="skill_nm" class="selectSk" ><option disabled hidden selected></option><option value="자바">자바</option><option value="파이썬">파이썬</option><option value="CSS">CSS</option><option value="MySQL">MySQL</option></select><select name="skill_lev" class="selectLev"><option disabled hidden selected></option><option value="초급">초급</option><option value="중급">중급</option><option value="고급">고급</option></select><button type="butoon" class="addButt removeAdd">추가하기</button></div>'		
+				);
+
+				/* 주요기술 스택 - select2(검색되는 select) 적용 */
+				$(function() {
+					$('.selectSk').select2();
+				});
+		
+				$(function() {
+					$('.selectSk').select2({
+						placeholder : "스킬을 선택해주세요."
+					});
+		
+				});
+				
+				/* [추가하기] 클릭 */
+				$(function() {
+					$('.addButt').click(function(){
+						let skill = $('.selectSk').val()
+						let level = $('.selectLev').val();
+// 						arr = {
+// 							skill : $('.selectSk').val(),
+// 							level : $('.selectLev').val()}
+// 						alert(JSON.stringify(arr));
+
+						/* 하나라도 미입력 시 추가 불가능 */
+						if(skill==null || level==null){
+							alert("안돼 돌아가");
+							return;
+						}
+						
+						/* [추가하기] 클릭 시 추가되는 기술 리스트 출력 */
+						$('.listPt').prepend('<p><div class="border border-1 rounded-3 m-2 p-4" role="group" style="width: 230px; display: inline-block;"><input type="hidden" value='+$('.listPt').children("p").length+' name="count"><input type="hidden" value='+skill+' name="skill_nm"><input type="hidden" value='+level+' name="skill_lev"><span class="badge bg-warning m-3">'
+						+skill+'</span><span class="badge bg-warning m-3">'+level+'</span><button class="removeSk btn-close" aria-label="Close"></button></div></p>');
+		
+					});
+					
+				});
+				
+				/* 리스트에 추가된 기술 삭제 */
+				$(document).on('click','.removeSk',function(){
+			        $(this).parent().remove()
+			    })
+			    
+			    /* [추가하기] 클릭 동시에 버튼 삭제 */
+				$(document).on('click','.removeAdd',function(){
+			        $(this).parent().remove()
+			    })
+				
+			});
+					
+		});
+		
+		
 </script>
+<!-- 자바스크립트 끝 -->
 
 <!-- select2 (검색되는 select) 자바스크립트 -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
