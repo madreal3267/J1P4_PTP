@@ -21,4 +21,10 @@ public interface EnrollProjService {
 	// 프로젝트 임시저장 여러번
 	public void multiSaveProj(ProjectVO vo);
 	
+	// 임시저장 후 스킬 수정
+	public void multiSaveSk(SkillVO vo);
+	
+	// 임시저장 후 지역 수정
+	public void multiSaveReg(RegionVO vo);
+	
 }
