@@ -1,5 +1,6 @@
 package com.itwillbs.web;
 
+import java.sql.Date;
 import java.util.HashMap;
 
 import javax.inject.Inject;
@@ -9,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,8 +43,8 @@ public class EnrollProjController {
 	}
 	
 	@PostMapping(value="/enrollProj")
-	public String enrollPOST(ProjectVO pVO,SkillVO sVO,RegionVO rVO) {
-		logger.debug(" Controller : (＃°Д°) /enrollProj -> enrollPOST() 실행 ");
+	public String enrollPOST(ProjectVO pVO, SkillVO sVO, RegionVO rVO) {
+		logger.debug(" Controller : (＃°Д°) /enrollProj -> enrollPOST() 실행 ");		
 		
 		eService.insertProj(pVO);
 		eService.insertSkill(sVO);
@@ -63,8 +65,19 @@ public class EnrollProjController {
 		eService.insertSkill(sVO);
 		eService.insertReg(rVO);
 		
-		
 		return map;
+	}
+	
+	@PostMapping(value="/enrollSaveProj")
+	public String enrollSavePOST(ProjectVO pVO,SkillVO sVO,RegionVO rVO) {
+		logger.debug(" Controller : (＃°Д°) /enrollSaveProj -> enrollPOST() 실행 ");
+		
+		eService.multiSaveProj(pVO);
+		eService.multiSaveSk(sVO);
+		eService.multiSaveReg(rVO);
+		
+		return "redirect:/enroll/enrollSuccess";
+		
 	}
 	
 	@PostMapping(value="/multiSaveProj")

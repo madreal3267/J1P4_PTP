@@ -27,4 +27,12 @@ public interface EnrollProjService {
 	// 임시저장 후 지역 수정
 	public void multiSaveReg(RegionVO vo);
 	
+	// 임시저장 후 삭제
+	public void deleteSave(ProjectVO vo);
+	
+	// 임시저장 후 스킬 삭제
+	public void deleteSk(SkillVO vo);
+	
+	// 임시저장 후 지역 삭제
+	public void deleteReg (RegionVO vo);
 }

@@ -3,6 +3,8 @@ package com.itwillbs.domain;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 @Data
@@ -15,12 +17,12 @@ public class ProjectVO {
 	private String work_field;
 	private String proj_title;
 	private int proj_progress;
-	private Date start_date;
+	private String start_date;
 	private int date_nego;
-	private int work_period;
-	private int no_recruited;
-	private Date deadline;
-	private int proj_cost;
+	private String work_period;
+	private String no_recruited;
+	private String deadline;
+	private String proj_cost;
 	private int cost_nego;
 	private String pmeet_meth;
 	private String meet_meth;
@@ -28,7 +30,7 @@ public class ProjectVO {
 	private String proj_content;
 	private String job_level;
 	private int career_proof; 
-	private int wanted_career;
+	private String wanted_career;
 	private String dlvy_msg;
 	private String proj_status;
 	private int pay_check;

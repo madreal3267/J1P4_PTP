@@ -30,4 +30,13 @@ public interface EnrollProjDAO {
 	// 최초 임시 저장 후 지역저장
 	public void multiSaveReg(RegionVO vo);
 	
+	// 임시 저장 후 등록을 위한 삭제
+	public void deleteSave(ProjectVO vo);
+	
+	// 임시저장 후 등록을 위한 스킬 삭제
+	public void deleteSk(SkillVO vo);
+	
+	// 임시저장 후 등록을 위한 지역 삭제
+	public void deleteReg(RegionVO vo);
+	
 }

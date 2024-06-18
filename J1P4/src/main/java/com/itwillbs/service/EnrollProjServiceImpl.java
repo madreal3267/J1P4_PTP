@@ -93,6 +93,39 @@ public class EnrollProjServiceImpl implements EnrollProjService {
 		
 		logger.debug(" (●'◡'●) Service: 임시 저장 지역 수정 성공! (●'◡'●) ");
 		
+	}
+
+	// 임시저장 후 삭제
+	@Override
+	public void deleteSave(ProjectVO vo) {
+		logger.debug(" (●'◡'●) Service: deleteSave(vo) 실행 ");
+		
+		pdao.deleteSave(vo);
+		
+		logger.debug(" (●'◡'●) Service: 임시 저장 후 삭제 성공! (●'◡'●) ");
+		
+	}
+	
+	// 임시저장 후 스킬 삭제
+	@Override
+	public void deleteSk(SkillVO vo) {
+		logger.debug(" (●'◡'●) Service: deleteSk(vo) 실행 ");
+		
+		pdao.deleteSk(vo);
+		
+		logger.debug(" (●'◡'●) Service: 임시 저장 후 스킬 삭제 성공! (●'◡'●) ");
+		
+	}
+
+	// 임시저장 후 지역 삭제
+	@Override
+	public void deleteReg(RegionVO vo) {
+		logger.debug(" (●'◡'●) Service: deleteReg(vo) 실행 ");
+		
+		pdao.deleteReg(vo);
+		
+		logger.debug(" (●'◡'●) Service: 임시 저장 후 지역 삭제 성공! (●'◡'●) ");
+		
 	}	
 	
 	

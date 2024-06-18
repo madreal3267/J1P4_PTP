@@ -7,8 +7,8 @@
   <div class="row no-gutters row-bordered row-border-light">
 	<!-- 사이드 메뉴 시작 -->
 	<div class="col-md-3 pt-0">
-		<div class="list-group list-group-flush account-settings-links mx-2" style="width:300px;">
-			<h4 class="font-weight-bold py-1 m-3" style=" position: relative; bottom: 1px;">프로젝트 등록하기</h4>
+		<div class="list-group list-group-flush account-settings-links" style="width:280px;">
+			<h4 class="font-weight-bold py-1 mx-4 my-3" style=" position: relative; bottom: 1px;">프로젝트 등록하기</h4>
 			<a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">기본 정보</a>
 			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-detail">상세 정보</a>
 			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-hope">지원자 희망 조건</a>

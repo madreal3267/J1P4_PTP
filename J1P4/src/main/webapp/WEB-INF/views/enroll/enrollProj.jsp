@@ -33,9 +33,10 @@ h5 { color: gray !important; }
 
 	<hr>
 	<div>
-	<form action="/enroll/enrollProj" method="post" id="fm1" name="fm1">
+	<form action="/enroll/enrollProj" method="post" id="fm1" name="fm1" class="fm">
 		<input type="hidden" value="user_10" name="user_id">
 		<input type="hidden" value=119 name="proj_no">
+		<input type="hidden" value="" name="temporary" class="temporary">
 		<!-- 사용자 아이디 정보 세션에 담아서 hidden 으로 전달 -> project 테이블 컬럼 ct_no 저장에 필요하기 때문 -->
 		<!-- 기능 구현 중 받아올 수 있는 세션이 없어서 임의로 user_10을 담아서 테스트 중 추후 수정 필요 -->
 		
@@ -66,29 +67,29 @@ h5 { color: gray !important; }
 		<h2>예상 시작일</h2>
 		<h5>프리랜서가 프로젝트에 착수하는 날짜입니다.<br>
 		해당 날짜에 프로젝트 시작이 가능한 프리랜서들이 지원하게 됩니다.</h5>
-		<input type="date" name="start_date" style="width: 200px" value="2024-01-01"> <br>
+		<input type="date" name="start_date" style="width: 200px"> <br>
 		<input type="checkbox" name="date_nego" value=1 id="ckDate">
 		<label for="ckDate">프로젝트 착수 일자의 협의가 가능합니다.</label>
 
 		<hr>
 		<h2>예상 진행 기간</h2>
 		<h5>프로젝트 진행 기간을 입력해 주세요.</h5>
-		<input type="text" name="work_period" value=0> 일
+		<input type="text" name="work_period"> 일
 
 		<hr>
 		<h2>모집 인원</h2>
 		<h5>프로젝트에 필요한 인원을 입력해 주세요.</h5>
-		<input type="text" name="no_recruited" value=0> 명
+		<input type="text" name="no_recruited"> 명
 
 		<hr>
 		<h2>모집 마감일</h2>
 		<h5>프리랜서 모집을 마감할 날짜입니다.<br> 해당 날짜에 프리랜서 모집이 자동으로 종료됩니다.</h5>
-		<input type="date" name="deadline" style="width: 200px" value="2024-01-01"> <br>
+		<input type="date" name="deadline" style="width: 200px"> <br>
 
 		<hr>
 		<h2>작업 단가</h2>
 		<h5>프로젝트에 지출 가능한 예산을 입력해 주세요.</h5>
-		<input type="text" name="proj_cost" value=0 > 원 <br>
+		<input type="text" name="proj_cost"> 원 <br>
 		<input type="checkbox" value=1 name="cost_nego" id="ckNego">
 		<label for="ckNego">입력한 예산에서 조율이 가능합니다.</label>
 
@@ -172,7 +173,7 @@ h5 { color: gray !important; }
 		<hr>
 		<h2>희망 경력</h2>
 		<h5>희망하는 프리랜서의 경력을 입력해 주세요.</h5>
-		<input type="text" name="wanted_career" value=0> 년
+		<input type="text" name="wanted_career"> 년
 
 		<hr>
 		<h2>경력 증빙 자료</h2>
@@ -190,7 +191,7 @@ h5 { color: gray !important; }
 
 		<hr>
 		<input type="button" class="saveButt" value="임시저장">
-		<input type="submit" value="등록">
+		<input type="submit" class="submButt" value="등록">
 
 	</form>
 	<!-- 폼 태그 끝 -->
@@ -341,6 +342,9 @@ h5 { color: gray !important; }
 
 		$(function() {
 			$(".saveButt").click(function() {
+				
+				$('.temporary').val("임시저장");
+				
 				/* 최초 임시 저장 - insert문 실행 */
 				if(data) {
 					$.ajax({
@@ -369,6 +373,24 @@ h5 { color: gray !important; }
 							alert("오류발생 - 최초 임시 저장 후");
 						}
 					});
+				}
+		
+			});
+		});	
+		
+		$(function() {
+			$(".submButt").click(function() {
+				/* 프로젝트 등록 */
+				
+				$('.temporary').val("등록성공");
+				
+				if(data) {
+					$(".fm").attr("action","/enroll/enrollProj");
+					$(".fm").submit();
+				} else {
+					/* 임시 저장 이후 등록 - delete후 insert문 실행*/
+					$(".fm").attr("action","/enroll/enrollSaveProj");
+					$(".fm").submit();
 				}
 		
 			});
