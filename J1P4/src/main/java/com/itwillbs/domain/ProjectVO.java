@@ -16,12 +16,12 @@ public class ProjectVO {
 	private String work_field;
 	private String proj_title;
 	private int proj_progress;
-	private Timestamp start_date;
+	private String start_date;
 	private int date_nego;
-	private int work_period;
-	private int no_recruited;
-	private Timestamp deadline;
-	private int proj_cost;
+	private String work_period;
+	private String no_recruited;
+	private String deadline;
+	private String proj_cost;
 	private int cost_nego;
 	
 	private String pmeet_meth;
@@ -31,15 +31,15 @@ public class ProjectVO {
 	private String job_level;
 	
 	private int career_proof;
-	private int wanted_career;
+	private String wanted_career;
 	
 	private String dlvy_msg;
 	private String proj_status;
 	private int pay_check;
 	private int deadline_check;
 	private String reject_reason;
-	private Timestamp reg_date;
-	private Timestamp mod_date;
+	private String reg_date;
+	private String mod_date;
 	
 	// 추가
 	private int rn;

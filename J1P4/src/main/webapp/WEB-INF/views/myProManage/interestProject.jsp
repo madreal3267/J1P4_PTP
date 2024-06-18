@@ -8,7 +8,7 @@
 
 <section class="content"> 
 	<h1>/myProManage/interestProject.jsp</h1> <hr>
-	
+
 <div class="col-md-12">
 	<div class="box box-default">
 		<div class="box-header with-border">
@@ -90,7 +90,7 @@
 		</div>
 	</div>
 </div>
-
+</section>
 
 
 
