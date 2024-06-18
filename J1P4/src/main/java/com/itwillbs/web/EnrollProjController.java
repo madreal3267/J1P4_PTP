@@ -7,9 +7,11 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwillbs.domain.ProjectVO;
@@ -98,6 +100,44 @@ public class EnrollProjController {
 		logger.debug(" Controller : ( •̀ ω •́ )y /enrollSuccess -> enrollSuccessGET() 실행 ");
 		
 		logger.debug(" Controller : ( •̀ ω •́ )y /views/enroll/enrollSuccess.jsp 페이지 연결 ");
+		
+	}
+	
+	// ----------------------------- 머지 후 파트 분리 해야됨 -----------------------------
+	// 임시로 EnrollProjController에 구현 중임
+	
+	// 내 프로젝트 관리에서 임시저장 프로젝트 불러오기
+	@GetMapping(value="/saveProjDt")
+	public void saveProjDtGET(Model model, @RequestParam("proj_no") int proj_no) {
+		logger.debug(" Controller : ( •̀ ω •́ )y /saveProj -> saveProjDtGET() 실행 ");
+		
+		model.addAttribute("resultProj", eService.saveProjDt(proj_no));
+		model.addAttribute("resultSk", eService.saveSkDt(proj_no));
+		model.addAttribute("resultReg", eService.saveRegDt(proj_no));
+	}
+	
+	// 불러온 임시저장 프로젝트 임시저장
+	@PostMapping(value="/saveProjSave")
+	@ResponseBody
+	public void moreSavePOST(ProjectVO pVO,SkillVO sVO,RegionVO rVO) {
+		logger.debug(" Controller : (＃°Д°) /saveProjSave -> moreSavePOST 실행 ");
+		
+		eService.saveProjSave(pVO);
+		eService.saveSkSave(sVO);
+		eService.saveRegSave(rVO);
+
+	}
+	
+	// 불러온 임시저장 프로젝트 등록
+	@PostMapping(value="/realEnrollProj")
+	public String realEnrollPOST(ProjectVO pVO,SkillVO sVO,RegionVO rVO) {
+		logger.debug(" Controller : (＃°Д°) /realEnrollProj -> realEnrollPOST() 실행 ");
+		
+		eService.saveProjSave(pVO);
+		eService.saveSkSave(sVO);
+		eService.saveRegSave(rVO);
+		
+		return "redirect:/enroll/enrollSuccess";
 		
 	}
 	
