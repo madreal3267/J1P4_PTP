@@ -29,7 +29,7 @@ public class EnrollProjServiceImpl implements EnrollProjService {
 		logger.debug(" (●'◡'●) Service: 프로젝트 등록 성공! (●'◡'●) "+vo);
 	}
 
-	// 프로젝트 임시저장
+	// 프로젝트 최초 임시저장
 	@Override
 	public boolean saveProj(ProjectVO vo) {
 		logger.debug(" (●'◡'●) Service: saveProj(vo) 실행 ");
@@ -40,7 +40,8 @@ public class EnrollProjServiceImpl implements EnrollProjService {
 		
 
 	}
-	// 스킬 등록
+	
+	// 스킬 등록 또는 임시저장
 	@Override
 	public void insertSkill(SkillVO vo) {
 		logger.debug(" (●'◡'●) Service: insertSkill(vo) 실행 ");
@@ -50,7 +51,7 @@ public class EnrollProjServiceImpl implements EnrollProjService {
 		logger.debug(" (●'◡'●) Service: 스킬 등록 성공! (●'◡'●) ");
 	}
 	
-	// 지역 등록
+	// 지역 등록 또는 임시저장
 	@Override
 	public void insertReg(RegionVO vo) {
 		logger.debug(" (●'◡'●) Service: insertReg(vo) 실행 ");
@@ -60,7 +61,7 @@ public class EnrollProjServiceImpl implements EnrollProjService {
 		logger.debug(" (●'◡'●) Service: 지역 등록 성공! (●'◡'●) ");
 	}
 
-	// 프로젝트 임시저장 여러번
+	// 프로젝트 최초 임시저장 후 임시저장
 	@Override
 	public void multiSaveProj(ProjectVO vo) {
 		logger.debug(" (●'◡'●) Service: multiSaveProj(vo) 실행 ");
@@ -71,7 +72,7 @@ public class EnrollProjServiceImpl implements EnrollProjService {
 		
 	}
 
-	// 임시저장 후 스킬 수정
+	// 프로젝트 최초 임시저장 후 스킬 임시저장 또는 등록
 	@Override
 	public void multiSaveSk(SkillVO vo) {
 		logger.debug(" (●'◡'●) Service: multiSaveSk(vo) 실행 ");
@@ -84,7 +85,7 @@ public class EnrollProjServiceImpl implements EnrollProjService {
 	}
 	
 	
-	// 임시저장 후 지역 수정
+	// 프로젝트 최초 임시저장 후 지역 임시저장 또는 등록
 	@Override
 	public void multiSaveReg(RegionVO vo) {
 		logger.debug(" (●'◡'●) Service: multiSaveReg(vo) 실행 ");
@@ -95,38 +96,7 @@ public class EnrollProjServiceImpl implements EnrollProjService {
 		
 	}
 
-	// 임시저장 후 삭제
-	@Override
-	public void deleteSave(ProjectVO vo) {
-		logger.debug(" (●'◡'●) Service: deleteSave(vo) 실행 ");
-		
-		pdao.deleteSave(vo);
-		
-		logger.debug(" (●'◡'●) Service: 임시 저장 후 삭제 성공! (●'◡'●) ");
-		
-	}
-	
-	// 임시저장 후 스킬 삭제
-	@Override
-	public void deleteSk(SkillVO vo) {
-		logger.debug(" (●'◡'●) Service: deleteSk(vo) 실행 ");
-		
-		pdao.deleteSk(vo);
-		
-		logger.debug(" (●'◡'●) Service: 임시 저장 후 스킬 삭제 성공! (●'◡'●) ");
-		
-	}
 
-	// 임시저장 후 지역 삭제
-	@Override
-	public void deleteReg(RegionVO vo) {
-		logger.debug(" (●'◡'●) Service: deleteReg(vo) 실행 ");
-		
-		pdao.deleteReg(vo);
-		
-		logger.debug(" (●'◡'●) Service: 임시 저장 후 지역 삭제 성공! (●'◡'●) ");
-		
-	}	
 	
 	
 }

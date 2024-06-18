@@ -1,22 +1,15 @@
 package com.itwillbs.web;
 
-import java.sql.Date;
 import java.util.HashMap;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwillbs.domain.ProjectVO;
@@ -33,6 +26,7 @@ public class EnrollProjController {
 	@Inject
 	private EnrollProjService eService;
 	
+	// 프로젝트 등록 페이지 연결
 	// http://localhost:8088/enroll/enrollProj
 	@GetMapping(value="/enrollProj")
 	public void enrollGET() {
@@ -42,6 +36,7 @@ public class EnrollProjController {
 		
 	}
 	
+	// 프로젝트 등록
 	@PostMapping(value="/enrollProj")
 	public String enrollPOST(ProjectVO pVO, SkillVO sVO, RegionVO rVO) {
 		logger.debug(" Controller : (＃°Д°) /enrollProj -> enrollPOST() 실행 ");		
@@ -53,24 +48,28 @@ public class EnrollProjController {
 		return "redirect:/enroll/enrollSuccess";
 	}
 	
+	
+	// 프로젝트 임시저장 -> ajax
 	@PostMapping(value="/saveProj")
 	@ResponseBody
 	public HashMap<String, Object> savePOST(ProjectVO pVO, SkillVO sVO, RegionVO rVO) {
-		logger.debug(" Controller : (＃°Д°) /saveProj -> enrollPOST() 실행 ");
+		logger.debug(" Controller : (＃°Д°) /saveProj -> savePOST() 실행 ");
 		
+		// boolean으로 최초 임시저장 여부 판단
+		// 해당 서비스단이 실행되면 false 값이 리턴됨
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
-		boolean result = eService.saveProj(pVO);
-		map.put("result", result);
+		map.put("result", eService.saveProj(pVO)); // false 담음
 		eService.insertSkill(sVO);
 		eService.insertReg(rVO);
 		
 		return map;
 	}
 	
+	// 프로젝트 임시저장 후 등록
 	@PostMapping(value="/enrollSaveProj")
 	public String enrollSavePOST(ProjectVO pVO,SkillVO sVO,RegionVO rVO) {
-		logger.debug(" Controller : (＃°Д°) /enrollSaveProj -> enrollPOST() 실행 ");
+		logger.debug(" Controller : (＃°Д°) /enrollSaveProj -> enrollSavePOST() 실행 ");
 		
 		eService.multiSaveProj(pVO);
 		eService.multiSaveSk(sVO);
@@ -80,10 +79,11 @@ public class EnrollProjController {
 		
 	}
 	
+	// 프로젝트 최초 임시저장 이후 임시저장
 	@PostMapping(value="/multiSaveProj")
 	@ResponseBody
 	public void multiSavePOST(ProjectVO pVO,SkillVO sVO,RegionVO rVO) {
-		logger.debug(" Controller : (＃°Д°) /multiSaveProj -> enrollPOST() 실행 ");
+		logger.debug(" Controller : (＃°Д°) /multiSaveProj -> multiSavePOST() 실행 ");
 		
 		eService.multiSaveProj(pVO);
 		eService.multiSaveSk(sVO);
@@ -91,6 +91,7 @@ public class EnrollProjController {
 
 	}
 	
+	// 프로젝트 등록 후 성공 페이지
 	// http://localhost:8088/enroll/enrollSuccess
 	@GetMapping(value="/enrollSuccess")
 	public void enrollSuccessGET() {

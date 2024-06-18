@@ -12,9 +12,6 @@ public interface EnrollProjDAO {
 	// 프로젝트 등록 최초 임시 저장
 	public boolean saveProj(ProjectVO vo);
 	
-	// 임시 저장 프로젝트 수정 후 등록
-	public void updateProj(ProjectVO vo);
-	
 	// 주요 기술 스택
 	public void insertSkill(SkillVO vo);
 	
@@ -30,13 +27,5 @@ public interface EnrollProjDAO {
 	// 최초 임시 저장 후 지역저장
 	public void multiSaveReg(RegionVO vo);
 	
-	// 임시 저장 후 등록을 위한 삭제
-	public void deleteSave(ProjectVO vo);
-	
-	// 임시저장 후 등록을 위한 스킬 삭제
-	public void deleteSk(SkillVO vo);
-	
-	// 임시저장 후 등록을 위한 지역 삭제
-	public void deleteReg(RegionVO vo);
 	
 }

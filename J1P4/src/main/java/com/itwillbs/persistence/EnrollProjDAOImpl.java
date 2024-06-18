@@ -45,15 +45,6 @@ public class EnrollProjDAOImpl implements EnrollProjDAO {
 		return false;
 	}
 
-	// 임시 저장 프로젝트 수정 후 등록
-	@Override
-	public void updateProj(ProjectVO vo) {
-		logger.debug(" DAO : updateProj(vo) 호출 (❁´◡`❁) ");
-		
-		sqlSession.insert(NAMESPACE + "updateProj", vo);
-		
-		logger.debug(" DAO : 임시저장 등록 완료! ╰(*°▽°*)╯ ");
-	}
 
 	// 주요 기술 스택
 	@Override
@@ -106,42 +97,6 @@ public class EnrollProjDAOImpl implements EnrollProjDAO {
 		logger.debug(" DAO : 임시 저장 지역 수정 완료! ╰(*°▽°*)╯ ");
 		
 	}
-
-	// 임시 저장 후 등록을 위한 삭제
-	@Override
-	public void deleteSave(ProjectVO vo) {
-		logger.debug(" DAO : deleteSave(vo) 호출 (❁´◡`❁) ");
-		
-		sqlSession.insert(NAMESPACE + "deleteSave", vo);
-		
-		logger.debug(" DAO : 임시저장 삭제 완료! ╰(*°▽°*)╯ ");
-	}
-	
-	// 임시저장 후 등록을 위한 지역 삭제
-	@Override
-	public void deleteSk(SkillVO vo) {
-		logger.debug(" DAO : deleteSk(vo) 호출 (❁´◡`❁) ");
-		
-		sqlSession.insert(NAMESPACE + "deleteSk", vo);
-		
-		logger.debug(" DAO : 임시저장 스킬 삭제 완료! ╰(*°▽°*)╯ ");
-		
-	}
-	
-	// 임시저장 후 등록을 위한 지역 삭제
-	@Override
-	public void deleteReg(RegionVO vo) {
-		logger.debug(" DAO : deleteReg(vo) 호출 (❁´◡`❁) ");
-		
-		sqlSession.insert(NAMESPACE + "deleteReg", vo);
-		
-		logger.debug(" DAO : 임시저장 지역 삭제 완료! ╰(*°▽°*)╯ ");
-		
-	}
-
-	
-	
-	
 	
 	
 	
