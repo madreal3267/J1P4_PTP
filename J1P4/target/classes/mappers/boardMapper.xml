@@ -19,11 +19,26 @@
 		where deadline > now()
   	 </select>
   	 
-  	 <!-- 페이징 처리 limit?rownum? -->
+<!--   	 페이징 처리
   	 <select id="pListPaging" resultType="com.itwillbs.domain.ProjectVO" parameterType="com.itwillbs.domain.Criteria">
   	 	<![CDATA[
 			select * 
 			from project
+			where deadline > now()
+			order by reg_date DESC
+			limit #{amount} offset #{offset}
+			
+  	 	]]>
+  	 </select> -->
+  	 <!-- 페이징 처리 skill, region 조인  -->
+  	 <select id="pListPaging" resultType="com.itwillbs.domain.ProjectVO" parameterType="com.itwillbs.domain.Criteria">
+  	 	<![CDATA[
+			select p.proj_no, p.proj_title, p.proj_cost , p.deadline, p.work_field, p.reg_date, r.region, r.district, s.skill_nm
+			from project p
+			left join skill s
+			on p.proj_no = s.proj_no
+			left join region r
+			on p.proj_no = r.proj_no
 			where deadline > now()
 			order by reg_date DESC
 			limit #{amount} offset #{offset}
@@ -34,8 +49,12 @@
   	 <!-- 정렬 limit 쿼리 -->
   	 <select id="proLSort" resultType="com.itwillbs.domain.ProjectVO">
 	  	 <![CDATA[
-			select * 
-			from project
+			select p.proj_no, p.proj_title, p.proj_cost , p.deadline, p.work_field, p.reg_date, r.region, r.district, s.skill_nm
+			from project p
+			left join skill s
+			on p.proj_no = s.proj_no
+			left join region r
+			on p.proj_no = r.proj_no
 			where deadline > now()
 			order by ${sn} DESC
 			limit ${amount} offset #{offset}
@@ -46,8 +65,12 @@
   	 <!-- 게시판 필터 -->
   	 <select id="proFi" resultType="com.itwillbs.domain.ProjectVO">
   	 	<![CDATA[
-			select * 
-			from project
+			select p.proj_no, p.proj_title, p.proj_cost , p.deadline, p.work_field, p.reg_date, r.region, r.district, s.skill_nm
+			from project p
+			left join skill s
+			on p.proj_no = s.proj_no
+			left join region r
+			on p.proj_no = r.proj_no
 			where deadline > now() and work_field = #{work_field}
 			order by reg_date DESC
 			limit #{amount} offset #{offset}

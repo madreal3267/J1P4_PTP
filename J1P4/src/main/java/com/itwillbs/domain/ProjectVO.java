@@ -39,7 +39,15 @@ public class ProjectVO {
 	private Timestamp reg_date;
 	private Timestamp mod_date;
 	
+	// 추가
 	private int rn;
 	private int count;
+	
+	// skill 테이블
+	private String skill_nm;
+	
+	// region 테이블
+	private String region;
+	private String district;
 
 }

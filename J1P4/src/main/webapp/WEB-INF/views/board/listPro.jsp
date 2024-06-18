@@ -1,20 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" 
+  integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" 
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <!--  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <link href="../resources/css/listPro.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-  <style>
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<style>
+@import
+	url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap')
+	;
+
 body {
-font-family: "Nanum Gothic", sans-serif !important;
+	font-family: "Nanum Gothic", sans-serif !important;
+}
+
+h2 {
+	font-weight: bolder !important;
+}
+
+h5 {
+	color: gray !important;
 }
 </style>
 <script type="text/javascript">
@@ -64,7 +85,8 @@ $(document).ready(function(){
 						    
 						   		 '<div style="display: grid; grid-template-columns: 1fr 1fr;"> <div style="display: flex; font-weight: bold;"> <span style="display: flex; align-items: center;">'+
 						   		 data[index].work_field+
-						         ' | 서울시 강남구 |</span> <div style="margin: 0 6px; padding: 3px 12px; border: 1px solid #333; border-radius: 5px; background-color: white;">'+
+						         ' | '+data[index].region+' '+data[index].district+' |</span> <div style="margin: 0 6px; padding: 3px 12px; border: 1px solid #333; border-radius: 5px; background-color: white;">'+
+						         
 						         'JAVA'+
 						         '</div> <div style="padding: 3px 12px; border: 1px solid #333; border-radius: 5px; background-color: white;">'+
 						         'MySql'+
@@ -124,45 +146,78 @@ $(document).ready(function(){
 					</button>
 				</div>
 				<div class="modal-body">
-					업무 분야 <br> <input type="button" value="개발"> <input
-						type="button" value="기획"> <input type="button" value="디자인">
-					<input type="button" value="퍼블리싱">
+				<!-- form -->
+					<form action="/enroll/enrollProj" method="post" id="fm1" name="fm1">
+					업무 분야 <br> 
+					<input type="radio" value="개발" class="btn-check" name="work_field"
+					id="radioWf1"> <label class="btn btn-outline-dark"
+					for="radioWf1">⚙️ 개발</label> <input type="radio" value="기획"
+					class="btn-check" name="work_field" id="radioWf2"> <label
+					class="btn btn-outline-dark" for="radioWf2">🛠️ 기획</label> <input
+					type="radio" value="디자인" class="btn-check" name="work_field"
+					id="radioWf3"> <label class="btn btn-outline-dark"
+					for="radioWf3">🎨 디자인</label> <input type="radio" value="퍼블리싱"
+					class="btn-check" name="work_field" id="radioWf4"> <label
+					class="btn btn-outline-dark" for="radioWf4">🖋️ 퍼블리싱</label>
 					<hr>
-					관련 기술<br> <input type="search" name="관련기술">
+					<h2>관련 기술</h2>
+					<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+					<select name="skill_nm" class="selectSk" id="skillSelect" >
+					<option disabled hidden selected></option>
+					<option value="자바">자바</option>
+					<option value="파이썬">파이썬</option>
+					<option value="CSS">CSS</option>
+					<option value="MySQL">MySQL</option></select>
+					<button type="button" class="addButt removeAdd">추가하기</button>
+					</div>
+					<div class="listPt"></div>
+					<!-- [추가하기] 클릭 시 추가되는 기술 리스트 출력되는 공간-->
+		
 					<hr>
-					숙련도 <br> <input type="button" value="주니어"> <input
-						type="button" value="미들"> <input type="button" value="시니어">
+					<div class="btn-group" role="group"
+			aria-label="Basic checkbox toggle button group">
+			<input type="radio" value="주니어" class="btn-check" name="job_level"
+				id="radioLev1"> <label class="btn btn-outline-dark"
+				for="radioLev1">주니어</label> <input type="radio" value="미들"
+				class="btn-check" name="job_level" id="radioLev2"> <label
+				class="btn btn-outline-dark" for="radioLev2">미들</label> <input
+				type="radio" value="시니어" class="btn-check" name="job_level"
+				id="radioLev3"> <label class="btn btn-outline-dark"
+				for="radioLev3">시니어</label>
+		</div>
+
 					<hr>
-					<form name="fm1" action="">
-						지역 <br> <select name='region'
-							onchange="change(this.selectedIndex);" class=input>
-							<option value='전체'>전체</option>
-							<option value='서울'>서울특별시</option>
-							<option value='부산'>부산광역시</option>
-							<option value='대구'>대구광역시</option>
-							<option value='인천'>인천광역시</option>
-							<option value='광주'>광주광역시</option>
-							<option value='대전'>대전광역시</option>
-							<option value='울산'>울산광역시</option>
-							<option value='경기'>경기도</option>
-							<option value='강원'>강원도</option>
-							<option value='충북'>충청북도</option>
-							<option value='충남'>충청남도</option>
-							<option value='전북'>전라북도</option>
-							<option value='전남'>전라남도</option>
-							<option value='경북'>경상북도</option>
-							<option value='경남'>경상남도</option>
-							<option value='제주'>제주도</option>
-						</select> <select name='district' class=select>
-							<option value=''>전체</option>
-						</select>
-					</form>
+					<h2>지역</h2>
+					<select name='region' onchange="change(this.selectedIndex);"
+						class=input>
+						<option value='전체'>전체</option>
+						<option value='서울'>서울특별시</option>
+						<option value='부산'>부산광역시</option>
+						<option value='대구'>대구광역시</option>
+						<option value='인천'>인천광역시</option>
+						<option value='광주'>광주광역시</option>
+						<option value='대전'>대전광역시</option>
+						<option value='울산'>울산광역시</option>
+						<option value='경기'>경기도</option>
+						<option value='강원'>강원도</option>
+						<option value='충북'>충청북도</option>
+						<option value='충남'>충청남도</option>
+						<option value='전북'>전라북도</option>
+						<option value='전남'>전라남도</option>
+						<option value='경북'>경상북도</option>
+						<option value='경남'>경상남도</option>
+						<option value='제주'>제주도</option>
+					</select> <select name='district' class=select>
+						<option value=''>전체</option>
+					</select>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">필터 적용하기</button>
+					<button type="submit" class="btn btn-primary">필터 적용하기</button>
 				</div>
+				</form>
+				<!--form  -->
 			</div>
 		</div>
 	</div>
@@ -181,10 +236,14 @@ $(document).ready(function(){
 	</form>
 </div>
 	
+
+ 
+	
 <fieldset  id="pList" >
 
 <!-- 회색 박스 -->
 <c:forEach var="v" items="${list }">
+<c:set var="skillList" value="${v.skill_nm }" />
 <div OnClick="location.href ='/board/detailList?proj_no=${v.proj_no}'" style="width : full; margin: 2px 3px; padding: 12px; background-color: #dddddd; border-radius: 7px; border: 1px solid black;">
     <!-- 모집중, NEW!, 하트 영역 -->
     <div style="display: grid; grid-template-columns: 1fr 1fr;">
@@ -206,25 +265,27 @@ $(document).ready(function(){
     <div style="margin-bottom: 6px;">
         예상금액 <span style="font-weight: bold;">${v.proj_cost }원</span> | 예상 기간 <span style="font-weight: bold;">${v.deadline }일</span>
     </div>
-    
-    <!-- 기타 정보 / 등록일자 -->
-    <div style="display: grid; grid-template-columns: 1fr 1fr;">
-        <div style="display: flex; font-weight: bold;">
-            <span style="display: flex; align-items: center;">${v.work_field } | 서울시 강남구 |</span>
-            <div style="margin: 0 6px; padding: 3px 12px; border: 1px solid #333; border-radius: 5px; background-color: white;">
-                JAVA
-            </div>
-            <div style="padding: 3px 12px; border: 1px solid #333; border-radius: 5px; background-color: white;">
-                MySql
-            </div>
-        </div>
 
-        <div style="display: flex; justify-content: end;">
-            <span style="font-size: 14px; color : #444">${v.reg_date }</span>
-        </div>
-    </div>
-    
-</div>
+				<!-- 기타 정보 / 등록일자 -->
+				<div style="display: grid; grid-template-columns: 1fr 1fr;">
+					<div style="display: flex; font-weight: bold;">
+						<span style="display: flex; align-items: center;">${v.work_field }
+							| ${v.region } ${v.district } |</span>
+						<c:forEach items="${fn:split(skillList, ',') }" var="skill">
+							<button type="button" class="btn btn-warning">
+								<c:out value="${skill}" />
+							</button>
+						</c:forEach>
+						<br>
+
+					</div>
+
+					<div style="display: flex; justify-content: end;">
+						<span style="font-size: 14px; color: #444">${v.reg_date }</span>
+					</div>
+				</div>
+
+			</div>
 </c:forEach>
 </fieldset>
 
@@ -271,6 +332,14 @@ $(document).ready(function(){
 	actionForm.submit();
   });
 </script>
+<!-- select2 (검색되는 select) 자바스크립트 -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<!-- 부트스트랩 자바스크립트 -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous"></script>
+	
 <script type="text/javascript">
       /* 시군구 - select */
       var cnt = new Array();
@@ -325,7 +394,36 @@ $(document).ready(function(){
             sel.options[i] = new Option(cnt[add][i], cnt[add][i]);
          }
       }
-     
+      $(document).ready(function(){
+    	  $('.selectSk').select2({
+    	    dropdownParent: $('#exampleModal')    
+        });
+		})
+			
+		/* [추가하기] 클릭 */
+				$(function() {
+					$('.addButt').click(function(){
+						let skill = $('.selectSk').val()
+
+						
+						/* [추가하기] 클릭 시 추가되는 기술 리스트 출력 */
+						$('.listPt').prepend('<p><div class="border border-1 rounded-3 m-2 p-4" role="group" style="width: 230px; display: inline-block;"><input type="hidden" value='+$('.listPt').children("p").length+' name="count"><input type="hidden" value='+skill+' name="skill_nm"><span class="badge bg-warning m-3">'
+						+skill+'</span><button class="removeSk btn-close" aria-label="Close"></button></div></p>');
+		
+					});
+					
+				});
+				
+				/* 리스트에 추가된 기술 삭제 */
+				$(document).on('click','.removeSk',function(){
+			        $(this).parent().remove()
+			    })
+			    
+// 			    /* [추가하기] 클릭 동시에 버튼 삭제 */
+// 				$(document).on('click','.removeAdd',function(){
+// 			        $(this).parent().remove()
+// 			    })
+				
 
 </script>
 </body>
