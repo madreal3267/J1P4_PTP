@@ -5,7 +5,7 @@
 
 <%@ include file="../include/headerCt.jsp" %>
 
-<h1>/myProManage/underReviewProject</h1>
+<h1>/myProManageCt/underReviewProject</h1>
 <hr>
 
 <div class="col-md-12">
@@ -39,10 +39,14 @@
 								</td>
 								<td class="text-center">${projectVO.proj_status } </td>
 								<td class="text-center">
-									<form method="POST" name="form">
-										<button type="submit" onclick="javascript: form.action='#'"class="btn btn-primary">수정하기</button>   
-										<button type="submit" onclick="javascript: form.action='#'" class="btn btn-danger">삭제하기</button>
-									</form>
+										<form action="">
+											<button type="submit" onclick="javascript: form.action='#'"class="btn btn-primary">수정하기</button>   
+										</form>
+										<form action="/myProManageCt/underReviewProject" method="post">
+											<input type="hidden" name="proj_no" value="${projectVO.proj_no }">
+											<input type="submit" class="btn btn-danger" value="삭제하기">
+										</form>
+									
 								</td>
 							</tr>
 						</c:forEach>

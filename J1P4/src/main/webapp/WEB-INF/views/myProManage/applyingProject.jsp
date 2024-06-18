@@ -62,6 +62,60 @@
 	</ul>
 </div>
 
+<!-- modal 창 -->
+<div class="modal fade" id="myModal" style="display: none;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+				<h4 class="modal-title">지원하기 성공</h4>
+			</div>
+			<div class="modal-body">
+				<p>프로젝트에 지원하여 '지원내역'-'지원중'으로 이동합니다.</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
+				<button type="button" class="btn btn-primary">동작 X</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="myModal2" style="display: none;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+				<h4 class="modal-title">지원 취소 성공</h4>
+			</div>
+			<div class="modal-body">
+				<p>성공적으로 '지원중' 프로젝트에서 지원을 취소하였습니다.</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
+				<button type="button" class="btn btn-primary">동작 X</button>
+			</div>
+		</div>
+	</div>
+</div>
+		
+<!-- Jquery 사용 -->
+<script>
+	$(document).ready(function() {
+		
+		// 지원하기 성공 정보 전달
+		var result = "${msg}";
+		if (result == "applySuccess") {
+			$("#myModal").modal("show");
+		}
+		if (result == "deletApply") {
+			$("#myModal2").modal("show");
+		}
+	});
+</script>
 
 
 <%@ include file="../include/footer.jsp" %>

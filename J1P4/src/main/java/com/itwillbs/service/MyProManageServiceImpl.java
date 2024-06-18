@@ -107,6 +107,17 @@ public class MyProManageServiceImpl implements MyProManageService {
 		return mpmdao.underReviewProjectList();
 	}
 
+	// 검수중 프로젝트 목록 - 프로젝트 삭제하기
+	@Override
+	public int deleteProject(int proj_no) {
+		logger.debug("deleteProject(int proj_no) 실행");
+		
+		int result = mpmdao.deleteProject(proj_no);
+		logger.debug("프로젝트 - 삭제하기 성공");
+		
+		return result;
+	}
+
 	// 임시저장 프로젝트 목록
 	@Override
 	public List<ProjectVO> temSaveProjectList() {

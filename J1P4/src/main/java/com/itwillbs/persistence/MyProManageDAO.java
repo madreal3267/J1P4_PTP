@@ -49,6 +49,9 @@ public interface MyProManageDAO {
 	// 검수중 프로젝트 목록
 	public List<ProjectVO> underReviewProjectList();
 	
+	// 검수중 프로젝트 목록 - 프로젝트 삭제하기
+	public int deleteProject(int proj_no);
+	
 	// 임시저장 프로젝트 목록
 	public List<ProjectVO> temSaveProjectList();
 	

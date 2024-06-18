@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itwillbs.domain.ApplyMgmtVO;
 import com.itwillbs.domain.EvaluateProjectDTO;
@@ -58,10 +59,13 @@ public class MyProManageController {
 	
 	// 관심 프로젝트 목록 - 지원하기
 	@RequestMapping(value = "/interestProject",method = RequestMethod.POST)
-	public String interestProjectApply(ApplyMgmtVO avo) {
+	public String interestProjectApply(ApplyMgmtVO avo, RedirectAttributes rttr) {
 		logger.debug("/interestProject -> interestProjectApply() 호출");
 		
 		myService.applyProject(avo);
+		
+		// 지원하기 성공정보를 전달
+		rttr.addFlashAttribute("msg", "applySuccess");
 		
 		return "redirect:/myProManage/applyingProject";
 	}
@@ -81,10 +85,13 @@ public class MyProManageController {
 	
 	// 제안받은 프로젝트 - 지원하기
 	@RequestMapping(value = "/proposedProject",method = RequestMethod.POST)
-	public String proposedProjectApply(ApplyMgmtVO avo) {
+	public String proposedProjectApply(ApplyMgmtVO avo, RedirectAttributes rttr) {
 		logger.debug("/proposedProject -> proposedProjectApply() 호출");
 		
 		myService.applyProject(avo);
+		
+		// 지원하기 성공정보를 전달
+		rttr.addFlashAttribute("msg", "applySuccess");
 		
 		return "redirect:/myProManage/applyingProject";
 	}
@@ -103,7 +110,7 @@ public class MyProManageController {
 	
 	// 지원 중 프로젝트 목록 - 지원 취소	
 	@RequestMapping(value = "/applyingProject",method = RequestMethod.POST)
-	public String deleteApply(ApplyMgmtVO avo) {
+	public String deleteApply(ApplyMgmtVO avo, RedirectAttributes rttr) {
 		logger.debug("/applyingProject -> deleteApply(applyMgmtVO avo) 호출");
 		
 		int result = myService.deleteApply(avo);
@@ -111,6 +118,9 @@ public class MyProManageController {
 		if(result == 1) {
 			logger.debug("지원 취소되었습니다.");
 		}
+		// 지원 취소 정보를 전달
+		rttr.addFlashAttribute("msg", "deletApply");
+		
 		return "redirect:/myProManage/applyingProject";
 	}
 		
@@ -128,7 +138,7 @@ public class MyProManageController {
 	
 	// 지원 종료 프로젝트 목록 - 지원 종료 목록에서 삭제	
 	@RequestMapping(value = "/endApplyProject",method = RequestMethod.POST)
-	public String deleteEndApply(ApplyMgmtVO avo) {
+	public String deleteEndApply(ApplyMgmtVO avo, RedirectAttributes rttr) {
 		logger.debug("/endApplyProject -> deleteEndApply(applyMgmtVO avo) 호출");
 		
 		int result = myService.deleteApply(avo);
@@ -136,6 +146,10 @@ public class MyProManageController {
 		if(result == 1) {
 			logger.debug("지원 목록에서 삭제하였습니다.");
 		}
+		
+		// 지원 취소 정보를 전달
+		rttr.addFlashAttribute("msg", "deletApply");
+		
 		return "redirect:/myProManage/endApplyProject";
 	}
 	
@@ -149,6 +163,19 @@ public class MyProManageController {
 		logger.debug("contractProjectList : " + contractProjectList.size());
 		
 		model.addAttribute("contractProjectList", contractProjectList);		
+	}
+	
+	// 계약 진행 중 프로젝트 목록 - 지원 취소	
+	@RequestMapping(value = "/contractProject",method = RequestMethod.POST)
+	public String deleteApplyContractProject(ApplyMgmtVO avo) {
+		logger.debug("/contractProject -> deleteApplyContractProject(applyMgmtVO avo) 호출");
+		
+		int result = myService.deleteApply(avo);
+		
+		if(result == 1) {
+			logger.debug("지원 취소되었습니다.");
+		}
+		return "redirect:/myProManage/contractProject";
 	}
 	
 	// 프로젝트 진행중 목록 조회

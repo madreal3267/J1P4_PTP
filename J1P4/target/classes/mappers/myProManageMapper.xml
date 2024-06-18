@@ -187,6 +187,12 @@
 		where p.proj_status = '검수 단계' and c.ct_id ='user_10'<!--예시! #{user_id}로 변경 -->
 	</select>	
 	
+	<!-- 프로젝트 삭제하기 -->
+	<delete id="deleteProject">
+		delete from project
+		where proj_no=#{proj_no}
+	</delete>
+	
 	<!-- 임시저장 프로젝트 -->
 	<select id="temSaveProjectList" resultType="com.itwillbs.domain.ProjectVO">
 		select p.*

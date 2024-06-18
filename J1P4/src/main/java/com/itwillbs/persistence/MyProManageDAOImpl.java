@@ -117,7 +117,15 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 		
 		return resultVO;
 	}
-
+	
+	// 검수중 프로젝트 리스트 - 프로젝트 삭제하기
+	@Override
+	public int deleteProject(int proj_no) {
+		int result = sqlSession.delete(NAMESPACE+"deleteProject", proj_no);
+		
+		return result;
+	}
+	
 	// 임시저장 프로젝트 리스트
 	@Override
 	public List<ProjectVO> temSaveProjectList() {
@@ -125,6 +133,7 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 		
 		return resultVO;
 	}
+
 
 	// 등록실패 프로젝트 리스트
 	@Override

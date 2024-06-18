@@ -44,6 +44,9 @@ public interface MyProManageService {
 	// 검수중 프로젝트 목록
 	public List<ProjectVO> underReviewProjectList();
 	
+	// 검수중 프로젝트 목록 - 프로젝트 삭제하기
+	public int deleteProject(int proj_no);	
+	
 	// 임시저장 프로젝트 목록
 	public List<ProjectVO> temSaveProjectList();
 	
@@ -55,20 +58,6 @@ public interface MyProManageService {
 	
 	// 계약 진행중 프로젝트 목록
 	public List<ProjectVO> ctContractProjectList();
-	
-	// 프로젝트 진행중 목록 
-	// public List<ProjectVO> ctOngoingProjectList();
-	
-	// 평가 대기중 프리랜서 목록
-	// public List<FreelancerVO> waitEvaluationFreelancerList();
-	
-	// 완료한 프로젝트의 평가완료 프리랜서 목록
-    // public List<FreelancerVO> completedFreelancerList();
-	
-	
-	
-	
-	
 	
 	// DTO 변경 적용 중
 	// 평가 대기중 프로젝트 리스트

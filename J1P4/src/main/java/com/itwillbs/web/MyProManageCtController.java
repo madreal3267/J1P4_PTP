@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itwillbs.domain.EvaluateFreelancerDTO;
 import com.itwillbs.domain.EvaluateProjectDTO;
@@ -69,6 +70,22 @@ public class MyProManageCtController {
 		model.addAttribute("underReviewProjectList", underReviewProjectList);		
 	}	
 	
+	// 검수중 프로젝트 목록 - 프로젝트 삭제하기
+	@RequestMapping(value = "/underReviewProject",method = RequestMethod.POST)
+	public String deleteUnderReviewProject(int proj_no, RedirectAttributes rttr) {
+		logger.debug("/underReviewProject -> deleteUnderReviewProject(int proj_no) 호출");
+		
+		int result = myService.deleteProject(proj_no);
+
+		if(result == 1) {
+			logger.debug("프로젝트를 삭제하였습니다.");
+		}		
+		// 삭제 성공 정보를 전달
+		rttr.addFlashAttribute("msg", "deleteProject");
+		
+		return "redirect:redirect:/myProManageCt/underReviewProject";
+	}
+	
 	// 임시저장 프로젝트 목록 조회
 	// http://localhost:8088/myProManageCt/temSaveProject
 	@RequestMapping(value = "/temSaveProject",method = RequestMethod.GET)
@@ -80,6 +97,22 @@ public class MyProManageCtController {
 		
 		model.addAttribute("temSaveProjectList", temSaveProjectList);		
 	}		
+	
+	// 임시저장 프로젝트 목록 - 프로젝트 삭제하기
+	@RequestMapping(value = "/temSaveProject",method = RequestMethod.POST)
+	public String deletetemSaveProject(int proj_no, RedirectAttributes rttr) {
+		logger.debug("/temSaveProject -> temSaveProject(int proj_no) 호출");
+		
+		int result = myService.deleteProject(proj_no);
+
+		if(result == 1) {
+			logger.debug("프로젝트를 삭제하였습니다.");
+		}		
+		// 삭제 성공 정보를 전달
+		rttr.addFlashAttribute("msg", "deleteProject");
+		
+		return "redirect:redirect:/myProManageCt/temSaveProject";
+	}
 	
 	// 등록실패 프로젝트 목록 조회
 	// http://localhost:8088/myProManageCt/regFailedProject
