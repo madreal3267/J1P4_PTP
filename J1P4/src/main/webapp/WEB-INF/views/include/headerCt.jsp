@@ -5,12 +5,10 @@
 <html>
   <head>
     <meta charset="UTF-8">
-
-    <title>AdminLTE 2 | Dashboard</title>
+    <title>J1P4 프로젝트(클라이언트 페이지)</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
-    <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-
+    <link href="../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- Font Awesome Icons -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- Ionicons -->
@@ -24,7 +22,7 @@
 	<!-- 부트스트랩 CSS -->
 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"  -->
 <!-- integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
-
+	
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -45,6 +43,7 @@
           <span class="logo-mini"><b>로</b>고</span>
           <!-- logo for regular state and mobile devices -->
           <span class="logo-lg"><b>J1P4</b> PROJECT</span>
+        </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
@@ -294,59 +293,69 @@
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-
+          
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
-            <li class="header"><font size="4"><i class="fa fa-laptop"></i> 내 프로젝트 관리</font></li>
+            <li class="header"><i class="fa fa-laptop"></i> 내 프로젝트 관리</li>
            
             <li>
-              <a href="../myProManage/interestProject">
-                <span>관심 프로젝트</span>
-                <small class="label pull-right bg-green">3</small>
+              <a href="../myProManageCt/interestFreelancer">
+                <span>관심 프리랜서</span>
               </a>
             </li>
             <li>
-              <a href="../myProManage/proposedProject">
-                <span>제안받은 프로젝트</span>
-                <small class="label pull-right bg-green">1</small>
+              <a href="../myProManageCt/proposeFreelancer">
+                <span>제안한 프리랜서</span>
               </a>
             </li>
            
             <li class="treeview">
               <a href="#">
-                <span>지원내역</span> <i class="fa fa-angle-left pull-right"></i>
+                <span>검수중</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="../myProManage/applyingProject"><i class="fa fa-circle-o"></i> 지원중</a></li>
-                <li><a href="../myProManage/endApplyProject"><i class="fa fa-circle-o"></i> 지원 종료</a></li>
+                <li><a href="../myProManageCt/underReviewProject"><i class="fa fa-circle-o"></i> 검수중 </a></li>
+                <li><a href="../myProManageCt/temSaveProject"><i class="fa fa-circle-o"></i> 임시저장</a></li>
+                <li><a href="../myProManageCt/regFailedProject"><i class="fa fa-circle-o"></i> 등록실패</a></li>
               </ul>
             </li>
             <li class="treeview">
               <a href="#">
-                <span>진행중인 프로젝트</span>
+                <span>지원자 모집중</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="../myProManage/contractProject"><i class="fa fa-circle-o"></i> 계약 진행 중</a></li>
-                <li><a href="../myProManage/ongoingProject"><i class="fa fa-circle-o text-aqua"></i> 프로젝트 진행 중</a></li>
+                <li><a href="../myProManageCt/recruitingProject"><i class="fa fa-circle-o"></i> 지원자 모집 중</a></li>
               </ul>
             </li>
             <li class="treeview">
               <a href="#">
-                <span>완료한 프로젝트</span>
+                <span>진행 중인 프로젝트</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="../myProManage/waitEvaluationProject"><i class="fa fa-circle-o"></i> 평가 대기중</a></li>
-                <li><a href="../myProManage/completedProject"><i class="fa fa-circle-o"></i> 완료한 프로젝트</a></li>
+                <li><a href="../myProManageCt/ctContractProject"><i class="fa fa-circle-o"></i> 계약 진행 중</a></li>
+                <li><a href="../myProManageCt/ctOngoingProject"><i class="fa fa-circle-o"></i> 프로젝트 진행 중</a></li>
               </ul>
             </li>
+            <li class="treeview">
+              <a href="#">
+                <span>종료된 프로젝트</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="../myProManageCt/waitEvaluationFreelancer"><i class="fa fa-circle-o"></i> 평가 대기중</a></li>
+                <li><a href="../myProManageCt/completedFreelancer"><i class="fa fa-circle-o"></i> 완료한 프로젝트</a></li>
+              </ul>
+            </li>
+            
           </ul>
         </section>
         <!-- /.sidebar -->
       </aside>
+
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper" >
+      <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
