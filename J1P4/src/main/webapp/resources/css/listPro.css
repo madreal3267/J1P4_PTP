@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+.select2-container {
+width:300px !important;
+border: 1px solid #aaa !important;
+}
+
+.select2-selection--single {
+border: none !important;
+}
+
+.select2-selection--rendered {
+width:300px !important;
+}
+
+.select2-container--open .select2-dropdown {
+left: -1px !important;
+}
