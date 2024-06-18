@@ -60,12 +60,17 @@ public class EnrollFreeController {
 	public String enrollFreeBPOST(FreelancerVO fVO,CareerVO cVO, PartnersVO pVO, CompanyVO cpVO, SkillVO sVO, RegionVO rVO) {		
 		logger.debug(" Controller : ( •̀ ω •́ )y /enrollFree -> enrollFreeBPOST() 실행 ");
 		
+		
+		cpVO.setHdetails(cpVO.getHdetails().replaceAll(",", "|"));
+		
 		fService.insertFree(fVO);
 		fService.insertCareer(cVO);
 		fService.insertPartners(pVO);
 		fService.insertComp(cpVO);
 		fService.insertSkill(sVO);
 		fService.insertReg(rVO);
+		
+		
 		
 		return "redirect:/enroll/enrollSuccess";
 	}

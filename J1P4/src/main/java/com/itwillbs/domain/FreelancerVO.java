@@ -17,7 +17,7 @@ public class FreelancerVO {
 	private String graduation;
 	private int work_check;
 	private String work_date;
-	private int proj_cost;
+	private String proj_cost;
 	private String oneline_bio;
 	private String bio;
 	private Timestamp mod_date;
