@@ -6,6 +6,8 @@ import lombok.Data;
 
 @Data
 public class ProjectVO {
+
+
 	/* 프로젝트 테이블 */
 	private int proj_no;
 	private int ct_no;
@@ -49,5 +51,9 @@ public class ProjectVO {
 	// region 테이블
 	private String region;
 	private String district;
+
+	// 지윤씨
+	private String temporary;
+	private String user_id;
 
 }
