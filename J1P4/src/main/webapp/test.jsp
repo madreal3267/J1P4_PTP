@@ -7,7 +7,7 @@
   <div class="row no-gutters row-bordered row-border-light">
 	<!-- 사이드 메뉴 시작 -->
 	<div class="col-md-3 pt-0">
-		<div class="list-group list-group-flush account-settings-links" style="width:280px;">
+		<div class="list-group list-group-flush account-settings-links" style="width:280px;" onclick="menu">
 			<h4 class="font-weight-bold py-1 mx-4 my-3" style=" position: relative; bottom: 1px;">프로젝트 등록하기</h4>
 			<a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">기본 정보</a>
 			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-detail">상세 정보</a>
@@ -118,6 +118,7 @@
 <!-- 기본 정보 탭 끝 -->
 
 <!-- 상세 정보 탭 시작 -->
+<!-- class="tab-pane fade" -->
 <div class="tab-pane fade" id="account-detail">
 <div class="card-body pb-2" style="position: relative; left: 300px;">
 <div class="form-group">
@@ -176,10 +177,6 @@
 </div>
   </div>
   	<!-- 임시저장, 등록 버튼 -->
-
-
-
-
 
 	<div class="text-right mt-3">
 	<button type="button" class="btn btn-default" id="liveToastBtn">임시저장</button>&nbsp;
@@ -304,18 +301,21 @@
 			});
 					
 		});
-	
+		
+		function menu() {
+			
+		}
 		
 		
 		const toastTrigger = document.getElementById('liveToastBtn')
-		const toastLiveExample = document.getElementById('liveToast')
+// 		const toastLiveExample = document.getElementById('liveToast')
 
-		if (toastTrigger) {
-		  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
-		  toastTrigger.addEventListener('click', () => {
-		    toastBootstrap.show()
-		  })
-		}
+// 		if (toastTrigger) {
+// 		  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+// 		  toastTrigger.addEventListener('click', () => {
+// 		    toastBootstrap.show()
+// 		  })
+// 		}
 	</script>
 </body>
 </html>
