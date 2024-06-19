@@ -6,9 +6,10 @@ import com.itwillbs.dto.SettlementDTO;
 
 public interface SettlementDAO {
 	
-	List<SettlementDTO> getAllSettlements();
+	void updateSettlement(SettlementDTO settlement);
+    SettlementDTO getSettlementById(int settlementNo);
+    List<SettlementDTO> getAllSettlements();
     List<SettlementDTO> getSettlementsByPriceCheck(boolean priceCheck);
     List<SettlementDTO> getSettlementsBySettlementCheck(boolean settlementCheck);
-    SettlementDTO getSettlementById(int settlement_no);
-    void updateSettlement(SettlementDTO settlement);
+    SettlementDTO getSettlementByMerchantUid(String merchant_uid);
 }

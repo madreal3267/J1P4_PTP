@@ -4,10 +4,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
@@ -22,7 +24,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -39,6 +43,9 @@ import com.itwillbs.service.ContractService;
 import com.itwillbs.service.ProjectService;
 import com.itwillbs.service.SettlementService;
 import com.itwillbs.service.UserService;
+import com.itwillbs.util.PaymentRequest;
+import com.itwillbs.util.PaymentResponse;
+import com.itwillbs.util.PortOneClient;
 
 @Controller
 @RequestMapping(value = "/admin/*")
@@ -54,7 +61,7 @@ public class AdminController {
 	private ProjectService pService;
 	
 	@Inject
-	private SettlementService sService;
+	private SettlementService settlementService;
 	
 	@Autowired
 	private ContractService cService;
@@ -174,28 +181,68 @@ public class AdminController {
 	 
 	 @GetMapping("/settlements")
 	    public String getSettlements(Model model,
-	                                 @RequestParam(value = "priceCheck", required = false) Boolean priceCheck,
-	                                 @RequestParam(value = "settlementCheck", required = false) Boolean settlementCheck) {
+	                                 @RequestParam(value = "price_check", required = false) Boolean priceCheck,
+	                                 @RequestParam(value = "settlement_check", required = false) Boolean settlementCheck) {
 	        List<SettlementDTO> settlements;
 
 	        if (priceCheck != null) {
-	            settlements = sService.getSettlementsByPriceCheck(priceCheck);
+	            settlements = settlementService.getSettlementsByPriceCheck(priceCheck);
 	        } else if (settlementCheck != null) {
-	            settlements = sService.getSettlementsBySettlementCheck(settlementCheck);
+	            settlements = settlementService.getSettlementsBySettlementCheck(settlementCheck);
 	        } else {
-	            settlements = sService.getAllSettlements();
+	            settlements = settlementService.getAllSettlements();
 	        }
 
 	        model.addAttribute("settlements", settlements);
 	        return "admin/settlementList";
 	    }
 
+	 @GetMapping("/settlements/{settlement_no}/calculate")
+	    @ResponseBody
+	    public SettlementDTO calculateSettlement(@PathVariable("settlement_no") int settlementNo) {
+	        SettlementDTO settlement = settlementService.getSettlementById(settlementNo);
+	        BigDecimal fee = settlement.getPrice().multiply(new BigDecimal("0.1"));
+	        BigDecimal settledCost = settlement.getPrice().subtract(fee);
+	        settlement.setFee(fee);
+	        settlement.setSettled_cost(settledCost);
+	        return settlement;
+	    }
+
+	    @PostMapping("/settlements/{settlement_no}/update")
+	    @ResponseBody
+	    public String updateSettlement(@PathVariable("settlement_no") int settlementNo,
+	                                   @RequestBody SettlementDTO updatedSettlement) {
+	        SettlementDTO settlement = settlementService.getSettlementById(settlementNo);
+	        settlement.setFee(updatedSettlement.getFee());
+	        settlement.setSettled_cost(updatedSettlement.getSettled_cost());
+	        settlement.setSettlement_check(true);
+	        settlementService.updateSettlement(settlement);
+	        return "정산 정보가 성공적으로 업데이트되었습니다.";
+	    }
+
 	    @PostMapping("/settlements/process")
 	    public String processSettlement(@RequestParam("settlement_no") int settlementNo) {
-	        SettlementDTO settlement = sService.getSettlementById(settlementNo);
-	        sService.processSettlement(settlement);
+	        SettlementDTO settlement = settlementService.getSettlementById(settlementNo);
+	        settlement.setMerchant_uid("settlement_" + settlement.getSettlement_no()); // merchant_uid 설정
+	        settlementService.processSettlement(settlement);
 	        return "redirect:/admin/settlements";
 	    }
+
+//	    @PostMapping("/settlements/{settlement_no}/update")
+//	    @ResponseBody
+//	    public String updateSettlement(@PathVariable("settlement_no") int settlementNo, @RequestBody SettlementDTO settlement) {
+//	        SettlementDTO originalSettlement = settlementService.getSettlementById(settlementNo);
+//	        originalSettlement.setFee(settlement.getFee());
+//	        originalSettlement.setSettled_cost(settlement.getSettled_cost());
+//	        originalSettlement.setSettlement_check(true);
+//	        settlementService.updateSettlement(originalSettlement);
+//	        return "{\"status\":\"success\"}";
+//	    }
+
+	    
+	    
+	    
+	    
 	 
 	 @Value("${file.upload-dir}")
 	    private String uploadDir;

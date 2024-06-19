@@ -1,72 +1,104 @@
 package com.itwillbs.service;
 
+import java.math.BigDecimal;
+import java.security.SecureRandom;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.itwillbs.dto.SettlementDTO;
 import com.itwillbs.persistence.SettlementDAO;
+import com.itwillbs.util.PaymentRequest;
+import com.itwillbs.util.PaymentResponse;
+import com.itwillbs.util.PortOneClient;
+
 
 @Service
 public class SettlementServiceImpl implements SettlementService {
+		
+
+		private static final Logger logger = LoggerFactory.getLogger(SettlementServiceImpl.class);
 	
-	@Autowired
-	private SettlementDAO sdao;
+		@Autowired
+	    private SettlementDAO settlementDAO;
 
-	@Override
-    public List<SettlementDTO> getAllSettlements() {
-        return sdao.getAllSettlements();
-    }
+	    @Autowired
+	    private PortOneClient portOneClient;
 
-    @Override
-    public List<SettlementDTO> getSettlementsByPriceCheck(boolean priceCheck) {
-        return sdao.getSettlementsByPriceCheck(priceCheck);
-    }
+	    @Override
+	    public void updateSettlement(SettlementDTO settlement) {
+	        settlementDAO.updateSettlement(settlement);
+	    }
 
-    @Override
-    public List<SettlementDTO> getSettlementsBySettlementCheck(boolean settlementCheck) {
-        return sdao.getSettlementsBySettlementCheck(settlementCheck);
-    }
+	    @Override
+	    public SettlementDTO getSettlementById(int settlementNo) {
+	        return settlementDAO.getSettlementById(settlementNo);
+	    }
 
-    @Override
-    public SettlementDTO getSettlementById(int settlement_no) {
-        return sdao.getSettlementById(settlement_no);
-    }
+	    @Override
+	    public List<SettlementDTO> getAllSettlements() {
+	        return settlementDAO.getAllSettlements();
+	    }
 
-    @Override
-    public void updateSettlement(SettlementDTO settlement) {
-    	sdao.updateSettlement(settlement);
-    }
+	    @Override
+	    public List<SettlementDTO> getSettlementsByPriceCheck(boolean priceCheck) {
+	        return settlementDAO.getSettlementsByPriceCheck(priceCheck);
+	    }
 
-    @Override
-    @Transactional
-    public void processSettlement(SettlementDTO settlement) {
-//        // 결제 처리 로직
-//        int fee = (int) (settlement.getPrice() * 0.1); // 수수료 10%
-//        int settledCost = settlement.getPrice() - fee;
-//
-//        PortoneClient client = new PortoneClient("api_key", "api_secret"); // 포트원 클라이언트 생성
-//        PaymentRequest request = new PaymentRequest();
-//        request.setAmount(settledCost);
-//        request.setReceiver(settlement.getFree_id()); // 프리랜서 ID를 수신자로 설정
-//
-//        try {
-//            PaymentResponse response = client.makePayment(request);
-//            if (response.isSuccess()) {
-//                // 결제 성공 시
-//                settlement.setFee(fee);
-//                settlement.setSettled_cost(settledCost);
-//                settlement.setSettlement_check(true);
-//                sdao.updateSettlement(settlement);
-//            } else {
-//                throw new RuntimeException("Payment failed: " + response.getMessage());
-//            }
-//        } catch (Exception e) {
-//            throw new RuntimeException("Payment processing error: " + e.getMessage());
-//        }
-    }
-   
-	
+	    @Override
+	    public List<SettlementDTO> getSettlementsBySettlementCheck(boolean settlementCheck) {
+	        return settlementDAO.getSettlementsBySettlementCheck(settlementCheck);
+	    }
+
+	    @Override
+	    public SettlementDTO getSettlementByMerchantUid(String merchant_uid) {
+	        return settlementDAO.getSettlementByMerchantUid(merchant_uid);
+	    }
+	    
+	    
+	    
+	    @Override
+		public void requestSettlement(SettlementDTO settlement) {
+	    	settlementDAO.updateSettlement(settlement);
+		}
+
+		@Transactional
+	    @Override
+	    public void processSettlement(SettlementDTO settlement) {
+	        // Calculate fee and settled cost
+	        BigDecimal fee = settlement.getPrice().multiply(new BigDecimal("0.1"));
+	        BigDecimal settledCost = settlement.getPrice().subtract(fee);
+
+	        settlement.setFee(fee);
+	        settlement.setSettled_cost(settledCost);
+	        settlement.setMerchant_uid(UUID.randomUUID().toString());
+
+	        // Call the payment API
+	        PaymentRequest request = new PaymentRequest();
+	        request.setPg("kakaopay");
+	        request.setPay_method("easy");
+	        request.setMerchant_uid(settlement.getMerchant_uid());
+	        request.setName("정산 처리");
+	        request.setAmount(settledCost);
+	        request.setBuyer_name(settlement.getDepositor());
+
+	        PaymentResponse response = portOneClient.requestPayment(request);
+
+	        if (response.isSuccess()) {
+	            // Update the settlement
+	            settlement.setSettlement_check(true);
+	            settlementDAO.updateSettlement(settlement);
+	        } else {
+	            throw new RuntimeException("Payment failed: " + response.getError_msg());
+	        }
+	    }
+
+
 }

@@ -2,18 +2,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="../include/header.jsp" %>
 
-<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-
 <div class="box-header">
     <h3 class="box-title">정산관리</h3>
 </div>
 
 <div class="btn-group" role="group" aria-label="Settlement Filter">
     <a href="/admin/settlements" class="btn btn-default">전체</a>
-    <a href="/admin/settlements?priceCheck=true" class="btn btn-default">대금지불</a>
-    <a href="/admin/settlements?priceCheck=false" class="btn btn-default">대금미지불</a>
-    <a href="/admin/settlements?settlementCheck=true" class="btn btn-default">정산완료</a>
-    <a href="/admin/settlements?settlementCheck=false" class="btn btn-default">정산미완료</a>
+    <a href="/admin/settlements?price_check=true" class="btn btn-default">대금지불</a>
+    <a href="/admin/settlements?price_check=false" class="btn btn-default">대금미지불</a>
+    <a href="/admin/settlements?settlement_check=true" class="btn btn-default">정산완료</a>
+    <a href="/admin/settlements?settlement_check=false" class="btn btn-default">정산미완료</a>
 </div>
 
 <div class="box-body">
@@ -73,57 +71,86 @@
                                     </c:otherwise>
                                 </c:choose></td>
                                 <td>
-                                    <button class="btn btn-primary" <%-- onclick="processSettlement(${item.settlement_no}, '${item.free_id}', '${item.bank_nm}', '${item.depositor}', '${item.account}', ${item.price}) --%>">정산 처리</button>
+                                    <c:if test="${item.price_check == true && item.settlement_check == false}">
+                                        <form class="process-form" action="/admin/settlements/process" method="post">
+                                            <input type="hidden" name="settlement_no" value="${item.settlement_no}" />
+                                            <input type="hidden" name="settlement_requested" value="${item.settlement_requested}" />
+                                            <button type="submit" class="btn btn-primary">정산 처리</button>
+                                        </form>
+                                    </c:if>
                                 </td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 </table>
             </div>
-            
         </div>
     </div>
 </div>
 
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <script>
-//     function processSettlement(settlementNo, freeId, bankNm, depositor, account, price) {
-//         const IMP = window.IMP;
-//         IMP.init("imp41432400"); // 가맹점 식별코드
+    IMP.init('imp41432400');  // 이곳에 고객사 식별코드 입력
 
-//         IMP.request_pay({
-//             pg: 'tosspayments',
-//             pay_method: 'trans',
-//             merchant_uid: 'merchant_' + new Date().getTime(),
-//             name: 'Settlement Payment',
-//             amount: price * 0.9, // 수수료 10% 제외
-//             buyer_name: freeId,
-//             buyer_email: 'buyer@example.com', // 샘플 이메일
-//             buyer_tel: '010-1234-5678', // 샘플 전화번호
-//             escrow: true
-//         }, function (rsp) {
-//             if (rsp.success) {
-//                 // 결제 성공 시 서버로 결제 결과 전송
-//                 $.ajax({
-//                     url: "/admin/settlements/process",
-//                     method: "POST",
-//                     data: {
-//                         settlement_no: settlementNo,
-//                         fee: price * 0.1,
-//                         settled_cost: price * 0.9
-//                     },
-//                     success: function (response) {
-//                         alert('결제 성공: ' + bankNm + ', ' + depositor + ', ' + account);
-//                         location.reload();
-//                     },
-//                     error: function (error) {
-//                         alert('결제 처리 중 오류가 발생했습니다.');
-//                     }
-//                 });
-//             } else {
-//                 alert('결제에 실패했습니다. ' + rsp.error_msg);
-//             }
-//         });
-//     }
+    function processPayment(settlementNo, bankNm, account, depositor, fee, settledCost) {
+        IMP.request_pay({
+            pg: "kakaopay",
+            pay_method: "easy",
+            merchant_uid: "test_" + Math.random().toString(36).substr(2, 9),
+            name: "정산 처리",
+            amount: settledCost,
+            buyer_name: depositor
+        }, function (rsp) {
+            if (rsp.success) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/admin/settlements/' + settlementNo + '/update', true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        alert("정산 처리 완료\n계좌번호: " + account + "\n은행명: " + bankNm + "\n예금주: " + depositor + "\n수수료: " + fee + "\n정산금액: " + settledCost);
+                        location.reload();
+                    } else if (xhr.readyState === 4) {
+                        alert("결제는 성공하였으나 서버 업데이트에 실패하였습니다. 에러 내용: " + xhr.responseText);
+                    }
+                };
+                xhr.send(JSON.stringify({
+                    fee: fee,
+                    settled_cost: settledCost
+                }));
+            } else {
+                alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
+            }
+        });
+    }
+
+    var buttons = document.querySelectorAll('.process-form');
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('submit', function (e) {
+            e.preventDefault();
+            var settlementNo = this.querySelector('input[name="settlement_no"]').value;
+            var settlementRequested = this.querySelector('input[name="settlement_requested"]').value;
+
+            if (settlementRequested === "false" && !confirm("클라이언트의 정산 요청이 필요합니다. 강제로 진행하시겠습니까?")) {
+                return;
+            }
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/admin/settlements/' + settlementNo + '/calculate', true);
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 400) {
+                    var data = JSON.parse(xhr.responseText);
+                    var bankNm = data.bank_nm;
+                    var account = data.account;
+                    var depositor = data.depositor;
+                    var fee = data.fee;
+                    var settledCost = data.settled_cost;
+
+                    processPayment(settlementNo, bankNm, account, depositor, fee, settledCost);
+                }
+            };
+            xhr.send();
+        });
+    }
 </script>
 
 <%@ include file="../include/footer.jsp" %>
