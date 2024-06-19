@@ -54,8 +54,8 @@
 									<td>${conProj.proj_no }</td>
 									<td>${conProj.proj_title }</td>
 									<td>${conProj.ct_id }</td>
-									<td>${conProj.manager_nm }</td>
-									<td>${conProj.proj_status }</td>
+									<td id="mn">${conProj.manager_nm }</td>
+									<td>${conProj.proj_status } 진행중</td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -90,6 +90,16 @@
 	</ul>
 </div>
 
+<script type="text/javascript">
+	$(document).ready(function(){
+		var mn = "${conProj.manager_nm}";
+		if(mn == ""){
+			$("#mn").text("매니저 미정");
+		}
+		
+	});
+
+</script> 
 
 
 

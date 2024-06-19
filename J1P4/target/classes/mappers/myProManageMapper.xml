@@ -34,8 +34,8 @@
         from project p
 		join offer_mgmt o on p.proj_no = o.proj_no 
 		join freelancer f on f.free_no = o.free_no  
-    	join skill s on s.proj_no = o.proj_no
-    	join region r on r.proj_no = o.proj_no        
+    	left join skill s on s.proj_no = o.proj_no
+    	left join region r on r.proj_no = o.proj_no        
 		where f.free_id = 'user_9'<!--  #{user_id} --> 
 	</select>    
 

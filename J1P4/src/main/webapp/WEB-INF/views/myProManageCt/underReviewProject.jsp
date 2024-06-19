@@ -35,19 +35,20 @@
 								<tr>
 									<td>${projectVO.proj_title }</td>
 									<td class="text-center">
-									<%-- <fmt:formatDate value="${projectVO.reg_date }" pattern="yyyy-mm-dd" /> ~ ${projectVO.deadline } --%>
-									<span id="reg_date"></span> ~ ${projectVO.deadline }
+									${projectVO.reg_date.substring(0, 10)} ~ ${projectVO.deadline }
 									</td>
 									<td class="text-center">${projectVO.proj_status }</td>
 									<td class="text-center">
-										<form action="">
-											<button type="submit" onclick="javascript: form.action='#'" class="btn btn-primary">수정하기</button>
+	
+									<!-- 수정/삭제 공용 폼 -->
+										<form role="form" action="" method="post">
+											<input type="hidden" name="proj_no" value="${projectVO.proj_no }">
 										</form>
-										<form action="/myProManageCt/underReviewProject" method="post">
-											<input type="hidden" name="proj_no" value="${projectVO.proj_no }"> 
-											<input type="submit" class="btn btn-danger" value="삭제하기">
-										</form>
-
+										
+									<!-- 제이쿼리 사용 버튼 -->	
+			<!-- 수정하기 버튼 프로젝트 수정페이지와 연결 필요 -->									
+										<button type="submit" class="btn btn-warning">수정하기</button>
+										<button type="submit" class="btn btn-danger">삭제하기</button>
 									</td>
 								</tr>
 							</c:forEach>
@@ -59,17 +60,9 @@
 	</div>
 </section>
 
+<!--  -->
 <script>
 	$(document).ready(function() {
-		
-		var datetime = "${projectVO.reg_date}";
-		
-		if(datetime){
-			var date = datetime.slice(0, 7);			
-		}
-		
-		// 결과를 HTML에 출력
-		$("#reg_date").text(date);
 		
 		// 프로젝트 삭제 성공 모달창 생성
 		var result = "${msg}";
@@ -82,9 +75,19 @@
 			  showConfirmButton: true,
 			  confirmButtonText: "확인"
 			});
-		}		
+		}	
+		
+		// '수정하기' 버튼 클릭시 프로젝트 수정 페이지로 이동
+		
+		// '삭제하기' 버튼 클릭시 삭제후 현재 페이지로 redirect
+		$(".btn_danger").click(function(){
+			$("form[role='form']").attr("action","/myProManageCt/underReviewProject");
+			$("form[role='form']").submit();
+		});
+		
 	});
 </script>
+
 <%@ include file="../include/footer.jsp" %>
 	
 	

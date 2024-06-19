@@ -112,7 +112,7 @@ public class MyProManageCtController {
 		// 삭제 성공 정보를 전달
 		rttr.addFlashAttribute("msg", "deleteProject");
 		
-		return "redirect:redirect:/myProManageCt/temSaveProject";
+		return "redirect:/myProManageCt/temSaveProject";
 	}
 	
 	// 등록실패 프로젝트 목록 조회
