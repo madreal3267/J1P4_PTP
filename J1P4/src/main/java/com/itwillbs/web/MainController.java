@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping(value = "/*")
+@RequestMapping(value = "/main/*")
 public class MainController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 	
 	// 서비스 객체 주입
 	
-	// https://localhost:8088/main
-	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	// http://localhost:8088/main/home
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public void mainGET() {
 		logger.debug(" /main -> mainGET() 호출 ");
 		// 연결된 뷰페이지 실행 /WEB-INF/views/main.jsp
