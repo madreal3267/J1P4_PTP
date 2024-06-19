@@ -38,8 +38,8 @@
 							<tr>
 								<td rowspan="2">${projectVO.proj_no }</td>
 								<td>${projectVO.proj_title }</td>
-								<td><fmt:formatDate value="${projectVO.reg_date }" pattern="yyyy-mm-dd"/></td>
-								<td><fmt:formatDate value="${projectVO.mod_date }" pattern="yyyy-mm-dd"/></td>
+								<td>${projectVO.reg_date }
+								<td>${projectVO.mod_date }
 								<td rowspan="2" class="text-center">
 									<form method="POST" name="form">
 										<button type="submit" onclick="javascript: form.action='#'" class="btn btn-primary">수정하기</button>

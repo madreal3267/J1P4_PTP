@@ -36,15 +36,13 @@ public interface MyProManageDAO {
 	public List<ProjectDTO> endApplyProjectList();	
 	
 	// 계약 진행 중 프로젝트 목록
-	public List<ProjectVO> contractProjectList();
+	public List<ProjectDTO> contractProjectList();
 	
 	// 프로젝트 진행 중 목록
 	public List<ProjectDTO> ongoingProjectList();
 	
 	// 평가 대기중 프로젝트 목록
 	public List<ProjectVO> waitEvaluationProjectList();
-
-	
 	
 	// 검수중 프로젝트 목록
 	public List<ProjectVO> underReviewProjectList();
@@ -59,7 +57,7 @@ public interface MyProManageDAO {
 	public List<ProjectVO> regFailedProjectList();
 	
 	// 지원자 모집중 프로젝트 목록
-	public List<ProjectVO> recruitingProjectList();
+	public List<ProjectDTO> recruitingProjectList();
 	
 	// 계약 진행중 프로젝트 목록
 	public List<ProjectVO> ctContractProjectList();

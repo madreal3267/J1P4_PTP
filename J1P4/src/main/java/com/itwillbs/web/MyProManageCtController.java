@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.itwillbs.domain.EvaluateFreelancerDTO;
 import com.itwillbs.domain.EvaluateProjectDTO;
 import com.itwillbs.domain.FreelancerVO;
+import com.itwillbs.domain.ProjectDTO;
 import com.itwillbs.domain.ProjectVO;
 import com.itwillbs.domain.ctOngoingProjectDTO;
 import com.itwillbs.domain.freeInfoDTO;
@@ -83,7 +84,7 @@ public class MyProManageCtController {
 		// 삭제 성공 정보를 전달
 		rttr.addFlashAttribute("msg", "deleteProject");
 		
-		return "redirect:redirect:/myProManageCt/underReviewProject";
+		return "redirect:/myProManageCt/underReviewProject";
 	}
 	
 	// 임시저장 프로젝트 목록 조회
@@ -132,7 +133,7 @@ public class MyProManageCtController {
 	public void recruitingProjectList(Model model) {
 		logger.debug("/recruitingProject -> recruitingProjectList() 호출");
 		
-		List<ProjectVO> recruitingProjectList = myService.recruitingProjectList();
+		List<ProjectDTO> recruitingProjectList = myService.recruitingProjectList();
 		logger.debug("recruitingProjectList : " + recruitingProjectList.size());
 		
 		model.addAttribute("recruitingProjectList", recruitingProjectList);		

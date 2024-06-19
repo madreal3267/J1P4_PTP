@@ -88,10 +88,10 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 
 	// 계약중 프로젝트 리스트 미완성미완성미안선애 에잲애
 	@Override
-	public List<ProjectVO> contractProjectList() {
-		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"contractProjectList");
+	public List<ProjectDTO> contractProjectList() {
+		List<ProjectDTO> resultDTO = sqlSession.selectList(NAMESPACE+"contractProjectList");
 		
-		return resultVO;
+		return resultDTO;
 	}
 
 	// 진행중 프로젝트 리스트
@@ -145,10 +145,10 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 
 	// 지원자 모집중 프로젝트 리스트
 	@Override
-	public List<ProjectVO> recruitingProjectList() {
-		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"recruitingProjectList");
+	public List<ProjectDTO> recruitingProjectList() {
+		List<ProjectDTO> resultDTO = sqlSession.selectList(NAMESPACE+"recruitingProjectList");
 		
-		return resultVO;
+		return resultDTO;
 	}
 
 	// 계약중 프로젝트 리스트(클라이언트 ver.)

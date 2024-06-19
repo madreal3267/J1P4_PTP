@@ -85,7 +85,7 @@ public class MyProManageServiceImpl implements MyProManageService {
 
 	// 계약 진행 중 프로젝트 목록
 	@Override
-	public List<ProjectVO> contractProjectList() {
+	public List<ProjectDTO> contractProjectList() {
 		logger.debug("contractProjectList() 실행");
 		
 		return mpmdao.contractProjectList();
@@ -136,7 +136,7 @@ public class MyProManageServiceImpl implements MyProManageService {
 
 	// 지원자 모집중 프로젝트 목록
 	@Override
-	public List<ProjectVO> recruitingProjectList() {
+	public List<ProjectDTO> recruitingProjectList() {
 		logger.debug("recruitingProjectList() 실행");
 		
 		return mpmdao.recruitingProjectList();

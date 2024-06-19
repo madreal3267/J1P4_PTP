@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ include file="../include/headerCt.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <h1>/myProManageCt/underReviewProject</h1>
 <hr>
@@ -70,6 +71,18 @@
 		// 결과를 HTML에 출력
 		$("#reg_date").text(date);
 		
+		// 프로젝트 삭제 성공 모달창 생성
+		var result = "${msg}";
+		
+		if(result == "deleteProject"){
+
+			Swal.fire({
+			  icon: "info",
+			  title: "삭제 완료",
+			  showConfirmButton: true,
+			  confirmButtonText: "확인"
+			});
+		}		
 	});
 </script>
 <%@ include file="../include/footer.jsp" %>

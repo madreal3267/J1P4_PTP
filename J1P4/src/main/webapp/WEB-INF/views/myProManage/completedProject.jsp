@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <%@ include file="../include/header.jsp"%>
 
 <h1>/myProManage/completedProject.jsp</h1>
@@ -117,5 +117,21 @@
 	</div>
 </div>
 
+<script>
+$(document).ready(function() {
+	
+	// 프로젝트 삭제 성공 모달창 생성
+	var result = "${msg}";
+	
+	if(result == "evaluateOK"){
 
+		Swal.fire({
+		  icon: "info",
+		  title: "평가가 성공적으로 등록되었습니다.",
+		  showConfirmButton: true,
+		  confirmButtonText: "확인"
+		});
+	}		
+});
+</script>
 <%@ include file="../include/footer.jsp"%>
