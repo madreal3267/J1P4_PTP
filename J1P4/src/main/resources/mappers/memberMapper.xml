@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.itwillbs.mapper.MemberMapper">
+  	 
+  	 <!-- 회원가입 -->
+  	 <insert id="join">
+  	 	insert into user (name,user_id,user_email,user_pw)
+  	 	values(#{name},#{user_id},#{user_email},#{user_pw})
+  	 </insert>
+  	 
+  	 <!-- 로그인 -->
+  	 <select id="memberLogin" resultType="com.itwillbs.domain.MemberVO">
+  	 	select * from user
+  	 	where user_id=#{user_id} and user_pw=#{user_pw}
+  	 </select>
+  	 
+  	 <!-- 회원가입시 이메일 인증을 위한 랜덤번호 저장 -->
+  	 <update id="updateMailKey" parameterType="com.itwillbs.domain.MemberVO">
+  	 	update user
+  	 	set mail_key=#{mail_key}
+  	 	where user_email=#{user_email} and user_id=#{user_id}
+  	 </update>
+  	 
+  	 <update id="updateMailAuth" parameterType="com.itwillbs.domain.MemberVO">
+  	 	update user
+  	 	set mail_auth=1
+  	 	where mail_auth=#{mail_auth} and user_email=#{user_email} 
+  	 </update>	
+  	 
+  	 <!-- 유형을 선택하고, 확인버튼을 눌렀을때 mail_auth=1로 바뀌고 user_cp, user_type이 업데이트된다. -->
+	 <update id="updateTypeCp">
+	  	update user
+	  	set (mail_auth=1, user_cp=#{user_cp}, user_type=#{user_type})
+	  	where user_id=#{user_id}
+	 </update>			  	 
+  	
+  	<!-- 중복된 아이디가 있는지 조회 -->
+  	<select id="selectId" parameterType="String" resultType="int" >
+  		select count(user_id) from user where user_id=#{user_id}
+  	</select>
+  
+  
+  
+  
+  
+  
+  
+  </mapper>
