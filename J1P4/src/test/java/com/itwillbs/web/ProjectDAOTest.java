@@ -41,9 +41,9 @@ public class ProjectDAOTest {
 		vo.setProj_progress(1);
 //		vo.setDeadline(ld.now());
 //		vo.setStart_date(ld.now());
-		vo.setWork_period(18);
-		vo.setNo_recruited(100);
-		vo.setProj_cost(100000);
+//		vo.setWork_period('18');
+//		vo.setNo_recruited('100');
+//		vo.setProj_cost('100000');
 		vo.setProj_content("얍");
 		
 		pdao.insertProj(vo);
@@ -61,7 +61,7 @@ public class ProjectDAOTest {
 		uVO.setProj_title("update 쿼리 테스트 중");
 		uVO.setWork_field("퍼블리싱");
 		
-		pdao.updateProj(uVO);
+//		pdao.updateProj(uVO);
 		
 		logger.debug(" DAO TEST : updateTest() 끝 ");
 	}

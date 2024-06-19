@@ -25,6 +25,15 @@ h5 { color: gray !important; }
 <body>
 	<h1>임시 프로젝트 수정하기 (saveProjDt.jsp)</h1>
 
+	<div class="toast-container position-fixed top-70 start-50 p-3">
+	  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+	    
+	    <div class="toast-body" style="text-align: center;">
+	      임시 저장 완료 ( •̀ ω •́ )y
+	    </div>
+	    
+	  </div>
+	</div>
 
 	<hr>
 	<div>
@@ -32,8 +41,8 @@ h5 { color: gray !important; }
 		<input type="hidden" value="user_10" name="user_id">
 		<input type="hidden" value=315 name="proj_no">
 		<input type="hidden" value="" name="temporary" class="temporary">
-		<!-- 사용자 아이디 정보 세션에 담아서 hidden 으로 전달 -> project 테이블 컬럼 ct_no 저장에 필요하기 때문 -->
-		<!-- 기능 구현 중 받아올 수 있는 세션이 없어서 임의로 user_10을 담아서 테스트 중 추후 수정 필요 -->
+		<!-- 사용자 아이디 정보를 세션과 pror_no은 파라미터값을 담아서 hidden 으로 전달 -> 임시저장 수정 또는 등록에 필요하기 때문 -->
+		<!-- 기능 구현 중 받아올 수 있는 세션과 파라미터가 없어서 임의로 user_10와 315를 담아서 테스트 중 추후 수정 필요 -->
 		
 		
 		<h2>어떤 프로젝트 업무를 맡기고 싶으신가요?</h2>
@@ -48,11 +57,11 @@ h5 { color: gray !important; }
 		<label for="radioWf4" class="btn btn-outline-dark">🖋️ 퍼블리싱</label>
 
 		<hr>
-		<h2>프로젝트 진행 분류</h2>
+		<h2>프로젝트를 간단하게 알려주세요</h2>
 		<input type="text" name="proj_title" value="${resultProj.proj_title}" placeholder="프로젝트 제목을 입력해주세요" style="width: 500px">
 
 		<hr>
-		<h2>프로젝트를 간단하게 알려주세요</h2>
+		<h2>프로젝트 진행 분류</h2>
 		<input type="radio" value=0 name="proj_progress" id="radioPj1">
 		<label for="radioPj1">신규 프로젝트를 진행하려 합니다</label><br>
 		<input type="radio" value=1 name="proj_progress" id="radioPj2">
@@ -69,12 +78,12 @@ h5 { color: gray !important; }
 		<hr>
 		<h2>예상 진행 기간</h2>
 		<h5>프로젝트 진행 기간을 입력해 주세요.</h5>
-		<input type="text" name="work_period" value="${resultProj.work_period}"> 일
+		<input type="number" name="work_period" value="${resultProj.work_period}"> 일
 
 		<hr>
 		<h2>모집 인원</h2>
 		<h5>프로젝트에 필요한 인원을 입력해 주세요.</h5>
-		<input type="text" name="no_recruited" value="${resultProj.no_recruited}"> 명
+		<input type="number" name="no_recruited" value="${resultProj.no_recruited}"> 명
 
 		<hr>
 		<h2>모집 마감일</h2>
@@ -84,7 +93,7 @@ h5 { color: gray !important; }
 		<hr>
 		<h2>작업 단가</h2>
 		<h5>프로젝트에 지출 가능한 예산을 입력해 주세요.</h5>
-		<input type="text" name="proj_cost" value="${resultProj.proj_cost}"> 원 <br>
+		<input type="number" name="proj_cost" value="${resultProj.proj_cost}"> 원 <br>
 		<input type="checkbox" value=1 name="cost_nego" id="ckNego">
 		<label for="ckNego">입력한 예산에서 조율이 가능합니다.</label>
 
@@ -141,13 +150,15 @@ h5 { color: gray !important; }
 		<hr>
 		<h2>프로젝트 상세 내용</h2>
 		<h5>프리랜서의 담당역할 및 업무범위를 입력해 주세요.</h5>
-		<textarea rows="10" cols="60" name="proj_content">${resultProj.proj_content}</textarea>
+		<textarea rows="10" cols="60" name="proj_content"><c:out value="${resultProj.proj_content}"/></textarea>
 
 		<hr>
 		<h2>주요 기술 스택</h2>
 		<h5>프리랜서가 필수로 보유해야하는 기술을 입력해 주세요.</h5>
+		
 		<div class="listPt"></div>
 		<!-- [추가하기] 클릭 시 추가되는 기술 리스트 출력되는 공간-->
+		
 		<c:forEach var="sk" items="${resultSk }">
 		<p><div class="border border-1 rounded-3" role="group" style="width: 400px; display: inline-block; position: relative;">
 		<input type="hidden" value="${sk.skill_nm}" name="skill_nm">
@@ -157,8 +168,11 @@ h5 { color: gray !important; }
 		<button class="removeSk btn-close" aria-label="Close" style="width: 1px; position: absolute; top: 21px; left: 360px;"></button></div>
 		</p>
 		</c:forEach>
+		<!-- 유저가 임시저장한 스킬 리스트 출력되는 공간 -->
+
 		<div id="inputPt"></div>
 		<!-- [+보유기술 추가] 클릭 시 [select 버튼] 출력되는 공간 -->
+		
 		<div role="button" class="addSkill">+ 보유기술 추가</div>
 
 		<hr>
@@ -190,24 +204,25 @@ h5 { color: gray !important; }
 		<hr>
 		<h2>전달사항 또는 우대사항</h2>
 		<h5>프리랜서 어쩌고 저쩌고 우짤</h5>
-		<textarea rows="10" cols="60" name="dlvy_msg">${resultProj.dlvy_msg}</textarea>
+		<textarea rows="10" cols="60" name="dlvy_msg"><c:out value="${resultProj.dlvy_msg}" /></textarea>
 
 		<hr>
-		<input type="button" class="saveButt" value="임시저장">
+		<input type="button" class="saveButt" id="liveToastBtn" value="임시저장">
 		<input type="submit" class="submButt" value="등록">
 
 	</form>
 	<!-- 폼 태그 끝 -->
-	</div>
-	${resultReg.region },${resultReg.district }
+	</div>	
 	
+
 	
 <!-- select2 (검색되는 select) 자바스크립트 -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <!-- 부트스트랩 5.3.3 자바스크립트 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script type="text/javascript">
-
+		
+		/* 임시저장된 value를 불러와서 라디오 체크에 checked 또는 체크박스에 selected 옵션 부여 */
 		$(":radio[name='work_field'][value='${resultProj.work_field}']").attr('checked', true);
 		$(":radio[name='pmeet_meth'][value='${resultProj.pmeet_meth}']").attr('checked', true);
 		$(":radio[name='meet_meth'][value='${resultProj.meet_meth}']").attr('checked', true);
@@ -217,8 +232,10 @@ h5 { color: gray !important; }
 		$(":radio[name='proj_progress'][value='${resultProj.proj_progress}']").attr('checked', true);
 		$(":checkbox[name='date_nego'][value='${resultProj.date_nego}']").attr('checked', true);
 		$(":checkbox[name='cost_nego'][value='${resultProj.cost_nego}']").attr('checked', true);
-		$("#region").val("${resultReg.region }").attr("selected", "selected");
-
+		$("#region").val("${resultReg.region }");
+		
+		// 시군구 selected 옵션 선택이 되지 않음 <- 해결 필요
+// 		$("#district").val("${resultReg.district }").attr("selected", "selected");
 		
 		/* 시군구 - select */
 		var cnt = new Array();
@@ -260,7 +277,7 @@ h5 { color: gray !important; }
 				'진주시', '진해시', '창원시', '통영시', '거창군', '고성군', '남해군', '산청군', '양산시',
 				'의령군', '창녕군', '하동군', '함안군', '함양군', '합천군');
 		cnt[16] = new Array('전체', '서귀포시', '제주시', '남제주군', '북제주군');
-
+		
 		function change(add) {
 
 			var sel = document.fm1.district
@@ -274,8 +291,11 @@ h5 { color: gray !important; }
 				sel.options[i] = new Option(cnt[add][i], cnt[add][i]);
 			}
 			
-			$("#district").val("${resultReg.district }").attr("selected", "selected");
+			
 		}
+
+		$("#district").val("${resultReg.district }");
+
 
 		/* [+보유기술 추가] 클릭 */
 		$(function() {
@@ -360,6 +380,8 @@ h5 { color: gray !important; }
 		/* 임시저장 기능 구현 */
 		var data = true;
 
+		// 임시저장된 프로젝트를 또 임시저장할 경우
+		// 비동기 방식으로 데이터를 처리하고 페이지는 유지
 		$(function() {
 			$(".saveButt").click(function() {
 				
@@ -370,7 +392,7 @@ h5 { color: gray !important; }
 						type : "POST",
 						data : $("#fm1").serialize(),
 						success : function() {
-							alert(" ╰(*°▽°*)╯ 최초 임시저장 후 저장 완료");
+							
 						},
 						error : function() {
 							alert("오류발생 - 최초 임시 저장 후");
@@ -380,9 +402,10 @@ h5 { color: gray !important; }
 		
 		});
 		
+		// 임시저장된 프로젝트를 등록할 경우
+		// 페이지를 이동시키며 데이터 처리
 		$(function() {
 			$(".submButt").click(function() {
-				/* 프로젝트 등록 */
 				
 				$('.temporary').val("등록성공");
 	
@@ -396,6 +419,16 @@ h5 { color: gray !important; }
 		$(document).on('click','.removeSk',function(){
 	        $(this).parent().remove()
 	    });
+		
+		const toastTrigger = document.getElementById('liveToastBtn')
+		const toastLiveExample = document.getElementById('liveToast')
+
+		if (toastTrigger) {
+		  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+		  toastTrigger.addEventListener('click', () => {
+		    toastBootstrap.show()
+		  })
+		}
 		
 </script>
 </body>

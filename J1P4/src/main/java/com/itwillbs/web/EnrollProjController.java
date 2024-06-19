@@ -106,6 +106,8 @@ public class EnrollProjController {
 	// ----------------------------- 머지 후 파트 분리 해야됨 -----------------------------
 	// 임시로 EnrollProjController에 구현 중임
 	
+	// http://localhost:8088/enroll/saveProjDt?proj_no=315
+	
 	// 내 프로젝트 관리에서 임시저장 프로젝트 불러오기
 	@GetMapping(value="/saveProjDt")
 	public void saveProjDtGET(Model model, @RequestParam("proj_no") int proj_no) {
