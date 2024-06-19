@@ -267,10 +267,12 @@ public class MyProManageController {
 	
 	// 완료한 프로젝트 평가 수정하기
 	@RequestMapping(value = "/completedProject",method = RequestMethod.POST)
-	public String updateEvaluate(EvaluateProjectDTO edto) {
+	public String updateEvaluate(EvaluateProjectDTO edto, RedirectAttributes rttr) {
 		logger.debug("/completedProject -> updateEvaluate(EvaluateProjectDTO edto) 호출");
 		
 		myService.updateEvaluate(edto);
+		
+		rttr.addFlashAttribute("msg", "modifyOK");
 		
 		return "redirect:/myProManage/completedProject";
 	}

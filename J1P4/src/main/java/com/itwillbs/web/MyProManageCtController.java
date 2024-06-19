@@ -1,5 +1,6 @@
 package com.itwillbs.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -169,19 +170,34 @@ public class MyProManageCtController {
 	public void waitEvaluationFreelancerList(Model model) {
 		logger.debug("/waitEvaluationFreelancer -> waitEvaluationFreelancerList() 호출");
 		
+		// 프리랜서 평가 여부 체크후 평가 대기중 프리랜서 목록조회
 		List<EvaluateFreelancerDTO> waitEvaluationFreelancerList = myService.waitEvaluationFreelancerList();
-		logger.debug("waitEvaluationFreelancerList : " + waitEvaluationFreelancerList.size());
+		List<EvaluateFreelancerDTO> filteredFreeList = new ArrayList<EvaluateFreelancerDTO>();
 		
-		model.addAttribute("waitEvaluationFreelancerList", waitEvaluationFreelancerList);		
+		for (EvaluateFreelancerDTO freelancer : waitEvaluationFreelancerList) {
+		    if (myService.checkEvaluateFree(freelancer) == 0) {
+		    	filteredFreeList.add(freelancer);
+		    }
+		}
+		
+		// 평가 미입력 프리랜서만 필터링해서 모델에 추가
+		if (!filteredFreeList.isEmpty()) {
+		    logger.debug("filteredFreeList : " + filteredFreeList.size());
+		    model.addAttribute("waitEvaluationFreelancerList", filteredFreeList);
+		} else {
+		    logger.debug("No freelancer found for evaluation.");
+		}
 	}	
 	
 	// 평가 대기중 프리랜서 - 평가하기
 	@RequestMapping(value = "/waitEvaluationFreelancer",method = RequestMethod.POST)
-	public String evaluationFreelancer(EvaluateFreelancerDTO edto) {
+	public String evaluationFreelancer(EvaluateFreelancerDTO edto, RedirectAttributes rttr) {
 		logger.debug("/waitEvaluationFreelancer -> evaluationFreelancer(EvaluateProjectDTO edto) 호출");
 		myService.evaluateFreelancer(edto);
 		
-		return "redirect:/myProManageCt/waitEvaluationFreelancer";
+		rttr.addFlashAttribute("msg", "evaluateOK");
+		
+		return "redirect:/myProManageCt/completedFreelancer";
 	}			
 	
 	// 완료한 프로젝트의 평가완료 프리랜서 목록 조회
@@ -198,10 +214,12 @@ public class MyProManageCtController {
 	
 	// 완료한 프로젝트 - 프리랜서 평가 수정하기
 	@RequestMapping(value = "/completedFreelancer",method = RequestMethod.POST)
-	public String updateEvaluateFree(EvaluateFreelancerDTO edto) {
+	public String updateEvaluateFree(EvaluateFreelancerDTO edto, RedirectAttributes rttr) {
 		logger.debug("/completedFreelancer -> updateEvaluateFree(EvaluateFreelancerDTO edto) 호출");
 		
 		myService.updateEvaluateFree(edto);
+		
+		rttr.addFlashAttribute("msg", "modifyOK");
 		
 		return "redirect:/myProManageCt/completedFreelancer";
 	}	

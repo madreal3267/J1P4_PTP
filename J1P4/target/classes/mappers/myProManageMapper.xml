@@ -288,7 +288,7 @@
 		join user u on f.free_id = u.user_id
 		join project p on fv.valuing_ct = p.ct_no and fv.proj_no = p.proj_no 
 		join client c on fv.valuing_ct = c.ct_no
-		where p.proj_status ='완료' and c.ct_id = 'user_10'<!--예시! #{user_id}로 변경 -->		
+		where p.proj_status ='완료' and c.ct_id = 'testct'<!--예시! #{user_id}로 변경 -->		
 	</select>
 
 	<!-- 완료한 프로젝트 - 프리랜서 평가 수정하기 -->
@@ -298,27 +298,6 @@
 		where valued_free=#{free_no} and valuing_ct=#{ct_no} and proj_no=#{proj_no}
 	</update>
 
-
-	<!-- 북마크 여부 확인 -->
-	<select id="isBookmarked">
-	SELECT COUNT(*) > 0
-	FROM bookmarks 
-	WHERE proj_no = #{proj_no} and free_no=#{free_no}
-	</select>
-	
-	<!-- 북마크 추가 -->
-	<insert id="addBookmark">
-		INSERT INTO bookmark (free_no,proj_no,ct_no) 
-		VALUES (#{free_no},#{proj_no},#{ct_no})
-	</insert>
-	
-	<!-- 북마크 삭제 -->	
-	<delete id="removeBookmark">
-		DELETE FROM bookmark 
-		WHERE proj_no = #{proj_no} AND free_no = #{free_no}
-	</delete>
-	
-	
 	
 	
 	

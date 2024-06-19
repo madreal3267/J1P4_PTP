@@ -97,6 +97,63 @@
 	</div>
 </div>		
 
+<!-- '평가하기'로 페이지 이동시 생성 modal 창 -->
+<div class="modal fade" id="myModal" style="display: none;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+				<h4 class="modal-title">평가하기 성공</h4>
+			</div>
+			<div class="modal-body">
+				<p>평가가 성공적으로 완료되어'종료된 프로젝트'의 '완료한 프로젝트'로 이동합니다.</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
+				<button type="button" class="btn btn-primary">동작 X</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 수정하기 완료시 생성 모달창 -->
+<div class="modal fade" id="myModal2" style="display: none;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+				<h4 class="modal-title">평가 수정 완료</h4>
+			</div>
+			<div class="modal-body">
+				<p>성공적으로 평가를 수정하였습니다.</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
+				<button type="button" class="btn btn-primary">동작 X</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Jquery 사용 -->
+<script>
+	$(document).ready(function() {
+		
+		// 지원하기 성공 정보 전달
+		var result = "${msg}";
+		if (result == "evaluateOK") {
+			$("#myModal").modal("show");
+		}
+		if (result == "modifyOK") {
+			$("#myModal2").modal("show");
+		}
+	});
+</script>
+
 <!-- 외형만 복사. 작동원리 탐구 필요. -->
 <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
 	<ul class="pagination">
