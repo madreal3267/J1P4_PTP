@@ -1,5 +1,7 @@
 package com.itwillbs.web;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,10 +11,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.itwillbs.domain.Criteria;
 import com.itwillbs.domain.EvaluateFreelancerDTO;
 import com.itwillbs.domain.EvaluateProjectDTO;
 import com.itwillbs.domain.FreelancerVO;
@@ -36,7 +43,7 @@ public class MyProManageCtController {
 	// 관심 프리랜서 목록 조회
 	// http://localhost:8088/myProManageCt/interestFreelancer
 	@RequestMapping(value = "/interestFreelancer",method = RequestMethod.GET)
-	public void interestFreelancerList(Model model) {
+	public void interestFreelancerList(Criteria cri, Model model) {
 		logger.debug("/interestFreelancer -> interestFreelancerList() 호출");
 		
 		List<freeInfoDTO> interestFreelancerList = myService.interestFreelancerList();
@@ -223,13 +230,5 @@ public class MyProManageCtController {
 		
 		return "redirect:/myProManageCt/completedFreelancer";
 	}	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }
