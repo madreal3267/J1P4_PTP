@@ -82,7 +82,7 @@
 <div class="form-group">
 <label for="inputPassword3" class="col-sm-2 control-label">비밀번호 확인</label>
 <div class="col-sm-10">
-<input type="password" name="user_pw" class="pass" id="pw2" placeholder="PasswordCheck">
+<input type="password" name="user_pw2" class="pass" id="pw2" placeholder="PasswordCheck">
 <span id=checkpass></span>
 </div>
 </div>
@@ -138,9 +138,9 @@
 		 			let memberid = $('#userid').val();
 		 			
 					if(input_id.length==0){ //아무것도 입력안한상태
- 						$('#check').html('입력하세요.').css('color','black')
+ 						$('#check').html('아이디는 6~12자리 영어,숫자만 사용 가능합니다.').css('color','black')
 					}else if((res ==1)  || (!check_id.test(memberid))){ // 사용불가
-						$('#check').html('중복된 아이디거나, 조건에 맞지않음').css('color','red')
+						$('#check').html('중복된 아이디거나, 조건에 맞지않습니다.').css('color','red')
 					}else if(res != 1){//사용가능
 						$('#check').html('사용 가능한 아이디입니다.').css('color','green')
 					}
@@ -167,27 +167,48 @@
 
 		//비밀번호 조건 일치/불일치
 		if(!check_pw.test(memberpw)){
-			$('#checkpass2').html('조건불일치').css('color', 'black');
+			$('#checkpass2').html('8~20자리의 영어,숫자,특수문자 조합으로 입력해주세요.').css('color', 'black');
 		}else{
-			$('#checkpass2').html('조건일치일치@@@@').css('color', 'green');
+			$('#checkpass2').html('비밀번호가 조건에 일치합니다.').css('color', 'green');
 		}
 		
 		//비밀번호 재확인
 		if(check_pw.test(memberpw)){
 			if(!pass1=="" || !pass2==""){
 			if(pass1 == pass2){
-				$('#checkpass').html('비밀번호 일치').css('color','green')
+				$('#checkpass').html('비밀번호가 일치합니다.').css('color','green')
 			}else if(pass1 != pass2){
-				$('#checkpass').html('비밀번호 불일치').css('color', 'red');
+				$('#checkpass').html('비밀번호를 다시 확인해주세요.').css('color', 'red');
 			}
 			
 			}
 		}		
 			
-		
+		let input_id = document.form_join.user_id.value; //name=user_id값
 		 
 	 });
-		 
+	 
+	 
+	 //회원가입 공백 처리
+	 function checkBlank(){
+		 var useremail = document.form_join.user_email.value;
+		 var username = document.form_join.name.value;
+		 var userid = document.form_join.user_id.value;
+		 var userpw = document.form_join.user_pw.value;
+		 var userpw2 = document.form_join.user_pw2.value;
+		 if(useremail==""|| username==""||userid==""|| userpw==""|| userpw2==""){
+			 alert("모든 빈칸을 작성해주세요.");
+		 	return false;
+		 }
+		
+		 	return true;
+	 }
+	 
+	 
+	 
+	 
+
+
 	 
  });
  
