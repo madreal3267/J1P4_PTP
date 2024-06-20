@@ -15,7 +15,7 @@ public class ProjectVO {
 	
 	private String work_field;
 	private String proj_title;
-	private int proj_progress;
+	private String proj_progress;
 	private String start_date;
 	private int date_nego;
 	private String work_period;
