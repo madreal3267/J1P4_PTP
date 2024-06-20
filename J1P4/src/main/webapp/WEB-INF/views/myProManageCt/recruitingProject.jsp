@@ -12,24 +12,21 @@
 </section>
 
 <section>
-<!-- 프로젝트 + 지원한 프리랜서 정보 -->
-	<c:forEach var="projectVO" items="${recruitingProjectList}">
-		<div>
-			<h3>${projectVO.proj_title }</h3>
-			예상 금액 ${projectVO.proj_cost } 원 | 예상 기간 ${projectVO.work_period } 개월 <br> 
-			${pojectVO.work_filed } | 서울시 강남구<!-- 지역 el표현식 -->|<button>자바<!-- 기술 el표현식 --></button><br> 
-			등록일자 ${projectVO.reg_date }
-			
-			<c:forEach var="applyVO" items="${applyList}">
-				<c:if test="${projectVO.proj_no == applyVO.proj_no}">
-					<p>${applyVO.free_no}</p>
-					<span class="badge bg-secondary">${applyVO.skill_nm}</span>
-					<p>Content: ${applyVO.content}</p>
-				</c:if>
-			</c:forEach>
-			<input type="button" value="수정하기">
-		</div>
-	</c:forEach>
+	 <c:forEach var="projDTO" items="${recruitingProjectList}">
+	 <hr>
+	 <div>
+	 	<h2>${projDTO.proj_title }</h2> 
+	 	예상 금액 ${projDTO.proj_cost } 만원 | 예상 기간 ${projDTO.work_period } 개월<br>
+		${projDTO.work_field }	|  ${projDTO.region } ${projDTO.district } | 
+		<c:set var="skillList" value="${projDTO.skill_nm }" />
+			<c:forEach items="${fn:split(skillList, ',')}" var="skill">
+			    <button type="button" class="btn btn-warning" ><c:out value="${skill}" /></button>
+			</c:forEach><br>	
+		<!-- 하트위치 -->
+		등록일자 ${projDTO.reg_date }
+	 </div>
+	 </c:forEach>
+
 </section>
 
 <!-- 외형만 복사. 작동원리 탐구 필요. -->

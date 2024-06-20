@@ -17,10 +17,10 @@ public class ProjectDTO {
 	private int proj_progress;
 	private Date start_date;
 	private int date_nego;
-	private int work_period;		// 관심
+	private String work_period;		// 관심
 	private int no_recruited;
 	private Date deadline;
-	private int proj_cost;			// 관심
+	private String proj_cost;			// 관심
 	private int cost_nego;
 	private String pmeet_meth;
 	private String meet_meth;

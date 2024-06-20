@@ -35,10 +35,10 @@
 							<td>
 		                        <c:choose>
 		                            <c:when test="${copDTO.proj_status == '계약'}">
-		                                <button>결제하기</button>
+		                                <button type="submit" class="btn btn-warning">결제하기</button>
 		                            </c:when>
 		                            <c:otherwise>
-		                               <button>완료하기</button>
+		                               <button type="submit" class="btn btn-primary">완료하기</button>
 		                            </c:otherwise>
 		                        </c:choose>
 							</td>

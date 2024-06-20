@@ -5,9 +5,12 @@
 <%@ include file="../include/headerCt.jsp" %>
 
 	<h1>/myProManageCt/ctContractProject.jsp</h1>
-	
-	<section>
-	 	<h3><b>AAA BB계약</b> 이란?</h3>
+<!--  -->
+<section>
+	<div class="col-md-12">
+		<div class="box box-default">
+			<div class="box-header with-border">
+<h3><b>AAA BB계약</b> 이란?</h3>
 	 	AAA BB계약은 계약서 날인 과정을 온라인으로 진행할 수 있는 편리한 계약 시스템입니다.
 	 	<div>
 	 	<b>[AAA BB 계약 절차]</b> <br>
@@ -15,29 +18,47 @@
 	 		2. 클라이언트, AAA, 프리랜서 모두의 계약서 검토가 완료되면 계약서 날인이 시작됩니다. <br>
 	 		3. 계약서는 AAA 간편날인, 서명날인, 도장 날인 총 3가지 방법으로 날인 할 수 있습니다.
 	 	</div>
-	</section>
-	
-	<section>
+			</div>
+		</div>
+	</div>
+</section>	
+<section>
+	<div class="col-md-12">
+		<div class="box box-default">
+			<div class="box-header with-border">
 		<h3>계약 진행 중</h3>
 		계약이 진행 중인 프로젝트를 확인 할 수 있습니다.
-	</section>
-	
-	<section>
-		<p>
-		1. 계약서 업로드
-		</p>
-	 
-	 	<c:forEach var="projectVO" items="${ctContractProjectList}">
-	 		<div>
-	 			<h2>${projectVO.proj_title }</h2> 
-	 			예상 금액 ${projectVO.proj_cost } | 예상 기간 ${projectVO.work_period } <br>
-				${pojectVO.work_filed }	| 서울시 강남구 <!-- 지역 el표현식 --> | <button>자바<!-- 기술 el표현식 --></button>
-				<input type="submit" value="계약하기">
-				등록일자 ${projectVO.reg_date }
-	 		</div>
-		</c:forEach>
-	</section>
-
+			</div>
+		</div>
+	</div>
+</section>
+<div class="col-md-12">
+	<div class="box box-default">
+		<div class="box-header with-border">
+			<section>
+				<table class="table table-bordered bg-light table-striped">
+					<tr class="text-center">
+						<td>프로젝트 번호</td>
+						<td>프로젝트 이름</td>
+						<td>담당 매니저</td>
+						<td>진행 상태</td>
+					</tr>
+					<c:forEach var="copDTO" items="${ctContractProjectList}">
+						<tr>
+							<td>${copDTO.proj_no }</td>
+							<td>${copDTO.proj_title }</td>
+							<td>${copDTO.manager_nm }</td>
+							<td>
+		                   ${copDTO.proj_status} 진행중
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</section>
+		</div>
+	</div>
+</div>
+<!--  -->
 <!-- 외형만 복사. 작동원리 탐구 필요. -->
 <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
 	<ul class="pagination">

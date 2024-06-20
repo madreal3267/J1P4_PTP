@@ -38,8 +38,8 @@ public class ProjectVO {
 	private int pay_check;
 	private int deadline_check;
 	private String reject_reason;
-	private Timestamp reg_date;
-	private Timestamp mod_date;
+	private String reg_date;
+	private String mod_date;
 	
 	// 추가
 	private int rn;

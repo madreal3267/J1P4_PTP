@@ -1,5 +1,8 @@
 package com.itwillbs.web;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,13 +11,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.itwillbs.domain.Criteria;
 import com.itwillbs.domain.EvaluateFreelancerDTO;
 import com.itwillbs.domain.EvaluateProjectDTO;
 import com.itwillbs.domain.FreelancerVO;
+import com.itwillbs.domain.ProjectDTO;
 import com.itwillbs.domain.ProjectVO;
 import com.itwillbs.domain.ctOngoingProjectDTO;
 import com.itwillbs.domain.freeInfoDTO;
@@ -34,7 +43,7 @@ public class MyProManageCtController {
 	// 관심 프리랜서 목록 조회
 	// http://localhost:8088/myProManageCt/interestFreelancer
 	@RequestMapping(value = "/interestFreelancer",method = RequestMethod.GET)
-	public void interestFreelancerList(Model model) {
+	public void interestFreelancerList(Criteria cri, Model model) {
 		logger.debug("/interestFreelancer -> interestFreelancerList() 호출");
 		
 		List<freeInfoDTO> interestFreelancerList = myService.interestFreelancerList();
@@ -83,7 +92,7 @@ public class MyProManageCtController {
 		// 삭제 성공 정보를 전달
 		rttr.addFlashAttribute("msg", "deleteProject");
 		
-		return "redirect:redirect:/myProManageCt/underReviewProject";
+		return "redirect:/myProManageCt/underReviewProject";
 	}
 	
 	// 임시저장 프로젝트 목록 조회
@@ -111,7 +120,7 @@ public class MyProManageCtController {
 		// 삭제 성공 정보를 전달
 		rttr.addFlashAttribute("msg", "deleteProject");
 		
-		return "redirect:redirect:/myProManageCt/temSaveProject";
+		return "redirect:/myProManageCt/temSaveProject";
 	}
 	
 	// 등록실패 프로젝트 목록 조회
@@ -132,7 +141,7 @@ public class MyProManageCtController {
 	public void recruitingProjectList(Model model) {
 		logger.debug("/recruitingProject -> recruitingProjectList() 호출");
 		
-		List<ProjectVO> recruitingProjectList = myService.recruitingProjectList();
+		List<ProjectDTO> recruitingProjectList = myService.recruitingProjectList();
 		logger.debug("recruitingProjectList : " + recruitingProjectList.size());
 		
 		model.addAttribute("recruitingProjectList", recruitingProjectList);		
@@ -168,19 +177,34 @@ public class MyProManageCtController {
 	public void waitEvaluationFreelancerList(Model model) {
 		logger.debug("/waitEvaluationFreelancer -> waitEvaluationFreelancerList() 호출");
 		
+		// 프리랜서 평가 여부 체크후 평가 대기중 프리랜서 목록조회
 		List<EvaluateFreelancerDTO> waitEvaluationFreelancerList = myService.waitEvaluationFreelancerList();
-		logger.debug("waitEvaluationFreelancerList : " + waitEvaluationFreelancerList.size());
+		List<EvaluateFreelancerDTO> filteredFreeList = new ArrayList<EvaluateFreelancerDTO>();
 		
-		model.addAttribute("waitEvaluationFreelancerList", waitEvaluationFreelancerList);		
+		for (EvaluateFreelancerDTO freelancer : waitEvaluationFreelancerList) {
+		    if (myService.checkEvaluateFree(freelancer) == 0) {
+		    	filteredFreeList.add(freelancer);
+		    }
+		}
+		
+		// 평가 미입력 프리랜서만 필터링해서 모델에 추가
+		if (!filteredFreeList.isEmpty()) {
+		    logger.debug("filteredFreeList : " + filteredFreeList.size());
+		    model.addAttribute("waitEvaluationFreelancerList", filteredFreeList);
+		} else {
+		    logger.debug("No freelancer found for evaluation.");
+		}
 	}	
 	
 	// 평가 대기중 프리랜서 - 평가하기
 	@RequestMapping(value = "/waitEvaluationFreelancer",method = RequestMethod.POST)
-	public String evaluationFreelancer(EvaluateFreelancerDTO edto) {
+	public String evaluationFreelancer(EvaluateFreelancerDTO edto, RedirectAttributes rttr) {
 		logger.debug("/waitEvaluationFreelancer -> evaluationFreelancer(EvaluateProjectDTO edto) 호출");
 		myService.evaluateFreelancer(edto);
 		
-		return "redirect:/myProManageCt/waitEvaluationFreelancer";
+		rttr.addFlashAttribute("msg", "evaluateOK");
+		
+		return "redirect:/myProManageCt/completedFreelancer";
 	}			
 	
 	// 완료한 프로젝트의 평가완료 프리랜서 목록 조회
@@ -197,20 +221,14 @@ public class MyProManageCtController {
 	
 	// 완료한 프로젝트 - 프리랜서 평가 수정하기
 	@RequestMapping(value = "/completedFreelancer",method = RequestMethod.POST)
-	public String updateEvaluateFree(EvaluateFreelancerDTO edto) {
+	public String updateEvaluateFree(EvaluateFreelancerDTO edto, RedirectAttributes rttr) {
 		logger.debug("/completedFreelancer -> updateEvaluateFree(EvaluateFreelancerDTO edto) 호출");
 		
 		myService.updateEvaluateFree(edto);
 		
+		rttr.addFlashAttribute("msg", "modifyOK");
+		
 		return "redirect:/myProManageCt/completedFreelancer";
 	}	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

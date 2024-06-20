@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itwillbs.domain.ApplyMgmtVO;
@@ -159,7 +160,7 @@ public class MyProManageController {
 	public void contractProjectList(Model model) {
 		logger.debug("/contractProject -> contractProjectList() 호출");
 		
-		List<ProjectVO> contractProjectList = myService.contractProjectList();
+		List<ProjectDTO> contractProjectList = myService.contractProjectList();
 		logger.debug("contractProjectList : " + contractProjectList.size());
 		
 		model.addAttribute("contractProjectList", contractProjectList);		
@@ -216,9 +217,13 @@ public class MyProManageController {
 	
 	// 평가 대기중 프로젝트 - 평가하기
 	@RequestMapping(value = "/waitEvaluationProject",method = RequestMethod.POST)
-	public void evaluationProject(EvaluateProjectDTO edto) {
+	public String evaluationProject(EvaluateProjectDTO edto, RedirectAttributes rttr) {
 		logger.debug("/waitEvaluationProject -> evaluationProject() 호출");
 		myService.evaluateProject(edto);
+		
+		rttr.addFlashAttribute("msg", "evaluateOK");
+		
+		return "redirect:/myProManage/completedProject";
 		
 	}			
 	
@@ -262,10 +267,12 @@ public class MyProManageController {
 	
 	// 완료한 프로젝트 평가 수정하기
 	@RequestMapping(value = "/completedProject",method = RequestMethod.POST)
-	public String updateEvaluate(EvaluateProjectDTO edto) {
+	public String updateEvaluate(EvaluateProjectDTO edto, RedirectAttributes rttr) {
 		logger.debug("/completedProject -> updateEvaluate(EvaluateProjectDTO edto) 호출");
 		
 		myService.updateEvaluate(edto);
+		
+		rttr.addFlashAttribute("msg", "modifyOK");
 		
 		return "redirect:/myProManage/completedProject";
 	}

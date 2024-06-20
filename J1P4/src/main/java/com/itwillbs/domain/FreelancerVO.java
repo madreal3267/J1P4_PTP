@@ -16,13 +16,13 @@ public class FreelancerVO {
 	private String major;
 	private String grad_status;
 	
-	private Timestamp entrance ;
-	private Timestamp graduation ;
+	private String entrance ;
+	private String graduation ;
 	
 	private String work_check;
-	private Timestamp work_date ;
+	private String work_date ;
 	
-	private int proj_cost;
+	private String proj_cost;
 	private String oneline_bio;
 	private String bio;
 	

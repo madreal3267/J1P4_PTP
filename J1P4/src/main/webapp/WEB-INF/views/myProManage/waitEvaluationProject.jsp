@@ -24,12 +24,13 @@
 				</div>
 
 				<c:forEach var="projectVO" items="${waitEvaluationProjectList}">
-					<p>
-						<b>${projectVO.proj_title }</b><br>
-						${projectVO.ct_id } <br>
-						작성기간 <fmt:formatDate value="${projectVO.mod_date }" pattern="yyyy-mm-dd"/>
-						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-${projectVO.ct_no}">평가하기</button>
-					</p>
+					
+						<b style="font-size: large;">${projectVO.proj_title }</b>
+						<button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#modal-${projectVO.ct_no}">평가하기</button>
+						<br><br>
+						${projectVO.ct_id } 클라이언트<span class="pull-right">작성기간 <fmt:formatDate value="${projectVO.mod_date }" pattern="yyyy-mm-dd"/></span>
+						 <br>
+					
 
 					<!-- 모달창 생성하기 -->
 					<div class="modal fade" id="modal-${projectVO.ct_no}">
@@ -72,22 +73,9 @@
 					</div>
 				</c:forEach>
 			</section>
-
-			<!-- 외형만 복사. 작동원리 탐구 필요. -->
-			<div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-				<ul class="pagination">
-					<li class="paginate_button previous disabled" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0">Previous</a></li>
-					<li class="paginate_button active"><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0">1</a></li>
-					<li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0">2</a></li>
-					<li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0">3</a></li>
-					<li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0">4</a></li>
-					<li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0">5</a></li>
-					<li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0">6</a></li>
-					<li class="paginate_button next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0">Next</a></li>
-				</ul>
-			</div>
 		</div>
 	</div>
 </div>
+
 <%@ include file="../include/footer.jsp" %>
 	
