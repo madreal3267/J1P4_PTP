@@ -244,10 +244,10 @@ public class AdminController {
 	    
 	    
 	 
-//	 @Value("${file.upload-dir}")
-//	    private String uploadDir;
+	 @Value("${file.upload-dir}")
+	    private String UPLOAD_DIR;
 	    
-	    private static final String UPLOAD_DIR = System.getenv("FILE_UPLOAD_DIR");
+//	    private static final String UPLOAD_DIR = System.getenv("FILE_UPLOAD_DIR");
 	 @Autowired
 	    private ServletContext servletContext;
 	 
@@ -265,16 +265,16 @@ public class AdminController {
 	        if (!file.isEmpty()) {
 	            try {
 	                // 절대 경로로 변환
-	            	logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + UPLOAD_DIR);
-	            	
-	                String realPath = servletContext.getRealPath(UPLOAD_DIR);
-	                File uploadDirFile = new File(realPath);
+	                logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + UPLOAD_DIR);
+
+	                // UPLOAD_DIR이 절대 경로인지 확인하고 절대 경로로 설정
+	                File uploadDirFile = new File(UPLOAD_DIR);
 	                if (!uploadDirFile.exists()) {
 	                    uploadDirFile.mkdirs(); // 경로가 존재하지 않으면 생성
 	                }
 
 	                // 파일을 저장할 경로를 지정
-	                String filePath = realPath + File.separator + file.getOriginalFilename();
+	                String filePath = UPLOAD_DIR + File.separator + file.getOriginalFilename();
 	                File dest = new File(filePath);
 	                file.transferTo(dest);
 
@@ -289,7 +289,10 @@ public class AdminController {
 	                cService.saveContract(contract);
 	            } catch (IOException e) {
 	                e.printStackTrace();
+	                return "admin/uploadError"; // 예외 발생 시 uploadError.jsp로 이동
 	            }
+	        } else {
+	            return "admin/uploadError"; // 파일이 비어있을 경우 uploadError.jsp로 이동
 	        }
 	        return "redirect:/admin/contracts";
 	    }

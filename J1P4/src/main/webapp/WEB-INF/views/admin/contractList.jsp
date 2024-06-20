@@ -148,7 +148,7 @@
 
         console.log("Project No:", projNo);
         console.log("Contract Title:", contractTitle);
-        console.log("File:", file);
+        console.log("File:", file);	
 
         if (projNo === '') {
             alert('Project No is required');
