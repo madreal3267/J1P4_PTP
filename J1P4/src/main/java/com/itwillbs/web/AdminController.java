@@ -244,9 +244,10 @@ public class AdminController {
 	    
 	    
 	 
-	 @Value("${file.upload-dir}")
-	    private String uploadDir;
-	 
+//	 @Value("${file.upload-dir}")
+//	    private String uploadDir;
+	    
+	    private static final String UPLOAD_DIR = System.getenv("FILE_UPLOAD_DIR");
 	 @Autowired
 	    private ServletContext servletContext;
 	 
@@ -264,7 +265,9 @@ public class AdminController {
 	        if (!file.isEmpty()) {
 	            try {
 	                // 절대 경로로 변환
-	                String realPath = servletContext.getRealPath(uploadDir);
+	            	logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + UPLOAD_DIR);
+	            	
+	                String realPath = servletContext.getRealPath(UPLOAD_DIR);
 	                File uploadDirFile = new File(realPath);
 	                if (!uploadDirFile.exists()) {
 	                    uploadDirFile.mkdirs(); // 경로가 존재하지 않으면 생성
