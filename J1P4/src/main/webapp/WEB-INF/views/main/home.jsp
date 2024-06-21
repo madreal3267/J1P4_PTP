@@ -16,66 +16,75 @@
 <c:import url="../include/ctHeader.jsp"></c:import>
 </c:if>
 
-<div class="my-3 py-3" style="position: static;">
-<h1>대한민국 NO.0 (허언사이트)<br>
-	IT 프리랜서 매칭 플랫폼</h1>
+<div style="position: relative;">
+	<div class="my-3 py-3" >
+	<h1 id="mainText">대한민국 NO.0 (허언사이트)<br>
+		IT 프리랜서 매칭 플랫폼</h1>
+	</div>
+	
+	<div style="padding-bottom: 150px;">
+		<h4 id="subText">강력한 어쩌고로 가장 정확하게, 쉽고 빠르게<br>
+		프로젝트 매칭을 경험하세요!</h4>
+	</div>
+	
+	<div id="mainImg">
+	<img src="../resources/main_side.svg" alt="mainImg"/>
+	</div>
+	
+	<!-- ============== 비회원 메인 메뉴 ================= -->
+	<c:if test="${empty sessionScope.user_id }">
+	<div class="mainButt">
+		<button class="rounded-3 p-3 butt1" type="button" onclick = "location.href = '/member/insert'">회원가입</button>
+		<button class="rounded-3 p-3 butt2" type="button" >이용방법</button>
+	</div>
+	</c:if>
+	
+	<!-- ============== 프리랜서 메인 메뉴 ================= -->
+	<c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.user_cf.equals('프리랜서') }">
+	<div class="mainButt">
+		<button class="rounded-3 p-3 butt1" type="button" onclick = "location.href = '/board/listPro'">프로젝트 찾기</button>
+		<button class="rounded-3 p-3 butt2" type="button" >이용방법</button>
+	</div>
+	</c:if>
+	
+	<!-- ============== 클라이언트 메인 메뉴 ================= -->
+	<c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.user_cf.equals('클라이언트') }">
+	<div class="mainButt" >
+		<button class="rounded-3 p-3 butt1" type="button" >프리랜서 찾기</button>
+		<button class="rounded-3 p-3 butt2" type="button" >이용방법</button>
+	</div>
+	</c:if>
+	  
+	<div class="border-top border-bottom my-5 py-5" id="mainCount">
+		<div class ="siteCount border-end px-5">총 프리랜서 수<br>
+			<p>102,192,371명</p>
+		</div>
+		<div class ="siteCount border-end px-5">총 프로젝트 금액<br>
+			<p>921,281,102,192,371원</p>
+		</div>
+		<div class ="siteCount border-end px-5">총 프로젝트 수<br>
+			<p>592,371개</p>
+		</div>
+		<div class ="siteCount px-5">재의뢰율<br>
+			<p>101%</p>
+		</div>
+	</div>
 </div>
 
-<div style="padding-bottom: 150px;">
-	<h4>강력한 어쩌고로 가장 정확하게, 쉽고 빠르게<br>
-	프로젝트 매칭을 경험하세요!</h4>
+<div style="position: relative; padding-top:80px;">
+	<h3 id="mainProjMenu">프로젝트 둘러보기</h3>
+	<div style="text-align: center;">
+		<button class="rounded-3 p-3 m-1 butt3" type="button"><b>⚙️ 개발</b></button>
+		<button class="rounded-3 p-3 m-1 butt3" type="button"><b>🛠️ 기획</b></button>
+		<button class="rounded-3 p-3 m-1 butt3" type="button"><b>🎨 디자인</b></button>
+		<button class="rounded-3 p-3 m-1 butt3" type="button"><b>🖋️ 퍼블리싱</b></button>
+	</div>
 </div>
 
-<div style="position: absolute; left:1000px; bottom:450px;">
-<img src="../resources/main_side.svg" alt="mainImg"/>
-</div>
-<c:if test="${empty sessionScope.user_id }">
-<div style= "width: 400px; position: absolute; bottom: 490px; left:415px;" >
-	<button class="rounded-3 p-3 b1" type="button" onclick = "location.href = '/member/insert'">회원가입</button>
-	<button class="rounded-3 p-3 b2" type="button" >이용방법</button>
-</div>
-</c:if>
-<c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.user_cf.equals('프리랜서') }">
-<div style= "width: 400px; position: absolute; bottom: 490px; left:415px;" >
-	<button class="rounded-3 p-3 b1" type="button" onclick = "location.href = '/board/listPro'">프로젝트 찾기</button>
-	<button class="rounded-3 p-3 b2" type="button" >이용방법</button>
-</div>
-</c:if>
-<c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.user_cf.equals('클라이언트') }">
-<div style= "width: 400px; position: absolute; bottom: 490px; left:415px;" >
-	<button class="rounded-3 p-3 b1" type="button" >프리랜서 찾기</button>
-	<button class="rounded-3 p-3 b2" type="button" >이용방법</button>
-</div>
-</c:if>
+<div id="logoText">
+100,000+ 기업이 믿고 사용 중인 국내 1위 IT 프로젝트 플랫폼</div>
   
-<div style="text-align: center; padding-top: 50px;" class="border-top border-bottom my-5 py-5" >
-	<div class ="siteInfo border-end px-5">총 프리랜서 수<br>
-		<p>102,192,371명</p>
-	</div>
-	<div class ="siteInfo border-end px-5">총 프로젝트 금액<br>
-		<p>921,281,102,192,371원</p>
-	</div>
-	<div class ="siteInfo border-end px-5">총 프로젝트 수<br>
-		<p>592,371개</p>
-	</div>
-	<div class ="siteInfo px-5">재의뢰율<br>
-		<p>101%</p>
-	</div>
-</div>
-
-<div class="my-5" >
-<h3>프로젝트 둘러보기</h3>
-</div>
-<div style="padding-left: 415px;">
-	<button class="rounded-3 p-3 m-1 b3" type="button"><b>⚙️ 개발</b></button>
-	<button class="rounded-3 p-3 m-1 b3" type="button"><b>🛠️ 기획</b></button>
-	<button class="rounded-3 p-3 m-1 b3" type="button"><b>🎨 디자인</b></button>
-	<button class="rounded-3 p-3 m-1 b3" type="button"><b>🖋️ 퍼블리싱</b></button>
-</div>
-
-<div class="subject" style="margin-top: 100px; margin-bottom: 50px;">100,000+ 기업이 믿고 사용 중인 국내 1위 IT 프로젝트 플랫폼</div>
-  
-<div class="my-3 slider">
+<div class="slider my-3">
 	<div class="image-box">
 	    <div><img class="logo" src="../resources/logo/logo_1.svg" alt=""></div>        
 	    <div><img class="logo" src="../resources/logo/logo_2.svg" alt=""></div>        

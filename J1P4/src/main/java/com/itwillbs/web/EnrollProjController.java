@@ -32,7 +32,7 @@ public class EnrollProjController {
 	// 프로젝트 등록 페이지 연결
 	// http://localhost:8088/enroll/enrollProj
 	@GetMapping(value="/enrollProj")
-	public void enrollGET() {
+	public void enrollProjGET() {
 		logger.debug(" Controller : ( •̀ ω •́ )y /enrollProj -> enrollGET() 실행 ");
 		
 		logger.debug(" Controller : ( •̀ ω •́ )y /views/enroll/enrollProj.jsp 페이지 연결 ");
@@ -41,7 +41,7 @@ public class EnrollProjController {
 	
 	// 프로젝트 등록
 	@PostMapping(value="/enrollProj")
-	public String enrollPOST(ProjectVO pVO, SkillVO sVO, RegionVO rVO/*, Model model,HttpSession session */) {
+	public String enrollProjPOST(ProjectVO pVO, SkillVO sVO, RegionVO rVO/*, Model model,HttpSession session */) {
 		logger.debug(" Controller : (＃°Д°) /enrollProj -> enrollPOST() 실행 ");		
 		
 //		String id = (String)session.getAttribute("user_id");
@@ -99,7 +99,7 @@ public class EnrollProjController {
 	// 프로젝트 등록 후 성공 페이지
 	// http://localhost:8088/enroll/enrollSuccess
 	@GetMapping(value="/enrollSuccess")
-	public void enrollSuccessGET() {
+	public void enrollProjSuccessGET() {
 		logger.debug(" Controller : ( •̀ ω •́ )y /enrollSuccess -> enrollSuccessGET() 실행 ");
 		
 		logger.debug(" Controller : ( •̀ ω •́ )y /views/enroll/enrollSuccess.jsp 페이지 연결 ");

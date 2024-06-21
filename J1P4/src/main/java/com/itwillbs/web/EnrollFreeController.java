@@ -45,7 +45,7 @@ public class EnrollFreeController {
 		fService.insertSkill(sVO);
 		fService.insertReg(rVO);
 		
-		return "redirect:/enroll/enrollSuccess";
+		return "redirect:/enroll/enrollFreeSuccess";
 	}
 	
 	// http://localhost:8088/enroll/enrollFreeB
@@ -72,12 +72,12 @@ public class EnrollFreeController {
 		
 		
 		
-		return "redirect:/enroll/enrollSuccess";
+		return "redirect:/enroll/enrollFreeSuccess";
 	}
 	
 	// 등록 성공 후
-	@GetMapping(value="/enrollSuccess")
-	public void enrollSuccessGET() {
+	@GetMapping(value="/enrollFreeSuccess")
+	public void enrollFreeSuccessGET() {
 		logger.debug(" Controller : ( •̀ ω •́ )y /enrollFree -> enrollSuccessGET() 실행 ");
 		
 		logger.debug(" Controller : ( •̀ ω •́ )y /views/enroll/enrollSuccess.jsp 페이지 연결 ");		
