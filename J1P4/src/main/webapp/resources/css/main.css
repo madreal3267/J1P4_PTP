@@ -1,47 +1,48 @@
 @charset "UTF-8";
 
-.nav-r4 {position: relative; left: 430px;}
-.nav-r1 {position: relative; left: 120px; font-size: 8px;}
-.pro-l {position: relative; right: 100px;}
-.nav-f {font-size: 12px;}
-
-body {
-font-family: "Nanum Gothic", sans-serif !important;
+body{
+    background: #fff;
+    margin-top:20px;
+    font-family: "Nanum Gothic", sans-serif !important;
 }
  
-header {
- 	font-weight: bold;
- 	font-size: 14px;
- }
- 
 h1 {
- font-weight: bolder !important;
- white-space: pre;
- text-align: center;
- }
- 
-h2>p {
- white-space: pre;
- text-align: center;
- color: #808080;
- }
+	font-weight: bolder;
+	line-height: 60px;
+	padding-left: 420px;
+}
 
-#slider {
+h3 {
+	font-weight: bolder;
+	line-height: 60px;
+	padding-left: 420px;
+}
+ 
+h4 {
+	color: #808080;
+	padding-left: 420px;
+	line-height: 40px;
+}
+
+/* 흐르는 이미지 */
+.slider {
 	overflow: hidden;
 	position: relative;
 	width: 1440px;
-	height: 140px;
+	height: 65px;
 	box-sizing: border-box;
 	margin: auto;
 }
+
 .image-box {
-	width: 6800px;
+	width: 12000px;
 	height:100%;
 	display: flex;
 	flex-wrap: nowrap;
-	animation: bannermove 20s linear infinite;
+	animation: bannermove 100s linear infinite;
 
 }
+
 .image_box>div {
 	margin: 0px -1px 0px 0px;
 }
@@ -54,25 +55,49 @@ h2>p {
 		transform:translate(-50%,0);
 	}
 }
+/* 흐르는 이미지 */
 
-#text{
+
+.subject{
 	text-align: center;
 	font-size: large;
 	font-weight: bolder;
 }
 
-button {
-	position: relative; left: 120px;
-}
-
-#b1 {
-	padding: 15px 40px !important;
-	margin-right: 10px;
+.b1 {
+	background-color: #31b9a9;
+	border: solid 1px #31b9a9;
+	color: #fff;
 	
 }
 
-#b2 {
-	padding: 15px 35px !important;
-	margin: auto;
+.b2 {
+	background-color: #fff;
+	border: solid 1px #31b9a9;
 }
-<!-- -->
+
+.b3 {
+	background-color: #31b9a9;
+	border: solid 2px #31b9a9;
+	color: #fff;
+	text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
+}
+
+.b3{
+	width:250px;
+	font-size: 20px
+}
+
+.logo{
+	margin-right: 70px;
+}
+
+.siteInfo {
+	display:inline-block;
+}
+
+.siteInfo>p {
+	font-size:30px;
+	font-weight: bolder;
+}
+

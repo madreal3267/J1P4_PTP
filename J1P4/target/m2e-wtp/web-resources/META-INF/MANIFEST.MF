@@ -1,5 +1,7 @@
 Manifest-Version: 1.0
-Built-By: 홍연지
-Build-Jdk: 11.0.22
+
+Built-By: ITWILL
+Build-Jdk: 11.0.15
+
 Created-By: Maven Integration for Eclipse
 
