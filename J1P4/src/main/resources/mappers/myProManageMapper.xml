@@ -64,9 +64,10 @@
 		from project p 
 		join apply_mgmt a on p.proj_no = a.proj_no
 		join freelancer f on f.free_no = a.free_no
-		join skill s on s.proj_no = a.proj_no
-    	join region r on r.proj_no = a.proj_no 
-		where now() > p.deadline and f.free_id = 'user_100'<!-- #{user_id} -->
+		left join skill s on s.proj_no = a.proj_no
+    	left join region r on r.proj_no = a.proj_no 
+		where now() > p.deadline and f.free_id = 'freeTest'<!-- #{user_id} -->
+		<!-- where NOW() > STR_TO_DATE(p.deadline, '%Y-%m-%d %H:%i:%s') AND f.free_id = 'freeTest'; -->
 	</select>
 	
 	<!-- 계약 진행중 -->
@@ -241,8 +242,8 @@
 		select p.proj_no, p.proj_title, m.manager_nm, p.proj_status
 		from project p 
 		join client c on p.ct_no = c.ct_no
-		join settlement s on s.proj_no = p.proj_no
-		join manager m on s.manager_no = m.manager_no
+		left join settlement s on s.proj_no = p.proj_no
+		left join manager m on s.manager_no = m.manager_no
 		where p.proj_status = '계약' and c.ct_id = 'testct'
 	</select>	
 	

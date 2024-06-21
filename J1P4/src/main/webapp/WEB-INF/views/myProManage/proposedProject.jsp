@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<%@ include file="../include/header.jsp"%>
+<%@ include file="../include/headerMPM_F.jsp"%>
 
 <h1>/myProManage/proposedProject.jsp</h1>
 <hr>

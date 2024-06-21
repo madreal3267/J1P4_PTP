@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<%@ include file="../include/header.jsp"%>
+<%@ include file="../include/headerMPM_F.jsp"%>
 
 <h1>/myProManage/completedProject.jsp</h1>
 
@@ -25,11 +25,11 @@
 				3. 공정하게 평가를 작성할 수 있도록 상호 평가가 완료되거나 작성 기한이 종료된 뒤에 평가가 공개됩니다 .
 			</div>
 			<br>
-			<c:forEach var="projDTO" items="${pageProjects}">
+			<c:forEach var="projDTO" items="${completedProjectList}">
 				<div class="box-header with-border">
 					<h4>${projDTO.proj_title }</h4>
 					${projDTO.ct_id } 클라이언트
-						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-${projDTO.proj_no}">수정하기</button>
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-${projDTO.proj_no}">수정하기</button>
 					<div class="rating-display">
 						<c:set var="score" value="${projDTO.score}" />
 						<c:forEach begin="1" end="5" var="i">
@@ -93,26 +93,6 @@
 					${projDTO.content }
 				</div>
 			</c:forEach>
-		</div>
-		<div class="pagination">
-			<c:if test="${currentPage > 1}">
-				<a href="?page=${currentPage - 1}&pageSize=${pageSize}">&laquo;
-					이전</a>
-			</c:if>
-			<c:forEach begin="1" end="${totalPages}" var="i">
-				<c:choose>
-					<c:when test="${i == currentPage}">
-						<span>${i}</span>
-					</c:when>
-					<c:otherwise>
-						<a href="?page=${i}&pageSize=${pageSize}">${i}</a>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-			<c:if test="${currentPage < totalPages}">
-				<a href="?page=${currentPage + 1}&pageSize=${pageSize}">다음
-					&raquo;</a>
-			</c:if>
 		</div>
 	</div>
 </div>
