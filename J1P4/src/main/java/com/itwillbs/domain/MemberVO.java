@@ -31,8 +31,18 @@ public class MemberVO {
 	private String mail_key;
 	private int mail_auth;
 	
+	private int phone_no;
+	private String profile;
 	
-
+	private String user_cf; 
+	private String user_type;
+	
+	//프리랜서 테이블
+	private String free_id; // 회원id
+	private int enroll_status; // 등록여부 - 디폴트 0
+	
+	//클라이언트 테이블
+	private String ct_id; //회원id
 	
 	
 	
