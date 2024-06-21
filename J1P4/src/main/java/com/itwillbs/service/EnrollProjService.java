@@ -11,6 +11,9 @@ public interface EnrollProjService {
 	// 프로젝트 등록
 	public void insertProj(ProjectVO vo);
 	
+	// 프로젝트 번호 불러오기
+	public int getProjNo(String id);
+	
 	// 프로젝트 최초 임시 저장 -> insert문
 	public boolean saveProj(ProjectVO vo);
 	

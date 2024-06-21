@@ -30,6 +30,16 @@ public class EnrollProjServiceImpl implements EnrollProjService {
 		
 		logger.debug(" (●'◡'●) Service: 프로젝트 등록 성공! (●'◡'●) "+vo);
 	}
+	
+	// 프로젝트 번호 불러오기
+	@Override
+	public int getProjNo(String id) {
+		logger.debug(" (●'◡'●) Service: getProjNo(id) 실행 ");
+		
+		return pdao.getProjNo(id);
+	}
+
+
 
 	// 프로젝트 최초 임시 저장 -> insert문
 	@Override

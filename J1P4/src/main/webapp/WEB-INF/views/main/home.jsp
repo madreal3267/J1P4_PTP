@@ -3,17 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 
 <!-- ============== 비회원 헤더 ================= -->
-<c:if test="${1 eq 1 }">
+<c:if test="${empty sessionScope.user_id }">
 <c:import url="../include/header.jsp"></c:import>
 </c:if>
-
 <!-- ============== 프리랜서 헤더 ================= -->
-<c:if test="${1 eq 2 }">
+<c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.user_cf.equals('프리랜서') }">
 <c:import url="../include/freeHeader.jsp"></c:import>
 </c:if>
 
 <!-- ============== 클라이언트 헤더 ================= -->
-<c:if test="${1 eq 2 }">
+<c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.user_cf.equals('클라이언트') }">
 <c:import url="../include/ctHeader.jsp"></c:import>
 </c:if>
 
@@ -30,11 +29,24 @@
 <div style="position: absolute; left:1000px; bottom:450px;">
 <img src="../resources/main_side.svg" alt="mainImg"/>
 </div>
-
+<c:if test="${empty sessionScope.user_id }">
 <div style= "width: 400px; position: absolute; bottom: 490px; left:415px;" >
-	<button class="rounded-3 p-3 b1" type="button" >프로젝트 등록</button>
-	<button class="rounded-3 p-3 b2" type="button" >회원가입</button>
+	<button class="rounded-3 p-3 b1" type="button" onclick = "location.href = '/member/insert'">회원가입</button>
+	<button class="rounded-3 p-3 b2" type="button" >이용방법</button>
 </div>
+</c:if>
+<c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.user_cf.equals('프리랜서') }">
+<div style= "width: 400px; position: absolute; bottom: 490px; left:415px;" >
+	<button class="rounded-3 p-3 b1" type="button" onclick = "location.href = '/board/listPro'">프로젝트 찾기</button>
+	<button class="rounded-3 p-3 b2" type="button" >이용방법</button>
+</div>
+</c:if>
+<c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.user_cf.equals('클라이언트') }">
+<div style= "width: 400px; position: absolute; bottom: 490px; left:415px;" >
+	<button class="rounded-3 p-3 b1" type="button" >프리랜서 찾기</button>
+	<button class="rounded-3 p-3 b2" type="button" >이용방법</button>
+</div>
+</c:if>
   
 <div style="text-align: center; padding-top: 50px;" class="border-top border-bottom my-5 py-5" >
 	<div class ="siteInfo border-end px-5">총 프리랜서 수<br>

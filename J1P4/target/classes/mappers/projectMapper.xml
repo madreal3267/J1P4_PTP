@@ -13,6 +13,11 @@
   	 	#{career_proof},#{wanted_career},#{dlvy_msg},#{temporary})
   	 </insert>
   	 
+  	 <select id="getProjNo" resultType="int">
+  	 	select max(proj_no) from project
+  	 	where user_id = #{user_id}
+  	 </select>
+  	 
   	 <insert id="saveProj">
   	 	insert into project (ct_no,work_field,proj_title,proj_progress,start_date,date_nego,work_period,
   	 	no_recruited,deadline,proj_cost,cost_nego,pmeet_meth,meet_meth,meet_cycle,proj_content,job_level,
@@ -32,12 +37,12 @@
 
 	<insert id="insertSkill">
 		insert into skill (proj_no,skill_nm,skill_lev,temporary) 
-		values((select max(proj_no) from project),#{skill_nm},#{skill_lev},#{temporary})
+		values((select max(proj_no) from project where ct_no = (select ct_no from client where ct_id=#{user_id})),#{skill_nm},#{skill_lev},#{temporary})
 	</insert>
 	
 	<insert id="insertReg">
 		insert into region (proj_no,region,district,temporary)
-		values((select max(proj_no) from project),#{region},#{district},#{temporary})
+		values((select max(proj_no) from project where ct_no = (select ct_no from client where ct_id=#{user_id})),#{region},#{district},#{temporary})
 	</insert>
 	
 	<update id="multiSaveSk">

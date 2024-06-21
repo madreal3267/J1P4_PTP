@@ -24,7 +24,7 @@ h5 { color: gray !important; }
 </head>
 <body>
 	<h1>임시 프로젝트 수정하기 (saveProjDt.jsp)</h1>
-
+<%-- ${sessionScope.user_id.user_id },${param.proj_no } --%>
 	<div class="toast-container position-fixed top-70 start-50 p-3">
 	  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
 	    
@@ -38,8 +38,8 @@ h5 { color: gray !important; }
 	<hr>
 	<div>
 	<form action="/enroll/enrollProj" method="post" id="fm1" name="fm1" class="fm">
-		<input type="hidden" value="user_10" name="user_id">
-		<input type="hidden" value=315 name="proj_no">
+		<input type="hidden" value="${sessionScope.user_id.user_id }" name="user_id">
+		<input type="hidden" value="${param.proj_no }" name="proj_no">
 		<input type="hidden" value="" name="temporary" class="temporary">
 		<!-- 사용자 아이디 정보를 세션과 pror_no은 파라미터값을 담아서 hidden 으로 전달 -> 임시저장 수정 또는 등록에 필요하기 때문 -->
 		<!-- 기능 구현 중 받아올 수 있는 세션과 파라미터가 없어서 임의로 user_10와 315를 담아서 테스트 중 추후 수정 필요 -->
