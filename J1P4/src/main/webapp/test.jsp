@@ -10,7 +10,7 @@
 		<p class="workField" style="position: absolute; left:180px; top:85px; font-size: 16px;">분야</p>
 		<p class="userWf" style="position: absolute; left:220px; top:85px; font-size: 16px; font-weight: bold; border-right: 1px solid gray; padding-right: 10px;">개발</p>
 		<p class="level" style="position: absolute; left:270px; top:85px; font-size: 16px;">레벨</p>
-		<p class="userLev" style="position: absolute; left:310px; top:85px; font-size: 16px; font-weight: bold;">시니어</p>
+		<p class ="userLev" style="position: absolute; left:310px; top:85px; font-size: 16px; font-weight: bold;">시니어</p>
 		
 		<!-- 한줄 소개 말풍선 -->
 		<div class="border border-secondary rounded p-2" style="position: absolute; left:520px; top:35px; width: 500px;">&nbsp</div>
