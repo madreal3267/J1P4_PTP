@@ -35,6 +35,16 @@ public class EnrollProjDAOImpl implements EnrollProjDAO {
 		logger.debug(" DAO : 프로젝트 등록 완료! ╰(*°▽°*)╯ ");
 	}
 	
+	
+	// 프로젝트 번호 불러오기
+	@Override
+	public int getProjNo(String id) {
+		logger.debug(" DAO : Proj(vo) 호출 (❁´◡`❁) ");
+		return sqlSession.selectOne(NAMESPACE+"getProjNo",id);
+	}
+
+
+
 	// 프로젝트 최초 임시 저장 -> insert문
 	@Override
 	public boolean saveProj(ProjectVO vo) {

@@ -33,7 +33,7 @@
           <li><a href="/board/listPro" class="nav-link px-3 link-body-emphasis nav-r1">프로젝트 찾기</a></li>
           <li><a href="#" class="nav-link px-3 link-body-emphasis nav-r1">프리랜서 찾기</a></li>
           <li><a href="#" class="nav-link px-3 link-body-emphasis nav-r1">이용방법</a></li>
-          <li><a href="#" class="nav-link px-2 link-body-emphasis nav-r4">로그인</a></li>
+          <li><a href="/member/login" class="nav-link px-2 link-body-emphasis nav-r4">로그인</a></li>
           <li><a href="/member/insert" class="nav-link px-2 link-body-emphasis nav-r4">회원가입</a></li>
         </ul>
         

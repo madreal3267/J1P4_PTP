@@ -148,7 +148,7 @@ public class MemberController {
 			}
 			
 			
-			return"redirect:/member/loginmain";
+			return"redirect:/main/home";
 		}
 	
 
@@ -182,7 +182,7 @@ public class MemberController {
 	
 		//POST
 		@RequestMapping(value = "/login", method = RequestMethod.POST)
-		public String loginPOST(HttpSession session, MemberVO vo, HttpServletRequest request ) {
+		public String loginPOST(HttpSession session, MemberVO vo, HttpServletRequest request,String id ) throws Exception {
 			
 			MemberVO resultVO= mService.memberLogin(vo);
 			
@@ -192,11 +192,13 @@ public class MemberController {
 			// 세션에 있으면 있는 세션반환, 없으면 신규 세션을 생성
 			HttpSession Session = request.getSession();
 			if(resultVO != null) {
-				Session.setAttribute("resultVO", resultVO);
-				return"redirect:/member/loginmain";
+				Session.setAttribute("user_id", resultVO);
+				Session.setAttribute("user_cf", mService.sessCf(vo));
+				Session.setAttribute("user_type", mService.sessType(vo));
+				return"redirect:/main/home";
 				
 			}else {
-				Session.setAttribute("resultVO", null);
+				Session.setAttribute("user_id", null);
 				logger.debug("로그인 실패");
 				return "redirect:/member/login";
 			}
@@ -211,13 +213,13 @@ public class MemberController {
 		
 
 		//로그아웃
-		@PostMapping(value = "/logout")
+		@GetMapping(value = "/logout")
 		public String logoutPOST(HttpSession session) {
 
 			logger.debug("/logoutPOST()호출");
 			session.invalidate();//세션무효화
 			
-			return "redirect:/member/login";
+			return "redirect:/main/home";
 		}
 		
 		

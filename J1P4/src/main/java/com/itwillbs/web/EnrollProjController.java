@@ -3,6 +3,7 @@ package com.itwillbs.web;
 import java.util.HashMap;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,10 +41,12 @@ public class EnrollProjController {
 	
 	// 프로젝트 등록
 	@PostMapping(value="/enrollProj")
-	public String enrollPOST(ProjectVO pVO, SkillVO sVO, RegionVO rVO) {
+	public String enrollPOST(ProjectVO pVO, SkillVO sVO, RegionVO rVO/*, Model model,HttpSession session */) {
 		logger.debug(" Controller : (＃°Д°) /enrollProj -> enrollPOST() 실행 ");		
 		
+//		String id = (String)session.getAttribute("user_id");
 		eService.insertProj(pVO);
+//		model.addAttribute("projNo",eService.getProjNo(id));
 		eService.insertSkill(sVO);
 		eService.insertReg(rVO);
 		
