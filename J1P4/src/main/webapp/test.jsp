@@ -1,14 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
-<div class="container light-style flex-grow-1 container-p-y text-center" style="width:1100px; padding-top:30px;padding-bottom: 10px;">
-<div class="card overflow-hidden"  >
-<p style="position: absolute; left:180px; top:40px; font-size: 30px; font-weight: bold;">전지윤</p>
-<p  style="position: absolute; left:180px; top:90px; font-size: 16px;">분야</p>
-<span class="border-left px-2" style="position: absolute; left:220px; top:90px; font-size: 16px; font-weight: bold;">개발</span>
-<img src="../resources/증명1.jpg" alt="profile" width="100" height="100" class="rounded-circle my-4 mx-5" style="border: solid 1px gray; position: static;">
+
+<div class="container light-style flex-grow-1 container-p-y text-center" style="width:1100px; padding-top:15px;padding-bottom: 10px;">
+	<!-- 프리랜서 상세페이지 상단 박스 시작 -->
+	<div class="card overflow-hidden">
+		<!-- 프리랜서 정보 출력 : 이름 / 분야 / 레벨 -->
+		<p class="userName" style="position: absolute; left:180px; top:35px; font-size: 30px; font-weight: bold;">전지윤</p>
+		<p class="workField" style="position: absolute; left:180px; top:85px; font-size: 16px;">분야</p>
+		<p class="userWf" style="position: absolute; left:220px; top:85px; font-size: 16px; font-weight: bold; border-right: 1px solid gray; padding-right: 10px;">개발</p>
+		<p class="level" style="position: absolute; left:270px; top:85px; font-size: 16px;">레벨</p>
+		<p class="userLev" style="position: absolute; left:310px; top:85px; font-size: 16px; font-weight: bold;">시니어</p>
+		
+		<!-- 한줄 소개 말풍선 -->
+		<div class="border border-secondary rounded p-2" style="position: absolute; left:520px; top:35px; width: 500px;">&nbsp</div>
+		<div style="position: absolute; top:40px; width: 1010px; font-size: 20px; font-weight: bold; text-align: right;">" 안녕하세요 완전 짱 프리랜서 JAVA 개발자 입니다. "</div>
+		
+		<!-- 스킬 -->
+		<div style="display: flex; justify-content: end">
+		<span style="position: absolute; left:960px; top:85px; font-size: 16px;" class="badge bg-light text-dark border">JAVA</span>
+		</div>
+		
+		<!-- 프로필 사진 -->
+		<img src="../resources/증명1.jpg" alt="profile" width="100" height="100" class="border border-secondary rounded-circle my-4 mx-5">
+	</div>
+	<!-- 프리랜서 상세페이지 상단 끝 -->
 </div>
-</div>
+
+
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px;">
   <div class="card overflow-hidden">
 <div class="row no-gutters row-bordered row-border-light" >
@@ -18,10 +37,10 @@
 			<a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">업무조건</a>
 			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-detail">소개정보</a>
 			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-hope">보유기술</a>
-			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-hope">경력</a>
-			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-hope">학력</a>
-			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-hope">자격증</a>
-			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-hope">포트폴리오</a>
+			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-hope1">경력</a>
+			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-hope2">학력</a>
+			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-hope3">자격증</a>
+			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-hope4">포트폴리오</a>
 		</div>
 	</div>
 	<!-- 사이드 메뉴 끝 -->
@@ -124,7 +143,7 @@
 <!-- 기본 정보 탭 끝 -->
 
 <!-- 상세 정보 탭 시작 -->
-<div class="tab-pane fade" id="account-detail"">
+<div class="tab-pane fade" id="account-detail">
 <div class="card-body pb-2" style="position: relative; left: 300px;">
 <div class="form-group">
 <label class="form-label">Current password</label>
@@ -193,9 +212,14 @@
 	</div>
 
 </div>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <!-- select2 (검색되는 select) 자바스크립트 -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
+
 <script type="text/javascript">
 		/* 시군구 - select */
 		var cnt = new Array();
@@ -323,5 +347,6 @@
 		  })
 		}
 	</script>
+	
 </body>
 </html>
