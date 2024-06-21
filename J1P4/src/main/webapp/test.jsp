@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
 
+<<<<<<< HEAD
 <div class="container light-style flex-grow-1 container-p-y text-center" style="width:1100px; padding-top:15px;padding-bottom: 10px;">
 	<!-- 프리랜서 상세페이지 상단 박스 시작 -->
 	<div class="card overflow-hidden">
@@ -41,6 +42,18 @@
 			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-hope2">학력</a>
 			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-hope3">자격증</a>
 			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-hope4">포트폴리오</a>
+=======
+<div class="container light-style flex-grow-1 container-p-y" style="width:1100px;">
+ <div class="card overflow-hidden">
+  <div class="row no-gutters row-bordered row-border-light">
+	<!-- 사이드 메뉴 시작 -->
+	<div class="col-md-3 pt-0">
+		<div class="list-group list-group-flush account-settings-links" style="width:280px;" onclick="menu">
+			<h4 class="font-weight-bold py-1 mx-4 my-3" style=" position: relative; bottom: 1px;">프로젝트 등록하기</h4>
+			<a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">기본 정보</a>
+			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-detail">상세 정보</a>
+			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-hope">지원자 희망 조건</a>
+>>>>>>> 696f7ab4f144e7ba008503f3f2d328e498beec22
 		</div>
 	</div>
 	<!-- 사이드 메뉴 끝 -->
@@ -48,7 +61,11 @@
 <div class="tab-content">
 
 <!-- 기본 정보 탭 시작 -->
+<<<<<<< HEAD
 <div class="tab-pane fade active show" id="account-general">
+=======
+<div class="tab-pane fade active show" id="account-general" >
+>>>>>>> 696f7ab4f144e7ba008503f3f2d328e498beec22
 	 <div class="toast-container position-fixed top-70 start-50 p-3">
 	  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
 	    
@@ -61,11 +78,23 @@
 	
 <hr class="border-light m-0" >
 	<!-- card body 시작 -->
+<<<<<<< HEAD
 	<div class="card-body border-start" style="position: relative; left: 280px; bottom:365px;">
 			<div style="position: relative; right: 16px; bottom: 5px;" class="px-4 py-2 border-bottom"><h4 class="font-weight-bold">업무 조건</h4></div>
 		
 		<!-- 폼 그룹 시작 -->
 		<div class="form-group mx-4 my-3">
+=======
+	<div class="card-body border-start" style="position: relative; left: 280px; bottom:230px; ">
+			<div style="position: relative; right: 16px; bottom: 5px;" class="px-4 py-2 border-bottom"><h4 class="font-weight-bold">기본 정보</h4></div>
+		<!-- 폼 그룹 시작 -->
+<!-- 			<div class="alert alert-warning mt-3"> -->
+<!-- 			임시 저장 프로젝트를 불러오거나, 등록했던 프로젝트를 다시 등록해 보세요. -->
+<!-- 			<a href="javascript:void(0)">프로젝트 선택하기 ></a> -->
+<!-- 			</div> -->
+		<div class="form-group mx-4 my-3">
+
+>>>>>>> 696f7ab4f144e7ba008503f3f2d328e498beec22
 		<h5 class="my-3">프로젝트를 간단하게 알려주세요</h5>
 		<input type="radio" name="proj_progress" value=0 id="radioPj1" class="mb-1">
 		<label for="radioPj1" class="form-label mx-2 h6">신규 프로젝트를 진행하려 합니다</label><br>
@@ -73,7 +102,11 @@
 		<label for="radioPj2" class="form-label mx-2 h6">운영 중인 서비스의 리뉴얼 또는 유지보수를 하려 합니다</label>
 		</div>
 		<!-- 폼 그룹 끝 -->
+<<<<<<< HEAD
 		
+=======
+		<hr>
+>>>>>>> 696f7ab4f144e7ba008503f3f2d328e498beec22
 		<!-- 폼 그룹 시작 -->
 		<div class="form-group">
 		<h5>예상 시작일</h5>
@@ -143,6 +176,10 @@
 <!-- 기본 정보 탭 끝 -->
 
 <!-- 상세 정보 탭 시작 -->
+<<<<<<< HEAD
+=======
+<!-- class="tab-pane fade" -->
+>>>>>>> 696f7ab4f144e7ba008503f3f2d328e498beec22
 <div class="tab-pane fade" id="account-detail">
 <div class="card-body pb-2" style="position: relative; left: 300px;">
 <div class="form-group">
@@ -202,16 +239,20 @@
   </div>
   	<!-- 임시저장, 등록 버튼 -->
 
+<<<<<<< HEAD
 
 
 
 
+=======
+>>>>>>> 696f7ab4f144e7ba008503f3f2d328e498beec22
 	<div class="text-right mt-3">
 	<button type="button" class="btn btn-default" id="liveToastBtn">임시저장</button>&nbsp;
 	<button type="button" class="btn btn-primary">등록</button>
 	</div>
 
 </div>
+<<<<<<< HEAD
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <!-- select2 (검색되는 select) 자바스크립트 -->
@@ -220,6 +261,11 @@
 
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
 
+=======
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<!-- select2 (검색되는 select) 자바스크립트 -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+>>>>>>> 696f7ab4f144e7ba008503f3f2d328e498beec22
 <script type="text/javascript">
 		/* 시군구 - select */
 		var cnt = new Array();
@@ -334,6 +380,7 @@
 			});
 					
 		});
+<<<<<<< HEAD
 	
 		
 		
@@ -348,5 +395,23 @@
 		}
 	</script>
 	
+=======
+		
+		function menu() {
+			
+		}
+		
+		
+		const toastTrigger = document.getElementById('liveToastBtn')
+// 		const toastLiveExample = document.getElementById('liveToast')
+
+// 		if (toastTrigger) {
+// 		  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+// 		  toastTrigger.addEventListener('click', () => {
+// 		    toastBootstrap.show()
+// 		  })
+// 		}
+	</script>
+>>>>>>> 696f7ab4f144e7ba008503f3f2d328e498beec22
 </body>
 </html>
