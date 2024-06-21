@@ -38,7 +38,7 @@ public class FreelanDAOTest {
 		vo.setFree_id("user_100");
 		vo.setWork_check(1);
 		vo.setWork_date("2024-06-12");
-		vo.setProj_cost(100000000);
+//		vo.setProj_cost(100000000);
 		vo.setOneline_bio("피곤행");
 		vo.setBio("안녕하세요 저는 짱짱 최고 프리랜서입니다");
 		vo.setSchool_type("대학원(석사)");

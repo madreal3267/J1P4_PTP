@@ -13,7 +13,7 @@
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 body{
-    background: #ebfafa;
+    background: #f0f5f5;
     margin-top:20px;
     font-family: "Nanum Gothic", sans-serif !important;
 }

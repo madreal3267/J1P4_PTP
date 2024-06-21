@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
-<div class="container light-style flex-grow-1 container-p-y text-center" style="width:1100px;">
+<div class="container light-style flex-grow-1 container-p-y text-center" style="width:1100px; padding-top:30px;padding-bottom: 10px;">
 <div class="card overflow-hidden"  >
-<img src="../resources/증명1.jpg" alt="profile" width="100" height="100" class="rounded-circle my-4 mx-5 border border-3 border-dark">
+<p style="position: absolute; left:180px; top:40px; font-size: 30px; font-weight: bold;">전지윤</p>
+<p  style="position: absolute; left:180px; top:90px; font-size: 16px;">분야</p>
+<span class="border-left px-2" style="position: absolute; left:220px; top:90px; font-size: 16px; font-weight: bold;">개발</span>
+<img src="../resources/증명1.jpg" alt="profile" width="100" height="100" class="rounded-circle my-4 mx-5" style="border: solid 1px gray; position: static;">
 </div>
 </div>
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px;">
