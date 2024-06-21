@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.itwillbs.mapper.freelancerMapper">
+	
+	<update id="updateFree">
+		update freelancer set free_id=#{free_id},work_field=#{work_field},work_check=#{work_check},
+		work_date=#{work_date},proj_cost=#{proj_cost},oneline_bio=#{oneline_bio},bio=#{bio},chool_type=#{school_type},
+  	 	school_nm=#{school_nm},major=#{major},grad_status=#{grad_status},entrance=#{entrance},graduation=#{graduation}
+	</update>
+	
+	<update id="updateCareer">
+		update career company_nm=#{company_nm},join_date=#{join_date},
+		quit_date=#{quit_date},responsibility=#{responsibility},job_lev=#{job_lev}
+		where free_no = (select free_no from freelancer where free_id=#{free_id})
+	</update>
+	
+	<update id="updateLicense">
+		update license license_nm=#{license_nm},qualify_date=#{qualify_date},issuer=#{issuer}
+		where free_no = (select free_no from freelancer where free_id=#{free_id})
+	</update>
+	
+	<update id="updatePartners">
+		update partners partners_nm=#{partners_nm},details=#{details}
+		where free_no = (select free_no from freelancer where free_id=#{free_id})
+	</update>
+	
+	<update id="updateComp">
+		update company_history yearmonth=#{yearmonth},details=#{details}
+		where free_no = (select free_no from freelancer where free_id=#{free_id})		
+	</update>
+	
+	<update id="updateSkill">
+		update skill skill_nm=#{skill_nm},skill_lev=#{skill_lev}
+		where free_no = (select free_no from freelancer where free_id=#{free_id})		
+	</update>
+  
+  	<update id="updateReg">
+  		update region region=#{region},district=#{district}
+		where free_no = ( )		
+  	</update>
+  	
+  </mapper>

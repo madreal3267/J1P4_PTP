@@ -2,6 +2,47 @@
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
 
+<<<<<<< HEAD
+<div class="container light-style flex-grow-1 container-p-y text-center" style="width:1100px; padding-top:15px;padding-bottom: 10px;">
+	<!-- 프리랜서 상세페이지 상단 박스 시작 -->
+	<div class="card overflow-hidden">
+		<!-- 프리랜서 정보 출력 : 이름 / 분야 / 레벨 -->
+		<p class="userName" style="position: absolute; left:180px; top:35px; font-size: 30px; font-weight: bold;">전지윤</p>
+		<p class="workField" style="position: absolute; left:180px; top:85px; font-size: 16px;">분야</p>
+		<p class="userWf" style="position: absolute; left:220px; top:85px; font-size: 16px; font-weight: bold; border-right: 1px solid gray; padding-right: 10px;">개발</p>
+		<p class="level" style="position: absolute; left:270px; top:85px; font-size: 16px;">레벨</p>
+		<p class ="userLev" style="position: absolute; left:310px; top:85px; font-size: 16px; font-weight: bold;">시니어</p>
+		
+		<!-- 한줄 소개 말풍선 -->
+		<div class="border border-secondary rounded p-2" style="position: absolute; left:520px; top:35px; width: 500px;">&nbsp</div>
+		<div style="position: absolute; top:40px; width: 1010px; font-size: 20px; font-weight: bold; text-align: right;">" 안녕하세요 완전 짱 프리랜서 JAVA 개발자 입니다. "</div>
+		
+		<!-- 스킬 -->
+		<div style="display: flex; justify-content: end">
+		<span style="position: absolute; left:960px; top:85px; font-size: 16px;" class="badge bg-light text-dark border">JAVA</span>
+		</div>
+		
+		<!-- 프로필 사진 -->
+		<img src="../resources/증명1.jpg" alt="profile" width="100" height="100" class="border border-secondary rounded-circle my-4 mx-5">
+	</div>
+	<!-- 프리랜서 상세페이지 상단 끝 -->
+</div>
+
+
+<div class="container light-style flex-grow-1 container-p-y" style="width:1100px;">
+  <div class="card overflow-hidden">
+<div class="row no-gutters row-bordered row-border-light" >
+	<!-- 사이드 메뉴 시작 -->
+	<div class="col-md-3 pt-0" style="width: 300px;">
+		<div class="list-group list-group-flush account-settings-links mx-2">
+			<a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">업무조건</a>
+			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-detail">소개정보</a>
+			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-hope">보유기술</a>
+			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-hope1">경력</a>
+			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-hope2">학력</a>
+			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-hope3">자격증</a>
+			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-hope4">포트폴리오</a>
+=======
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px;">
  <div class="card overflow-hidden">
   <div class="row no-gutters row-bordered row-border-light">
@@ -12,6 +53,7 @@
 			<a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">기본 정보</a>
 			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-detail">상세 정보</a>
 			<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-hope">지원자 희망 조건</a>
+>>>>>>> 696f7ab4f144e7ba008503f3f2d328e498beec22
 		</div>
 	</div>
 	<!-- 사이드 메뉴 끝 -->
@@ -19,7 +61,11 @@
 <div class="tab-content">
 
 <!-- 기본 정보 탭 시작 -->
+<<<<<<< HEAD
+<div class="tab-pane fade active show" id="account-general">
+=======
 <div class="tab-pane fade active show" id="account-general" >
+>>>>>>> 696f7ab4f144e7ba008503f3f2d328e498beec22
 	 <div class="toast-container position-fixed top-70 start-50 p-3">
 	  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
 	    
@@ -32,6 +78,13 @@
 	
 <hr class="border-light m-0" >
 	<!-- card body 시작 -->
+<<<<<<< HEAD
+	<div class="card-body border-start" style="position: relative; left: 280px; bottom:365px;">
+			<div style="position: relative; right: 16px; bottom: 5px;" class="px-4 py-2 border-bottom"><h4 class="font-weight-bold">업무 조건</h4></div>
+		
+		<!-- 폼 그룹 시작 -->
+		<div class="form-group mx-4 my-3">
+=======
 	<div class="card-body border-start" style="position: relative; left: 280px; bottom:230px; ">
 			<div style="position: relative; right: 16px; bottom: 5px;" class="px-4 py-2 border-bottom"><h4 class="font-weight-bold">기본 정보</h4></div>
 		<!-- 폼 그룹 시작 -->
@@ -41,6 +94,7 @@
 <!-- 			</div> -->
 		<div class="form-group mx-4 my-3">
 
+>>>>>>> 696f7ab4f144e7ba008503f3f2d328e498beec22
 		<h5 class="my-3">프로젝트를 간단하게 알려주세요</h5>
 		<input type="radio" name="proj_progress" value=0 id="radioPj1" class="mb-1">
 		<label for="radioPj1" class="form-label mx-2 h6">신규 프로젝트를 진행하려 합니다</label><br>
@@ -48,7 +102,11 @@
 		<label for="radioPj2" class="form-label mx-2 h6">운영 중인 서비스의 리뉴얼 또는 유지보수를 하려 합니다</label>
 		</div>
 		<!-- 폼 그룹 끝 -->
+<<<<<<< HEAD
+		
+=======
 		<hr>
+>>>>>>> 696f7ab4f144e7ba008503f3f2d328e498beec22
 		<!-- 폼 그룹 시작 -->
 		<div class="form-group">
 		<h5>예상 시작일</h5>
@@ -118,7 +176,10 @@
 <!-- 기본 정보 탭 끝 -->
 
 <!-- 상세 정보 탭 시작 -->
+<<<<<<< HEAD
+=======
 <!-- class="tab-pane fade" -->
+>>>>>>> 696f7ab4f144e7ba008503f3f2d328e498beec22
 <div class="tab-pane fade" id="account-detail">
 <div class="card-body pb-2" style="position: relative; left: 300px;">
 <div class="form-group">
@@ -178,15 +239,33 @@
   </div>
   	<!-- 임시저장, 등록 버튼 -->
 
+<<<<<<< HEAD
+
+
+
+
+=======
+>>>>>>> 696f7ab4f144e7ba008503f3f2d328e498beec22
 	<div class="text-right mt-3">
 	<button type="button" class="btn btn-default" id="liveToastBtn">임시저장</button>&nbsp;
 	<button type="button" class="btn btn-primary">등록</button>
 	</div>
 
 </div>
+<<<<<<< HEAD
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<!-- select2 (검색되는 select) 자바스크립트 -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
+
+=======
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <!-- select2 (검색되는 select) 자바스크립트 -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+>>>>>>> 696f7ab4f144e7ba008503f3f2d328e498beec22
 <script type="text/javascript">
 		/* 시군구 - select */
 		var cnt = new Array();
@@ -301,6 +380,22 @@
 			});
 					
 		});
+<<<<<<< HEAD
+	
+		
+		
+		const toastTrigger = document.getElementById('liveToastBtn')
+		const toastLiveExample = document.getElementById('liveToast')
+
+		if (toastTrigger) {
+		  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+		  toastTrigger.addEventListener('click', () => {
+		    toastBootstrap.show()
+		  })
+		}
+	</script>
+	
+=======
 		
 		function menu() {
 			
@@ -317,5 +412,6 @@
 // 		  })
 // 		}
 	</script>
+>>>>>>> 696f7ab4f144e7ba008503f3f2d328e498beec22
 </body>
 </html>
