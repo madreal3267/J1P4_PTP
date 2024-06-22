@@ -51,7 +51,7 @@ public class MemberVO {
 	private String est_date; //설립일
 	private String addr; //주소, 나머지 주소
 	
-	private int phone_no; //핸드폰 번호, 전화번호
+	private String phone_no; //핸드폰 번호, 전화번호
 	
 	private String tax_email; //세금계산서용 
 
