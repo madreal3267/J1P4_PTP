@@ -36,8 +36,8 @@ h5 {
 	<hr>
 	
 	<form action="" method="post" name="fm1" id="fm1">
-	<input type="hidden" value="${sessionScope.user_id.user_id }" name="free_id">
-	<input type="hidden" value="${sessionScope.user_id.user_id }" name="user_id">
+	<input type="hidden" value="${sessionScope.user_id }" name="free_id">
+	<input type="hidden" value="${sessionScope.user_id }" name="user_id">
 	<h2>업무조건</h2>
 		<h4>업무 가능 분야</h4>
 			<input type="radio" value="개발" class="btn-check" name="work_field" id="radioWf1">
@@ -211,7 +211,7 @@ h5 {
 				/* [+보유기술 추가] 클릭 시 [select 버튼]+[추가하기] 출력 */
 				$('#inputPt').html(
 				'<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">'+
-				 '<select name="skill_nm" class="selectSk"><option disabled hidden selected></option>'+
+				 '<select class="selectSk"><option disabled hidden selected></option>'+
 				 '<option value=".NET">.NET</option><option value="AA">AA</option><option value="Adobe Photoshop">Adobe Photoshop</option><option value="AfterEffect">AfterEffect</option>'+
 				 '<option value="Ajax">Ajax</option><option value="Android">Android</option><option value="Angular.js">Angular.js</option><option value="Apache">Apache</option>'+
 				 '<option value="Bootstrap">Bootstrap</option><option value="C">C</option><option value="C#">C#</option><option value="C++">C++</option>'+
@@ -227,7 +227,7 @@ h5 {
 				 '<option value="Unity">Unity</option><option value="Unix">Unix</option><option value="VisualStudio">VisualStudio</option>'+
 				 '<option value="Vue.js">Vue.js</option><option value="Windows">Windows</option><option value="모바일 웹/앱">모바일 웹/앱</option><option value="앱디자인">앱디자인</option>'+
 				 '<option value="웹디자인">웹디자인</option><option value="전자정부프레임워크">전자정부프레임워크</option><option value="한글">한글</option></select>'+
-				 '<select name="skill_lev" class="selectLev"><option disabled hidden selected></option>'+
+				 '<select class="selectLev"><option disabled hidden selected></option>'+
 				 '<option value="초급">초급</option><option value="중급">중급</option><option value="고급">고급</option></select>'+
 				 '<button type="button" class="addButt removeAdd">추가하기</button></div>'
 				);
@@ -270,12 +270,12 @@ h5 {
 				
 				/* 리스트에 추가된 기술 삭제 */
 				$(document).on('click','.removeSk',function(){
-			        $(this).parent().remove()
+			        $(this).parent().remove();
 			    });
 			    
 			    /* [추가하기] 클릭 동시에 버튼 삭제 */
 				$(document).on('click','.removeAdd',function(){
-			        $(this).parent().remove()
+			        $(this).parent().remove();
 			    });
 				
 			});
@@ -288,11 +288,11 @@ h5 {
 				/* [+경력 추가] 클릭 시 [input text]+[추가하기] 출력 */
 				$('.inputCa').html(
 				'<div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">'+
-				'<input type="text" name="company_nm" class="textCn" placeholder="회사명*" style="width: 512px">'+
-				'<textarea rows="5" cols="60" class="textRs" placeholder="&#13;&#10&#13;&#10; 담당업무*" name="responsibility"></textarea>'+
+				'<input type="text" class="textCn" placeholder="회사명*" style="width: 512px">'+
+				'<textarea rows="5" cols="60" class="textRs" placeholder="&#13;&#10&#13;&#10; 담당업무*"></textarea>'+
 				'<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">'+
-				'<input type="text" name="join_date" class="textJd" placeholder="입사연월">'+
-				'<input type="text" name="quit_date" class="textQd" placeholder="퇴사연월"></div>'+
+				'<input type="text" class="textJd" placeholder="입사연월">'+
+				'<input type="text" class="textQd" placeholder="퇴사연월"></div>'+
 				'<br><button type="button" class="addButt2 removeAdd2">추가하기</button></div>'
 				);
 				
@@ -354,8 +354,8 @@ h5 {
 				/* [+회사연혁 추가] 클릭 시 [input text]+[추가하기] 출력 */
 				$('.inputHi').html(
 				'<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">'+
-				'<input type="text" name="yearmonth" class="ym" placeholder="YYYY.MM." style="width: 300px;">'+
-				'<input type="text" name="details" class="detail" placeholder="상세내용*">'+
+				'<input type="text" class="ym" placeholder="YYYY.MM." style="width: 300px;">'+
+				'<input type="text" class="detail" placeholder="상세내용*">'+
 				'<br><button type="button" class="addButt3 removeAdd3">추가하기</button></div>'
 				);
 				
@@ -378,7 +378,7 @@ h5 {
 						/* [추가하기] 클릭 시 추가되는 경력 리스트 출력 */
 						$('.listHi').prepend(
 						 '<p><div class="border border-1 rounded-3" role="group" style="width: 400px; display: inline-block; position: relative;">'+
-						 '<input type="hidden" value="'+ym+'" name="yearmonth"><input type="hidden" value="'+detail+'" name="Hdetails">'+
+						 '<input type="hidden" value="'+ym+'" name="yearmonth"><input type="hidden" value="'+detail+'" name="hDetails">'+
 						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+ym+'</span></h4>'+
 						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+detail+'</span></h4>'+
 						 '<button class="removeHi btn-close" aria-label="Close" style="width: 1px; position: absolute; top: 21px; left: 360px;"></button></div></p>'		
@@ -408,8 +408,8 @@ h5 {
 				/* [+협력업체 추가] 클릭 시 [input text]+[추가하기] 출력 */
 				$('.inputPa').html(
 				'<div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">'+
-				'<input type="text" name="partners_nm" class="partNm" placeholder="파트너사 및 협력기관 명*" style="width:500px;">'+
-				'<input type="text" name="details" class="partDe" placeholder="협력 관계 설명*" style="width:500px;">'+
+				'<input type="text" class="partNm" placeholder="파트너사 및 협력기관 명*" style="width:500px;">'+
+				'<input type="text" class="partDe" placeholder="협력 관계 설명*" style="width:500px;">'+
 				'<br><button type="button" class="addButt4 removeAdd4">추가하기</button></div>'
 				);
 				
@@ -432,7 +432,7 @@ h5 {
 						/* [추가하기] 클릭 시 추가되는 경력 리스트 출력 */
 						$('.listPa').prepend(
 						 '<p><div class="border border-1 rounded-3" role="group" style="width: 400px; display: inline-block; position: relative;">'+
-						 '<input type="hidden" value="'+partNm+'" name="partners_nm"><input type="hidden" value="'+partDe+'" name="Pdetails">'+
+						 '<input type="hidden" value="'+partNm+'" name="partners_nm"><input type="hidden" value="'+partDe+'" name="pDetails">'+
 						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+partNm+'</span></h4>'+
 						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+partDe+'</span></h4>'+
 						 '<button class="removePa btn-close" aria-label="Close" style="width: 1px; position: absolute; top: 21px; left: 360px;"></button></div></p>'		

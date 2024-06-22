@@ -28,10 +28,10 @@
 <!--      <li><a href="#" class="nav-link px-2 link-secondary nav-r">프로젝트 찾기</a></li> -->
           <li><a href="/board/listPro" class="nav-link px-3 link-body-emphasis nav-r1">프로젝트 찾기</a></li>
           <li><a href="#" class="nav-link px-3 link-body-emphasis nav-r1">프리랜서 찾기</a></li>
-          <c:if test="${sessionScope.user_type.user_type.equals('개인') or sessionScope.user_type.user_type.equals('팀') }">
+          <c:if test="${sessionScope.user_type.equals('개인') or sessionScope.user_type.equals('팀') }">
           <li><a href="/enroll/enrollFree" class="nav-link px-3 link-body-emphasis nav-r1">프리랜서 등록</a></li>
           </c:if>
-          <c:if test="${sessionScope.user_type.user_type.equals('사업자') }">
+          <c:if test="${sessionScope.user_type.equals('사업자') }">
           <li><a href="/enroll/enrollFreeB" class="nav-link px-3 link-body-emphasis nav-r1">프리랜서 등록</a></li>
           </c:if>
           <li><a href="#" class="nav-link px-3 link-body-emphasis nav-r1">이용방법</a></li>

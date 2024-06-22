@@ -30,12 +30,12 @@
 	</update>
 	
 	<update id="updatePartners">
-		update partners set partners_nm=#{partners_nm},details=#{Pdetails}
+		update partners set partners_nm=#{partners_nm},details=#{pDetails}
 		where free_no = (select free_no from freelancer where free_id=#{user_id})
 	</update>
 	
 	<update id="updateComp">
-		update company_history set yearmonth=#{yearmonth},details=#{Hdetails}
+		update company_history set yearmonth=#{yearmonth},details=#{hDetails}
 		where free_no = (select free_no from freelancer where free_id=#{user_id})		
 	</update>
 	

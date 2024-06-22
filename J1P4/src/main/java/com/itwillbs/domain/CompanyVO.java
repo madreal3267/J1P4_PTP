@@ -7,6 +7,6 @@ public class CompanyVO {
 
 	private int free_no;
 	private String yearmonth;
-	private String Hdetails;
+	private String hDetails;
 	private String user_id;
 }

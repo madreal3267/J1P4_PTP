@@ -3,19 +3,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 
 <!-- ============== 비회원 헤더 ================= -->
+
 <c:if test="${empty sessionScope.user_id }">
 <c:import url="../include/header.jsp"></c:import>
 </c:if>
 <!-- ============== 프리랜서 헤더 ================= -->
-<c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.user_cf.equals('프리랜서') }">
+<c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.equals('프리랜서') }">
 <c:import url="../include/freeHeader.jsp"></c:import>
 </c:if>
 
 <!-- ============== 클라이언트 헤더 ================= -->
-<c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.user_cf.equals('클라이언트') }">
+<c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.equals('클라이언트') }">
 <c:import url="../include/ctHeader.jsp"></c:import>
 </c:if>
-
+<%-- ${sessionScope.user_id } --%>
+<%-- ${sessionScope.user_cf } --%>
+<%-- ${sessionScope.user_type } --%>
 <div style="position: relative;">
 	<div class="my-3 py-3" >
 	<h1 id="mainText">대한민국 NO.0 (허언사이트)<br>
@@ -40,7 +43,7 @@
 	</c:if>
 	
 	<!-- ============== 프리랜서 메인 메뉴 ================= -->
-	<c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.user_cf.equals('프리랜서') }">
+	<c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.equals('프리랜서') }">
 	<div class="mainButt">
 		<button class="rounded-3 p-3 butt1" type="button" onclick = "location.href = '/board/listPro'">프로젝트 찾기</button>
 		<button class="rounded-3 p-3 butt2" type="button" >이용방법</button>
@@ -48,7 +51,7 @@
 	</c:if>
 	
 	<!-- ============== 클라이언트 메인 메뉴 ================= -->
-	<c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.user_cf.equals('클라이언트') }">
+	<c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.equals('클라이언트') }">
 	<div class="mainButt" >
 		<button class="rounded-3 p-3 butt1" type="button" >프리랜서 찾기</button>
 		<button class="rounded-3 p-3 butt2" type="button" >이용방법</button>

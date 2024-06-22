@@ -89,11 +89,11 @@ public class EnrollFreeController {
 		if(pVO.getPartners_nm() != null) {
 			pVO.setPartners_nm(pVO.getPartners_nm().replace(",", "|"));			
 		}
-		if(pVO.getPdetails() != null) {			
-			pVO.setPdetails(pVO.getPdetails().replace(",", "|"));
+		if(pVO.getPDetails() != null) {			
+			pVO.setPDetails(pVO.getPDetails().replace(",", "|"));
 		}
-		if(cpVO.getHdetails() != null) {			
-			cpVO.setHdetails(cpVO.getHdetails().replaceAll(",", "|"));
+		if(cpVO.getHDetails() != null) {			
+			cpVO.setHDetails(cpVO.getHDetails().replaceAll(",", "|"));
 		}
 		
 		fService.updateFreeB(fVO);
