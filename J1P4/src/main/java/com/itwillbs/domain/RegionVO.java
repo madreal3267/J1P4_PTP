@@ -11,5 +11,7 @@ public class RegionVO {
 	private int proj_no;
 	private String region;
 	private String district;
+	private String temporary;
+	private String user_id;
 
 }

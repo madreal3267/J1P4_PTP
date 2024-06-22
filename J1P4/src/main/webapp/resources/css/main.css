@@ -1,27 +1,90 @@
 @charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
 body{
     background: #fff;
     margin-top:20px;
-    font-family: "Nanum Gothic", sans-serif !important;
-}
- 
-h1 {
-	font-weight: bolder;
-	line-height: 60px;
-	padding-left: 420px;
+	font-family: "Nanum Gothic", sans-serif !important;
 }
 
-h3 {
+#mainImg {
+	position: absolute;
+	left:900px;
+	bottom:300px; 
+}
+
+#mainText {
 	font-weight: bolder;
 	line-height: 60px;
-	padding-left: 420px;
+	padding-left: 330px;
+}
+
+#mainProjMenu {
+	font-weight: bolder;
+	line-height: 60px;
+	position: absolute;
+	left:330px;
+	bottom:90px;
 }
  
-h4 {
+#subText {
 	color: #808080;
-	padding-left: 420px;
+	padding-left: 330px;
 	line-height: 40px;
+}
+
+#mainCount {
+	text-align: center;
+	padding-top: 50px;" 
+}
+
+#logoText{
+	text-align: center;
+	font-size: large;
+	font-weight: bolder;
+	margin-top: 100px;
+	margin-bottom: 50px;
+}
+
+.mainButt {
+	width: 400px;
+	position: absolute;
+	bottom: 300px;
+	left:330px;
+}
+
+.butt1 {
+	background-color: #31b9a9;
+	border: solid 1px #31b9a9;
+	color: #fff;
+}
+
+.butt2 {
+	background-color: #fff;
+	border: solid 1px #31b9a9;
+	color: #31b9a9;
+}
+
+.butt3 {
+	background-color: #31b9a9;
+	border: solid 2px #31b9a9;
+	color: #fff;
+	text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
+	width:250px;
+	font-size: 20px
+}
+
+.logo{
+	margin-right: 70px;
+}
+
+.siteCount {
+	display:inline-block;
+}
+
+.siteCount>p {
+	font-size:30px;
+	font-weight: bolder;
 }
 
 /* 흐르는 이미지 */
@@ -56,48 +119,4 @@ h4 {
 	}
 }
 /* 흐르는 이미지 */
-
-
-.subject{
-	text-align: center;
-	font-size: large;
-	font-weight: bolder;
-}
-
-.b1 {
-	background-color: #31b9a9;
-	border: solid 1px #31b9a9;
-	color: #fff;
-	
-}
-
-.b2 {
-	background-color: #fff;
-	border: solid 1px #31b9a9;
-}
-
-.b3 {
-	background-color: #31b9a9;
-	border: solid 2px #31b9a9;
-	color: #fff;
-	text-shadow: -1px 0px black, 0px 1px black, 1px 0px black, 0px -1px black;
-}
-
-.b3{
-	width:250px;
-	font-size: 20px
-}
-
-.logo{
-	margin-right: 70px;
-}
-
-.siteInfo {
-	display:inline-block;
-}
-
-.siteInfo>p {
-	font-size:30px;
-	font-weight: bolder;
-}
 

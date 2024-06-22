@@ -1,8 +1,12 @@
 package com.itwillbs.web;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +35,7 @@ public class EnrollProjController {
 	// 프로젝트 등록 페이지 연결
 	// http://localhost:8088/enroll/enrollProj
 	@GetMapping(value="/enrollProj")
-	public void enrollGET() {
+	public void enrollProjGET() {
 		logger.debug(" Controller : ( •̀ ω •́ )y /enrollProj -> enrollGET() 실행 ");
 		
 		logger.debug(" Controller : ( •̀ ω •́ )y /views/enroll/enrollProj.jsp 페이지 연결 ");
@@ -40,7 +44,7 @@ public class EnrollProjController {
 	
 	// 프로젝트 등록
 	@PostMapping(value="/enrollProj")
-	public String enrollPOST(ProjectVO pVO, SkillVO sVO, RegionVO rVO) {
+	public String enrollProjPOST(ProjectVO pVO, SkillVO sVO, RegionVO rVO/*, Model model,HttpSession session */) {
 		logger.debug(" Controller : (＃°Д°) /enrollProj -> enrollPOST() 실행 ");		
 		
 		eService.insertProj(pVO);
@@ -96,7 +100,7 @@ public class EnrollProjController {
 	// 프로젝트 등록 후 성공 페이지
 	// http://localhost:8088/enroll/enrollSuccess
 	@GetMapping(value="/enrollSuccess")
-	public void enrollSuccessGET() {
+	public void enrollProjSuccessGET() {
 		logger.debug(" Controller : ( •̀ ω •́ )y /enrollSuccess -> enrollSuccessGET() 실행 ");
 		
 		logger.debug(" Controller : ( •̀ ω •́ )y /views/enroll/enrollSuccess.jsp 페이지 연결 ");
@@ -106,38 +110,66 @@ public class EnrollProjController {
 	// ----------------------------- 머지 후 파트 분리 해야됨 -----------------------------
 	// 임시로 EnrollProjController에 구현 중임
 	
-	// http://localhost:8088/enroll/saveProjDt?proj_no=315
+	// http://localhost:8088/enroll/getSavedProj?proj_no=412
 	
 	// 내 프로젝트 관리에서 임시저장 프로젝트 불러오기
-	@GetMapping(value="/saveProjDt")
-	public void saveProjDtGET(Model model, @RequestParam("proj_no") int proj_no) {
-		logger.debug(" Controller : ( •̀ ω •́ )y /saveProj -> saveProjDtGET() 실행 ");
+	@GetMapping(value="/getSavedProj")
+	public String getSavedProjGET(Model model,ProjectVO vo, @RequestParam("proj_no") int proj_no, HttpSession session,HttpServletResponse response) throws IOException {
+		logger.debug(" Controller : ( •̀ ω •́ )y /getSavedProj -> getSavedProjGET() 실행 ");
 		
-		model.addAttribute("resultProj", eService.saveProjDt(proj_no));
-		model.addAttribute("resultSk", eService.saveSkDt(proj_no));
-		model.addAttribute("resultReg", eService.saveRegDt(proj_no));
+		vo.setUser_id(String.valueOf(session.getAttribute("user_id")));
+		vo.setProj_no(proj_no);
+		logger.debug("@@@@@@@@@@@@@@@"+vo);
+		
+//		response.setCharacterEncoding("utf-8");
+//		response.setContentType("text/html; charset=utf-8");
+		
+		// eService.chkProj -> 불러온 임시저장 프로젝트의 번호(파라미터값)와 로그인한 아이디(세션)가 일치하면 1을 리턴
+		// 일치하지 않는 경우 (본인의 프로젝트가 아닌데 파라미터값을 변경하여 강제접근할 경우) 0을 리턴
+		if(eService.chkProj(vo)==1) {
+			// eService.chkTemp -> 불러온 임시저장 프로젝트가 임시저장 프로젝트면 1을 리턴
+			// 아닐 경우 (등록된 프로젝트에 파라미터값을 변경하여 강제접근할 경우) 0을 리턴
+			if(eService.chkTemp(vo)==1) {
+				model.addAttribute("resultProj", eService.getSavedProj(vo));
+				model.addAttribute("resultSk", eService.getSavedSk(vo));
+				model.addAttribute("resultReg", eService.getSavedReg(vo));
+				return "/enroll/getSavedProj";				
+			} else {
+				PrintWriter out = response.getWriter();
+				out.println("<script> alert('Fuck FUCK You');");
+				out.println("history.back();</script>");
+				out.close();
+				return null;
+			}
+		} else {
+			PrintWriter out = response.getWriter();
+			out.println("<script> alert('Fuck You');");
+			out.println("history.back();</script>");
+			out.close();
+			return null;
+		}
 	}
 	
 	// 불러온 임시저장 프로젝트 임시저장
-	@PostMapping(value="/saveProjSave")
+	@PostMapping(value="/savedProjSave")
 	@ResponseBody
-	public void moreSavePOST(ProjectVO pVO,SkillVO sVO,RegionVO rVO) {
-		logger.debug(" Controller : (＃°Д°) /saveProjSave -> moreSavePOST 실행 ");
+	public void savedProjSavePOST(ProjectVO pVO,SkillVO sVO,RegionVO rVO) {
+		logger.debug(" Controller : (＃°Д°) /savedProjSave -> savedProjSavePOST 실행 ");
 		
-		eService.saveProjSave(pVO);
-		eService.saveSkSave(sVO);
-		eService.saveRegSave(rVO);
+		eService.savedProjSave(pVO);
+		eService.savedSkSave(sVO);
+		eService.savedRegSave(rVO);
 
 	}
 	
 	// 불러온 임시저장 프로젝트 등록
-	@PostMapping(value="/realEnrollProj")
-	public String realEnrollPOST(ProjectVO pVO,SkillVO sVO,RegionVO rVO) {
-		logger.debug(" Controller : (＃°Д°) /realEnrollProj -> realEnrollPOST() 실행 ");
+	@PostMapping(value="/savedProjEnroll")
+	public String savedProjEnrollPOST(ProjectVO pVO,SkillVO sVO,RegionVO rVO) {
+		logger.debug(" Controller : (＃°Д°) /savedProjEnroll -> realEnrollPOST() 실행 ");
 		
-		eService.saveProjSave(pVO);
-		eService.saveSkSave(sVO);
-		eService.saveRegSave(rVO);
+		eService.savedProjSave(pVO);
+		eService.savedSkSave(sVO);
+		eService.savedRegSave(rVO);
 		
 		return "redirect:/enroll/enrollSuccess";
 		
