@@ -1,5 +1,7 @@
 package com.itwillbs.persistence;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -31,8 +33,8 @@ public class AccountDAOImpl implements AccountDAO {
 	
 	//비밀번호 수정
 	@Override
-	public void passwordUpdate(MemberVO vo) {
-		sqlSession.update(NAMESPACE+"passwordUpdate", vo);
+	public void passwordUpdate(Map<String, Object> paramMap) {
+		sqlSession.update(NAMESPACE+"passwordUpdate", paramMap);
 	}
 	
 	//아이디 조회

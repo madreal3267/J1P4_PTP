@@ -4,13 +4,13 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"></script> <!-- ajax이용시 제이쿼리cnd 사용 -->
+  
     <meta charset="UTF-8">
-    <script src="">
-    
-    </script>
-    
-    
-    
+   
+      
     <title>로그인 폼</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
@@ -45,7 +45,7 @@
 </div>
 
 
-<form action="/member/login" class="form-horizontal" method="post">
+<form action="/member/login" class="form-horizontal" method="post" name="loginform">
 <div class="box-body">
 <div class="form-group">
 <label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
@@ -71,9 +71,9 @@
 </div>
 
 <div class="box-footer">
-<!-- <button type="submit" class="btn btn-default">회원가입</button> -->
+
+<button type="button" class="btn btn-info pull-right" id="loginButton">로그인</button>
 <a href="/member/insert" class="register">회원가입</a>
-<button type="submit" class="btn btn-info pull-right">로그인</button>
 <a href="/member/idfind" class="idfind">아이디 찾기</a>
 <a href="/member/pwfind" class="pwfind">비밀번호 찾기</a>
 </div>
@@ -90,6 +90,48 @@
     <script src="./resources/dist/js/app.min.js" type="text/javascript"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="./resources/dist/js/demo.js" type="text/javascript"></script>
+    
+    
+    <script type="text/javascript">
+    //로그인 공백처리
+	 $(document).ready(function(){
+    
+    $('#loginButton').click(function(){
+		
+		 var userid = document.loginform.user_id.value;
+		 var userpw = document.loginform.user_pw.value;
+		
+		
+		if(userid==""){
+			alert("아이디를 입력해주세요.");
+			return;
+		}
+		if(userpw==""){
+			alert("비밀번호를 입력해주세요.");
+			return;
+		}
+		
+		$('#loginButton').attr("type","submit");
+		location.href = '/member/loginmain';
+		 
+	 	});
+	
+    
+	 });
+
+    
+    
+    </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
   </body>
 </html>
 

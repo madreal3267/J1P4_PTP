@@ -226,23 +226,10 @@ public class MemberDAOImpl implements MemberDAO {
 		sqlSession.insert(NAMESPACE+"clientId", ct_id);
 		
 	}
+	
+	
+	
 
-
-	
-	
-	@Override
-	public String sessCf(MemberVO vo) throws Exception {
-		return sqlSession.selectOne(NAMESPACE+"sessCf",vo);
-	}
-	
-	@Override
-	public String sessType(MemberVO vo) throws Exception {
-		return sqlSession.selectOne(NAMESPACE+"sessType",vo);
-	}
-	
-	
-	
-	
 	
 	
 	

@@ -24,7 +24,7 @@ h5 { color: gray !important; }
 </head>
 <body>
 	<h1>임시 프로젝트 수정하기 (saveProjDt.jsp)</h1>
-${sessionScope.user_id },${param.proj_no }
+
 	<div class="toast-container position-fixed top-70 start-50 p-3">
 	  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
 	    
@@ -38,9 +38,11 @@ ${sessionScope.user_id },${param.proj_no }
 	<hr>
 	<div>
 	<form action="/enroll/enrollProj" method="post" id="fm1" name="fm1" class="fm">
-		<input type="hidden" value="${sessionScope.user_id }" name="user_id">
-		<input type="hidden" value="${param.proj_no }" name="proj_no">
+		<input type="hidden" value="user_10" name="user_id">
+		<input type="hidden" value=315 name="proj_no">
 		<input type="hidden" value="" name="temporary" class="temporary">
+		<!-- 사용자 아이디 정보를 세션과 pror_no은 파라미터값을 담아서 hidden 으로 전달 -> 임시저장 수정 또는 등록에 필요하기 때문 -->
+		<!-- 기능 구현 중 받아올 수 있는 세션과 파라미터가 없어서 임의로 user_10와 315를 담아서 테스트 중 추후 수정 필요 -->
 		
 		
 		<h2>어떤 프로젝트 업무를 맡기고 싶으신가요?</h2>
@@ -302,7 +304,7 @@ ${sessionScope.user_id },${param.proj_no }
 				/* [+보유기술 추가] 클릭 시 [select 버튼]+[추가하기] 출력 */
 				$('#inputPt').html(
 				 '<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">'+
-				 '<select class="selectSk" ><option disabled hidden selected></option>'+
+				 '<select name="skill_nm" class="selectSk" ><option disabled hidden selected></option>'+
 				 '<option value=".NET">.NET</option><option value="AA">AA</option><option value="Adobe Photoshop">Adobe Photoshop</option><option value="AfterEffect">AfterEffect</option>'+
 				 '<option value="Ajax">Ajax</option><option value="Android">Android</option><option value="Angular.js">Angular.js</option><option value="Apache">Apache</option>'+
 				 '<option value="Bootstrap">Bootstrap</option><option value="C">C</option><option value="C#">C#</option><option value="C++">C++</option>'+
@@ -318,7 +320,7 @@ ${sessionScope.user_id },${param.proj_no }
 				 '<option value="Unity">Unity</option><option value="Unix">Unix</option><option value="VisualStudio">VisualStudio</option>'+
 				 '<option value="Vue.js">Vue.js</option><option value="Windows">Windows</option><option value="모바일 웹/앱">모바일 웹/앱</option><option value="앱디자인">앱디자인</option>'+
 				 '<option value="웹디자인">웹디자인</option><option value="전자정부프레임워크">전자정부프레임워크</option><option value="한글">한글</option></select>'+
-				 '<select class="selectLev"><option disabled hidden selected></option>'+
+				 '<select name="skill_lev" class="selectLev"><option disabled hidden selected></option>'+
 				 '<option value="초급">초급</option><option value="중급">중급</option><option value="고급">고급</option></select>'+
 				 '<button type="butoon" class="addButt removeAdd">추가하기</button></div>'		
 				);
@@ -386,7 +388,7 @@ ${sessionScope.user_id },${param.proj_no }
 				$('.temporary').val("임시저장");
 				
 					$.ajax({
-						url : "/enroll/savedProjSave",
+						url : "/enroll/saveProjSave",
 						type : "POST",
 						data : $("#fm1").serialize(),
 						success : function() {
@@ -407,7 +409,7 @@ ${sessionScope.user_id },${param.proj_no }
 				
 				$('.temporary').val("등록성공");
 	
-					$(".fm").attr("action","/enroll/savedProjEnroll");
+					$(".fm").attr("action","/enroll/realEnrollProj");
 					$(".fm").submit();
 		
 			});

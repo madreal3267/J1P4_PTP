@@ -76,12 +76,10 @@ public interface MemberDAO {
 	
 	//---------------------------------------------
 	
-	// 클라이언트 등록여부
+	//클라이언트 등록여부
 	public void insertCt(String ct_id) throws Exception; 
 	
-	//
-	public String sessCf(MemberVO vo) throws Exception;
-	public String sessType(MemberVO vo) throws Exception;
+	
 	
 	
 	

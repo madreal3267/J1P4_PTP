@@ -11,7 +11,7 @@ public class FreelancerVO {
 	private String free_id;
 	private String enroll_status;
 	private String work_field;
-	private String school_type;
+	private String scholl_type;
 	private String school_nm;
 	private String major;
 	private String grad_status;
