@@ -3,6 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"></script> <!-- ajax이용시 제이쿼리cnd 사용 -->
+
 <meta charset="UTF-8">
 <title>비밀번호 찾기 폼</title>
 <meta
@@ -47,7 +51,7 @@
 		</div>
 
 
-		<form class="form-horizontal" action="/member/findpw" method="post">
+		<form class="form-horizontal" action="/member/findpw" method="post" name="pwform">
 			<div class="box-body">
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
@@ -74,10 +78,9 @@
 			</div>
 
 			<div class="box-footer">
-				<button type="submit" class="btn btn-default">비밀번호 재설정</button>
-				<button type="submit" class="btn btn-default">회원가입</button>
-				<button type="submit" class="btn btn-info pull-right">아이디
-					찾기</button>
+				<button type="button" class="btn btn-default" id="pwButton">비밀번호 재설정</button>
+				<a href="/member/insert" class="register">회원가입</a>
+				<a href="/member/idfind" class="idfind">아이디 찾기</a>
 
 			</div>
 
@@ -102,6 +105,50 @@
     if (msg != "") {
         alert(msg);
     }
+    
+   //----------------------------------------
+   
+   $(document).ready(function(){
+   $('#pwButton').click(function(){
+	   
+	  var id = document.pwform.user_id.value;  //아이디
+	  var email = document.pwform.user_email.value; //이메일 
+	   
+	  	if(id==""){
+	  		alert("아이디를 입력하세요.");
+	  		return;
+	  	}
+	  	if(email==""){
+	  		alert("이메일을 입력하세요.");
+	  		return;
+	  	}
+	   
+	  	$('#pwButton').attr("type","submit");
+		location.href = '/member/findpw';
+	  	
+   		});
+    
+   });
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 </script>
 
 </html>

@@ -303,7 +303,7 @@ public class MemberController {
 							"<br/>"+vo.getUser_id()+"님 "+
 							"<br/>비밀번호 변경을 위해서"+
 							"<br/>아래 [비밀번호 변경하기]를 눌러주세요."+
-							"<a href='http://192.168.7.213:8088/member/findpw?user_email=" + vo.getUser_email() +
+							"<a href='http://localhost:8088/member/findpw?user_email=" + vo.getUser_email() +
 							"&key=" + key +
 							"' target='_blank'>비밀번호 변경하기</a>");
 			mailhandler.setFrom("itwil_j1p4@naver.com", "캐프리");

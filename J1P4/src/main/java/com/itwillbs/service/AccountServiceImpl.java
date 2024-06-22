@@ -1,5 +1,7 @@
 package com.itwillbs.service;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -30,8 +32,8 @@ public class AccountServiceImpl implements AccountService {
 
 	//비밀번호 수정
 	@Override
-	public void passwordUpdate(MemberVO vo) {
-		adao.passwordUpdate(vo);
+	public void passwordUpdate(Map<String, Object> paramMap) {
+		adao.passwordUpdate(paramMap);
 		
 	}
 

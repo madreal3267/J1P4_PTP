@@ -55,7 +55,7 @@
 <div class="box-body">
 <div class="form-group">
 <label for="exampleInputEmail1">아이디</label>
-<input type="text" class="form-control" name="user_id" id="exampleInputEmail1" placeholder="ID" value="${param.user_id}" readonly="readonly">
+<input type="text" class="form-control" name="user_id" id="exampleInputEmail1" placeholder="ID" value="${sessionScope.user_id}" readonly="readonly">
 </div>
 
 <div class="form-group">
@@ -64,7 +64,8 @@
 <p class="help-block">Example block-level help text here.</p>
 </div>
 <button type="submit" class="btn btn-primary">업로드</button>
-
+<br>
+<br>
 
 <div class="form-group">
 <label for="exampleInputPassword1">현재 비밀번호</label>
@@ -73,13 +74,13 @@
 
 <button type="button" class="passwordButton" >수정</button>
 <br>
-
+<br>
 <!-- div사이에 새비밀번호, 새비밀번호 확인, 취소, 수정버튼이 들어가 있음 -->
 <div class="inputType"></div> 
 
 
 
-
+<br>
 <div class="form-group">
 <label for="exampleInputEmail1">연락처</label>
 <input type="number" class="form-control" id="exampleInputEmail1" name="phone_no" placeholder="phoneNumber">
@@ -87,14 +88,9 @@
 <button type="submit" class="btn btn-primary">수정</button>
 
 
-
-<div class="checkbox">
-<label>
-<input type="checkbox"> Check me out
-</label>
 </div>
-</div>
-
+<br>
+<br>
 <div class="box-footer">
 회원탈퇴 <button type="submit" class="btn btn-primary">탈퇴</button>
 </div>

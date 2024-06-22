@@ -43,14 +43,14 @@
 </div>
 
 
-<form class="form-horizontal" method="post" name="form_join">
+<form class="form-horizontal" method="post" name="form_join" id="form1">
 
 <div class="box-body">
 
 <div class="form-group">
 <label for="inputEmail3" class="col-sm-2 control-label">이메일</label>
 <div class="col-sm-10">
-<input type="email" name="user_email" class="form-control" id="inputEmail3" placeholder="Email">
+<input type="email" name="user_email" class="form-control email" id="inputEmail3" placeholder="Email">
 </div>
 </div>
 
@@ -94,7 +94,7 @@
 
 <!-- 버튼설정 -->
 <div class="col-md-6">
-<button type="submit" class="btn btn-primary btn-block"><i class="fa fa-bell" ></i>회원가입</button>
+<button type="button" class="btn btn-primary btn-block" id="insertMember"><i class="fa fa-bell"></i>회원가입</button>
 <button type="submit" class="btn btn-info btn-block btn-flat"><i class="fa fa-bell"></i>구글 계정으로 회원가입</button>
 <button type="submit" class="btn btn-danger btn-block btn-sm"><i class="fa fa-bell"></i>카카오톡 계정으로 회원가입</button>
 </div>
@@ -114,8 +114,8 @@
     <!-- AdminLTE for demo purposes -->
     <script src="./resources/dist/js/demo.js" type="text/javascript"></script>
  
+ 
   <script type="text/javascript">
-  
 
   // 아이디 입력값을 가져오고, 입력값을 서버로 전송하고-> 똑같은 아이디가 있는지 체크한 후
   // 사용 가능 여부를 아이디 입력창 아래에 표시
@@ -189,29 +189,45 @@
 	 });
 	 
 	 
+
+	 
+ });
+ 
 	 //회원가입 공백 처리
-	 function checkBlank(){
+	 $('#insertMember').click(function(){
 		 var useremail = document.form_join.user_email.value;
 		 var username = document.form_join.name.value;
 		 var userid = document.form_join.user_id.value;
 		 var userpw = document.form_join.user_pw.value;
 		 var userpw2 = document.form_join.user_pw2.value;
-		 if(useremail==""|| username==""||userid==""|| userpw==""|| userpw2==""){
-			 alert("모든 빈칸을 작성해주세요.");
-		 	return false;
-		 }
 		
-		 	return true;
-	 }
-	 
-	 
-	 
-	 
+		if(useremail==""){
+			alert("모든 칸을 입력해주세요");
+			return;
+		}
+		if(username==""){
+			alert("모든 칸을 입력해주세요");
+			return;
+		}
+		if(userid==""){
+			alert("모든 칸을 입력해주세요");
+			return;
+		}
+		if(userpw==""){
+			alert("모든 칸을 입력해주세요");
+			return;
+		}
+		if(userpw2==""){
+			alert("모든 칸을 입력해주세요");
+			return;
+		} 
+		$('#insertMember').attr("type","submit");
+		location.href = '/member/insert';
+		 
+	 });
+	
 
-
 	 
- });
- 
  </script> 
   
   

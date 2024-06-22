@@ -1,5 +1,8 @@
 package com.itwillbs.web;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -38,7 +41,7 @@ public class AccountController {
 		
 		
 		//현재 비밀번호 입력
-		@PostMapping(value = "/account")
+		@PostMapping(value = "/nowPass")
 		@ResponseBody
 		public String password(@RequestParam("passwordButton")String passwordButton, MemberVO vo, Model model,String user_pw, String user_id) {
 			logger.debug("/account -> password() 호출 ");
@@ -56,8 +59,17 @@ public class AccountController {
 		}
 		
 		//수정할 비밀번호
-		public void passwordupdate(MemberVO vo, String user_pw) {
+		@PostMapping(value = "/chagePass")
+		public void passwordupdate(MemberVO vo, String user_pw, String user_id) {
 			logger.debug("/account -> passwordUpdate() 호출 ");
+			
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+			paramMap.put("user_id", user_id);
+			paramMap.put("user_pw", user_pw); //현재비번
+			
+			aService.passwordUpdate(paramMap);
+			logger.debug("@@@@@@@@"+paramMap);
+			logger.debug("비밀번호 변경완료");
 			
 		}
 	
