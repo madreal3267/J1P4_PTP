@@ -24,71 +24,79 @@ public class EnrollFreeServiceImpl implements EnrollFreeService {
 	private EnrollFreeDAO fdao;
 	
 	@Override
-	public void insertFree(FreelancerVO vo) {
-		logger.debug(" (●'◡'●) Service: insertFree(vo) 실행 ");
+	public void updateFree(FreelancerVO vo) {
+		logger.debug(" (●'◡'●) Service: updateFree(vo) 실행 ");
 		
-		fdao.insertFree(vo);
+		fdao.updateFree(vo);
 		
-		logger.debug(" (●'◡'●) Service: 프리랜서 등록 성공! (●'◡'●) ");
+		logger.debug(" (●'◡'●) Service: 프리랜서 업데이트 성공! (●'◡'●) ");
+	}
+	@Override
+	public void updateFreeB(FreelancerVO vo) {
+		logger.debug(" (●'◡'●) Service: updateFreeB(vo) 실행 ");
+		
+		fdao.updateFreeB(vo);
+		
+		logger.debug(" (●'◡'●) Service: 프리랜서 업데이트 성공! (●'◡'●) ");
 	}
 
 	@Override
-	public void insertCareer(CareerVO vo) {
-		logger.debug(" (●'◡'●) Service: insertCareer(vo) 실행 ");
+	public void updateCareer(CareerVO vo) {
+		logger.debug(" (●'◡'●) Service: updateCareer(vo) 실행 ");
 		
-		fdao.insertCareer(vo);
+		fdao.updateCareer(vo);
 		
-		logger.debug(" (●'◡'●) Service: 경력 등록 성공! (●'◡'●) ");
-		
-	}
-
-	@Override
-	public void insertLicense(LicenseVO vo) {
-		logger.debug(" (●'◡'●) Service: insertLicense(vo) 실행 ");
-		
-		fdao.insertLicense(vo);
-		
-		logger.debug(" (●'◡'●) Service: 자격증 등록 성공! (●'◡'●) ");
-		
-	}
-
-	@Override
-	public void insertSkill(SkillVO vo) {
-		logger.debug(" (●'◡'●) Service: insertSkill(vo) 실행 ");
-		
-		fdao.insertSkill(vo);
-		
-		logger.debug(" (●'◡'●) Service: 스킬 등록 성공! (●'◡'●) ");
+		logger.debug(" (●'◡'●) Service: 경력 업데이트 성공! (●'◡'●) ");
 		
 	}
 
 	@Override
-	public void insertReg(RegionVO vo) {
-		logger.debug(" (●'◡'●) Service: insertReg(vo) 실행 ");
+	public void updateLicense(LicenseVO vo) {
+		logger.debug(" (●'◡'●) Service: updateLicense(vo) 실행 ");
 		
-		fdao.insertReg(vo);
+		fdao.updateLicense(vo);
 		
-		logger.debug(" (●'◡'●) Service: 지역 등록 성공! (●'◡'●) ");
-		
-	}
-
-	@Override
-	public void insertPartners(PartnersVO vo) {
-		logger.debug(" (●'◡'●) Service: insertReg(vo) 실행 ");
-		
-		fdao.insertPartners(vo);
-		
-		logger.debug(" (●'◡'●) Service: 협력업체 등록 성공! (●'◡'●) ");
+		logger.debug(" (●'◡'●) Service: 자격증 업데이트 성공! (●'◡'●) ");
 		
 	}
 
 	@Override
-	public void insertComp(CompanyVO vo) {
-		logger.debug(" (●'◡'●) Service: insertReg(vo) 실행 ");
+	public void updateSkill(SkillVO vo) {
+		logger.debug(" (●'◡'●) Service: updateSkill(vo) 실행 ");
 		
-		fdao.insertComp(vo);
+		fdao.updateSkill(vo);
 		
-		logger.debug(" (●'◡'●) Service: 회사연혁 등록 성공! (●'◡'●) ");
+		logger.debug(" (●'◡'●) Service: 스킬 업데이트 성공! (●'◡'●) ");
+		
+	}
+
+	@Override
+	public void updateReg(RegionVO vo) {
+		logger.debug(" (●'◡'●) Service: updateReg(vo) 실행 ");
+		
+		fdao.updateReg(vo);
+		
+		logger.debug(" (●'◡'●) Service: 지역 업데이트 성공! (●'◡'●) ");
+		
+	}
+
+	@Override
+	public void updatePartners(PartnersVO vo) {
+		logger.debug(" (●'◡'●) Service: updateReg(vo) 실행 ");
+		
+		fdao.updatePartners(vo);
+		
+		logger.debug(" (●'◡'●) Service: 협력업체 업데이트 성공! (●'◡'●) ");
+		
+	}
+
+	@Override
+	public void updateComp(CompanyVO vo) {
+		logger.debug(" (●'◡'●) Service: updateReg(vo) 실행 ");
+		
+		fdao.updateComp(vo);
+		
+		logger.debug(" (●'◡'●) Service: 회사연혁 업데이트 성공! (●'◡'●) ");
 		
 	}
 	

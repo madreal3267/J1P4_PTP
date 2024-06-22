@@ -11,23 +11,24 @@ import com.itwillbs.domain.SkillVO;
 public interface EnrollFreeDAO {
 	
 	// 프리랜서 등록 정보 입력
-	public void insertFree(FreelancerVO vo);
+	public void updateFree(FreelancerVO vo);
+	public void updateFreeB(FreelancerVO vo);
 	
 	// 프리랜서 경력
-	public void insertCareer(CareerVO vo);
+	public void updateCareer(CareerVO vo);
 	
 	// 프리랜서 보유 자격증
-	public void insertLicense(LicenseVO vo);
+	public void updateLicense(LicenseVO vo);
 	
 	// 프리랜서 보유 기술
-	public void insertSkill(SkillVO vo);
+	public void updateSkill(SkillVO vo);
 	
 	// 프리랜서 희망 지역
-	public void insertReg(RegionVO vo);
+	public void updateReg(RegionVO vo);
 	
 	// 프리랜서 협력 업체
-	public void insertPartners(PartnersVO vo);
+	public void updatePartners(PartnersVO vo);
 	
 	// 프리랜서 회사 연혁
-	public void insertComp(CompanyVO vo);
+	public void updateComp(CompanyVO vo);
 }	

@@ -188,11 +188,12 @@ public class MemberController {
 			
 			System.out.println("resultVO : "+resultVO);
 			
+			
 			//로그인 성공처리
 			// 세션에 있으면 있는 세션반환, 없으면 신규 세션을 생성
 			HttpSession Session = request.getSession();
 			if(resultVO != null) {
-				Session.setAttribute("user_id", resultVO);
+				Session.setAttribute("user_id", resultVO.getUser_id());
 				Session.setAttribute("user_cf", mService.sessCf(vo));
 				Session.setAttribute("user_type", mService.sessType(vo));
 				return"redirect:/main/home";

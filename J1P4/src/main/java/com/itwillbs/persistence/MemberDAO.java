@@ -80,8 +80,8 @@ public interface MemberDAO {
 	public void insertCt(String ct_id) throws Exception; 
 	
 	//
-	public MemberVO sessCf(MemberVO vo) throws Exception;
-	public MemberVO sessType(MemberVO vo) throws Exception;
+	public String sessCf(MemberVO vo) throws Exception;
+	public String sessType(MemberVO vo) throws Exception;
 	
 	
 	
