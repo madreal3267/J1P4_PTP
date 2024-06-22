@@ -13,9 +13,6 @@
 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 <link href="../resources/css/header.css" rel="stylesheet" />
 <link href="../resources/css/main.css" rel="stylesheet" />
-<style type="text/css">
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
-</style>
 </head>
 <body style="padding-top: 75px;">
 
@@ -29,11 +26,10 @@
         </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" >
-<!--      <li><a href="#" class="nav-link px-2 link-secondary nav-r">프로젝트 찾기</a></li> -->
           <li><a href="/board/listPro" class="nav-link px-3 link-body-emphasis nav-r1">프로젝트 찾기</a></li>
           <li><a href="#" class="nav-link px-3 link-body-emphasis nav-r1">프리랜서 찾기</a></li>
           <li><a href="#" class="nav-link px-3 link-body-emphasis nav-r1">이용방법</a></li>
-          <li><a href="#" class="nav-link px-2 link-body-emphasis nav-r4">로그인</a></li>
+          <li><a href="/member/login" class="nav-link px-2 link-body-emphasis nav-r4">로그인</a></li>
           <li><a href="/member/insert" class="nav-link px-2 link-body-emphasis nav-r4">회원가입</a></li>
         </ul>
         

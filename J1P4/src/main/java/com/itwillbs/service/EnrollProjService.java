@@ -14,10 +14,10 @@ public interface EnrollProjService {
 	// 프로젝트 최초 임시 저장 -> insert문
 	public boolean saveProj(ProjectVO vo);
 	
-	// 프로젝트 기술 최초 임시 저장
+	// 프로젝트 기술 등록 또는 최초 임시 저장
 	public void insertSkill(SkillVO vo);
 	
-	// 프로젝트 위치 최초 임시 저장
+	// 프로젝트 위치 등록 또는 최초 임시 저장
 	public void insertReg(RegionVO vo);
 	
 	// 최초 임시 저장 후 임시저장 또는 등록 -> update문
@@ -30,21 +30,27 @@ public interface EnrollProjService {
 	public void multiSaveReg(RegionVO vo);
 	
 	// 임시저장된 프로젝트 불러오기
-	public ProjectVO saveProjDt(int proj_no);
+	public ProjectVO getSavedProj(ProjectVO vo);
 	
 	// 임시저장된 프로젝트의 스킬 불러오기
-	public List<SkillVO> saveSkDt(int proj_no);
+	public List<SkillVO> getSavedSk(ProjectVO vo);
 	
 	// 임시저장된 프로젝트의 지역 불러오기
-	public RegionVO saveRegDt(int proj_no);
+	public RegionVO getSavedReg(ProjectVO vo);
 	
 	// 임시저장된 프로젝트 수정 또는 등록
-	public void saveProjSave(ProjectVO vo);
+	public void savedProjSave(ProjectVO vo);
 	
 	// 임시저장된 프로젝트의 스킬 수정 또는 등록
-	public void saveSkSave(SkillVO vo);
+	public void savedSkSave(SkillVO vo);
 	
 	// 임시저장된 프로젝트의 지역 수정 또는 등록
-	public void saveRegSave(RegionVO vo);
-
+	public void savedRegSave(RegionVO vo);
+	
+	// 임시저장된 프로젝트를 불러올 때 본인의 프로젝트가 맞는지 체크
+	public Integer chkProj(ProjectVO vo);
+	
+	// 임시저장된 프로젝트를 불러올 때 임시저장 프로젝트가 맞는지 체크
+	public Integer chkTemp(ProjectVO vo);
+	
 }

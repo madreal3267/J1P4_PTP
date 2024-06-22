@@ -194,6 +194,18 @@ public class MemberServiceImpl implements MemberService {
 		mdao.insertCt(ct_id);
 		
 	}
+
+
+
+	@Override
+	public String sessCf(MemberVO vo) throws Exception {
+		return mdao.sessCf(vo);
+	}
+	
+	@Override
+	public String sessType(MemberVO vo) throws Exception {
+		return mdao.sessType(vo);
+	}
 	
 	
 	
