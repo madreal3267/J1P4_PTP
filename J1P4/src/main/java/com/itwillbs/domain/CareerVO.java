@@ -11,5 +11,6 @@ public class CareerVO {
 	private String quit_date;
 	private String responsibility;
 	private String job_lev;
+	private String user_id;
 	
 }

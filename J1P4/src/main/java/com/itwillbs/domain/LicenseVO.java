@@ -9,4 +9,5 @@ public class LicenseVO {
 	private String license_nm;
 	private String qualify_date;
 	private String issuer;
+	private String user_id;
 }

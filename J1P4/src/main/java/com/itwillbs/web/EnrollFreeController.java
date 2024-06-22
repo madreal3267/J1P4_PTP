@@ -39,11 +39,16 @@ public class EnrollFreeController {
 	public String enrollFreePOST(FreelancerVO fVO,CareerVO cVO, LicenseVO lVO, SkillVO sVO, RegionVO rVO) {		
 		logger.debug(" Controller : ( •̀ ω •́ )y /enrollFree -> enrollFreePOST() 실행 ");
 		
-		fService.insertFree(fVO);
-		fService.insertCareer(cVO);
-		fService.insertLicense(lVO);
-		fService.insertSkill(sVO);
-		fService.insertReg(rVO);
+		cVO.setCompany_nm(cVO.getCompany_nm().replace(",", "|"));
+		cVO.setResponsibility(cVO.getResponsibility().replace(",", "|"));
+		lVO.setIssuer(lVO.getIssuer().replace(",", "|"));
+		lVO.setLicense_nm(lVO.getLicense_nm().replace(",", "|"));
+		
+		fService.updateFree(fVO);
+		fService.updateCareer(cVO);
+		fService.updateLicense(lVO);
+		fService.updateSkill(sVO);
+		fService.updateReg(rVO);
 		
 		return "redirect:/enroll/enrollFreeSuccess";
 	}
@@ -53,24 +58,25 @@ public class EnrollFreeController {
 	public void enrollFreeBGET() {
 		logger.debug(" Controller : ( •̀ ω •́ )y /enrollFreeB -> enrollFreeBGET() 실행 ");
 		
-		logger.debug(" Controller : ( •̀ ω •́ )y /views/enroll/enrollFree.jsp 페이지 연결 ");
+		logger.debug(" Controller : ( •̀ ω •́ )y /views/enroll/enrollFreeB.jsp 페이지 연결 ");
 	}
 	
 	@PostMapping(value="/enrollFreeB")
 	public String enrollFreeBPOST(FreelancerVO fVO,CareerVO cVO, PartnersVO pVO, CompanyVO cpVO, SkillVO sVO, RegionVO rVO) {		
-		logger.debug(" Controller : ( •̀ ω •́ )y /enrollFree -> enrollFreeBPOST() 실행 ");
+		logger.debug(" Controller : ( •̀ ω •́ )y /enrollFreeB -> enrollFreeBPOST() 실행 ");
 		
-		
+		cVO.setCompany_nm(cVO.getCompany_nm().replace(",", "|"));
+		cVO.setResponsibility(cVO.getResponsibility().replace(",", "|"));
+		pVO.setPartners_nm(pVO.getPartners_nm().replace(",", "|"));
+		pVO.setPdetails(pVO.getPdetails().replace(",", "|"));
 		cpVO.setHdetails(cpVO.getHdetails().replaceAll(",", "|"));
 		
-		fService.insertFree(fVO);
-		fService.insertCareer(cVO);
-		fService.insertPartners(pVO);
-		fService.insertComp(cpVO);
-		fService.insertSkill(sVO);
-		fService.insertReg(rVO);
-		
-		
+		fService.updateFreeB(fVO);
+		fService.updateCareer(cVO);
+		fService.updatePartners(pVO);
+		fService.updateComp(cpVO);
+		fService.updateSkill(sVO);
+		fService.updateReg(rVO);
 		
 		return "redirect:/enroll/enrollFreeSuccess";
 	}
@@ -78,9 +84,9 @@ public class EnrollFreeController {
 	// 등록 성공 후
 	@GetMapping(value="/enrollFreeSuccess")
 	public void enrollFreeSuccessGET() {
-		logger.debug(" Controller : ( •̀ ω •́ )y /enrollFree -> enrollSuccessGET() 실행 ");
+		logger.debug(" Controller : ( •̀ ω •́ )y /enrollFreeSuccess -> enrollFreeSuccess() 실행 ");
 		
-		logger.debug(" Controller : ( •̀ ω •́ )y /views/enroll/enrollSuccess.jsp 페이지 연결 ");		
+		logger.debug(" Controller : ( •̀ ω •́ )y /views/enroll/enrollFreeSuccess.jsp 페이지 연결 ");		
 	}
 	
 }

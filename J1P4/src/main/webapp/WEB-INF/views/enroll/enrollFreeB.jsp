@@ -36,7 +36,8 @@ h5 {
 	<hr>
 	
 	<form action="" method="post" name="fm1" id="fm1">
-	<input type="hidden" value="user_100" name="free_id">
+	<input type="hidden" value="${sessionScope.user_id.user_id }" name="free_id">
+	<input type="hidden" value="${sessionScope.user_id.user_id }" name="user_id">
 	<h2>업무조건</h2>
 		<h4>업무 가능 분야</h4>
 			<input type="radio" value="개발" class="btn-check" name="work_field" id="radioWf1">
