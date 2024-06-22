@@ -1,5 +1,7 @@
 package com.itwillbs.service;
 
+import java.util.Map;
+
 import com.itwillbs.domain.MemberVO;
 
 
@@ -12,7 +14,7 @@ public interface AccountService {
 		public String password(String user_id);
 		
 		//비밀번호 수정
-		public void passwordUpdate(MemberVO vo);
+		public void passwordUpdate(Map<String, Object> paramMap);
 		
 		//아이디 조회
 		public String selectId(String user_id);
