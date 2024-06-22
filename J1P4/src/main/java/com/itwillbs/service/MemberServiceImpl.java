@@ -206,6 +206,20 @@ public class MemberServiceImpl implements MemberService {
 	public String sessType(MemberVO vo) throws Exception {
 		return mdao.sessType(vo);
 	}
+
+
+
+	@Override
+	public Integer sessFreeNo(MemberVO vo) throws Exception {
+		return mdao.sessFreeNo(vo);
+	}
+
+
+
+	@Override
+	public Integer sessCtNo(MemberVO vo) throws Exception {
+		return mdao.sessCtNo(vo);
+	}
 	
 	
 	

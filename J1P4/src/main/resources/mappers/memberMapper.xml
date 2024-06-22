@@ -195,6 +195,16 @@
   	where user_id = #{user_id};
   </select>
   
+  <select id="sessFreeNo" resultType="int">
+  	select free_no from freelancer
+  	where free_id = #{user_id};
+  </select>
+  
+  <select id="sessCtNo" resultType="int">
+  	select ct_no from client
+  	where ct_id = #{user_id};
+  </select>
+  
   
   
   

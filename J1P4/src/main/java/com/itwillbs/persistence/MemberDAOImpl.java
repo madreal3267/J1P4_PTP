@@ -239,6 +239,20 @@ public class MemberDAOImpl implements MemberDAO {
 	public String sessType(MemberVO vo) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+"sessType",vo);
 	}
+
+
+
+	@Override
+	public Integer sessFreeNo(MemberVO vo) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"sessFreeNo",vo);
+	}
+
+
+
+	@Override
+	public Integer sessCtNo(MemberVO vo) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"sessCtNo",vo);
+	}
 	
 	
 	

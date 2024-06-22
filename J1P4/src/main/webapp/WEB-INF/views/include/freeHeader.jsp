@@ -35,7 +35,7 @@
           <li><a href="/enroll/enrollFreeB" class="nav-link px-3 link-body-emphasis nav-r1">프리랜서 등록</a></li>
           </c:if>
           <li><a href="#" class="nav-link px-3 link-body-emphasis nav-r1">이용방법</a></li>
-          <li><a href="#" class="nav-link px-2 link-body-emphasis nav-r4">내 프로필</a></li>
+          <li><a href="/myProfile/profile?free_no=${sessionScope.free_no }" class="nav-link px-2 link-body-emphasis nav-r4">내 프로필</a></li>
           <li><a href="/myProManage/interestProject" class="nav-link px-2 link-body-emphasis nav-r4">내 프로젝트 관리</a></li>
         </ul>
 
