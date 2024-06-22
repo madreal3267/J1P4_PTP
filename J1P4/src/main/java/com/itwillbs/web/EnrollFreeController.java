@@ -46,18 +46,6 @@ public class EnrollFreeController {
 //			lVO.setLicense_nm(lVO.getLicense_nm().replace(",", "|"));		
 //		}
 		
-		if(cVO.getCompany_nm() != null) {			
-			cVO.setCompany_nm(cVO.getCompany_nm().replace(",", "|"));
-		}
-		if(cVO.getResponsibility() != null) {
-			cVO.setResponsibility(cVO.getResponsibility().replace(",", "|"));
-		}
-		if(lVO.getIssuer() != null) {			
-			lVO.setIssuer(lVO.getIssuer().replace(",", "|"));
-		}
-		if(lVO.getLicense_nm() != null) {
-			lVO.setLicense_nm(lVO.getLicense_nm().replace(",", "|"));		
-		}
 		
 		fService.updateFree(fVO);
 		fService.updateCareer(cVO);
@@ -80,21 +68,6 @@ public class EnrollFreeController {
 	public String enrollFreeBPOST(FreelancerVO fVO,CareerVO cVO, PartnersVO pVO, CompanyVO cpVO, SkillVO sVO, RegionVO rVO) {		
 		logger.debug(" Controller : ( •̀ ω •́ )y /enrollFreeB -> enrollFreeBPOST() 실행 ");
 		
-		if(cVO.getCompany_nm() != null) {
-			cVO.setCompany_nm(cVO.getCompany_nm().replace(",", "|"));			
-		}
-		if(cVO.getResponsibility() != null) {
-			cVO.setResponsibility(cVO.getResponsibility().replace(",", "|"));			
-		}
-		if(pVO.getPartners_nm() != null) {
-			pVO.setPartners_nm(pVO.getPartners_nm().replace(",", "|"));			
-		}
-		if(pVO.getPDetails() != null) {			
-			pVO.setPDetails(pVO.getPDetails().replace(",", "|"));
-		}
-		if(cpVO.getHDetails() != null) {			
-			cpVO.setHDetails(cpVO.getHDetails().replaceAll(",", "|"));
-		}
 		
 		fService.updateFreeB(fVO);
 		fService.updateCareer(cVO);

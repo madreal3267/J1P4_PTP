@@ -196,6 +196,8 @@ public class MemberController {
 				Session.setAttribute("user_id", resultVO.getUser_id());
 				Session.setAttribute("user_cf", mService.sessCf(vo));
 				Session.setAttribute("user_type", mService.sessType(vo));
+				Session.setAttribute("free_no", mService.sessFreeNo(vo));
+				Session.setAttribute("ct_no", mService.sessCtNo(vo));
 				return"redirect:/main/home";
 				
 			}else {

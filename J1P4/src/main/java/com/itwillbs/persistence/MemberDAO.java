@@ -82,6 +82,8 @@ public interface MemberDAO {
 	//
 	public String sessCf(MemberVO vo) throws Exception;
 	public String sessType(MemberVO vo) throws Exception;
+	public Integer sessFreeNo(MemberVO vo) throws Exception;
+	public Integer sessCtNo(MemberVO vo) throws Exception;
 	
 	
 	

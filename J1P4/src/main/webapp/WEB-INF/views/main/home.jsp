@@ -16,9 +16,11 @@
 <c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.equals('클라이언트') }">
 <c:import url="../include/ctHeader.jsp"></c:import>
 </c:if>
-<%-- ${sessionScope.user_id } --%>
-<%-- ${sessionScope.user_cf } --%>
-<%-- ${sessionScope.user_type } --%>
+${sessionScope.user_id }
+${sessionScope.user_cf }
+${sessionScope.user_type }
+${sessionScope.free_no }
+${sessionScope.ct_no }
 <div style="position: relative;">
 	<div class="my-3 py-3" >
 	<h1 id="mainText">대한민국 NO.0 (허언사이트)<br>

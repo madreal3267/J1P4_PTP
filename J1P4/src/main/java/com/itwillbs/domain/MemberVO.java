@@ -40,8 +40,7 @@ public class MemberVO {
 	
 	//클라이언트 테이블
 	private String ct_id; //회원id
-	
-	
+		
 	
 	
 	//<회원정보>
