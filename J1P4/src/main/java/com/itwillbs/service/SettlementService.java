@@ -6,9 +6,7 @@ import com.itwillbs.dto.SettlementDTO;
 
 public interface SettlementService {
 	
-	void requestSettlement(SettlementDTO settlement);
-    void updateSettlement(SettlementDTO settlement);
-    void processSettlement(SettlementDTO settlement);
+	void updateSettlement(SettlementDTO settlement);
     SettlementDTO getSettlementById(int settlementNo);
     List<SettlementDTO> getAllSettlements();
     List<SettlementDTO> getSettlementsByPriceCheck(boolean priceCheck);

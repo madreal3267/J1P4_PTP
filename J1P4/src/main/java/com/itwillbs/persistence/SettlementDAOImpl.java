@@ -13,7 +13,7 @@ import com.itwillbs.dto.SettlementDTO;
 @Repository
 public class SettlementDAOImpl implements SettlementDAO {
 
-	@Autowired
+    @Autowired
     private SqlSession sqlSession;
 
     private static final String namespace = "com.itwillbs.mapper.AdminMapper";
@@ -47,5 +47,4 @@ public class SettlementDAOImpl implements SettlementDAO {
     public SettlementDTO getSettlementByMerchantUid(String merchant_uid) {
         return sqlSession.selectOne(namespace + ".getSettlementByMerchantUid", merchant_uid);
     }
-
 }

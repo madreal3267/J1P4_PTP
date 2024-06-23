@@ -1,6 +1,7 @@
 package com.itwillbs.web;
 
 import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,6 +22,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,10 +34,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itwillbs.domain.ProjectVO;
-import com.itwillbs.domain.UserVO;
 import com.itwillbs.dto.ContractDTO;
 import com.itwillbs.dto.ProjectDTO;
 import com.itwillbs.dto.SettlementDTO;
@@ -43,9 +44,6 @@ import com.itwillbs.service.ContractService;
 import com.itwillbs.service.ProjectService;
 import com.itwillbs.service.SettlementService;
 import com.itwillbs.service.UserService;
-import com.itwillbs.util.PaymentRequest;
-import com.itwillbs.util.PaymentResponse;
-import com.itwillbs.util.PortOneClient;
 
 @Controller
 @RequestMapping(value = "/admin/*")
@@ -67,12 +65,6 @@ public class AdminController {
 	private ContractService cService;
 	
 	
-
-	
-	
-	
-	
-	
 	// 관리자 메인페이지 이동
 	// http://localhost:8088/admin/main
 	@GetMapping(value = "/main")
@@ -82,41 +74,11 @@ public class AdminController {
 		logger.debug("/views/admin/main.jsp 페이지 연결");
 	}
 	
-//	// 회원정보 관리(회원 목록 출력)
-//	@GetMapping(value = "/userList")
-//	public void userListGET(Model model) {
-//		logger.debug("/userList -> userListGET() 호출");
-//		List<UserDTO> ul = uService.UserList();
-//		logger.debug(" userList : " + ul.size());
-//		model.addAttribute("ul", uService.UserList());
-//	}
-	
-//	// 회원정보 관리(전체 목록)
-//	@GetMapping("/allUsers")
-//    public String allUsers(Model model) {
-//        List<UserDTO> allUsers = uService.getAllUsers();
-//        model.addAttribute("allUsers", allUsers);
-//        return "allUsersView";
-//    }
-//
-//	// 회원정보 관리(프리랜서 목록)
-//    @GetMapping("/freelancers")
-//    public String freelancers(Model model) {
-//        List<UserDTO> freelancers = uService.getFreelancers();
-//        model.addAttribute("freelancers", freelancers);
-//        return "freelancersView";
-//    }
-//
-//    // 회원정보 관리(클라이언트 목록)
-//    @GetMapping("/clients")
-//    public String clients(Model model) {
-//        List<UserDTO> clients = uService.getClients();
-//        model.addAttribute("clients", clients);
-//        return "clientsView";
-//    }
+
 	
 	// http://localhost:8088/admin/users?type=all
 	// http://localhost:8088/admin/users?type=freelancers
+	// 회원 정보관리 메서드
 	@GetMapping("/users")
     public String getUsers(@RequestParam(name = "type", required = false, defaultValue = "all") String type, Model model) {
         List<UserDTO> users;
@@ -136,7 +98,7 @@ public class AdminController {
         model.addAttribute("type", type);
         return "admin/userList";
     }
-	
+	// 프로젝트 관리 메서드들
 	@GetMapping("/projects")
 	public String getProjects(@RequestParam(value = "proj_status", required = false) String proj_status, Model model) {
         List<ProjectDTO> projects;
@@ -150,7 +112,7 @@ public class AdminController {
         
         return "admin/projectList";
     }
-	
+	// 프로젝트 승인 메서드
 	@PostMapping("/project/approve")
 	public String approveProject(@RequestParam("proj_no") int proj_no) {
 		ProjectVO pvo = new ProjectVO();
@@ -160,7 +122,7 @@ public class AdminController {
         logger.debug("승인 proj_no : " + proj_no);
         return "redirect:/admin/projects";
     }
-	
+	// 프로젝트 반려 메서드
 	@PostMapping("/project/reject")
 	public String rejectProject(@RequestParam("proj_no") int proj_no, @RequestParam("reject_reason") String reject_reason) {
 		ProjectVO pvo = new ProjectVO();
@@ -169,7 +131,7 @@ public class AdminController {
         pService.rejectProject(pvo);
         return "redirect:/admin/projects";
     }
-	
+	// 프로젝트 반려 사유를 가져오는 메서드
 	 @GetMapping("/project/rejectReason")
 	    @ResponseBody
 	    public Map<String,String> getRejectReason(@RequestParam("proj_no") int proj_no) {
@@ -178,6 +140,7 @@ public class AdminController {
 		 	response.put("reject_reason", pvo.getReject_reason());
 	        return response;
 	    }
+	 
 	 
 	 @GetMapping("/settlements")
 	    public String getSettlements(Model model,
@@ -196,8 +159,8 @@ public class AdminController {
 	        model.addAttribute("settlements", settlements);
 	        return "admin/settlementList";
 	    }
-
-	 @GetMapping("/settlements/{settlement_no}/calculate")
+	 	// 정산 금액과 수수료를 가져오는 메서드.
+	    @GetMapping("/settlements/{settlement_no}/calculate")
 	    @ResponseBody
 	    public SettlementDTO calculateSettlement(@PathVariable("settlement_no") int settlementNo) {
 	        SettlementDTO settlement = settlementService.getSettlementById(settlementNo);
@@ -207,43 +170,79 @@ public class AdminController {
 	        settlement.setSettled_cost(settledCost);
 	        return settlement;
 	    }
-
+	    // 정산 정보를 업데이트 하는 메서드.
 	    @PostMapping("/settlements/{settlement_no}/update")
 	    @ResponseBody
-	    public String updateSettlement(@PathVariable("settlement_no") int settlementNo,
-	                                   @RequestBody SettlementDTO updatedSettlement) {
-	        SettlementDTO settlement = settlementService.getSettlementById(settlementNo);
-	        settlement.setFee(updatedSettlement.getFee());
-	        settlement.setSettled_cost(updatedSettlement.getSettled_cost());
-	        settlement.setSettlement_check(true);
-	        settlementService.updateSettlement(settlement);
-	        return "정산 정보가 성공적으로 업데이트되었습니다.";
+	    public ResponseEntity<String> updateSettlement(@PathVariable("settlement_no") int settlementNo,
+	                                                   @RequestBody SettlementDTO updatedSettlement) {
+	        try {
+	            SettlementDTO settlement = settlementService.getSettlementById(settlementNo);
+	            settlement.setFee(updatedSettlement.getFee());
+	            settlement.setSettled_cost(updatedSettlement.getSettled_cost());
+	            settlement.setSettlement_check(true);
+	            settlementService.updateSettlement(settlement);
+	            return ResponseEntity.ok("정산 정보가 성공적으로 업데이트되었습니다.");
+	        } catch (Exception e) {
+	            logger.error("Error updating settlement: ", e);
+	            return ResponseEntity.status(500).body("서버 업데이트에 실패하였습니다. 에러 내용: " + e.getMessage());
+	        }
 	    }
 
-	    @PostMapping("/settlements/process")
-	    public String processSettlement(@RequestParam("settlement_no") int settlementNo) {
-	        SettlementDTO settlement = settlementService.getSettlementById(settlementNo);
-	        settlement.setMerchant_uid("settlement_" + settlement.getSettlement_no()); // merchant_uid 설정
-	        settlementService.processSettlement(settlement);
-	        return "redirect:/admin/settlements";
-	    }
-
+	 
+	 
+	/* 클라이언트 결제처리 */
+//	 @GetMapping("/settlements")
+//	    public String getSettlements(Model model,
+//	                                 @RequestParam(value = "price_check", required = false) Boolean priceCheck,
+//	                                 @RequestParam(value = "settlement_check", required = false) Boolean settlementCheck) {
+//	        List<SettlementDTO> settlements;
+//
+//	        if (priceCheck != null) {
+//	            settlements = settlementService.getSettlementsByPriceCheck(priceCheck);
+//	        } else if (settlementCheck != null) {
+//	            settlements = settlementService.getSettlementsBySettlementCheck(settlementCheck);
+//	        } else {
+//	            settlements = settlementService.getAllSettlements();
+//	        }
+//
+//	        model.addAttribute("settlements", settlements);
+//	        return "admin/settlementList";
+//	    }
+//
+//	    @GetMapping("/settlements/{settlement_no}/calculate")
+//	    @ResponseBody
+//	    public SettlementDTO calculateSettlement(@PathVariable("settlement_no") int settlementNo) {
+//	        SettlementDTO settlement = settlementService.getSettlementById(settlementNo);
+//	        BigDecimal fee = settlement.getPrice().multiply(new BigDecimal("0.1"));
+//	        BigDecimal settledCost = settlement.getPrice().subtract(fee);
+//	        settlement.setFee(fee);
+//	        settlement.setSettled_cost(settledCost);
+//	        return settlement;
+//	    }
+//
 //	    @PostMapping("/settlements/{settlement_no}/update")
 //	    @ResponseBody
-//	    public String updateSettlement(@PathVariable("settlement_no") int settlementNo, @RequestBody SettlementDTO settlement) {
-//	        SettlementDTO originalSettlement = settlementService.getSettlementById(settlementNo);
-//	        originalSettlement.setFee(settlement.getFee());
-//	        originalSettlement.setSettled_cost(settlement.getSettled_cost());
-//	        originalSettlement.setSettlement_check(true);
-//	        settlementService.updateSettlement(originalSettlement);
-//	        return "{\"status\":\"success\"}";
+//	    public ResponseEntity<String> updateSettlement(@PathVariable("settlement_no") int settlementNo,
+//	                                                   @RequestBody SettlementDTO updatedSettlement) {
+//	        try {
+//	            SettlementDTO settlement = settlementService.getSettlementById(settlementNo);
+//	            settlement.setFee(updatedSettlement.getFee());
+//	            settlement.setSettled_cost(updatedSettlement.getSettled_cost());
+//	            settlement.setSettlement_check(true);
+//	            settlementService.updateSettlement(settlement);
+//	            return ResponseEntity.ok("정산 정보가 성공적으로 업데이트되었습니다.");
+//	        } catch (Exception e) {
+//	            logger.error("Error updating settlement: ", e);
+//	            return ResponseEntity.status(500).body("서버 업데이트에 실패하였습니다. 에러 내용: " + e.getMessage());
+//	        }
 //	    }
+	 /* 클라이언트 결제처리 */
 
 	    
 	    
 	    
 	    
-	 
+	 // 파일 업로드 경로 설정
 	 @Value("${file.upload-dir}")
 	    private String UPLOAD_DIR;
 	    
@@ -251,23 +250,22 @@ public class AdminController {
 	 @Autowired
 	    private ServletContext servletContext;
 	 
+	 // 계약서 리스트 출력
 	 @GetMapping("/contracts")
 	    public String getContracts(Model model) {
 	        List<ContractDTO> contracts = cService.getAllContracts();
 	        model.addAttribute("contracts", contracts);
 	        return "admin/contractList";
 	    }
-
+	 // 계약서 업로드 메서드
 	 @PostMapping("/contracts/upload")
 	    public String uploadContract(@RequestParam("proj_no") int projNo,
 	                                 @RequestParam("contract_title") String contractTitle,
 	                                 @RequestParam("file") MultipartFile file) {
 	        if (!file.isEmpty()) {
 	            try {
-	                // 절대 경로로 변환
 	                logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + UPLOAD_DIR);
 
-	                // UPLOAD_DIR이 절대 경로인지 확인하고 절대 경로로 설정
 	                File uploadDirFile = new File(UPLOAD_DIR);
 	                if (!uploadDirFile.exists()) {
 	                    uploadDirFile.mkdirs(); // 경로가 존재하지 않으면 생성
@@ -298,7 +296,7 @@ public class AdminController {
 	    }
 	 
 	 
-	 
+	 // 계약서를 다운로드 하는 메서드
 	 @GetMapping("/contract/download")
 	 public void downloadFile(@RequestParam("contract_no") int contractNo, HttpServletResponse response) {
 	     ContractDTO contract = cService.getContractById(contractNo);
