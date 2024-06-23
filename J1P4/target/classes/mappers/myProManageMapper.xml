@@ -60,13 +60,13 @@
 	<!-- 지원 종료 프로젝트 정보 조회 -->
 	<select id="endApplyProjectList" resultType="com.itwillbs.domain.ProjectDTO">	
      	select p.proj_title, p.proj_cost, p.work_period, p.work_field, 
-     		   r.region, r.district, s.skill_nm, p.reg_date, f.free_no, p.proj_no 
+     		   r.region, r.district, s.skill_nm, p.reg_date, f.free_no, p.proj_no, p.deadline, a.reject_check
 		from project p 
 		join apply_mgmt a on p.proj_no = a.proj_no
 		join freelancer f on f.free_no = a.free_no
 		left join skill s on s.proj_no = a.proj_no
     	left join region r on r.proj_no = a.proj_no 
-		where now() > p.deadline and f.free_id = 'freeTest'<!-- #{user_id} -->
+		where (now() > p.deadline or a.reject_check = 1) and f.free_id = 'freeTest'<!-- #{user_id} -->
 		<!-- where NOW() > STR_TO_DATE(p.deadline, '%Y-%m-%d %H:%i:%s') AND f.free_id = 'freeTest'; -->
 	</select>
 	
@@ -216,26 +216,34 @@
 	
 	<!-- 지원자 모집중 프로젝트 -->
 	<select id="recruitingProjectList" resultType="com.itwillbs.domain.ProjectDTO">
-<!-- 		select p.proj_title, p.proj_cost, p.work_period, p.work_field, 
-     		   r.region, r.district, s.skill_nm, p.reg_date, f.free_no, p.proj_no, c.ct_no
-        from project p
-		join apply_mgmt a on p.proj_no = a.proj_no 
-		join freelancer f on f.free_no = a.free_no 
-		join client c on c.ct_no = p.ct_no
-    	join skill s on s.proj_no = a.proj_no
-    	join region r on r.proj_no = a.proj_no        
-		where p.proj_status = '모집중' and c.ct_id ='testct'
-		 -->
 		select p.proj_title, p.proj_cost, p.work_period, p.work_field, 
-      		   r.region, r.district, s.skill_nm, p.reg_date, f.free_no, p.proj_no, c.ct_no
+      		   r.region, r.district, s.skill_nm, p.reg_date, 
+      		   f.free_no, p.proj_no, c.ct_no, f.free_id
 		from project p
 		left join apply_mgmt a on p.proj_no = a.proj_no 
 		left join freelancer f on f.free_no = a.free_no 
 		join client c on c.ct_no = p.ct_no
 		left join skill s on s.proj_no = p.proj_no
 		left join region r on r.proj_no = p.proj_no        
-		where p.proj_status = '모집중' and c.ct_id = 'testct';		
+		where p.proj_status = '모집중' a.reject_check = 0 and c.ct_id = 'testct';		
 	</select>	
+
+	<select id="rpl" resultType="com.itwillbs.domain.proposeFreeDTO">
+	SELECT p.proj_title, u.name, f.free_id, p.proj_no, f.free_no,
+	COALESCE(GROUP_CONCAT(DISTINCT s.skill_nm SEPARATOR ' | '), 'No Skills') AS skills,
+	COALESCE(MAX(TRUNCATE(DATEDIFF(NOW(), c.join_date) / 365, 0) + 1), 0) AS yeoncha, 
+	CASE WHEN MAX(a.proj_no = p.proj_no AND a.free_no = f.free_no) = 1 THEN 'Y' ELSE 'N' END AS apply_YN 
+	FROM project p 
+	JOIN client ct ON ct.ct_no = p.ct_no 
+	LEFT JOIN apply_mgmt a ON p.proj_no = a.proj_no 
+	JOIN freelancer f ON f.free_no = a.free_no 
+	JOIN user u ON u.user_id = f.free_id 
+	LEFT JOIN skill s ON s.free_no = f.free_no 
+	LEFT JOIN career c ON c.free_no = f.free_no 
+	WHERE p.proj_status = '모집중' AND ct.ct_id = 'testct' 
+	GROUP BY p.proj_title, u.name, f.free_id, p.proj_no, f.free_no
+	ORDER BY p.proj_title
+	</select>
 	
 	<!-- 계약 진행중 프로젝트 -->
 	<select id="ctContractProjectList" resultType="com.itwillbs.domain.ctOngoingProjectDTO">
@@ -249,7 +257,7 @@
 	
 	<!-- 프로젝트 진행중 목록 조회-->
 	<select id="ctOngoingProjectList" resultType="com.itwillbs.domain.ctOngoingProjectDTO">
-		select p.proj_no, p.proj_title, m.manager_nm, p.proj_status
+		select p.proj_no, p.proj_title, m.manager_nm, p.proj_status, c.ct_no, m.manager_no, s.free_no 
 		from project p 
 		join client c on p.ct_no = c.ct_no
 		join settlement s on s.proj_no = p.proj_no
@@ -299,13 +307,29 @@
 		where valued_free=#{free_no} and valuing_ct=#{ct_no} and proj_no=#{proj_no}
 	</update>
 
+	<!-- 지원자 모집중 프로젝트 - 지원거절 -->
+	<update id="rejectApply">
+		update apply_mgmt
+		set reject_check=1
+		where proj_no=#{proj_no} and free_no=#{free_no}
+	</update>
 	
+	<!-- 지원자 모집중 프로젝트 - 계약 제안 -->
+	<!-- 문제 발견!!!! 지원자(프리랜서)가 n명일때 첫번째 프리랜서에게 '계약하기'이후 
+	다른 프리랜서에게 계약 제안 불가 -->
+	<update id="">
+		update project
+		set proj_status = '계약'
+		where proj_no=#{proj_no} and free_no=#{free_no}	
+	</update>
 	
-	
-	
-	
-	
-	
+	<!-- 진행중 프로젝트 - 완료하기(정산요청) -->
+	<update id="requestSettlement">
+		update settlement
+		set settlement_requested = 1
+		where proj_no=#{proj_no} and free_no=#{free_no}
+	</update>
+
 	
 	
 	

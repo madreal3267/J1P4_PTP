@@ -54,7 +54,7 @@ public interface MyProManageService {
 	public List<ProjectVO> regFailedProjectList();
 	
 	// 지원자 모집중 프로젝트 목록
-	public List<ProjectDTO> recruitingProjectList();
+	public List<proposeFreeDTO> recruitingProjectList();
 	
 	// 계약 진행중 프로젝트 목록
 	public List<ProjectVO> ctContractProjectList();
@@ -98,6 +98,17 @@ public interface MyProManageService {
 	
 	// 프리랜서 평가 수정하기
 	public void updateEvaluateFree(EvaluateFreelancerDTO edto);
+
+	// 지원자 모집중 프로젝트 - 지원 거절
+	public void rejectApply(proposeFreeDTO pfdto);
+
+	// 지원자 모집중 프로젝트 - 게약 제안
+	public void contractFree(proposeFreeDTO pfdto);
+
+	// 진행중 프로젝트 - 완료하기(정산요청)
+	public void requestSettlement(ctOngoingProjectDTO cdto);
+
+
 
 
 

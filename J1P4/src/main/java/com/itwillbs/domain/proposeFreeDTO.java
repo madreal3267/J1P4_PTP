@@ -10,4 +10,11 @@ public class proposeFreeDTO {
 	private String skills;
 	private String yeoncha;
 	private String apply_YN;
+	
+	private String free_id;
+	private String skill_nm;
+	private String region;
+	private String district;
+	private int proj_no;
+	private int free_no;
 }

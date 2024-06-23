@@ -145,8 +145,8 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 
 	// 지원자 모집중 프로젝트 리스트
 	@Override
-	public List<ProjectDTO> recruitingProjectList() {
-		List<ProjectDTO> resultDTO = sqlSession.selectList(NAMESPACE+"recruitingProjectList");
+	public List<proposeFreeDTO> recruitingProjectList() {
+		List<proposeFreeDTO> resultDTO = sqlSession.selectList(NAMESPACE+"rpl");
 		
 		return resultDTO;
 	}
@@ -263,6 +263,27 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 		logger.debug("(/≧▽≦)/(/≧▽≦)/(/≧▽≦)/(/≧▽≦)/"+edto);
 		sqlSession.update(NAMESPACE+"updateEvaluateFree", edto);
 									
+	}
+
+	// 지원자 모집중 프로젝트 - 지원거절
+	@Override
+	public void rejectApply(proposeFreeDTO pfdto) {
+		sqlSession.update(NAMESPACE+"rejectApply", pfdto);
+		
+	}
+
+	// 지원자 모집중 프로젝트 - 게약 제안
+	@Override
+	public void contractFree(proposeFreeDTO pfdto) {
+		sqlSession.update(NAMESPACE+"contractFree", pfdto);
+		
+	}
+
+	// 진행중 프로젝트 - 완료하기(정산요청)
+	@Override
+	public void requestSettlement(ctOngoingProjectDTO cdto) {
+		sqlSession.update(NAMESPACE+"requestSettlement", cdto);
+		
 	}
 	
 

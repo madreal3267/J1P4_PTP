@@ -43,12 +43,17 @@
 							<c:out value="${skill}" />
 						</button>
 					</c:forEach>
+					
+				<!-- 지원 종료 이유 설명 -->
+				<c:if test="${projDTO.reject_check == 1}"> 죄송합니다. 다음기회에 더 좋은 프로젝트에서 함께 해주세요 </c:if>
+				<c:if test="${projDTO.deadline} < ${now}"> <p>지원기간이 종료되었습니다.</p> </c:if>
+				<!-- 지원 종료 목록에서 삭제 -->	
 					<form action="/myProManage/endApplyProject" method="post">
 						<input type="hidden" name="free_no" value="${projDTO.free_no }">
 						<input type="hidden" name="proj_no" value="${projDTO.proj_no }">
 						<input type="submit" value="목록에서 삭제" >
 					</form>
-					등록일자 <fmt:formatDate value="${projDTO.reg_date }" pattern="yyyy-mm-dd"/>
+					등록일자 <fmt:formatDate value="${projDTO.reg_date }" pattern="yyyy-MM-dd"/>
 				 </div>
 				 </c:forEach>
 				</section>

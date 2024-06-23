@@ -106,7 +106,7 @@
 	</div>
 </div>
 		
-<!-- Jquery 사용 -->
+
 <script>
 	$(document).ready(function() {
 		
