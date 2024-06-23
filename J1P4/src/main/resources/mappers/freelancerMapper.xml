@@ -6,14 +6,14 @@
   <mapper namespace="com.itwillbs.mapper.freelancerMapper">
 	
 	<update id="updateFree">
-		update freelancer set work_field=#{work_field},work_check=#{work_check},
+		update freelancer set enroll_status=1, work_field=#{work_field},work_check=#{work_check},
 		work_date=#{work_date},proj_cost=#{proj_cost},oneline_bio=#{oneline_bio},bio=#{bio},school_type=#{school_type},
   	 	school_nm=#{school_nm},major=#{major},grad_status=#{grad_status},entrance=#{entrance},graduation=#{graduation},mod_date=now()
   	 	where free_id = #{free_id}
 	</update>
 	
 	<update id="updateFreeB">
-		update freelancer set work_field=#{work_field},work_check=#{work_check},
+		update freelancer set enroll_status=1, work_field=#{work_field},work_check=#{work_check},
 		work_date=#{work_date},proj_cost=#{proj_cost},oneline_bio=#{oneline_bio},bio=#{bio}
   	 	where free_id = #{free_id}
 	</update>

@@ -34,7 +34,7 @@ h5 {
 <title>내 프로필</title>
 </head>
 <body>
-	<h1>내 프로필</h1>
+	<h1>내 프로필 - 개인/팀 (/myProfile/profile.jsp)</h1>
 	<hr>
 	
 	<h2>업무조건</h2>
@@ -84,6 +84,7 @@ h5 {
 	${myCareer[0].job_lev }
 	<br>
 	<b>경력</b><br>
+<%-- 	${myCareer } --%>
 	<c:forEach items="${myCareer }" var="myCareer">
 		회사명 : ${myCareer.company_nm }<br>
 		입사연월 : ${myCareer.join_date }<br>
