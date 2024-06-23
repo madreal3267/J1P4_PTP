@@ -9,4 +9,12 @@ public class CompanyVO {
 	private String yearmonth;
 	private String hDetails;
 	private String user_id;
+	public String gethDetails() {
+		return hDetails;
+	}
+	public void sethDetails(String hDetails) {
+		this.hDetails = hDetails;
+	}
+	
+	
 }

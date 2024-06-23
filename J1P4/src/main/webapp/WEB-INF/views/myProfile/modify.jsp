@@ -33,10 +33,10 @@ h5 {
 <title>내 프로필 수정하기</title>
 </head>
 <body>
-	<h1>내 프로필 수정하기 (myProfile/modify.jsp)</h1>
+	<h1>내 프로필 수정하기 - 개인/팀 (/myProfile/modify.jsp)</h1>
 	<hr>
 	
-	<form action="" method="post" name="fm1" id="fm1">
+	<form action="" method="post" name="fm1" id="modifyFm">
 	<input type="hidden" value="${sessionScope.user_id }" name="free_id">
 	<input type="hidden" value="${sessionScope.user_id }" name="user_id">
 	<h2>업무조건</h2>
@@ -196,7 +196,7 @@ h5 {
 	<br>		
 	<div role="button" class="addLicense">+ 자격증 추가</div>
 	<hr>
-	<input type="submit" value="수정하기">
+	<input type="button" class="saveButt" value="수정하기">
 	</form>
 	
 <!-- 자바스크립트 시작 -->	
@@ -473,6 +473,27 @@ h5 {
 		$(document).on('click','.removeButt',function(){
 	        $(this).parent().remove()
 	    });
+		
+		/* 수정하기 버튼 수행 */
+		$(function(){
+			
+			$(".saveButt").click(function(){
+				
+				$.ajax({
+					url:"/myProfile/modify",
+					type:"POST",
+					data : $("#modifyFm").serialize(),
+					success : function(){
+						alert(" ╰(*°▽°*)╯ 수정 완료 ")
+					},
+					error : function() {
+						alert("오류발생");
+					}
+				});
+				
+			});
+			
+		});
 		
 </script>
 <!-- 자바스크립트 끝 -->

@@ -56,7 +56,7 @@
 	
 	<select id="getComp" resultType="com.itwillbs.domain.CompanyVO">
 		select free_no, SUBSTRING_INDEX (SUBSTRING_INDEX(company_history.yearmonth,',',numbers.n),',',-1) yearmonth,
-        SUBSTRING_INDEX (SUBSTRING_INDEX(company_history.details,',',numbers.n),',',-1) details
+        SUBSTRING_INDEX (SUBSTRING_INDEX(company_history.details,',',numbers.n),',',-1) hDetails
 		from (select 1 n union all select 2
 		union all select 3 union all select 4
         union all select 5 union all select 6
@@ -67,8 +67,8 @@
 	</select>
 	
 	<select id="getPartn" resultType="com.itwillbs.domain.PartnersVO">
-		select free_no, SUBSTRING_INDEX (SUBSTRING_INDEX(partners.partners_nm,',',numbers.n),',',-1) partners,
-        SUBSTRING_INDEX (SUBSTRING_INDEX(partners.details,',',numbers.n),',',-1) partners
+		select free_no, SUBSTRING_INDEX (SUBSTRING_INDEX(partners.partners_nm,',',numbers.n),',',-1) partners_nm,
+        SUBSTRING_INDEX (SUBSTRING_INDEX(partners.details,',',numbers.n),',',-1) pDetails
 		from (select 1 n union all select 2
 		union all select 3 union all select 4
         union all select 5 union all select 6
