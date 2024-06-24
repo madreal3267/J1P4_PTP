@@ -261,11 +261,20 @@ public class MyProManageServiceImpl implements MyProManageService {
 
 	// 지원자 모집중 프로젝트 - 게약 제안
 	@Override
-	public void contractFree(proposeFreeDTO pfdto) {
-		logger.debug("contractFree(proposeFreeDTO pfdto) 실행");
+	public void offerContract(proposeFreeDTO pfdto) {
+		logger.debug("offerContract(proposeFreeDTO pfdto) 실행");
 		
-		mpmdao.contractFree(pfdto);
+		mpmdao.offerContract(pfdto);
 	}
+	
+	// 지원자 모집중 프로젝트 - 모집완료
+	@Override
+	public void recruitmentCompleted(proposeFreeDTO pfdto) {
+		logger.debug("recruitmentCompleted(proposeFreeDTO pfdto) 실행");
+		
+		mpmdao.recruitmentCompleted(pfdto);
+	}
+
 
 	// 진행중 프로젝트 - 완료하기(정산요청)
 	@Override
@@ -273,6 +282,13 @@ public class MyProManageServiceImpl implements MyProManageService {
 		logger.debug(" requestSettlement(ctOngoingProjectDTO cdto) 실행");
 		
 		mpmdao.requestSettlement(cdto);
+	}
+
+	@Override
+	public void agreeContract(proposeFreeDTO pfdto) {
+		logger.debug(" agreeContract(proposeFreeDTO pfdto) 실행");
+		
+		mpmdao.agreeContract(pfdto);
 	}
 
 

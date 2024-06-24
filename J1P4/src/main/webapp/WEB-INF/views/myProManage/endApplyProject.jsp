@@ -6,6 +6,12 @@
 
 <%@ include file="../include/headerMPM_F.jsp" %>
 
+<%
+    // 현재 시간을 가져오기 위해 java.util.Date 객체 생성
+    java.util.Date currentDate = new java.util.Date();
+    request.setAttribute("currentDate", currentDate);
+%>
+
 	<h1>/myProManage/endApplyProject.jsp</h1>
 <section class="content">
 	<div class="col-md-12">
@@ -45,8 +51,8 @@
 					</c:forEach>
 					
 				<!-- 지원 종료 이유 설명 -->
-				<c:if test="${projDTO.reject_check == 1}"> 죄송합니다. 다음기회에 더 좋은 프로젝트에서 함께 해주세요 </c:if>
-				<c:if test="${projDTO.deadline} < ${now}"> <p>지원기간이 종료되었습니다.</p> </c:if>
+				<c:if test="${projDTO.reject_check == 1}"> 지원해 주셔서 감사드립니다. 이번에는 함께하지 못하지만, 향후 기회를 기대합니다. </c:if>
+				<c:if test="${projDTO.deadline < currentDate}"> <p>지원기간이 종료되었습니다. 이번에는 함께하지 못하지만, 향후 기회를 기대합니다.</p> </c:if>
 				<!-- 지원 종료 목록에서 삭제 -->	
 					<form action="/myProManage/endApplyProject" method="post">
 						<input type="hidden" name="free_no" value="${projDTO.free_no }">

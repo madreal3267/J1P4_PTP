@@ -107,12 +107,19 @@ public interface MyProManageDAO {
 
 	// 지원자 모집중 프로젝트 - 지원거절
 	public void rejectApply(proposeFreeDTO pfdto);
-
-	// 지원자 모집중 프로젝트 - 게약 제안
-	public void contractFree(proposeFreeDTO pfdto);
+	
+	// 지원자 모집중 프로젝트 - 계약 제안
+	public void offerContract(proposeFreeDTO pfdto);	
+	
+	// 지원자 모집중 프로젝트 - 모집완료
+	public void recruitmentCompleted(proposeFreeDTO pfdto);
 
 	// 진행중 프로젝트 - 완료하기(정산요청)
-	public void requestSettlement(ctOngoingProjectDTO cdto);	
+	public void requestSettlement(ctOngoingProjectDTO cdto);
+
+	// 지원중 프로젝트 -  제안 동의
+	public void agreeContract(proposeFreeDTO pfdto);
+
 	
 
 	

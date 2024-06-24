@@ -51,7 +51,11 @@ public class ProjectDTO {
 	// 프로젝트 진행중 필요
 	private String ct_id;			// 프로젝트 진행 중 
 	private String manager_nm;		// 프로젝트 진행 중
+	private Timestamp meeting_dt;
+	private String meeting_pc;
+	private int meetingOK;
 	
 	//지원 종료에 필요
 	private int reject_check;
+	
 }

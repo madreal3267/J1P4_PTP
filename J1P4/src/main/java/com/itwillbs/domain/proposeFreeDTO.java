@@ -1,5 +1,7 @@
 package com.itwillbs.domain;
 
+import java.sql.Timestamp;
+
 import lombok.Data;
 
 @Data
@@ -17,4 +19,8 @@ public class proposeFreeDTO {
 	private String district;
 	private int proj_no;
 	private int free_no;
+	
+	private Timestamp meeting_dt;
+	private String meeting_pc;
+	private int meetingOK;
 }

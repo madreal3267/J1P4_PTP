@@ -32,7 +32,7 @@ import com.itwillbs.persistence.MyProManageDAO;
 import com.itwillbs.service.MyProManageService;
 
 @Controller
-@RequestMapping(value = "/myProManageCt/*")
+@RequestMapping(value ="/myProManageCt/*")
 public class MyProManageCtController {
 
 	private static final Logger logger = LoggerFactory.getLogger(MyProManageCtController.class);
@@ -158,13 +158,24 @@ public class MyProManageCtController {
 		return "redirect:/myProManageCt/recruitingProject";
 	}
 	
-	// 지원자 모집중 프로젝트 목록 - 계약하기
-	@RequestMapping(value = "/contractFree",method = RequestMethod.POST)
-	public String contractFree(proposeFreeDTO pfdto, RedirectAttributes rttr) {
-		logger.debug("/contractFree -> contractFree() 호출");
+	// 지원자 모집중 프로젝트 목록 - 계약 제안
+	@RequestMapping(value = "/offerContract", method = RequestMethod.POST)
+	public String offerContract(proposeFreeDTO pfdto, RedirectAttributes rttr) {
+		logger.debug("/offerContract -> offerContract() 호출");
 		
-		myService.contractFree(pfdto);
-		rttr.addFlashAttribute("msg", "contractOffer");
+		myService.offerContract(pfdto);
+		rttr.addFlashAttribute("msg", "offerContract");
+		
+		return "redirect:/myProManageCt/recruitingProject";
+	}
+	
+	// 지원자 모집중 프로젝트 목록 - 모집완료
+	@RequestMapping(value = "/recruitmentCompleted",method = RequestMethod.POST)
+	public String recruitmentCompleted(proposeFreeDTO pfdto, RedirectAttributes rttr) {
+		logger.debug("/recruitmentCompleted -> recruitmentCompleted() 호출");
+		
+		myService.recruitmentCompleted(pfdto);
+		rttr.addFlashAttribute("msg", "recruitmentCompleted");
 		
 		return "redirect:/myProManageCt/recruitingProject";
 	}

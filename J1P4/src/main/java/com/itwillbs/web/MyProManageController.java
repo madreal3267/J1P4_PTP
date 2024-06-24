@@ -22,7 +22,7 @@ import com.itwillbs.domain.ApplyMgmtVO;
 import com.itwillbs.domain.EvaluateProjectDTO;
 import com.itwillbs.domain.ProjectDTO;
 import com.itwillbs.domain.ProjectVO;
-
+import com.itwillbs.domain.proposeFreeDTO;
 import com.itwillbs.persistence.MyProManageDAO;
 import com.itwillbs.service.MyProManageService;
 
@@ -125,6 +125,20 @@ public class MyProManageController {
 		
 		return "redirect:/myProManage/applyingProject";
 	}
+	
+	// 지원 중 프로젝트 목록 - 제안 동의
+	@RequestMapping(value = "/agreeContract",method = RequestMethod.POST)
+	public String agreeContract(proposeFreeDTO pfdto, RedirectAttributes rttr) {
+		logger.debug("/agreeContract -> agreeContract(proposeFreeDTO pfdto) 호출");
+		
+		myService.agreeContract(pfdto);
+		
+		// 지원 취소 정보를 전달
+		rttr.addFlashAttribute("msg", "deletApply");
+		
+		return "redirect:/myProManage/applyingProject";
+	}
+	
 		
 	// 지원 종료 프로젝트 목록 조회
 	// http://localhost:8088/myProManage/endApplyProject

@@ -42,7 +42,7 @@
 	<!-- 지원 중 프로젝트 정보 조회-->
 	<select id="applyingProjectList" resultType="com.itwillbs.domain.ProjectDTO">
      	select p.proj_title, p.proj_cost, p.work_period, p.work_field, 
-     		   r.region, r.district, s.skill_nm, p.reg_date, f.free_no, p.proj_no
+     		   r.region, r.district, s.skill_nm, p.reg_date, f.free_no, p.proj_no, a.meeting_dt, a.meeting_pc, a.meetingOK
         from project p
 		join apply_mgmt a on p.proj_no = a.proj_no 
 		join freelancer f on f.free_no = a.free_no  
@@ -57,6 +57,12 @@
 		where free_no=#{free_no} and proj_no=#{proj_no}
 	</delete>
 
+	<!-- 지원중 프로젝트 - 제안동의 -->
+	 <update id="agreeContract">
+		update apply_mgmt
+		set meeting_dt=#{meeting_dt}, meeting_pc=#{meeting_pc}, meetingOK=1
+		where proj_no=#{proj_no} and free_no=#{free_no}	 	
+	 </update>
 	<!-- 지원 종료 프로젝트 정보 조회 -->
 	<select id="endApplyProjectList" resultType="com.itwillbs.domain.ProjectDTO">	
      	select p.proj_title, p.proj_cost, p.work_period, p.work_field, 
@@ -229,7 +235,7 @@
 	</select>	
 
 	<select id="rpl" resultType="com.itwillbs.domain.proposeFreeDTO">
-	SELECT p.proj_title, u.name, f.free_id, p.proj_no, f.free_no,
+	SELECT p.proj_title, u.name, f.free_id, p.proj_no, f.free_no, meeting_dt, meeting_pc, meetingOK,
 	COALESCE(GROUP_CONCAT(DISTINCT s.skill_nm SEPARATOR ' | '), 'No Skills') AS skills,
 	COALESCE(MAX(TRUNCATE(DATEDIFF(NOW(), c.join_date) / 365, 0) + 1), 0) AS yeoncha, 
 	CASE WHEN MAX(a.proj_no = p.proj_no AND a.free_no = f.free_no) = 1 THEN 'Y' ELSE 'N' END AS apply_YN 
@@ -241,7 +247,7 @@
 	LEFT JOIN skill s ON s.free_no = f.free_no 
 	LEFT JOIN career c ON c.free_no = f.free_no 
 	WHERE p.proj_status = '모집중' AND ct.ct_id = 'testct' 
-	GROUP BY p.proj_title, u.name, f.free_id, p.proj_no, f.free_no
+	GROUP BY p.proj_title, u.name, f.free_id, p.proj_no, f.free_no, meeting_dt, meeting_pc, meetingOK
 	ORDER BY p.proj_title
 	</select>
 	
@@ -315,12 +321,16 @@
 	</update>
 	
 	<!-- 지원자 모집중 프로젝트 - 계약 제안 -->
-	<!-- 문제 발견!!!! 지원자(프리랜서)가 n명일때 첫번째 프리랜서에게 '계약하기'이후 
-	다른 프리랜서에게 계약 제안 불가 -->
-	<update id="">
+	<update id="offerContract">
+		update apply_mgmt
+		set meeting_dt=#{meeting_dt}, meeting_pc=#{meeting_pc}
+		where proj_no=#{proj_no} and free_no=#{free_no}
+	</update>
+	
+	<update id="recruitmentCompleted">
 		update project
 		set proj_status = '계약'
-		where proj_no=#{proj_no} and free_no=#{free_no}	
+		where proj_no=#{proj_no}	
 	</update>
 	
 	<!-- 진행중 프로젝트 - 완료하기(정산요청) -->

@@ -50,6 +50,9 @@
 							</c:forEach>
 							
 							<!-- 하트위치 -->
+							<c:if test="${not empty projDTO.meeting_dt and not empty projDTO.meeting_pc}">
+								<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-${projDTO.proj_no}">제안 확인</button>
+							</c:if>
 							<form action="/myProManage/applyingProject" method="post">
 								<input type="hidden" name="free_no" value="${projDTO.free_no }">
 								<input type="hidden" name="proj_no" value="${projDTO.proj_no }">
@@ -57,6 +60,33 @@
 							</form>
 							등록일자 <fmt:formatDate value="${projDTO.reg_date }" pattern="yyyy-mm-dd"/>
 						 </div>
+			 <!--제안 확인 modal 창 -->
+				<div class="modal fade" id="modal-${projDTO.proj_no}" style="display: none;">
+					<form action="/myProManageCt/agreeContract" method="post">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">×</span>
+								</button>
+								<h4 class="modal-title">클라이언트가 사전미팅을 제안했습니다..</h4>
+							</div>
+							<div class="modal-body">
+								
+									<label for="md">미팅 날짜를</label><input id="md" type="datetime-local" name="meeting_dt" value="${projDTO.meeting_dt }" readonly="readonly"><br>
+									<label for="mp">미팅 장소와 내용</label><br>
+									<textarea id="mp" name="meeting_pc" rows="6" cols="80" readonly="readonly">${projDTO.meeting_pc }</textarea>
+									<input type="hidden" name="proj_no" value="${projDTO.proj_no }">
+									<input type="hidden" name="free_no" value="${projDTO.free_no }">								
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
+								<input type="submit" class="btn btn-primary" value="제안 동의">
+							</div>
+						</div>
+					</div>
+					</form>
+				</div>
 					 </c:forEach>
 				</section>
 			</div>
