@@ -16,47 +16,51 @@
   	 <select id="pNum" resultType="int">
   	 	select count(*)
 		from project
-		where deadline > now()
+		where deadline > now() and work_field="개발"
   	 </select>
-  	 
-<!--   	 페이징 처리
-  	 <select id="pListPaging" resultType="com.itwillbs.domain.ProjectVO" parameterType="com.itwillbs.domain.Criteria">
-  	 	<![CDATA[
-			select * 
-			from project
-			where deadline > now()
-			order by reg_date DESC
-			limit #{amount} offset #{offset}
-			
-  	 	]]>
-  	 </select> -->
+
   	 <!-- 페이징 처리 skill, region 조인  -->
   	 <select id="pListPaging" resultType="com.itwillbs.domain.ProjectVO" parameterType="com.itwillbs.domain.Criteria">
   	 	<![CDATA[
-			select p.proj_no, p.proj_title, p.proj_cost , p.deadline, p.work_field, p.reg_date, r.region, r.district, s.skill_nm
+			select p.proj_no, p.proj_title, p.proj_cost , p.deadline, p.work_field, p.reg_date, p.job_level, r.region, r.district, s.skill_nm
 			from project p
 			left join skill s
 			on p.proj_no = s.proj_no
 			left join region r
 			on p.proj_no = r.proj_no
-			where deadline > now()
+			where deadline > now() and work_field = "개발"
 			order by reg_date DESC
 			limit #{amount} offset #{offset}
 			
   	 	]]>
   	 </select>
   	 
-  	 <!-- 정렬 limit 쿼리 -->
+  	 <!-- 정렬 limit 쿼리 등록일, 견적비교 -->
   	 <select id="proLSort" resultType="com.itwillbs.domain.ProjectVO">
 	  	 <![CDATA[
-			select p.proj_no, p.proj_title, p.proj_cost , p.deadline, p.work_field, p.reg_date, r.region, r.district, s.skill_nm
+			select p.proj_no, p.proj_title, p.proj_cost , p.deadline, p.work_field, p.reg_date, p.job_level, r.region, r.district, s.skill_nm
 			from project p
 			left join skill s
 			on p.proj_no = s.proj_no
 			left join region r
 			on p.proj_no = r.proj_no
-			where deadline > now()
-			order by ${sn} DESC
+			where deadline > now() and work_field=#{work_field}
+			order by cast(${sn} as unsigned) DESC
+			limit ${amount} offset #{offset}
+		]]>
+  	 </select>
+
+  	 <!-- 정렬 limit 쿼리 마감비교 -->
+  	 <select id="proLSortD" resultType="com.itwillbs.domain.ProjectVO">
+	  	 <![CDATA[
+			select p.proj_no, p.proj_title, p.proj_cost , p.deadline, p.work_field, p.reg_date, p.job_level, r.region, r.district, s.skill_nm
+			from project p
+			left join skill s
+			on p.proj_no = s.proj_no
+			left join region r
+			on p.proj_no = r.proj_no
+			where deadline > now()  and work_field=#{work_field}
+			order by cast(${sn} as date)
 			limit ${amount} offset #{offset}
 		]]>
   	 </select>
@@ -65,7 +69,7 @@
   	 <!-- 게시판 필터 -->
   	 <select id="proFi" resultType="com.itwillbs.domain.ProjectVO">
   	 	<![CDATA[
-			select p.proj_no, p.proj_title, p.proj_cost , p.deadline, p.work_field, p.reg_date, r.region, r.district, s.skill_nm
+			select p.proj_no, p.proj_title, p.proj_cost , p.deadline, p.work_field, p.reg_date, p.job_level, r.region, r.district, s.skill_nm
 			from project p
 			left join skill s
 			on p.proj_no = s.proj_no
@@ -86,10 +90,20 @@
 		]]>
   	 </select>
   	 
-  	 <!-- 프로젝트 상세페이지  -->
+<!--   	 프로젝트 상세페이지 
   	 <select id="dePro" resultType="com.itwillbs.domain.ProjectVO">
   	 	select * from project
   	 	where proj_no=#{proj_no}
+  	 </select> -->
+  	 <!-- 프로젝트 상세페이지  -->
+  	 <select id="dePro" resultType="com.itwillbs.domain.ProjectVO">
+  	 	select p.proj_no, p.proj_title, p.proj_cost , p.deadline, p.work_field, p.reg_date, p.job_level, r.region, r.district, s.skill_nm
+		from project p
+		left join skill s
+		on p.proj_no = s.proj_no
+		left join region r
+		on p.proj_no = r.proj_no
+  	 	where p.proj_no=#{proj_no}
   	 </select>
   	 
   	   	 <!-- 프리랜서 수 -->
@@ -108,5 +122,113 @@
 			
   	 	]]>
   	 </select>
+  	 
+  	 <!-- 프로젝트를 북마크 저장 -->
+  	 <insert id="doBMark">
+  	 	insert into bookmark(free_no, proj_no)
+  	 	values (#{free_no},#{proj_no})
+  	 </insert>
+  	 
+  	 <!-- 프로젝트를 북마크 해제 -->
+  	 <delete id="deleteBMark">
+  	 	delete from bookmark
+  	 	where proj_no=#{proj_no} and free_no=#{free_no}
+  	 </delete>
+  	 
+  	 <!-- 모달 필터(후 정렬, 필터포함) -->
+  	 <select id="moFiPro" resultType="com.itwillbs.domain.ProjectVO">
+		<![CDATA[
+			select p.proj_no, p.proj_title, p.proj_cost , p.deadline, p.work_field, p.reg_date, p.job_level, r.region, r.district, s.skill_nm
+			from project p
+			left join skill s
+			on p.proj_no = s.proj_no
+			left join region r
+			on p.proj_no = r.proj_no
+			where deadline > now() and work_field = #{work_field}
+					and s.skill_nm regexp(select REPLACE(GROUP_CONCAT(#{skill_nm}),',','|') AS skill_nm) and job_level like CONCAT_WS('','%',#{job_level},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
+			order by cast(${sn} as unsigned) DESC
+			limit #{amount} offset #{offset}
+  	 	]]>
+  	 </select>
+  	 <!-- 모달 필터(후 정렬, 필터포함) skill_nm null일때 -->
+  	 <select id="moFiProNs" resultType="com.itwillbs.domain.ProjectVO">
+		<![CDATA[
+			select p.proj_no, p.proj_title, p.proj_cost , p.deadline, p.work_field, p.reg_date, p.job_level, r.region, r.district, s.skill_nm
+			from project p
+			left join skill s
+			on p.proj_no = s.proj_no
+			left join region r
+			on p.proj_no = r.proj_no
+			where deadline > now() and work_field = #{work_field}
+					and p.job_level like CONCAT_WS('','%',#{job_level},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
+			order by cast(${sn} as unsigned) DESC
+			limit #{amount} offset #{offset}
+  	 	]]>
+  	 </select>
+
+	<!-- 모달 후 정렬 데드라인 경우 -->
+  	 <select id="moFiProD" resultType="com.itwillbs.domain.ProjectVO">
+		<![CDATA[
+			select p.proj_no, p.proj_title, p.proj_cost , p.deadline, p.work_field, p.reg_date, p.job_level, r.region, r.district, s.skill_nm
+			from project p
+			left join skill s
+			on p.proj_no = s.proj_no
+			left join region r
+			on p.proj_no = r.proj_no
+			where deadline > now() and work_field = #{work_field}
+					and s.skill_nm regexp(select REPLACE(GROUP_CONCAT(#{skill_nm}),',','|') AS skill_nm) and job_level like CONCAT_WS('','%',#{job_level},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
+			order by cast(${sn} as date)
+			limit #{amount} offset #{offset}
+  	 	]]>
+  	 </select>
+
+	<!-- 모달 후 정렬 데드라인 경우 skill_nm null일때 -->
+  	 <select id="moFiProDNs" resultType="com.itwillbs.domain.ProjectVO">
+		<![CDATA[
+			select p.proj_no, p.proj_title, p.proj_cost , p.deadline, p.work_field, p.reg_date, p.job_level, r.region, r.district, s.skill_nm
+			from project p
+			left join skill s
+			on p.proj_no = s.proj_no
+			left join region r
+			on p.proj_no = r.proj_no
+			where deadline > now() and work_field = #{work_field}
+					and job_level like CONCAT_WS('','%',#{job_level},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
+			order by cast(${sn} as date)
+			limit #{amount} offset #{offset}
+  	 	]]>
+  	 </select>
+  	 
+  	 <!-- 모달필터 게시물 숫자 -->
+  	 <select id="mofiNum" resultType="int"  parameterType="com.itwillbs.domain.ProjectVO" >
+  		 <![CDATA[
+	  	 	select count(*)
+	 	 	from project p
+			left join skill s
+			on p.proj_no = s.proj_no
+			left join region r
+			on p.proj_no = r.proj_no
+			where deadline > now() and work_field = #{work_field}
+					and s.skill_nm regexp(select REPLACE(GROUP_CONCAT(#{skill_nm}),',','|') AS skill_nm) and job_level like CONCAT_WS('','%',#{job_level},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
+		]]>
+  	 </select>
+
+  	 <!-- 모달필터 게시물 숫자 skill_nm null일때 -->
+  	 <select id="mofiNumNs" resultType="int"  parameterType="com.itwillbs.domain.ProjectVO" >
+  		 <![CDATA[
+	  	 	select count(*)
+	 	 	from project p
+			left join skill s
+			on p.proj_no = s.proj_no
+			left join region r
+			on p.proj_no = r.proj_no
+			where deadline > now() and work_field = #{work_field}
+					and job_level like CONCAT_WS('','%',#{job_level},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
+		]]>
+  	 </select>
+  	 
+  	 
+  	 
+  	 
+  	 
   	 
   </mapper>
