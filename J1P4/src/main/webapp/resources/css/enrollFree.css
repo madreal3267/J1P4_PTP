@@ -94,7 +94,7 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
 }
 
 .select2-container {
-width:300px !important;
+width:400px !important;
 border: 1px solid #aaa !important;
 }
 
@@ -103,7 +103,7 @@ border: none !important;
 }
 
 .select2-selection--rendered {
-width:300px !important;
+width:400px !important;
 }
 
 .select2-container--open .select2-dropdown {
@@ -126,7 +126,6 @@ h5{
 .gap {
 	margin-bottom: 30px;
 	margin-top: 30px;
-/* 	border: solid; */
 }
 
 .checkGap{
@@ -136,4 +135,16 @@ h5{
 
 .content {
 	margin-top: 20px;
+}
+
+.radioGs {
+	width:130px;
+}
+
+.radioField {
+	width:150px;
+}
+
+.radioLev {
+	width:150px;
 }
