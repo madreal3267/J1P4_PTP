@@ -75,6 +75,8 @@ ct_no: ${sessionScope.ct_no }
 		
 	<div class="col-md-9">
 	<div class="tab-content">
+<%-- 	<button type="button" class="btn btn-dark" style="position: absolute; right:54px; top:25px;" onclick = "location.href = '/myProfile/modify?free_no=${sessionScope.free_no}'">수정하기</button> --%>
+	
 	
 		<!-- 업무조건 탭 시작 -->
 		<div class="tab-pane fade active show" id="free_condition"  >
@@ -299,10 +301,8 @@ ct_no: ${sessionScope.ct_no }
 		<!-- card body 끝 -->
 		</div>
 		<!-- 자격증 탭 끝 -->
-							
-		<button type="button"  class="btn btn-dark" style="position: absolute; bottom:535px; right:50px;"
-		onclick = "location.href = '/myProfile/modify?free_no=${sessionScope.free_no}'">수정하기</button>
-
+		<button type="button" class="btn btn-dark" style="position: absolute; right:54px; top:25px;" onclick = "location.href = '/myProfile/modify?free_no=${sessionScope.free_no}'">수정하기</button>
+		
 	
 	</div>
 	</div>

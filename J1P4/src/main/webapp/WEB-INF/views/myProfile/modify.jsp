@@ -166,11 +166,11 @@ ct_no: ${sessionScope.ct_no }
 				<!-- [추가하기] 클릭 시 추가되는 기술 리스트 출력되는 공간-->
 				
 				<c:forEach items="${mySkill }" var="mySkill">
-				<p><div class="border border-1 rounded-3" role="group" style="width: 400px; display: inline-block; position: relative;">
-				<input type="hidden" value="${mySkill.skill_nm}" name="skill_nm"><input type="hidden" value='${mySkill.skill_lev}' name="skill_lev">
-				<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">${mySkill.skill_nm}</span></h4>
-				<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">${mySkill.skill_lev}</span></h4>
-				<button class="removeButt btn-close" aria-label="Close" style="width: 1px; position: absolute; top: 21px; left: 360px;"></button></div></p>
+				<p><div class="border border-1 rounded-3 p-2" role="group" style="width: 700px; margin-bottom: 20px;">
+				<input type="hidden" value="${mySkill.skill_nm }" name="skill_nm"><input type="hidden" value="${mySkill.skill_lev }" name="skill_lev">
+				<div style="padding-bottom:5px;"><span style="padding-left: 20px; font-size: 22px; font-weight: bold;">${mySkill.skill_nm }</span><br></div>
+				<span style="padding-left: 20px;"> 레벨 : ${mySkill.skill_lev }</span>
+				<button class="removeSk btn-close" aria-label="Close" style="width: 1px; position: absolute; right:72px;"></button></div></p>	
 				</c:forEach>
 				
 				<div id="inputPt"></div>
@@ -318,7 +318,7 @@ ct_no: ${sessionScope.ct_no }
 		</div>
 		<!-- 자격증 탭 끝 -->
 							
-		<button type="button"  class="btn btn-dark saveButt" style="position: absolute; bottom:535px; right:50px;">저장하기</button>
+		<button type="button"  class="btn btn-dark saveButt" style="position: absolute; right:54px; top:25px;">저장하기</button>
 	
 	</div>
 	</div>
@@ -418,8 +418,8 @@ ct_no: ${sessionScope.ct_no }
 				 '<option value="Vue.js">Vue.js</option><option value="Windows">Windows</option><option value="모바일 웹/앱">모바일 웹/앱</option><option value="앱디자인">앱디자인</option>'+
 				 '<option value="웹디자인">웹디자인</option><option value="전자정부프레임워크">전자정부프레임워크</option><option value="한글">한글</option></select>'+
 				 '<select class="selectLev"><option disabled hidden selected></option>'+
-				 '<option value="초급">초급</option><option value="중급">중급</option><option value="고급">고급</option></select>'+
-				 '<button type="button" class="addButt removeAdd">추가하기</button></div>'
+				 '<option value="초급">초급</option><option value="중급">중급</option><option value="고급">고급</option></select></div>'+
+				 '<button type="button" class="btn btn-dark btn-sm addButt removeAdd">추가하기</button>'
 				);
 
 				/* 주요기술 스택 - select2(검색되는 select) 적용 */
@@ -448,10 +448,11 @@ ct_no: ${sessionScope.ct_no }
 						
 						/* [추가하기] 클릭 시 추가되는 기술 리스트 출력 */
 						$('.listPt').prepend(
-						 '<p><div class="border border-1 rounded-3" role="group" style="width: 400px; display: inline-block; position: relative;">'+
-						 '<input type="hidden" value="'+skill+'" name="skill_nm"><input type="hidden" value='+level+' name="skill_lev">'+
-						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+skill+'</span></h4><h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+level+'</span></h4>'+
-						 '<button class="removeSk btn-close" aria-label="Close" style="width: 1px; position: absolute; top: 21px; left: 360px;"></button></div></p>'		
+							'<p><div class="border border-1 rounded-3 p-2" role="group" style="width: 700px; margin-bottom: 20px;">'+
+							'<input type="hidden" value="'+skill+'" name="skill_nm"><input type="hidden" value='+level+' name="skill_lev">'+
+							'<div style="padding-bottom:5px;"><span style="padding-left: 20px; font-size: 22px; font-weight: bold;">'+skill+'</span><br></div>'+
+							'<span style="padding-left: 20px;"> 레벨 : '+level+'</span></div>'+
+							'<button class="removeSk btn-close" aria-label="Close" style="width: 1px; position: absolute; top: 21px; left: 360px;"></button></div></p>'		
 						);
 		
 					});
@@ -483,8 +484,8 @@ ct_no: ${sessionScope.ct_no }
 				'<textarea rows="5" cols="60" class="textRs" placeholder="&#13;&#10&#13;&#10; 담당업무*"></textarea>'+
 				'<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">'+
 				'<input type="text" class="textJd" placeholder="입사연월">'+
-				'<input type="text" class="textQd" placeholder="퇴사연월"></div>'+
-				'<br><button type="button" class="addButt2 removeAdd2">추가하기</button></div>'
+				'<input type="text" class="textQd" placeholder="퇴사연월"></div></div>'+
+				'<button type="button" class="btn btn-dark btn-sm addButt2 removeAdd2">추가하기</button>'
 				);
 				
 				/* [추가하기] 클릭 */
@@ -544,10 +545,10 @@ ct_no: ${sessionScope.ct_no }
 				/* [+경력 추가] 클릭 시 [input text]+[추가하기] 출력 */
 				$('.inputLi').html(
 				'<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">'+
-				'<input type="text" placeholder="자격증명*" style="width: 300px;" class="licNm">'+
+				'<input type="text" placeholder="자격증명*" class="licNm">'+
 				'<input type="text" placeholder="기관명*" class="licIss">'+
-				'<input type="text" placeholder="YYYY.MM." class="licQd">'+
-				'<br><button type="button" class="addButt3 removeAdd3">추가하기</button></div>'
+				'<input type="text" placeholder="YYYY.MM." class="licQd"></div>'+
+				'<button type="button" class="btn btn-dark btn-sm addButt3 removeAdd3">추가하기</button>'
 				);
 				
 				/* [추가하기] 클릭 */
