@@ -8,17 +8,17 @@
     <title>J1P4 프로젝트(프리랜서 페이지)</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
-    <link href="../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- Font Awesome Icons -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- Ionicons -->
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
-    <link href="../resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
     <!-- AdminLTE Skins. Choose a skin from the css/skins 
          folder instead of downloading all of them to reduce the load. -->
-    <link href="../resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
-	<link href="../resources/star.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+	<link href="${pageContext.request.contextPath}/resources/star.css" rel="stylesheet" type="text/css">
 	<!-- 부트스트랩 CSS -->
 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"  -->
 <!-- integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
@@ -32,13 +32,13 @@
     
   </head>
       <!-- jQuery 2.1.4 -->
-    <script src="../resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
   <body class="skin-blue sidebar-mini">
     <div class="wrapper">
       
       <header class="main-header">
         <!-- Logo -->
-        <a href="../resources/index2.html" class="logo">
+        <a href="${pageContext.request.contextPath}/resources/index2.html" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>로</b>고</span>
           <!-- logo for regular state and mobile devices -->
@@ -69,7 +69,7 @@
                       <li><!-- start message -->
                         <a href="#">
                           <div class="pull-left">
-                            <img src="../resources/dist/img/user7-128x128.jpg" class="img-circle" alt="User Image"/>
+                            <img src="${pageContext.request.contextPath}/resources/dist/img/user7-128x128.jpg" class="img-circle" alt="User Image"/>
                           </div>
                           <h4>
                             Support Team
@@ -81,7 +81,7 @@
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="../resources/dist/img/user3-128x128.jpg" class="img-circle" alt="user image"/>
+                            <img src="${pageContext.request.contextPath}/resources/dist/img/user3-128x128.jpg" class="img-circle" alt="user image"/>
                           </div>
                           <h4>
                             AdminLTE Design Team
@@ -93,7 +93,7 @@
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="../resources/dist/img/user4-128x128.jpg" class="img-circle" alt="user image"/>
+                            <img src="${pageContext.request.contextPath}/resources/dist/img/user4-128x128.jpg" class="img-circle" alt="user image"/>
                           </div>
                           <h4>
                             Developers
@@ -105,7 +105,7 @@
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="../resources/dist/img/user3-128x128.jpg" class="img-circle" alt="user image"/>
+                            <img src="${pageContext.request.contextPath}/resources/dist/img/user3-128x128.jpg" class="img-circle" alt="user image"/>
                           </div>
                           <h4>
                             Sales Department
@@ -117,7 +117,7 @@
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="../resources/dist/img/user4-128x128.jpg" class="img-circle" alt="user image"/>
+                            <img src="${pageContext.request.contextPath}/resources/dist/img/user4-128x128.jpg" class="img-circle" alt="user image"/>
                           </div>
                           <h4>
                             Reviewers
@@ -246,13 +246,13 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="../resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+                  <img src="${pageContext.request.contextPath}/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
                   <span class="hidden-xs">Alexander Pierce</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="../resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                    <img src="${pageContext.request.contextPath}/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
                     <p>
                       Alexander Pierce - Web Developer
                       <small>Member since Nov. 2012</small>
@@ -299,12 +299,12 @@
             <li class="header"><i class="fa fa-laptop"></i> 내 프로젝트 관리</li>
            
             <li>
-              <a href="../myProManage/interestProject">
+              <a href="${pageContext.request.contextPath}/myProManage/interestProject">
                 <span>관심 프로젝트</span>
               </a>
             </li>
             <li>
-              <a href="../myProManage/proposedProject">
+              <a href="${pageContext.request.contextPath}/myProManage/proposedProject">
                 <span>제안받은 프로젝트</span>
               </a>
             </li>
@@ -314,8 +314,8 @@
                 <span>지원내역</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="../myProManage/applyingProject"><i class="fa fa-circle-o"></i> 지원중 </a></li>
-                <li><a href="../myProManage/endApplyProject"><i class="fa fa-circle-o"></i> 지원종료</a></li>
+                <li><a href="${pageContext.request.contextPath}/myProManage/applyingProject"><i class="fa fa-circle-o"></i> 지원중 </a></li>
+                <li><a href="${pageContext.request.contextPath}/myProManage/endApplyProject"><i class="fa fa-circle-o"></i> 지원종료</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -324,8 +324,8 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="../myProManage/contractProject"><i class="fa fa-circle-o"></i> 계약 진행중</a></li>
-                <li><a href="../myProManage/ongoingProject"><i class="fa fa-circle-o"></i> 프로젝트 진행중</a></li>
+                <li><a href="${pageContext.request.contextPath}/myProManage/contractProject"><i class="fa fa-circle-o"></i> 계약 진행중</a></li>
+                <li><a href="${pageContext.request.contextPath}/myProManage/ongoingProject"><i class="fa fa-circle-o"></i> 프로젝트 진행중</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -334,8 +334,8 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="../myProManage/waitEvaluationProject"><i class="fa fa-circle-o"></i> 평가대기중</a></li>
-                <li><a href="../myProManage/completedProject"><i class="fa fa-circle-o"></i> 완료한 프로젝트</a></li>
+                <li><a href="${pageContext.request.contextPath}/myProManage/waitEvaluationProject"><i class="fa fa-circle-o"></i> 평가대기중</a></li>
+                <li><a href="${pageContext.request.contextPath}/myProManage/completedProject"><i class="fa fa-circle-o"></i> 완료한 프로젝트</a></li>
               </ul>
             </li>           
           </ul>

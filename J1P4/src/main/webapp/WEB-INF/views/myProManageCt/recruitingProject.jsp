@@ -62,12 +62,14 @@
                         <td>${proFreeDTO.yeoncha} </td>
                         <td> 
                         	<button type="submit" class="btn btn-warning" >지원 거절</button>
-                        <c:if test="${proFreeDTO.meetingOK == 0}">                        
-                        	<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-${proFreeDTO.free_no}">계약하기</button>
-                        </c:if>	
-                        <c:otherwise>
-                        	<button class="btn btn-success" >계약 동의</button>
-                        </c:otherwise>
+					    <c:choose>
+					        <c:when test="${proFreeDTO.meetingOK == 0}">
+					            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-${proFreeDTO.free_no}">계약하기</button>
+					        </c:when>
+					        <c:otherwise>
+					            <button class="btn btn-success">계약 동의</button>
+					        </c:otherwise>
+					    </c:choose>
                         </td>
 <%--                          <td rowspan="${rowCount+1}" id="proj${status.index}"> --%>
 <!--                          	<button type="submit" class="btn aaa" >모집완료</button> -->
@@ -93,12 +95,14 @@
                         <td>${proFreeDTO.yeoncha} </td>
                         <td>
 						   	<button type="submit" class="btn btn-warning" >지원거절</button>
-                        <c:if test="${proFreeDTO.meetingOK == 0}">                        
-                        	<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-${proFreeDTO.free_no}">계약하기</button>
-                        </c:if>	
-                        <c:otherwise>
-                        	<button class="btn btn-success" >계약 동의</button>
-                        </c:otherwise>
+					    <c:choose>
+					        <c:when test="${proFreeDTO.meetingOK == 0}">
+					            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-${proFreeDTO.free_no}">계약하기</button>
+					        </c:when>
+					        <c:otherwise>
+					            <button class="btn btn-success">계약 동의</button>
+					        </c:otherwise>
+					    </c:choose>
                         </td>
                                          <!-- 수정된 부분 시작: 동일한 프로젝트일 때 모집완료 버튼 칸을 없애기 위해 rowspan 업데이트 -->
                     <c:if test="${prevProjectName != proFreeDTO.proj_title}">
