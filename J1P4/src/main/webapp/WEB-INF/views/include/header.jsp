@@ -13,6 +13,7 @@
 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 <link href="../resources/css/header.css" rel="stylesheet" />
 <link href="../resources/css/main.css" rel="stylesheet" />
+<link href="../resources/star.css" rel="stylesheet" type="text/css">
 </head>
 <body style="padding-top: 75px;">
 

@@ -1,5 +1,6 @@
 package com.itwillbs.persistence;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -9,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.itwillbs.domain.BMarkVO;
 import com.itwillbs.domain.Criteria;
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.ProjectVO;
@@ -49,6 +51,12 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
+	public List<ProjectVO> proLSortD(Criteria cri) {
+		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"proLSortD",cri);
+		return resultVO;
+	}
+
+	@Override
 	public List<ProjectVO> proFi(Criteria cri) {
 		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"proFi",cri);
 		return resultVO;
@@ -81,6 +89,57 @@ public class BoardDAOImpl implements BoardDAO{
 		int result = sqlSession.selectOne(NAMESPACE+"fNum");
 		return result;
 	}
+
+	@Override
+	public void doBMark(BMarkVO vo) {
+		logger.debug(" doBMark(BMarkVO vo) 실행 ");
+		sqlSession.insert(NAMESPACE+"doBMark", vo);
+	}
+
+	@Override
+	public void deleteBMark(BMarkVO vo) {
+
+		
+		sqlSession.delete(NAMESPACE+"deleteBMark", vo);
+	}
+
+	@Override
+	public List<ProjectVO> moFiPro(Criteria cri) {
+		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"moFiPro",cri);
+		return resultVO;
+	}
+
+	@Override
+	public List<ProjectVO> moFiProNs(Criteria cri) {
+		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"moFiProNs",cri);
+		return resultVO;
+	}
+
+	@Override
+	public List<ProjectVO> moFiProD(Criteria cri) {
+		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"moFiProD",cri);
+		return resultVO;
+	}
+
+	@Override
+	public List<ProjectVO> moFiProDNs(Criteria cri) {
+		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"moFiProDNs",cri);
+		return resultVO;
+	}
+
+	@Override
+	public int mofiNum(ProjectVO vo) {
+		int result = sqlSession.selectOne(NAMESPACE+"mofiNum",vo);
+		return result;
+	}
+
+	@Override
+	public int mofiNumNs(ProjectVO vo) {
+		int result = sqlSession.selectOne(NAMESPACE+"mofiNumNs",vo);
+		return result;
+	}
+
+	
 
 	
 	

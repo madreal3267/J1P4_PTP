@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<!-- sweetalert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 <%@ include file="../include/headerCt.jsp" %>
 
 <!-- 폼태그 -->
@@ -28,7 +32,7 @@
 	</c:forEach>
 	
 
-<%-- 제이쿼리  --%>	
+
 <script type="text/javascript">
 	$(document).ready(function(){
 		

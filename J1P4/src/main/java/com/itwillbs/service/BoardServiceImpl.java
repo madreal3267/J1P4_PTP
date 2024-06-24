@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.itwillbs.domain.BMarkVO;
 import com.itwillbs.domain.Criteria;
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.ProjectVO;
@@ -50,6 +51,12 @@ public class BoardServiceImpl implements BoardService {
 		logger.debug("ghkgdfdsf");
 		return bdao.proLSort(cri);
 	}
+	
+	@Override
+	public List<ProjectVO> proLSortD(Criteria cri) {
+		logger.debug("proLSortD(Criteria cri)마감 정렬 실행");
+		return bdao.proLSortD(cri);
+	}
 
 	@Override
 	public List<ProjectVO> proFi(Criteria cri) {
@@ -77,6 +84,57 @@ public class BoardServiceImpl implements BoardService {
 	public int fNum() {
 		return bdao.fNum();
 	}
+	
+	// 북마크 등록
+	@Override
+	public void doBMark(BMarkVO vo) {
+		bdao.doBMark(vo);
+	}
+
+	// 북마크 삭제
+	@Override
+	public void deleteBMark(BMarkVO vo) {
+		bdao.deleteBMark(vo);
+	}
+	
+	// 모달 필터
+	@Override
+	public List<ProjectVO> moFiPro(Criteria cri) {
+		logger.debug(" moFiPro(Criteria cri) 실행"); 
+		return bdao.moFiPro(cri);
+	}
+	
+	@Override
+	public List<ProjectVO> moFiProNs(Criteria cri) {
+		logger.debug("moFiProNs(Criteria cri) 실행"); 
+		return bdao.moFiProNs(cri);
+	}
+
+	@Override
+	public List<ProjectVO> moFiProD(Criteria cri) {
+		logger.debug(" moFiProD(Criteria cri) 실행"); 
+		return bdao.moFiProD(cri);
+	}
+
+	@Override
+	public List<ProjectVO> moFiProDNs(Criteria cri) {
+		logger.debug(" moFiProDNs(Criteria cri) 실행"); 
+		return bdao.moFiProDNs(cri);
+	}
+
+	// 모달 필터된 프로젝트 수
+	@Override
+	public int mofiNum(ProjectVO vo) {
+		return bdao.mofiNum(vo);
+	}
+
+	// 모달 필터된 프로젝트 수 skill_nm 없을때
+	@Override
+	public int mofiNumNs(ProjectVO vo) {
+		return bdao.mofiNumNs(vo);
+	}
+	
+	
 	
 	
 	

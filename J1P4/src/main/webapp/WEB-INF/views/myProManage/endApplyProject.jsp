@@ -4,7 +4,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<%@ include file="../include/header.jsp" %>
+<%@ include file="../include/headerMPM_F.jsp" %>
+
+<%
+    // 현재 시간을 가져오기 위해 java.util.Date 객체 생성
+    java.util.Date currentDate = new java.util.Date();
+    request.setAttribute("currentDate", currentDate);
+%>
 
 	<h1>/myProManage/endApplyProject.jsp</h1>
 <section class="content">
@@ -43,12 +49,17 @@
 							<c:out value="${skill}" />
 						</button>
 					</c:forEach>
+					
+				<!-- 지원 종료 이유 설명 -->
+				<c:if test="${projDTO.reject_check == 1}"> 지원해 주셔서 감사드립니다. 이번에는 함께하지 못하지만, 향후 기회를 기대합니다. </c:if>
+				<c:if test="${projDTO.deadline < currentDate}"> <p>지원기간이 종료되었습니다. 이번에는 함께하지 못하지만, 향후 기회를 기대합니다.</p> </c:if>
+				<!-- 지원 종료 목록에서 삭제 -->	
 					<form action="/myProManage/endApplyProject" method="post">
 						<input type="hidden" name="free_no" value="${projDTO.free_no }">
 						<input type="hidden" name="proj_no" value="${projDTO.proj_no }">
 						<input type="submit" value="목록에서 삭제" >
 					</form>
-					등록일자 <fmt:formatDate value="${projDTO.reg_date }" pattern="yyyy-mm-dd"/>
+					등록일자 <fmt:formatDate value="${projDTO.reg_date }" pattern="yyyy-MM-dd"/>
 				 </div>
 				 </c:forEach>
 				</section>
