@@ -38,15 +38,7 @@ public class EnrollFreeController {
 	@PostMapping(value="/enrollFree")
 	public String enrollFreePOST(FreelancerVO fVO,CareerVO cVO, LicenseVO lVO, SkillVO sVO, RegionVO rVO) {		
 		logger.debug(" Controller : ( •̀ ω •́ )y /enrollFree -> enrollFreePOST() 실행 ");
-		
-//		if(lVO.getLicense_nm() != null || lVO.getIssuer() != null || cVO.getResponsibility() != null || cVO.getCompany_nm() != null) {
-//			cVO.setCompany_nm(cVO.getCompany_nm().replace(",", "|"));
-//			cVO.setResponsibility(cVO.getResponsibility().replace(",", "|"));
-//			lVO.setIssuer(lVO.getIssuer().replace(",", "|"));
-//			lVO.setLicense_nm(lVO.getLicense_nm().replace(",", "|"));		
-//		}
-		
-		
+				
 		fService.updateFree(fVO);
 		fService.updateCareer(cVO);
 		fService.updateLicense(lVO);
