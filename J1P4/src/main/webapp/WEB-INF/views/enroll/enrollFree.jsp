@@ -1,43 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-@import
-	url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<!-- ============== 비회원 헤더 ================= -->
 
-body {
-	font-family: "Nanum Gothic", sans-serif !important;
-}
+<c:if test="${empty sessionScope.user_id }">
+<c:import url="../include/header.jsp"></c:import>
+</c:if>
+<!-- ============== 프리랜서 헤더 ================= -->
+<c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.equals('프리랜서') }">
+<c:import url="../include/freeHeader.jsp"></c:import>
+</c:if>
 
-h2 {
-	font-weight: bolder !important;
-}
+<!-- ============== 클라이언트 헤더 ================= -->
+<c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.equals('클라이언트') }">
+<c:import url="../include/ctHeader.jsp"></c:import>
+</c:if>
 
-h5 {
-	color: gray !important;
-}
-</style>
-<!-- JQuery -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js' integrity='sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==' crossorigin='anonymous'></script>
-<!-- enrollFree.css -->
-<link href="../resources/css/enrollFree.css" rel="stylesheet" />
-<!-- select2 (검색되는 select) CSS -->
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<!-- 부트스트랩 CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<meta charset="UTF-8">
-<title>프리랜서 등록 페이지</title>
-</head>
-<body>
-	<h1>프리랜서 등록하기 (enrollFree.jsp)</h1>
-	<hr>
 	
 	<form action="" method="post" name="fm1" id="fm1">
 	<input type="hidden" value="${sessionScope.user_id }" name="free_id">
 	<input type="hidden" value="${sessionScope.user_id }" name="user_id">
+	
+	<div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
+ <div class="card overflow-hidden card-2" >
+  <div class="row no-gutters row-bordered row-border-light">	
+  
+    <!-- 사이드 메뉴 시작 -->
+	<div class="col-md-3 pt-0">
+		<div class="list-group list-group-flush account-settings-links" style="width:274px;">
+			<h4 class="font-weight-bold py-1 mx-4 my-3">프리랜서 등록하기</h4>
+			<a class="list-group-item list-group-item-action" data-toggle="list" href="#free_condition">업무조건</a>
+			<a class="list-group-item list-group-item-action" data-toggle="list" href="#free_intro">소개정보</a>
+			<a class="list-group-item list-group-item-action" data-toggle="list" href="#free_skill">보유기술</a>
+			<a class="list-group-item list-group-item-action" data-toggle="list" href="#free_career">경력</a>
+			<a class="list-group-item list-group-item-action" data-toggle="list" href="#free_school">학력</a>
+			<a class="list-group-item list-group-item-action" data-toggle="list" href="#free_license">자격증</a>
+			<a class="list-group-item list-group-item-action" data-toggle="list" href="#free_portf">포트폴리오</a>
+		</div>
+	</div>
+	<!-- 사이드 메뉴 끝 -->
+	
+	<div class="col-md-9">
+	<div class="tab-content">
+	<!-- 프로젝트 등록하기 탭 시작 -->
+	<div class="tab-pane fade active show" id="free_condition"  >
+	<!-- card body 시작 -->
+	<div class="card-body border-start" >
+		<div class="border-bottom" style="position: relative; right:16px; width:1000px; padding-bottom: 10px;" >
+			<h4 class="font-weight-bold mx-4 my-3">프로젝트 등록</h4>
+		</div>
+	
 	<h2>업무조건</h2>
 		<h4>업무 가능 분야</h4>
 			<input type="radio" value="개발" class="btn-check" name="work_field" id="radioWf1">
@@ -87,13 +99,31 @@ h5 {
 			<option value=''>전체</option>
 		</select>
 		</div>
-	<hr>
+		</div>
+		</div>
+
+<!-- 프로젝트 등록하기 탭 시작 -->
+	<div class="tab-pane fade" id="free_intro"  >
+	<!-- card body 시작 -->
+	<div class="card-body border-start" >
+		<div class="border-bottom" style="position: relative; right:16px; width:1000px; padding-bottom: 10px;" >
+			<h4 class="font-weight-bold mx-4 my-3">프로젝트 등록</h4>
+		</div>
 	<h2>소개정보</h2>		
 	<b>한줄 소개</b><br>
 		<input type="text" name="oneline_bio" style="width: 510px"><br>
 	<b>자기 소개서</b><br>
 	<textarea rows="10" cols="60" name="bio"></textarea>
-	<hr>
+	</div>
+	</div>
+	
+<!-- 프로젝트 등록하기 탭 시작 -->
+	<div class="tab-pane fade" id="free_skill"  >
+	<!-- card body 시작 -->
+	<div class="card-body border-start" >
+		<div class="border-bottom" style="position: relative; right:16px; width:1000px; padding-bottom: 10px;" >
+			<h4 class="font-weight-bold mx-4 my-3">프로젝트 등록</h4>
+		</div>
 	<h2>보유기술</h2>		
 	<b>보유 중인 기술</b><br>
 	<div class="listPt"></div>
@@ -103,7 +133,15 @@ h5 {
 	
 	<div role="button" class="addSkill">+ 보유기술 추가</div>
 	
-	<hr>
+	</div>
+	</div>
+	<!-- 프로젝트 등록하기 탭 시작 -->
+	<div class="tab-pane fade" id="free_career"  >
+	<!-- card body 시작 -->
+	<div class="card-body border-start" >
+		<div class="border-bottom" style="position: relative; right:16px; width:1000px; padding-bottom: 10px;" >
+			<h4 class="font-weight-bold mx-4 my-3">프로젝트 등록</h4>
+		</div>
 	<h2>경력</h2>		
 	<b>전문성</b><br>
 	<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
@@ -122,8 +160,15 @@ h5 {
 	<!-- [+경력 추가] 클릭 시 [input text] 출력되는 공간 -->
 	<br>		
 	<div role="button" class="addCareer">+ 경력 추가</div>
-	
-	<hr>
+	</div>
+	</div>
+	<!-- 프로젝트 등록하기 탭 시작 -->
+	<div class="tab-pane fade" id="free_school"  >
+	<!-- card body 시작 -->
+	<div class="card-body border-start" >
+		<div class="border-bottom" style="position: relative; right:16px; width:1000px; padding-bottom: 10px;" >
+			<h4 class="font-weight-bold mx-4 my-3">프로젝트 등록</h4>
+		</div>	
 	<h2>학력</h2>		
 	<b>최종학력</b><br>
 	<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
@@ -150,7 +195,15 @@ h5 {
 		<option value="휴학">휴학</option>
 		<option value="중퇴/자퇴">중퇴/자퇴</option>
 	</select>
-	<hr>
+	</div>
+	</div>
+<!-- 프로젝트 등록하기 탭 시작 -->
+	<div class="tab-pane fade" id="free_license"  >
+	<!-- card body 시작 -->
+	<div class="card-body border-start" >
+		<div class="border-bottom" style="position: relative; right:16px; width:1000px; padding-bottom: 10px;" >
+			<h4 class="font-weight-bold mx-4 my-3">프로젝트 등록</h4>
+		</div>
 	<h2>자격증</h2>		
 	<b>자격증</b><br>
 	
@@ -161,8 +214,14 @@ h5 {
 	<!-- [+경력 추가] 클릭 시 [input text] 출력되는 공간 -->
 	<br>		
 	<div role="button" class="addLicense">+ 자격증 추가</div>
-	<hr>
 	<input type="submit" value="등록하기">
+	</div>
+	</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
 	</form>
 	
 <!-- 자바스크립트 시작 -->	
