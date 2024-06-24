@@ -10,5 +10,8 @@ public class BMarkVO {
 	private int proj_no;
 	private int free_no;
 	private int ct_no;
+	
+	
+	
 
 }
