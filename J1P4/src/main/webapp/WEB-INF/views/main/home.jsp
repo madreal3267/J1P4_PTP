@@ -16,6 +16,11 @@
 <c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.equals('클라이언트') }">
 <c:import url="../include/ctHeader.jsp"></c:import>
 </c:if>
+
+<c:if test="${not empty sessionScope.user_id && empty sessionScope.user_cf}">
+<meta http-equiv='refresh' content='0;url=../member/mailsend'>
+</c:if>
+
 user_id: ${sessionScope.user_id },
 user_cf: ${sessionScope.user_cf },
 user_type: ${sessionScope.user_type },

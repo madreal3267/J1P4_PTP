@@ -1,121 +1,97 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-  <head> 
-    <meta charset="UTF-8">
-    <title>프투프 - 회원가입</title>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-  crossorigin="anonymous"></script> <!-- ajax이용시 제이쿼리cnd 사용 -->
-  
-  
-    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    <!-- Bootstrap 3.3.4 -->
-    <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <!-- Font Awesome Icons -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <!-- Ionicons -->
-    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-    <!-- Theme style -->
-    <link href="/resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
-    <!-- AdminLTE Skins. Choose a skin from the css/skins 
-         folder instead of downloading all of them to reduce the load. -->
-    <link href="/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    
-  </head>
-      <!-- jQuery 2.1.4 -->
-    <script src="./resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-    
-    
-<body>
-
-<div class="box box-info">
-<div class="box-header with-border">
-<h3 class="box-title">회원가입</h3>
-</div>
-
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:import url="../include/login.jsp"></c:import>
 <form class="form-horizontal" method="post" name="form_join" id="form1">
 
-<div class="box-body">
+<div style="text-align: center; margin-bottom: 30px;">
+<a href="/main/home">
+  <img src="../resources/ptp_logo.png" alt="logo" height="100" class="nav-r1"/>
+  </a>
+  <br>
+  <div style="margin-top: 30px; font-size: 20px;">
+  함께 나눌수록 더욱 커지는 가치,<br>
+IT 전문가 세상 PTP에 오신것을 환영합니다.<br>
+  </div>
+ 	</div>
+ 	
+ 	<div class="container light-style flex-grow-1 container-p-y" style="width:500px; ">
+ <div class="card overflow-hidden card-2" style="padding: 10px;" >
+  <div style="font-size: 25px; padding-left: 26px; font-weight: bolder;">
+  회원가입
+  </div>
+  </div>
+  </div>
+ 	
+ 	
+<div class="container light-style flex-grow-1 container-p-y" style="width:500px; margin-bottom: 100px; ">
+ <div class="card overflow-hidden card-2" >
+  <div class="row no-gutters row-bordered row-border-light">
 
-<div class="form-group">
-<label for="inputEmail3" class="col-sm-2 control-label">이메일</label>
+
+<div style="padding-left: 50px; padding-top: 20px; margin-bottom: 20px;">
+<label for="inputEmail3" class="insertFont">이메일</label>
 <div class="col-sm-10">
-<input type="email" name="user_email" class="form-control email" id="inputEmail3" placeholder="Email">
-</div>
+<input type="email" name="user_email" class="email inputInfo" id="inputEmail3" placeholder="이메일">
 </div>
 
-
-<div class="form-group">
-<label for="inputEmail3" class="col-sm-2 control-label">이름</label>
+<label for="inputEmail3" class="insertFont">이름</label>
 <div class="col-sm-10">
-<input type="text" name="name" class="form-control" id="inputEmail3" placeholder="Name">
-</div>
+<input type="text" name="name" class="inputInfo" id="inputEmail3" placeholder="이름">
 </div>
 
 
-<div class="form-group">
-<label for="inputPassword3" class="col-sm-2 control-label">아이디</label>
+<label for="inputPassword3" class="insertFont">아이디</label>
 <div class="col-sm-10">
-<input type="text" name="user_id" class="form-control" id="userid"  placeholder="아이디를 입력해주세요.">
-<span id=check></span>
-</div>
+<input type="text" name="user_id" class="inputInfo" id="userid" placeholder="아이디">
+<span id=check style="font-size: 14px;"></span>
 </div>
 
-<div class="form-group">
-<label for="inputPassword3" class="col-sm-2 control-label">비밀번호</label>
+<label for="inputPassword3" class="insertFont">비밀번호</label>
 <div class="col-sm-10">
-<input type="password" name="user_pw" class="pass" id="pw1" placeholder="Password">
-<span id=checkpass2></span>
-</div>
+<input type="password" name="user_pw" class="pass inputInfo" id="pw1" placeholder="비밀번호">
+<span id=checkpass2 style="font-size: 14px;"></span>
 </div>
 
-<div class="form-group">
-<label for="inputPassword3" class="col-sm-2 control-label">비밀번호 확인</label>
+<label for="inputPassword3" class="insertFont">비밀번호 확인</label>
 <div class="col-sm-10">
-<input type="password" name="user_pw2" class="pass" id="pw2" placeholder="PasswordCheck">
-<span id=checkpass></span>
+<input type="password" name="user_pw2" class="pass inputInfo" id="pw2" placeholder="비밀번호 확인">
+<span id=checkpass style="font-size: 14px;"></span>
 </div>
-</div>
-
 
 </div>
 
 
 
-<!-- 버튼설정 -->
-<div class="col-md-6">
-<button type="button" class="btn btn-primary btn-block" id="insertMember"><i class="fa fa-bell"></i>회원가입</button>
-<button type="submit" class="btn btn-info btn-block btn-flat"><i class="fa fa-bell"></i>구글 계정으로 회원가입</button>
-<button type="submit" class="btn btn-danger btn-block btn-sm"><i class="fa fa-bell"></i>카카오톡 계정으로 회원가입</button>
+<div style="text-align: center; margin-bottom: 20px;">
+<button type="button" class="rounded-3 roginButt" id="insertMember">회원가입</button>
 </div>
 
 
+
+</div>
+</div>
+</div>
 </form>
+
+<div class="container">
+	<footer class="py-3 my-4">
+	<ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+    </ul>
+    <p class="text-center text-body-secondary">© 2024-06-06 Zip-Ga-Go-Ship-Da, Inc</p>
+   </footer>
 </div>
 
 
 
-    <!-- Bootstrap 3.3.2 JS -->
-    <script src="./resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <!-- FastClick -->
-    <script src='./resources/plugins/fastclick/fastclick.min.js'></script>
-    <!-- AdminLTE App -->
-    <script src="./resources/dist/js/app.min.js" type="text/javascript"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="./resources/dist/js/demo.js" type="text/javascript"></script>
  
  
-  <script type="text/javascript">
+<script type="text/javascript">
 
   // 아이디 입력값을 가져오고, 입력값을 서버로 전송하고-> 똑같은 아이디가 있는지 체크한 후
   // 사용 가능 여부를 아이디 입력창 아래에 표시
@@ -140,7 +116,7 @@
 					if(input_id.length==0){ //아무것도 입력안한상태
  						$('#check').html('아이디는 6~12자리 영어,숫자만 사용 가능합니다.').css('color','black')
 					}else if((res ==1)  || (!check_id.test(memberid))){ // 사용불가
-						$('#check').html('중복된 아이디거나, 조건에 맞지않습니다.').css('color','red')
+						$('#check').html('중복된 아이디거나, 조건에 맞지 않습니다.').css('color','red')
 					}else if(res != 1){//사용가능
 						$('#check').html('사용 가능한 아이디입니다.').css('color','green')
 					}
@@ -167,7 +143,7 @@
 
 		//비밀번호 조건 일치/불일치
 		if(!check_pw.test(memberpw)){
-			$('#checkpass2').html('8~20자리의 영어,숫자,특수문자 조합으로 입력해주세요.').css('color', 'black');
+			$('#checkpass2').html('8~20자리의 영어,숫자,특수문자 조합으로 입력해주세요.').css('color', 'red');
 		}else{
 			$('#checkpass2').html('비밀번호가 조건에 일치합니다.').css('color', 'green');
 		}
