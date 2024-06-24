@@ -188,13 +188,16 @@ public class MemberController {
 			
 			System.out.println("resultVO : "+resultVO);
 			
+			
 			//로그인 성공처리
 			// 세션에 있으면 있는 세션반환, 없으면 신규 세션을 생성
 			HttpSession Session = request.getSession();
 			if(resultVO != null) {
-				Session.setAttribute("user_id", resultVO);
+				Session.setAttribute("user_id", resultVO.getUser_id());
 				Session.setAttribute("user_cf", mService.sessCf(vo));
 				Session.setAttribute("user_type", mService.sessType(vo));
+				Session.setAttribute("free_no", mService.sessFreeNo(vo));
+				Session.setAttribute("ct_no", mService.sessCtNo(vo));
 				return"redirect:/main/home";
 				
 			}else {
@@ -300,7 +303,7 @@ public class MemberController {
 							"<br/>"+vo.getUser_id()+"님 "+
 							"<br/>비밀번호 변경을 위해서"+
 							"<br/>아래 [비밀번호 변경하기]를 눌러주세요."+
-							"<a href='http://192.168.7.213:8088/member/findpw?user_email=" + vo.getUser_email() +
+							"<a href='http://localhost:8088/member/findpw?user_email=" + vo.getUser_email() +
 							"&key=" + key +
 							"' target='_blank'>비밀번호 변경하기</a>");
 			mailhandler.setFrom("itwil_j1p4@naver.com", "캐프리");

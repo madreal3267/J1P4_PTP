@@ -74,8 +74,10 @@ public interface MemberService {
 		//클라이언트 등록여부
 		public void insertCt(String ct_id) throws Exception; 
 	
-		public MemberVO sessCf(MemberVO vo) throws Exception;
-		public MemberVO sessType(MemberVO vo) throws Exception;
+		public String sessCf(MemberVO vo) throws Exception;
+		public String sessType(MemberVO vo ) throws Exception;
+		public Integer sessFreeNo(MemberVO vo) throws Exception;
+		public Integer sessCtNo(MemberVO vo) throws Exception;
 
 	
 }

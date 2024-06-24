@@ -185,14 +185,24 @@
   	where user_id=#{user_id}
   </update>
   
-  <select id="sessCf" resultType="com.itwillbs.domain.MemberVO">
+  <select id="sessCf" resultType="string">
   	select user_cf from user
   	where user_id = #{user_id};
   </select>
   
-  <select id="sessType" resultType="com.itwillbs.domain.MemberVO">
+  <select id="sessType" resultType="string">
   	select user_type from user
   	where user_id = #{user_id};
+  </select>
+  
+  <select id="sessFreeNo" resultType="int">
+  	select free_no from freelancer
+  	where free_id = #{user_id};
+  </select>
+  
+  <select id="sessCtNo" resultType="int">
+  	select ct_no from client
+  	where ct_id = #{user_id};
   </select>
   
   
@@ -201,15 +211,5 @@
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
 
   </mapper>

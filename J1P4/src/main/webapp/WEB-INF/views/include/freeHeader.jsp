@@ -13,14 +13,10 @@
 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 <link href="../resources/css/freeHeader.css" rel="stylesheet" />
 <link href="../resources/css/main.css" rel="stylesheet" />
-<style type="text/css">
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
-</style>
 </head>
 <body style="padding-top: 75px;">
 
 <!-- =============================== 프리랜서 헤더 =============================== -->
-<%-- <c:if test="${user_id eq '' and free_no not empty}"> --%>
 <header class="mb-3 border-bottom" style="background-color:#fff; position: fixed; top: 0; left: 0; right: 0; z-index: 999;">
     <div class="container p-3" style="width: 1100px;">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -32,9 +28,19 @@
 <!--      <li><a href="#" class="nav-link px-2 link-secondary nav-r">프로젝트 찾기</a></li> -->
           <li><a href="/board/listPro" class="nav-link px-3 link-body-emphasis nav-r1">프로젝트 찾기</a></li>
           <li><a href="#" class="nav-link px-3 link-body-emphasis nav-r1">프리랜서 찾기</a></li>
-          <li><a href="#" class="nav-link px-3 link-body-emphasis nav-r1">프리랜서 등록</a></li>
+          <c:if test="${sessionScope.user_type.equals('개인') or sessionScope.user_type.equals('팀') }">
+          <li><a href="/enroll/enrollFree" class="nav-link px-3 link-body-emphasis nav-r1">프리랜서 등록</a></li>
+          </c:if>
+          <c:if test="${sessionScope.user_type.equals('사업자') }">
+          <li><a href="/enroll/enrollFreeB" class="nav-link px-3 link-body-emphasis nav-r1">프리랜서 등록</a></li>
+          </c:if>
           <li><a href="#" class="nav-link px-3 link-body-emphasis nav-r1">이용방법</a></li>
-          <li><a href="#" class="nav-link px-2 link-body-emphasis nav-r4">내 프로필</a></li>
+          <c:if test="${sessionScope.user_type.equals('개인') or sessionScope.user_type.equals('팀') }">
+          <li><a href="/myProfile/profile?free_no=${sessionScope.free_no }" class="nav-link px-2 link-body-emphasis nav-r4">내 프로필</a></li>
+          </c:if>
+          <c:if test="${sessionScope.user_type.equals('사업자') }">
+          <li><a href="/myProfile/profileB?free_no=${sessionScope.free_no }" class="nav-link px-2 link-body-emphasis nav-r4">내 프로필</a></li>
+          </c:if>
           <li><a href="/myProManage/interestProject" class="nav-link px-2 link-body-emphasis nav-r4">내 프로젝트 관리</a></li>
         </ul>
 
@@ -52,4 +58,3 @@
       </div>
     </div>
   </header>
-<%-- </c:if> --%>

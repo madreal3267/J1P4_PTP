@@ -22,9 +22,7 @@ public class MainController {
 		logger.debug(" /main -> mainGET() 호출 ");
 		// 연결된 뷰페이지 실행 /WEB-INF/views/main.jsp
 		logger.debug("/views/main.jsp 페이지 연결");
-		session.getAttribute("user_id");
-		session.getAttribute("user_cf");
-		session.getAttribute("user_type");
+
 		
 	}
 	

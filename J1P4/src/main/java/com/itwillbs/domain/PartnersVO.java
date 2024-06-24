@@ -7,6 +7,15 @@ public class PartnersVO {
 
 	private int free_no;
 	private String partners_nm;
-	private String Pdetails;
+	private String pDetails;
+	private String user_id;
+	public String getpDetails() {
+		return pDetails;
+	}
+	public void setpDetails(String pDetails) {
+		this.pDetails = pDetails;
+	}
+	
+	
 	
 }

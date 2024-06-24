@@ -198,13 +198,27 @@ public class MemberServiceImpl implements MemberService {
 
 
 	@Override
-	public MemberVO sessCf(MemberVO vo) throws Exception {
+	public String sessCf(MemberVO vo) throws Exception {
 		return mdao.sessCf(vo);
 	}
 	
 	@Override
-	public MemberVO sessType(MemberVO vo) throws Exception {
+	public String sessType(MemberVO vo) throws Exception {
 		return mdao.sessType(vo);
+	}
+
+
+
+	@Override
+	public Integer sessFreeNo(MemberVO vo) throws Exception {
+		return mdao.sessFreeNo(vo);
+	}
+
+
+
+	@Override
+	public Integer sessCtNo(MemberVO vo) throws Exception {
+		return mdao.sessCtNo(vo);
 	}
 	
 	

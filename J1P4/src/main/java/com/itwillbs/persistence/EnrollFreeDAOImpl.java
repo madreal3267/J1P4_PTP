@@ -28,72 +28,81 @@ public class EnrollFreeDAOImpl implements EnrollFreeDAO {
 	
 	// 프리랜서 등록 정보 입력
 	@Override
-	public void insertFree(FreelancerVO vo) {
-		logger.debug(" DAO : insertFree(vo) 호출 (❁´◡`❁) ");
+	public void updateFree(FreelancerVO vo) {
+		logger.debug(" DAO : updateFree(vo) 호출 (❁´◡`❁) ");
 		
-		sqlSession.insert(NAMESPACE+"insertFree",vo);
+		sqlSession.update(NAMESPACE+"updateFree",vo);
 		
-		logger.debug(" DAO : 프리랜서 등록 완료! ╰(*°▽°*)╯ ");
+		logger.debug(" DAO : 프리랜서 업데이트 완료! ╰(*°▽°*)╯ ");
+	}
+	
+	@Override
+	public void updateFreeB(FreelancerVO vo) {
+		logger.debug(" DAO : updateFreeB(vo) 호출 (❁´◡`❁) ");
+		
+		sqlSession.update(NAMESPACE+"updateFreeB",vo);
+		
+		logger.debug(" DAO : 프리랜서 업데이트 완료! ╰(*°▽°*)╯ ");
 	}
 
 	// 프리랜서 경력
 	@Override
-	public void insertCareer(CareerVO vo) {
-		logger.debug(" DAO : insertCareer(vo) 호출 (❁´◡`❁) ");
+	public void updateCareer(CareerVO vo) {
+		logger.debug(" DAO : updateCareer(vo) 호출 (❁´◡`❁) ");
 		
-		sqlSession.insert(NAMESPACE+"insertCareer",vo);
+		sqlSession.update(NAMESPACE+"updateCareer",vo);
 		
-		logger.debug(" DAO : 프리랜서 경력 등록 완료! ╰(*°▽°*)╯ ");
+		logger.debug(" DAO : 프리랜서 경력 업데이트 완료! ╰(*°▽°*)╯ ");
 	}
 
 	// 프리랜서 보유 자격증
 	@Override
-	public void insertLicense(LicenseVO vo) {
-		logger.debug(" DAO : insertLicense(vo) 호출 (❁´◡`❁) ");
+	public void updateLicense(LicenseVO vo) {
+		logger.debug(" DAO : updateLicense(vo) 호출 (❁´◡`❁) ");
 		
-		sqlSession.insert(NAMESPACE+"insertLicense",vo);
+		sqlSession.update(NAMESPACE+"updateLicense",vo);
 		
-		logger.debug(" DAO : 프리랜서 자격증 등록 완료! ╰(*°▽°*)╯ ");
+		logger.debug(" DAO : 프리랜서 자격증 업데이트 완료! ╰(*°▽°*)╯ ");
 	}
 
 	// 프리랜서 보유 기술
 	@Override
-	public void insertSkill(SkillVO vo) {
-		logger.debug(" DAO : insertSkill(vo) 호출 (❁´◡`❁) ");
+	public void updateSkill(SkillVO vo) {
+		logger.debug(" DAO : updateSkill(vo) 호출 (❁´◡`❁) ");
 		
-		sqlSession.insert(NAMESPACE+"insertSkill",vo);
+		sqlSession.update(NAMESPACE+"updateSkill",vo);
 		
-		logger.debug(" DAO : 프리랜서 기술 등록 완료! ╰(*°▽°*)╯ ");	
+		logger.debug(" DAO : 프리랜서 기술 업데이트 완료! ╰(*°▽°*)╯ ");	
 	}
 
 	// 프리랜서 희망 지역
 	@Override
-	public void insertReg(RegionVO vo) {
-		logger.debug(" DAO : insertReg(vo) 호출 (❁´◡`❁) ");
+	public void updateReg(RegionVO vo) {
+		logger.debug(" DAO : updateReg(vo) 호출 (❁´◡`❁) ");
 		
-		sqlSession.insert(NAMESPACE+"insertReg",vo);
+		sqlSession.update(NAMESPACE+"updateReg",vo);
 		
-		logger.debug(" DAO : 프리랜서 희망지역 등록 완료! ╰(*°▽°*)╯ ");
+		logger.debug(" DAO : 프리랜서 희망지역 업데이트 완료! ╰(*°▽°*)╯ ");
 	}
 	
 	// 프리랜서 협력 업체
 	@Override
-	public void insertPartners(PartnersVO vo) {
-		logger.debug(" DAO : insertReg(vo) 호출 (❁´◡`❁) ");
+	public void updatePartners(PartnersVO vo) {
+		logger.debug(" DAO : updateReg(vo) 호출 (❁´◡`❁) ");
 		
-		sqlSession.insert(NAMESPACE+"insertPartners",vo);
+		sqlSession.update(NAMESPACE+"updatePartners",vo);
 		
-		logger.debug(" DAO : 프리랜서 협력업체 등록 완료! ╰(*°▽°*)╯ ");		
+		logger.debug(" DAO : 프리랜서 협력업체 업데이트 완료! ╰(*°▽°*)╯ ");		
 	}
 	
 	// 프리랜서 회사 연혁
 	@Override
-	public void insertComp(CompanyVO vo) {
-		logger.debug(" DAO : insertReg(vo) 호출 (❁´◡`❁) ");
+	public void updateComp(CompanyVO vo) {
+		logger.debug(" DAO : updateReg(vo) 호출 (❁´◡`❁) ");
 		
-		sqlSession.insert(NAMESPACE+"insertComp",vo);
+		sqlSession.update(NAMESPACE+"updateComp",vo);
 		
-		logger.debug(" DAO : 프리랜서 회사연혁 등록 완료! ╰(*°▽°*)╯ ");				
+		logger.debug(" DAO : 프리랜서 회사연혁 업데이트 완료! ╰(*°▽°*)╯ ");				
 	}
 	
 	

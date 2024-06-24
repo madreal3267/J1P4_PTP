@@ -30,15 +30,12 @@ h5 { color: gray !important; }
 	<div>
 		임시 저장 프로젝트를 불러오거나, 등록했던 프로젝트를 다시 등록해 보세요. <a href="">프로젝트 선택하기 ></a>
 	</div>
-
 	<hr>
 	<div>
 	<form action="/enroll/enrollProj" method="post" id="fm1" name="fm1" class="fm">
-		<input type="hidden" value="${sessionScope.user_id.user_id }" name="user_id">
-		<input type="hidden" value=119 name="proj_no">
+		<input type="hidden" value="${sessionScope.user_id }" name="user_id">
+<!-- 		<input type="hidden" value=119 name="proj_no"> -->
 		<input type="hidden" value="" name="temporary" class="temporary">
-		<!-- 사용자 아이디 정보 세션에 담아서 hidden 으로 전달 -> project 테이블 컬럼 ct_no 저장에 필요하기 때문 -->
-		<!-- 기능 구현 중 받아올 수 있는 세션이 없어서 임의로 user_10을 담아서 테스트 중 추후 수정 필요 -->
 		
 		
 		<h2>어떤 프로젝트 업무를 맡기고 싶으신가요?</h2>
@@ -264,7 +261,7 @@ h5 { color: gray !important; }
 				/* [+보유기술 추가] 클릭 시 [select 버튼]+[추가하기] 출력 */
 				$('#inputPt').html(
 				 '<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">'+
-				 '<select name="skill_nm" class="selectSk" ><option disabled hidden selected></option>'+
+				 '<select class="selectSk" ><option disabled hidden selected></option>'+
 				 '<option value=".NET">.NET</option><option value="AA">AA</option><option value="Adobe Photoshop">Adobe Photoshop</option><option value="AfterEffect">AfterEffect</option>'+
 				 '<option value="Ajax">Ajax</option><option value="Android">Android</option><option value="Angular.js">Angular.js</option><option value="Apache">Apache</option>'+
 				 '<option value="Bootstrap">Bootstrap</option><option value="C">C</option><option value="C#">C#</option><option value="C++">C++</option>'+
@@ -280,7 +277,7 @@ h5 { color: gray !important; }
 				 '<option value="Unity">Unity</option><option value="Unix">Unix</option><option value="VisualStudio">VisualStudio</option>'+
 				 '<option value="Vue.js">Vue.js</option><option value="Windows">Windows</option><option value="모바일 웹/앱">모바일 웹/앱</option><option value="앱디자인">앱디자인</option>'+
 				 '<option value="웹디자인">웹디자인</option><option value="전자정부프레임워크">전자정부프레임워크</option><option value="한글">한글</option></select>'+
-				 '<select name="skill_lev" class="selectLev"><option disabled hidden selected></option>'+
+				 '<select class="selectLev"><option disabled hidden selected></option>'+
 				 '<option value="초급">초급</option><option value="중급">중급</option><option value="고급">고급</option></select>'+
 				 '<button type="butoon" class="addButt removeAdd">추가하기</button></div>'		
 				);
@@ -313,7 +310,7 @@ h5 { color: gray !important; }
 						$('.listPt').prepend(
 						 '<p><div class="border border-1 rounded-3" role="group" style="width: 400px; display: inline-block; position: relative;">'+
 						 '<input type="hidden" value='+$('.listPt').children("p").length+' name="count">'+
-						 '<input type="hidden" value='+skill+' name="skill_nm"><input type="hidden" value='+level+' name="skill_lev">'+
+						 '<input type="hidden" value="'+skill+'" name="skill_nm"><input type="hidden" value='+level+' name="skill_lev">'+
 						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+skill+'</span></h4><h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+level+'</span></h4>'+
 						 '<button class="removeSk btn-close" aria-label="Close" style="width: 1px; position: absolute; top: 21px; left: 360px;"></button></div></p>'
 						);
