@@ -43,14 +43,14 @@
 </div>
 
 
-<form class="form-horizontal" method="post" name="form_join">
+<form class="form-horizontal" method="post" name="form_join" id="form1">
 
 <div class="box-body">
 
 <div class="form-group">
 <label for="inputEmail3" class="col-sm-2 control-label">이메일</label>
 <div class="col-sm-10">
-<input type="email" name="user_email" class="form-control" id="inputEmail3" placeholder="Email">
+<input type="email" name="user_email" class="form-control email" id="inputEmail3" placeholder="Email">
 </div>
 </div>
 
@@ -82,7 +82,7 @@
 <div class="form-group">
 <label for="inputPassword3" class="col-sm-2 control-label">비밀번호 확인</label>
 <div class="col-sm-10">
-<input type="password" name="user_pw" class="pass" id="pw2" placeholder="PasswordCheck">
+<input type="password" name="user_pw2" class="pass" id="pw2" placeholder="PasswordCheck">
 <span id=checkpass></span>
 </div>
 </div>
@@ -94,7 +94,7 @@
 
 <!-- 버튼설정 -->
 <div class="col-md-6">
-<button type="submit" class="btn btn-primary btn-block"><i class="fa fa-bell" ></i>회원가입</button>
+<button type="button" class="btn btn-primary btn-block" id="insertMember"><i class="fa fa-bell"></i>회원가입</button>
 <button type="submit" class="btn btn-info btn-block btn-flat"><i class="fa fa-bell"></i>구글 계정으로 회원가입</button>
 <button type="submit" class="btn btn-danger btn-block btn-sm"><i class="fa fa-bell"></i>카카오톡 계정으로 회원가입</button>
 </div>
@@ -114,8 +114,8 @@
     <!-- AdminLTE for demo purposes -->
     <script src="./resources/dist/js/demo.js" type="text/javascript"></script>
  
+ 
   <script type="text/javascript">
-  
 
   // 아이디 입력값을 가져오고, 입력값을 서버로 전송하고-> 똑같은 아이디가 있는지 체크한 후
   // 사용 가능 여부를 아이디 입력창 아래에 표시
@@ -138,9 +138,9 @@
 		 			let memberid = $('#userid').val();
 		 			
 					if(input_id.length==0){ //아무것도 입력안한상태
- 						$('#check').html('입력하세요.').css('color','black')
+ 						$('#check').html('아이디는 6~12자리 영어,숫자만 사용 가능합니다.').css('color','black')
 					}else if((res ==1)  || (!check_id.test(memberid))){ // 사용불가
-						$('#check').html('중복된 아이디거나, 조건에 맞지않음').css('color','red')
+						$('#check').html('중복된 아이디거나, 조건에 맞지않습니다.').css('color','red')
 					}else if(res != 1){//사용가능
 						$('#check').html('사용 가능한 아이디입니다.').css('color','green')
 					}
@@ -167,30 +167,67 @@
 
 		//비밀번호 조건 일치/불일치
 		if(!check_pw.test(memberpw)){
-			$('#checkpass2').html('조건불일치').css('color', 'black');
+			$('#checkpass2').html('8~20자리의 영어,숫자,특수문자 조합으로 입력해주세요.').css('color', 'black');
 		}else{
-			$('#checkpass2').html('조건일치일치@@@@').css('color', 'green');
+			$('#checkpass2').html('비밀번호가 조건에 일치합니다.').css('color', 'green');
 		}
 		
 		//비밀번호 재확인
 		if(check_pw.test(memberpw)){
 			if(!pass1=="" || !pass2==""){
 			if(pass1 == pass2){
-				$('#checkpass').html('비밀번호 일치').css('color','green')
+				$('#checkpass').html('비밀번호가 일치합니다.').css('color','green')
 			}else if(pass1 != pass2){
-				$('#checkpass').html('비밀번호 불일치').css('color', 'red');
+				$('#checkpass').html('비밀번호를 다시 확인해주세요.').css('color', 'red');
 			}
 			
 			}
 		}		
 			
-		
+		let input_id = document.form_join.user_id.value; //name=user_id값
 		 
 	 });
-		 
+	 
+	 
+
 	 
  });
  
+	 //회원가입 공백 처리
+	 $('#insertMember').click(function(){
+		 var useremail = document.form_join.user_email.value;
+		 var username = document.form_join.name.value;
+		 var userid = document.form_join.user_id.value;
+		 var userpw = document.form_join.user_pw.value;
+		 var userpw2 = document.form_join.user_pw2.value;
+		
+		if(useremail==""){
+			alert("모든 칸을 입력해주세요");
+			return;
+		}
+		if(username==""){
+			alert("모든 칸을 입력해주세요");
+			return;
+		}
+		if(userid==""){
+			alert("모든 칸을 입력해주세요");
+			return;
+		}
+		if(userpw==""){
+			alert("모든 칸을 입력해주세요");
+			return;
+		}
+		if(userpw2==""){
+			alert("모든 칸을 입력해주세요");
+			return;
+		} 
+		$('#insertMember').attr("type","submit");
+		location.href = '/member/insert';
+		 
+	 });
+	
+
+	 
  </script> 
   
   

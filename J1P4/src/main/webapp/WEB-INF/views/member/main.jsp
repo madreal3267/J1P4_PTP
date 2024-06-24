@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>메인페이지</h1>
+<h1>로그인 안함 - 메인페이지</h1>
 </body>
 </html>
