@@ -38,7 +38,7 @@ ct_no: ${sessionScope.ct_no }
 	</div>
 	
 	<div id="mainImg">
-	<img src="../resources/main_side.svg" alt="mainImg"/>
+	<img src="../resources/main2.png" style="width:500px;" alt="mainImg"/>
 	</div>
 	
 	<!-- ============== 비회원 메인 메뉴 ================= -->

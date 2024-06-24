@@ -24,39 +24,27 @@
 <%-- user_type: ${sessionScope.user_type }, --%>
 <%-- free_no: ${sessionScope.free_no }, --%>
 <%-- ct_no: ${sessionScope.ct_no } --%>
-
-
-<div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
- <div class="card overflow-hidden card-2" >
-  <div class="row no-gutters row-bordered row-border-light">
-
-
-   <div class="tab-content">
-
-	<h1>${pNum} 개의 프로젝트가 등록되었습니다.</h1> <br>
-<%-- ${param.work_field } --%>
-${skill_nm }
-${modalCheck }
-	
+<div style="margin-left: 310px; display: inline-block; width:1070px;" >
+<h3>${pNum} 개의 프로젝트가 등록되었습니다.</h3> <br>
 	<!-- 필터 -->
-<form action="/board/listProFi" method="post" id="fbtn">	
+	<div style="">
+<form action="/board/listProFi" method="post" id="fbtn" style="display: inline-block;">	
 
 		<input type="radio" value="개발" class="btn-check" name="work_field" id="radioWf1"  <c:if test='${param.work_field eq "개발"}' >checked</c:if>> 
-		<label class="rounded-3 p-3 m-1 butt3"" for="radioWf1">⚙️ 개발</label> 
+		<label class="btn btn-outline-dark" for="radioWf1">⚙️ 개발</label> 
 		<input type="radio" value="기획" class="btn-check" name="work_field" id="radioWf2" <c:if test='${param.work_field eq "기획"}' >checked</c:if>> 
-		<label class="rounded-3 p-3 m-1 butt3"" for="radioWf2">🛠️ 기획</label> 
+		<label class="btn btn-outline-dark" for="radioWf2">🛠️ 기획</label> 
 		<input type="radio" value="디자인" class="btn-check" name="work_field" id="radioWf3" <c:if test='${param.work_field eq "디자인"}' >checked</c:if>> 
-		<label class="rounded-3 p-3 m-1 butt3"" for="radioWf3">🎨 디자인</label> 
+		<label class="btn btn-outline-dark" for="radioWf3">🎨 디자인</label> 
 		<input type="radio" value="퍼블리싱" class="btn-check" name="work_field" id="radioWf4" <c:if test='${param.work_field eq "퍼블리싱"}' >checked</c:if>> 
-		<label class="rounded-3 p-3 m-1 butt3"" for="radioWf4">🖋️ 퍼블리싱</label>
+		<label class="btn btn-outline-dark" for="radioWf4">🖋️ 퍼블리싱</label>
 </form>	
-
-
 	<!-- modal -->
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary rounded-3 p-3 butt2" data-toggle="modal" data-target="#exampleModal">
+<button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal" style="position: absolute; margin-left: 5px;">
   상세
 </button>
+
 
 <!-- Modal -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -199,11 +187,12 @@ ${modalCheck }
 				<!--form  -->
 			</div>
 		</div>
-	</div>
+		</div>
 
-<div>
-	<form id="sort">
-		<select name="sn" id="ss" style="display: inline-block; float: right; font-size: 1.2rem; width: 10rem; padding: 7px ;">
+
+<div >
+	<form id="sort" style="display: inline-box;">
+		<select name="sn" id="ss" style="display: inline-block; float: right; width: 10rem; padding: 7px ;">
 			<option value="reg_date" <c:if test="${param.sn eq 'reg_date'}" >selected</c:if>>최신 등록 순</option>
 			<option value="proj_cost" <c:if test="${param.sn eq 'proj_cost'}" >selected</c:if>>견적 높은 순</option>
 			<option value="deadline" <c:if test="${param.sn eq 'deadline'}" >selected</c:if>>마감 임박 순</option>
@@ -211,6 +200,21 @@ ${modalCheck }
 		 <input type="hidden" name="sn">
 	</form>
 </div>
+</div>
+</div>
+<div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
+<!--  <div class="card overflow-hidden card-2" > -->
+  <div class="row no-gutters row-bordered row-border-light">
+
+
+
+<%-- ${param.work_field } --%>
+<%-- ${skill_nm } --%>
+<%-- ${modalCheck } --%>
+	
+
+
+
 	
 
  
@@ -220,15 +224,15 @@ ${modalCheck }
 <!-- 회색 박스 -->
 <c:forEach var="v" items="${list }">
 <c:set var="skillList" value="${v.skill_nm }" />
-<div OnClick="location.href ='/board/detailList?proj_no=${v.proj_no}'" style="width : full; margin: 2px 3px; padding: 12px; background-color: #f2f2f2; border-radius: 7px; border: 1px solid black;">
+<div OnClick="location.href ='/board/detailList?proj_no=${v.proj_no}'" style="width : full; margin-bottom: 20px; padding: 20px; background-color: #f2f2f2; border-radius: 7px; border: 1px solid black;">
     <form role="form" method="post">
     	<input type="hidden" id="proj_no" value="${v.proj_no }">
     </form>
     <!-- 모집중, NEW!, 하트 영역 -->
     <div style="display: grid; grid-template-columns: 1fr 1fr;">
         <div style="display: flex;">
-            <div style="background-color: white; border: 1px solid #333; border-radius: 5px; padding: 3px 12px; margin-right: 6px;">모집중</div>
-            <div style="background-color: white; border: 1px solid #333; border-radius: 5px; padding: 3px 12px;">NEW!</div>
+            <div style="background-color: white; border: 1px solid #333; border-radius: 5px; padding: 3px 12px; margin-right: 6px; font-size: 12px;">모집중</div>
+            <div style="background-color: white; border: 1px solid #333; border-radius: 5px; padding: 3px 12px;font-size: 12px;">NEW!</div>
         </div>
     <!-- 로그인 여부, 북마크 여부체크 -->    
         <div style="display: flex; justify-content: end;">
@@ -279,7 +283,7 @@ ${modalCheck }
 
     <!-- 예상 금액/ 예상 기간 -->
     <div style="margin-bottom: 6px;">
-        예상금액 <span style="font-weight: bold;">${v.proj_cost }원</span> | 모집 마감일 <span style="font-weight: bold;">${v.deadline }일</span>
+        예상금액 <span style="font-weight: bold;">&nbsp${v.proj_cost }원</span>&nbsp&nbsp|&nbsp&nbsp 모집 마감일 <span style="font-weight: bold;">&nbsp${v.deadline }</span>
     </div>
 
 				<!-- 기타 정보 / 등록일자 -->
@@ -288,9 +292,9 @@ ${modalCheck }
 						<span style="display: flex; align-items: center;">${v.work_field }
 							| ${v.region } ${v.district } |</span>
 						<c:forEach items="${fn:split(skillList, ',') }" var="skill">
-							<button type="button" class="btn btn-warning">
+							<span class="badge bg-secondary mx-1" style="font-size: 14px;">
 								<c:out value="${skill}" />
-							</button>
+							</span>
 						</c:forEach>
 						<br>
 
@@ -307,23 +311,30 @@ ${modalCheck }
 </fieldset>
 
 
+</div>
+
+
+   </div>
+   
+  </div>
+<!--  </div> -->
 <!-- 페이징 처리 -->
-<div>
-    <ul class="pagination">
+<div style=" text-align: center;" class="my-3">
+    <ul class="pagination" style="display: inline; ">
         <c:if test="${pageMaker.prev }">
-            <li class="page-item previous">
+            <li class="page-item previous" style="display: inline-block; ">
                 <a class="page-link" href="${pageMaker.startPage -1 }">Previous</a>
             </li>
         </c:if>
         
         <c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-            <li class="page-item ${pageMaker.cri.pageNum == num ? 'active':''}">
+            <li class="page-item ${pageMaker.cri.pageNum == num ? 'active':''}" style="display: inline-block ; ">
                 <a class="page-link" href="${num }">${num }</a>
             </li>
         </c:forEach>
         
-        <c:if test="${pageMaker.next }">
-            <li class="page-item next">
+        <c:if test="${pageMaker.next }" >
+            <li class="page-item next" style="display: inline-block; ">
                 <a class="page-link" href="${pageMaker.endPage +1 }">Next</a>
             </li>
         </c:if>
@@ -337,14 +348,6 @@ ${modalCheck }
 	<input id ="work_field2" type='hidden' name='work_field' value='개발'>
 	
 </form>
-</div>
-
-
-   </div>
-   
-  </div>
- </div>
-</div>
 
 
 
