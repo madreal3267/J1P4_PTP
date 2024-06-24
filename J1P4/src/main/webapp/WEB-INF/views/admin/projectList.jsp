@@ -1,11 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="../include/header.jsp"%>
-
+<%@ include file="../include/header.jsp" %>
 
 <div class="box-header">
-    <h3 class="box-title">프로젝트 조회 내역 <c:choose><c:when test="${not empty param.proj_status}">(${param.proj_status})</c:when>
+    <h3 class="box-title">프로젝트 목록<c:choose><c:when test="${not empty param.proj_status}">(${param.proj_status})</c:when>
     <c:otherwise>
     	(전체)
     </c:otherwise>
@@ -15,6 +13,7 @@
 <!-- 상태 필터 메뉴 -->
 <div class="btn-group" role="group" aria-label="Project Status Filter">
     <a href="/admin/projects?proj_status=검수 단계" class="btn btn-default">검수 단계</a>
+    <a href="/admin/projects?proj_status=모집중" class="btn btn-default">모집 중</a>
     <a href="/admin/projects?proj_status=반려" class="btn btn-default">반려</a>
     <a href="/admin/projects?proj_status=임시 저장" class="btn btn-default">임시 저장</a>
     <a href="/admin/projects?proj_status=등록 실패" class="btn btn-default">등록 실패</a>
@@ -30,19 +29,16 @@
             <div class="col-sm-6">
                 <div class="dataTables_length" id="example1_length">
                     <label>Show 
-                        <select name="example1_length" aria-controls="example1" class="form-control input-sm">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
+                        <select name="pageSize" aria-controls="example1" class="form-control input-sm" onchange="changePageSize(this.value)">
+                            <option value="10" <c:if test="${pagination.pageSize == 10}">selected</c:if>>10</option>
+                            <option value="25" <c:if test="${pagination.pageSize == 25}">selected</c:if>>25</option>
+                            <option value="50" <c:if test="${pagination.pageSize == 50}">selected</c:if>>50</option>
+                            <option value="100" <c:if test="${pagination.pageSize == 100}">selected</c:if>>100</option>
                         </select> entries
                     </label>
                 </div>
             </div>
             <div class="col-sm-6">
-                <div id="example1_filter" class="dataTables_filter">
-                    <label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="example1"></label>
-                </div>
             </div>
         </div>
         <div class="row">
@@ -56,7 +52,6 @@
                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">등록날짜</th>
                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">프로젝트 기간</th>
                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1">검수</th>
-                            
                         </tr>
                     </thead>
                     <tbody>
@@ -75,19 +70,9 @@
                                         </form>
                                         <button type="button" class="btn btn-danger" onclick="showRejectPopup(${item.proj_no})">반려</button>
                                     </c:if>
-                                    <c:if test="${item.proj_status == '진행 중'}">
-                                        진행 중
-                                    </c:if>
                                     <c:if test="${item.proj_status == '반려'}">
-                                       <button type="button" class="btn btn-warning" onclick="showRejectReason(${item.proj_no})">반려 사유 확인</button>
+                                        <button type="button" class="btn btn-warning" onclick="showRejectReason(${item.proj_no})">반려 사유 확인</button>
                                     </c:if>
-                                </td>
-                                <td>
-                                	<c:if test="${item.proj_status == '반려' }">
-                                	
-                                	
-                                	
-                                	</c:if>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -97,35 +82,28 @@
         </div>
         <div class="row">
             <div class="col-sm-5">
-                <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+                <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
+                    Showing ${pagination.startRecord + 1} to ${pagination.endRecord} of ${pagination.totalRecords} entries
+                </div>
             </div>
             <div class="col-sm-7">
                 <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
                     <ul class="pagination">
-                        <li class="paginate_button previous disabled" id="example1_previous">
-                            <a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a>
-                        </li>
-                        <li class="paginate_button active">
-                            <a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0">1</a>
-                        </li>
-                        <li class="paginate_button ">
-                            <a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0">2</a>
-                        </li>
-                        <li class="paginate_button ">
-                            <a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0">3</a>
-                        </li>
-                        <li class="paginate_button ">
-                            <a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0">4</a>
-                        </li>
-                        <li class="paginate_button ">
-                            <a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0">5</a>
-                        </li>
-                        <li class="paginate_button ">
-                            <a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0">6</a>
-                        </li>
-                        <li class="paginate_button next" id="example1_next">
-                            <a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a>
-                        </li>
+                        <c:if test="${pagination.hasPreviousPageBlock()}">
+                            <li class="paginate_button previous" id="example1_previous">
+                                <a href="?page=${pagination.startPage - 1}&pageSize=${pagination.pageSize}&proj_status=${projStatus}" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a>
+                            </li>
+                        </c:if>
+                        <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}">
+                            <li class="paginate_button <c:if test="${i == pagination.currentPage}">active</c:if>">
+                                <a href="?page=${i}&pageSize=${pagination.pageSize}&proj_status=${projStatus}" aria-controls="example1" data-dt-idx="${i}" tabindex="0">${i}</a>
+                            </li>
+                        </c:forEach>
+                        <c:if test="${pagination.hasNextPageBlock()}">
+                            <li class="paginate_button next" id="example1_next">
+                                <a href="?page=${pagination.endPage + 1}&pageSize=${pagination.pageSize}&proj_status=${projStatus}" aria-controls="example1" data-dt-idx="${pagination.endPage + 1}" tabindex="0">Next</a>
+                            </li>
+                        </c:if>
                     </ul>
                 </div>
             </div>
@@ -133,76 +111,39 @@
     </div>
 </div>
 
-<!-- 반려 팝업 -->
-<div id="rejectPopup" class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">반려 사유 입력</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form id="rejectForm" action="/admin/project/reject" method="post">
-            <input type="hidden" name="proj_no" id="rejectProjNo">
-            <textarea name="reject_reason" class="form-control" rows="4" placeholder="반려 사유를 입력하세요"></textarea>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-        <button type="button" class="btn btn-primary" onclick="submitRejectForm()">등록</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- 반려 사유 팝업 -->
-<div id="rejectReasonPopup" class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">반려 사유</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p id="rejectReasonText"></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<%@ include file="../include/footer.jsp"%>
+<%@ include file="../include/footer.jsp" %>
 
 <script>
-function showRejectPopup(proj_no) {
-    document.getElementById('rejectProjNo').value = proj_no;
-    $('#rejectPopup').modal('show');
-}
+    function changePageSize(pageSize) {
+        const urlParams = new URLSearchParams(window.location.search);
+        urlParams.set('pageSize', pageSize);
+        urlParams.set('page', 1); // Reset to page 1 when changing page size
+        urlParams.set('proj_status', '${projStatus}'); // Ensure the proj_status parameter is included
+        window.location.search = urlParams.toString();
+    }
 
-function submitRejectForm() {
-    document.getElementById('rejectForm').submit();
-}
+    function showRejectPopup(proj_no) {
+        document.getElementById('rejectProjNo').value = proj_no;
+        $('#rejectPopup').modal('show');
+    }
 
-function showRejectReason(proj_no) {
-    // AJAX 요청을 통해 반려 사유 가져옴
-    $.ajax({
-        url: '/admin/project/rejectReason',
-        method: 'GET',
-        data: { proj_no: proj_no },
-        success: function(response) {
-            document.getElementById('rejectReasonText').innerText = response.reject_reason;
-            $('#rejectReasonPopup').modal('show');
-        },
-        error: function() {
-            alert('반려 사유를 가져오는데 실패했습니다.');
-        }
-    });
-}
+    function submitRejectForm() {
+        document.getElementById('rejectForm').submit();
+    }
+
+    function showRejectReason(proj_no) {
+        // AJAX 요청을 통해 반려 사유 가져옴
+        $.ajax({
+            url: '/admin/project/rejectReason',
+            method: 'GET',
+            data: { proj_no: proj_no },
+            success: function(response) {
+                document.getElementById('rejectReasonText').innerText = response.reject_reason;
+                $('#rejectReasonPopup').modal('show');
+            },
+            error: function() {
+                alert('반려 사유를 가져오는데 실패했습니다.');
+            }
+        });
+    }
 </script>

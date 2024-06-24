@@ -1,6 +1,7 @@
 package com.itwillbs.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -53,5 +54,13 @@ public class ProjectDAOImpl implements ProjectDAO {
 		return sqlSession.selectOne(NAMESPACE + "getProjectById", proj_no);
 	}
 	
+	@Override
+    public int getProjectCount() {
+        return sqlSession.selectOne(NAMESPACE + "getProjectCount");
+    }
 	
+	@Override
+    public List<Map<String, Object>> getProjectStatusCounts() {
+        return sqlSession.selectList(NAMESPACE + "getProjectStatusCounts");
+    }
 }

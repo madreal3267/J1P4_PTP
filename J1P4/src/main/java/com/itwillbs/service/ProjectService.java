@@ -1,6 +1,7 @@
 package com.itwillbs.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.itwillbs.domain.ProjectVO;
 import com.itwillbs.dto.ProjectDTO;
@@ -17,4 +18,8 @@ public interface ProjectService {
     public void rejectProject(ProjectVO vo);
     
     public ProjectVO getProjectById(int proj_no);
+    
+    int getProjectCount();
+    
+    List<Map<String, Object>> getProjectStatusCounts();
 }

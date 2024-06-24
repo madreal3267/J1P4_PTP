@@ -1,6 +1,7 @@
 package com.itwillbs.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -58,5 +59,13 @@ public class ProjectServiceImpl implements ProjectService {
 		return pdao.getProjectById(proj_no);
 	}
 	
+	@Override
+    public int getProjectCount() {
+        return pdao.getProjectCount();
+    }
 	
+	@Override
+    public List<Map<String, Object>> getProjectStatusCounts() {
+        return pdao.getProjectStatusCounts();
+    }
 }

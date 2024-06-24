@@ -2,6 +2,7 @@ package com.itwillbs.persistence;
 
 import java.util.List;
 
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -9,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.itwillbs.domain.UserVO;
 import com.itwillbs.dto.UserDTO;
 
 @Repository
@@ -41,7 +41,20 @@ public class UserDAOImpl implements UserDAO {
 		return resultVO;
 	}
 	
+	@Override
+    public int getUserCount() {
+        return sqlSession.selectOne(NAMESPACE + "getUserCount");
+    }
 	
+	@Override
+    public int getFreelancerCount() {
+        return sqlSession.selectOne(NAMESPACE + "getFreelancerCount");
+    }
+
+    @Override
+    public int getClientCount() {
+        return sqlSession.selectOne(NAMESPACE + "getClientCount");
+    }
 //	유저 목록
 //	@Override
 //	public List<UserDTO> userList() {

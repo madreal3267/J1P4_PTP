@@ -5,6 +5,84 @@
   
   <mapper namespace="com.itwillbs.mapper.AdminMapper">
   	 
+  	 <!-- 메인 페이지 count -->
+		<select id="getUserCount" resultType="int">
+    	 SELECT count(*) FROM (
+            SELECT 
+                f.free_no AS no, 
+                f.free_id AS id, 
+                u.name, 
+                u.user_type, 
+                u.reg_date,
+                'freelancer' AS role
+            FROM freelancer f
+            JOIN user u ON f.free_id = u.user_id
+            UNION ALL
+            SELECT 
+                c.ct_no AS no, 
+                c.ct_id AS id, 
+                u.name, 
+                u.user_type, 
+                u.reg_date,
+                'client' AS role
+            FROM client c
+            JOIN user u ON c.ct_id = u.user_id
+        ) AS all_users
+  		</select>  	 
+  	 	<select id="getFreelancerCount" resultType="int">
+	    SELECT 
+            count(*)
+        FROM freelancer f
+        JOIN user u ON f.free_id = u.user_id
+	  	</select>
+	
+	  	<select id="getClientCount" resultType="int">
+	    SELECT 
+            count(*)
+        FROM client c
+        JOIN user u ON c.ct_id = u.user_id
+	  	</select>
+	  	
+  	 	<select id="getProjectCount" resultType="int">
+    	SELECT COUNT(*) FROM project
+  		</select>
+  		
+  		<select id="getProjectStatusCounts" resultType="map">
+    	SELECT proj_status, COUNT(*) as count
+    	FROM project
+    	GROUP BY proj_status
+  		</select>
+  		
+  		<select id="getManagerCount" resultType="int">
+    	SELECT COUNT(*) FROM manager
+  		</select>
+  		
+  		<select id="getUnapprovedManagerCount" resultType="int">
+    	SELECT COUNT(*) FROM manager WHERE approved = 0
+  		</select>
+  		
+  	 <!-- 메인 페이지 count -->
+  	 
+  	 <!-- 공지사항 -->
+		<insert id="insertAnnouncement" parameterType="com.itwillbs.dto.AnnouncementDTO">
+        INSERT INTO announcement (title, content, manager_id, created_at)
+        VALUES (#{title}, #{content}, #{manager_id}, NOW())
+	    </insert>
+	
+	    <select id="getAllAnnouncements" resultType="com.itwillbs.dto.AnnouncementDTO">
+	        SELECT * FROM announcement
+	    </select>
+	
+	    <select id="getAnnouncementById" parameterType="int" resultType="com.itwillbs.dto.AnnouncementDTO">
+	        SELECT * FROM announcement WHERE announcement_id = #{announcementId}
+	    </select>
+		
+		<select id="getLatestNotices" resultType="com.itwillbs.dto.AnnouncementDTO">
+		    SELECT * FROM announcement ORDER BY created_at DESC LIMIT #{limit}
+		</select>
+		
+  	 <!-- 공지사항 -->
+  	 
   	 <!-- 회원정보 관리 -->
   	 
 <!--   	 <select id="getAllUsers" resultType="com.itwillbs.dto.UserDTO"> -->
@@ -167,11 +245,6 @@
         WHERE settlement_no = #{settlement_no}
     </update>
 
-
-
-	
-	
-	
     <!-- 계약서 -->
     <insert id="insertContract" parameterType="com.itwillbs.dto.ContractDTO">
         INSERT INTO contract (proj_no, contract_title, contract_path, upload_date)
@@ -197,4 +270,33 @@
         JOIN freelancer f ON p.free_no = f.free_no
     </select>
   	 <!-- 정산 관리 -->
+  	 
+  	 <!-- 관리자 관리 -->
+	<resultMap id="managerResultMap" type="com.itwillbs.dto.ManagerDTO">
+	    <id property="manager_no" column="manager_no" />
+	    <result property="manager_nm" column="manager_nm" />
+	    <result property="manager_call" column="manager_call" />
+	    <result property="manager_email" column="manager_email" />
+	    <result property="manager_id" column="manager_id" />
+	    <result property="manager_pw" column="manager_pw" />
+	    <result property="approved" column="approved" />
+	</resultMap>
+	
+	<select id="getManagerById" parameterType="String" resultMap="managerResultMap">
+	    SELECT * FROM manager WHERE manager_id = #{manager_id}
+	</select>
+	
+	<update id="approveManager" parameterType="int">
+	    UPDATE manager SET approved = TRUE WHERE manager_no = #{manager_no}
+	</update>
+	
+	<select id="getAllManagers" resultMap="managerResultMap">
+	    SELECT * FROM manager
+	</select>
+	
+	<insert id="insertManager" parameterType="com.itwillbs.dto.ManagerDTO">
+	    INSERT INTO manager (manager_nm, manager_call, manager_email, manager_id, manager_pw, approved)
+	    VALUES (#{manager_nm}, #{manager_call}, #{manager_email}, #{manager_id}, #{manager_pw}, FALSE)
+	</insert>
+  	 <!-- 관리자 관리 -->
   </mapper>

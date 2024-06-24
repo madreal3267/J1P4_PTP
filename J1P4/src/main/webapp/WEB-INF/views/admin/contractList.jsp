@@ -1,9 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="../include/header.jsp"%>
-
-<h1>Contract List</h1>
+<%@ include file="../include/header.jsp" %>
 
 <!-- Upload Contract Button -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadContractModal">
@@ -17,19 +14,16 @@
             <div class="col-sm-6">
                 <div class="dataTables_length" id="example1_length">
                     <label>Show 
-                        <select name="example1_length" aria-controls="example1" class="form-control input-sm">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
+                        <select name="pageSize" aria-controls="example1" class="form-control input-sm" onchange="changePageSize(this.value)">
+                            <option value="10" <c:if test="${pagination.pageSize == 10}">selected</c:if>>10</option>
+                            <option value="25" <c:if test="${pagination.pageSize == 25}">selected</c:if>>25</option>
+                            <option value="50" <c:if test="${pagination.pageSize == 50}">selected</c:if>>50</option>
+                            <option value="100" <c:if test="${pagination.pageSize == 100}">selected</c:if>>100</option>
                         </select> entries
                     </label>
                 </div>
             </div>
             <div class="col-sm-6">
-                <div id="example1_filter" class="dataTables_filter">
-                    <label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="example1"></label>
-                </div>
             </div>
         </div>
         <div class="row">
@@ -49,7 +43,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                    
                         <c:forEach var="contract" items="${contracts}">
                             <tr>
                                 <td>${contract.contract_no}</td>
@@ -73,35 +66,28 @@
         <!-- Pagination -->
         <div class="row">
             <div class="col-sm-5">
-                <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+                <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">
+                    Showing ${pagination.startRecord + 1} to ${pagination.endRecord} of ${pagination.totalRecords} entries
+                </div>
             </div>
             <div class="col-sm-7">
                 <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
                     <ul class="pagination">
-                        <li class="paginate_button previous disabled" id="example1_previous">
-                            <a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a>
-                        </li>
-                        <li class="paginate_button active">
-                            <a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0">1</a>
-                        </li>
-                        <li class="paginate_button">
-                            <a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0">2</a>
-                        </li>
-                        <li class="paginate_button">
-                            <a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0">3</a>
-                        </li>
-                        <li class="paginate_button">
-                            <a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0">4</a>
-                        </li>
-                        <li class="paginate_button">
-                            <a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0">5</a>
-                        </li>
-                        <li class="paginate_button">
-                            <a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0">6</a>
-                        </li>
-                        <li class="paginate_button next" id="example1_next">
-                            <a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a>
-                        </li>
+                        <c:if test="${pagination.hasPreviousPageBlock()}">
+                            <li class="paginate_button previous" id="example1_previous">
+                                <a href="?page=${pagination.startPage - 1}&pageSize=${pagination.pageSize}" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a>
+                            </li>
+                        </c:if>
+                        <c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}">
+                            <li class="paginate_button <c:if test="${i == pagination.currentPage}">active</c:if>">
+                                <a href="?page=${i}&pageSize=${pagination.pageSize}" aria-controls="example1" data-dt-idx="${i}" tabindex="0">${i}</a>
+                            </li>
+                        </c:forEach>
+                        <c:if test="${pagination.hasNextPageBlock()}">
+                            <li class="paginate_button next" id="example1_next">
+                                <a href="?page=${pagination.endPage + 1}&pageSize=${pagination.pageSize}" aria-controls="example1" data-dt-idx="${pagination.endPage + 1}" tabindex="0">Next</a>
+                            </li>
+                        </c:if>
                     </ul>
                 </div>
             </div>
@@ -140,7 +126,13 @@
     </div>
 </div>
 
+<%@ include file="../include/footer.jsp" %>
+
 <script>
+    function changePageSize(pageSize) {
+        window.location.href = '/admin/contracts?pageSize=' + pageSize;
+    }
+
     function validateForm() {
         var projNo = document.getElementById('proj_no').value;
         var contractTitle = document.getElementById('contract_title').value;
@@ -148,7 +140,7 @@
 
         console.log("Project No:", projNo);
         console.log("Contract Title:", contractTitle);
-        console.log("File:", file);	
+        console.log("File:", file);    
 
         if (projNo === '') {
             alert('Project No is required');
@@ -169,5 +161,3 @@
         return true;
     }
 </script>
-
-<%@ include file="../include/footer.jsp" %>

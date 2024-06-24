@@ -40,6 +40,21 @@ public class UserServiceImpl implements UserService {
 		return udao.getClients();
 	}
 	
+	
+	@Override
+    public int getUserCount() {
+        return udao.getUserCount();
+    }
+	
+	@Override
+    public int getFreelancerCount() {
+        return udao.getFreelancerCount();
+    }
+
+    @Override
+    public int getClientCount() {
+        return udao.getClientCount();
+    }
 //	@Override
 //	public List<UserDTO> UserList() {
 //		logger.debug("컨트롤러 -> 서비스 호출");

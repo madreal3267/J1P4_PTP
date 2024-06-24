@@ -1,7 +1,7 @@
 package com.itwillbs.persistence;
 
 import java.util.List;
-
+import java.util.Map;
 
 import com.itwillbs.domain.ProjectVO;
 import com.itwillbs.dto.ProjectDTO;
@@ -18,4 +18,7 @@ public interface ProjectDAO {
     
     public ProjectVO getProjectById(int proj_no);
 	
+    int getProjectCount();
+    
+    List<Map<String, Object>> getProjectStatusCounts();
 }
