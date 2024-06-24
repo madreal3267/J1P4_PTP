@@ -5,7 +5,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>J1P4 프로젝트(클라이언트 페이지)</title>
+    <title>J1P4 프로젝트(프리랜서 페이지)</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
     <link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -299,56 +299,45 @@
             <li class="header"><i class="fa fa-laptop"></i> 내 프로젝트 관리</li>
            
             <li>
-              <a href="${pageContext.request.contextPath}/myProManageCt/interestFreelancer">
-                <span>관심 프리랜서</span>
+              <a href="${pageContext.request.contextPath}/myProManage/interestProject">
+                <span>관심 프로젝트</span>
               </a>
             </li>
             <li>
-              <a href="${pageContext.request.contextPath}/myProManageCt/proposeFreelancer">
-                <span>제안한 프리랜서</span>
+              <a href="${pageContext.request.contextPath}/myProManage/proposedProject">
+                <span>제안받은 프로젝트</span>
               </a>
             </li>
            
             <li class="treeview">
               <a href="#">
-                <span>검수중</span> <i class="fa fa-angle-left pull-right"></i>
+                <span>지원내역</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="${pageContext.request.contextPath}/myProManageCt/underReviewProject"><i class="fa fa-circle-o"></i> 검수중 </a></li>
-                <li><a href="${pageContext.request.contextPath}/myProManageCt/temSaveProject"><i class="fa fa-circle-o"></i> 임시저장</a></li>
-                <li><a href="${pageContext.request.contextPath}/myProManageCt/regFailedProject"><i class="fa fa-circle-o"></i> 등록실패</a></li>
+                <li><a href="${pageContext.request.contextPath}/myProManage/applyingProject"><i class="fa fa-circle-o"></i> 지원중 </a></li>
+                <li><a href="${pageContext.request.contextPath}/myProManage/endApplyProject"><i class="fa fa-circle-o"></i> 지원종료</a></li>
               </ul>
             </li>
             <li class="treeview">
               <a href="#">
-                <span>지원자 모집중</span>
+                <span>진행중인 프로젝트</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="${pageContext.request.contextPath}/myProManageCt/recruitingProject"><i class="fa fa-circle-o"></i> 지원자 모집 중</a></li>
+                <li><a href="${pageContext.request.contextPath}/myProManage/contractProject"><i class="fa fa-circle-o"></i> 계약 진행중</a></li>
+                <li><a href="${pageContext.request.contextPath}/myProManage/ongoingProject"><i class="fa fa-circle-o"></i> 프로젝트 진행중</a></li>
               </ul>
             </li>
             <li class="treeview">
               <a href="#">
-                <span>진행 중인 프로젝트</span>
+                <span>완료한 프로젝트</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="${pageContext.request.contextPath}/myProManageCt/ctContractProject"><i class="fa fa-circle-o"></i> 계약 진행 중</a></li>
-                <li><a href="${pageContext.request.contextPath}/myProManageCt/ctOngoingProject"><i class="fa fa-circle-o"></i> 프로젝트 진행 중</a></li>
+                <li><a href="${pageContext.request.contextPath}/myProManage/waitEvaluationProject"><i class="fa fa-circle-o"></i> 평가대기중</a></li>
+                <li><a href="${pageContext.request.contextPath}/myProManage/completedProject"><i class="fa fa-circle-o"></i> 완료한 프로젝트</a></li>
               </ul>
-            </li>
-            <li class="treeview">
-              <a href="#">
-                <span>종료된 프로젝트</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="${pageContext.request.contextPath}/myProManageCt/waitEvaluationFreelancer"><i class="fa fa-circle-o"></i> 평가 대기중</a></li>
-                <li><a href="${pageContext.request.contextPath}/myProManageCt/completedFreelancer"><i class="fa fa-circle-o"></i> 완료한 프로젝트</a></li>
-              </ul>
-            </li>
-            
+            </li>           
           </ul>
         </section>
         <!-- /.sidebar -->

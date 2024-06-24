@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -21,7 +22,7 @@ import com.itwillbs.domain.ApplyMgmtVO;
 import com.itwillbs.domain.EvaluateProjectDTO;
 import com.itwillbs.domain.ProjectDTO;
 import com.itwillbs.domain.ProjectVO;
-
+import com.itwillbs.domain.proposeFreeDTO;
 import com.itwillbs.persistence.MyProManageDAO;
 import com.itwillbs.service.MyProManageService;
 
@@ -47,7 +48,7 @@ public class MyProManageController {
 	// 관심 프로젝트 목록 - 조회
 	// http://localhost:8088/myProManage/interestProject
 	@RequestMapping(value = "/interestProject", method = RequestMethod.GET)
-	public void interestProjectList(Model model) {
+	public void interestProjectList(HttpSession session, Model model) {
 		logger.debug("/interestProject -> interestProjectList() 호출");
 		
 		// 서비스 -> DAO 관심 프로젝트 목록 조회 메서드
@@ -124,6 +125,20 @@ public class MyProManageController {
 		
 		return "redirect:/myProManage/applyingProject";
 	}
+	
+	// 지원 중 프로젝트 목록 - 제안 동의
+	@RequestMapping(value = "/agreeContract",method = RequestMethod.POST)
+	public String agreeContract(proposeFreeDTO pfdto, RedirectAttributes rttr) {
+		logger.debug("/agreeContract -> agreeContract(proposeFreeDTO pfdto) 호출");
+		
+		myService.agreeContract(pfdto);
+		
+		// 지원 취소 정보를 전달
+		rttr.addFlashAttribute("msg", "deletApply");
+		
+		return "redirect:/myProManage/applyingProject";
+	}
+	
 		
 	// 지원 종료 프로젝트 목록 조회
 	// http://localhost:8088/myProManage/endApplyProject
@@ -230,9 +245,7 @@ public class MyProManageController {
 	// 완료한 프로젝트 목록 조회
 	// http://localhost:8088/myProManage/completedProject
 	@RequestMapping(value = "/completedProject",method = RequestMethod.GET)
-	public void completedProjectList(EvaluateProjectDTO edto, Model model,
-			@RequestParam(defaultValue = "1") int page,
-            @RequestParam(defaultValue = "5") int pageSize) {
+	public void completedProjectList(EvaluateProjectDTO edto, Model model) {
 		logger.debug("/completedProject -> completedProjectList() 호출");
 		
 		List<EvaluateProjectDTO> completedProjectList = myService.completedProjectList();
@@ -243,18 +256,7 @@ public class MyProManageController {
 		        filteredProjList.add(project);
 		    }
 		}
-		logger.debug("q(≧▽≦q)q(≧▽≦q)q(≧▽≦q)q(≧▽≦q)q(≧▽≦q)" + filteredProjList.size());
-		int totalProjects = filteredProjList.size();
-		int totalPages = (int) Math.ceil((double) totalProjects / pageSize);
-		
-		int startIndex = (page - 1) * pageSize;
-		int endIndex = Math.min(startIndex + pageSize, totalProjects);
-		List<EvaluateProjectDTO> pageProjects = filteredProjList.subList(startIndex, endIndex);
-		
-		model.addAttribute("pageProjects", pageProjects);
-		model.addAttribute("currentPage", page);
-		model.addAttribute("totalPages", totalPages);
-		model.addAttribute("pageSize", pageSize);
+		logger.debug("q(≧▽≦q)q(≧▽≦q)q(≧▽≦q)q(≧▽≦q)q(≧▽≦q) 필터링된 프로젝트 : " + filteredProjList.size());
 
 		if (!filteredProjList.isEmpty()) {
 		    logger.debug("filteredProjList : " + filteredProjList.size());

@@ -32,7 +32,7 @@ import com.itwillbs.persistence.MyProManageDAO;
 import com.itwillbs.service.MyProManageService;
 
 @Controller
-@RequestMapping(value = "/myProManageCt/*")
+@RequestMapping(value ="/myProManageCt/*")
 public class MyProManageCtController {
 
 	private static final Logger logger = LoggerFactory.getLogger(MyProManageCtController.class);
@@ -141,11 +141,44 @@ public class MyProManageCtController {
 	public void recruitingProjectList(Model model) {
 		logger.debug("/recruitingProject -> recruitingProjectList() 호출");
 		
-		List<ProjectDTO> recruitingProjectList = myService.recruitingProjectList();
+		List<proposeFreeDTO> recruitingProjectList = myService.recruitingProjectList();
 		logger.debug("recruitingProjectList : " + recruitingProjectList.size());
 		
 		model.addAttribute("recruitingProjectList", recruitingProjectList);		
 	}		
+	
+	// 지원자 모집중 프로젝트 목록 - 지원 거절
+	@RequestMapping(value = "/rejectApply",method = RequestMethod.POST)
+	public String rejectApply(proposeFreeDTO pfdto, RedirectAttributes rttr) {
+		logger.debug("/rejectApply -> rejectApply() 호출");
+		
+		myService.rejectApply(pfdto);
+		rttr.addFlashAttribute("msg", "rejectApply");
+		
+		return "redirect:/myProManageCt/recruitingProject";
+	}
+	
+	// 지원자 모집중 프로젝트 목록 - 계약 제안
+	@RequestMapping(value = "/offerContract", method = RequestMethod.POST)
+	public String offerContract(proposeFreeDTO pfdto, RedirectAttributes rttr) {
+		logger.debug("/offerContract -> offerContract() 호출");
+		
+		myService.offerContract(pfdto);
+		rttr.addFlashAttribute("msg", "offerContract");
+		
+		return "redirect:/myProManageCt/recruitingProject";
+	}
+	
+	// 지원자 모집중 프로젝트 목록 - 모집완료
+	@RequestMapping(value = "/recruitmentCompleted",method = RequestMethod.POST)
+	public String recruitmentCompleted(proposeFreeDTO pfdto, RedirectAttributes rttr) {
+		logger.debug("/recruitmentCompleted -> recruitmentCompleted() 호출");
+		
+		myService.recruitmentCompleted(pfdto);
+		rttr.addFlashAttribute("msg", "recruitmentCompleted");
+		
+		return "redirect:/myProManageCt/recruitingProject";
+	}
 	
 	// 계약 진행중 프로젝트 목록 조회
 	// http://localhost:8088/myProManageCt/ctContractProject
@@ -170,6 +203,19 @@ public class MyProManageCtController {
 		
 		model.addAttribute("ctOngoingProjectList", ctOngoingProjectList);		
 	}		
+	
+	// 프로젝트 진행중 프로젝트 - 결제하기
+	
+	// 프로젝트 진행중 프로젝트 - 완료하기
+	@RequestMapping(value = "/requestSettlement",method = RequestMethod.POST)
+	public String requestSettlement(ctOngoingProjectDTO cdto, RedirectAttributes rttr) {
+		logger.debug("/requestSettlement -> requestSettlement(ctOngoingProjectDTO cdto) 호출");
+		myService.requestSettlement(cdto);
+		
+		rttr.addFlashAttribute("msg", "requestSettlement");
+		
+		return "redirect:/myProManageCt/ctOngoingProject";
+	}
 	
 	// 평가 대기중 프리랜서 목록 조회
 	// http://localhost:8088/myProManageCt/waitEvaluationFreelancer

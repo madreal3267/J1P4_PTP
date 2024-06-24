@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.ProjectDTO;
 import com.itwillbs.domain.ProjectVO;
@@ -136,7 +135,7 @@ public class MyProManageServiceImpl implements MyProManageService {
 
 	// 지원자 모집중 프로젝트 목록
 	@Override
-	public List<ProjectDTO> recruitingProjectList() {
+	public List<proposeFreeDTO> recruitingProjectList() {
 		logger.debug("recruitingProjectList() 실행");
 		
 		return mpmdao.recruitingProjectList();
@@ -250,6 +249,46 @@ public class MyProManageServiceImpl implements MyProManageService {
 		logger.debug("updateEvaluateFree(EvaluateFreelancerDTO edto) 실행");
 		
 		mpmdao.updateEvaluateFree(edto);
+	}
+	
+	// 지원자 모집중 프로젝트 - 지원거절
+	@Override
+	public void rejectApply(proposeFreeDTO pfdto) {
+		logger.debug("rejectApply(proposeFreeDTO pfdto) 실행");
+		
+		mpmdao.rejectApply(pfdto);
+	}
+
+	// 지원자 모집중 프로젝트 - 게약 제안
+	@Override
+	public void offerContract(proposeFreeDTO pfdto) {
+		logger.debug("offerContract(proposeFreeDTO pfdto) 실행");
+		
+		mpmdao.offerContract(pfdto);
+	}
+	
+	// 지원자 모집중 프로젝트 - 모집완료
+	@Override
+	public void recruitmentCompleted(proposeFreeDTO pfdto) {
+		logger.debug("recruitmentCompleted(proposeFreeDTO pfdto) 실행");
+		
+		mpmdao.recruitmentCompleted(pfdto);
+	}
+
+
+	// 진행중 프로젝트 - 완료하기(정산요청)
+	@Override
+	public void requestSettlement(ctOngoingProjectDTO cdto) {
+		logger.debug(" requestSettlement(ctOngoingProjectDTO cdto) 실행");
+		
+		mpmdao.requestSettlement(cdto);
+	}
+
+	@Override
+	public void agreeContract(proposeFreeDTO pfdto) {
+		logger.debug(" agreeContract(proposeFreeDTO pfdto) 실행");
+		
+		mpmdao.agreeContract(pfdto);
 	}
 
 

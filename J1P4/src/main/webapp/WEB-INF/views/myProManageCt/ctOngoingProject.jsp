@@ -4,6 +4,14 @@
 
 <%@ include file="../include/headerCt.jsp" %>
 
+<!-- 폼태그 -->
+<form role="form" action="" method="post">
+	<input type="hidden" name="proj_no" value="${copDTO.proj_no }">
+	<input type="hidden" name="free_no" value="${copDTO.free_no }">
+	
+	<input type="hidden" name="ct_no" value="${copDTO.ct_no }">
+</form>
+
 	<h1>/myProManageCt/ctOngoingProject.jsp</h1> <br>
 	
 <section>
@@ -50,20 +58,38 @@
 	</div>
 </div>
 
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		// '결제하기' 버튼 클릭시 대금결제 API with 기렬
+		$(".btn-warning").click(function(){
+			$("form[role='form']").attr("action","/myProManageCt/????");
+			$("form[role='form']").submit();			
+			
+		});
 
-<!-- 외형만 복사. 작동원리 탐구 필요. -->
-<div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-	<ul class="pagination">
-		<li class="paginate_button previous disabled" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0">Previous</a></li>
-		<li class="paginate_button active"><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0">1</a></li>
-		<li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0">2</a></li>
-		<li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0">3</a></li>
-		<li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0">4</a></li>
-		<li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0">5</a></li>
-		<li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0">6</a></li>
-		<li class="paginate_button next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0">Next</a></li>
-	</ul>
-</div>
+		// '완료하기' 버튼 클릭시 정산요청 컬럼값 변경, 프리랜서 '진행중' 
+		$(".btn-primary").click(function(){
+			$("form[role='form']").attr("action","/myProManageCt/requestSettlement");
+			$("form[role='form']").submit();			
+			
+		});
+		
+		
+		
+		// 삭제 후 페이지 로딩시 모달창 생성
+		var result = "${msg}";
+		
+		if(result == "requestSettlement"){
+			Swal.fire({
+			  icon: "info",
+			  title: "성공적 정산요청!",
+			  showConfirmButton: true,
+			  confirmButtonText: "확인"
+			});
+		}
+	})	
+</script>
 
 <%@ include file="../include/footer.jsp" %>
 	

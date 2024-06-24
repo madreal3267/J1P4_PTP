@@ -11,4 +11,8 @@ public class ctOngoingProjectDTO {
 	private String manager_nm;
 	private String proj_status;
 	
+	// 완료하기 필요
+	private int ct_no;
+	private int free_no;
+	private int manager_no;
 }
