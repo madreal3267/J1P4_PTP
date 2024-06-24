@@ -31,7 +31,7 @@
           <li><a href="#" class="nav-link px-3 link-body-emphasis nav-r1">프리랜서 찾기</a></li>
           <li><a href="/enroll/enrollProj" class="nav-link px-3 link-body-emphasis nav-r1">프로젝트 등록</a></li>
           <li><a href="#" class="nav-link px-3 link-body-emphasis nav-r1">이용방법</a></li>
-          <li><a href="/myProManage/interestProject" class="nav-link px-2 link-body-emphasis nav-r4">내 프로젝트 관리</a></li>
+          <li><a href="/myProManageCt/interestFreelancer" class="nav-link px-2 link-body-emphasis nav-r4">내 프로젝트 관리</a></li>
         </ul>
 
         <div class="dropdown text-end pro-l" >

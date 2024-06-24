@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,25 +44,26 @@ public class MyProManageCtController {
 	// 관심 프리랜서 목록 조회
 	// http://localhost:8088/myProManageCt/interestFreelancer
 	@RequestMapping(value = "/interestFreelancer",method = RequestMethod.GET)
-	public void interestFreelancerList(Criteria cri, Model model) {
+	public void interestFreelancerList(HttpSession session, Model model) {
 		logger.debug("/interestFreelancer -> interestFreelancerList() 호출");
 		
-		List<freeInfoDTO> interestFreelancerList = myService.interestFreelancerList();
+		String user_id = (String)session.getAttribute("user_id");
+		
+		List<freeInfoDTO> interestFreelancerList = myService.interestFreelancerList(user_id);
 		logger.debug("interestFreelancerList : " + interestFreelancerList.size());
 		
 		model.addAttribute("interestFreelancerList", interestFreelancerList);
 	}
 	
-	// 프로젝트 지원하기
-	
-	
 	// 제안한 프리랜서 목록 조회
 	// http://localhost:8088/myProManageCt/proposeFreelancer
 	@RequestMapping(value = "/proposeFreelancer",method = RequestMethod.GET)
-	public void proposeFreelancerList(Model model) {
+	public void proposeFreelancerList(HttpSession session, Model model) {
 		logger.debug("/proposeFreelancer -> proposeFreelancerList() 호출");
 		
-		List<proposeFreeDTO> proposeFreelancerList = myService.proposeFreelancerList();
+		String user_id = (String)session.getAttribute("user_id");
+		
+		List<proposeFreeDTO> proposeFreelancerList = myService.proposeFreelancerList(user_id);
 		logger.debug("proposeFreelancerList : " + proposeFreelancerList.size());
 		
 		model.addAttribute("proposeFreelancerList", proposeFreelancerList);

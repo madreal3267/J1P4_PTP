@@ -18,31 +18,25 @@ public interface MyProManageDAO {
 	public String getTime();	
 	
 	// 관심 프로젝트 목록
-	public List<ProjectDTO> interestProjectList();	
-	
-	// 프로젝트 목록 - 지원하기
-	public void applyProject(ApplyMgmtVO avo);
+	public List<ProjectDTO> interestProjectList(String user_id);	
 	
 	// 제안받은 프로젝트 목록
-	public List<ProjectDTO> proposedProjectList();
+	public List<ProjectDTO> proposedProjectList(String user_id);
 	
 	// 지원 중 프로젝트 목록
-	public List<ProjectDTO> applyingProjectList();
+	public List<ProjectDTO> applyingProjectList(String user_id);
 	
 	// 프로젝트 목록 - 지원취소
 	public int deleteApply(ApplyMgmtVO avo);
 	
 	// 지원 종료 프로젝트 목록
-	public List<ProjectDTO> endApplyProjectList();	
+	public List<ProjectDTO> endApplyProjectList(String user_id);	
 	
 	// 계약 진행 중 프로젝트 목록
-	public List<ProjectDTO> contractProjectList();
+	public List<ProjectDTO> contractProjectList(String user_id);
 	
 	// 프로젝트 진행 중 목록
-	public List<ProjectDTO> ongoingProjectList();
-	
-	// 평가 대기중 프로젝트 목록
-	public List<ProjectVO> waitEvaluationProjectList();
+	public List<ProjectDTO> ongoingProjectList(String user_id);
 	
 	// 검수중 프로젝트 목록
 	public List<ProjectVO> underReviewProjectList();
@@ -63,11 +57,9 @@ public interface MyProManageDAO {
 	public List<ProjectVO> ctContractProjectList();
 	
 
-	
-	
 	// DTO로 재구성중...
 	// 평가 대기중 프로젝트 리스트
-	public List<EvaluateProjectDTO> evaluateProjectList();
+	public List<EvaluateProjectDTO> evaluateProjectList(String user_id);
 	
 	// 평가 대기중 프로젝트 - 평가하기
 	public void evaluateProject(EvaluateProjectDTO edto);
@@ -76,16 +68,16 @@ public interface MyProManageDAO {
 	public int checkEvaluate(EvaluateProjectDTO edto);
 	
 	// 완료한 프로젝트 목록
-	public List<EvaluateProjectDTO> completedProjectList();
+	public List<EvaluateProjectDTO> completedProjectList(String user_id);
 
 	// 프로젝트 평가 수정하기
 	public void updateEvaluate(EvaluateProjectDTO edto);	
 	
 	// 관심 프리랜서 목록
-	public List<freeInfoDTO> interestFreelancerList();
+	public List<freeInfoDTO> interestFreelancerList(String user_id);
 	
 	// 제안한 프리랜서 목록
-	public List<proposeFreeDTO> proposeFreelancerList();
+	public List<proposeFreeDTO> proposeFreelancerList(String user_id);
 	
 	// 프로젝트 진행중 목록 
 	public List<ctOngoingProjectDTO> ctOngoingProjectList();

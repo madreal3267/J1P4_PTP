@@ -19,13 +19,8 @@
     	join freelancer f on b.free_no = f.free_no
     	left join skill s on s.proj_no = b.proj_no
     	left join region r on r.proj_no = b.proj_no
-    	where f.free_id= 'user_9' <!-- #{user_id} -->
+    	where f.free_id=#{user_id}
     </select>  
-    
-    <!-- 프로젝트 지원하기 -->
-    <insert id="applyProject">
-    	insert into apply_mgmt (free_no, proj_no) values (#{free_no},#{proj_no})
-    </insert>
     
     <!-- 제안받은 프로젝트 정보 조회 -->
 	<select id="proposedProjectList" resultType="com.itwillbs.domain.ProjectDTO">
@@ -36,7 +31,7 @@
 		join freelancer f on f.free_no = o.free_no  
     	left join skill s on s.proj_no = o.proj_no
     	left join region r on r.proj_no = o.proj_no        
-		where f.free_id = 'user_9'<!--  #{user_id} --> 
+		where f.free_id = #{user_id}
 	</select>    
 
 	<!-- 지원 중 프로젝트 정보 조회-->
@@ -48,7 +43,7 @@
 		join freelancer f on f.free_no = a.free_no  
     	left join skill s on s.proj_no = a.proj_no
     	left join region r on r.proj_no = a.proj_no        
-		where f.free_id = 'user_9'<!--  #{user_id} -->
+		where f.free_id = #{user_id}
 	</select>
 	
 	<!-- 지원중 프로젝트 - 지원취소하기 -->
@@ -63,6 +58,7 @@
 		set meeting_dt=#{meeting_dt}, meeting_pc=#{meeting_pc}, meetingOK=1
 		where proj_no=#{proj_no} and free_no=#{free_no}	 	
 	 </update>
+	 
 	<!-- 지원 종료 프로젝트 정보 조회 -->
 	<select id="endApplyProjectList" resultType="com.itwillbs.domain.ProjectDTO">	
      	select p.proj_title, p.proj_cost, p.work_period, p.work_field, 
@@ -72,7 +68,7 @@
 		join freelancer f on f.free_no = a.free_no
 		left join skill s on s.proj_no = a.proj_no
     	left join region r on r.proj_no = a.proj_no 
-		where (now() > p.deadline or a.reject_check = 1) and f.free_id = 'freeTest'<!-- #{user_id} -->
+		where (now() > p.deadline or a.reject_check = 1) and f.free_id = #{user_id}
 		<!-- where NOW() > STR_TO_DATE(p.deadline, '%Y-%m-%d %H:%i:%s') AND f.free_id = 'freeTest'; -->
 	</select>
 	
@@ -85,7 +81,7 @@
 		join freelancer f on a.free_no = f.free_no
 		left join settlement s on s.proj_no = p.proj_no
 		left join manager m on s.manager_no = m.manager_no
-		where p.proj_status = '계약' and f.free_id = 'user_9'
+		where p.proj_status = '계약' and f.free_id = #{user_id}
 	</select>	
 	
 	<!-- 프로젝트 진행중 -->
@@ -97,7 +93,7 @@
 		join freelancer f on a.free_no = f.free_no
 		left join settlement s on s.proj_no = p.proj_no
 		left join manager m on s.manager_no = m.manager_no
-		where (p.proj_status = '계약' or p.proj_status = '진행 중') and f.free_id = 'user_9'<!-- #{user_id} -->
+		where (p.proj_status = '계약' or p.proj_status = '진행 중') and f.free_id = #{user_id}
 	</select>
 
 	<!-- 평가 대기중 프로젝트 목록 -->
@@ -108,7 +104,7 @@
 		join client c on c.ct_no = p.ct_no
 		join apply_mgmt a on p.proj_no = a.proj_no  
 		join freelancer f on f.free_no = a.free_no
-		where p.proj_status ='완료' and f.free_id='user_3'<!--  and f.free_id=#{user_id} -->
+		where p.proj_status ='완료' and f.free_id= #{user_id}
 	</select>	
 	
 	<!-- 평가 대기중 - 평가하기 -->
@@ -132,7 +128,7 @@
 		join project p on p.proj_no = pv.proj_no
 		join client c on p.ct_no = c.ct_no
 		join freelancer f on f.free_no = pv.valuing_free 
-		where p.proj_status ='완료' and f.free_id='user_3'<!--  and f.free_id=#{user_id} -->		
+		where p.proj_status ='완료' and f.free_id=#{user_id}		
 	</select>
 	
 	<!-- 완료한 프로젝트 - 프로젝트 평가 수정하기 -->
@@ -142,6 +138,7 @@
 		where valuing_free=#{free_no} and proj_no=#{proj_no}
 	</update>
 	
+	<!-- 클라이언트 내 프로젝트 관리 -->
 	<!-- 관심 프리랜서 시작 -->
 	<select id="freeInfo" resultType="com.itwillbs.domain.freeInfoDTO">
 		SELECT u.user_id, u.name, f.work_field, f.school_type, r.region, r.district, f.oneline_bio,
@@ -163,7 +160,7 @@
 		left join portfolio p on p.free_no = f.free_no
 		join bookmark b on b.free_no = f.free_no
 		JOIN client ct ON ct.ct_no = b.ct_no
-		WHERE ct.ct_id = 'testct' <!--예시! #{user_id}로 변경 -->
+		WHERE ct.ct_id = #{user_id}
 		GROUP BY u.user_id, u.name, f.work_field, f.school_type, r.region, r.district, f.oneline_bio;
 	</select>
 		
@@ -185,7 +182,7 @@
 		LEFT JOIN skill s ON s.free_no = f.free_no 
 		LEFT JOIN career c ON c.free_no = f.free_no
 		LEFT JOIN apply_mgmt a ON p.proj_no = a.proj_no AND a.free_no = f.free_no
-		WHERE ct.ct_id = 'user_10'
+		WHERE ct.ct_id = #{user_id}
 		GROUP BY p.proj_title, u.name, p.proj_no
 		ORDER BY p.proj_no
 	</select>

@@ -35,35 +35,26 @@ public class MyProManageServiceImpl implements MyProManageService {
 	
 	// 관심 프로젝트 목록
 	@Override
-	public List<ProjectDTO> interestProjectList() {
-		logger.debug("interestProjectList() 실행");
+	public List<ProjectDTO> interestProjectList(String user_id) {
+		logger.debug("interestProjectList(String user_id) 실행");
 		
-		return mpmdao.interestProjectList();
-	}
-	
-	// 프로젝트 - 지원하기
-	@Override
-	public void applyProject(ApplyMgmtVO avo) {
-		logger.debug("applyProject(applyMgmtVO avo) 실행");
-		
-		mpmdao.applyProject(avo);
-		logger.debug("프로젝트 - 지원하기 성공");
+		return mpmdao.interestProjectList(user_id);
 	}
 
 	// 제안받은 프로젝트 목록
 	@Override
-	public List<ProjectDTO> proposedProjectList() {
+	public List<ProjectDTO> proposedProjectList(String user_id) {
 		logger.debug("proposedProjectList() 실행");
 		
-		return mpmdao.proposedProjectList();
+		return mpmdao.proposedProjectList(user_id);
 	}
 	
 	// 지원 중 프로젝트 목록
 	@Override
-	public List<ProjectDTO> applyingProjectList() {
+	public List<ProjectDTO> applyingProjectList(String user_id) {
 		logger.debug("applyingProjectList() 실행");
 		
-		return mpmdao.applyingProjectList();
+		return mpmdao.applyingProjectList(user_id);
 	}
 
 	// 프로젝트 목록 - 지원취소
@@ -76,26 +67,26 @@ public class MyProManageServiceImpl implements MyProManageService {
 
 	// 지원 종료 프로젝트 목록
 	@Override
-	public List<ProjectDTO> endApplyProjectList() {
+	public List<ProjectDTO> endApplyProjectList(String user_id) {
 		logger.debug("endApplyProjectList() 실행");
 		
-		return mpmdao.endApplyProjectList();
+		return mpmdao.endApplyProjectList(user_id);
 	}
 
 	// 계약 진행 중 프로젝트 목록
 	@Override
-	public List<ProjectDTO> contractProjectList() {
+	public List<ProjectDTO> contractProjectList(String user_id) {
 		logger.debug("contractProjectList() 실행");
 		
-		return mpmdao.contractProjectList();
+		return mpmdao.contractProjectList(user_id);
 	}
 
 	// 프로젝트 진행 중 목록
 	@Override
-	public List<ProjectDTO> ongoingProjectList() {
+	public List<ProjectDTO> ongoingProjectList(String user_id) {
 		logger.debug("ongoingProjectList() 실행");
 		
-		return mpmdao.ongoingProjectList();
+		return mpmdao.ongoingProjectList(user_id);
 	}
 
 	// 검수중 프로젝트 목록
@@ -152,10 +143,10 @@ public class MyProManageServiceImpl implements MyProManageService {
 	// VO -> DTO 로 변경하여 재구성중
 	// 평가 대기중 프로젝트 리스트	
 	@Override
-	public List<EvaluateProjectDTO> evaluateProjectList() {
+	public List<EvaluateProjectDTO> evaluateProjectList(String user_id) {
 		logger.debug("evaluateProjectList() 실행");
 		
-		return mpmdao.evaluateProjectList();
+		return mpmdao.evaluateProjectList(user_id);
 	}
 	
 	// 평가 대기중 프로젝트 - 평가하기
@@ -176,10 +167,10 @@ public class MyProManageServiceImpl implements MyProManageService {
 	
 	// 완료한 프로젝트 목록
 	@Override
-	public List<EvaluateProjectDTO> completedProjectList() {
+	public List<EvaluateProjectDTO> completedProjectList(String user_id) {
 			logger.debug("completedProjectList() 실행");
 			
-			return mpmdao.completedProjectList();
+			return mpmdao.completedProjectList(user_id);
 	}
 	
 	// 프로젝트 평가 수정하기
@@ -191,17 +182,17 @@ public class MyProManageServiceImpl implements MyProManageService {
 	}
 	
 	@Override
-	public List<freeInfoDTO> interestFreelancerList() {
+	public List<freeInfoDTO> interestFreelancerList(String user_id) {
 		logger.debug("interestFreelancerList() 실행");
 		
-		return mpmdao.interestFreelancerList();
+		return mpmdao.interestFreelancerList(user_id);
 	}
 	
 	@Override
-	public List<proposeFreeDTO> proposeFreelancerList() {
+	public List<proposeFreeDTO> proposeFreelancerList(String user_id) {
 		logger.debug("proposeFreelancerList() 실행");
 		
-		return mpmdao.proposeFreelancerList();
+		return mpmdao.proposeFreelancerList(user_id);
 	}
 	
 	@Override

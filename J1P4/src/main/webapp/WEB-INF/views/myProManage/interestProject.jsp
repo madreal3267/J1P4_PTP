@@ -62,7 +62,7 @@
 							<br>
 
 							<!-- 프로젝트 지원하기  -->
-							<form action="/myProManage/interestProject" method="post">
+							<form action="/projectDetail/applyProj" method="post">
 								<input type="hidden" name="free_no" value="${projDTO.free_no }"> 
 								<input type="hidden" name="proj_no" value="${projDTO.proj_no }"> 
 								<input type="submit" value="지원하기">

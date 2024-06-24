@@ -140,11 +140,9 @@
 <script>
 	$(document).ready(function() {
 		
-		// 지원하기 성공 정보 전달
 		var result = "${msg}";
-		if (result == "applySuccess") {
-			$("#myModal").modal("show");
-		}
+
+		// 지원 취소 성공 정보 전달 
 		if (result == "deletApply") {
 			$("#myModal2").modal("show");
 		}

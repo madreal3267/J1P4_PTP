@@ -46,16 +46,16 @@
 									<div class="modal-body">
 										별점을 매겨주세요<br>
 										<fieldset class="rate">
-											<input type="radio" id="rating10-${projectVO.ct_no}" name="score" value="10"><label for="rating10-${projectVO.ct_no}" title="5점"></label> 
-											<input type="radio" id="rating9-${projectVO.ct_no}" name="score" value="9"><label class="half" for="rating9-${projectVO.ct_no}" title="4.5점"></label> 
-											<input type="radio" id="rating8-${projectVO.ct_no}" name="score" value="8"><label for="rating8-${projectVO.ct_no}" title="4점"></label> 
-											<input type="radio" id="rating7-${projectVO.ct_no}" name="score" value="7"><label class="half" for="rating7-${projectVO.ct_no}" title="3.5점"></label> 
-											<input type="radio" id="rating6-${projectVO.ct_no}" name="score" value="6"><label for="rating6-${projectVO.ct_no}" title="3점"></label> 
-											<input type="radio" id="rating5-${projectVO.ct_no}" name="score" value="5"><label class="half" for="rating5-${projectVO.ct_no}" title="2.5점"></label> 
-											<input type="radio" id="rating4-${projectVO.ct_no}" name="score" value="4"><label for="rating4-${projectVO.ct_no}" title="2점"></label> 
-											<input type="radio" id="rating3-${projectVO.ct_no}" name="score" value="3"><label class="half" for="rating3-${projectVO.ct_no}" title="1.5점"></label> 
-											<input type="radio" id="rating2-${projectVO.ct_no}" name="score" value="2"><label for="rating2-${projectVO.ct_no}" title="1점"></label> 
-											<input type="radio" id="rating1-${projectVO.ct_no}" name="score" value="1"><label class="half" for="rating1-${projectVO.ct_no}" title="0.5점"></label>
+											<input type="radio" id="rating10-${projectVO.ct_no}" name="score" value="10"><label for="rating10-${projectVO.ct_no}" title="10점"></label> 
+											<input type="radio" id="rating9-${projectVO.ct_no}" name="score" value="9"><label class="half" for="rating9-${projectVO.ct_no}" title="9점"></label> 
+											<input type="radio" id="rating8-${projectVO.ct_no}" name="score" value="8"><label for="rating8-${projectVO.ct_no}" title="8점"></label> 
+											<input type="radio" id="rating7-${projectVO.ct_no}" name="score" value="7"><label class="half" for="rating7-${projectVO.ct_no}" title="7점"></label> 
+											<input type="radio" id="rating6-${projectVO.ct_no}" name="score" value="6"><label for="rating6-${projectVO.ct_no}" title="6점"></label> 
+											<input type="radio" id="rating5-${projectVO.ct_no}" name="score" value="5"><label class="half" for="rating5-${projectVO.ct_no}" title="5점"></label> 
+											<input type="radio" id="rating4-${projectVO.ct_no}" name="score" value="4"><label for="rating4-${projectVO.ct_no}" title="4점"></label> 
+											<input type="radio" id="rating3-${projectVO.ct_no}" name="score" value="3"><label class="half" for="rating3-${projectVO.ct_no}" title="3점"></label> 
+											<input type="radio" id="rating2-${projectVO.ct_no}" name="score" value="2"><label for="rating2-${projectVO.ct_no}" title="2점"></label> 
+											<input type="radio" id="rating1-${projectVO.ct_no}" name="score" value="1"><label class="half" for="rating1-${projectVO.ct_no}" title="1점"></label>
 										</fieldset>
 										<hr>
 										<textarea name="content" placeholder="프로젝트를 평가해주세요" rows="4" cols="50"></textarea>

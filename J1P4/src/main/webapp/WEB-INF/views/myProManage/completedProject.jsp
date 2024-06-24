@@ -62,16 +62,16 @@
 												<div class="modal-body">
 													별점을 매겨주세요<br>
 												<fieldset class="rate">
-											<input type="radio" id="rating10-${projDTO.proj_no}" name="score" value="10" <c:if test="${projDTO.score == 10}">checked</c:if>><label for="rating10-${projDTO.proj_no}" title="5점"></label> 
-											<input type="radio" id="rating9-${projDTO.proj_no}" name="score" value="9" <c:if test="${projDTO.score == 9}">checked</c:if>><label class="half" for="rating9-${projDTO.proj_no}" title="4.5점"></label> 
-											<input type="radio" id="rating8-${projDTO.proj_no}" name="score" value="8" <c:if test="${projDTO.score == 8}">checked</c:if>><label for="rating8-${projDTO.proj_no}" title="4점"></label> 
-											<input type="radio" id="rating7-${projDTO.proj_no}" name="score" value="7" <c:if test="${projDTO.score == 7}">checked</c:if>><label class="half" for="rating7-${projDTO.proj_no}" title="3.5점"></label> 
-											<input type="radio" id="rating6-${projDTO.proj_no}" name="score" value="6" <c:if test="${projDTO.score == 6}">checked</c:if>><label for="rating6-${projDTO.proj_no}" title="3점"></label> 
-											<input type="radio" id="rating5-${projDTO.proj_no}" name="score" value="5" <c:if test="${projDTO.score == 5}">checked</c:if>><label class="half" for="rating5-${projDTO.proj_no}" title="2.5점"></label> 
-											<input type="radio" id="rating4-${projDTO.proj_no}" name="score" value="4" <c:if test="${projDTO.score == 4}">checked</c:if>><label for="rating4-${projDTO.proj_no}" title="2점"></label> 
-											<input type="radio" id="rating3-${projDTO.proj_no}" name="score" value="3" <c:if test="${projDTO.score == 3}">checked</c:if>><label class="half" for="rating3-${projDTO.proj_no}" title="1.5점"></label> 
-											<input type="radio" id="rating2-${projDTO.proj_no}" name="score" value="2" <c:if test="${projDTO.score == 2}">checked</c:if>><label for="rating2-${projDTO.proj_no}" title="1점"></label> 
-											<input type="radio" id="rating1-${projDTO.proj_no}" name="score" value="1" <c:if test="${projDTO.score == 1}">checked</c:if>><label class="half" for="rating1-${projDTO.proj_no}" title="0.5점"></label>
+											<input type="radio" id="rating10-${projDTO.proj_no}" name="score" value="10" <c:if test="${projDTO.score == 10}">checked</c:if>><label for="rating10-${projDTO.proj_no}" title="10점"></label> 
+											<input type="radio" id="rating9-${projDTO.proj_no}" name="score" value="9" <c:if test="${projDTO.score == 9}">checked</c:if>><label class="half" for="rating9-${projDTO.proj_no}" title="9점"></label> 
+											<input type="radio" id="rating8-${projDTO.proj_no}" name="score" value="8" <c:if test="${projDTO.score == 8}">checked</c:if>><label for="rating8-${projDTO.proj_no}" title="8점"></label> 
+											<input type="radio" id="rating7-${projDTO.proj_no}" name="score" value="7" <c:if test="${projDTO.score == 7}">checked</c:if>><label class="half" for="rating7-${projDTO.proj_no}" title="7점"></label> 
+											<input type="radio" id="rating6-${projDTO.proj_no}" name="score" value="6" <c:if test="${projDTO.score == 6}">checked</c:if>><label for="rating6-${projDTO.proj_no}" title="6점"></label> 
+											<input type="radio" id="rating5-${projDTO.proj_no}" name="score" value="5" <c:if test="${projDTO.score == 5}">checked</c:if>><label class="half" for="rating5-${projDTO.proj_no}" title="5점"></label> 
+											<input type="radio" id="rating4-${projDTO.proj_no}" name="score" value="4" <c:if test="${projDTO.score == 4}">checked</c:if>><label for="rating4-${projDTO.proj_no}" title="4점"></label> 
+											<input type="radio" id="rating3-${projDTO.proj_no}" name="score" value="3" <c:if test="${projDTO.score == 3}">checked</c:if>><label class="half" for="rating3-${projDTO.proj_no}" title="3점"></label> 
+											<input type="radio" id="rating2-${projDTO.proj_no}" name="score" value="2" <c:if test="${projDTO.score == 2}">checked</c:if>><label for="rating2-${projDTO.proj_no}" title="2점"></label> 
+											<input type="radio" id="rating1-${projDTO.proj_no}" name="score" value="1" <c:if test="${projDTO.score == 1}">checked</c:if>><label class="half" for="rating1-${projDTO.proj_no}" title="1점"></label>
 										</fieldset>
 													<hr>
 													<textarea name="content" placeholder="프로젝트를 평가해주세요" rows="4" cols="50">${projDTO.content}</textarea>
@@ -100,7 +100,7 @@
 <script>
 $(document).ready(function() {
 	
-	// 프로젝트 삭제 성공 모달창 생성
+	// 프로젝트 평가 후 이동하였을때 모달창 생성
 	var result = "${msg}";
 	
 	if(result == "evaluateOK"){
@@ -112,6 +112,18 @@ $(document).ready(function() {
 		  confirmButtonText: "확인"
 		});
 	}		
+	
+	// 프로젝트 수정 후 모달창 생성
+	if(result == "modifyOK"){
+
+		Swal.fire({
+		  icon: "info",
+		  title: "평가가 성공적으로 수정되었습니다.",
+		  showConfirmButton: true,
+		  confirmButtonText: "확인"
+		});
+	}		
+	
 });
 </script>
 <%@ include file="../include/footer.jsp"%>

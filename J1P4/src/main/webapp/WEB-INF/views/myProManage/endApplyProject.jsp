@@ -82,8 +82,7 @@
 				<p>성공적으로 지원 목록에서 삭제하였습니다.</p>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
-				<button type="button" class="btn btn-primary">동작 X</button>
+				<button type="button" class="btn btn-default pull-right" data-dismiss="modal">닫기</button>
 			</div>
 		</div>
 	</div>

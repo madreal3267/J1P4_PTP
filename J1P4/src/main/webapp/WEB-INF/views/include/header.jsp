@@ -13,13 +13,10 @@
 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 <link href="../resources/css/header.css" rel="stylesheet" />
 <link href="../resources/css/main.css" rel="stylesheet" />
-<<<<<<< HEAD
 <link href="../resources/star.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 </style>
-=======
->>>>>>> ae8799e168b25a1d0d27d3be4475661e0c8ef183
 </head>
 <body style="padding-top: 75px;">
 
