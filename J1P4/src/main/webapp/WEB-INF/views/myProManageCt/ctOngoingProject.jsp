@@ -2,16 +2,23 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<!-- sweetalert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <%@ include file="../include/headerCt.jsp" %>
 
 <!-- 폼태그 -->
-<form role="form" action="" method="post">
+<form role="form" action="/myProManageCt/payment" method="post">
 	<input type="hidden" name="proj_no" value="${copDTO.proj_no }">
 	<input type="hidden" name="free_no" value="${copDTO.free_no }">
-	
 	<input type="hidden" name="ct_no" value="${copDTO.ct_no }">
+	
 </form>
-
+<form role="form" action="/myProManageCt/requestSettlement" method="post">
+	<input type="hidden" name="proj_no" value="${copDTO.proj_no }">
+	<input type="hidden" name="free_no" value="${copDTO.free_no }">
+	<input type="hidden" name="ct_no" value="${copDTO.ct_no }">
+	
+</form>
 	<h1>/myProManageCt/ctOngoingProject.jsp</h1> <br>
 	
 <section>
@@ -43,11 +50,23 @@
 							<td>
 		                        <c:choose>
 		                            <c:when test="${copDTO.proj_status == '계약'}">
-		                                <button type="submit" class="btn btn-warning">결제하기</button>
+										<form role="form" action="/myProManageCt/payment" method="post">
+											<input type="hidden" name="proj_no" value="${copDTO.proj_no }">
+											<input type="hidden" name="free_no" value="${copDTO.free_no }">
+											<input type="hidden" name="ct_no" value="${copDTO.ct_no }">
+											<input type="hidden" name="proj_cost" value="${copDTO.proj_cost }">
+		                                <input type="submit" class="btn btn-warning" value="결제하기">
+											
+										</form>
 		                            </c:when>
-		                            <c:otherwise>
-		                               <button type="submit" class="btn btn-primary">완료하기</button>
-		                            </c:otherwise>
+			                            <c:otherwise>
+											<form role="form" action="/myProManageCt/requestSettlement" method="post">
+												<input type="hidden" name="proj_no" value="${copDTO.proj_no }">
+												<input type="hidden" name="free_no" value="${copDTO.free_no }">
+												<input type="hidden" name="ct_no" value="${copDTO.ct_no }">
+			                               <input type="submit" class="btn btn-primary" value="완료하기">										
+											</form>		                               
+			                            </c:otherwise>
 		                        </c:choose>
 							</td>
 						</tr>
@@ -60,10 +79,10 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		
-		// '결제하기' 버튼 클릭시 대금결제 API with 기렬
+		 
+		// '결제하기' 버튼 클릭시 대금, 대금 지불 여부, 정산요청 컬럼 변경
 		$(".btn-warning").click(function(){
-			$("form[role='form']").attr("action","/myProManageCt/????");
+			$("form[role='form']").attr("action","/myProManageCt/payment");
 			$("form[role='form']").submit();			
 			
 		});
@@ -75,11 +94,19 @@
 			
 		});
 		
-		
-		
-		// 삭제 후 페이지 로딩시 모달창 생성
 		var result = "${msg}";
 		
+		// 결제하기 후 페이지 로딩시 모달창 생성
+		if(result == "payment"){
+			Swal.fire({
+			  icon: "info",
+			  title: "성공적으로 대급이 입급되었습니다.",
+			  showConfirmButton: true,
+			  confirmButtonText: "확인"
+			});
+		}
+		
+		// 완료하기 후 페이지 로딩시 모달창 생성
 		if(result == "requestSettlement"){
 			Swal.fire({
 			  icon: "info",

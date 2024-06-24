@@ -91,10 +91,10 @@ public class MyProManageServiceImpl implements MyProManageService {
 
 	// 검수중 프로젝트 목록
 	@Override
-	public List<ProjectVO> underReviewProjectList() {
+	public List<ProjectVO> underReviewProjectList(String user_id) {
 		logger.debug("underReviewProjectList() 실행");
 		
-		return mpmdao.underReviewProjectList();
+		return mpmdao.underReviewProjectList(user_id);
 	}
 
 	// 검수중 프로젝트 목록 - 프로젝트 삭제하기
@@ -110,34 +110,34 @@ public class MyProManageServiceImpl implements MyProManageService {
 
 	// 임시저장 프로젝트 목록
 	@Override
-	public List<ProjectVO> temSaveProjectList() {
+	public List<ProjectVO> temSaveProjectList(String user_id) {
 		logger.debug("temSaveProjectList() 실행");
 		
-		return mpmdao.temSaveProjectList();
+		return mpmdao.temSaveProjectList(user_id);
 	}
 	
 	// 등록실패 프로젝트 목록
 	@Override
-	public List<ProjectVO> regFailedProjectList() {
+	public List<ProjectVO> regFailedProjectList(String user_id) {
 		logger.debug("regFailedProjectList() 실행");
 		
-		return mpmdao.regFailedProjectList();
+		return mpmdao.regFailedProjectList(user_id);
 	}
 
 	// 지원자 모집중 프로젝트 목록
 	@Override
-	public List<proposeFreeDTO> recruitingProjectList() {
+	public List<proposeFreeDTO> recruitingProjectList(String user_id) {
 		logger.debug("recruitingProjectList() 실행");
 		
-		return mpmdao.recruitingProjectList();
+		return mpmdao.recruitingProjectList(user_id);
 	}
 
 	// 계약 진행중 프로젝트 목록
 	@Override
-	public List<ProjectVO> ctContractProjectList() {
+	public List<ProjectVO> ctContractProjectList(String user_id) {
 		logger.debug("ctContractProjectList() 실행");
 		
-		return mpmdao.ctContractProjectList();
+		return mpmdao.ctContractProjectList(user_id);
 	}
 
 	// VO -> DTO 로 변경하여 재구성중
@@ -196,18 +196,18 @@ public class MyProManageServiceImpl implements MyProManageService {
 	}
 	
 	@Override
-	public List<ctOngoingProjectDTO> ctOngoingProjectList() {
+	public List<ctOngoingProjectDTO> ctOngoingProjectList(String user_id) {
 		logger.debug("ctOngoingProjectList() 실행");
 		
-		return mpmdao.ctOngoingProjectList();
+		return mpmdao.ctOngoingProjectList(user_id);
 	}
 	
 	// 평가 대기중 프리랜서 목록 조회
 	@Override
-	public List<EvaluateFreelancerDTO> waitEvaluationFreelancerList() {
+	public List<EvaluateFreelancerDTO> waitEvaluationFreelancerList(String user_id) {
 		logger.debug("waitEvaluationFreelancerList() 실행");
 		
-		return mpmdao.waitEvaluationFreelancerList();
+		return mpmdao.waitEvaluationFreelancerList(user_id);
 	}
 	
 	// 평가 대기중 프리랜서 - 평가하기
@@ -228,10 +228,10 @@ public class MyProManageServiceImpl implements MyProManageService {
 
 	// 평가 완료한 프리랜서 목록 조회
 	@Override
-	public List<EvaluateFreelancerDTO> completedFreelancerList() {
+	public List<EvaluateFreelancerDTO> completedFreelancerList(String user_id) {
 		logger.debug("completedFreelancerList() 실행");
 		
-		return mpmdao.completedFreelancerList();
+		return mpmdao.completedFreelancerList(user_id);
 	}
 
 	// 평가 완료한 프로젝트 - 프리랜서 평가 수정하기
@@ -266,6 +266,13 @@ public class MyProManageServiceImpl implements MyProManageService {
 		mpmdao.recruitmentCompleted(pfdto);
 	}
 
+	// 진행중 프로젝트 - 결제하기(대금지불)
+	@Override
+	public void payment(ctOngoingProjectDTO cdto) {
+		logger.debug("payment(ctOngoingProjectDTO cdto) 실행");
+		
+		mpmdao.payment(cdto);
+	}
 
 	// 진행중 프로젝트 - 완료하기(정산요청)
 	@Override
