@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.itwillbs.mapper.ProjectMapper">
+  	 <insert id="insertProj">
+  	 	insert into project (ct_no,work_field,proj_title,proj_progress,start_date,date_nego,work_period,
+  	 	no_recruited,deadline,proj_cost,cost_nego,pmeet_meth,meet_meth,meet_cycle,proj_content,job_level,
+  	 	career_proof,wanted_career,dlvy_msg,temporary) 
+  	 	values((select ct_no from client where ct_id = #{user_id}),#{work_field},#{proj_title},#{proj_progress},#{start_date},#{date_nego},#{work_period},
+  	 	#{no_recruited},#{deadline},#{proj_cost},#{cost_nego},#{pmeet_meth},#{meet_meth},#{meet_cycle},#{proj_content},#{job_level},
+  	 	#{career_proof},#{wanted_career},#{dlvy_msg},#{temporary})
+  	 </insert>
+  	 
+	<insert id="insertSkill">
+		insert into skill (proj_no,skill_nm,skill_lev,temporary) 
+		values((select max(proj_no) from project where ct_no = (select ct_no from client where ct_id=#{user_id})),#{skill_nm},#{skill_lev},#{temporary})
+	</insert>
+	
+	<insert id="insertReg">
+		insert into region (proj_no,region,district,temporary)
+		values((select max(proj_no) from project where ct_no = (select ct_no from client where ct_id=#{user_id})),#{region},#{district},#{temporary})
+	</insert>
+	
+  	 <insert id="saveProj">
+  	 	insert into project (ct_no,work_field,proj_title,proj_progress,start_date,date_nego,work_period,
+  	 	no_recruited,deadline,proj_cost,cost_nego,pmeet_meth,meet_meth,meet_cycle,proj_content,job_level,
+  	 	career_proof,wanted_career,dlvy_msg,temporary) 
+  	 	values((select ct_no from client where ct_id = #{user_id}),#{work_field},#{proj_title},#{proj_progress},#{start_date},#{date_nego},#{work_period},
+  	 	#{no_recruited},#{deadline},#{proj_cost},#{cost_nego},#{pmeet_meth},#{meet_meth},#{meet_cycle},#{proj_content},#{job_level},
+  	 	#{career_proof},#{wanted_career},#{dlvy_msg},#{temporary})
+  	 </insert>
+  	 
+  	 <update id="multiSaveProj">
+  	 	update project set work_field=#{work_field},proj_title=#{proj_title},proj_progress=#{proj_progress},start_date=#{start_date},date_nego=#{date_nego},work_period=#{work_period},
+  	 	no_recruited=#{no_recruited},deadline=#{deadline},proj_cost=#{proj_cost},cost_nego=#{cost_nego},pmeet_meth=#{pmeet_meth},meet_meth=#{meet_meth},meet_cycle=#{meet_cycle},proj_content=#{proj_content},job_level=#{job_level},
+  	 	career_proof=#{career_proof},wanted_career=#{wanted_career},dlvy_msg=#{dlvy_msg},temporary=#{temporary},mod_date=now()
+  	 	where proj_no=(select c.proj_no from (select max(proj_no) as proj_no from project where ct_no = (select ct_no from client where ct_id = #{user_id})) c)
+  	 	and temporary = "임시저장"
+  	 </update>
+	
+	<update id="multiSaveSk">
+		update skill set skill_nm=#{skill_nm},skill_lev=#{skill_lev},temporary=#{temporary}
+		where proj_no=(select c.proj_no from (select max(proj_no) as proj_no from project where ct_no = (select ct_no from client where ct_id = #{user_id})) c)
+		and temporary = "임시저장"
+	</update>
+	
+	<update id="multiSaveReg">
+		update region set region=#{region},district=#{district},temporary=#{temporary}
+		where proj_no=(select c.proj_no from (select max(proj_no) as proj_no from project where ct_no = (select ct_no from client where ct_id = #{user_id})) c)
+		and temporary = "임시저장"
+	</update>
+	
+	<select id="getSavedProj" resultType="com.itwillbs.domain.ProjectVO">
+		select * from project
+		where proj_no = #{proj_no} and ct_no=(select ct_no from client where ct_id = #{user_id})
+	</select>
+	
+	<select id="getSavedSk" resultType="com.itwillbs.domain.SkillVO">
+		select skill_no, proj_no, SUBSTRING_INDEX (SUBSTRING_INDEX(skill.skill_nm,',',numbers.n),',',-1) skill_nm,
+		SUBSTRING_INDEX (SUBSTRING_INDEX(skill.skill_lev,',',numbers.n),',',-1) skill_lev
+		from (select 1 n union all select 2
+		union all select 3 union all select 4
+        union all select 5 union all select 6
+        union all select 7 union all select 8
+        union all select 9 union all select 10) numbers INNER JOIN skill
+        on char_length (skill.skill_nm) - char_length(replace(skill.skill_nm,',',''))>=numbers.n-1
+		where proj_no = #{proj_no} and user_id = #{user_id}
+	</select>
+	
+	<select id="getSavedReg" resultType="com.itwillbs.domain.RegionVO">
+		select * from region
+		where proj_no = #{proj_no} and user_id = #{user_id}
+	</select>
+	
+	<update id="savedProjSave">
+  	 	update project set work_field=#{work_field},proj_title=#{proj_title},proj_progress=#{proj_progress},start_date=#{start_date},date_nego=#{date_nego},work_period=#{work_period},
+  	 	no_recruited=#{no_recruited},deadline=#{deadline},proj_cost=#{proj_cost},cost_nego=#{cost_nego},pmeet_meth=#{pmeet_meth},meet_meth=#{meet_meth},meet_cycle=#{meet_cycle},proj_content=#{proj_content},job_level=#{job_level},
+  	 	career_proof=#{career_proof},wanted_career=#{wanted_career},dlvy_msg=#{dlvy_msg},temporary=#{temporary},mod_date=now()
+  	 	where ct_no=(select ct_no from client where ct_id = #{user_id}) and proj_no=#{proj_no} and temporary = "임시저장"
+  	</update>
+
+  	<update id="savedSkSave">
+		update skill set skill_nm=#{skill_nm},skill_lev=#{skill_lev},temporary=#{temporary}
+		where user_id=#{user_id} and proj_no=#{proj_no} and temporary = "임시저장"
+	</update>
+	
+	<update id="savedRegSave">
+		update region set region=#{region},district=#{district},temporary=#{temporary}
+		where user_id=#{user_id} and proj_no=#{proj_no} and temporary = "임시저장"
+	</update>
+	
+	<select id="chkProj" resultType="int">
+		select exists (
+		select proj_no from project
+	    where ct_no = (select ct_no from client where ct_id = #{user_id}) and proj_no=#{proj_no}
+		) as isChk;
+	</select>
+	
+	<select id="chkTemp" resultType="int">
+		select exists (     
+		select proj_no from project
+		where temporary = "임시저장" and proj_no=#{proj_no}
+		) as tempChk;
+	</select>
+	
+  
+  </mapper>

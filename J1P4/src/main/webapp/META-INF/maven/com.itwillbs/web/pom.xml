@@ -122,6 +122,12 @@
 			<scope>test</scope>
 		</dependency>        
 		<!-- 외부 라이브러리 추가 -->
+	  <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-databind</artifactId>
+          <version>2.9.2</version>
+      </dependency>
+		
 		<!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
 		<dependency>
 		    <groupId>com.mysql</groupId>
@@ -172,7 +178,7 @@
 		    <artifactId>HikariCP</artifactId>
 		    <version>4.0.3</version>
 		</dependency>
-
+		
 		
 		<!--메일라이브러리 
 		https://mvnrepository.com/artifact/javax.mail/mail -->
@@ -207,7 +213,11 @@
     	<version>2.9.2</version>
 	</dependency>
 		
-
+		
+		
+		
+		
+		
 		<!-- 외부 라이브러리 추가 -->
 	</dependencies>
     <build>
@@ -257,3 +267,4 @@
         </plugins>
     </build>
 </project>
+

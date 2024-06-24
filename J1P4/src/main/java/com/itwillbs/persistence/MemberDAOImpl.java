@@ -76,11 +76,190 @@ public class MemberDAOImpl implements MemberDAO {
 		return res;
 	}
 
+//------------------------------------------------------------------------------
+	//9번 아이디찾기브랜치 복사
+	
+	//로그인
+	@Override
+	public MemberVO login(MemberVO vo) {
+		
+		return sqlSession.selectOne(NAMESPACE+"memberLogin", vo);
+		
+	}
+	
+	//아이디에 pk 
+	@Override
+	public MemberVO findId(String memberEmail) throws Exception {
+		
+		return sqlSession.selectOne(NAMESPACE+"findId", memberEmail);
+	}
+
+	
+	//입력된 이메일의 아이디 존재여부 확인->있으면 1 반환, 없으면 0반환
+	@Override
+	public int findIdCheck(String memberEmail) throws Exception {
+		
+		return sqlSession.selectOne(NAMESPACE+"findIdCheck", memberEmail);
+	}
+
+	// 비번 - 가입한 유저가 맞는지 -> 맞으면 난수 생성 디비저장
+	@Override
+	public void findpw(MemberVO vo) throws Exception {
+		sqlSession.update(NAMESPACE+"mailkey", vo);
+	}
+	
+
+	
+	//비번변경 - 저장된 이메일과 난수를 가진 유저의 비밀번호를 변경 
+	@Override
+	public void chagepw(Map<String, Object> paramMap) throws Exception {
+		sqlSession.update(NAMESPACE+"mailkey2", paramMap);
+		
+	}
+	
+	
+	
+	
+	
+	//아이디가 존재하는지 비교
+	@Override
+	public MemberVO findUserById(String user_id) throws Exception {
+		
+		return sqlSession.selectOne(NAMESPACE+"findUserById", user_id);
+	
+	}
+	
+
+
+
+	//난수가 존재하는지 비교
+	@Override
+	public String findUserByMailKey(String user_email) throws Exception {
+		
+		return sqlSession.selectOne(NAMESPACE+"findUserByMailKey", user_email);
+	}
+
+
+
 
 
 	
 
+//-------------------------------------------------------------------------------회원유형시작
+	//프리랜서, 클라이언트
+	@Override
+	public void userCf(MemberVO vo) throws Exception {
+		
+		 sqlSession.update(NAMESPACE+"userCf", vo);
+		
+	}
+	
+	
+	//개인, 팀, 사업자
+	@Override
+	public void userType(MemberVO vo) throws Exception {
+		sqlSession.update(NAMESPACE+"userType", vo);
+			
+	}
 
+
+	//-------------------------------------------------------
+
+	@Override
+	public void insertFree(String free_id) throws Exception {
+		sqlSession.insert(NAMESPACE+"freelancerId", free_id);
+		
+	}
+
+
+
+	@Override
+	public void insertCareer(String free_id) throws Exception {
+		sqlSession.insert(NAMESPACE+"insertCareer", free_id);
+		
+	}
+
+
+
+	@Override
+	public void insertLicense(String free_id) throws Exception {
+		sqlSession.insert(NAMESPACE+"insertLicense", free_id);
+		
+	}
+
+
+
+	@Override
+	public void insertPartners(String free_id) throws Exception {
+		sqlSession.insert(NAMESPACE+"insertPartners", free_id);
+		
+	}
+
+
+
+	@Override
+	public void insertComp(String free_id) throws Exception {
+		sqlSession.insert(NAMESPACE+"insertComp", free_id);
+		
+	}
+
+
+
+	@Override
+	public void insertSkill(String free_id) throws Exception {
+		sqlSession.insert(NAMESPACE+"insertSkill", free_id);
+		
+	}
+
+
+
+	@Override
+	public void insertReg(String free_id) throws Exception {
+		sqlSession.insert(NAMESPACE+"insertReg", free_id);
+		
+	}
+
+
+
+	@Override
+	public void insertCt(String ct_id) throws Exception {
+		sqlSession.insert(NAMESPACE+"clientId", ct_id);
+		
+	}
+
+
+	
+	
+	@Override
+	public String sessCf(MemberVO vo) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"sessCf",vo);
+	}
+	
+	@Override
+	public String sessType(MemberVO vo) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"sessType",vo);
+	}
+
+
+
+	@Override
+	public Integer sessFreeNo(MemberVO vo) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"sessFreeNo",vo);
+	}
+
+
+
+	@Override
+	public Integer sessCtNo(MemberVO vo) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"sessCtNo",vo);
+	}
+	
+	
+	
+	
+	
+	
+	
 
 	
 

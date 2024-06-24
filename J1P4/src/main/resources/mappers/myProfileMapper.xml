@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.itwillbs.mapper.myProfileMapper">
+	<select id="getProfile" resultType="com.itwillbs.domain.FreelancerVO">
+		select * from freelancer
+		where free_no = #{free_no} and free_id=#{free_id}
+	</select>
+	
+	<select id="getSkill" resultType="com.itwillbs.domain.SkillVO">
+		select user_id, skill_no, free_no,
+		SUBSTRING_INDEX (SUBSTRING_INDEX(skill.skill_nm,',',numbers.n),',',-1) skill_nm,
+		SUBSTRING_INDEX (SUBSTRING_INDEX(skill.skill_lev,',',numbers.n),',',-1) skill_lev
+		from (select 1 n union all select 2
+		union all select 3 union all select 4
+        union all select 5 union all select 6
+        union all select 7 union all select 8
+        union all select 9 union all select 10) numbers INNER JOIN skill
+        on char_length (skill.skill_nm) - char_length(replace(skill.skill_nm,',',''))>=numbers.n-1
+        where free_no = #{free_no} and user_id=#{free_id}
+	</select>
+	
+	<select id="getReg" resultType="com.itwillbs.domain.RegionVO">
+		select * from region
+		where free_no = #{free_no} and user_id=#{free_id}
+	</select>
+	
+	<select id="getCareer" resultType="com.itwillbs.domain.CareerVO">
+		select free_no, job_lev, SUBSTRING_INDEX (SUBSTRING_INDEX(career.company_nm,',',numbers.n),',',-1) company_nm,
+		SUBSTRING_INDEX (SUBSTRING_INDEX(career.join_date,',',numbers.n),',',-1) join_date,
+        SUBSTRING_INDEX (SUBSTRING_INDEX(career.quit_date,',',numbers.n),',',-1) quit_date,
+        SUBSTRING_INDEX (SUBSTRING_INDEX(career.responsibility,',',numbers.n),',',-1) responsibility
+		from (select 1 n union all select 2
+		union all select 3 union all select 4
+        union all select 5 union all select 6
+        union all select 7 union all select 8
+        union all select 9 union all select 10) numbers INNER JOIN career
+        on char_length (career.company_nm) - char_length(replace(career.company_nm,',',''))>=numbers.n-1
+       	where free_no = #{free_no}   
+	</select>
+	
+	<select id="getLicense" resultType="com.itwillbs.domain.LicenseVO">
+        select free_no, SUBSTRING_INDEX (SUBSTRING_INDEX(license.license_nm,',',numbers.n),',',-1) license_nm,
+		SUBSTRING_INDEX (SUBSTRING_INDEX(license.qualify_date,',',numbers.n),',',-1) qualify_date,
+        SUBSTRING_INDEX (SUBSTRING_INDEX(license.issuer,',',numbers.n),',',-1) issuer
+		from (select 1 n union all select 2
+		union all select 3 union all select 4
+        union all select 5 union all select 6
+        union all select 7 union all select 8
+        union all select 9 union all select 10) numbers INNER JOIN license
+        on char_length (license.license_nm) - char_length(replace(license.license_nm,',',''))>=numbers.n-1
+		where free_no = #{free_no}  
+	</select>
+	
+	<select id="getComp" resultType="com.itwillbs.domain.CompanyVO">
+		select free_no, SUBSTRING_INDEX (SUBSTRING_INDEX(company_history.yearmonth,',',numbers.n),',',-1) yearmonth,
+        SUBSTRING_INDEX (SUBSTRING_INDEX(company_history.details,',',numbers.n),',',-1) hDetails
+		from (select 1 n union all select 2
+		union all select 3 union all select 4
+        union all select 5 union all select 6
+        union all select 7 union all select 8
+        union all select 9 union all select 10) numbers INNER JOIN company_history
+        on char_length (company_history.yearmonth) - char_length(replace(company_history.yearmonth,',',''))>=numbers.n-1
+        where free_no = #{free_no}    
+	</select>
+	
+	<select id="getPartn" resultType="com.itwillbs.domain.PartnersVO">
+		select free_no, SUBSTRING_INDEX (SUBSTRING_INDEX(partners.partners_nm,',',numbers.n),',',-1) partners_nm,
+        SUBSTRING_INDEX (SUBSTRING_INDEX(partners.details,',',numbers.n),',',-1) pDetails
+		from (select 1 n union all select 2
+		union all select 3 union all select 4
+        union all select 5 union all select 6
+        union all select 7 union all select 8
+        union all select 9 union all select 10) numbers INNER JOIN partners
+        on char_length (partners.partners_nm) - char_length(replace(partners.partners_nm,',',''))>=numbers.n-1
+        where free_no = #{free_no}
+	</select>
+
+ 
+  </mapper>
