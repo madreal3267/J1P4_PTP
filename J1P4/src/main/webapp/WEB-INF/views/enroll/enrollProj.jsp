@@ -71,14 +71,15 @@
 		</div>
 		<hr>
 		<div class="gap">
-		<h5>프로젝트를 간단하게 알려주세요</h5>
-		<input type="text" name="proj_title" placeholder="프로젝트 제목을 입력해주세요" style="width: 500px" id="proj_title">
+		<h5 style="margin-bottom:15px;">프로젝트를 간단하게 알려주세요</h5>
+		<input type="text" name="proj_title" placeholder="프로젝트 제목을 입력해주세요" style="width: 710px" id="proj_title">
 		</div>
-		<br>
-		<br>
-		<input type="button" class="saveButt" value="임시저장">
+		<hr>
+		<div class="my-3" style="text-align: right;" >
 		<a class="list-group-item list-group-item-action" data-toggle="list" href="#proj_basic">
-		<button type="button" class="btn btn-dark" id="nextButt">다음</button></a>
+		<button type="button" class="btn btn-dark" onclick="scrollTopAbs()">다음</button>
+		</a>
+		</div>
 		</div>
 		</div>
 		<!-- card body 끝 -->
@@ -95,7 +96,7 @@
 			</div>
 		<div class="mx-4 my-3">	
 		<div class="gap">
-		<h5>프로젝트 진행 분류</h5>
+		<h5 style="margin-bottom:15px;">프로젝트 진행 분류</h5>
 		<input type="radio" value=0 name="proj_progress" id="radioPj1">
 		<label for="radioPj1">신규 프로젝트를 진행하려 합니다</label><br>
 		<div class="checkGap">
@@ -109,7 +110,7 @@
 		<h5>예상 시작일</h5>
 		<h6>프리랜서가 프로젝트에 착수하는 날짜입니다.<br>
 		해당 날짜에 프로젝트 시작이 가능한 프리랜서들이 지원하게 됩니다.</h6>
-		<input type="date" name="start_date" style="width: 200px" required="required"> <br>
+		<input type="date" name="start_date" style="width: 200px" id="startDate"> <br>
 		<div class="checkGap">
 		<input type="checkbox" name="date_nego" value=1 id="ckDate">
 		<label for="ckDate">프로젝트 착수 일자의 협의가 가능합니다.</label>
@@ -143,10 +144,12 @@
 		<label for="ckNego">입력한 예산에서 조율이 가능합니다.</label>
 		</div>
 		</div>
-		<br>
-		<a class="list-group-item list-group-item-action" data-toggle="list" href="#proj_title"><button>이전</button></a>
-		<input type="button" class="saveButt" value="임시저장">
-		<a class="list-group-item list-group-item-action" data-toggle="list" href="#proj_detail"><button type="button" id="focusDetail">다음</button></a>
+		<hr>
+		<div class="my-3" style="text-align: right;" >
+		<a class="list-group-item list-group-item-action" data-toggle="list" href="#proj_detail">
+		<button type="button" class="btn btn-dark" onclick="scrollTopAbs()">다음</button>
+		</a>
+		</div>
 		</div>
 		</div>
 		<!-- card body 끝 -->
@@ -227,12 +230,14 @@
 		<hr>
 		<h5>프로젝트 상세 내용</h5>
 		<h6>프리랜서의 담당역할 및 업무범위를 입력해 주세요.</h6>
-		<textarea rows="10" cols="60" name="proj_content"></textarea>
+		<textarea cols="84" rows="10" name="proj_content"></textarea>
 		</div>
-		<br>
-		<a class="list-group-item list-group-item-action" data-toggle="list" href="#proj_basic"><button>이전</button></a>
-		<input type="button" class="saveButt" value="임시저장">
-		<a class="list-group-item list-group-item-action" data-toggle="list" href="#proj_hope"><button>다음</button></a>	
+		<hr>
+		<div class="my-3" style="text-align: right;" >
+		<a class="list-group-item list-group-item-action" data-toggle="list" href="#proj_hope">
+		<button type="button" class="btn btn-dark" onclick="scrollTopAbs()">다음</button>
+		</a>
+		</div>
 		</div>
 		</div>
 		<!-- card body 끝 -->
@@ -263,12 +268,12 @@
 		<h5>구인 등급</h5>
 		<h6>프리랜서의 레벨을 선택해 주세요.</h6>
 		<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-			<input type="radio" value="주니어" name="job_level" class="btn-check" id="radioLev1" required="required">
-			<label for="radioLev1" class="btn btn-outline-dark">주니어</label>
+			<input type="radio" value="주니어" name="job_level" class="btn-check" id="radioLev1">
+			<label for="radioLev1" class="btn btn-outline-dark radioLv">주니어</label>
 			<input type="radio" value="미들" name="job_level" class="btn-check" id="radioLev2">
-			<label for="radioLev2" class="btn btn-outline-dark">미들</label>
+			<label for="radioLev2" class="btn btn-outline-dark radioLv">미들</label>
 			<input type="radio" value="시니어" name="job_level" class="btn-check" id="radioLev3">
-			<label for="radioLev3" class="btn btn-outline-dark">시니어</label>
+			<label for="radioLev3" class="btn btn-outline-dark radioLv">시니어</label>
 		</div>
 		</div>
 		<hr>
@@ -280,29 +285,32 @@
 
 		<hr>
 		<div class="gap">
-		<h5>경력 증빙 자료</h5>
+		<h5 style="margin-bottom:15px;" >경력 증빙 자료</h5>
 		<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-			<input type="radio" value=1 name="career_proof" class="btn-check" id="radioCp1" required="required">
-			<label for="radioCp1" class="btn btn-outline-dark">필수</label>
+			<input type="radio" value=1 name="career_proof" class="btn-check" id="radioCp1">
+			<label for="radioCp1" class="btn btn-outline-dark radioCp">필수</label>
 			<input type="radio" value=0 name="career_proof" class="btn-check" id="radioCp2">
-			<label for="radioCp2" class="btn btn-outline-dark">무관</label>
+			<label for="radioCp2" class="btn btn-outline-dark radioCp">무관</label>
 		</div>
 		</div>
 		<hr>
 		<div class="gap">
 		<h5>전달사항 또는 우대사항</h5>
 		<h6>프리랜서 어쩌고 저쩌고 우짤</h6>
-		<textarea rows="10" cols="60" name="dlvy_msg" required="required"></textarea>
+		<textarea rows="10" cols="84" name="dlvy_msg"></textarea>
 		</div>
 		<hr>
-		<a class="list-group-item list-group-item-action" data-toggle="list" href="#proj_detail"><button>이전</button></a>
-		<input type="button" class="saveButt" value="임시저장">
-		<input type="submit" class="submButt" value="등록">
+		<div class="my-3" style="text-align: right;" >
+		<button type="button" class="btn btn-dark submButt" >등록하기</button>
 		</div>
+		</div>
+		
 		</div>
 		<!-- card body 끝 -->
 		</div>
 		<!-- 지원자 희망 탭 끝 -->
+		
+		<input type="button" class="btn btn-outline-dark saveButt" value="임시저장" style="position: absolute; right:54px; top:25px;">
 	</div>
 	</div>
 	<!-- 폼 태그 끝 -->
@@ -408,7 +416,7 @@
 				 '<option value="웹디자인">웹디자인</option><option value="전자정부프레임워크">전자정부프레임워크</option><option value="한글">한글</option></select>'+
 				 '<select class="selectLev"><option disabled hidden selected></option>'+
 				 '<option value="초급">초급</option><option value="중급">중급</option><option value="고급">고급</option></select>'+
-				 '<button type="butoon" class="addButt removeAdd">추가하기</button></div>'		
+				 '<button type="butoon" class="btn btn-dark btn-sm addButt removeAdd">추가하기</button></div>'		
 				);
 
 				/* 주요기술 스택 - select2(검색되는 select) 적용 */
@@ -437,11 +445,11 @@
 						
 						/* [추가하기] 클릭 시 추가되는 기술 리스트 출력 */
 						$('.listPt').prepend(
-						 '<p><div class="border border-1 rounded-3" role="group" style="width: 400px; display: inline-block; position: relative;">'+
-						 '<input type="hidden" value='+$('.listPt').children("p").length+' name="count">'+
-						 '<input type="hidden" value="'+skill+'" name="skill_nm"><input type="hidden" value='+level+' name="skill_lev">'+
-						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+skill+'</span></h4><h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+level+'</span></h4>'+
-						 '<button class="removeSk btn-close" aria-label="Close" style="width: 1px; position: absolute; top: 21px; left: 360px;"></button></div></p>'
+							'<p><div class="border border-1 rounded-3 p-2" role="group" style="width: 700px; margin-bottom: 20px;">'+
+							'<button class="removeSk btn-close" aria-label="Close" style="width: 1px; position: absolute; right:78px;"></button>'+
+							'<input type="hidden" value="'+skill+'" name="skill_nm"><input type="hidden" value="'+level+'" name="skill_lev" id="skillLev">'+
+							'<div style="padding-bottom:5px;"><span style="padding-left: 20px; font-size: 22px; font-weight: bold;">'+skill+'</span><br></div>'+
+							'<span style="padding-left: 20px;"> 레벨 : '+level+'</span></div></p>'	
 						);
 		
 					});
@@ -508,6 +516,19 @@
 			$(".submButt").click(function() {
 				/* 프로젝트 등록 */
 				
+				if( fm1.proj_title.value == "" ) {
+		        alert("성명을 입력해 주십시오.");
+		        
+		        return;
+		        
+		   		 }
+				if( $("#startDate").val() = "" ) {
+		        alert("시작일을 입력해 주십시오.");
+		        
+		        return;
+		        
+		   		 }
+				
 				$('.temporary').val("등록성공");
 				
 				if(data) {
@@ -522,11 +543,6 @@
 			});
 		});	
 		
-		var WfVar = $('input[name=work_field]').is(":checked");
-		var WfVar = $('input[name=work_field]').is(":checked");
-		var WfVar = $('input[name=work_field]').is(":checked");
-		var WfVar = $('input[name=work_field]').is(":checked");
-		var WfVar = $('input[name=work_field]').is(":checked");
 		var WfVar = $('input[name=work_field]').is(":checked");
 		var titleVar = document.getElementById('proj_title').value;
 		var result = document.querySelector(".tell");
@@ -551,6 +567,13 @@
 			$('input[name=pmeet_meth]').focus();
 			});
 		});
+		
+		function scrollTopAbs() {
+		      window.scrollTo(0, 0);
+	    }
+		
+
+		    
 		
 		
 </script>
