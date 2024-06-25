@@ -4,49 +4,72 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<%@ include file="../include/headerMPM_F.jsp" %>
+<%@ include file="../include/freeHeader.jsp"%>
 
-	<h1>/myProManage/applyingProject.jsp</h1>
-<section class="content">
-	<div class="col-md-12">
-		<div class="box box-default">
-			<div class="box-header with-border">
-					<h1>지원중</h1>
-					지원한 프로젝트를 확인할 수 있습니다.	
+<div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
+	<div class="card overflow-hidden card-2" >
+		<div class="row no-gutters row-bordered row-border-light">
+
+		    <!-- 사이드 메뉴 시작 -->
+			<div class="col-md-3 pt-0">
+				<div class="list-group list-group-flush account-settings-links" style="width:274px;">
+					<h4 class="font-weight-bold py-1 mx-4 my-3">내 프로젝트 관리</h4>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManage/interestProject">관심프로젝트</a>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManage/proposedProject">제안받은 프로젝트</a>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManage/applyingProject">지원중</a>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManage/endApplyProject">지원종료</a>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManage/contractProject">계약 진행중</a>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManage/ongoingProject">프로젝트 진행중</a>
+					<a class="list-group-item list-group-item-action"
+					href="${pageContext.request.contextPath}/myProManage/waitEvaluationProject">평가대기중</a>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManage/completedProject">완료한 프로젝트</a>
+				</div>
 			</div>
-		</div>
-	</div>	
-	
-		<div class="col-md-12">
-		<div class="box box-default">
-			<div class="box-header with-border">
-				<section>
-					<div>
+			<!-- 사이드 메뉴 끝 -->
+
+	<div class="col-md-9">
+		<div class="tab-content">
+			<div class="tab-pane fade active show">
+<!-- ------------------------------------------------------------------------------------------------------------------------  -->
+				<!-- card body 시작 -->
+				<div class="card-body border-start" >
+					<div class="border-bottom" style="position: relative; right:16px; width:1000px; padding-bottom: 10px;" >
+						<h4 class="font-weight-bold mx-4 my-3">지원중</h4>
+						지원한 프로젝트를 확인할 수 있습니다.
+					</div><br>		
 						1. 현재 지원중인 프로젝트 목록입니다. <br>
 						2. 클라이언트는 프로젝트의 지원자 모집 마감 이후, 최대 10일간 지원자 검토 기간을 가집니다. <br>
 						3. 프로젝트 지원 결과는 클라이언트의 지원자 검토가 완료되면 안내해 드립니다. <br>
 						4. 클라이언트가 미팅을 원하는 경우, 캐프리에서 개별적으로 연락을 드립니다.<br>
-					</div>
-					<select class="pull-right">
-						<option selected>기본 정렬 순</option>
-						<option>금액 높은순</option>
-						<option>지원 적은 순</option>
-						<option>최신 등록 순</option>
-						<option>마감 임박 순</option>
-					</select>
+					<br>
 	 
 					 <c:forEach var="projDTO" items="${applyingProjectList}">
-					 <hr>
 						 <div>
-						 	<h2>${projDTO.proj_title }</h2> 
+							<c:choose>
+								<c:when test="${projDTO.proj_status == '모집중'}">
+									<span class="badge text-bg-warning">모집중</span>
+								</c:when>
+								<c:otherwise>
+									<span class="badge text-bg-warning">모집종료</span>
+								</c:otherwise>
+							</c:choose>			
+										 					 
+						 	<h4>${projDTO.proj_title }</h4> 
 						 	예상 금액 ${projDTO.proj_cost } 만원 | 예상 기간 ${projDTO.work_period } 개월<br>
 							${projDTO.work_field }	|  ${projDTO.region } ${projDTO.district } | 
 						<!-- 스킬 나열 -->
 							<c:set var="skillList" value="${projDTO.skill_nm }" />
 							<c:forEach items="${fn:split(skillList, ',')}" var="skill">
-								<button type="button" class="btn btn-warning">
+								<span class="badge text-bg-info">
 									<c:out value="${skill}" />
-								</button>
+								</span>
 							</c:forEach>
 							
 							<!-- 하트위치 -->
@@ -86,13 +109,11 @@
 						</div>
 					</div>
 					</form>
-				</div>
-					 </c:forEach>
-				</section>
+				</div> <hr>
+				 </c:forEach>
 			</div>
 		</div>
 	</div>
-</section>
 
 <!-- '지원하기'로 페이지 이동시 생성 modal 창 -->
 <div class="modal fade" id="myModal" style="display: none;">
@@ -132,24 +153,26 @@
 				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
 				<button type="button" class="btn btn-primary">동작 X</button>
 			</div>
+		</div>	
+<!-- ------------------------------------------------------------------------------------------------------------------------  -->
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
-		
-
 <script>
 	$(document).ready(function() {
 		
-		// 지원하기 성공 정보 전달
 		var result = "${msg}";
-		if (result == "applySuccess") {
-			$("#myModal").modal("show");
-		}
+
+		// 지원 취소 성공 정보 전달 
 		if (result == "deletApply") {
 			$("#myModal2").modal("show");
 		}
 	});
 </script>
+</body>
+</html>
 
-<%@ include file="../include/footer.jsp" %>
 	

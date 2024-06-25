@@ -16,6 +16,9 @@
 <link href="../resources/css/main.css" rel="stylesheet" />
 <link href="../resources/css/enrollFree.css" rel="stylesheet" />
 <link href="../resources/css/listPro.css" rel="stylesheet" />
+<!-- 별 css -->
+<link href="${pageContext.request.contextPath}/resources/star.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body style="padding-top: 75px;">
 

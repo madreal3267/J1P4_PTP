@@ -10,6 +10,7 @@ public class ctOngoingProjectDTO {
 	private String proj_title;
 	private String manager_nm;
 	private String proj_status;
+	private String proj_cost;
 	
 	// 완료하기 필요
 	private int ct_no;

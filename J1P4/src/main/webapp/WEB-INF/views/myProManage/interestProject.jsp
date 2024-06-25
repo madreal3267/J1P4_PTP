@@ -3,84 +3,88 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<%@ include file="../include/headerMPM_F.jsp"%>
+<%@ include file="../include/freeHeader.jsp"%>
 
-<section class="content">
-	<h1>/myProManage/interestProject.jsp</h1>
-	<hr>
+<div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
+	<div class="card overflow-hidden card-2" >
+		<div class="row no-gutters row-bordered row-border-light">
 
-	<div class="col-md-12">
-		<div class="box box-default">
-			<div class="box-header with-border">
-				<h1>관심 프로젝트</h1>
-				관심 프로젝트로 추가한 프로젝트를 확인할 수 있습니다.
+		    <!-- 사이드 메뉴 시작 -->
+			<div class="col-md-3 pt-0">
+				<div class="list-group list-group-flush account-settings-links" style="width:274px;">
+					<h4 class="font-weight-bold py-1 mx-4 my-3">내 프로젝트 관리</h4>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManage/interestProject">관심프로젝트</a>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManage/proposedProject">제안받은 프로젝트</a>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManage/applyingProject">지원중</a>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManage/endApplyProject">지원종료</a>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManage/contractProject">계약 진행중</a>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManage/ongoingProject">프로젝트 진행중</a>
+					<a class="list-group-item list-group-item-action"
+					href="${pageContext.request.contextPath}/myProManage/waitEvaluationProject">평가대기중</a>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManage/completedProject">완료한 프로젝트</a>
+				</div>
 			</div>
-		</div>
-	</div>
+			<!-- 사이드 메뉴 끝 -->
 
-	<div class="col-md-12">
-		<div class="box box-default">
-			<div class="box-header with-border">
-				<section>
-					<div>
+	<div class="col-md-9">
+		<div class="tab-content">
+			<div class="tab-pane fade active show" >
+			
+				<!-- card body 시작 -->
+				<div class="card-body border-start" >
+					<div class="border-bottom" style="position: relative; right:16px; width:1000px; padding-bottom: 10px;" >
+						<h4 class="font-weight-bold mx-4 my-3">관심 프로젝트</h4>
+						관심 프로젝트로 추가한 프로젝트를 확인할 수 있습니다.
+					</div><br>	
+					
 						1. 관심 프로젝트로 추가한 프로젝트 목록입니다. <br> 
 						2. [프로젝트 지원하기]버튼을 클릭하여 해당 프로젝트에 지원할 수 있습니다. <br>
-					</div>
-					<select>
-						<option>정렬방식</option>
-						<option></option>
-						<option selected>정렬방식</option>
-						<option>기본 정렬 순</option>
-						<option>금액 높은순</option>
-						<option>지원 적은 순</option>
-						<option>최신 등록 순</option>
-						<option>마감 임박 순</option>
-					</select>
-
+					<br>
 					<c:forEach var="projDTO" items="${interestProjectList}">
 						<div>
-							<hr>
 							<c:choose>
 								<c:when test="${projDTO.proj_status == '모집중'}">
-									<span class="badge btn-warning">모집중</span>
+									<span class="badge text-bg-warning">모집중</span>
 								</c:when>
 								<c:otherwise>
-									<span class="badge btn-primary">모집종료</span>
+									<span class="badge text-bg-warning">모집종료</span>
 								</c:otherwise>
 							</c:choose>
-							<h2>${projDTO.proj_title }</h2>
+						
+							<h4>${projDTO.proj_title }</h4>
 							예상 금액 ${projDTO.proj_cost } 만원 | 예상 기간 ${projDTO.work_period } 개월<br> 
 							${projDTO.work_field } | ${projDTO.region } ${projDTO.district } |
-
+		
 							<!-- 스킬 버튼 -->
 							<c:set var="skillList" value="${projDTO.skill_nm }" />
 							<c:forEach items="${fn:split(skillList, ',')}" var="skill">
-								<button type="button" class="btn btn-warning">
+								<span class="badge text-bg-info">
 									<c:out value="${skill}" />
-								</button>
-							</c:forEach>
-							<br>
-
-							<!-- 프로젝트 지원하기  -->
-							<form action="/myProManage/interestProject" method="post">
-								<input type="hidden" name="free_no" value="${projDTO.free_no }"> 
-								<input type="hidden" name="proj_no" value="${projDTO.proj_no }"> 
+								</span>
+							</c:forEach>	
+								<br> <!-- 프로젝트 지원하기  -->
+								<form action="/projectDetail/applyProj" method="post">
+									<input type="hidden" name="free_no" value="${projDTO.free_no }"> 
+									<input type="hidden" name="proj_no" value="${projDTO.proj_no }"> 
 								<input type="submit" value="지원하기">
 							</form>
-							등록일자 <fmt:formatDate value="${projDTO.reg_date }" pattern="yyyy-mm-dd" />
+								등록일자 <fmt:formatDate value="${projDTO.reg_date }" pattern="yyyy-mm-dd" />
+							</div>
+							<hr>
+						</c:forEach>
+							</div>
 						</div>
-					</c:forEach>
-				</section>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-</section>
-
-<script type="text/javascript">
-
-</script>
-
-
-
-<%@ include file="../include/footer.jsp"%>
-
+</body>
+</html>

@@ -51,60 +51,42 @@ public class MyProManageController {
 	public void interestProjectList(HttpSession session, Model model) {
 		logger.debug("/interestProject -> interestProjectList() 호출");
 		
+		// 로그로 아이디 확인
+		logger.debug("user_id : "+session.getAttribute("user_id")); 
+		String user_id = (String)session.getAttribute("user_id");
+		
 		// 서비스 -> DAO 관심 프로젝트 목록 조회 메서드
-		List<ProjectDTO> interestProjectList = myService.interestProjectList();
+		List<ProjectDTO> interestProjectList = myService.interestProjectList(user_id);
 		logger.debug("interestProjectList : " + interestProjectList.size());
 		
 		// DAO 데이터 -> 뷰페이지
 		model.addAttribute("interestProjectList", interestProjectList);		
 	}
-	
-	// 관심 프로젝트 목록 - 지원하기
-	@RequestMapping(value = "/interestProject",method = RequestMethod.POST)
-	public String interestProjectApply(ApplyMgmtVO avo, RedirectAttributes rttr) {
-		logger.debug("/interestProject -> interestProjectApply() 호출");
 		
-		myService.applyProject(avo);
-		
-		// 지원하기 성공정보를 전달
-		rttr.addFlashAttribute("msg", "applySuccess");
-		
-		return "redirect:/myProManage/applyingProject";
-	}
-	
 	// 제안받은 프로젝트 목록 조회
 	// http://localhost:8088/myProManage/proposedProject
 	@RequestMapping(value = "/proposedProject",method = RequestMethod.GET)
-	public void proposedProjectList(Model model) {
+	public void proposedProjectList(HttpSession session, Model model) {
 		logger.debug("/proposedProject -> propoesedProjectList() 호출");
+		 
+		String user_id = (String)session.getAttribute("user_id");
 		
-		List<ProjectDTO> proposedProjectList = myService.proposedProjectList();
+		List<ProjectDTO> proposedProjectList = myService.proposedProjectList(user_id);
 		logger.debug("proposedProjectList : " + proposedProjectList.size());
 		
 		model.addAttribute("proposedProjectList", proposedProjectList);
 		
 	}	
 	
-	// 제안받은 프로젝트 - 지원하기
-	@RequestMapping(value = "/proposedProject",method = RequestMethod.POST)
-	public String proposedProjectApply(ApplyMgmtVO avo, RedirectAttributes rttr) {
-		logger.debug("/proposedProject -> proposedProjectApply() 호출");
-		
-		myService.applyProject(avo);
-		
-		// 지원하기 성공정보를 전달
-		rttr.addFlashAttribute("msg", "applySuccess");
-		
-		return "redirect:/myProManage/applyingProject";
-	}
-	
 	// 지원 중 프로젝트 목록 조회
 	// http://localhost:8088/myProManage/applyingProject
 	@RequestMapping(value = "/applyingProject",method = RequestMethod.GET)
-	public void applyingProjectList(Model model) {
+	public void applyingProjectList(HttpSession session, Model model) {
 		logger.debug("/applyingProject -> applyingProjectList() 호출");
 		
-		List<ProjectDTO> applyingProjectList = myService.applyingProjectList();
+		String user_id = (String)session.getAttribute("user_id");
+		
+		List<ProjectDTO> applyingProjectList = myService.applyingProjectList(user_id);
 		logger.debug("applyingProjectList : " + applyingProjectList.size());
 		
 		model.addAttribute("applyingProjectList", applyingProjectList);		
@@ -143,10 +125,12 @@ public class MyProManageController {
 	// 지원 종료 프로젝트 목록 조회
 	// http://localhost:8088/myProManage/endApplyProject
 	@RequestMapping(value = "/endApplyProject",method = RequestMethod.GET)
-	public void endApplyProjectList(Model model) {
+	public void endApplyProjectList(HttpSession session, Model model) {
 		logger.debug("/endApplyProject -> endApplyProjectList() 호출");
 		
-		List<ProjectDTO> endApplyProjectList = myService.endApplyProjectList();
+		String user_id = (String)session.getAttribute("user_id");
+		
+		List<ProjectDTO> endApplyProjectList = myService.endApplyProjectList(user_id);
 		logger.debug("endApplyProjectList : " + endApplyProjectList.size());
 		
 		model.addAttribute("endApplyProjectList", endApplyProjectList);		
@@ -172,10 +156,12 @@ public class MyProManageController {
 	// 계약 진행 중 프로젝트 목록 조회
 	// http://localhost:8088/myProManage/contractProject	
 	@RequestMapping(value = "/contractProject",method = RequestMethod.GET)
-	public void contractProjectList(Model model) {
+	public void contractProjectList(HttpSession session, Model model) {
 		logger.debug("/contractProject -> contractProjectList() 호출");
 		
-		List<ProjectDTO> contractProjectList = myService.contractProjectList();
+		String user_id = (String)session.getAttribute("user_id");
+		
+		List<ProjectDTO> contractProjectList = myService.contractProjectList(user_id);
 		logger.debug("contractProjectList : " + contractProjectList.size());
 		
 		model.addAttribute("contractProjectList", contractProjectList);		
@@ -197,10 +183,12 @@ public class MyProManageController {
 	// 프로젝트 진행중 목록 조회
 	// http://localhost:8088/myProManage/ongoingProject	
 	@RequestMapping(value = "/ongoingProject",method = RequestMethod.GET)
-	public void ongoingProjectList(Model model) {
+	public void ongoingProjectList(HttpSession session, Model model) {
 		logger.debug("/ongoingProject -> ongoingProjectList() 호출");
 		
-		List<ProjectDTO> ongoingProjectList = myService.ongoingProjectList();
+		String user_id = (String)session.getAttribute("user_id");
+		
+		List<ProjectDTO> ongoingProjectList = myService.ongoingProjectList(user_id);
 		logger.debug("ongoingProjectList : " + ongoingProjectList.size());
 		
 		model.addAttribute("ongoingProjectList", ongoingProjectList);		
@@ -209,11 +197,13 @@ public class MyProManageController {
 	// 평가 대기중 프로젝트 목록 조회
 	// http://localhost:8088/myProManage/waitEvaluationProject	
 	@RequestMapping(value = "/waitEvaluationProject",method = RequestMethod.GET)
-	public void waitEvaluationProjectList(Model model) {
+	public void waitEvaluationProjectList(HttpSession session,Model model) {
 		logger.debug("/waitEvaluationProject -> waitEvaluationProjectList() 호출");
+	
+		String user_id = (String)session.getAttribute("user_id");
 		
 	// 프로젝트 평가 여부 체크 후 평가 대기중 프로젝트 목록 조회
-		List<EvaluateProjectDTO> waitEvaluationProjectList = myService.evaluateProjectList();
+		List<EvaluateProjectDTO> waitEvaluationProjectList = myService.evaluateProjectList(user_id);
 		List<EvaluateProjectDTO> filteredProjList = new ArrayList<>();
 
 		for (EvaluateProjectDTO project : waitEvaluationProjectList) {
@@ -245,10 +235,12 @@ public class MyProManageController {
 	// 완료한 프로젝트 목록 조회
 	// http://localhost:8088/myProManage/completedProject
 	@RequestMapping(value = "/completedProject",method = RequestMethod.GET)
-	public void completedProjectList(EvaluateProjectDTO edto, Model model) {
+	public void completedProjectList(HttpSession session, Model model) {
 		logger.debug("/completedProject -> completedProjectList() 호출");
 		
-		List<EvaluateProjectDTO> completedProjectList = myService.completedProjectList();
+		String user_id = (String)session.getAttribute("user_id");
+		
+		List<EvaluateProjectDTO> completedProjectList = myService.completedProjectList(user_id);
 		List<EvaluateProjectDTO> filteredProjList = new ArrayList<>();
 
 		for (EvaluateProjectDTO project : completedProjectList) {
