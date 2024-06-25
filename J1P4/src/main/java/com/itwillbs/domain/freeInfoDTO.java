@@ -19,4 +19,5 @@ public class freeInfoDTO {
 	
 	private int career_count;
 	private int portfolio_count;
+	private int free_no;
 }

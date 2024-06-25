@@ -141,7 +141,7 @@
 	<!-- 클라이언트 내 프로젝트 관리 -->
 	<!-- 관심 프리랜서 시작 -->
 	<select id="freeInfo" resultType="com.itwillbs.domain.freeInfoDTO">
-		SELECT u.user_id, u.name, f.work_field, f.school_type, r.region, r.district, f.oneline_bio,
+		SELECT u.user_id, u.name, f.work_field, f.school_type, r.region, r.district, f.oneline_bio, f.free_no,
 		       MAX(TRUNCATE(DATEDIFF(NOW(), c.join_date) / 365, 0) + 1) AS yeoncha,
 		       GROUP_CONCAT(DISTINCT s.skill_nm SEPARATOR ', ') AS skills,
 		       CASE
@@ -161,7 +161,7 @@
 		join bookmark b on b.free_no = f.free_no
 		JOIN client ct ON ct.ct_no = b.ct_no
 		WHERE ct.ct_id = #{user_id}
-		GROUP BY u.user_id, u.name, f.work_field, f.school_type, r.region, r.district, f.oneline_bio;
+		GROUP BY u.user_id, u.name, f.work_field, f.school_type, r.region, r.district, f.oneline_bio, f.free_no;
 	</select>
 		
 	

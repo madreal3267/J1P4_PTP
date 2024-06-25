@@ -35,7 +35,6 @@
 	<div class="col-md-9">
 		<div class="tab-content">
 			<div class="tab-pane fade active show"  >
-<!-- ------------------------------------------------------------------------------------------------------------------------  -->
 				<!-- card body 시작 -->
 				<div class="card-body border-start" >
 					<div class="border-bottom" style="position: relative; right:16px; width:1000px; padding-bottom: 10px;" >
@@ -47,53 +46,50 @@
 			<div>
 				<b>[프투프 안전 계약 절차]</b> <br> 
 				1. 업데이트된 계약서를 충분히 검토 후 계약 내용에 동의해주세요. <br> 
-				<b>2. 클라이언트, AAA, 프리랜서 모두의 계약서 검토가 완료되면 AAA가 계약서를 업로드 합니다.</b><br>
+				<b>2. 클라이언트, AAA, 프리랜서 모두의 계약서 검토가 완료되면 프투프가 계약서를 업로드 합니다.</b><br>
 			</div>	
-						<h4 class="font-weight-bold mx-4 my-3">계약 진행 중</h4>
-						계약이 진행 중인 프로젝트를 확인 할 수 있습니다.
-					</div><br>	
-						<div class="box box-default">
-							<div class="box-header with-border">1. 계약서 업로드</div>
-						</div>
-					<br>
-
-
-	<div class="col-md-12">
-		<div class="box box-default">
-			<div class="box-header with-border">
-				<section>
-					<table class="table table-bordered bg-light table-striped">
-						<tbody>
-							<tr class="text-center">
-								<td>프로젝트 번호</td>
-								<td>프로젝트 이름</td>
-								<td>클라이언트</td>
-								<td>담당 매니저</td>
-								<td>진행 상태</td>
-							</tr>
-							<c:forEach var="conProj" items="${contractProjectList}">
-								<tr>
-									<td>${conProj.proj_no }</td>
-									<td>${conProj.proj_title }</td>
-									<td>${conProj.ct_id }</td>
-									<td id="mn">${conProj.manager_nm }</td>
-									<td>${conProj.proj_status } 진행중</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</section>
-			</div>
-		</div>
-			</div>
+			<h4 class="font-weight-bold mx-4 my-3">계약 진행 중</h4>
+			계약이 진행 중인 프로젝트를 확인 할 수 있습니다.
+			</div><br>	
+				<div class="box box-default">
+					<div class="box-header with-border">1. 계약서 업로드</div>
 				</div>
-<!-- ------------------------------------------------------------------------------------------------------------------------  -->
+					<br>
+				<div class="col-md-12">
+					<div class="box box-default">
+						<div class="box-header with-border">
+							<section>
+								<table class="table table-bordered bg-light table-striped">
+									<tbody>
+										<tr class="text-center">
+											<td>프로젝트 번호</td>
+											<td>프로젝트 이름</td>
+											<td>클라이언트</td>
+											<td>담당 매니저</td>
+											<td>진행 상태</td>
+										</tr>
+										<c:forEach var="conProj" items="${contractProjectList}">
+											<tr>
+												<td>${conProj.proj_no }</td>
+												<td>${conProj.proj_title }</td>
+												<td>${conProj.ct_id }</td>
+												<td id="mn">${conProj.manager_nm }</td>
+												<td>${conProj.proj_status } 진행중</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</section>
 						</div>
+					</div>
+				</div>
+				</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 <!--  -->
 <script type="text/javascript">
 	$(document).ready(function(){

@@ -37,7 +37,6 @@
 	<div class="col-md-9">
 		<div class="tab-content">
 			<div class="tab-pane fade active show">
-<!-- ------------------------------------------------------------------------------------------------------------------------  -->
 				<!-- card body 시작 -->
 				<div class="card-body border-start" >
 					<div class="border-bottom" style="position: relative; right:16px; width:1000px; padding-bottom: 10px;" >
@@ -154,7 +153,6 @@
 				<button type="button" class="btn btn-primary">동작 X</button>
 			</div>
 		</div>	
-<!-- ------------------------------------------------------------------------------------------------------------------------  -->
 						</div>
 					</div>
 				</div>
