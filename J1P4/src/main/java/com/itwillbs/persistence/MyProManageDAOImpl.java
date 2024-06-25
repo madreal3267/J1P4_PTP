@@ -97,8 +97,8 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 
 	// 검수중 프로젝트 리스트
 	@Override
-	public List<ProjectVO> underReviewProjectList() {
-		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"underReviewProjectList");
+	public List<ProjectVO> underReviewProjectList(String user_id) {
+		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"underReviewProjectList", user_id);
 		
 		return resultVO;
 	}
@@ -106,6 +106,14 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 	// 검수중 프로젝트 리스트 - 프로젝트 삭제하기
 	@Override
 	public int deleteProject(int proj_no) {
+		sqlSession.delete(NAMESPACE+"del1", proj_no);
+		sqlSession.delete(NAMESPACE+"del2", proj_no);
+		sqlSession.delete(NAMESPACE+"del3", proj_no);
+		sqlSession.delete(NAMESPACE+"del4", proj_no);
+		sqlSession.delete(NAMESPACE+"del5", proj_no);
+		sqlSession.delete(NAMESPACE+"del6", proj_no);
+		sqlSession.delete(NAMESPACE+"del7", proj_no);
+		
 		int result = sqlSession.delete(NAMESPACE+"deleteProject", proj_no);
 		
 		return result;
@@ -113,8 +121,8 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 	
 	// 임시저장 프로젝트 리스트
 	@Override
-	public List<ProjectVO> temSaveProjectList() {
-		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"temSaveProjectList");
+	public List<ProjectVO> temSaveProjectList(String user_id) {
+		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"temSaveProjectList", user_id);
 		
 		return resultVO;
 	}
@@ -122,24 +130,24 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 
 	// 등록실패 프로젝트 리스트
 	@Override
-	public List<ProjectVO> regFailedProjectList() {
-		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"regFailedProjectList");
+	public List<ProjectVO> regFailedProjectList(String user_id) {
+		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"regFailedProjectList", user_id);
 		
 		return resultVO;
 	}
 
 	// 지원자 모집중 프로젝트 리스트
 	@Override
-	public List<proposeFreeDTO> recruitingProjectList() {
-		List<proposeFreeDTO> resultDTO = sqlSession.selectList(NAMESPACE+"rpl");
+	public List<proposeFreeDTO> recruitingProjectList(String user_id) {
+		List<proposeFreeDTO> resultDTO = sqlSession.selectList(NAMESPACE+"rpl", user_id);
 		
 		return resultDTO;
 	}
 
 	// 계약중 프로젝트 리스트(클라이언트 ver.)
 	@Override
-	public List<ProjectVO> ctContractProjectList() {
-		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"ctContractProjectList");
+	public List<ProjectVO> ctContractProjectList(String user_id) {
+		List<ProjectVO> resultVO = sqlSession.selectList(NAMESPACE+"ctContractProjectList", user_id);
 		
 		return resultVO;
 	}
@@ -203,8 +211,8 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 
 	// 진행중 프로젝트 목록 조회
 	@Override
-	public List<ctOngoingProjectDTO> ctOngoingProjectList() {
-		List<ctOngoingProjectDTO> resultDTO = sqlSession.selectList(NAMESPACE+"ctOngoingProjectList");
+	public List<ctOngoingProjectDTO> ctOngoingProjectList(String user_id) {
+		List<ctOngoingProjectDTO> resultDTO = sqlSession.selectList(NAMESPACE+"ctOngoingProjectList", user_id);
 		logger.debug("resultDTO : "+ resultDTO.size());
 		
 		return resultDTO;
@@ -212,8 +220,8 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 	
 	// 평가 대기중 프리랜서 목록 조회
 	@Override
-	public List<EvaluateFreelancerDTO> waitEvaluationFreelancerList() {
-		List<EvaluateFreelancerDTO> resultDTO =sqlSession.selectList(NAMESPACE+"waitEvaluationFreelancerList");
+	public List<EvaluateFreelancerDTO> waitEvaluationFreelancerList(String user_id) {
+		List<EvaluateFreelancerDTO> resultDTO =sqlSession.selectList(NAMESPACE+"waitEvaluationFreelancerList", user_id);
 		
 		return resultDTO;
 	}
@@ -235,8 +243,8 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 
 	// 완료된 프로젝트 - 평가 완료된 프로젝트 목록
 	@Override
-	public List<EvaluateFreelancerDTO> completedFreelancerList() {
-		List<EvaluateFreelancerDTO> resultDTO =sqlSession.selectList(NAMESPACE+"completedProjectFreeList");
+	public List<EvaluateFreelancerDTO> completedFreelancerList(String user_id) {
+		List<EvaluateFreelancerDTO> resultDTO =sqlSession.selectList(NAMESPACE+"completedProjectFreeList", user_id);
 		
 		return resultDTO;
 	}
@@ -270,7 +278,13 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 		sqlSession.update(NAMESPACE+"recruitmentCompleted", pfdto);
 		
 	}
-
+	// 진행중 프로젝트 - 완료하기(정산요청)
+	@Override
+	public void payment(ctOngoingProjectDTO cdto) {
+		sqlSession.update(NAMESPACE+"payment", cdto);
+		
+	}
+	
 	// 진행중 프로젝트 - 완료하기(정산요청)
 	@Override
 	public void requestSettlement(ctOngoingProjectDTO cdto) {

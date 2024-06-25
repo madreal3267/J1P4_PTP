@@ -44,16 +44,16 @@
 									<div class="modal-body">
 										별점을 매겨주세요<br>
 										<fieldset class="rate">
-											<input type="radio" id="rating10-${freeDTO.free_no}" name="score" value="10"><label for="rating10-${freeDTO.free_no}" title="5점"></label> 
-											<input type="radio" id="rating9-${freeDTO.free_no}" name="score" value="9"><label class="half" for="rating9-${freeDTO.free_no}" title="4.5점"></label> 
-											<input type="radio" id="rating8-${freeDTO.free_no}" name="score" value="8"><label for="rating8-${freeDTO.free_no}" title="4점"></label> 
-											<input type="radio" id="rating7-${freeDTO.free_no}" name="score" value="7"><label class="half" for="rating7-${freeDTO.free_no}" title="3.5점"></label> 
-											<input type="radio" id="rating6-${freeDTO.free_no}" name="score" value="6"><label for="rating6-${freeDTO.free_no}" title="3점"></label> 
-											<input type="radio" id="rating5-${freeDTO.free_no}" name="score" value="5"><label class="half" for="rating5-${freeDTO.free_no}" title="2.5점"></label> 
-											<input type="radio" id="rating4-${freeDTO.free_no}" name="score" value="4"><label for="rating4-${freeDTO.free_no}" title="2점"></label> 
-											<input type="radio" id="rating3-${freeDTO.free_no}" name="score" value="3"><label class="half" for="rating3-${freeDTO.free_no}" title="1.5점"></label> 
-											<input type="radio" id="rating2-${freeDTO.free_no}" name="score" value="2"><label for="rating2-${freeDTO.free_no}" title="1점"></label> 
-											<input type="radio" id="rating1-${freeDTO.free_no}" name="score" value="1"><label class="half" for="rating1-${freeDTO.free_no}" title="0.5점"></label>
+											<input type="radio" id="rating10-${freeDTO.free_no}" name="score" value="10"><label for="rating10-${freeDTO.free_no}" title="10점"></label> 
+											<input type="radio" id="rating9-${freeDTO.free_no}" name="score" value="9"><label class="half" for="rating9-${freeDTO.free_no}" title="9점"></label> 
+											<input type="radio" id="rating8-${freeDTO.free_no}" name="score" value="8"><label for="rating8-${freeDTO.free_no}" title="8점"></label> 
+											<input type="radio" id="rating7-${freeDTO.free_no}" name="score" value="7"><label class="half" for="rating7-${freeDTO.free_no}" title="7점"></label> 
+											<input type="radio" id="rating6-${freeDTO.free_no}" name="score" value="6"><label for="rating6-${freeDTO.free_no}" title="6점"></label> 
+											<input type="radio" id="rating5-${freeDTO.free_no}" name="score" value="5"><label class="half" for="rating5-${freeDTO.free_no}" title="5점"></label> 
+											<input type="radio" id="rating4-${freeDTO.free_no}" name="score" value="4"><label for="rating4-${freeDTO.free_no}" title="4점"></label> 
+											<input type="radio" id="rating3-${freeDTO.free_no}" name="score" value="3"><label class="half" for="rating3-${freeDTO.free_no}" title="3점"></label> 
+											<input type="radio" id="rating2-${freeDTO.free_no}" name="score" value="2"><label for="rating2-${freeDTO.free_no}" title="2점"></label> 
+											<input type="radio" id="rating1-${freeDTO.free_no}" name="score" value="1"><label class="half" for="rating1-${freeDTO.free_no}" title="1점"></label>
 										</fieldset>
 										<hr>
 										<textarea name="content" placeholder="프리랜서를 평가해주세요" rows="4" cols="50"></textarea>
@@ -72,21 +72,5 @@
 				</c:forEach>
 			</section>
 
-			<!-- 외형만 복사. 작동원리 탐구 필요. -->
-			<div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-				<ul class="pagination">
-					<li class="paginate_button previous disabled" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0">Previous</a></li>
-					<li class="paginate_button active"><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0">1</a></li>
-					<li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0">2</a></li>
-					<li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0">3</a></li>
-					<li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0">4</a></li>
-					<li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0">5</a></li>
-					<li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0">6</a></li>
-					<li class="paginate_button next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0">Next</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-</div>
 <%@ include file="../include/footer.jsp" %>
 	

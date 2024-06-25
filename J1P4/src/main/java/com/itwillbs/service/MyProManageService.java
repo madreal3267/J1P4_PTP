@@ -39,22 +39,22 @@ public interface MyProManageService {
 	public List<ProjectDTO> ongoingProjectList(String user_id);
 
 	// 검수중 프로젝트 목록
-	public List<ProjectVO> underReviewProjectList();
+	public List<ProjectVO> underReviewProjectList(String user_id);
 	
 	// 검수중 프로젝트 목록 - 프로젝트 삭제하기
 	public int deleteProject(int proj_no);	
 	
 	// 임시저장 프로젝트 목록
-	public List<ProjectVO> temSaveProjectList();
+	public List<ProjectVO> temSaveProjectList(String user_id);
 	
 	// 등록실패 프로젝트 목록
-	public List<ProjectVO> regFailedProjectList();
+	public List<ProjectVO> regFailedProjectList(String user_id);
 	
 	// 지원자 모집중 프로젝트 목록
-	public List<proposeFreeDTO> recruitingProjectList();
+	public List<proposeFreeDTO> recruitingProjectList(String user_id);
 	
 	// 계약 진행중 프로젝트 목록
-	public List<ProjectVO> ctContractProjectList();
+	public List<ProjectVO> ctContractProjectList(String user_id);
 	
 	// DTO 변경 적용 중
 	// 평가 대기중 프로젝트 리스트
@@ -79,10 +79,10 @@ public interface MyProManageService {
 	public List<proposeFreeDTO> proposeFreelancerList(String user_id);	
 	
 	// 프로젝트 진행중 목록 
-	public List<ctOngoingProjectDTO> ctOngoingProjectList();
+	public List<ctOngoingProjectDTO> ctOngoingProjectList(String user_id);
 	
 	// 평가 대기중 프리랜서 목록
-	public List<EvaluateFreelancerDTO> waitEvaluationFreelancerList();
+	public List<EvaluateFreelancerDTO> waitEvaluationFreelancerList(String user_id);
 	
 	// 평개 대기중 프리랜서 - 평가하기
 	public void evaluateFreelancer(EvaluateFreelancerDTO edto);
@@ -91,7 +91,7 @@ public interface MyProManageService {
 	public int checkEvaluateFree(EvaluateFreelancerDTO edto);
 	
 	// 완료한 프로젝트의 평가완료 프리랜서 목록
-	public List<EvaluateFreelancerDTO> completedFreelancerList();
+	public List<EvaluateFreelancerDTO> completedFreelancerList(String user_id);
 	
 	// 프리랜서 평가 수정하기
 	public void updateEvaluateFree(EvaluateFreelancerDTO edto);
@@ -105,11 +105,15 @@ public interface MyProManageService {
 	// 지원자 모집중 프로젝트 - 모집 완료
 	public void recruitmentCompleted(proposeFreeDTO pfdto);
 
+	// 진행중 프로젝트 - 결제하기(대금지불)
+	public void payment(ctOngoingProjectDTO cdto);
+
 	// 진행중 프로젝트 - 완료하기(정산요청)
 	public void requestSettlement(ctOngoingProjectDTO cdto);
 
 	// 지원중 프로젝트 - 제안동의
 	public void agreeContract(proposeFreeDTO pfdto);
+
 
 	
 

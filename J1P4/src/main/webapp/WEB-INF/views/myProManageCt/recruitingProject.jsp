@@ -7,12 +7,6 @@
 
 <%@ include file="../include/headerCt.jsp"%>
 
-<!-- 폼태그 -->
-<form role="form" action="" method="post">
-	<input type="hidden" name="proj_no" value="${proFreeDTO.proj_no }">
-	<input type="hidden" name="free_no" value="${proFreeDTO.free_no }">
-</form>
-
 <h1>/myProManageCt/recruitingProject.jsp</h1>
 
 <section>
@@ -61,7 +55,11 @@
 						</td>
                         <td>${proFreeDTO.yeoncha} </td>
                         <td> 
-                        	<button type="submit" class="btn btn-warning" >지원 거절</button>
+                        <form action="/myProManageCt/rejectApply" method="post">
+                            <input type="hidden" name="proj_no" value="${proFreeDTO.proj_no}">
+                            <input type="hidden" name="free_no" value="${proFreeDTO.free_no}">
+                            <button type="submit" class="btn btn-warning">지원 거절</button>
+                        </form>
 					    <c:choose>
 					        <c:when test="${proFreeDTO.meetingOK == 0}">
 					            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-${proFreeDTO.free_no}">계약하기</button>
@@ -71,12 +69,13 @@
 					        </c:otherwise>
 					    </c:choose>
                         </td>
-<%--                          <td rowspan="${rowCount+1}" id="proj${status.index}"> --%>
-<!--                          	<button type="submit" class="btn aaa" >모집완료</button> -->
-<!--                        	</td> -->
                     <!-- 수정된 부분 시작: 모집완료 버튼을 합치기 위해 rowspan 추가 -->
                     <td rowspan="${rowCount + 1}" id="complete${status.index}">
-                        <button type="submit" class="btn btn-danger">모집완료</button>
+                        <!-- <button type="submit" class="btn btn-danger">모집완료</button> -->
+                       <form action="/myProManageCt/recruitmentCompleted" method="post">
+                     		<input type="hidden" name="proj_no" value="${proFreeDTO.proj_no}">
+                       		<button type="submit" class="btn btn-danger">모집완료</button>
+                       </form>
                     </td>
                     <!-- 수정된 부분 끝 -->
                     </tr>
@@ -94,7 +93,11 @@
 						</td>
                         <td>${proFreeDTO.yeoncha} </td>
                         <td>
-						   	<button type="submit" class="btn btn-warning" >지원거절</button>
+						 <form action="/myProManageCt/rejectApply" method="post">
+                            <input type="hidden" name="proj_no" value="${proFreeDTO.proj_no}">
+                            <input type="hidden" name="free_no" value="${proFreeDTO.free_no}">
+                            <button type="submit" class="btn btn-warning">지원 거절</button>
+                        </form>
 					    <c:choose>
 					        <c:when test="${proFreeDTO.meetingOK == 0}">
 					            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-${proFreeDTO.free_no}">계약하기</button>
@@ -107,7 +110,11 @@
                                          <!-- 수정된 부분 시작: 동일한 프로젝트일 때 모집완료 버튼 칸을 없애기 위해 rowspan 업데이트 -->
                     <c:if test="${prevProjectName != proFreeDTO.proj_title}">
                         <td rowspan="${rowCount + 1}" id="complete${status.index}">
-                            <button type="submit" class="btn btn-danger">모집완료</button>
+                            <!-- <button type="submit" class="btn btn-danger">모집완료</button> -->
+                            <form action="/myProManageCt/recruitmentCompleted" method="post">
+                                <input type="hidden" name="proj_no" value="${proFreeDTO.proj_no}">
+                                <button type="submit" class="btn btn-danger">모집완료</button>
+                            </form>
                         </td>
                     </c:if>
                     <!-- 수정된 부분 끝 -->   
@@ -168,20 +175,6 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		
-		// '지원 거절' 버튼 클릭 -> update table apply_mgmt set reject_apply
-		$(".btn-warning").click(function(){
-			$("form[role='form']").attr("action","/myProManageCt/rejectApply]]");
-			$("form[role='form']").submit();			
-			
-		});
-		
-		// '모집완료' 버튼 클릭 -> update table project set proj_status
-		$(".btn-warning").click(function(){
-			$("form[role='form']").attr("action","/myProManageCt/recruitmentCompleted");
-			$("form[role='form']").submit();			
-			
-		}); 
-		
 		// 지원 거절후 페이지 로딩시 모달창 생성
 		var result = "${msg}";
 		
@@ -204,6 +197,7 @@
 			});
 		}
 		
+		// 모집 완료 후 페이지 로딩시 모달창 생성
 		if(result == "recruitmentCompleted"){
 			Swal.fire({
 			  icon: "info",
@@ -215,7 +209,7 @@
 		
 		
 		
-	})	
+	});
 </script>	
 <%@ include file="../include/footer.jsp"%>
 
