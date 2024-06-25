@@ -25,7 +25,11 @@
 			분야 | ${tspl.work_field } || 작업기간 | ${tspl.work_period } <br>
 			단가 | ${tspl.proj_cost } || 작업 내용 | ${tspl.proj_content } <br>
 			${tspl.reg_date }<br>
-			<button type="submit" class="btn btn-warning" >이어서 작성하기</button>
+			<!-- <button type="submit" class="btn btn-warning" >이어서 작성하기</button> -->
+			<%-- <button type="submit" class="btn btn-warning" onclick="location.href=enroll/getSavedProj?proj_no=${tspl.proj_no}'">이어서 작성하기</button> --%>
+			<button type="submit" class="btn btn-warning" 
+			onclick="location.href='/enroll/getSavedProj?proj_no=${tspl.proj_no}'">이어서 작성하기</button>
+			
 			<button type="submit" class="btn btn-danger" >삭제하기</button>
 			<br>
 		</div>
@@ -36,6 +40,12 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		
+		// http://localhost:8088/enroll/getSavedProj?proj_no=412
+// 		$(".btn-warning").click(function(){
+// 			$("form[role='form']").attr("action","/myProManageCt/temSaveProject");
+// 			$("form[role='form']").submit();			
+			
+// 		});				
 		// '삭제하기' 버튼 클릭시 삭제 후 
 		$(".btn-danger").click(function(){
 			$("form[role='form']").attr("action","/myProManageCt/temSaveProject");
@@ -54,7 +64,7 @@
 			  confirmButtonText: "확인"
 			});
 		}
-	})	
+	});	
 </script>	
 <%@ include file="../include/footer.jsp" %>
 	

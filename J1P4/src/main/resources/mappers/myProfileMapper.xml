@@ -19,7 +19,7 @@
         union all select 7 union all select 8
         union all select 9 union all select 10) numbers INNER JOIN skill
         on char_length (skill.skill_nm) - char_length(replace(skill.skill_nm,',',''))>=numbers.n-1
-        where free_no = #{free_no} and user_id=#{free_id}
+        where free_no = #{free_no} and user_id=#{free_id} order by skill_nm
 	</select>
 	
 	<select id="getReg" resultType="com.itwillbs.domain.RegionVO">
@@ -38,7 +38,7 @@
         union all select 7 union all select 8
         union all select 9 union all select 10) numbers INNER JOIN career
         on char_length (career.company_nm) - char_length(replace(career.company_nm,',',''))>=numbers.n-1
-       	where free_no = #{free_no}   
+       	where free_no = #{free_no} order by company_nm
 	</select>
 	
 	<select id="getLicense" resultType="com.itwillbs.domain.LicenseVO">
@@ -51,7 +51,7 @@
         union all select 7 union all select 8
         union all select 9 union all select 10) numbers INNER JOIN license
         on char_length (license.license_nm) - char_length(replace(license.license_nm,',',''))>=numbers.n-1
-		where free_no = #{free_no}  
+		where free_no = #{free_no} order by license_nm
 	</select>
 	
 	<select id="getComp" resultType="com.itwillbs.domain.CompanyVO">
@@ -63,7 +63,7 @@
         union all select 7 union all select 8
         union all select 9 union all select 10) numbers INNER JOIN company_history
         on char_length (company_history.yearmonth) - char_length(replace(company_history.yearmonth,',',''))>=numbers.n-1
-        where free_no = #{free_no}    
+        where free_no = #{free_no} order by yearmonth
 	</select>
 	
 	<select id="getPartn" resultType="com.itwillbs.domain.PartnersVO">
@@ -75,7 +75,7 @@
         union all select 7 union all select 8
         union all select 9 union all select 10) numbers INNER JOIN partners
         on char_length (partners.partners_nm) - char_length(replace(partners.partners_nm,',',''))>=numbers.n-1
-        where free_no = #{free_no}
+        where free_no = #{free_no} order by partners_nm
 	</select>
 
  

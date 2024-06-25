@@ -2,34 +2,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
 body{
-    background: #fff !important;
+    background: #fff
     margin-top:20px;
 	font-family: "Nanum Gothic", sans-serif !important;
 }
 
 #mainImg {
 	position: absolute;
-	left:900px;
-	bottom:300px; 
+	left:970px;
+	bottom:280px; 
 }
 
 #mainText {
 	font-weight: bolder;
 	line-height: 60px;
-	padding-left: 330px;
+	padding-left: 420px;
 }
 
 #mainProjMenu {
 	font-weight: bolder;
 	line-height: 60px;
 	position: absolute;
-	left:330px;
+	left:420px;
 	bottom:90px;
 }
  
 #subText {
 	color: #808080;
-	padding-left: 330px;
+	padding-left: 420px;
 	line-height: 40px;
 }
 
@@ -50,7 +50,7 @@ body{
 	width: 400px;
 	position: absolute;
 	bottom: 300px;
-	left:330px;
+	left:420px;
 }
 
 .butt1 {

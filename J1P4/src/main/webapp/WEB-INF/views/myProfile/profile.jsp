@@ -208,7 +208,8 @@ ct_no: ${sessionScope.ct_no }
 			<div class="gap">
 				<h5>전문성</h5>
 				<div class="content">
-				<h4><span class="badge rounded-pill bg-secondary">${myCareer[0].job_lev }</span>
+				<h4><span class="badge rounded-pill bg-secondary">${myCareer[0].job_lev }</span></h4>
+				
 				</div>
 			</div>
 			<hr>
@@ -308,6 +309,19 @@ ct_no: ${sessionScope.ct_no }
 	</div>
 </div>
 </div>
+</div>
+
+<div class="container">
+	<footer class="py-3 my-4">
+	<ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+    </ul>
+    <p class="text-center text-body-secondary">© 2024-06-06 Zip-Ga-Go-Ship-Da, Inc</p>
+   </footer>
 </div>
 
 </body>

@@ -14,7 +14,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="../resources/css/header.css" rel="stylesheet" />
 <link href="../resources/css/main.css" rel="stylesheet" />
+<link href="../resources/star.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+</style>
 <link href="../resources/css/enrollProj.css" rel="stylesheet" />
+<link href="../resources/css/listPro.css" rel="stylesheet" />
 </head>
 <body style="padding-top: 75px;">
 
