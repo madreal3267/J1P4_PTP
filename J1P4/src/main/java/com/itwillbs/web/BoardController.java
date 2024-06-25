@@ -1,8 +1,11 @@
 package com.itwillbs.web;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -47,9 +50,18 @@ public class BoardController {
 	// http://localhost:8088/board/listPro
 	// 기본 페이지
 	@GetMapping(value = "/listPro")
-	public void list(Criteria cri, Model model, HttpServletRequest request) {
+	public void list(Criteria cri, Model model, HttpServletRequest request,BMarkVO vo) {
 		logger.debug("/listPro 실행 ");
-		
+		// 북마크 체크
+		Integer fn = (Integer)request.getSession().getAttribute("free_no");
+		if(request.getSession().getAttribute("free_no") != null) {
+			logger.debug("프리랜서 로그인!");
+			logger.debug("fn"+fn);
+			List<BMarkVO> bMproj_no = bService.freebMark(fn);
+			logger.debug("bMproj_no"+bMproj_no);
+			
+			model.addAttribute("bMproj_no", bMproj_no);
+		}
 		int pNum = bService.pNum();
 		model.addAttribute("pNum", pNum);
 		
@@ -84,7 +96,8 @@ public class BoardController {
 	public String listPage(Criteria cri, Model model, HttpServletRequest request,@RequestParam("sn") String sn, String work_field, ProjectVO vo) {
 		logger.debug("/listProP 실행 ");
 		logger.debug("work_field " + work_field);
-		 
+
+		
 		int pNum = bService.fiNum(vo);
 		model.addAttribute("pNum", pNum);
 		
@@ -108,6 +121,17 @@ public class BoardController {
 		logger.debug("offset : "+offset);
 		model.addAttribute("pageMaker", new PageDTO(cri, pNum));
 		
+		// 북마크 체크
+		Integer fn = (Integer)request.getSession().getAttribute("free_no");
+		if(request.getSession().getAttribute("free_no") != null) {
+			logger.debug("프리랜서 로그인!");
+			logger.debug("fn"+fn);
+			List<BMarkVO> bMproj_no = bService.freebMark(fn);
+			logger.debug("bMproj_no"+bMproj_no);
+			
+			model.addAttribute("bMproj_no", bMproj_no);
+		}
+		
 		// 데드라인 일때 예외
 		if(sn.equals("deadline")) {
 			logger.debug("@@@@ deadline 정렬 확인용111111111@@@@");
@@ -127,6 +151,17 @@ public class BoardController {
 	public String listPageFi(Criteria cri, Model model, HttpServletRequest request,@RequestParam("sn") String sn, String work_field, ProjectVO vo) {
 		logger.debug("/listProFi 실행 ");
 		logger.debug("work_field " + work_field);
+		
+		// 북마크 체크
+		Integer fn = (Integer)request.getSession().getAttribute("free_no");
+		if(request.getSession().getAttribute("free_no") != null) {
+			logger.debug("프리랜서 로그인!");
+			logger.debug("fn"+fn);
+			List<BMarkVO> bMproj_no = bService.freebMark(fn);
+			logger.debug("bMproj_no"+bMproj_no);
+			
+			model.addAttribute("bMproj_no", bMproj_no);
+		}
 		
 		int pNum = bService.fiNum(vo);
 		model.addAttribute("pNum", pNum);
@@ -198,8 +233,19 @@ public class BoardController {
 	
 	// 필터
 	@RequestMapping(value = "/listPro",method = RequestMethod.POST)
-	public void fiterList(@RequestParam("work_field") String work_field, Model model,ProjectVO pvo, Criteria cri) {
+	public void fiterList(@RequestParam("work_field") String work_field, Model model,ProjectVO pvo, Criteria cri, HttpServletRequest request) {
 		logger.debug("work_field : "+work_field);
+		
+		// 북마크 체크
+		Integer fn = (Integer)request.getSession().getAttribute("free_no");
+		if(request.getSession().getAttribute("free_no") != null) {
+			logger.debug("프리랜서 로그인!");
+			logger.debug("fn"+fn);
+			List<BMarkVO> bMproj_no = bService.freebMark(fn);
+			logger.debug("bMproj_no"+bMproj_no);
+			
+			model.addAttribute("bMproj_no", bMproj_no);
+		}
 		
 		
 		List<ProjectVO> list = bService.proFi(cri);
@@ -218,13 +264,22 @@ public class BoardController {
 	}
 	
 	@GetMapping(value = "/detailList")
-	public String detailGET(@RequestParam("proj_no") int proj_no, Model model) {
+	public String detailGET(@RequestParam("proj_no") int proj_no, Model model, HttpServletRequest request) {
 		// 프로젝트 리스트 상세정보
 		
 		ProjectVO resultVO = bService.dePro(proj_no);
 		model.addAttribute(resultVO);
 		// 로그인 여부 조회
-		
+		// 북마크 체크
+			Integer fn = (Integer)request.getSession().getAttribute("free_no");
+			if(request.getSession().getAttribute("free_no") != null) {
+				logger.debug("프리랜서 로그인!");
+				logger.debug("fn"+fn);
+				List<BMarkVO> bMproj_no = bService.freebMark(fn);
+				logger.debug("bMproj_no"+bMproj_no);
+				
+				model.addAttribute("bMproj_no", bMproj_no);
+			}
 		// 뷰페이지 이동
 		return "/board/detailList";
 	}
@@ -267,16 +322,16 @@ public class BoardController {
 	// 북마크 등록
 	@GetMapping(value = "/dobMark")
 	@ResponseBody
-	public void dobMark(@RequestParam int proj_no, HttpSession session, BMarkVO vo){
+	public void dobMark(@RequestParam int proj_no, HttpSession session, BMarkVO vo, HttpServletRequest request){
 		
 		// 게시물 번호
 		vo.setProj_no(proj_no);
 		
 		// 로그인한 프리랜서
-		//vo.setFree_no((int)session.getAttribute("id_no"));
+		Integer Free_no = (Integer)request.getSession().getAttribute("free_no");
 		
 		// 테스트용 프리랜서
-		int Free_no = 349;
+		//int Free_no = 349;
 		vo.setFree_no(Free_no);
 
 		// 디비에 북마크 저장
@@ -289,16 +344,16 @@ public class BoardController {
 	// 북마크 해제
 	@GetMapping(value = "/deletebMark")
 	@ResponseBody
-	public void deleteBMark(@RequestParam int proj_no, HttpSession session, BMarkVO vo){
+	public void deleteBMark(@RequestParam int proj_no, HttpSession session, BMarkVO vo, HttpServletRequest request){
 		
 		// 게시물 번호
 		vo.setProj_no(proj_no);
 		
 		// 로그인한 프리랜서
-		//vo.setFree_no((int)session.getAttribute("id_no"));
+		Integer Free_no = (Integer)request.getSession().getAttribute("free_no");
 		
 		// 테스트용 프리랜서
-		int Free_no = 349;
+		//int Free_no = 349;
 		vo.setFree_no(Free_no);
 		
 		
@@ -314,6 +369,17 @@ public class BoardController {
 		
 		logger.debug("vo : "+vo);
 		logger.debug("sn : "+sn);
+		
+		// 북마크 체크
+		Integer fn = (Integer)request.getSession().getAttribute("free_no");
+		if(request.getSession().getAttribute("free_no") != null) {
+			logger.debug("프리랜서 로그인!");
+			logger.debug("fn"+fn);
+			List<BMarkVO> bMproj_no = bService.freebMark(fn);
+			logger.debug("bMproj_no"+bMproj_no);
+			
+			model.addAttribute("bMproj_no", bMproj_no);
+		}
 
 		// worke_fiel를 선택안했을 시는 기본 "개발"
 		if(vo.getWork_field() == null) {

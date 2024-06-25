@@ -5,18 +5,21 @@
 <html>
 <head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js' integrity='sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==' crossorigin='anonymous'></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <title>프투프 PTP</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script> -->
-<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 <link href="../resources/css/header.css" rel="stylesheet" />
 <link href="../resources/css/main.css" rel="stylesheet" />
 <link href="../resources/star.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 </style>
+<link href="../resources/css/enrollProj.css" rel="stylesheet" />
+
 </head>
 <body style="padding-top: 75px;">
 
@@ -31,7 +34,7 @@
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" >
           <li><a href="/board/listPro" class="nav-link px-3 link-body-emphasis nav-r1">프로젝트 찾기</a></li>
-          <li><a href="#" class="nav-link px-3 link-body-emphasis nav-r1">프리랜서 찾기</a></li>
+          <li><a href="/board/listFree" class="nav-link px-3 link-body-emphasis nav-r1">프리랜서 찾기</a></li>
           <li><a href="#" class="nav-link px-3 link-body-emphasis nav-r1">이용방법</a></li>
           <li><a href="/member/login" class="nav-link px-2 link-body-emphasis nav-r4">로그인</a></li>
           <li><a href="/member/insert" class="nav-link px-2 link-body-emphasis nav-r4">회원가입</a></li>

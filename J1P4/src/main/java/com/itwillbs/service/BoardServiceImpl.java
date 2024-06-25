@@ -133,6 +133,11 @@ public class BoardServiceImpl implements BoardService {
 	public int mofiNumNs(ProjectVO vo) {
 		return bdao.mofiNumNs(vo);
 	}
+
+	@Override
+	public List<BMarkVO> freebMark(int free_no) {
+		return bdao.freebMark(free_no);
+	}
 	
 	
 	

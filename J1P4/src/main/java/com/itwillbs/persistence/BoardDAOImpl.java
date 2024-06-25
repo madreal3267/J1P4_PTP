@@ -1,7 +1,9 @@
 package com.itwillbs.persistence;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -136,6 +138,12 @@ public class BoardDAOImpl implements BoardDAO{
 	@Override
 	public int mofiNumNs(ProjectVO vo) {
 		int result = sqlSession.selectOne(NAMESPACE+"mofiNumNs",vo);
+		return result;
+	}
+
+	@Override
+	public List<BMarkVO> freebMark(int free_no) {
+		List<BMarkVO> result = sqlSession.selectList(NAMESPACE+"freebMark",free_no);
 		return result;
 	}
 

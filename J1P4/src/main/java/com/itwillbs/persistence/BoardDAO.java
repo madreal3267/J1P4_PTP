@@ -1,6 +1,8 @@
 package com.itwillbs.persistence;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.itwillbs.domain.BMarkVO;
 import com.itwillbs.domain.Criteria;
@@ -56,6 +58,9 @@ public interface BoardDAO {
 	// 모달 필터된 프로젝트 수
 	public int mofiNum(ProjectVO vo);
 	public int mofiNumNs(ProjectVO vo);
+	
+	// 북마크된 프로젝트 번호
+	public List<BMarkVO> freebMark(int free_no);
 	
 	// 프리랜서 정렬
 	

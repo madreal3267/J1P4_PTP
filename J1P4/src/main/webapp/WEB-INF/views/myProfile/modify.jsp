@@ -1,203 +1,337 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-@import
-	url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 
-body {
-	font-family: "Nanum Gothic", sans-serif !important;
-}
+<!-- ============== 비회원 헤더 ================= -->
 
-h2 {
-	font-weight: bolder !important;
-}
+<c:if test="${empty sessionScope.user_id }">
+<c:import url="../include/header.jsp"></c:import>
+</c:if>
+<!-- ============== 프리랜서 헤더 ================= -->
+<c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.equals('프리랜서') }">
+<c:import url="../include/freeHeader.jsp"></c:import>
+</c:if>
 
-h5 {
-	color: gray !important;
-}
-</style>
-<!-- JQuery -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js' integrity='sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==' crossorigin='anonymous'></script>
-<!-- enrollFree.css -->
-<link href="../resources/css/enrollFree.css" rel="stylesheet" />
-<!-- select2 (검색되는 select) CSS -->
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<!-- 부트스트랩 CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<meta charset="UTF-8">
-<title>내 프로필 수정하기</title>
-</head>
-<body>
-	<h1>내 프로필 수정하기 - 개인/팀 (/myProfile/modify.jsp)</h1>
-	<hr>
-	
+<!-- ============== 클라이언트 헤더 ================= -->
+<c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.equals('클라이언트') }">
+<c:import url="../include/ctHeader.jsp"></c:import>
+</c:if>
+user_id: ${sessionScope.user_id },
+user_cf: ${sessionScope.user_cf },
+user_type: ${sessionScope.user_type },
+free_no: ${sessionScope.free_no },
+ct_no: ${sessionScope.ct_no }
+
 	<form action="" method="post" name="fm1" id="modifyFm">
 	<input type="hidden" value="${sessionScope.user_id }" name="free_id">
 	<input type="hidden" value="${sessionScope.user_id }" name="user_id">
-	<h2>업무조건</h2>
-		<h4>업무 가능 분야</h4>
-			<input type="radio" value="개발" class="btn-check" name="work_field" id="radioWf1">
-			<label class="btn btn-outline-dark" for="radioWf1">⚙️ 개발</label>
-			<input type="radio" value="기획" class="btn-check" name="work_field" id="radioWf2">
-			<label class="btn btn-outline-dark" for="radioWf2">🛠️ 기획</label>
-			<input type="radio" value="디자인" class="btn-check" name="work_field" id="radioWf3">
-			<label class="btn btn-outline-dark" for="radioWf3">🎨 디자인</label>
-			<input type="radio" value="퍼블리싱" class="btn-check" name="work_field" id="radioWf4">
-			<label class="btn btn-outline-dark" for="radioWf4">🖋️ 퍼블리싱</label>
-		<div>
-		<br>
-		<h4>업무 상태</h4>
-		<b>업무 가능 여부</b>
-		<input type="radio" value=1 name="work_check"> 가능
-		<input type="radio" value=0 name="work_check"> 불가능
-		<br>
-		<b>업무시작 가능일</b>
-		<input type="date" name="work_date" value="${myProfile.work_date }">
+
+<div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
+ <div class="card overflow-hidden card-2" >
+  <div class="row no-gutters row-bordered row-border-light">
+  
+      <!-- 사이드 메뉴 시작 -->
+	<div class="col-md-3 pt-0">
+		<div class="list-group list-group-flush account-settings-links" style="width:274px;">
+			<h4 class="font-weight-bold py-1 mx-4 my-3">내 프로필 수정</h4>
+			<a class="list-group-item list-group-item-action" data-toggle="list" href="#free_condition">업무조건</a>
+			<a class="list-group-item list-group-item-action" data-toggle="list" href="#free_intro">소개정보</a>
+			<a class="list-group-item list-group-item-action" data-toggle="list" href="#free_skill">보유기술</a>
+			<a class="list-group-item list-group-item-action" data-toggle="list" href="#free_career">경력</a>
+			<a class="list-group-item list-group-item-action" data-toggle="list" href="#free_school">학력</a>
+			<a class="list-group-item list-group-item-action" data-toggle="list" href="#free_license">자격증</a>
+			<a class="list-group-item list-group-item-action" data-toggle="list" href="#free_portf">포트폴리오</a>
 		</div>
-		<br>
-		<div>
-		<h4>희망 조건</h4>
-		<b>희망 프로젝트 대금</b>
-		<input type="text" name="proj_cost" value="${myProfile.proj_cost }">원 <br>
-		<b>희망 지역</b>
-		<select name='region' onchange="change(this.selectedIndex);" class=input id="region">
-			<option value='전체'>전체</option>
-			<option value='서울'>서울특별시</option>
-			<option value='부산'>부산광역시</option>
-			<option value='대구'>대구광역시</option>
-			<option value='인천'>인천광역시</option>
-			<option value='광주'>광주광역시</option>
-			<option value='대전'>대전광역시</option>
-			<option value='울산'>울산광역시</option>
-			<option value='경기'>경기도</option>
-			<option value='강원'>강원도</option>
-			<option value='충북'>충청북도</option>
-			<option value='충남'>충청남도</option>
-			<option value='전북'>전라북도</option>
-			<option value='전남'>전라남도</option>
-			<option value='경북'>경상북도</option>
-			<option value='경남'>경상남도</option>
-			<option value='제주'>제주도</option>
-		</select>
-		<select name='district' class=select>
-			<option value=''>전체</option>
-		</select>
+	</div>
+	<!-- 사이드 메뉴 끝 -->
+		
+	<div class="col-md-9">
+	<div class="tab-content">
+	
+		<!-- 업무조건 탭 시작 -->
+		<div class="tab-pane fade active show" id="free_condition"  >
+		<!-- card body 시작 -->
+		<div class="card-body border-start" >
+			<div class="border-bottom" style="position: relative; right:16px; width:1000px; padding-bottom: 10px;" >
+				<h4 class="font-weight-bold mx-4 my-3">업무조건</h4>
+			</div>
+			<div class="mx-4 my-3">
+			<div class="gap">
+				<h5>업무 가능 분야</h5>
+				<div class="content">
+					<input type="radio" value="개발" class="btn-check" name="work_field" id="radioWf1">
+					<label class="btn btn-outline-dark radioField" for="radioWf1">⚙️ 개발</label>
+					<input type="radio" value="기획" class="btn-check" name="work_field" id="radioWf2">
+					<label class="btn btn-outline-dark radioField" for="radioWf2">🛠️ 기획</label>
+					<input type="radio" value="디자인" class="btn-check" name="work_field" id="radioWf3">
+					<label class="btn btn-outline-dark radioField" for="radioWf3">🎨 디자인</label>
+					<input type="radio" value="퍼블리싱" class="btn-check" name="work_field" id="radioWf4">
+					<label class="btn btn-outline-dark radioField" for="radioWf4">🖋️ 퍼블리싱</label>
+				</div>
+			</div>	
+			<hr>
+			<div class="gap">
+				<h5>업무 상태</h5>
+				<div class="content">
+				<b style="padding-right: 10px;">업무 가능 여부</b>
+					<input type="radio" value=1 name="work_check"> 가능
+					<input type="radio" value=0 name="work_check"> 불가능
+				<br>
+				<div class="checkGap">
+				<b style="padding-right: 10px;">업무시작 가능일</b>
+				<input type="date" name="work_date" value="${myProfile.work_date }">
+				</div>
+				</div>
+			</div>
+			<hr>
+			<div class="gap">	
+				<h5>희망 조건</h5>
+				<div class="content" style="margin-bottom: 44px; ">
+				<b style="padding-right: 10px;">희망 프로젝트 대금</b>
+				<input type="text" name="proj_cost" value="${myProfile.proj_cost }"> 원 <br>
+				<div class="checkGap">
+				<b style="padding-right: 10px;">희망 지역</b>
+				<select name='region' onchange="change(this.selectedIndex);" class=input id="region">
+					<option value='전체'>전체</option>
+					<option value='서울'>서울특별시</option>
+					<option value='부산'>부산광역시</option>
+					<option value='대구'>대구광역시</option>
+					<option value='인천'>인천광역시</option>
+					<option value='광주'>광주광역시</option>
+					<option value='대전'>대전광역시</option>
+					<option value='울산'>울산광역시</option>
+					<option value='경기'>경기도</option>
+					<option value='강원'>강원도</option>
+					<option value='충북'>충청북도</option>
+					<option value='충남'>충청남도</option>
+					<option value='전북'>전라북도</option>
+					<option value='전남'>전라남도</option>
+					<option value='경북'>경상북도</option>
+					<option value='경남'>경상남도</option>
+					<option value='제주'>제주도</option>
+				</select>
+				<select name='district' class=select>
+					<option value=''>전체</option>
+				</select>
+				</div>
+				</div>
+			</div>
 		</div>
-	<hr>
-	<h2>소개정보</h2>		
-	<b>한줄 소개</b><br>
-		<input type="text" name="oneline_bio" style="width: 510px" value="${myProfile.oneline_bio }"><br>
-	<b>자기 소개서</b><br>
-	<textarea rows="10" cols="60" name="bio">${myProfile.bio }</textarea>
-	<hr>
-	<h2>보유기술</h2>		
-	<b>보유 중인 기술</b><br>
-	<div class="listPt"></div>
-	<!-- [추가하기] 클릭 시 추가되는 기술 리스트 출력되는 공간-->
+		</div>
+		<!-- card body 끝 -->
+		</div>
+		<!-- 업무조건 탭 끝 -->
+		
+		
+		<!-- 소개정보 탭 시작 -->
+		<div class="tab-pane fade" id="free_intro"  >
+		<!-- card body 시작 -->
+		<div class="card-body border-start" >
+			<div class="border-bottom" style="position: relative; right:16px; width:1000px; padding-bottom: 10px;" >
+				<h4 class="font-weight-bold mx-4 my-3">소개정보</h4>
+			</div>
+			<div class="mx-4 my-3">
+			<div class="gap">
+				<h5>한줄 소개</h5>
+					<div class="content">
+					<input type="text" name="oneline_bio" style="width: 710px" value="${myProfile.oneline_bio }"><br>
+					</div>
+			</div>
+			<hr>
+			<div class="gap">		
+				<h5>자기 소개서</h5>
+					<div class="content">
+					<textarea cols="84" rows="10" name="bio">${myProfile.bio }</textarea>
+					</div>
+			</div>		
+			</div>
+		</div>
+		<!-- card body 끝 -->
+		</div>					
+		<!-- 소개정보 탭 끝 -->
+					
+		
+		<!-- 보유기술 탭 시작 -->
+		<div class="tab-pane fade" id="free_skill"  >
+		<!-- card body 시작 -->
+		<div class="card-body border-start" >
+			<div class="border-bottom" style="position: relative; right:16px; width:1000px; padding-bottom: 10px;" >
+				<h4 class="font-weight-bold mx-4 my-3">보유기술</h4>
+			</div>
+			<div class="mx-4 my-3">
+			<div class="gap">
+				<h5>보유 중인 기술</h5>
+				<div class="content" style="margin-bottom: 305.42px; ">
+				<div class="listPt"></div>
+				<!-- [추가하기] 클릭 시 추가되는 기술 리스트 출력되는 공간-->
+				
+				<c:forEach items="${mySkill }" var="mySkill">
+				<p><div class="border border-1 rounded-3 p-2" role="group" style="width: 700px; margin-bottom: 20px;">
+				<button class="removeButt btn-close" aria-label="Close" style="width: 1px; position: absolute; right:78px;"></button>
+				<input type="hidden" value="${mySkill.skill_nm }" name="skill_nm"><input type="hidden" value="${mySkill.skill_lev }" name="skill_lev">
+				<div style="padding-bottom:5px;"><span style="padding-left: 20px; font-size: 22px; font-weight: bold;">${mySkill.skill_nm }</span><br></div>
+				<span style="padding-left: 20px;"> 레벨 : ${mySkill.skill_lev }</span></div></p>	
+				</c:forEach>
+				
+				<div id="inputPt"></div>
+				<!-- [+보유기술 추가] 클릭 시 [select 버튼] 출력되는 공간 -->
+				
+				<div role="button" class="addSkill my-3">+ 보유기술 추가</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		<!-- card body 끝 -->
+		</div>
+		<!-- 보유기술 탭 끝 -->				
 	
-	<c:forEach items="${mySkill }" var="mySkill">
-	<p><div class="border border-1 rounded-3" role="group" style="width: 400px; display: inline-block; position: relative;">
-	<input type="hidden" value="${mySkill.skill_nm}" name="skill_nm"><input type="hidden" value='${mySkill.skill_lev}' name="skill_lev">
-	<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">${mySkill.skill_nm}</span></h4>
-	<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">${mySkill.skill_lev}</span></h4>
-	<button class="removeButt btn-close" aria-label="Close" style="width: 1px; position: absolute; top: 21px; left: 360px;"></button></div></p>
-	</c:forEach>
+		<!-- 경력 탭 시작 -->
+		<div class="tab-pane fade" id="free_career"  >
+		<!-- card body 시작 -->
+		<div class="card-body border-start" >
+			<div class="border-bottom" style="position: relative; right:16px; width:1000px; padding-bottom: 10px;" >
+				<h4 class="font-weight-bold mx-4 my-3">경력</h4>
+			</div>
+			<div class="mx-4 my-3">
+			<div class="gap">
+				<h5>전문성</h5>
+				<div class="content">
+				<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+					<input type="radio" value="주니어" class="btn-check" name="job_lev" id="radioJl1">
+					<label class="btn btn-outline-dark radioLev" for="radioJl1">주니어</label>
+					<input type="radio" value="미들" class="btn-check" name="job_lev" id="radioJl2">
+					<label class="btn btn-outline-dark radioLev"" for="radioJl2">미들</label>
+					<input type="radio" value="시니어" class="btn-check" name="job_lev" id="radioJl3">
+					<label class="btn btn-outline-dark radioLev"" for="radioJl3">시니어</label>
+				</div>
+				</div>
+			</div>
+			<hr>
+			<div class="gap">	
+				<h5>경력</h5>
+				<div class="content" style="margin-bottom: 67.82px; ">
+				<div class="listCa"></div>
+				<!-- [추가하기] 클릭 시 추가되는 경력 리스트 출력되는 공간-->
+				
+				<c:forEach items="${myCareer }" var="myCareer">
+								
+				<p><div class="border border-1 rounded-3 p-2" role="group" style="width: 700px; margin-bottom: 20px;">
+				<button class="removeButt btn-close" aria-label="Close" style="width: 1px; position: absolute; right:78px;"></button>
+				<input type="hidden" value="${myCareer.company_nm }" name="company_nm"><input type="hidden" value="${myCareer.responsibility }" name="responsibility">
+				<input type="hidden" value="${myCareer.join_date }" name="join_date"><input type="hidden" value="${myCareer.quit_date }" name="quit_date">
+				<span style="padding-left: 20px; font-size: 18px; font-weight: bold;">${myCareer.company_nm }</span><br>
+				<span style="padding-left: 20px;">${myCareer.join_date } ~ ${myCareer.quit_date }</span><br>
+				<span style="padding-left: 20px;">${myCareer.responsibility }</span></div></p>
+				</c:forEach>
+				
+				<div class="inputCa"></div>
+				<!-- [+경력 추가] 클릭 시 [input text] 출력되는 공간 -->
+					
+				<div role="button" class="addCareer my-3">+ 경력 추가</div>
+				</div>
+			</div>	
+			</div>
+		</div>
+		<!-- card body 끝 -->
+		</div>
+		<!-- 경력 탭 끝 -->	
+
+		<!-- 학력 탭 시작 -->
+		<div class="tab-pane fade" id="free_school"  >
+		<!-- card body 시작 -->
+		<div class="card-body border-start" >
+			<div class="border-bottom" style="position: relative; right:16px; width:1000px; padding-bottom: 10px;" >
+				<h4 class="font-weight-bold mx-4 my-3">학력</h4>
+			</div>	
+			<div class="mx-4 my-3">
+			<div class="gap">	
+				<h5>최종학력</h5>
+				<div class="content" style="margin-bottom: 290.01px; ">
+				<div class="content">
+				<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+					<input type="radio" value="고등학교" class="btn-check" name="school_type" id="radioGs1">
+					<label class="btn btn-outline-dark radioGs" for="radioGs1">고등학교</label>
+					<input type="radio" value="대학교(2,3년제)" class="btn-check" name="school_type" id="radioGs2">
+					<label class="btn btn-outline-dark radioGs" for="radioGs2">대학(2,3년제)</label>
+					<input type="radio" value="대학교(4년제)" class="btn-check" name="school_type" id="radioGs3">
+					<label class="btn btn-outline-dark radioGs" for="radioGs3">대학교(4년제)</label>
+					<input type="radio" value="대학원(석사)" class="btn-check" name="school_type" id="radioGs4">
+					<label class="btn btn-outline-dark radioGs" for="radioGs4">대학원(석사)</label>
+					<input type="radio" value="대학원(박사)" class="btn-check" name="school_type" id="radioGs5">
+					<label class="btn btn-outline-dark radioGs" for="radioGs5">대학원(박사)</label>
+				</div>
+				</div>
+				<br>
+				학교명* <input type="text" name="school_nm" value="${myProfile.school_nm }"><br>
+				<div class="content">
+				전공명* <input type="text" name="major" value="${myProfile.major }"><br>
+				</div>
+				<div class="content">
+				재학기간 <input type="text" name="entrance" value="${myProfile.entrance }"> 
+				~ <input type="text" name="graduation" value="${myProfile.graduation }">
+				<select name="grad_status" id="grad_status">
+					<option disabled hidden selected>졸업상태</option>
+					<option value="졸업">졸업</option>
+					<option value="재학">재학</option>
+					<option value="수료">수료</option>
+					<option value="휴학">휴학</option>
+					<option value="중퇴/자퇴">중퇴/자퇴</option>
+				</select>
+				</div>
+				</div>
+			</div>	
+			</div>	
+		</div>
+		<!-- card body 끝 -->
+		</div>
+		<!-- 학력 탭 끝 -->					
+
+		<!-- 자격증 탭 시작 -->
+		<div class="tab-pane fade" id="free_license"  >
+		<!-- card body 시작 -->
+		<div class="card-body border-start" >
+			<div class="border-bottom" style="position: relative; right:16px; width:1000px; padding-bottom: 10px;" >
+				<h4 class="font-weight-bold mx-4 my-3">자격증</h4>
+			</div>
+			<div class="mx-4 my-3">
+			<div class="gap">	
+				<h5>자격증</h5>
+				<div class="content" style="margin-bottom: 281.42px; ">
+				<div class="listLi"></div>
+				<!-- [추가하기] 클릭 시 추가되는 경력 리스트 출력되는 공간-->
+				
+				<c:forEach items="${myLicense }" var="myLicense">
+								
+				<p><div class="border border-1 rounded-3 p-2" role="group" style="width: 700px; margin-bottom: 20px;">	
+				<button class="removeButt btn-close" aria-label="Close" style="width: 1px; position: absolute; right:78px;"></button>
+				<input type="hidden" value="${myLicense.license_nm }" name="license_nm"><input type="hidden" value="${myLicense.qualify_date }" name="qualify_date">
+				<input type="hidden" value="${myLicense.issuer }" name="issuer">
+				<span style="padding-left: 20px;font-size: 18px; font-weight: bold;">${myLicense.license_nm }</span><br>
+				<span style="padding-left: 20px;">${myLicense.issuer } | ${myLicense.qualify_date }</span></div></p>
+				</c:forEach>
+				
+				<div class="inputLi"></div>
+				<!-- [+경력 추가] 클릭 시 [input text] 출력되는 공간 -->
+				
+				<div role="button" class="addLicense my-3">+ 자격증 추가</div>
+				</div>
+			</div>
+			</div>		
+		</div>
+		<!-- card body 끝 -->
+		</div>
+		<!-- 자격증 탭 끝 -->
+							
+		<button type="button"  class="btn btn-dark saveButt" style="position: absolute; right:54px; top:25px;">저장하기</button>
 	
-	<div id="inputPt"></div>
-	<!-- [+보유기술 추가] 클릭 시 [select 버튼] 출력되는 공간 -->
-	
-	<div role="button" class="addSkill">+ 보유기술 추가</div>
-	
-	<hr>
-	<h2>경력</h2>		
-	<b>전문성</b><br>
-	<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-			<input type="radio" value="주니어" class="btn-check" name="job_lev" id="radioJl1">
-			<label class="btn btn-outline-dark" for="radioJl1">주니어</label>
-			<input type="radio" value="미들" class="btn-check" name="job_lev" id="radioJl2">
-			<label class="btn btn-outline-dark" for="radioJl2">미들</label>
-			<input type="radio" value="시니어" class="btn-check" name="job_lev" id="radioJl3">
-			<label class="btn btn-outline-dark" for="radioJl3">시니어</label>
 	</div>
-	<br>
-	<b>경력</b><br>
-	<div class="listCa"></div>
-	<!-- [추가하기] 클릭 시 추가되는 경력 리스트 출력되는 공간-->
-	
-	<c:forEach items="${myCareer }" var="myCareer">
-	<p><div class="border border-1 rounded-3" role="group" style="width: 400px; display: inline-block; position: relative;">
-	<input type="hidden" value="${myCareer.company_nm }" name="company_nm"><input type="hidden" value="${myCareer.responsibility }" name="responsibility">
-	<input type="hidden" value="${myCareer.join_date }" name="join_date"><input type="hidden" value="${myCareer.quit_date }" name="quit_date">
-	<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">${myCareer.company_nm }</span></h4>
-	<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">${myCareer.responsibility }</span></h4>
-	<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">${myCareer.join_date }</span></h4>
-	<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">${myCareer.quit_date }</span></h4>
-	<button class="removeButt btn-close" aria-label="Close" style="width: 1px; position: absolute; top: 21px; left: 360px;"></button></div></p>
-	</c:forEach>
-	
-	<div class="inputCa"></div>
-	<!-- [+경력 추가] 클릭 시 [input text] 출력되는 공간 -->
-	<br>		
-	<div role="button" class="addCareer">+ 경력 추가</div>
-	
-	<hr>
-	<h2>학력</h2>		
-	<b>최종학력</b><br>
-	<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-			<input type="radio" value="고등학교" class="btn-check" name="school_type" id="radioGs1">
-			<label class="btn btn-outline-dark" for="radioGs1">고등학교</label>
-			<input type="radio" value="대학교(2,3년제)" class="btn-check" name="school_type" id="radioGs2">
-			<label class="btn btn-outline-dark" for="radioGs2">대학(2,3년제)</label>
-			<input type="radio" value="대학교(4년제)" class="btn-check" name="school_type" id="radioGs3">
-			<label class="btn btn-outline-dark" for="radioGs3">대학교(4년제)</label>
-			<input type="radio" value="대학원(석사)" class="btn-check" name="school_type" id="radioGs4">
-			<label class="btn btn-outline-dark" for="radioGs4">대학원(석사)</label>
-			<input type="radio" value="대학원(박사)" class="btn-check" name="school_type" id="radioGs5">
-			<label class="btn btn-outline-dark" for="radioGs5">대학원(박사)</label>
 	</div>
-	<br>
-	학교명* <input type="text" name="school_nm" value="${myProfile.school_nm }"><br>
-	전공명* <input type="text" name="major" value="${myProfile.major }"><br>
-	재학기간 <input type="text" name="entrance" value="${myProfile.entrance }"> 
-	~ <input type="text" name="graduation" value="${myProfile.graduation }">
-	<select name="grad_status" id="grad_status">
-		<option disabled hidden selected>졸업상태</option>
-		<option value="졸업">졸업</option>
-		<option value="재학">재학</option>
-		<option value="수료">수료</option>
-		<option value="휴학">휴학</option>
-		<option value="중퇴/자퇴">중퇴/자퇴</option>
-	</select>
-	<hr>
-	<h2>자격증</h2>		
-	<b>자격증</b><br>
-	
-	<br>
-	<div class="listLi"></div>
-	<!-- [추가하기] 클릭 시 추가되는 경력 리스트 출력되는 공간-->
-	
-	<c:forEach items="${myLicense }" var="myLicense">
-	<p><div class="border border-1 rounded-3" role="group" style="width: 400px; display: inline-block; position: relative;">
-	<input type="hidden" value="${myLicense.license_nm }" name="license_nm"><input type="hidden" value="${myLicense.qualify_date }" name="qualify_date">
-	<input type="hidden" value="${myLicense.issuer }" name="issuer">
-	<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">${myLicense.license_nm }</span></h4>
-	<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">${myLicense.qualify_date }</span></h4>
-	<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">${myLicense.issuer }</span></h4>
-	<button class="removeButt btn-close" aria-label="Close" style="width: 1px; position: absolute; top: 21px; left: 360px;"></button></div></p>
-	</c:forEach>
-	
-	<div class="inputLi"></div>
-	<!-- [+경력 추가] 클릭 시 [input text] 출력되는 공간 -->
-	<br>		
-	<div role="button" class="addLicense">+ 자격증 추가</div>
-	<hr>
-	<input type="button" class="saveButt" value="수정하기">
-	</form>
+</div>
+</div>
+</div>
+</form>
+
+
 	
 <!-- 자바스크립트 시작 -->	
 <script type="text/javascript">
@@ -287,19 +421,17 @@ h5 {
 				 '<option value="Unity">Unity</option><option value="Unix">Unix</option><option value="VisualStudio">VisualStudio</option>'+
 				 '<option value="Vue.js">Vue.js</option><option value="Windows">Windows</option><option value="모바일 웹/앱">모바일 웹/앱</option><option value="앱디자인">앱디자인</option>'+
 				 '<option value="웹디자인">웹디자인</option><option value="전자정부프레임워크">전자정부프레임워크</option><option value="한글">한글</option></select>'+
-				 '<select class="selectLev"><option disabled hidden selected></option>'+
+				 '<select class="selectLev" style="width:100px;"><option disabled hidden selected >레벨 *</option>'+
 				 '<option value="초급">초급</option><option value="중급">중급</option><option value="고급">고급</option></select>'+
-				 '<button type="button" class="addButt removeAdd">추가하기</button></div>'
+				 '<button type="button" class="btn btn-dark btn-sm addButt removeAdd">추가하기</button></div>'
 				);
 
 				/* 주요기술 스택 - select2(검색되는 select) 적용 */
-				$(function() {
-					$('.selectSk').select2();
-				});
+
 		
 				$(function() {
 					$('.selectSk').select2({
-						placeholder : "스킬을 선택해주세요."
+						placeholder : "스킬을 선택해주세요.*"
 					});
 		
 				});
@@ -312,16 +444,17 @@ h5 {
 
 						/* 하나라도 미입력 시 추가 불가능 */
 						if(skill==null || level==null){
-							alert("안돼 돌아가");
+							alert("필수값을 모두 입력해주세요.");
 							return;
 						}
 						
 						/* [추가하기] 클릭 시 추가되는 기술 리스트 출력 */
 						$('.listPt').prepend(
-						 '<p><div class="border border-1 rounded-3" role="group" style="width: 400px; display: inline-block; position: relative;">'+
-						 '<input type="hidden" value="'+skill+'" name="skill_nm"><input type="hidden" value='+level+' name="skill_lev">'+
-						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+skill+'</span></h4><h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+level+'</span></h4>'+
-						 '<button class="removeSk btn-close" aria-label="Close" style="width: 1px; position: absolute; top: 21px; left: 360px;"></button></div></p>'		
+							'<p><div class="border border-1 rounded-3 p-2" role="group" style="width: 700px; margin-bottom: 20px;">'+
+							'<button class="removeSk btn-close" aria-label="Close" style="width: 1px; position: absolute; right:78px;"></button>'+
+							'<input type="hidden" value="'+skill+'" name="skill_nm"><input type="hidden" value="'+level+'" name="skill_lev">'+
+							'<div style="padding-bottom:5px;"><span style="padding-left: 20px; font-size: 22px; font-weight: bold;">'+skill+'</span><br></div>'+
+							'<span style="padding-left: 20px;"> 레벨 : '+level+'</span></div></p>'		
 						);
 		
 					});
@@ -349,12 +482,12 @@ h5 {
 				/* [+경력 추가] 클릭 시 [input text]+[추가하기] 출력 */
 				$('.inputCa').html(
 				'<div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">'+
-				'<input type="text" class="textCn" placeholder="회사명*" style="width: 512px">'+
-				'<textarea rows="5" cols="60" class="textRs" placeholder="&#13;&#10&#13;&#10; 담당업무*"></textarea>'+
+				'<input type="text" class="textCn" placeholder="회사명*" style="width: 710px">'+
+				'<textarea rows="5" cols="84" class="textRs" placeholder="&#13;&#10&#13;&#10; 담당업무*"></textarea>'+
 				'<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">'+
-				'<input type="text" class="textJd" placeholder="입사연월">'+
-				'<input type="text" class="textQd" placeholder="퇴사연월"></div>'+
-				'<br><button type="button" class="addButt2 removeAdd2">추가하기</button></div>'
+				'<input type="text" class="textJd" style="width: 355px" placeholder="입사연월" onkeyup="this.value = date_mask(this.value)" maxlength="8">'+
+				'<input type="text" class="textQd" style="width: 355px" placeholder="퇴사연월" onkeyup="this.value = date_mask(this.value)" maxlength="8"></div>'+
+				'<button type="button" class="btn btn-dark btn-sm addButt2 removeAdd2">추가하기</button></div>'
 				);
 				
 				/* [추가하기] 클릭 */
@@ -367,27 +500,28 @@ h5 {
 						
 						/* 하나라도 미입력 시 추가 불가능 */
 						if(comNm==""){
-							alert("안돼 돌아가");
+							alert("필수값을 모두 입력해주세요.");
 							return;
 						}
 						if(comRs==""){
-							alert("안돼 돌아가");
+							alert("필수값을 모두 입력해주세요.");
 							return;
 						}
 						if(comJd==""){
-							alert("안돼 돌아가");
+							alert("필수값을 모두 입력해주세요.");
 							return;
 						}
 						
 						
 						/* [추가하기] 클릭 시 추가되는 경력 리스트 출력 */
 						$('.listCa').prepend(
-						 '<p><div class="border border-1 rounded-3" role="group" style="width: 400px; display: inline-block; position: relative;">'+
-						 '<input type="hidden" value="'+comNm+'" name="company_nm"><input type="hidden" value="'+comRs+'" name="responsibility">'+
-						 '<input type="hidden" value="'+comJd+'" name="join_date"><input type="hidden" value="'+comQd+'" name="quit_date">'+
-						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+comNm+'</span></h4><h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+comRs+'</span></h4>'+
-						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+comJd+'</span></h4><h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+comQd+'</span></h4>'+
-						 '<button class="removeCa btn-close" aria-label="Close" style="width: 1px; position: absolute; top: 21px; left: 360px;"></button></div></p>'		
+								'<p><div class="border border-1 rounded-3 p-2" role="group" style="width: 700px; margin-bottom: 20px;">'+
+								'<button class="removeCa btn-close" aria-label="Close" style="width: 1px; position: absolute; right:78px;"></button>'+
+								'<input type="hidden" value="'+comNm+'" name="company_nm"><input type="hidden" value="'+comRs+'" name="responsibility">'+
+								'<input type="hidden" value="'+comJd+'" name="join_date"><input type="hidden" value="'+comQd+'" name="quit_date">'+
+								'<span style="padding-left: 20px; font-size: 18px; font-weight: bold;">'+comNm+'</span><br>'+
+								'<span style="padding-left: 20px;">'+comJd+' ~ '+comQd+'</span><br>'+
+								'<span style="padding-left: 20px;">'+comRs+'</span></div></p>'		
 						);
 		
 					});
@@ -411,13 +545,13 @@ h5 {
 		/* [+자격증 추가] 클릭 */
 		$(function() {
 			$('.addLicense').click(function(){
-				/* [+경력 추가] 클릭 시 [input text]+[추가하기] 출력 */
+				/* [+자격증 추가] 클릭 시 [input text]+[추가하기] 출력 */
 				$('.inputLi').html(
 				'<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">'+
-				'<input type="text" placeholder="자격증명*" style="width: 300px;" class="licNm">'+
-				'<input type="text" placeholder="기관명*" class="licIss">'+
-				'<input type="text" placeholder="YYYY.MM." class="licQd">'+
-				'<br><button type="button" class="addButt3 removeAdd3">추가하기</button></div>'
+				'<input type="text" placeholder="자격증명*" class="licNm" style="width:250px;">'+
+				'<input type="text" placeholder="기관명*" class="licIss" style="width:250px;">'+
+				'<input type="text" placeholder="YYYY.MM." style="width:120px;" class="licQd" onkeyup="this.value = date_mask(this.value)" maxlength="8" >'+
+				'<button type="button" class="btn btn-dark btn-sm addButt3 removeAdd3">추가하기</button></div>'
 				);
 				
 				/* [추가하기] 클릭 */
@@ -429,33 +563,33 @@ h5 {
 						
 						/* 하나라도 미입력 시 추가 불가능 */
 						if(licNm==""){
-							alert("안돼 돌아가");
+							alert("필수값을 모두 입력해주세요.");
 							return;
 						}
 						if(licIss==""){
-							alert("안돼 돌아가");
+							alert("필수값을 모두 입력해주세요.");
 							return;
 						}
 						if(licQd==""){
-							alert("안돼 돌아가");
+							alert("필수값을 모두 입력해주세요.");
 							return;
 						}
 						
-						/* [추가하기] 클릭 시 추가되는 경력 리스트 출력 */
+						/* [추가하기] 클릭 시 추가되는 자격증 리스트 출력 */
 						$('.listLi').prepend(
-						 '<p><div class="border border-1 rounded-3" role="group" style="width: 400px; display: inline-block; position: relative;">'+
-						 '<input type="hidden" value="'+licNm+'" name="license_nm"><input type="hidden" value="'+licIss+'" name="issuer"><input type="hidden" value="'+licQd+'" name="qualify_date">'+
-						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+licNm+'</span></h4>'+
-						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+licIss+'</span></h4>'+
-						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+licQd+'</span></h4>'+
-						 '<button class="removeLi btn-close" aria-label="Close" style="width: 1px; position: absolute; top: 21px; left: 360px;"></button></div></p>'		
+							'<p><div class="border border-1 rounded-3 p-2" role="group" style="width: 700px; margin-bottom: 20px;">'+
+							'<button class="removeLi btn-close" aria-label="Close" style="width: 1px; position: absolute; right:78px;"></button>'+
+							'<input type="hidden" value="'+licNm+'" name="license_nm"><input type="hidden" value="'+licQd+'" name="qualify_date">'+
+							'<input type="hidden" value="'+licIss+'" name="issuer">'+
+							'<span style="padding-left: 20px;font-size: 18px; font-weight: bold;">'+licNm+'</span><br>'+
+							'<span style="padding-left: 20px;">'+licIss+' | '+licQd+'</span></div></p>'
 						);
 		
 					});
 					
 				});
 				
-				/* 리스트에 추가된 경력 삭제 */
+				/* 리스트에 추가된 자격증 삭제 */
 				$(document).on('click','.removeLi',function(){
 			        $(this).parent().remove()
 			    });
@@ -469,7 +603,7 @@ h5 {
 			
 		});
 		
-		/* 리스트에 추가된 기술 삭제 */
+		/* 이미 출력되어있는 기술 또는 경력 또는 자격증 리스트 삭제 */
 		$(document).on('click','.removeButt',function(){
 	        $(this).parent().remove()
 	    });
@@ -495,12 +629,25 @@ h5 {
 			
 		});
 		
+		
+		// 날짜를 yyyy-mm-dd 형식으로 만들어 줌.
+		function date_mask(objValue) {
+		 var v = objValue.replace("--", "-");
+
+		    if (v.match(/^\d{4}$/) !== null) {
+		        v = v + '.';
+		    } else if (v.match(/^\d{4}\.\d{2}$/) !== null) {
+		        v = v + '.';
+		    }
+		 
+		    return v;
+		}
+		
+
 </script>
 <!-- 자바스크립트 끝 -->
 
 <!-- select2 (검색되는 select) 자바스크립트 -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<!-- 부트스트랩 자바스크립트 -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

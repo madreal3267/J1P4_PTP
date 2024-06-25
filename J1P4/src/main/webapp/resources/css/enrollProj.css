@@ -130,7 +130,11 @@ h6{
 	color:gray;
 }
 
-.wfRadio{
+.wfRadio {
+	width:150px;
+}
+
+.radioLv {
 	width:150px;
 }
 
@@ -140,4 +144,8 @@ body {
 
 .card-2{
   box-shadow: 0 0 0 rgba(0,0,0,0.19), 0 3px 3px rgba(0,0,0,0.23);
+}
+
+.radioCp{
+	width: 200px !important;
 }

@@ -114,9 +114,15 @@
   	 
   	 <!-- 프리랜서 페이징 처리 -->
   	 <select id="fListPaging" resultType="com.itwillbs.domain.FreelancerVO" parameterType="com.itwillbs.domain.Criteria">
-  	 	<![CDATA[
-			select * 
-			from freelancer
+  		<![CDATA[
+			select f.free_no, f.free_id, f.enroll_status, f.work_field, f.school_type, f.school_nm, f.major, f.grad_status,
+			  f.entrance, f.graduation, f.work_check, f.work_date, f.proj_cost, f.oneline_bio, f.bio, r.region, r.district, s.skill_nm
+			from freelancer f
+			left join skill s
+			on f.free_no = s.free_no
+			left join region r
+			on f.free_no = r.free_no
+			where work_field = "개발"
 			order by reg_date DESC
 			limit #{amount} offset #{offset}
 			
@@ -226,8 +232,12 @@
 		]]>
   	 </select>
   	 
-  	 
-  	 
+  	 <!-- 프리랜서 북마크 체크 -->
+  	 <select id="freebMark" resultType="com.itwillbs.domain.BMarkVO">
+  	 	select proj_no
+		from bookmark
+		where free_no = #{free_no}
+  	 </select>
   	 
   	 
   	 

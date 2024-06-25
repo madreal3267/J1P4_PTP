@@ -2,67 +2,38 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" 
-  integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" 
-  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<!--  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script> -->
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <link href="../resources/css/listPro.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-	crossorigin="anonymous">
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<style>
-@import
-	url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap')
-	;
 
-body {
-	font-family: "Nanum Gothic", sans-serif !important;
-}
+<!-- ============== 비회원 헤더 ================= -->
+<c:if test="${empty sessionScope.user_id }">
+<c:import url="../include/header.jsp"></c:import>
+</c:if>
 
-h2 {
-	font-weight: bolder !important;
-}
+<!-- ============== 프리랜서 헤더 ================= -->
+<c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.equals('프리랜서') }">
+<c:import url="../include/freeHeader.jsp"></c:import>
+</c:if>
 
-h5 {
-	color: gray !important;
-}
-</style>
-<script type="text/javascript">
-$(document).ready(function(){
-	if(${!empty param.sn}){
-	$("#sn2").val( $("#ss").val() );		
-	}
-	if(${empty param.sn}){
-		var sn = "";
-		sn = $('#ss').val("reg_date");
-	}
-	
-	if(${empty param.work_field}){
-	 $("#radioWf1").prop("checked",true);		
-	}else{
-		$('#work_field2').val($("input:radio[name='work_field']:checked").val());
-	}
-	
+<!-- ============== 클라이언트 헤더 ================= -->
+<c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.equals('클라이언트') }">
+<c:import url="../include/ctHeader.jsp"></c:import>
+</c:if>
 
-});
+<!-- ============== 로그인 했을 때 담기는 세션 값 (추후 삭제 예정) ================= -->
+<%-- user_id: ${sessionScope.user_id }, --%>
+<%-- user_cf: ${sessionScope.user_cf }, --%>
+<%-- user_type: ${sessionScope.user_type }, --%>
+<%-- free_no: ${sessionScope.free_no }, --%>
+<%-- ct_no: ${sessionScope.ct_no } --%>
 
 
-</script>
-</head>
-<body>
-	<h1> 프로젝트 찾기 </h1>
-	${pNum} 개의 프로젝트가 등록되었습니다. <br>
+<div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
+ <div class="card overflow-hidden card-2" >
+  <div class="row no-gutters row-bordered row-border-light">
+
+
+   <div class="tab-content">
+
+	<h1>${pNum} 개의 프로젝트가 등록되었습니다.</h1> <br>
 <%-- ${param.work_field } --%>
 ${skill_nm }
 ${modalCheck }
@@ -71,22 +42,19 @@ ${modalCheck }
 <form action="/board/listProFi" method="post" id="fbtn">	
 
 		<input type="radio" value="개발" class="btn-check" name="work_field" id="radioWf1"  <c:if test='${param.work_field eq "개발"}' >checked</c:if>> 
-		<label class="btn btn-outline-dark" for="radioWf1">⚙️ 개발</label> 
+		<label class="rounded-3 p-3 m-1 butt3"" for="radioWf1">⚙️ 개발</label> 
 		<input type="radio" value="기획" class="btn-check" name="work_field" id="radioWf2" <c:if test='${param.work_field eq "기획"}' >checked</c:if>> 
-		<label class="btn btn-outline-dark" for="radioWf2">🛠️ 기획</label> 
+		<label class="rounded-3 p-3 m-1 butt3"" for="radioWf2">🛠️ 기획</label> 
 		<input type="radio" value="디자인" class="btn-check" name="work_field" id="radioWf3" <c:if test='${param.work_field eq "디자인"}' >checked</c:if>> 
-		<label class="btn btn-outline-dark" for="radioWf3">🎨 디자인</label> 
+		<label class="rounded-3 p-3 m-1 butt3"" for="radioWf3">🎨 디자인</label> 
 		<input type="radio" value="퍼블리싱" class="btn-check" name="work_field" id="radioWf4" <c:if test='${param.work_field eq "퍼블리싱"}' >checked</c:if>> 
-		<label class="btn btn-outline-dark" for="radioWf4">🖋️ 퍼블리싱</label>
-		
+		<label class="rounded-3 p-3 m-1 butt3"" for="radioWf4">🖋️ 퍼블리싱</label>
 </form>	
-<!-- 	<input type="button" value="상세"> -->
 
 
 	<!-- modal -->
-
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+<button type="button" class="btn btn-primary rounded-3 p-3 butt2" data-toggle="modal" data-target="#exampleModal">
   상세
 </button>
 
@@ -235,7 +203,7 @@ ${modalCheck }
 
 <div>
 	<form id="sort">
-		<select name="sn" id="ss" >
+		<select name="sn" id="ss" style="display: inline-block; float: right; font-size: 1.2rem; width: 10rem; padding: 7px ;">
 			<option value="reg_date" <c:if test="${param.sn eq 'reg_date'}" >selected</c:if>>최신 등록 순</option>
 			<option value="proj_cost" <c:if test="${param.sn eq 'proj_cost'}" >selected</c:if>>견적 높은 순</option>
 			<option value="deadline" <c:if test="${param.sn eq 'deadline'}" >selected</c:if>>마감 임박 순</option>
@@ -252,7 +220,7 @@ ${modalCheck }
 <!-- 회색 박스 -->
 <c:forEach var="v" items="${list }">
 <c:set var="skillList" value="${v.skill_nm }" />
-<div OnClick="location.href ='/board/detailList?proj_no=${v.proj_no}'" style="width : full; margin: 2px 3px; padding: 12px; background-color: #dddddd; border-radius: 7px; border: 1px solid black;">
+<div OnClick="location.href ='/board/detailList?proj_no=${v.proj_no}'" style="width : full; margin: 2px 3px; padding: 12px; background-color: #f2f2f2; border-radius: 7px; border: 1px solid black;">
     <form role="form" method="post">
     	<input type="hidden" id="proj_no" value="${v.proj_no }">
     </form>
@@ -264,25 +232,43 @@ ${modalCheck }
         </div>
     <!-- 로그인 여부, 북마크 여부체크 -->    
         <div style="display: flex; justify-content: end;">
-		<c:choose>
-			<c:when test="${v.proj_no != 392}">
-			<!-- 북마크 확인용 임시 데이터, 수정 필요 -->
-			<!-- 빈 하트 -->
-				<a href="javascript:" class ="heart-click" value="${v.proj_no }">
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16" >
-		 			<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
-					</svg>
-				</a>
+        <c:choose>
+	        <c:when test="${not empty sessionScope.free_no }">
+				<c:set var="Bookmarked" value="false" />
+				<c:forEach  var="b" items="${bMproj_no }">
+					<c:if test="${v.proj_no == b.proj_no }">
+						<c:set var="Bookmarked" value="true" />
+					</c:if>
+				</c:forEach>
+				<c:choose>
+					<c:when test="${Bookmarked}">
+					<!-- 북마크 확인용 임시 데이터, 수정 필요 -->
+						<a href="javascript:" class ="heart-click" value="${v.proj_no }">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16" >
+		  				<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+						</svg>
+						</a>
+					<!-- 하트 -->
+					</c:when>
+					<c:otherwise>
+					<!-- 빈 하트 -->
+						<a href="javascript:" class ="heart-click" value="${v.proj_no }">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16" >
+				 			<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+							</svg>
+						</a>
+					</c:otherwise>
+				</c:choose>
 			</c:when>
 			<c:otherwise>
-			<!-- 하트 -->
-				<a href="javascript:" class ="heart-click" value="${v.proj_no }">
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16" >
-  				<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
-				</svg>
-				</a>
+					<!-- 프리랜서가 아닐때  -->
+						<a href="javascript:" class ="noHeart" value="${v.proj_no }">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16" >
+				 			<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+							</svg>
+						</a>
 			</c:otherwise>
-		</c:choose>        
+	</c:choose>	
         </div>
     </div>
 
@@ -316,6 +302,7 @@ ${modalCheck }
 				</div>
 
 			</div>
+			
 </c:forEach>
 </fieldset>
 
@@ -352,9 +339,35 @@ ${modalCheck }
 </form>
 </div>
 
+
+   </div>
+   
+  </div>
+ </div>
+</div>
+
+
+
+
+
 <script>
 $(document).ready(function(){
-  var actionForm = $("#actionForm");
+	if(${!empty param.sn}){
+		$("#sn2").val( $("#ss").val() );		
+		}
+		if(${empty param.sn}){
+			var sn = "";
+			sn = $('#ss').val("reg_date");
+		}
+		
+		if(${empty param.work_field}){
+		 $("#radioWf1").prop("checked",true);		
+		}else{
+			$('#work_field2').val($("input:radio[name='work_field']:checked").val());
+		}
+		
+		var actionForm = $("#actionForm");
+  
 
   /* 페이징 버튼 클릭 */
   $(".page-item a").on("click", function(e) {
@@ -559,6 +572,12 @@ $(document).ready(function(){
 				
 			}
 		});
+		
+		// 프리랜서가 아닐때 하트 클릭
+		$(".noHeart").click(function(){
+			alert("프리랜서로 로그인 해야 합니다");
+		});
+		
 		
 
 
