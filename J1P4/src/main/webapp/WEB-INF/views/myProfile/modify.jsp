@@ -200,9 +200,9 @@ ct_no: ${sessionScope.ct_no }
 					<input type="radio" value="주니어" class="btn-check" name="job_lev" id="radioJl1">
 					<label class="btn btn-outline-dark radioLev" for="radioJl1">주니어</label>
 					<input type="radio" value="미들" class="btn-check" name="job_lev" id="radioJl2">
-					<label class="btn btn-outline-dark radioLev"" for="radioJl2">미들</label>
+					<label class="btn btn-outline-dark radioLev" for="radioJl2">미들</label>
 					<input type="radio" value="시니어" class="btn-check" name="job_lev" id="radioJl3">
-					<label class="btn btn-outline-dark radioLev"" for="radioJl3">시니어</label>
+					<label class="btn btn-outline-dark radioLev" for="radioJl3">시니어</label>
 				</div>
 				</div>
 			</div>
@@ -321,6 +321,27 @@ ct_no: ${sessionScope.ct_no }
 		<!-- card body 끝 -->
 		</div>
 		<!-- 자격증 탭 끝 -->
+
+		<!-- 포트폴리오 탭 시작 -->
+		<div class="tab-pane fade" id="free_portf"  >
+		<!-- card body 시작 -->
+		<div class="card-body border-start" >
+			<div class="border-bottom" style="position: relative; right:16px; width:1000px; padding-bottom: 10px;" >
+				<h4 class="font-weight-bold mx-4 my-3">포트폴리오</h4>
+			</div>
+			<div class="mx-4 my-3">
+			<div class="gap">	
+				<h5>포트폴리오</h5>
+				<div class="content" style="margin-bottom: 281.42px; ">
+				<div class="filePlz"></div>				
+				<div role="button" class="my-3" data-bs-toggle="modal" data-bs-target="#portfModal">+ 포트폴리오 추가</div>
+				</div>
+			</div>
+			</div>		
+		</div>
+		<!-- card body 끝 -->
+		</div>
+		<!-- 포트폴리오 탭 끝 -->
 							
 		<button type="button"  class="btn btn-dark saveButt" style="position: absolute; right:54px; top:25px;">저장하기</button>
 	
@@ -330,6 +351,63 @@ ct_no: ${sessionScope.ct_no }
 </div>
 </div>
 </form>
+
+<!-- 포트폴리오 모달창 시작 -->
+<form action="/myProfile/upload" method="post" id="portf" enctype="multipart/form-data">
+
+<div class="modal fade" id="portfModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
+<div class="modal-content">	    
+	
+	<!-- 모달 header 시작 -->		
+	<div class="modal-header">
+	<h1 class="modal-title fs-5" id="staticBackdropLabel">포트폴리오 등록하기</h1>
+	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	</div>
+	<!-- 모달 header 끝 -->		
+				
+	<!-- 모달 본문 시작 -->   			   
+	<div class="modal-body">
+	프리랜서에게 제안할 프로젝트를 골라주떼욤 (❁´◡`❁)
+	<hr>
+		<div>
+		  <div>
+			<div>
+			<label for="exampleInputEmail1">포트폴리오 제목</label>
+			<input type="text" name="work_field" id="exampleInputEmail1" placeholder="포트폴리오 제목을 입력하세요">
+			</div>
+		
+			<div>
+			<label for="exampleInputPassword1">담당 업무</label>
+			<textarea cols="80" rows="30" name="responsibility" id="exampleInputPassword1" placeholder="담당 업무를 입력하세요"></textarea>
+			</div>
+			
+			<div class="form-group fileDiv">
+			<label for="exampleInputFile">File input</label> 
+			<input type="button" value="파일 추가" onclick="addFile();">
+			</div>
+		  </div>
+			
+			
+		</div>
+		
+	<!-- 모달 footer 시작 -->
+	<div class="modal-footer">
+	  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+	  <input type="button" class="btn btn-primary submButt" value="저장하기"
+	  data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#offerModalSucc">
+	</div>
+	<!-- 모달 footer 끝-->
+	
+	</div>
+	<!-- 모달 본문 끝 -->
+	
+</div>
+</div>
+</div>
+	
+</form>
+<!-- 포트폴리오 모달창 끝 -->
 
 <div class="container">
 	<footer class="py-3 my-4">
@@ -346,6 +424,48 @@ ct_no: ${sessionScope.ct_no }
 	
 <!-- 자바스크립트 시작 -->	
 <script type="text/javascript">
+
+$(function(){
+	
+	$(".submButt").click(function(){
+		
+		var formData = new FormData($('#portf')[0]);
+		
+		$.ajax({
+			url:"/myProfile/upload",
+			type:"POST",
+			data : formData,
+			processData: false,
+			contentType: false,
+			success : function(a){
+				alert(" ╰(*°▽°*)╯ 전송 완료 ");
+				
+				var resp = a.responsibility;
+				var wf = a.work_field
+				var fileName = a.fileNameList;
+				
+				
+				$.each(a, function(index, item) { // 데이터 =item
+					$(".filePlz").append(index + " "); // index가 끝날때까지 
+					$(".filePlz").append(item.wf + " ");
+					$(".filePlz").append(item.resp + " ");
+					$(".filePlz").append(item.fileName + " ");
+				});
+			},
+			error : function() {
+				alert("오류발생");
+			}
+		});
+		
+	});
+	
+});
+
+var cntt = 1;
+function addFile(){
+	$(".fileDiv").append("<input type='file' name='file"+cntt+"'id='exampleInputFile'>");
+	cntt++;
+}
 
 		/* 임시저장된 value를 불러와서 라디오 체크에 checked 또는 체크박스에 selected 옵션 부여 */
 		$(":radio[name='work_field'][value='${myProfile.work_field}']").attr('checked', true);
@@ -639,8 +759,7 @@ ct_no: ${sessionScope.ct_no }
 			});
 			
 		});
-		
-		
+
 		// 날짜를 yyyy-mm-dd 형식으로 만들어 줌.
 		function date_mask(objValue) {
 		 var v = objValue.replace("--", "-");

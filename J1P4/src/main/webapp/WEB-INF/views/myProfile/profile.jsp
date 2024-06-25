@@ -302,6 +302,38 @@ ct_no: ${sessionScope.ct_no }
 		<!-- card body 끝 -->
 		</div>
 		<!-- 자격증 탭 끝 -->
+		
+		<!-- 포트폴리오 탭 시작 -->
+		<div class="tab-pane fade" id="free_portf"  >
+		<!-- card body 시작 -->
+		<div class="card-body border-start" >
+			<div class="border-bottom" style="position: relative; right:16px; width:1000px; padding-bottom: 10px;" >
+				<h4 class="font-weight-bold mx-4 my-3">포트폴리오</h4>
+			</div>
+			<div class="mx-4 my-3">
+			<div class="gap">	
+				<h5>포트폴리오</h5>
+				<div class="content" style="margin-bottom: 367px;">
+				<c:forEach items="${myLicense }" var="myLicense">
+					<c:if test="${empty myLicense.license_nm }">
+						<div class="border border-1 rounded-3 p-2" role="group" style="width: 700px; ">
+						<span style="padding-left: 20px; font-size: 22px;" >등록된 포트폴리오가 없습니다.</span><br>
+						</div>
+					</c:if>
+					<c:if test="${not empty myLicense.license_nm }">
+					<div class="border border-1 rounded-3 p-2" role="group" style="width: 700px; margin-bottom: 20px;">	
+						<span style="padding-left: 20px;font-size: 18px; font-weight: bold;">${myLicense.license_nm }</span><br>
+						<span style="padding-left: 20px;">${myLicense.issuer } | ${myLicense.qualify_date }</span>	
+					</div>
+					</c:if>
+				</c:forEach>
+				</div>
+			</div>
+			</div>		
+		</div>
+		<!-- card body 끝 -->
+		</div>
+		<!-- 포트폴리오 탭 끝 -->
 		<button type="button" class="btn btn-dark" style="position: absolute; right:54px; top:25px;" onclick = "location.href = '/myProfile/modify?free_no=${sessionScope.free_no}'">수정하기</button>
 		
 	
