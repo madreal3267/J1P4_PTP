@@ -15,6 +15,10 @@
 <link href="../resources/css/freeHeader.css" rel="stylesheet" />
 <link href="../resources/css/main.css" rel="stylesheet" />
 <link href="../resources/css/enrollFree.css" rel="stylesheet" />
+<link href="../resources/css/listPro.css" rel="stylesheet" />
+<!-- 별 css -->
+<link href="${pageContext.request.contextPath}/resources/star.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body style="padding-top: 75px;">
 
@@ -28,7 +32,7 @@
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" >
           <li><a href="/board/listPro" class="nav-link px-3 link-body-emphasis nav-r1">프로젝트 찾기</a></li>
-          <li><a href="#" class="nav-link px-3 link-body-emphasis nav-r1">프리랜서 찾기</a></li>
+          <li><a href="/board/listFree" class="nav-link px-3 link-body-emphasis nav-r1">프리랜서 찾기</a></li>
 <%--           <c:if test="${sessionScope.user_type.equals('개인') or sessionScope.user_type.equals('팀') }"> --%>
 <!--           <li><a href="/enroll/enrollFree" class="nav-link px-3 link-body-emphasis nav-r1">프리랜서 등록</a></li> -->
 <%--           </c:if> --%>

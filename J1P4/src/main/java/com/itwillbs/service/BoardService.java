@@ -51,6 +51,8 @@ public interface BoardService {
 	public int mofiNum(ProjectVO vo);
 	public int mofiNumNs(ProjectVO vo);
 	
+	// 북마크된 프로젝트
+	public List<BMarkVO> freebMark(int free_no);
 	// 프리랜서 정렬
 	
 	// 프리랜서 필터

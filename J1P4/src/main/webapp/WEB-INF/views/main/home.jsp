@@ -16,6 +16,11 @@
 <c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.equals('클라이언트') }">
 <c:import url="../include/ctHeader.jsp"></c:import>
 </c:if>
+
+<c:if test="${not empty sessionScope.user_id && empty sessionScope.user_cf}">
+<meta http-equiv='refresh' content='0;url=../member/mailsend'>
+</c:if>
+
 user_id: ${sessionScope.user_id },
 user_cf: ${sessionScope.user_cf },
 user_type: ${sessionScope.user_type },
@@ -33,7 +38,7 @@ ct_no: ${sessionScope.ct_no }
 	</div>
 	
 	<div id="mainImg">
-	<img src="../resources/main_side.svg" alt="mainImg"/>
+	<img src="../resources/main.png" style="width:500px;" alt="mainImg"/>
 	</div>
 	
 	<!-- ============== 비회원 메인 메뉴 ================= -->
@@ -79,10 +84,10 @@ ct_no: ${sessionScope.ct_no }
 <div style="position: relative; padding-top:80px;">
 	<h3 id="mainProjMenu">프로젝트 둘러보기</h3>
 	<div style="text-align: center;">
-		<button class="rounded-3 p-3 m-1 butt3" type="button"><b>⚙️ 개발</b></button>
-		<button class="rounded-3 p-3 m-1 butt3" type="button"><b>🛠️ 기획</b></button>
-		<button class="rounded-3 p-3 m-1 butt3" type="button"><b>🎨 디자인</b></button>
-		<button class="rounded-3 p-3 m-1 butt3" type="button"><b>🖋️ 퍼블리싱</b></button>
+		<button class="rounded-3 p-3 m-1 butt3" type="button" onclick = "location.href = '/board/listProP?pageNum=1&amount=6&sn=reg_date&work_field=개발'"><b>⚙️ 개발</b></button>
+		<button class="rounded-3 p-3 m-1 butt3" type="button" onclick = "location.href = '/board/listProP?pageNum=1&amount=6&sn=reg_date&work_field=기획'"><b>🛠️ 기획</b></button>
+		<button class="rounded-3 p-3 m-1 butt3" type="button" onclick = "location.href = '/board/listProP?pageNum=1&amount=6&sn=reg_date&work_field=디자인'"><b>🎨 디자인</b></button>
+		<button class="rounded-3 p-3 m-1 butt3" type="button" onclick = "location.href = '/board/listProP?pageNum=1&amount=6&sn=reg_date&work_field=퍼블리싱'"><b>🖋️ 퍼블리싱</b></button>
 	</div>
 </div>
 

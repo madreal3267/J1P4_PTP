@@ -78,9 +78,13 @@
 		}	
 		
 		// '수정하기' 버튼 클릭시 프로젝트 수정 페이지로 이동
+		$(".btn-warning").click(function(){
+			$("form[role='form']").attr("action","/m/t");
+			$("form[role='form']").submit();
+		});
 		
 		// '삭제하기' 버튼 클릭시 삭제후 현재 페이지로 redirect
-		$(".btn_danger").click(function(){
+		$(".btn-danger").click(function(){
 			$("form[role='form']").attr("action","/myProManageCt/underReviewProject");
 			$("form[role='form']").submit();
 		});

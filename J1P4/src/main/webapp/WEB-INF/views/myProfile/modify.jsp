@@ -60,13 +60,13 @@ ct_no: ${sessionScope.ct_no }
 				<h5>업무 가능 분야</h5>
 				<div class="content">
 					<input type="radio" value="개발" class="btn-check" name="work_field" id="radioWf1">
-					<label class="btn btn-outline-dark" for="radioWf1">⚙️ 개발</label>
+					<label class="btn btn-outline-dark radioField" for="radioWf1">⚙️ 개발</label>
 					<input type="radio" value="기획" class="btn-check" name="work_field" id="radioWf2">
-					<label class="btn btn-outline-dark" for="radioWf2">🛠️ 기획</label>
+					<label class="btn btn-outline-dark radioField" for="radioWf2">🛠️ 기획</label>
 					<input type="radio" value="디자인" class="btn-check" name="work_field" id="radioWf3">
-					<label class="btn btn-outline-dark" for="radioWf3">🎨 디자인</label>
+					<label class="btn btn-outline-dark radioField" for="radioWf3">🎨 디자인</label>
 					<input type="radio" value="퍼블리싱" class="btn-check" name="work_field" id="radioWf4">
-					<label class="btn btn-outline-dark" for="radioWf4">🖋️ 퍼블리싱</label>
+					<label class="btn btn-outline-dark radioField" for="radioWf4">🖋️ 퍼블리싱</label>
 				</div>
 			</div>	
 			<hr>
@@ -166,17 +166,17 @@ ct_no: ${sessionScope.ct_no }
 				<!-- [추가하기] 클릭 시 추가되는 기술 리스트 출력되는 공간-->
 				
 				<c:forEach items="${mySkill }" var="mySkill">
-				<p><div class="border border-1 rounded-3" role="group" style="width: 400px; display: inline-block; position: relative;">
-				<input type="hidden" value="${mySkill.skill_nm}" name="skill_nm"><input type="hidden" value='${mySkill.skill_lev}' name="skill_lev">
-				<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">${mySkill.skill_nm}</span></h4>
-				<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">${mySkill.skill_lev}</span></h4>
-				<button class="removeButt btn-close" aria-label="Close" style="width: 1px; position: absolute; top: 21px; left: 360px;"></button></div></p>
+				<p><div class="border border-1 rounded-3 p-2" role="group" style="width: 700px; margin-bottom: 20px;">
+				<button class="removeButt btn-close" aria-label="Close" style="width: 1px; position: absolute; right:78px;"></button>
+				<input type="hidden" value="${mySkill.skill_nm }" name="skill_nm"><input type="hidden" value="${mySkill.skill_lev }" name="skill_lev">
+				<div style="padding-bottom:5px;"><span style="padding-left: 20px; font-size: 22px; font-weight: bold;">${mySkill.skill_nm }</span><br></div>
+				<span style="padding-left: 20px;"> 레벨 : ${mySkill.skill_lev }</span></div></p>	
 				</c:forEach>
 				
 				<div id="inputPt"></div>
 				<!-- [+보유기술 추가] 클릭 시 [select 버튼] 출력되는 공간 -->
 				
-				<div role="button" class="addSkill">+ 보유기술 추가</div>
+				<div role="button" class="addSkill my-3">+ 보유기술 추가</div>
 				</div>
 			</div>
 			</div>
@@ -198,11 +198,11 @@ ct_no: ${sessionScope.ct_no }
 				<div class="content">
 				<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
 					<input type="radio" value="주니어" class="btn-check" name="job_lev" id="radioJl1">
-					<label class="btn btn-outline-dark" for="radioJl1">주니어</label>
+					<label class="btn btn-outline-dark radioLev" for="radioJl1">주니어</label>
 					<input type="radio" value="미들" class="btn-check" name="job_lev" id="radioJl2">
-					<label class="btn btn-outline-dark" for="radioJl2">미들</label>
+					<label class="btn btn-outline-dark radioLev"" for="radioJl2">미들</label>
 					<input type="radio" value="시니어" class="btn-check" name="job_lev" id="radioJl3">
-					<label class="btn btn-outline-dark" for="radioJl3">시니어</label>
+					<label class="btn btn-outline-dark radioLev"" for="radioJl3">시니어</label>
 				</div>
 				</div>
 			</div>
@@ -214,21 +214,20 @@ ct_no: ${sessionScope.ct_no }
 				<!-- [추가하기] 클릭 시 추가되는 경력 리스트 출력되는 공간-->
 				
 				<c:forEach items="${myCareer }" var="myCareer">
-				<p><div class="border border-1 rounded-3" role="group" style="width: 400px; display: inline-block; position: relative;">
+								
+				<p><div class="border border-1 rounded-3 p-2" role="group" style="width: 700px; margin-bottom: 20px;">
+				<button class="removeButt btn-close" aria-label="Close" style="width: 1px; position: absolute; right:78px;"></button>
 				<input type="hidden" value="${myCareer.company_nm }" name="company_nm"><input type="hidden" value="${myCareer.responsibility }" name="responsibility">
 				<input type="hidden" value="${myCareer.join_date }" name="join_date"><input type="hidden" value="${myCareer.quit_date }" name="quit_date">
-				<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">${myCareer.company_nm }</span></h4>
-				<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">${myCareer.responsibility }</span></h4>
-				<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">${myCareer.join_date }</span></h4>
-				<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">${myCareer.quit_date }</span></h4>
-				<button class="removeButt btn-close" aria-label="Close" style="width: 1px; position: absolute; top: 21px; left: 360px;"></button></div></p>
+				<span style="padding-left: 20px; font-size: 18px; font-weight: bold;">${myCareer.company_nm }</span><br>
+				<span style="padding-left: 20px;">${myCareer.join_date } ~ ${myCareer.quit_date }</span><br>
+				<span style="padding-left: 20px;">${myCareer.responsibility }</span></div></p>
 				</c:forEach>
 				
 				<div class="inputCa"></div>
 				<!-- [+경력 추가] 클릭 시 [input text] 출력되는 공간 -->
-				<br>	
 					
-				<div role="button" class="addCareer">+ 경력 추가</div>
+				<div role="button" class="addCareer my-3">+ 경력 추가</div>
 				</div>
 			</div>	
 			</div>
@@ -248,21 +247,26 @@ ct_no: ${sessionScope.ct_no }
 			<div class="gap">	
 				<h5>최종학력</h5>
 				<div class="content" style="margin-bottom: 290.01px; ">
+				<div class="content">
 				<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
 					<input type="radio" value="고등학교" class="btn-check" name="school_type" id="radioGs1">
-					<label class="btn btn-outline-dark" for="radioGs1">고등학교</label>
+					<label class="btn btn-outline-dark radioGs" for="radioGs1">고등학교</label>
 					<input type="radio" value="대학교(2,3년제)" class="btn-check" name="school_type" id="radioGs2">
-					<label class="btn btn-outline-dark" for="radioGs2">대학(2,3년제)</label>
+					<label class="btn btn-outline-dark radioGs" for="radioGs2">대학(2,3년제)</label>
 					<input type="radio" value="대학교(4년제)" class="btn-check" name="school_type" id="radioGs3">
-					<label class="btn btn-outline-dark" for="radioGs3">대학교(4년제)</label>
+					<label class="btn btn-outline-dark radioGs" for="radioGs3">대학교(4년제)</label>
 					<input type="radio" value="대학원(석사)" class="btn-check" name="school_type" id="radioGs4">
-					<label class="btn btn-outline-dark" for="radioGs4">대학원(석사)</label>
+					<label class="btn btn-outline-dark radioGs" for="radioGs4">대학원(석사)</label>
 					<input type="radio" value="대학원(박사)" class="btn-check" name="school_type" id="radioGs5">
-					<label class="btn btn-outline-dark" for="radioGs5">대학원(박사)</label>
+					<label class="btn btn-outline-dark radioGs" for="radioGs5">대학원(박사)</label>
+				</div>
 				</div>
 				<br>
 				학교명* <input type="text" name="school_nm" value="${myProfile.school_nm }"><br>
+				<div class="content">
 				전공명* <input type="text" name="major" value="${myProfile.major }"><br>
+				</div>
+				<div class="content">
 				재학기간 <input type="text" name="entrance" value="${myProfile.entrance }"> 
 				~ <input type="text" name="graduation" value="${myProfile.graduation }">
 				<select name="grad_status" id="grad_status">
@@ -273,6 +277,7 @@ ct_no: ${sessionScope.ct_no }
 					<option value="휴학">휴학</option>
 					<option value="중퇴/자퇴">중퇴/자퇴</option>
 				</select>
+				</div>
 				</div>
 			</div>	
 			</div>	
@@ -296,20 +301,19 @@ ct_no: ${sessionScope.ct_no }
 				<!-- [추가하기] 클릭 시 추가되는 경력 리스트 출력되는 공간-->
 				
 				<c:forEach items="${myLicense }" var="myLicense">
-				<p><div class="border border-1 rounded-3" role="group" style="width: 400px; display: inline-block; position: relative;">
+								
+				<p><div class="border border-1 rounded-3 p-2" role="group" style="width: 700px; margin-bottom: 20px;">	
+				<button class="removeButt btn-close" aria-label="Close" style="width: 1px; position: absolute; right:78px;"></button>
 				<input type="hidden" value="${myLicense.license_nm }" name="license_nm"><input type="hidden" value="${myLicense.qualify_date }" name="qualify_date">
 				<input type="hidden" value="${myLicense.issuer }" name="issuer">
-				<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">${myLicense.license_nm }</span></h4>
-				<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">${myLicense.qualify_date }</span></h4>
-				<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">${myLicense.issuer }</span></h4>
-				<button class="removeButt btn-close" aria-label="Close" style="width: 1px; position: absolute; top: 21px; left: 360px;"></button></div></p>
+				<span style="padding-left: 20px;font-size: 18px; font-weight: bold;">${myLicense.license_nm }</span><br>
+				<span style="padding-left: 20px;">${myLicense.issuer } | ${myLicense.qualify_date }</span></div></p>
 				</c:forEach>
 				
 				<div class="inputLi"></div>
 				<!-- [+경력 추가] 클릭 시 [input text] 출력되는 공간 -->
-				<br>		
 				
-				<div role="button" class="addLicense">+ 자격증 추가</div>
+				<div role="button" class="addLicense my-3">+ 자격증 추가</div>
 				</div>
 			</div>
 			</div>		
@@ -318,7 +322,7 @@ ct_no: ${sessionScope.ct_no }
 		</div>
 		<!-- 자격증 탭 끝 -->
 							
-		<button type="button"  class="btn btn-dark saveButt" style="position: absolute; bottom:535px; right:50px;">저장하기</button>
+		<button type="button"  class="btn btn-dark saveButt" style="position: absolute; right:54px; top:25px;">저장하기</button>
 	
 	</div>
 	</div>
@@ -327,7 +331,18 @@ ct_no: ${sessionScope.ct_no }
 </div>
 </form>
 
-
+<div class="container">
+	<footer class="py-3 my-4">
+	<ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+    </ul>
+    <p class="text-center text-body-secondary">© 2024-06-06 Zip-Ga-Go-Ship-Da, Inc</p>
+   </footer>
+</div>
 	
 <!-- 자바스크립트 시작 -->	
 <script type="text/javascript">
@@ -417,19 +432,17 @@ ct_no: ${sessionScope.ct_no }
 				 '<option value="Unity">Unity</option><option value="Unix">Unix</option><option value="VisualStudio">VisualStudio</option>'+
 				 '<option value="Vue.js">Vue.js</option><option value="Windows">Windows</option><option value="모바일 웹/앱">모바일 웹/앱</option><option value="앱디자인">앱디자인</option>'+
 				 '<option value="웹디자인">웹디자인</option><option value="전자정부프레임워크">전자정부프레임워크</option><option value="한글">한글</option></select>'+
-				 '<select class="selectLev"><option disabled hidden selected></option>'+
+				 '<select class="selectLev" style="width:100px;"><option disabled hidden selected >레벨 *</option>'+
 				 '<option value="초급">초급</option><option value="중급">중급</option><option value="고급">고급</option></select>'+
-				 '<button type="button" class="addButt removeAdd">추가하기</button></div>'
+				 '<button type="button" class="btn btn-dark btn-sm addButt removeAdd">추가하기</button></div>'
 				);
 
 				/* 주요기술 스택 - select2(검색되는 select) 적용 */
-				$(function() {
-					$('.selectSk').select2();
-				});
+
 		
 				$(function() {
 					$('.selectSk').select2({
-						placeholder : "스킬을 선택해주세요."
+						placeholder : "스킬을 선택해주세요.*"
 					});
 		
 				});
@@ -442,16 +455,17 @@ ct_no: ${sessionScope.ct_no }
 
 						/* 하나라도 미입력 시 추가 불가능 */
 						if(skill==null || level==null){
-							alert("안돼 돌아가");
+							alert("필수값을 모두 입력해주세요.");
 							return;
 						}
 						
 						/* [추가하기] 클릭 시 추가되는 기술 리스트 출력 */
 						$('.listPt').prepend(
-						 '<p><div class="border border-1 rounded-3" role="group" style="width: 400px; display: inline-block; position: relative;">'+
-						 '<input type="hidden" value="'+skill+'" name="skill_nm"><input type="hidden" value='+level+' name="skill_lev">'+
-						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+skill+'</span></h4><h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+level+'</span></h4>'+
-						 '<button class="removeSk btn-close" aria-label="Close" style="width: 1px; position: absolute; top: 21px; left: 360px;"></button></div></p>'		
+							'<p><div class="border border-1 rounded-3 p-2" role="group" style="width: 700px; margin-bottom: 20px;">'+
+							'<button class="removeSk btn-close" aria-label="Close" style="width: 1px; position: absolute; right:78px;"></button>'+
+							'<input type="hidden" value="'+skill+'" name="skill_nm"><input type="hidden" value="'+level+'" name="skill_lev">'+
+							'<div style="padding-bottom:5px;"><span style="padding-left: 20px; font-size: 22px; font-weight: bold;">'+skill+'</span><br></div>'+
+							'<span style="padding-left: 20px;"> 레벨 : '+level+'</span></div></p>'		
 						);
 		
 					});
@@ -479,12 +493,12 @@ ct_no: ${sessionScope.ct_no }
 				/* [+경력 추가] 클릭 시 [input text]+[추가하기] 출력 */
 				$('.inputCa').html(
 				'<div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">'+
-				'<input type="text" class="textCn" placeholder="회사명*" style="width: 512px">'+
-				'<textarea rows="5" cols="60" class="textRs" placeholder="&#13;&#10&#13;&#10; 담당업무*"></textarea>'+
+				'<input type="text" class="textCn" placeholder="회사명*" style="width: 710px">'+
+				'<textarea rows="5" cols="84" class="textRs" placeholder="&#13;&#10&#13;&#10; 담당업무*"></textarea>'+
 				'<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">'+
-				'<input type="text" class="textJd" placeholder="입사연월">'+
-				'<input type="text" class="textQd" placeholder="퇴사연월"></div>'+
-				'<br><button type="button" class="addButt2 removeAdd2">추가하기</button></div>'
+				'<input type="text" class="textJd" style="width: 355px" placeholder="입사연월" onkeyup="this.value = date_mask(this.value)" maxlength="8">'+
+				'<input type="text" class="textQd" style="width: 355px" placeholder="퇴사연월" onkeyup="this.value = date_mask(this.value)" maxlength="8"></div>'+
+				'<button type="button" class="btn btn-dark btn-sm addButt2 removeAdd2">추가하기</button></div>'
 				);
 				
 				/* [추가하기] 클릭 */
@@ -497,27 +511,28 @@ ct_no: ${sessionScope.ct_no }
 						
 						/* 하나라도 미입력 시 추가 불가능 */
 						if(comNm==""){
-							alert("안돼 돌아가");
+							alert("필수값을 모두 입력해주세요.");
 							return;
 						}
 						if(comRs==""){
-							alert("안돼 돌아가");
+							alert("필수값을 모두 입력해주세요.");
 							return;
 						}
 						if(comJd==""){
-							alert("안돼 돌아가");
+							alert("필수값을 모두 입력해주세요.");
 							return;
 						}
 						
 						
 						/* [추가하기] 클릭 시 추가되는 경력 리스트 출력 */
 						$('.listCa').prepend(
-						 '<p><div class="border border-1 rounded-3" role="group" style="width: 400px; display: inline-block; position: relative;">'+
-						 '<input type="hidden" value="'+comNm+'" name="company_nm"><input type="hidden" value="'+comRs+'" name="responsibility">'+
-						 '<input type="hidden" value="'+comJd+'" name="join_date"><input type="hidden" value="'+comQd+'" name="quit_date">'+
-						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+comNm+'</span></h4><h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+comRs+'</span></h4>'+
-						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+comJd+'</span></h4><h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+comQd+'</span></h4>'+
-						 '<button class="removeCa btn-close" aria-label="Close" style="width: 1px; position: absolute; top: 21px; left: 360px;"></button></div></p>'		
+								'<p><div class="border border-1 rounded-3 p-2" role="group" style="width: 700px; margin-bottom: 20px;">'+
+								'<button class="removeCa btn-close" aria-label="Close" style="width: 1px; position: absolute; right:78px;"></button>'+
+								'<input type="hidden" value="'+comNm+'" name="company_nm"><input type="hidden" value="'+comRs+'" name="responsibility">'+
+								'<input type="hidden" value="'+comJd+'" name="join_date"><input type="hidden" value="'+comQd+'" name="quit_date">'+
+								'<span style="padding-left: 20px; font-size: 18px; font-weight: bold;">'+comNm+'</span><br>'+
+								'<span style="padding-left: 20px;">'+comJd+' ~ '+comQd+'</span><br>'+
+								'<span style="padding-left: 20px;">'+comRs+'</span></div></p>'		
 						);
 		
 					});
@@ -541,13 +556,13 @@ ct_no: ${sessionScope.ct_no }
 		/* [+자격증 추가] 클릭 */
 		$(function() {
 			$('.addLicense').click(function(){
-				/* [+경력 추가] 클릭 시 [input text]+[추가하기] 출력 */
+				/* [+자격증 추가] 클릭 시 [input text]+[추가하기] 출력 */
 				$('.inputLi').html(
 				'<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">'+
-				'<input type="text" placeholder="자격증명*" style="width: 300px;" class="licNm">'+
-				'<input type="text" placeholder="기관명*" class="licIss">'+
-				'<input type="text" placeholder="YYYY.MM." class="licQd">'+
-				'<br><button type="button" class="addButt3 removeAdd3">추가하기</button></div>'
+				'<input type="text" placeholder="자격증명*" class="licNm" style="width:250px;">'+
+				'<input type="text" placeholder="기관명*" class="licIss" style="width:250px;">'+
+				'<input type="text" placeholder="YYYY.MM." style="width:120px;" class="licQd" onkeyup="this.value = date_mask(this.value)" maxlength="8" >'+
+				'<button type="button" class="btn btn-dark btn-sm addButt3 removeAdd3">추가하기</button></div>'
 				);
 				
 				/* [추가하기] 클릭 */
@@ -559,33 +574,33 @@ ct_no: ${sessionScope.ct_no }
 						
 						/* 하나라도 미입력 시 추가 불가능 */
 						if(licNm==""){
-							alert("안돼 돌아가");
+							alert("필수값을 모두 입력해주세요.");
 							return;
 						}
 						if(licIss==""){
-							alert("안돼 돌아가");
+							alert("필수값을 모두 입력해주세요.");
 							return;
 						}
 						if(licQd==""){
-							alert("안돼 돌아가");
+							alert("필수값을 모두 입력해주세요.");
 							return;
 						}
 						
-						/* [추가하기] 클릭 시 추가되는 경력 리스트 출력 */
+						/* [추가하기] 클릭 시 추가되는 자격증 리스트 출력 */
 						$('.listLi').prepend(
-						 '<p><div class="border border-1 rounded-3" role="group" style="width: 400px; display: inline-block; position: relative;">'+
-						 '<input type="hidden" value="'+licNm+'" name="license_nm"><input type="hidden" value="'+licIss+'" name="issuer"><input type="hidden" value="'+licQd+'" name="qualify_date">'+
-						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+licNm+'</span></h4>'+
-						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+licIss+'</span></h4>'+
-						 '<h4 style="display: inline-block;"><span class="badge text-bg-warning m-3">'+licQd+'</span></h4>'+
-						 '<button class="removeLi btn-close" aria-label="Close" style="width: 1px; position: absolute; top: 21px; left: 360px;"></button></div></p>'		
+							'<p><div class="border border-1 rounded-3 p-2" role="group" style="width: 700px; margin-bottom: 20px;">'+
+							'<button class="removeLi btn-close" aria-label="Close" style="width: 1px; position: absolute; right:78px;"></button>'+
+							'<input type="hidden" value="'+licNm+'" name="license_nm"><input type="hidden" value="'+licQd+'" name="qualify_date">'+
+							'<input type="hidden" value="'+licIss+'" name="issuer">'+
+							'<span style="padding-left: 20px;font-size: 18px; font-weight: bold;">'+licNm+'</span><br>'+
+							'<span style="padding-left: 20px;">'+licIss+' | '+licQd+'</span></div></p>'
 						);
 		
 					});
 					
 				});
 				
-				/* 리스트에 추가된 경력 삭제 */
+				/* 리스트에 추가된 자격증 삭제 */
 				$(document).on('click','.removeLi',function(){
 			        $(this).parent().remove()
 			    });
@@ -599,7 +614,7 @@ ct_no: ${sessionScope.ct_no }
 			
 		});
 		
-		/* 리스트에 추가된 기술 삭제 */
+		/* 이미 출력되어있는 기술 또는 경력 또는 자격증 리스트 삭제 */
 		$(document).on('click','.removeButt',function(){
 	        $(this).parent().remove()
 	    });
@@ -625,12 +640,25 @@ ct_no: ${sessionScope.ct_no }
 			
 		});
 		
+		
+		// 날짜를 yyyy-mm-dd 형식으로 만들어 줌.
+		function date_mask(objValue) {
+		 var v = objValue.replace("--", "-");
+
+		    if (v.match(/^\d{4}$/) !== null) {
+		        v = v + '.';
+		    } else if (v.match(/^\d{4}\.\d{2}$/) !== null) {
+		        v = v + '.';
+		    }
+		 
+		    return v;
+		}
+		
+
 </script>
 <!-- 자바스크립트 끝 -->
 
 <!-- select2 (검색되는 select) 자바스크립트 -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<!-- 부트스트랩 자바스크립트 -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
