@@ -63,9 +63,16 @@ public interface BoardDAO {
 	public List<BMarkVO> freebMark(int free_no);
 	
 	// 프리랜서 정렬
-	
+	public List<FreelancerVO> freeLSort(Criteria cri);
 	// 프리랜서 필터
-	
+	// 필터된 프리랜서 수
+	public int fiNumFree(FreelancerVO vo);
+	// 모달 필터
+	public List<FreelancerVO> moFiFree(Criteria cri);
+	public List<FreelancerVO> moFiFreeNs(Criteria cri);
+	// 모달 필터된 프리랜서 수
+	public int mofiNumFree(FreelancerVO vo);
+	public int mofiNumNsFree(FreelancerVO vo);
 	// 프리랜서 상세페이지
 
 }
