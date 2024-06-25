@@ -386,7 +386,12 @@ public class BoardController {
 			cri.setWork_field("개발");
 			vo.setWork_field("개발");
 		}
-
+		
+		// district를 선택안했을 시는 ""으로 변경
+	      if(vo.getDistrict().equals("전체")) {
+	         cri.setDistrict("");
+	         vo.setDistrict("");
+	      }
 	
 		
 		model.addAttribute("skill_nm", skill_nm);

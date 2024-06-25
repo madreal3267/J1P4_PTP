@@ -19,7 +19,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 </style>
 <link href="../resources/css/enrollProj.css" rel="stylesheet" />
-
+<link href="../resources/css/listPro.css" rel="stylesheet" />
 </head>
 <body style="padding-top: 75px;">
 
