@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!-- ============== 비회원 헤더 ================= -->
 <c:if test="${empty sessionScope.user_id }">
@@ -24,25 +25,26 @@
 <%-- user_type: ${sessionScope.user_type }, --%>
 <%-- free_no: ${sessionScope.free_no }, --%>
 <%-- ct_no: ${sessionScope.ct_no } --%>
-<div style="margin-left: 310px; display: inline-block; width:1070px;" >
+<div style="margin-top: 30px;">
+<div style="margin-left: 418px; display: inline-block; width:1070px;" >
 <h3>${pNum} 개의 프로젝트가 등록되었습니다.</h3> <br>
 	<!-- 필터 -->
 	<div style="">
 <form action="/board/listProFi" method="post" id="fbtn" style="display: inline-block;">	
 
 		<input type="radio" value="개발" class="btn-check" name="work_field" id="radioWf1"  <c:if test='${param.work_field eq "개발"}' >checked</c:if>> 
-		<label class="btn btn-outline-dark" for="radioWf1">⚙️ 개발</label> 
+		<label class="btn btn-outline-dark filterWf" for="radioWf1">⚙️ 개발</label> 
 		<input type="radio" value="기획" class="btn-check" name="work_field" id="radioWf2" <c:if test='${param.work_field eq "기획"}' >checked</c:if>> 
-		<label class="btn btn-outline-dark" for="radioWf2">🛠️ 기획</label> 
+		<label class="btn btn-outline-dark filterWf" for="radioWf2">🛠️ 기획</label> 
 		<input type="radio" value="디자인" class="btn-check" name="work_field" id="radioWf3" <c:if test='${param.work_field eq "디자인"}' >checked</c:if>> 
-		<label class="btn btn-outline-dark" for="radioWf3">🎨 디자인</label> 
+		<label class="btn btn-outline-dark filterWf" for="radioWf3">🎨 디자인</label> 
 		<input type="radio" value="퍼블리싱" class="btn-check" name="work_field" id="radioWf4" <c:if test='${param.work_field eq "퍼블리싱"}' >checked</c:if>> 
-		<label class="btn btn-outline-dark" for="radioWf4">🖋️ 퍼블리싱</label>
+		<label class="btn btn-outline-dark filterWf" for="radioWf4">🖋️ 퍼블리싱</label>
 </form>	
 	<!-- modal -->
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModal" style="position: absolute; margin-left: 5px;">
-  상세
+<button type="button" class="btn btn-outline-dark filterWf" data-toggle="modal" data-target="#exampleModal" style="position: absolute; margin-left: 5px;">
+  <img alt="" src="../resources/filter2.png" height="20px;">
 </button>
 
 
@@ -53,25 +55,25 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">필터 추가하기</h5>
-					<button type="button" class="close" data-dismiss="modal"
+					<button type="button" class="close btn-close" data-dismiss="modal"
 						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
+						<span aria-hidden="true"></span>
 					</button>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body p-4">
 				<!-- form -->
 					<form action="/board/moFiListPro" method="post" id="fm1" name="fm1">
-						업무 분야 <br> 
+						<h6 class="modalText"> 업무 분야 </h6> 
 						<input type="radio" value="개발" class="btn-check" name="work_field" id="radio1"> 
-						<label class="btn btn-outline-dark" for="radio1">⚙️ 개발</label> 
+						<label class="btn btn-outline-dark modalWf" for="radio1">⚙️ 개발</label> 
 						<input type="radio" value="기획" class="btn-check" name="work_field" id="radio2"> 
-						<label class="btn btn-outline-dark" for="radio2">🛠️ 기획</label> 
+						<label class="btn btn-outline-dark modalWf" for="radio2">🛠️ 기획</label> 
 						<input type="radio" value="디자인" class="btn-check" name="work_field" id="radio3"> 
-						<label class="btn btn-outline-dark" for="radio3">🎨 디자인</label> 
+						<label class="btn btn-outline-dark modalWf" for="radio3">🎨 디자인</label> 
 						<input type="radio" value="퍼블리싱" class="btn-check" name="work_field" id="radio4"> 
 						<label class="btn btn-outline-dark" for="radio4">🖋️ 퍼블리싱</label>
 						<hr>
-						<h2>관련 기술</h2>
+						<h6 class="modalText">관련 기술</h6>
 						
 						<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
 							<select class="selectSk">
@@ -132,27 +134,26 @@
 								<option value="전자정부프레임워크">전자정부프레임워크</option>
 								<option value="한글">한글</option>
 							</select>
-							<button type="button" class="addButt removeAdd">추가하기</button>
+							<button type="button" class="btn btn-dark addButt removeAdd">+</button>
                      </div>
 						
 					<div class="listPt"></div>
 					<!-- [추가하기] 클릭 시 추가되는 기술 리스트 출력되는 공간-->
 
 					<hr>
+					<h6 class="modalText">숙련도</h6>
 					<div class="btn-group" role="group"
 						aria-label="Basic checkbox toggle button group">
-						<input type="radio" value="주니어" class="btn-check"
-							name="job_level" id="radioLev1"> <label
-							class="btn btn-outline-dark" for="radioLev1">주니어</label> <input
-							type="radio" value="미들" class="btn-check" name="job_level"
-							id="radioLev2"> <label class="btn btn-outline-dark"
-							for="radioLev2">미들</label> <input type="radio" value="시니어"
-							class="btn-check" name="job_level" id="radioLev3"> <label
-							class="btn btn-outline-dark" for="radioLev3">시니어</label>
-					</div>
+						<input type="radio" value="주니어" class="btn-check" name="job_level" id="radioLev1">
+						<label class="btn btn-outline-dark modalWf" for="radioLev1">주니어</label>
+						<input type="radio" value="미들" class="btn-check" name="job_level" id="radioLev2">
+						<label class="btn btn-outline-dark modalWf" for="radioLev2">미들</label>
+						<input type="radio" value="시니어" class="btn-check" name="job_level" id="radioLev3">
+						<label class="btn btn-outline-dark modalWf" for="radioLev3">시니어</label>
+					</div> 
 
 					<hr>
-					<h2>지역</h2>
+					<h6 class="modalText">클라이언트 위치</h6>
 					<select name='region' onchange="change(this.selectedIndex);"
 						class=input>
 						<option value="">전체</option>
@@ -181,7 +182,7 @@
 				<div class="modal-footer">
 					<!-- <button type="button" class="btn btn-secondary"
 						data-dismiss="modal">Close</button> -->
-					<button type="submit" class="btn btn-primary" id="filterBtn">필터 적용하기</button>
+					<button type="submit" class="btn btn-dark" id="filterBtn">필터 적용하기</button>
 				</div>
 				</form>
 				<!--form  -->
@@ -189,8 +190,7 @@
 		</div>
 		</div>
 
-
-<div >
+<div style="margin-bottom: 50px;">
 	<form id="sort" style="display: inline-box;">
 		<select name="sn" id="ss" style="display: inline-block; float: right; width: 10rem; padding: 7px ;">
 			<option value="reg_date" <c:if test="${param.sn eq 'reg_date'}" >selected</c:if>>최신 등록 순</option>
@@ -206,17 +206,9 @@
 <!--  <div class="card overflow-hidden card-2" > -->
   <div class="row no-gutters row-bordered row-border-light">
 
-
-
 <%-- ${param.work_field } --%>
 <%-- ${skill_nm } --%>
 <%-- ${modalCheck } --%>
-	
-
-
-
-	
-
  
 <div id="ajax_contetns">
 <fieldset  id="pList" >
@@ -224,7 +216,7 @@
 <!-- 회색 박스 -->
 <c:forEach var="v" items="${list }">
 <c:set var="skillList" value="${v.skill_nm }" />
-<div OnClick="location.href ='/board/detailList?proj_no=${v.proj_no}'" style="width : full; margin-bottom: 20px; padding: 20px; background-color: #f2f2f2; border-radius: 7px; border: 1px solid black;">
+<div class="card-2 projHover">
     <form role="form" method="post">
     	<input type="hidden" id="proj_no" value="${v.proj_no }">
     </form>
@@ -248,7 +240,7 @@
 					<c:when test="${Bookmarked}">
 					<!-- 북마크 확인용 임시 데이터, 수정 필요 -->
 						<a href="javascript:" class ="heart-click" value="${v.proj_no }">
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16" >
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="crimson" class="bi bi-heart-fill" viewBox="0 0 16 16" >
 		  				<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
 						</svg>
 						</a>
@@ -257,7 +249,7 @@
 					<c:otherwise>
 					<!-- 빈 하트 -->
 						<a href="javascript:" class ="heart-click" value="${v.proj_no }">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16" >
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="crimson" class="bi bi-heart" viewBox="0 0 16 16" >
 				 			<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
 							</svg>
 						</a>
@@ -267,7 +259,7 @@
 			<c:otherwise>
 					<!-- 프리랜서가 아닐때  -->
 						<a href="javascript:" class ="noHeart" value="${v.proj_no }">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16" >
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="crimson" class="bi bi-heart" viewBox="0 0 16 16" >
 				 			<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
 							</svg>
 						</a>
@@ -278,12 +270,12 @@
 
     <!-- 제목 -->
     <div style="font-weight: bold; font-size: 20px; margin: 6px 0;">
-        ${v.proj_title }
+       <a href="/board/detailList?proj_no=${v.proj_no}" class="titleCss">${v.proj_title }</a>
     </div>
 
     <!-- 예상 금액/ 예상 기간 -->
     <div style="margin-bottom: 6px;">
-        예상금액 <span style="font-weight: bold;">&nbsp${v.proj_cost }원</span>&nbsp&nbsp|&nbsp&nbsp 모집 마감일 <span style="font-weight: bold;">&nbsp${v.deadline }</span>
+        예상금액 <span style="font-weight: bold;">&nbsp<fmt:formatNumber value="${v.proj_cost }" pattern="#,###"/>원</span>&nbsp&nbsp|&nbsp&nbsp모집 마감일 <span style="font-weight: bold;">&nbsp${v.deadline }</span>
     </div>
 
 				<!-- 기타 정보 / 등록일자 -->
@@ -292,7 +284,7 @@
 						<span style="display: flex; align-items: center;">${v.work_field }
 							| ${v.region } ${v.district } |</span>
 						<c:forEach items="${fn:split(skillList, ',') }" var="skill">
-							<span class="badge bg-secondary mx-1" style="font-size: 14px;">
+							<span class="badge bg-secondary mx-1" style="font-size: 14px; background-color:#31b9a9 !important;">
 								<c:out value="${skill}" />
 							</span>
 						</c:forEach>
@@ -313,7 +305,7 @@
 
 </div>
 
-
+</div>
    </div>
    
   </div>
@@ -349,9 +341,18 @@
 	
 </form>
 
-
-
-
+<div class="container">
+	<footer class="py-3 my-4">
+	<ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
+      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+    </ul>
+    <p class="text-center text-body-secondary">© 2024-06-06 Zip-Ga-Go-Ship-Da, Inc</p>
+   </footer>
+</div>
 
 <script>
 $(document).ready(function(){
@@ -371,7 +372,6 @@ $(document).ready(function(){
 		
 		var actionForm = $("#actionForm");
   
-
   /* 페이징 버튼 클릭 */
   $(".page-item a").on("click", function(e) {
 	e.preventDefault();  //전송을 막음
@@ -433,12 +433,7 @@ $(document).ready(function(){
 </script>
 <!-- select2 (검색되는 select) 자바스크립트 -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<!-- 부트스트랩 자바스크립트 -->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-	crossorigin="anonymous"></script>
-	
+
 <script type="text/javascript">
       /* 시군구 - select */
       var cnt = new Array();
@@ -493,10 +488,11 @@ $(document).ready(function(){
             sel.options[i] = new Option(cnt[add][i], cnt[add][i]);
          }
       }
+      
       $(document).ready(function(){
     	  $('.selectSk').select2({
     	    dropdownParent: $('#exampleModal')    
-        });
+       		 });
 		})
 			
 		/* [추가하기] 클릭 */
@@ -506,12 +502,17 @@ $(document).ready(function(){
 
 				
 				/* [추가하기] 클릭 시 추가되는 기술 리스트 출력 */
-				$('.listPt').prepend('<p><div class="border border-1 rounded-3 m-2 p-4" role="group" style="width: 230px; display: inline-block;"><input type="hidden" value='+$('.listPt').children("p").length+' name="count"><input type="hidden" value="'+skill+'" name="skill_nm"><span class="badge bg-warning m-3">'
-				+skill+'</span><button class="removeSk btn-close" aria-label="Close"></button></div></p>');
+// 				$('.listPt').prepend('<p><div class="border border-1 rounded-3 m-2 p-4" role="group" style="width: 230px; display: inline-block;"><input type="hidden" value='+$('.listPt').children("p").length+' name="count"><input type="hidden" value="'+skill+'" name="skill_nm"><span class="badge bg-warning m-3">'
+// 				+skill+'</span><button class="removeSk btn-close" aria-label="Close"></button></div></p>');
 				
+				$('.listPt').prepend(
+						'<p><div class="border border-1 rounded-3 p-2" role="group" style="width: 430px; margin-bottom: 10px;">'+
+						'<button class="removeSk btn-close" aria-label="Close" style="width: 1px; position: absolute; right:60px;"></button>'+
+						'<input type="hidden" value='+$('.listPt').children("p").length+' name="count"><input type="hidden" value="'+skill+'" name="skill_nm">'+
+						'<span style="margin-left:20px; font-size: 16px; font-weight: bold;">'+skill+'</span></div></p>'		
+					);
 
-
-			});
+				});
 			
 		});
 		
@@ -519,12 +520,7 @@ $(document).ready(function(){
 		$(document).on('click','.removeSk',function(){
 	        $(this).parent().remove()
 	    })
-			    
-// 			    /* [추가하기] 클릭 동시에 버튼 삭제 */
-// 				$(document).on('click','.removeAdd',function(){
-// 			        $(this).parent().remove()
-// 			    })
-		
+			    		
 		// 하트 클릭
 		$(".heart-click").click(function(e){
 			 
@@ -551,7 +547,7 @@ $(document).ready(function(){
 					}
 				});
 				
-				$(this).html("<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-heart-fill' viewBox='0 0 16 16'> <path fill-rule='evenodd' d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314'/></svg>")
+				$(this).html("<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='crimson' class='bi bi-heart-fill' viewBox='0 0 16 16'> <path fill-rule='evenodd' d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314'/></svg>")
 				
 			// 하트 클릭
 			}else if($(this).children('svg').attr('class') == "bi bi-heart-fill"){
@@ -571,7 +567,7 @@ $(document).ready(function(){
 					}
 				});
 				
-				$(this).html("<svg xmlns='http://www.w3.org/2000/svg' width'16' height='16' fill='currentColor' class='bi bi-heart' viewBox='0 0 16 16'><path d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15'/></svg>")
+				$(this).html("<svg xmlns='http://www.w3.org/2000/svg' width'16' height='16' fill='crimson' class='bi bi-heart' viewBox='0 0 16 16'><path d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15'/></svg>")
 				
 			}
 		});
