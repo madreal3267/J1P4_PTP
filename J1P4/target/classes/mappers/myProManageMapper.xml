@@ -13,7 +13,7 @@
     <!-- 관심 프로젝트 정보 조회 -->
     <select id="interestProjectList" resultType="com.itwillbs.domain.ProjectDTO">
      	select p.proj_title, p.proj_cost, p.work_period, p.work_field, 
-     		   r.region, r.district, s.skill_nm, p.reg_date, f.free_no, p.proj_no, proj_status
+     		   r.region, r.district, s.skill_nm, p.reg_date, f.free_no, p.proj_no, p.proj_status
      	from project p 
     	join bookmark b on p.proj_no = b.proj_no
     	join freelancer f on b.free_no = f.free_no
