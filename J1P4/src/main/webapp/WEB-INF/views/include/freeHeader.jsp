@@ -39,7 +39,7 @@
 <%--           <c:if test="${sessionScope.user_type.equals('사업자') }"> --%>
 <!--           <li><a href="/enroll/enrollFreeB" class="nav-link px-3 link-body-emphasis nav-r1">프리랜서 등록</a></li> -->
 <%--           </c:if> --%>
-          <li><a href="#" class="nav-link px-3 link-body-emphasis nav-r1">이용방법</a></li>
+          <li><a href="/member/guide" class="nav-link px-3 link-body-emphasis nav-r1">이용방법</a></li>
           <c:if test="${sessionScope.user_type.equals('개인') or sessionScope.user_type.equals('팀') }">
           <li><a href="/myProfile/profile?free_no=${sessionScope.free_no }" class="nav-link px-2 link-body-emphasis nav-r4">내 프로필</a></li>
           </c:if>
@@ -54,8 +54,8 @@
             <img src="../resources/증명1.jpg" alt="profile" width="45" height="45" class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small">
-            <li><a class="dropdown-item" href="#">마이페이지</a></li>
-            <li><a class="dropdown-item" href="#">계정설정</a></li>
+            <li><a class="dropdown-item" href="/member/mypage">마이페이지</a></li>
+            <li><a class="dropdown-item" href="/member/account">계정설정</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="/member/logout">로그아웃</a></li>
           </ul>

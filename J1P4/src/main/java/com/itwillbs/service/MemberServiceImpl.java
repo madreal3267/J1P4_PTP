@@ -313,7 +313,6 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Integer chkIdentB(String id) {
 		return mdao.chkIdentB(id);
->>>>>>> a62ef28b1049a913396d33381b9c51ba8c04c42a
 	}
 	
 	
