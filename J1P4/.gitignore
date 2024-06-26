@@ -120,4 +120,8 @@ $RECYCLE.BIN/
 *.lnk
 
 /target/
+<<<<<<< HEAD
 /.classpath
+=======
+/.classpath
+>>>>>>> develop

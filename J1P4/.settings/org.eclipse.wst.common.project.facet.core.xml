@@ -4,4 +4,8 @@
   <installed facet="java" version="11"/>
   <installed facet="jst.web" version="3.1"/>
   <installed facet="wst.jsdt.web" version="1.0"/>
+<<<<<<< HEAD
 </faceted-project>
+=======
+</faceted-project>
+>>>>>>> develop
