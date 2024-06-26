@@ -4,6 +4,27 @@
 
 <%@ include file="../include/ctHeader.jsp"%>
 
+<style>
+#linkG {color: black; text-decoration: none; font-weight: bolder;}
+#linkG:hover {
+	color: #31b9a9;
+}
+
+.project-item {
+    position: relative;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.apply-form {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+</style>
+
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
 	<div class="card overflow-hidden card-2" >
 		<div class="row no-gutters row-bordered row-border-light">
@@ -52,10 +73,10 @@
 					</div>
 					<hr>
 					<c:forEach var="cflDTO" items="${completedFreelancerList}">
-						<div class="box-header with-border">
-							<h4>${cflDTO.name }</h4>
-							${cflDTO.proj_title }<br>
-								<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modal-${cflDTO.free_no}">수정하기</button>
+						<div class="box-header with-border project-item">
+							<h5><a id="linkG" href="/board/detailListFreeC?free_no=${cflDTO.free_no }">${cflDTO.name }</a></h5>
+							<a id="linkG" href="/board/detailList?proj_no=${cflDTO.proj_no }">${cflDTO.proj_title }</a><br>
+								<button style="float: right;" type="button" class="btn btn-dark  apply-form" data-toggle="modal" data-target="#modal-${cflDTO.free_no}">수정하기</button>
 							<div class="rating-display">
 								<c:set var="score" value="${cflDTO.score}" />
 								<c:forEach begin="1" end="5" var="i">
@@ -115,7 +136,7 @@
 									<div>${cflDTO.score}</div>
 									</div>
 									${cflDTO.content }
-								</div><hr>
+								</div>
 							</c:forEach>
 						</div>
 					</div>

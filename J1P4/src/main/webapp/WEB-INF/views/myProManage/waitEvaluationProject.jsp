@@ -5,6 +5,27 @@
 
 <%@ include file="../include/freeHeader.jsp"%>
 
+<style>
+.project-item {
+    position: relative;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.apply-form {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+#linkG {color: black; text-decoration: none; font-weight: bolder;}
+#linkG:hover {
+	color: #31b9a9;
+}
+</style>
+
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
 	<div class="card overflow-hidden card-2" >
 		<div class="row no-gutters row-bordered row-border-light">
@@ -44,15 +65,17 @@
 					</div><br>		
 				<div>
 					<i class="fa fa-fw fa-exclamation"></i>평가 기간 내에만 작성하실 수 있습니다.
-				</div><hr>
-				
+				</div><br> 
+				<div class="project-item">
 				<c:forEach var="projectVO" items="${waitEvaluationProjectList}">
 					
-						<b style="font-size: large;">${projectVO.proj_title }</b>
-						<button style="float: right;" type="button" class="btn btn-dark text-right pull right" data-toggle="modal" data-target="#modal-${projectVO.ct_no}">평가하기</button>
-						<br><br>
-						${projectVO.ct_id } 클라이언트<span class="pull-right">작성기간 <fmt:formatDate value="${projectVO.mod_date }" pattern="yyyy-mm-dd"/></span>
-						 <br>
+						<h4><a id="linkG" href="/board/detailList?proj_no=${projectVO.proj_no }">${projectVO.proj_title }</a></h4>
+							<br>
+							${projectVO.ct_id } 클라이언트
+						 	
+						<span style="float: right;">작성기간 <fmt:formatDate value="${projectVO.mod_date }" pattern="yyyy-mm-dd"/></span>
+						<button type="button" class="btn btn-dark apply-form" data-toggle="modal" data-target="#modal-${projectVO.ct_no}">평가하기</button>
+						
 						<!-- 모달창 생성하기 -->
 						<div class="modal fade text-center" id="modal-${projectVO.ct_no}">
 							<div class="modal-dialog">
@@ -65,7 +88,7 @@
 										</div>
 										<div class="modal-body">
 											별점을 매겨주세요<br>
-											<fieldset class="rate">
+											<fieldset  class="rate">
 												<input type="radio" id="rating10-${projectVO.ct_no}" name="score" value="10"><label for="rating10-${projectVO.ct_no}" title="10점"></label> 
 												<input type="radio" id="rating9-${projectVO.ct_no}" name="score" value="9"><label class="half" for="rating9-${projectVO.ct_no}" title="9점"></label> 
 												<input type="radio" id="rating8-${projectVO.ct_no}" name="score" value="8"><label for="rating8-${projectVO.ct_no}" title="8점"></label> 
@@ -90,8 +113,9 @@
 									</form>	
 								</div>			
 							</div>
-						</div><hr>
+						</div>
 					</c:forEach>
+								</div>
 							</div>
 						</div>
 					</div>

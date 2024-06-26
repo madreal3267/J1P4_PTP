@@ -3,7 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ include file="../include/ctHeader.jsp"%>
-
+<style>
+#linkG {color: black; text-decoration: none; font-weight: bolder;}
+#linkG:hover {
+	color: #31b9a9;
+}
+</style>
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
 	<div class="card overflow-hidden card-2" >
 		<div class="row no-gutters row-bordered row-border-light">
@@ -48,11 +53,11 @@
 								<br>
 			                <table class="table table-bordered table-striped bg-light" border="1">
 			                    <tr>
-			                        <td>프로젝트 이름</td>
-			                        <td>프리랜서 이름</td>
-			                        <td>기술</td>
-			                        <td>경력</td>
-			                        <td>지원 여부 확인</td>
+			                        <th>프로젝트 이름</th>
+			                        <th>프리랜서 이름</th>
+			                        <th>기술</th>
+			                        <th>경력</th>
+			                        <th>지원 여부 확인</th>
 			                    </tr>
 			                    <c:set var="prevProjectName" value="" />
 			                    <c:set var="rowCount" value="0" />
@@ -66,8 +71,8 @@
 			                                    <c:set var="rowCount" value="0" />
 			                                </c:if>
 			                                <tr>
-			                                    <td rowspan="1" id="proj${status.index}"><a href="#">${proFreeDTO.proj_title}</a></td>
-			                                    <td><a href="#">${proFreeDTO.name}</a></td>
+			                                    <td rowspan="1" id="proj${status.index}"><a id="linkG" href="/board/detailList?proj_no=${proFreeDTO.proj_no }">${proFreeDTO.proj_title}</a></td>
+			                                    <td><a id="linkG" href="/board/detailListFreeC?free_no=${proFreeDTO.free_no }">${proFreeDTO.name}</a></td>
 			                                    <td>${proFreeDTO.skills}</td>
 			                                    <td>${proFreeDTO.yeoncha}</td>
 			                                    <td><b>${proFreeDTO.apply_YN}</b></td>
@@ -77,7 +82,7 @@
 			                            </c:when>
 			                            <c:otherwise>
 			                                <tr>
-			                                    <td><a href="#">${proFreeDTO.name}</a></td>
+			                                    <td><a id="linkG" href="#">${proFreeDTO.name}</a></td>
 			                                    <td>${proFreeDTO.skills}</td>
 			                                    <td>${proFreeDTO.yeoncha}</td>
 			                                    <td><b>${proFreeDTO.apply_YN}</b></td>

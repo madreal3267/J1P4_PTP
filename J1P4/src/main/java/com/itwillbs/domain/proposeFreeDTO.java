@@ -20,7 +20,8 @@ public class proposeFreeDTO {
 	private int proj_no;
 	private int free_no;
 	
-	private Timestamp meeting_dt;
+	private String meeting_dt;
 	private String meeting_pc;
 	private int meetingOK;
+	
 }

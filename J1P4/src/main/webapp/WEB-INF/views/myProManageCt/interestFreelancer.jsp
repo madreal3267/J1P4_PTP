@@ -5,6 +5,16 @@
 
 <%@ include file="../include/ctHeader.jsp"%>
 
+<style>
+.project-item {
+    position: relative;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+</style>
+
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
 	<div class="card overflow-hidden card-2" >
 		<div class="row no-gutters row-bordered row-border-light">
@@ -47,14 +57,14 @@
 						북마크한 프리랜서를 관리할 수 있습니다.	
 					</div><br>	
 			 	<c:forEach var="free" items="${interestFreelancerList}">
-					<div style=" background-color: white; padding:10px; width: 750px; height: auto; cursor: pointer;" onclick="location.href='/myProfile/profile?free_no=${free.free_no}'">
+					<div class="project-item" style="cursor: pointer;" onclick="location.href='/board/detailListFreeC?free_no=${free.free_no}'">
 						[프로필사진]
 						<b>${free.name }</b>
-						분야 <b>${free.work_field }</b> | [레벨] <b>${free.job_level }</b><br>
+						분야 <b>${free.work_field }</b> | 레벨 <b>${free.job_level }</b><br>
 						경력 <b>${free.yeoncha }</b> 년차 |
 						학력 <b>${free.school_type }</b> | 
 						지역 <b>${free.region } ${free.district }</b>	
-						<table style="border: 1px solid black;"class="text-center pull-right">
+						<table style="border: 1px solid black;"class="text-center pull-right ">
 							<tr>
 								<th>근무경력</th>
 								<th>포트폴리오</th>
@@ -66,13 +76,14 @@
 						</table><br>				
 							<!-- 스킬 버튼 생성 test -->
 							<c:set var="skillList" value="${free.skills }" />
-							<c:forEach items="${fn:split(skillList, ',')}" var="skill">
+							<c:forEach  items="${fn:split(skillList, ',')}" var="skill">
 								<span class="badge text-bg-info">
 									<c:out value="${skill}" />
 								</span>	
-							</c:forEach><br><br>		
-						<span class="pull-right">[한줄소개] ${free.oneline_bio }</span> 
-					</div><hr>
+							</c:forEach><br><br>	
+						<span style="float: right;">[한줄소개] ${free.oneline_bio }</span> 
+						<br>
+					</div>
 				</c:forEach>
 					</div>
 			</div>

@@ -4,6 +4,13 @@
 
 <%@ include file="../include/ctHeader.jsp"%>
 
+<style>
+#linkG {color: black; text-decoration: none; font-weight: bolder;}
+#linkG:hover {
+	color: #31b9a9;
+}
+</style>
+
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
 	<div class="card overflow-hidden card-2" >
 		<div class="row no-gutters row-bordered row-border-light">
@@ -61,7 +68,7 @@
 					<c:forEach var="copDTO" items="${ctContractProjectList}">
 						<tr>
 							<td>${copDTO.proj_no }</td>
-							<td>${copDTO.proj_title }</td>
+							<td><a id="linkG" href="/board/detailList?proj_no=${copDTO.proj_no }">${copDTO.proj_title }</a></td>
 							<td>${copDTO.manager_nm }</td>
 							<td>
 		                   ${copDTO.proj_status} 진행중

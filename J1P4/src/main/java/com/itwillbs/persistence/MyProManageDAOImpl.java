@@ -58,7 +58,7 @@ public class MyProManageDAOImpl implements MyProManageDAO {
 	// 지원중 프로젝트 리스트
 	@Override
 	public List<ProjectDTO> applyingProjectList(String user_id) {
-		List<ProjectDTO> resultDTO = sqlSession.selectList(NAMESPACE + "applyingProjectList", user_id);
+		List<ProjectDTO> resultDTO = sqlSession.selectList(NAMESPACE +"applyingProjectList", user_id);
 		
 		return resultDTO;
 	}

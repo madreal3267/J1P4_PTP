@@ -6,6 +6,13 @@
 
 <%@ include file="../include/ctHeader.jsp"%>
 
+<style>
+#linkG {color: black; text-decoration: none; font-weight: bolder;}
+#linkG:hover {
+	color: #31b9a9;
+}
+</style>
+
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
 	<div class="card overflow-hidden card-2" >
 		<div class="row no-gutters row-bordered row-border-light">
@@ -49,16 +56,16 @@
 								<table class="table table-bordered table-striped bg-light">
 									<tbody>
 										<tr class="text-center">
-											<td>프로젝트 번호</td>
-											<td>프로젝트 이름</td>
-											<td>등록일자</td>
-											<td>반려 일자</td>
+											<th>프로젝트 번호</th>
+											<th>프로젝트 이름</th>
+											<th>등록일자</th>
+											<th>반려 일자</th>
 											
 										</tr>
 										<c:forEach var="projectVO" items="${regFailedProjectList}">
 											<tr>
 												<td rowspan="2">${projectVO.proj_no }</td>
-												<td>${projectVO.proj_title }</td>
+												<td><a id="linkG" href="/board/detailList?proj_no=${projectVO.proj_no }">${projectVO.proj_title }</a></td>
 												<td>${projectVO.reg_date }
 												<td>${projectVO.mod_date }
 											</tr>
