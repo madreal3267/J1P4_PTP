@@ -253,6 +253,60 @@ public class MemberDAOImpl implements MemberDAO {
 	public Integer sessCtNo(MemberVO vo) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+"sessCtNo",vo);
 	}
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	public Integer chkIdent(String id) {
+		return sqlSession.selectOne(NAMESPACE+"chkIdent",id);
+	}
+
+
+
+	@Override
+	public Integer chkIdentB(String id) {
+		return sqlSession.selectOne(NAMESPACE+"chkIdentB",id);
+	}
 	
 	
 	
@@ -263,24 +317,6 @@ public class MemberDAOImpl implements MemberDAO {
 
 	
 
-
-
-	
-	
-
-
-	
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 

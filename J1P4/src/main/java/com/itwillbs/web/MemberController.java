@@ -194,10 +194,18 @@ public class MemberController {
 			HttpSession Session = request.getSession();
 			if(resultVO != null) {
 				Session.setAttribute("user_id", resultVO.getUser_id());
+				id = ((String)Session.getAttribute("user_id"));
 				Session.setAttribute("user_cf", mService.sessCf(vo));
 				Session.setAttribute("user_type", mService.sessType(vo));
 				Session.setAttribute("free_no", mService.sessFreeNo(vo));
 				Session.setAttribute("ct_no", mService.sessCtNo(vo));
+//				if(Session.getAttribute("user_type").equals("개인") || Session.getAttribute("user_type").equals("팀")) {					
+					Session.setAttribute("ident", mService.chkIdent(id));
+					
+//				} else {					
+					Session.setAttribute("identB", mService.chkIdentB(id));
+//				}
+				
 				return"redirect:/main/home";
 				
 			}else {

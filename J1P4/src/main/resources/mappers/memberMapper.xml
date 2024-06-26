@@ -211,5 +211,111 @@
   
   
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <select id="chkIdent" resultType="int">
+		select exists (
+		select * from user
+		where user_id=#{user_id} and jumin_no is not null
+		) as isI
+	</select>
+	
+	<select id="chkIdentB" resultType="int">
+		select exists (
+		select * from user
+		where user_id=#{user_id} and bussiness_registration is not null
+		) as isB
+	</select>
+  
+  
+  
+  
+  
+  
+  
 
   </mapper>

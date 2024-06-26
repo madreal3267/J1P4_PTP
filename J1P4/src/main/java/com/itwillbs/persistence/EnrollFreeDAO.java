@@ -5,6 +5,7 @@ import com.itwillbs.domain.CompanyVO;
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.LicenseVO;
 import com.itwillbs.domain.PartnersVO;
+import com.itwillbs.domain.PortfolioVO;
 import com.itwillbs.domain.RegionVO;
 import com.itwillbs.domain.SkillVO;
 
@@ -31,4 +32,7 @@ public interface EnrollFreeDAO {
 	
 	// 프리랜서 회사 연혁
 	public void updateComp(CompanyVO vo);
+	
+	// 프리랜서 포트폴리오
+	public void updatePortf(PortfolioVO vo);
 }	

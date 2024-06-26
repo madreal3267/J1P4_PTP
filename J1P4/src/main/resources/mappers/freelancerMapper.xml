@@ -49,4 +49,9 @@
 		where free_no = (select free_no from freelancer where free_id=#{user_id})	
   	</update>
   	
+  	<insert id="updatePortf">
+		update portfolio set portfolio_title=#{portfolio_title},p_responsibility=#{p_responsibility}, file=#{file}
+		where free_no= #{free_no}
+	</insert>
+  	
   </mapper>

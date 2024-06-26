@@ -12,6 +12,7 @@ import com.itwillbs.domain.CompanyVO;
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.LicenseVO;
 import com.itwillbs.domain.PartnersVO;
+import com.itwillbs.domain.PortfolioVO;
 import com.itwillbs.domain.RegionVO;
 import com.itwillbs.domain.SkillVO;
 import com.itwillbs.web.EnrollFreeController;
@@ -103,6 +104,16 @@ public class EnrollFreeDAOImpl implements EnrollFreeDAO {
 		sqlSession.update(NAMESPACE+"updateComp",vo);
 		
 		logger.debug(" DAO : 프리랜서 회사연혁 업데이트 완료! ╰(*°▽°*)╯ ");				
+	}
+	
+	// 프리랜서 포트폴리오
+	@Override
+	public void updatePortf(PortfolioVO vo) {
+		logger.debug(" DAO : updatePortf(vo) 호출 (❁´◡`❁) ");
+		
+		sqlSession.update(NAMESPACE+"updatePortf",vo);
+		
+		logger.debug(" DAO : 프리랜서 포트폴리오 업데이트 완료! ╰(*°▽°*)╯ ");			
 	}
 	
 	

@@ -79,5 +79,22 @@ public interface MemberService {
 		public Integer sessFreeNo(MemberVO vo) throws Exception;
 		public Integer sessCtNo(MemberVO vo) throws Exception;
 
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		// 신원인증 확인
+		public Integer chkIdent(String id);
+		public Integer chkIdentB(String id);
 	
 }

@@ -101,9 +101,8 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 	
 	<!-- 모달 본문 시작 -->   			   
 	<div class="modal-body">
-	<h1>제안 성공했삼</h1>
-	<h3>축하축하룽💃🏼🕺 축하축하룽👯‍♀️ 축하축하룽🧚🏻‍♀️ 축하축하룽🤸‍♀️축하축하룽🤹 축하축하룽🎷 축하축하룽🎸 축하축하룽🎤
-	축하축하룽🎻 축하축하룽🚀 축하축하룽🎡 축하축하룽🎇 축하축하룽🎉 축하축하룽🎊 축하축하룽🎀 축하축하룽🛍 축하축하룽🎁</h3>
+	<h2>프로젝트 참여 신청이 완료되었습니다.</h2>
+	<h3>해당 프로젝트 담당 클라이언트의 확인이 있을 예정입니다.</h3>
 	
 	<!-- 모달 footer 시작 -->
 	<div class="modal-footer">
