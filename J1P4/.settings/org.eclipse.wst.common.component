@@ -1,4 +1,6 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+<<<<<<< HEAD
         	
     
     <wb-module deploy-name="web-1.0.0-BUILD-SNAPSHOT">
@@ -24,5 +26,109 @@
     
     </wb-module>
         
+=======
+                            	
+    
+    
+    
+    
+    
+    
+    <wb-module deploy-name="web-1.0.0-BUILD-SNAPSHOT">
+                                                        		
+        
+        
+        
+        
+        
+        
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+                                        
+        
+        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+                                        
+        
+        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+                                                                
+        
+        
+        
+        
+        
+        
+        <property name="context-root" value="web"/>
+                                
+        
+        
+        <property name="java-output-path" value="/J1P4/target/classes"/>
+                                                        	
+    
+    
+    
+    
+    
+    
+    </wb-module>
+                            
+
+
+
+
+
+>>>>>>> develop
 
 </project-modules>
+=======
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+                        	
+    
+    
+    
+    
+    
+    <wb-module deploy-name="web-1.0.0-BUILD-SNAPSHOT">
+                                                		
+        
+        
+        
+        
+        
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+                                
+        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+                                
+        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+                                                        
+        
+        
+        
+        
+        
+        <property name="context-root" value="web"/>
+                        
+        
+        <property name="java-output-path" value="/J1P4/target/classes"/>
+                                                	
+    
+    
+    
+    
+    
+    </wb-module>
+                        
+
+
+
+
+
+</project-modules>
+>>>>>>> 7dc89c4c522e6471496092ed16c5d227a7b5e0f0

@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.itwillbs.mapper.BoardMapper">
+  	 
+  	 
+  	 <!-- 프로젝트 목록 -->
+  	 <select id="projList" resultType="com.itwillbs.domain.ProjectVO">
+  	 	select * from project
+  	 	where deadline > now()
+  	 </select>
+  	 
+  	 <!-- 프로젝트 갯수 -->
+  	 <select id="pNum" resultType="int">
+  	 	select count(*)
+		from project
+		where deadline > now() and work_field="개발"
+  	 </select>
+
+  	 <!-- 페이징 처리 skill, region 조인  -->
+  	 <select id="pListPaging" resultType="com.itwillbs.domain.ProjectVO" parameterType="com.itwillbs.domain.Criteria">
+  	 	<![CDATA[
+			select p.proj_no, p.proj_title, p.proj_cost , p.deadline, p.work_field, p.reg_date, p.job_level, r.region, r.district, s.skill_nm
+			from project p
+			left join skill s
+			on p.proj_no = s.proj_no
+			left join region r
+			on p.proj_no = r.proj_no
+			where deadline > now() and work_field = "개발"
+			order by reg_date DESC
+			limit #{amount} offset #{offset}
+			
+  	 	]]>
+  	 </select>
+  	 
+  	 <!-- 정렬 limit 쿼리 등록일, 견적비교 -->
+  	 <select id="proLSort" resultType="com.itwillbs.domain.ProjectVO">
+	  	 <![CDATA[
+			select p.proj_no, p.proj_title, p.proj_cost , p.deadline, p.work_field, p.reg_date, p.job_level, r.region, r.district, s.skill_nm
+			from project p
+			left join skill s
+			on p.proj_no = s.proj_no
+			left join region r
+			on p.proj_no = r.proj_no
+			where deadline > now() and work_field=#{work_field}
+			order by cast(${sn} as unsigned) DESC
+			limit ${amount} offset #{offset}
+		]]>
+  	 </select>
+
+  	 <!-- 정렬 limit 쿼리 마감비교 -->
+  	 <select id="proLSortD" resultType="com.itwillbs.domain.ProjectVO">
+	  	 <![CDATA[
+			select p.proj_no, p.proj_title, p.proj_cost , p.deadline, p.work_field, p.reg_date, p.job_level, r.region, r.district, s.skill_nm
+			from project p
+			left join skill s
+			on p.proj_no = s.proj_no
+			left join region r
+			on p.proj_no = r.proj_no
+			where deadline > now()  and work_field=#{work_field}
+			order by cast(${sn} as date)
+			limit ${amount} offset #{offset}
+		]]>
+  	 </select>
+  	 
+  	 
+  	 <!-- 게시판 필터 -->
+  	 <select id="proFi" resultType="com.itwillbs.domain.ProjectVO">
+  	 	<![CDATA[
+			select p.proj_no, p.proj_title, p.proj_cost , p.deadline, p.work_field, p.reg_date, p.job_level, r.region, r.district, s.skill_nm
+			from project p
+			left join skill s
+			on p.proj_no = s.proj_no
+			left join region r
+			on p.proj_no = r.proj_no
+			where deadline > now() and work_field = #{work_field}
+			order by reg_date DESC
+			limit #{amount} offset #{offset}
+  	 	]]>
+  	 </select>
+  	 
+  	 <!-- 필터된 게시물 숫자 -->
+  	 <select id="fiNum" resultType="int" parameterType="com.itwillbs.domain.ProjectVO" >
+  		 <![CDATA[
+  	 	select count(*)
+		from project
+		where deadline > now() and work_field = #{work_field}
+		]]>
+  	 </select>
+  	 
+<!--   	 프로젝트 상세페이지 
+  	 <select id="dePro" resultType="com.itwillbs.domain.ProjectVO">
+  	 	select * from project
+  	 	where proj_no=#{proj_no}
+  	 </select> -->
+  	 <!-- 프로젝트 상세페이지  -->
+  	 <select id="dePro" resultType="com.itwillbs.domain.ProjectVO">
+  	 	select p.proj_no, p.proj_title, p.proj_cost , p.deadline, p.work_field, p.reg_date, p.job_level, r.region, r.district, s.skill_nm
+		from project p
+		left join skill s
+		on p.proj_no = s.proj_no
+		left join region r
+		on p.proj_no = r.proj_no
+  	 	where p.proj_no=#{proj_no}
+  	 </select>
+  	 
+  	   	 <!-- 프리랜서 수 -->
+  	 <select id="fNum" resultType="int">
+  	 	select count(*)
+		from freelancer
+		where work_field="개발"
+  	 </select>
+  	 
+  	 <!-- 프리랜서 페이징 처리 -->
+  	 <select id="fListPaging" resultType="com.itwillbs.domain.FreelancerVO" parameterType="com.itwillbs.domain.Criteria">
+  		<![CDATA[
+			select f.free_no, f.free_id, f.enroll_status, f.work_field, f.school_type, f.school_nm, f.major, f.grad_status,
+			  f.entrance, f.graduation, f.work_check, f.work_date, f.proj_cost, f.oneline_bio, f.bio, r.region, r.district, s.skill_nm, c.job_lev
+			from freelancer f
+			left join skill s
+			on f.free_no = s.free_no
+			left join region r
+			on f.free_no = r.free_no
+			left join career c
+            on f.free_no = c.free_no
+			where work_field = "개발"
+			order by reg_date DESC
+			limit #{amount} offset #{offset}
+			
+  	 	]]>
+  	 </select>
+  	 
+  	 <!-- 프로젝트를 북마크 저장 -->
+  	 <insert id="doBMark">
+  	 	insert into bookmark(free_no, proj_no)
+  	 	values (#{free_no},#{proj_no})
+  	 </insert>
+  	 
+  	 <!-- 프로젝트를 북마크 해제 -->
+  	 <delete id="deleteBMark">
+  	 	delete from bookmark
+  	 	where proj_no=#{proj_no} and free_no=#{free_no}
+  	 </delete>
+  	 
+  	 <!-- 모달 필터(후 정렬, 필터포함) -->
+  	 <select id="moFiPro" resultType="com.itwillbs.domain.ProjectVO">
+		<![CDATA[
+			select p.proj_no, p.proj_title, p.proj_cost , p.deadline, p.work_field, p.reg_date, p.job_level, r.region, r.district, s.skill_nm
+			from project p
+			left join skill s
+			on p.proj_no = s.proj_no
+			left join region r
+			on p.proj_no = r.proj_no
+			where deadline > now() and work_field = #{work_field}
+					and s.skill_nm regexp(select REPLACE(GROUP_CONCAT(#{skill_nm}),',','|') AS skill_nm) and job_level like CONCAT_WS('','%',#{job_level},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
+			order by cast(${sn} as unsigned) DESC
+			limit #{amount} offset #{offset}
+  	 	]]>
+  	 </select>
+  	 <!-- 모달 필터(후 정렬, 필터포함) skill_nm null일때 -->
+  	 <select id="moFiProNs" resultType="com.itwillbs.domain.ProjectVO">
+		<![CDATA[
+			select p.proj_no, p.proj_title, p.proj_cost , p.deadline, p.work_field, p.reg_date, p.job_level, r.region, r.district, s.skill_nm
+			from project p
+			left join skill s
+			on p.proj_no = s.proj_no
+			left join region r
+			on p.proj_no = r.proj_no
+			where deadline > now() and work_field = #{work_field}
+					and p.job_level like CONCAT_WS('','%',#{job_level},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
+			order by cast(${sn} as unsigned) DESC
+			limit #{amount} offset #{offset}
+  	 	]]>
+  	 </select>
+
+	<!-- 모달 후 정렬 데드라인 경우 -->
+  	 <select id="moFiProD" resultType="com.itwillbs.domain.ProjectVO">
+		<![CDATA[
+			select p.proj_no, p.proj_title, p.proj_cost , p.deadline, p.work_field, p.reg_date, p.job_level, r.region, r.district, s.skill_nm
+			from project p
+			left join skill s
+			on p.proj_no = s.proj_no
+			left join region r
+			on p.proj_no = r.proj_no
+			where deadline > now() and work_field = #{work_field}
+					and s.skill_nm regexp(select REPLACE(GROUP_CONCAT(#{skill_nm}),',','|') AS skill_nm) and job_level like CONCAT_WS('','%',#{job_level},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
+			order by cast(${sn} as date)
+			limit #{amount} offset #{offset}
+  	 	]]>
+  	 </select>
+
+	<!-- 모달 후 정렬 데드라인 경우 skill_nm null일때 -->
+  	 <select id="moFiProDNs" resultType="com.itwillbs.domain.ProjectVO">
+		<![CDATA[
+			select p.proj_no, p.proj_title, p.proj_cost , p.deadline, p.work_field, p.reg_date, p.job_level, r.region, r.district, s.skill_nm
+			from project p
+			left join skill s
+			on p.proj_no = s.proj_no
+			left join region r
+			on p.proj_no = r.proj_no
+			where deadline > now() and work_field = #{work_field}
+					and job_level like CONCAT_WS('','%',#{job_level},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
+			order by cast(${sn} as date)
+			limit #{amount} offset #{offset}
+  	 	]]>
+  	 </select>
+  	 
+  	 <!-- 모달필터 게시물 숫자 -->
+  	 <select id="mofiNum" resultType="int"  parameterType="com.itwillbs.domain.ProjectVO" >
+  		 <![CDATA[
+	  	 	select count(*)
+	 	 	from project p
+			left join skill s
+			on p.proj_no = s.proj_no
+			left join region r
+			on p.proj_no = r.proj_no
+			where deadline > now() and work_field = #{work_field}
+					and s.skill_nm regexp(select REPLACE(GROUP_CONCAT(#{skill_nm}),',','|') AS skill_nm) and job_level like CONCAT_WS('','%',#{job_level},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
+		]]>
+  	 </select>
+
+  	 <!-- 모달필터 게시물 숫자 skill_nm null일때 -->
+  	 <select id="mofiNumNs" resultType="int"  parameterType="com.itwillbs.domain.ProjectVO" >
+  		 <![CDATA[
+	  	 	select count(*)
+	 	 	from project p
+			left join skill s
+			on p.proj_no = s.proj_no
+			left join region r
+			on p.proj_no = r.proj_no
+			where deadline > now() and work_field = #{work_field}
+					and job_level like CONCAT_WS('','%',#{job_level},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
+		]]>
+  	 </select>
+  	 
+  	 <!-- 프리랜서 북마크 체크 -->
+  	 <select id="freebMark" resultType="com.itwillbs.domain.BMarkVO">
+  	 	select proj_no
+		from bookmark
+		where free_no = #{free_no}
+  	 </select>
+  	 
+  	 <!-- 프리랜서 찾기 정렬 -->
+  	 <select id="freeLSort" resultType="com.itwillbs.domain.FreelancerVO">
+	  	 <![CDATA[
+			select f.free_no, f.free_id, f.enroll_status, f.work_field, f.school_type, f.school_nm, f.major, f.grad_status,
+			  f.entrance, f.graduation, f.work_check, f.work_date, f.proj_cost, f.oneline_bio, f.bio, r.region, r.district, s.skill_nm, c.job_lev, u.user_type
+			from freelancer f
+			left join skill s
+			on f.free_no = s.free_no
+			left join region r
+			on f.free_no = r.free_no
+			left join career c
+            on f.free_no = c.free_no
+        	left join user u
+        	on f.free_id = u.user_id
+			where work_field=#{work_field}
+			order by cast(f.reg_date as unsigned) DESC
+			limit ${amount} offset #{offset}
+		]]>
+  	 </select>
+  	   	 
+  	 <!-- 필터된 프리랜서 숫자 -->
+  	 <select id="fiNumFree" resultType="int" parameterType="com.itwillbs.domain.FreelancerVO" >
+  		 <![CDATA[
+  	 	select count(*)
+		from freelancer
+		where work_field = #{work_field}
+		]]>
+  	 </select>
+  	 
+  	 <!-- 모달 필터(후 정렬, 필터포함) -->
+  	 <select id="moFiFree" resultType="com.itwillbs.domain.FreelancerVO">
+		<![CDATA[
+			select f.free_no, f.free_id, f.enroll_status, f.work_field, f.school_type, f.school_nm, f.major, f.grad_status,
+			  f.entrance, f.graduation, f.work_check, f.work_date, f.proj_cost, f.oneline_bio, f.bio, r.region, r.district, s.skill_nm, c.job_lev, u.user_type
+			from freelancer f
+			left join skill s
+			on f.free_no = s.free_no
+			left join region r
+			on f.free_no = r.free_no
+			left join career c
+            on f.free_no = c.free_no
+            left join user u
+        	on f.free_id = u.user_id
+			where work_field = #{work_field}
+					and s.skill_nm regexp(select REPLACE(GROUP_CONCAT(#{skill_nm}),',','|') AS skill_nm) and c.job_lev like CONCAT_WS('','%',#{job_lev},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
+			order by cast(f.reg_date as unsigned) DESC
+			limit #{amount} offset #{offset}
+  	 	]]>
+  	 </select>
+  	 
+  	 <!-- 모달 필터(후 정렬, 필터포함) skill_nm null일때 -->
+  	 <select id="moFiFreeNs" resultType="com.itwillbs.domain.FreelancerVO">
+		<![CDATA[
+			select f.free_no, f.free_id, f.enroll_status, f.work_field, f.school_type, f.school_nm, f.major, f.grad_status,
+			  f.entrance, f.graduation, f.work_check, f.work_date, f.proj_cost, f.oneline_bio, f.bio, r.region, r.district, s.skill_nm, c.job_lev, u.user_type
+			from freelancer f
+			left join skill s
+			on f.free_no = s.free_no
+			left join region r
+			on f.free_no = r.free_no
+			left join career c
+            on f.free_no = c.free_no
+            left join user u
+        	on f.free_id = u.user_id
+			where work_field = #{work_field}
+					and c.job_lev like CONCAT_WS('','%',#{job_lev},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
+			order by cast(f.reg_date as unsigned) DESC
+			limit #{amount} offset #{offset}
+  	 	]]>
+  	 </select>
+  	 
+  	 <!-- 모달필터 게시물 숫자 -->
+  	 <select id="mofiNumFree" resultType="int"  parameterType="com.itwillbs.domain.FreelancerVO" >
+  		 <![CDATA[
+	  	 	select count(*)
+	 	 	from freelancer f
+			left join skill s
+			on f.free_no = s.free_no
+			left join region r
+			on f.free_no = r.free_no
+			left join career c
+            on f.free_no = c.free_no
+			where work_field = #{work_field}
+					and s.skill_nm regexp(select REPLACE(GROUP_CONCAT(#{skill_nm}),',','|') AS skill_nm) and c.job_lev like CONCAT_WS('','%',#{job_lev},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
+		]]>
+  	 </select>
+
+  	 <!-- 모달필터 게시물 숫자 skill_nm null일때 -->
+  	 <select id="mofiNumNsFree" resultType="int"  parameterType="com.itwillbs.domain.FreelancerVO" >
+  		 <![CDATA[
+	  	 	select count(*)
+	 	 	from freelancer f
+			left join skill s
+			on f.free_no = s.free_no
+			left join region r
+			on f.free_no = r.free_no
+			left join career c
+            on f.free_no = c.free_no
+			where work_field = #{work_field}
+					and c.job_lev like CONCAT_WS('','%',#{job_lev},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
+		]]>
+  	 </select>
+  	 
+  	 <!-- 프리랜서 상세페이지들 -->
+  	<select id="getProfile" resultType="com.itwillbs.domain.FreelancerVO">
+		select * from freelancer
+		where free_no = #{free_no}
+	</select>
+	
+	<select id="getSkill" resultType="com.itwillbs.domain.SkillVO">
+		select user_id, skill_no, free_no,
+		SUBSTRING_INDEX (SUBSTRING_INDEX(skill.skill_nm,',',numbers.n),',',-1) skill_nm,
+		SUBSTRING_INDEX (SUBSTRING_INDEX(skill.skill_lev,',',numbers.n),',',-1) skill_lev
+		from (select 1 n union all select 2
+		union all select 3 union all select 4
+        union all select 5 union all select 6
+        union all select 7 union all select 8
+        union all select 9 union all select 10) numbers INNER JOIN skill
+        on char_length (skill.skill_nm) - char_length(replace(skill.skill_nm,',',''))>=numbers.n-1
+        where free_no = #{free_no} order by skill_nm
+	</select>
+	
+	<select id="getReg" resultType="com.itwillbs.domain.RegionVO">
+		select * from region
+		where free_no = #{free_no}
+	</select>
+	
+	<select id="getCareer" resultType="com.itwillbs.domain.CareerVO">
+		select free_no, job_lev, SUBSTRING_INDEX (SUBSTRING_INDEX(career.company_nm,',',numbers.n),',',-1) company_nm,
+		SUBSTRING_INDEX (SUBSTRING_INDEX(career.join_date,',',numbers.n),',',-1) join_date,
+        SUBSTRING_INDEX (SUBSTRING_INDEX(career.quit_date,',',numbers.n),',',-1) quit_date,
+        SUBSTRING_INDEX (SUBSTRING_INDEX(career.responsibility,',',numbers.n),',',-1) responsibility
+		from (select 1 n union all select 2
+		union all select 3 union all select 4
+        union all select 5 union all select 6
+        union all select 7 union all select 8
+        union all select 9 union all select 10) numbers INNER JOIN career
+        on char_length (career.company_nm) - char_length(replace(career.company_nm,',',''))>=numbers.n-1
+       	where free_no = #{free_no} order by company_nm
+	</select>
+	
+	<select id="getLicense" resultType="com.itwillbs.domain.LicenseVO">
+        select free_no, SUBSTRING_INDEX (SUBSTRING_INDEX(license.license_nm,',',numbers.n),',',-1) license_nm,
+		SUBSTRING_INDEX (SUBSTRING_INDEX(license.qualify_date,',',numbers.n),',',-1) qualify_date,
+        SUBSTRING_INDEX (SUBSTRING_INDEX(license.issuer,',',numbers.n),',',-1) issuer
+		from (select 1 n union all select 2
+		union all select 3 union all select 4
+        union all select 5 union all select 6
+        union all select 7 union all select 8
+        union all select 9 union all select 10) numbers INNER JOIN license
+        on char_length (license.license_nm) - char_length(replace(license.license_nm,',',''))>=numbers.n-1
+		where free_no = #{free_no} order by license_nm
+	</select>
+	
+		<select id="getComp" resultType="com.itwillbs.domain.CompanyVO">
+		select free_no, SUBSTRING_INDEX (SUBSTRING_INDEX(company_history.yearmonth,',',numbers.n),',',-1) yearmonth,
+        SUBSTRING_INDEX (SUBSTRING_INDEX(company_history.details,',',numbers.n),',',-1) hDetails
+		from (select 1 n union all select 2
+		union all select 3 union all select 4
+        union all select 5 union all select 6
+        union all select 7 union all select 8
+        union all select 9 union all select 10) numbers INNER JOIN company_history
+        on char_length (company_history.yearmonth) - char_length(replace(company_history.yearmonth,',',''))>=numbers.n-1
+        where free_no = #{free_no} order by yearmonth
+	</select>
+	
+	<select id="getPartn" resultType="com.itwillbs.domain.PartnersVO">
+		select free_no, SUBSTRING_INDEX (SUBSTRING_INDEX(partners.partners_nm,',',numbers.n),',',-1) partners_nm,
+        SUBSTRING_INDEX (SUBSTRING_INDEX(partners.details,',',numbers.n),',',-1) pDetails
+		from (select 1 n union all select 2
+		union all select 3 union all select 4
+        union all select 5 union all select 6
+        union all select 7 union all select 8
+        union all select 9 union all select 10) numbers INNER JOIN partners
+        on char_length (partners.partners_nm) - char_length(replace(partners.partners_nm,',',''))>=numbers.n-1
+        where free_no = #{free_no} order by partners_nm
+	</select>
+  	 
+  	<!-- 클라이언트가 프리랜서를 북마크 저장 -->
+  	 <insert id="doBMarkC">
+  	 	insert into bookmark(free_no, ct_no)
+  	 	values (#{free_no},#{ct_no})
+  	 </insert>
+  	 
+  	 <!-- 클라이언트가 프리랜서를 북마크 해제 -->
+  	 <delete id="deleteBMarkC">
+  	 	delete from bookmark
+  	 	where free_no=#{free_no} and ct_no=#{ct_no}
+  	 </delete>
+  	 
+  	 <!-- 클라이언트 북마크 체크 -->
+  	   	 <!-- 프리랜서 북마크 체크 -->
+  	 <select id="bMarkC" resultType="com.itwillbs.domain.BMarkVO">
+  	 	select free_no
+		from bookmark
+		where ct_no = #{ct_no}
+  	 </select>
+  	 
+  	 <!-- 클라이언트가 프리랜서에게 제안하기 -->
+  	 <select id="getProj" resultType="com.itwillbs.domain.ProjectVO">
+  	 	select proj_no,work_field,proj_title,start_date,work_period,proj_cost,proj_content
+  	 	from project where ct_no = #{ct_no}
+  	 </select>
+  	 
+  	 <insert id="insertOffer">
+  	 	insert into offer_mgmt (free_no,proj_no)
+  	 	values (#{free_no},#{proj_no})
+  	 </insert> 
+  	 
+  	 <!-- 프로젝트 지원하기 -->
+  	 <select id="getSkillA" resultType="com.itwillbs.domain.SkillVO">
+  	 	select SUBSTRING_INDEX (SUBSTRING_INDEX(skill.skill_nm,',',numbers.n),',',-1) skill_nm, SUBSTRING_INDEX (SUBSTRING_INDEX(skill.skill_lev,',',numbers.n),',',-1) skill_lev 
+  	 	from (select 1 n union all select 2 union all select 3 union all select 4 union all select 5 union all
+  	 	select 6 union all select 7 union all select 8 union all select 9 union all select 10) numbers INNER JOIN skill 
+  	 	on char_length (skill.skill_nm) - char_length(replace(skill.skill_nm,',',''))>=numbers.n-1
+  	 	where proj_no = #{proj_no};
+  	 </select>
+  	 
+  	 <insert id="applyProj">
+  	 	insert into apply_mgmt (free_no,proj_no,skillCheck1,skillCheck2,skillCheck3,skillCheck4,skillCheck5,
+  	 	skillCheck6,skillCheck7,skillCheck8,skillCheck9,skillCheck10,content) values (#{free_no},#{proj_no},#{skillCheck1},
+  	 	#{skillCheck2},#{skillCheck3},#{skillCheck4},#{skillCheck5},#{skillCheck6},#{skillCheck7},#{skillCheck8},
+  	 	#{skillCheck9},#{skillCheck10},#{content})
+  	 </insert>
+  	 
+  </mapper>

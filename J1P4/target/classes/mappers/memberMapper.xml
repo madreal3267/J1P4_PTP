@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.itwillbs.mapper.MemberMapper">
+  	 
+  	 <!-- 회원가입 -->
+  	 <insert id="join">
+  	 	insert into user (name,user_id,user_email,user_pw)
+  	 	values(#{name},#{user_id},#{user_email},#{user_pw})
+  	 </insert>
+  	 
+  	 <!-- 로그인 -->
+  	 <select id="memberLogin" resultType="com.itwillbs.domain.MemberVO">
+  	 	select * from user
+  	 	where user_id=#{user_id} and user_pw=#{user_pw}
+  	 </select>
+  	 
+  	 <!-- 회원가입시 이메일 인증을 위한 랜덤번호 저장 -->
+  	 <update id="updateMailKey" parameterType="com.itwillbs.domain.MemberVO">
+  	 	update user
+  	 	set mail_key=#{mail_key}
+  	 	where user_email=#{user_email} and user_id=#{user_id}
+  	 </update>
+  	 
+  	 <update id="updateMailAuth" parameterType="com.itwillbs.domain.MemberVO">
+  	 	update user
+  	 	set mail_auth=1
+  	 	where mail_auth=#{mail_auth} and user_email=#{user_email} 
+  	 </update>	
+  	 
+  	 <!-- 유형을 선택하고, 확인버튼을 눌렀을때 mail_auth=1로 바뀌고 user_cf, user_type이 업데이트된다. -->
+	 <update id="updateTypeCp">
+	  	update user
+	  	set (mail_auth=1, user_cf=#{user_cf}, user_type=#{user_type})
+	  	where user_id=#{user_id}
+	 </update>			  	 
+  	
+  	<!-- 중복된 아이디가 있는지 조회 -->
+  	<select id="selectId" parameterType="String" resultType="int" >
+  		select count(user_id) from user where user_id=#{user_id}
+  	</select>
+  
+  	
+  	<!-- 폰넘버 수정 -->
+  	<update id="phoneNo">
+  	update user
+  	set phone_no=#{phone_no}
+  	where user_id=#{user_id}
+  	</update>
+  
+  	<!-- 비밀번호 맞는지 확인 -->
+  	<select id="password" parameterType="int"  resultType="String">
+  	select user_pw from user where user_id=#{user_id}
+  	</select>
+  	
+  	<!-- 비밀번호 수정 -->
+  	<update id="passwordUpdate">
+  	update user
+  	set user_pw=#{user_pw}
+  	where user_id=#{user_id}
+  	</update>
+  	
+  	<!-- 아이디 조회 -->
+  	<select id="id" resultType="String">
+  	select user_id from user
+  	</select>
+  
+  
+  <!-- 9번  -->
+ 
+  	 
+  	 <!--이메일로 아이디 찾기 -->
+  	 <select id="findId" resultType="com.itwillbs.domain.MemberVO">
+		select * from user where user_email=#{user_email}
+	</select>
+
+	<!--입력한 이메일 수를 카운트해서 0이 나오면 팝업창에 "정확한 이메일 입력바람" -->
+	<select id="findIdCheck" resultType="int">
+		select count(*) from user where user_email=#{user_email}
+	</select>
+	
+	
+	<!-- 난수생성 후 저장 -->
+	<update id="mailkey">
+		update user
+		set mail_key=#{mail_key}
+		where user_id=#{user_id} 
+	</update>
+	
+	<!-- 난수비교 -->
+	<!-- 저장된 이메일과 난수를 가진 유저의 비밀번호를 바꾸는 쿼리  -->
+	<update id="mailkey2">
+	update user
+	set user_pw=#{user_pw}
+	where user_email=#{user_email} 
+	</update>
+	
+	
+	<!-- 아이디 존재하는지 비교하기 -->
+    <select id="findUserById" parameterType="String" resultType="com.itwillbs.domain.MemberVO">
+        SELECT * FROM user WHERE user_id = #{user_id}
+    </select>
+	
+	<!-- 난수가 존재하는지 확인 -->
+    <select id="findUserByMailKey" parameterType="String" resultType="string">
+        select mail_key 
+        from user 
+        where user_email = #{user_email} 
+    </select>
+    
+    
+    
+    
+    <!--프리랜서 테이블에 아이디, 등록여부 입력  -->
+    <insert id="freelancerId">
+    	insert into freelancer (free_id, enroll_status)
+    	values(#{user_id},0)
+    </insert>
+	
+	<!-- 프리랜서경력 -->
+	<insert id="insertCareer">
+		insert into career (free_no)
+		(select free_no from freelancer
+		where free_id=#{free_id})
+	</insert>
+	
+	<!-- 프리랜서 자격증 -->
+	<insert id="insertLicense">
+		insert into license (free_no)
+		(select free_no from freelancer
+		where free_id=#{free_id})
+	</insert>
+	
+	<!-- 프리랜서 협력업체 -->
+	<insert id="insertPartners">
+		insert into partners (free_no)
+		(select free_no from freelancer
+		where free_id=#{free_id})
+	</insert>
+	
+	<!-- 프리랜서 회사연혁 -->
+	<insert id="insertComp">
+		insert into company_history (free_no)
+		(select free_no from freelancer
+		where free_id=#{free_id})
+	</insert>
+
+	<!-- 프리랜서 스킬 -->
+	<insert id="insertSkill">
+		insert into skill (free_no)
+		(select free_no from freelancer
+		where free_id=#{free_id})
+	</insert>
+	
+	<!-- 프리랜서 지역 -->
+	<insert id="insertReg">
+		insert into region (free_no)
+		(select free_no from freelancer
+		where free_id=#{free_id})
+	</insert>
+    
+    
+   <!--클라이언트 테이블에 아이디 등록  -->
+  	<insert id="clientId">
+  		insert into client (ct_id)
+  		value(#{ct_id})
+  	</insert>
+  	
+  	
+  
+  
+  	<!-- 유저 테이블 user_type 등록 -->
+  	<update id="userType">
+  		update user
+  		set user_type=#{user_type}
+  		where user_id=#{user_id}
+  	</update>
+  	
+  	<!-- 유저 테이블에 클라이언트/프리랜서 등록 -->
+  <update id="userCf">
+  	update user
+  	set user_cf=#{user_cf}
+  	where user_id=#{user_id}
+  </update>
+  
+  <select id="sessCf" resultType="string">
+  	select user_cf from user
+  	where user_id = #{user_id};
+  </select>
+  
+  <select id="sessType" resultType="string">
+  	select user_type from user
+  	where user_id = #{user_id};
+  </select>
+  
+  <select id="sessFreeNo" resultType="int">
+  	select free_no from freelancer
+  	where free_id = #{user_id};
+  </select>
+  
+  <select id="sessCtNo" resultType="int">
+  	select ct_no from client
+  	where ct_id = #{user_id};
+  </select>
+  
+  
+  
+  
+  
+  
+  
+
+  </mapper>

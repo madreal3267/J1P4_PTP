@@ -126,6 +126,12 @@
 			<scope>test</scope>
 		</dependency>        
 		<!-- 외부 라이브러리 추가 -->
+	  <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-databind</artifactId>
+          <version>2.9.2</version>
+      </dependency>
+		
 		<!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
 		<dependency>
 		    <groupId>com.mysql</groupId>
@@ -177,7 +183,7 @@
 		    <version>4.0.3</version>
 		</dependency>
 		
-		
+
  		<!-- Jackson 라이브러리 -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
@@ -242,6 +248,55 @@
 	    <!-- commons-io -->
 		
 		
+
+		<!--메일라이브러리 
+		https://mvnrepository.com/artifact/javax.mail/mail -->
+		<dependency>
+   		 	<groupId>javax.mail</groupId>
+    		<artifactId>mail</artifactId>
+    		<version>1.4.7</version>
+		</dependency>
+
+
+		<!-- mail 서포트 -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+		<dependency>
+    		<groupId>org.springframework</groupId>
+   			 <artifactId>spring-context-support</artifactId>
+    		<version>4.3.8.RELEASE</version>
+		</dependency>
+	
+		<!-- 메일발송을 기능 추가 -->
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-email -->
+	<dependency>
+    	<groupId>org.apache.commons</groupId>
+    	<artifactId>commons-email</artifactId>
+    	<version>1.5</version>
+	</dependency>
+		
+		<!-- Jackson라이브러리 -->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+<!-- 	<dependency>
+    	<groupId>com.fasterxml.jackson.core</groupId>
+    	<artifactId>jackson-databind</artifactId>
+    	<version>2.9.2</version>
+	</dependency> -->
+		
+		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.2.1</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+<!-- 		<dependency>	
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.4</version>
+		</dependency> -->
+
+
 		<!-- 외부 라이브러리 추가 -->
 	</dependencies>
     <build>
@@ -280,6 +335,15 @@
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
+            <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.0</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
         </plugins>
     </build>
 </project>
+
