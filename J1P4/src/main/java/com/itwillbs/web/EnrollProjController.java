@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.itwillbs.domain.ProjectVO;
 import com.itwillbs.domain.RegionVO;
 import com.itwillbs.domain.SkillVO;
-import com.itwillbs.dto.SettlementDTO;
 import com.itwillbs.persistence.EnrollProjDAO;
 import com.itwillbs.service.EnrollProjService;
 import com.itwillbs.service.SettlementService;
