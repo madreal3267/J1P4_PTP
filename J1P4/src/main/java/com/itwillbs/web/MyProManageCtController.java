@@ -46,7 +46,8 @@ public class MyProManageCtController {
 	@RequestMapping(value = "/interestFreelancer",method = RequestMethod.GET)
 	public void interestFreelancerList(HttpSession session, Model model) {
 		logger.debug("/interestFreelancer -> interestFreelancerList() 호출");
-		
+		//임의로 세션에 user_id 입력 
+		session.setAttribute("user_id", "jyjeon");
 		String user_id = (String)session.getAttribute("user_id");
 		
 		List<freeInfoDTO> interestFreelancerList = myService.interestFreelancerList(user_id);
@@ -172,6 +173,9 @@ public class MyProManageCtController {
 	@RequestMapping(value = "/offerContract", method = RequestMethod.POST)
 	public String offerContract(proposeFreeDTO pfdto, RedirectAttributes rttr) {
 		logger.debug("/offerContract -> offerContract() 호출");
+		 
+		// DTO 데이터 확인을 위한 로그 추가
+	    logger.debug("ProposeFreeDTO: " + pfdto);
 		
 		myService.offerContract(pfdto);
 		rttr.addFlashAttribute("msg", "offerContract");

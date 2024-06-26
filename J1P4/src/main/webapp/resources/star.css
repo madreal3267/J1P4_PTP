@@ -21,7 +21,7 @@
 
 .rate>label:before {
 	display: inline-block;
-	font-size: 2rem;
+	font-size: 1rem;
 	padding: .6rem .4rem;
 	margin: 0;
 	cursor: pointer;
@@ -53,7 +53,7 @@
 }
 
 .rating-display .star {
-	font-size: 2rem;
+	font-size: 1rem;
 	color: #ddd;
 }
 
@@ -63,5 +63,5 @@
 
 .rating-display div {
 	margin-left: 10px;
-	font-size: 1.5rem;
+	font-size: 1rem;
 }
