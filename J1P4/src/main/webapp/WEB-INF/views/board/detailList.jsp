@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- ============== 비회원 헤더 ================= -->
 <c:if test="${empty sessionScope.user_id }">
 <c:import url="../include/header.jsp"></c:import>
@@ -31,7 +32,7 @@ free_no: ${sessionScope.free_no },
 		<p class="userName" style="position: absolute; left:180px; top:35px; font-size: 30px; font-weight: bold;"></p>
 		<div style="display: inline-block; position: absolute; left:20px;top:35px;">
 		<span class="workField" style="font-size: 16px; margin-right:7px;">예상 금액</span>
-		<span class="userWf" style="font-size: 16px; font-weight: bold; border-right: 1px solid gray; padding-right: 10px;">${projectVO.proj_cost } 원</span>
+		<span class="userWf" style="font-size: 16px; font-weight: bold; border-right: 1px solid gray; padding-right: 10px;">원</span>
 		<span class="level" style="margin-left:7px; margin-right:7px;font-size: 16px;">모집 마감일</span>
 		<span class ="userLev" style="font-size: 16px; font-weight: bold;">${projectVO.deadline }</span> <br>
 		</div>
@@ -97,7 +98,6 @@ free_no: ${sessionScope.free_no },
 			</div>
 			<div class="mx-4 my-3">
 
-			<hr>
 			<div class="gap">
 				<h5>클라이언트 위치</h5>
 				<div class="content">
@@ -178,7 +178,7 @@ free_no: ${sessionScope.free_no },
 
 
    <c:if test="${sessionScope.free_no != null }">     
-	 <div style="background-color: white; border: 1px solid #333; position: fixed; bottom: 10px; right: 0; width: 200px; display: block; font-size: 0;">
+	 <div style="background-color: white; border: 1px solid #333; position: fixed; bottom: 10px; right: 317px; width: 200px; display: block; font-size: 0;">
 		<div class="eframe-pop-width py-0 mx-auto">
 			<div class="inline-block relative w-full py-4 px-3 md:py-8 md:px-14 bg-gray-c_43 md:rounded whitespace-nowrap">
 		
@@ -406,7 +406,7 @@ $(".heart-click").click(function(e){
 			}
 		});
 		
-		$(this).html("<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-heart-fill' viewBox='0 0 16 16'> <path fill-rule='evenodd' d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314'/></svg>")
+		$(this).html("<svg xmlns='http://www.w3.org/2000/svg' width='25' height='25' fill='crimson' class='bi bi-heart-fill' viewBox='0 0 16 16'> <path fill-rule='evenodd' d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314'/></svg>")
 		
 	// 하트 클릭
 	}else if($(this).children('svg').attr('class') == "bi bi-heart-fill"){
@@ -426,7 +426,7 @@ $(".heart-click").click(function(e){
 			}
 		});
 		
-		$(this).html("<svg xmlns='http://www.w3.org/2000/svg' width'16' height='16' fill='currentColor' class='bi bi-heart' viewBox='0 0 16 16'><path d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15'/></svg>")
+		$(this).html("<svg xmlns='http://www.w3.org/2000/svg' width'25' height='25' fill='crimson' class='bi bi-heart' viewBox='0 0 16 16'><path d='m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15'/></svg>")
 		
 	}
 });
@@ -437,5 +437,4 @@ $(".noHeart").click(function(e){
 	alert("프리랜서로 로그인 해야 합니다");
 });
 </script>
-</body>
-</html>
+<%@ include file="../include/footer.jsp" %>
