@@ -53,10 +53,10 @@
 						 <div>
 							<c:choose>
 								<c:when test="${projDTO.proj_status == '모집중'}">
-									<span class="badge text-bg-warning">모집중</span>
+									<span style="background-color: #31b9a9;" class="badge">모집중</span>
 								</c:when>
 								<c:otherwise>
-									<span class="badge text-bg-warning">모집종료</span>
+									<span style="background-color: #31b9a9;" class="badge">모집종료</span>
 								</c:otherwise>
 							</c:choose>			
 										 					 
@@ -66,7 +66,7 @@
 						<!-- 스킬 나열 -->
 							<c:set var="skillList" value="${projDTO.skill_nm }" />
 							<c:forEach items="${fn:split(skillList, ',')}" var="skill">
-								<span class="badge text-bg-info">
+								<span style="background-color: #31b9a9;" class="badge">
 									<c:out value="${skill}" />
 								</span>
 							</c:forEach>
@@ -78,7 +78,7 @@
 							<form action="/myProManage/applyingProject" method="post">
 								<input type="hidden" name="free_no" value="${projDTO.free_no }">
 								<input type="hidden" name="proj_no" value="${projDTO.proj_no }">
-								<input type="submit" value="지원 취소"> 
+								<input class="btn btn-dark" type="submit" value="지원 취소"> 
 							</form>
 							등록일자 <fmt:formatDate value="${projDTO.reg_date }" pattern="yyyy-mm-dd"/>
 						 </div>
@@ -102,7 +102,7 @@
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default pull-left" data-bs-dismiss="modal">닫기</button>
-								<input type="submit" class="btn btn-primary" value="제안 동의">
+								<input type="submit" class="btn btn-dark" value="제안 동의">
 							</div>
 						</div>
 					</div>
@@ -126,8 +126,7 @@
 				<p>프로젝트에 지원하여 '지원내역'-'지원중'으로 이동합니다.</p>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default pull-left" data-bs-dismiss="modal">닫기</button>
-				<button type="button" class="btn btn-primary">동작 X</button>
+				<button type="button" class="btn btn-dark" data-bs-dismiss="modal">닫기</button>
 			</div>
 		</div>
 	</div>

@@ -46,7 +46,7 @@
 										<h4 class="font-weight-bold mx-4 my-3">등록 실패</h4>
 										반려된 프로젝트와 반려 사유를 확인할 수 있습니다.
 									</div><br>	
-								<table class="table table-bordered bg-light">
+								<table class="table table-bordered table-striped bg-light">
 									<tbody>
 										<tr class="text-center">
 											<td>프로젝트 번호</td>

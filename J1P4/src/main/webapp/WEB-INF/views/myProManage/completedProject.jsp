@@ -36,7 +36,6 @@
 	<div class="col-md-9">
 		<div class="tab-content">
 			<div class="tab-pane fade active show"  >
-<!-- ------------------------------------------------------------------------------------------------------------------------  -->
 	<div class="col-md-9">
 		<div class="tab-content">
 			<div class="tab-pane fade active show" >
@@ -50,13 +49,13 @@
 						1. 평가를 완료한 프로젝트 목록입니다.<br> 
 						2. 클라이언트가 남긴 평가는 [프로필 관리] > [클라이언트의평가]에서 확인할 수 있습니다.<br> 
 						3. 공정하게 평가를 작성할 수 있도록 상호 평가가 완료되거나 작성 기한이 종료된 뒤에 평가가 공개됩니다 .
-					<br>		
+					<hr>		
 			<section>		
 			<c:forEach var="projDTO" items="${completedProjectList}">
 				<div class="box-header with-border">
 					<h4>${projDTO.proj_title }</h4>
 					${projDTO.ct_id } 클라이언트
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-${projDTO.proj_no}">수정하기</button>
+						<button style="float: right;" type="button " class="btn btn-dark" data-toggle="modal" data-target="#modal-${projDTO.proj_no}">수정하기</button>
 					<div class="rating-display">
 						<c:set var="score" value="${projDTO.score}" />
 						<c:forEach begin="1" end="5" var="i">
@@ -73,7 +72,7 @@
 									</c:otherwise>
 								</c:choose>
 							</span>
- 						</c:forEach>
+ 						</c:forEach> &nbsp;&nbsp; <b>${projDTO.score}</b>
  					</div>
 								<!-- 모달창 생성하기 -->
 								<div class="modal fade" id="modal-${projDTO.proj_no}">
@@ -113,9 +112,9 @@
 										</div>			
 									</div>
 								</div>
-						<div>${projDTO.score}</div>
+					
 					</div>
-					${projDTO.content }
+					${projDTO.content }<hr>
 		</c:forEach>
 		</section>
 		</div>
