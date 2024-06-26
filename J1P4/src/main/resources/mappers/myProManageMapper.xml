@@ -206,7 +206,7 @@
 	<delete id="del7">delete from skill where proj_no = #{proj_no}</delete>
 	
 	<delete id="deleteProject">
-		delete from project where proj_no=#{proj_no}
+		delete from project where proj_no = #{proj_no}
 	</delete>
 	
 	<!-- 임시저장 프로젝트 -->

@@ -1,17 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- sweetalert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- jQuery 2.1.4 -->
 <script src="${pageContext.request.contextPath }/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <%@ include file="../include/ctHeader.jsp"%>
 
-<!-- 폼태그 -->
-<form role="form" action="" method="post">
-	<input type="hidden" name="proj_no" value="${tspl.proj_no }">
-</form>
+
 
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
 	<div class="card overflow-hidden card-2" >
@@ -53,41 +50,39 @@
 						<h4 class="font-weight-bold mx-4 my-3">임시 저장</h4>
 						작성 중 임시 저장한 프로젝트를 확인할 수 있습니다.
 					</div><br>	
-	
-	<c:forEach var="tspl" items="${temSaveProjectList}">
-		<div style=" background-color: white; padding:10px; width: 350px; height: 160px; cursor: pointer; display:inline-block;" class="text-center">
-			<h4><b>${tspl.proj_title }</b></h4>		
-			분야 | ${tspl.work_field } || 작업기간 | ${tspl.work_period } <br>
-			단가 | ${tspl.proj_cost } || 작업 내용 | ${tspl.proj_content } <br>
-			${tspl.reg_date }<br>
-			<!-- <button type="submit" class="btn btn-warning" >이어서 작성하기</button> -->
-			<%-- <button type="submit" class="btn btn-warning" onclick="location.href=enroll/getSavedProj?proj_no=${tspl.proj_no}'">이어서 작성하기</button> --%>
-			<button type="submit" class="btn btn-warning" 
-			onclick="location.href='/enroll/getSavedProj?proj_no=${tspl.proj_no}'">이어서 작성하기</button>
-			
-			<button type="submit" class="btn btn-danger" >삭제하기</button>
-			<br>
-		</div>
-	</c:forEach>
-	
-			</div>
-		</div>
-	</div>	
-				</div>
+							<c:forEach var="tspl" items="${temSaveProjectList}">
+								<div style=" background-color: white; padding:10px; width: 350px; height: 180px; display:inline-block; border: 1px solid black;" class="text-center" >
+									<h4><b>${tspl.proj_title }</b></h4>		
+									<span class="badge text-bg-warning">분야</span>${tspl.work_field }  <span class="badge text-bg-warning">작업기간</span>${tspl.work_period } <br>
+									<span class="badge text-bg-warning">단가</span>${tspl.proj_cost }<span class="badge text-bg-warning">작업내용</span> 
+									<c:set var="content" value="${tspl.proj_content}" />
+										<c:choose>
+										    <c:when test="${fn:length(content) > 8}">
+										        ${fn:substring(content, 0, 8)}...
+										    </c:when>
+										    <c:otherwise>
+										        ${content}
+										    </c:otherwise>
+										</c:choose> <br>
+									<span class="badge text-bg-warning">등록일</span>${tspl.reg_date }<br>
+									<button type="submit" class="btn btn-outline-dark" 
+									onclick="location.href='/enroll/getSavedProj?proj_no=${tspl.proj_no}'">이어서 작성하기</button>
+								<form action="/myProManageCt/temSaveProject" method="post" style="display: inline-block;">
+									<input type="hidden" name="proj_no" value="${tspl.proj_no }">
+									<input class="btn btn-dark"  type="submit" value="삭제하기">
+								</form>
+								</div>
+							</c:forEach>
+						</div>
+					</div>
+				</div>	
 			</div>
 		</div>
 	</div>
-
+</div>
 	
 <script type="text/javascript">
 	$(document).ready(function(){
-				
-		// '삭제하기' 버튼 클릭시 삭제 후 
-		$(".btn-danger").click(function(){
-			$("form[role='form']").attr("action","/myProManageCt/temSaveProject");
-			$("form[role='form']").submit();			
-			
-		});
 		
 		// 삭제 후 페이지 로딩시 모달창 생성
 		var result = "${msg}";

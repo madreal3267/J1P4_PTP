@@ -87,7 +87,7 @@
 															<input type="hidden" name="proj_no" value="${copDTO.proj_no }">
 															<input type="hidden" name="free_no" value="${copDTO.free_no }">
 															<input type="hidden" name="ct_no" value="${copDTO.ct_no }">
-						                               <input type="submit" class="btn btn-primary" value="완료하기">										
+						                               <input type="submit" class="btn btn-dark" value="완료하기">										
 														</form>		                               
 						                            </c:otherwise>
 					                        </c:choose>
@@ -113,7 +113,7 @@
 		});
 
 		// '완료하기' 버튼 클릭시 정산요청 컬럼값 변경, 프리랜서 '진행중' 
-		$(".btn-primary").click(function(){
+		$(".btn-dark").click(function(){
 			$("form[role='form']").attr("action","/myProManageCt/requestSettlement");
 			$("form[role='form']").submit();			
 			

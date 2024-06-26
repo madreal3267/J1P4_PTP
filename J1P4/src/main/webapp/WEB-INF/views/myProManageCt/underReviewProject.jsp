@@ -73,7 +73,7 @@
 										</form>
 										
 										<!-- 제이쿼리 사용 버튼 -->	
-										<button type="submit" class="btn btn-danger">삭제하기</button>
+										<button type="submit" class="btn btn-dark">삭제하기</button>
 									</td>
 								</tr>
 							</c:forEach>
@@ -105,7 +105,7 @@
 		}	
 
 		// '삭제하기' 버튼 클릭시 삭제후 현재 페이지로 redirect
-		$(".btn-danger").click(function(){
+		$(".btn-dark").click(function(){
 			$("form[role='form']").attr("action","/myProManageCt/underReviewProject");
 			$("form[role='form']").submit();
 		});

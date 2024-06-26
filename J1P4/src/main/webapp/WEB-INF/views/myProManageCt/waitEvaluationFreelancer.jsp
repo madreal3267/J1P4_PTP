@@ -51,7 +51,7 @@
 								<b>${freeDTO.name }</b><br>
 								${freeDTO.proj_title}<br>
 								작성기간 <fmt:formatDate value="${freeDTO.mod_date }" pattern="yyyy-mm-dd"/>
-								<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-${freeDTO.free_no}">평가하기</button>
+								<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modal-${freeDTO.free_no}">평가하기</button>
 							</p>
 								<!-- 모달창 생성하기 -->
 								<div class="modal fade  text-center" id="modal-${freeDTO.free_no}">

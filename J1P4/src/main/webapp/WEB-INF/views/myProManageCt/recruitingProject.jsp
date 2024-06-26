@@ -78,7 +78,7 @@
 												</td>
 						                        <td>${proFreeDTO.yeoncha} </td>
 						                        <td> 
-						                        <form action="/myProManageCt/rejectApply" method="post">
+						                        <form action="/myProManageCt/rejectApply" method="post" style="display: inline-block;">
 						                            <input type="hidden" name="proj_no" value="${proFreeDTO.proj_no}">
 						                            <input type="hidden" name="free_no" value="${proFreeDTO.free_no}">
 						                            <button type="submit" class="btn btn-warning">지원 거절</button>
@@ -97,7 +97,7 @@
 						                        <!-- <button type="submit" class="btn btn-danger">모집완료</button> -->
 						                       <form action="/myProManageCt/recruitmentCompleted" method="post">
 						                     		<input type="hidden" name="proj_no" value="${proFreeDTO.proj_no}">
-						                       		<button type="submit" class="btn btn-danger">모집완료</button>
+						                       		<button type="submit" class="btn btn-dark">모집완료</button>
 						                       </form>
 						                    </td>
 						                    <!-- 수정된 부분 끝 -->
@@ -116,7 +116,7 @@
 												</td>
 						                        <td>${proFreeDTO.yeoncha} </td>
 						                        <td>
-												 <form action="/myProManageCt/rejectApply" method="post">
+												 <form action="/myProManageCt/rejectApply" method="post" style="display: inline-block;">
 						                            <input type="hidden" name="proj_no" value="${proFreeDTO.proj_no}">
 						                            <input type="hidden" name="free_no" value="${proFreeDTO.free_no}">
 						                            <button type="submit" class="btn btn-warning">지원 거절</button>
@@ -136,7 +136,7 @@
 						                            <!-- <button type="submit" class="btn btn-danger">모집완료</button> -->
 						                            <form action="/myProManageCt/recruitmentCompleted" method="post">
 						                                <input type="hidden" name="proj_no" value="${proFreeDTO.proj_no}">
-						                                <button type="submit" class="btn btn-danger">모집완료</button>
+						                                <button type="submit" class="btn btn-dark">모집완료</button>
 						                            </form>
 						                        </td>
 						                    </c:if>
@@ -156,31 +156,30 @@
 						                    document.getElementById("complete${status.index}").rowSpan = ${rowCount + 1};
 						                </script>
 						            </c:if>
-						            
-<!-- modal 창 -->
-<div class="modal fade" id="modal-${proFreeDTO.free_no}">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<form action="${pageContext.request.contextPath}/myProManageCt/offerContract" method="post">
-				<div class="modal-header">
-					<h4 class="modal-title">계약을 위한 사전미팅을 제안합니다.</h4>
-					<button type="button" class="btn-close pull-right" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<label for="md">미팅 날짜를 정해주세요</label><input type="datetime-local" name="meeting_dt" id="md"><br>
-					<label for="mp">미팅 장소와 내용에 대해 알려주세요</label><br>
-					<textarea id="mp" name="meeting_pc" rows="6" cols="54" placeholder="미팅 장소와 내용에 대해 입력해주세요."></textarea>
-					<input type="hidden" name="proj_no" value="${proFreeDTO.proj_no }">
-					<input type="hidden" name="free_no" value="${proFreeDTO.free_no }">
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-					<input type="submit" class="btn btn-primary" value="계약 제안">
-				</div>
-			</form>
-		</div>
-	</div>
-</div>	
+									<!-- modal 창 -->
+									<div class="modal fade" id="modal-${proFreeDTO.free_no}">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<form action="${pageContext.request.contextPath}/myProManageCt/offerContract" method="post">
+													<div class="modal-header">
+														<h4 class="modal-title">계약을 위한 사전미팅을 제안합니다.</h4>
+														<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+													</div>
+													<div class="modal-body">
+														<label for="md">미팅 날짜를 정해주세요</label><input type="datetime-local" name="meeting_dt" id="md"><br>
+														<label for="mp">미팅 장소와 내용에 대해 알려주세요</label><br>
+														<textarea id="mp" name="meeting_pc" rows="6" cols="54" placeholder="미팅 장소와 내용에 대해 입력해주세요."></textarea>
+														<input type="hidden" name="proj_no" value="${proFreeDTO.proj_no }">
+														<input type="hidden" name="free_no" value="${proFreeDTO.free_no }">
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+														<input type="submit" class="btn btn-primary" value="계약 제안">
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>	
 				        		</c:forEach>
 				    		</table>
 				  		</div>

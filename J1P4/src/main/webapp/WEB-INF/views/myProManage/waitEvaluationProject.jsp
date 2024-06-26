@@ -49,7 +49,7 @@
 				<c:forEach var="projectVO" items="${waitEvaluationProjectList}">
 					
 						<b style="font-size: large;">${projectVO.proj_title }</b>
-						<button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#modal-${projectVO.ct_no}">평가하기</button>
+						<button type="button" class="btn btn-dark pull-right" data-toggle="modal" data-target="#modal-${projectVO.ct_no}">평가하기</button>
 						<br><br>
 						${projectVO.ct_id } 클라이언트<span class="pull-right">작성기간 <fmt:formatDate value="${projectVO.mod_date }" pattern="yyyy-mm-dd"/></span>
 						 <br>
