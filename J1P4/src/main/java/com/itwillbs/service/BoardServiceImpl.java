@@ -13,10 +13,12 @@ import com.itwillbs.domain.BMarkVO;
 import com.itwillbs.domain.CareerVO;
 import com.itwillbs.domain.CompanyVO;
 import com.itwillbs.domain.Criteria;
+import com.itwillbs.domain.EvaluateProjectDTO;
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.LicenseVO;
 import com.itwillbs.domain.OfferVO;
 import com.itwillbs.domain.PartnersVO;
+import com.itwillbs.domain.PortfolioVO;
 import com.itwillbs.domain.ProjectVO;
 import com.itwillbs.domain.RegionVO;
 import com.itwillbs.domain.SkillVO;
@@ -251,6 +253,21 @@ public class BoardServiceImpl implements BoardService {
 	public void insertApply(ApplyVO vo) {
 		logger.debug(" (●'◡'●) Service: insertApply() 실행 ");
 		bdao.insertApply(vo);
+	}
+
+	@Override
+	public double proSco(int ct_no) {
+		return bdao.proSco(ct_no);
+	}
+
+	@Override
+	public int proScoC(int ct_no) {
+		return bdao.proScoC(ct_no);
+	}
+
+	@Override
+	public List<PortfolioVO> getPortf(FreelancerVO vo) {
+		return bdao.getPortf(vo);
 	}
 	
 	
