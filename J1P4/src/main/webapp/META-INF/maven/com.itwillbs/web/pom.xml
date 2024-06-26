@@ -248,8 +248,6 @@
 	    </dependency>
 	    <!-- commons-io -->
 		
-		
-=======
 		<!--메일라이브러리 
 		https://mvnrepository.com/artifact/javax.mail/mail -->
 		<dependency>
@@ -277,11 +275,11 @@
 		
 		<!-- Jackson라이브러리 -->
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-	<dependency>
+	<!-- <dependency>
     	<groupId>com.fasterxml.jackson.core</groupId>
     	<artifactId>jackson-databind</artifactId>
     	<version>2.9.2</version>
-	</dependency>
+	</dependency> -->
 		
 		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 		<dependency>
@@ -291,13 +289,13 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
-		<dependency>	
+		<!-- <dependency>	
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>1.4</version>
-		</dependency>
+		</dependency> -->
 
->>>>>>> develop:J1P4/src/main/webapp/META-INF/maven/com.itwillbs/web/pom.xml
+
 		<!-- 외부 라이브러리 추가 -->
 	</dependencies>
     <build>
