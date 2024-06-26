@@ -13,6 +13,10 @@
   	 	#{career_proof},#{wanted_career},#{dlvy_msg},#{temporary})
   	 </insert>
   	 
+  	 <select id="getLastInsertedProjNo" resultType="int">
+	    SELECT LAST_INSERT_ID()
+	</select>
+  	 
 	<insert id="insertSkill">
 		insert into skill (proj_no,skill_nm,skill_lev,temporary) 
 		values((select max(proj_no) from project where ct_no = (select ct_no from client where ct_id=#{user_id})),#{skill_nm},#{skill_lev},#{temporary})
@@ -104,6 +108,21 @@
 		where temporary = "임시저장" and proj_no=#{proj_no}
 		) as tempChk;
 	</select>
+	
+	<!-- 정산관리 처리를 위한 쿼리 -->
+	<insert id="insertProject" parameterType="com.itwillbs.domain.ProjectVO">
+    INSERT INTO project (ct_no, free_no, work_field, proj_title, proj_progress, start_date, date_nego, work_period, no_recruited, deadline, proj_cost, cost_nego, pmeet_meth, meet_meth, meet_cycle, proj_content, job_level, career_proof, wanted_career, dlvy_msg, proj_status, pay_check, deadline_check, reject_reason, reg_date, mod_date)
+    VALUES (#{ct_no}, #{free_no}, #{work_field}, #{proj_title}, #{proj_progress}, #{start_date}, #{date_nego}, #{work_period}, #{no_recruited}, #{deadline}, #{proj_cost}, #{cost_nego}, #{pmeet_meth}, #{meet_meth}, #{meet_cycle}, #{proj_content}, #{job_level}, #{career_proof}, #{wanted_career}, #{dlvy_msg}, #{proj_status}, #{pay_check}, #{deadline_check}, #{reject_reason}, #{reg_date}, #{mod_date})
+	</insert>
+	
+	<select id="getClientIdByCtNo" parameterType="int" resultType="string">
+	    SELECT ct_id FROM client WHERE ct_no = #{ctNo}
+	</select>
+	
+	<select id="getFreelancerIdByFreeNo" parameterType="int" resultType="string">
+	    SELECT free_id FROM freelancer WHERE free_no = #{freeNo}
+	</select>
+	<!-- 정산관리 처리를 위한 쿼리 -->
 		
   
   </mapper>

@@ -86,11 +86,12 @@
                                         Yes
                                     </c:otherwise>
                                 </c:choose></td>
-                                <!-- 정산 처리 버튼 --><td>    
+                                <!-- 정산 처리 버튼 -->
+                                <td>    
                                     <c:if test="${item.price_check == true && item.settlement_check == false}">
-                                        <form class="process-form" action="/admin/settlements/process" method="post">
-                                            <input type="hidden" name="settlement_no" value="${item.settlement_no}" />
-                                            <input type="hidden" name="settlement_requested" value="${item.settlement_requested}" />
+                                        <form class="process-form" action="/admin/settlements/${item.settlement_no}/update" method="post">
+                                            <input type="hidden" name="settled_cost" value="${item.settled_cost}" />
+                                            <input type="hidden" name="fee" value="${item.fee}" />
                                             <button type="submit" class="btn btn-primary">정산 처리</button>
                                         </form>
                                     </c:if>
@@ -134,7 +135,6 @@
 
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/payment.js"></script> <!-- 결제 처리 -->
-
 
 <%@ include file="../include/footer.jsp" %>
 

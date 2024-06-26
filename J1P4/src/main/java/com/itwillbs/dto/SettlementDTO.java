@@ -14,9 +14,9 @@ public class SettlementDTO {
     private String proj_title;	
     private String ct_id;
     private String free_id;
-    private BigDecimal price;
-    private BigDecimal settled_cost;
-    private BigDecimal fee;
+    private BigDecimal price = BigDecimal.ZERO.setScale(0);
+    private BigDecimal settled_cost = BigDecimal.ZERO.setScale(0);
+    private BigDecimal fee = BigDecimal.ZERO.setScale(0);
     private boolean price_check;
     private boolean settlement_check;
     private boolean settlement_requested;
@@ -25,4 +25,16 @@ public class SettlementDTO {
     private String depositor;
     private String merchant_uid;
     
+    
+    public void setPrice(BigDecimal price) {
+        this.price = price.setScale(0, BigDecimal.ROUND_DOWN);
+    }
+
+    public void setSettled_cost(BigDecimal settled_cost) {
+        this.settled_cost = settled_cost.setScale(0, BigDecimal.ROUND_DOWN);
+    }
+
+    public void setFee(BigDecimal fee) {
+        this.fee = fee.setScale(0, BigDecimal.ROUND_DOWN);
+    }
 }

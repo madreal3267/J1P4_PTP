@@ -7,7 +7,6 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,20 +36,22 @@ public class EnrollProjServiceImpl implements EnrollProjService {
 	public void insertProj(ProjectVO vo) {
 		logger.debug(" (●'◡'●) Service: insertProj(vo) 실행 ");
 		
+		if (vo.getPay_check() == 0) { // pay_check가 0(false)인지 서비스단에서 다시 한번 체크
+			vo.setPay_check(0);
+        }
+		
 		pdao.insertProj(vo);
 		
+		int projNo = pdao.getLastInsertedProjNo();
 		logger.debug(" (●'◡'●) Service: 프로젝트 등록 성공! (●'◡'●) "+vo);
 		
 		// 프로젝트 생성 후 관련된 정산 데이터 생성
 		SettlementDTO settlement = new SettlementDTO();
-        settlement.setProj_no(vo.getProj_no());
-        settlement.setCt_id(uDAO.getClientIdByCtNo(vo.getCt_no()));
-        settlement.setFree_id(uDAO.getFreelancerIdByFreeNo(vo.getFree_no()));
-        settlement.setSettled_cost(BigDecimal.ZERO);
-        settlement.setFee(BigDecimal.ZERO);
-        settlement.setSettlement_check(false);
-        settlement.setSettlement_requested(false);
-        settlement.setMerchant_uid(""); // 필요한 경우 설정
+        settlement.setProj_no(projNo);
+        settlement.setSettled_cost(BigDecimal.ZERO); // 초기값 설정
+        settlement.setFee(BigDecimal.ZERO); // 초기값 설정
+        settlement.setSettlement_check(false); // 초기값으로 false 설정
+        settlement.setSettlement_requested(false); // 초기값으로 false 설정
 
         sService.createSettlement(settlement);
 	}

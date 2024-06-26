@@ -53,6 +53,6 @@ public interface EnrollProjDAO {
 	// 임시저장된 프로젝트를 불러올 때 임시저장 프로젝트가 맞는지 체크
 	public Integer chkTemp(ProjectVO vo);
 	
-	
+	public int getLastInsertedProjNo();
 	
 }
