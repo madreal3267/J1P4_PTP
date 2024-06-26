@@ -58,7 +58,7 @@
 				<!-- 스킬 나열 -->
 					<c:set var="skillList" value="${projDTO.skill_nm }" />
 					<c:forEach items="${fn:split(skillList, ',')}" var="skill">
-						<span class="badge text-bg-info">
+						<span style="background-color: #31b9a9;" class="badge">
 							<c:out value="${skill}" />
 						</span>
 					</c:forEach>
@@ -70,7 +70,7 @@
 					<form action="/myProManage/endApplyProject" method="post">
 						<input type="hidden" name="free_no" value="${projDTO.free_no }">
 						<input type="hidden" name="proj_no" value="${projDTO.proj_no }">
-						<input type="submit" value="목록에서 삭제" >
+						<input class="btn btn-dark" type="submit" value="목록에서 삭제" >
 					</form>
 					등록일자 <fmt:formatDate value="${projDTO.reg_date }" pattern="yyyy-MM-dd"/>
 				 </div> <hr>

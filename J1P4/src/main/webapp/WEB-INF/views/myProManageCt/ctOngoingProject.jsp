@@ -60,10 +60,10 @@
 							</div><br>	
 							<table class="table table-bordered bg-light table-striped">
 								<tr class="text-center">
-									<td>프로젝트 번호</td>
-									<td>프로젝트 이름</td>
-									<td>담당 매니저</td>
-									<td>진행 상태</td>
+									<th>프로젝트 번호</th>
+									<th>프로젝트 이름</th>
+									<th>담당 매니저</th>
+									<th>진행 상태</th>
 								</tr>
 								<c:forEach var="copDTO" items="${ctOngoingProjectList}">
 									<tr>
@@ -78,7 +78,7 @@
 														<input type="hidden" name="free_no" value="${copDTO.free_no }">
 														<input type="hidden" name="ct_no" value="${copDTO.ct_no }">
 														<input type="hidden" name="proj_cost" value="${copDTO.proj_cost }">
-					                                <input type="submit" class="btn btn-warning" value="결제하기">
+					                                <input style="background-color: #31b9a9; color: white;" type="submit" class="btn" value="결제하기">
 														
 													</form>
 					                            </c:when>
@@ -87,7 +87,7 @@
 															<input type="hidden" name="proj_no" value="${copDTO.proj_no }">
 															<input type="hidden" name="free_no" value="${copDTO.free_no }">
 															<input type="hidden" name="ct_no" value="${copDTO.ct_no }">
-						                               <input type="submit" class="btn btn-primary" value="완료하기">										
+						                               <input type="submit" class="btn btn-dark" value="완료하기">										
 														</form>		                               
 						                            </c:otherwise>
 					                        </c:choose>
@@ -113,7 +113,7 @@
 		});
 
 		// '완료하기' 버튼 클릭시 정산요청 컬럼값 변경, 프리랜서 '진행중' 
-		$(".btn-primary").click(function(){
+		$(".btn-dark").click(function(){
 			$("form[role='form']").attr("action","/myProManageCt/requestSettlement");
 			$("form[role='form']").submit();			
 			

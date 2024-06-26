@@ -50,8 +50,8 @@
 							<p>
 								<b>${freeDTO.name }</b><br>
 								${freeDTO.proj_title}<br>
-								작성기간 <fmt:formatDate value="${freeDTO.mod_date }" pattern="yyyy-mm-dd"/>
-								<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-${freeDTO.free_no}">평가하기</button>
+								작성기간 <fmt:formatDate value="${freeDTO.mod_date }" pattern="yyyy-MM-dd"/>-<span id="formatted-date-${freeDTO.free_no}"></span>
+								<button id="button-${freeDTO.free_no}"  type="button" class="btn btn-dark" data-toggle="modal" data-target="#modal-${freeDTO.free_no}">평가하기</button>
 							</p>
 								<!-- 모달창 생성하기 -->
 								<div class="modal fade  text-center" id="modal-${freeDTO.free_no}">
@@ -98,6 +98,33 @@
 		</div>
 	</div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        <c:forEach var="freeDTO" items="${waitEvaluationFreelancerList}">
+            (function(freeNo, modDateStr) {
+                var modDate = new Date(modDateStr);
+                var currentDate = new Date();
+
+                // 10일 추가한 날짜 계산
+                modDate.setDate(modDate.getDate() + 10);
+
+                // 날짜 포맷 변경
+                var formattedDate = modDate.getFullYear() + '-' +
+                                    ('0' + (modDate.getMonth() + 1)).slice(-2) + '-' +
+                                    ('0' + modDate.getDate()).slice(-2);
+
+                // 포맷된 날짜 출력
+                $("#formatted-date-" + freeNo).text(formattedDate);
+
+                // 현재 날짜와 비교하여 버튼 비활성화 여부 결정
+                if (currentDate > modDate) {
+                    $("#button-" + freeNo).attr("disabled", true);
+                }
+            })("${freeDTO.free_no}", "${freeDTO.mod_date}");
+        </c:forEach>
+    });
+</script>
 </body>
 </html>
 	

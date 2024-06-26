@@ -53,10 +53,10 @@
 				</div>
 				<table class="table table-bordered bg-light table-striped">
 					<tr class="text-center">
-						<td>프로젝트 번호</td>
-						<td>프로젝트 이름</td>
-						<td>담당 매니저</td>
-						<td>진행 상태</td>
+						<th>프로젝트 번호</th>
+						<th>프로젝트 이름</th>
+						<th>담당 매니저</th>
+						<th>진행 상태</th>
 					</tr>
 					<c:forEach var="copDTO" items="${ctContractProjectList}">
 						<tr>

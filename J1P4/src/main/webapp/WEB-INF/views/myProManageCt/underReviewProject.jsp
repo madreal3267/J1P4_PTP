@@ -73,7 +73,7 @@
 										</form>
 										
 										<!-- 제이쿼리 사용 버튼 -->	
-										<button type="submit" class="btn btn-danger">삭제하기</button>
+										<button type="submit" class="btn btn-dark">삭제하기</button>
 									</td>
 								</tr>
 							</c:forEach>
