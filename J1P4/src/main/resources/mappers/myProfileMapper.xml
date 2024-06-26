@@ -77,6 +77,18 @@
         on char_length (partners.partners_nm) - char_length(replace(partners.partners_nm,',',''))>=numbers.n-1
         where free_no = #{free_no} order by partners_nm
 	</select>
-
+	
+	<select id="getPortf" resultType="com.itwillbs.domain.PortfolioVO">
+		select free_no, p_responsibility, portfolio_title,
+		SUBSTRING_INDEX (SUBSTRING_INDEX(portfolio.file,',',numbers.n),',',-1) file
+		from (select 1 n union all select 2
+		union all select 3 union all select 4
+        union all select 5 union all select 6
+        union all select 7 union all select 8
+        union all select 9 union all select 10) numbers INNER JOIN portfolio
+        on char_length (portfolio.file) - char_length(replace(portfolio.file,',',''))>=numbers.n-1
+        where free_no = #{free_no}
+	</select>
+	
  
   </mapper>

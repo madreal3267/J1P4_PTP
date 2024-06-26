@@ -10,5 +10,6 @@ public class PortfolioVO {
    private String p_responsibility;
    private String file;
    private String user_id;
+
 }
 

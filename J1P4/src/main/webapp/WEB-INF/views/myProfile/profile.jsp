@@ -16,11 +16,6 @@
 <c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.equals('클라이언트') }">
 <c:import url="../include/ctHeader.jsp"></c:import>
 </c:if>
-user_id: ${sessionScope.user_id },
-user_cf: ${sessionScope.user_cf },
-user_type: ${sessionScope.user_type },
-free_no: ${sessionScope.free_no },
-ct_no: ${sessionScope.ct_no }
 
 <div class="container light-style flex-grow-1 container-p-y text-center" style="width:1100px; padding-top:15px;padding-bottom: 10px;">
 	<!-- 프리랜서 상세페이지 상단 박스 시작 -->
@@ -181,7 +176,7 @@ ct_no: ${sessionScope.ct_no }
 					</div>
 					</c:if>
 					<c:if test="${not empty mySkill.skill_nm }">
-					<div class="border border-1 rounded-3 p-2" role="group" style="width: 700px;">
+					<div class="border border-1 rounded-3 p-2" role="group" style="width: 700px; margin-bottom: 20px;">
 						<div style="padding-bottom:5px;">
 						<span style="padding-left: 20px; font-size: 22px; font-weight: bold;">${mySkill.skill_nm }</span><br>
 						</div>
@@ -223,7 +218,7 @@ ct_no: ${sessionScope.ct_no }
 						</div>
 					</c:if>
 					<c:if test="${not empty myCareer.company_nm }">
-					<div class="border border-1 rounded-3 p-2" role="group" style="width: 700px; ">
+					<div class="border border-1 rounded-3 p-2" role="group" style="width: 700px; margin-bottom: 20px; ">
 						<span style="padding-left: 20px; font-size: 18px; font-weight: bold;">${myCareer.company_nm }</span><br>
 						<span style="padding-left: 20px;">${myCareer.join_date } ~ ${myCareer.quit_date }</span><br>
 						<span style="padding-left: 20px;">${myCareer.responsibility }</span>
@@ -314,16 +309,18 @@ ct_no: ${sessionScope.ct_no }
 			<div class="gap">	
 				<h5>포트폴리오</h5>
 				<div class="content" style="margin-bottom: 367px;">
-				<c:forEach items="${myLicense }" var="myLicense">
-					<c:if test="${empty myLicense.license_nm }">
+				<c:forEach items="${myPortf }" var="myPortf">
+					<c:if test="${empty myPortf.portfolio_title }">
 						<div class="border border-1 rounded-3 p-2" role="group" style="width: 700px; ">
 						<span style="padding-left: 20px; font-size: 22px;" >등록된 포트폴리오가 없습니다.</span><br>
 						</div>
 					</c:if>
-					<c:if test="${not empty myLicense.license_nm }">
+					<c:if test="${not empty myPortf.portfolio_title }">
 					<div class="border border-1 rounded-3 p-2" role="group" style="width: 700px; margin-bottom: 20px;">	
-						<span style="padding-left: 20px;font-size: 18px; font-weight: bold;">${myLicense.license_nm }</span><br>
-						<span style="padding-left: 20px;">${myLicense.issuer } | ${myLicense.qualify_date }</span>	
+						<span style="padding-left: 20px;font-size: 18px; font-weight: bold;">${myPortf.portfolio_title }</span><br>
+						<span style="padding-left: 20px;">${myPortf.p_responsibility }</span><br>
+						<span style="padding-left: 20px;">
+						<a href="/myProfile/download?fileName=${myPortf.file }">${myPortf.file }</a></span><br>
 					</div>
 					</c:if>
 				</c:forEach>
@@ -334,7 +331,16 @@ ct_no: ${sessionScope.ct_no }
 		<!-- card body 끝 -->
 		</div>
 		<!-- 포트폴리오 탭 끝 -->
-		<button type="button" class="btn btn-dark" style="position: absolute; right:54px; top:25px;" onclick = "location.href = '/myProfile/modify?free_no=${sessionScope.free_no}'">수정하기</button>
+		<c:if test="${sessionScope.ident == 1}">
+		<button type="button" class="btn btn-dark" style="position: absolute; right:54px; top:25px;" 
+		onclick = "location.href = '/myProfile/modify?free_no=${sessionScope.free_no}'" id="modButt">수정하기</button>
+		</c:if>
+		<c:if test="${sessionScope.ident == 0}">
+		<button type="button" class="btn btn-dark" style="position: absolute; right:54px; top:15px;" onclick = "location.href = '/member/mypage'">신원인증</button>
+		<div style="position: absolute; right:54px; top:57px; font-size: 12px;">
+		신원인증이 필요합니다.
+		</div>		
+		</c:if>
 		
 	
 	</div>
@@ -355,6 +361,8 @@ ct_no: ${sessionScope.ct_no }
     <p class="text-center text-body-secondary">© 2024-06-06 Zip-Ga-Go-Ship-Da, Inc</p>
    </footer>
 </div>
+<script>
 
+</script>
 </body>
 </html>

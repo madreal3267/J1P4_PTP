@@ -487,7 +487,7 @@
 						data : $("#fm1").serialize(),
 						async : false,
 						success : function(a) {
-							alert(" ╰(*°▽°*)╯ 저장 완료");
+							alert("임시저장 되었습니다.");
 							data = a.result;
 						},
 						error : function() {
@@ -501,7 +501,7 @@
 						type : "POST",
 						data : $("#fm1").serialize(),
 						success : function() {
-							alert(" ╰(*°▽°*)╯ 최초 임시저장 후 저장 완료");
+							alert("임시저장 되었습니다.");
 						},
 						error : function() {
 							alert("오류발생 - 최초 임시 저장 후");
@@ -516,18 +516,18 @@
 			$(".submButt").click(function() {
 				/* 프로젝트 등록 */
 				
-				if( fm1.proj_title.value == "" ) {
-		        alert("성명을 입력해 주십시오.");
+// 				if( fm1.proj_title.value == "" ) {
+// 		        alert("성명을 입력해 주십시오.");
 		        
-		        return;
+// 		        return;
 		        
-		   		 }
-				if( $("#startDate").val() = "" ) {
-		        alert("시작일을 입력해 주십시오.");
+// 		   		 }
+// 				if( $("#startDate").val() = "" ) {
+// 		        alert("시작일을 입력해 주십시오.");
 		        
-		        return;
+// 		        return;
 		        
-		   		 }
+// 		   		 }
 				
 				$('.temporary').val("등록성공");
 				
@@ -539,6 +539,8 @@
 					$(".fm").attr("action","/enroll/enrollSaveProj");
 					$(".fm").submit();
 				}
+				
+				alert("aaaaaaa");
 		
 			});
 		});	

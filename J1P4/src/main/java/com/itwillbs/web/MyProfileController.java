@@ -22,6 +22,7 @@ import com.itwillbs.domain.CompanyVO;
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.LicenseVO;
 import com.itwillbs.domain.PartnersVO;
+import com.itwillbs.domain.PortfolioVO;
 import com.itwillbs.domain.RegionVO;
 import com.itwillbs.domain.SkillVO;
 import com.itwillbs.service.EnrollFreeService;
@@ -55,6 +56,7 @@ public class MyProfileController {
 				model.addAttribute("myReg",mpService.getReg(vo));
 				model.addAttribute("myCareer", mpService.getCareer(vo));
 				model.addAttribute("myLicense", mpService.getLicense(vo));
+				model.addAttribute("myPortf", mpService.getPortf(vo));
 				return "/myProfile/profile";
 			} else {
 				PrintWriter out = response.getWriter();
@@ -94,14 +96,18 @@ public class MyProfileController {
 	
 	// 내 프로필 수정하기 - 개인 / 팀
 	@PostMapping(value="/modify")
-	public void profModifyPOST(FreelancerVO fVO,SkillVO sVO, RegionVO rVO, CareerVO cVO, LicenseVO lVO){
+	public void profModifyPOST(FreelancerVO fVO,SkillVO sVO, RegionVO rVO, CareerVO cVO, LicenseVO lVO,PortfolioVO pVO,HttpSession session){
 		logger.debug(" Controller : ( •̀ ω •́ )y /modify -> profModifyPOST 실행 ");
 		
+		int free_no = (int) session.getAttribute("free_no");
+		pVO.setFree_no(free_no);
+		int chk = pVO.getFree_no();
 		efService.updateFree(fVO);
 		efService.updateSkill(sVO);
 		efService.updateReg(rVO);
 		efService.updateCareer(cVO);
 		efService.updateLicense(lVO);
+		efService.updatePortf(pVO);
 		
 		logger.debug(" Controller : ( •̀ ω •́ )y /views/myProfile/modify.jsp 페이지 연결 ");
 
@@ -130,6 +136,7 @@ public class MyProfileController {
 				model.addAttribute("myCareer", mpService.getCareer(vo));
 				model.addAttribute("myComp", mpService.getComp(vo));
 				model.addAttribute("myPartn", mpService.getPartn(vo));
+				model.addAttribute("myPortf", mpService.getPortf(vo));
 				return "/myProfile/profileB";
 			} else {
 				PrintWriter out = response.getWriter();
@@ -170,8 +177,12 @@ public class MyProfileController {
 	
 	// 내 프로필 수정하기 - 사업자
 	@PostMapping(value="/modifyB")
-	public void profModifyBPOST(FreelancerVO fVO,SkillVO sVO, RegionVO rVO, CareerVO cVO, CompanyVO cpVO, PartnersVO pVO){
+	public void profModifyBPOST(FreelancerVO fVO,SkillVO sVO, RegionVO rVO, CareerVO cVO, CompanyVO cpVO, PartnersVO pVO, PortfolioVO poVO,HttpSession session){
 		logger.debug(" Controller : ( •̀ ω •́ )y /modifyB -> profModifyBPOST 실행 ");
+		
+		int free_no = (int) session.getAttribute("free_no");
+		poVO.setFree_no(free_no);
+		int chk = poVO.getFree_no();
 		
 		efService.updateFree(fVO);
 		efService.updateSkill(sVO);
@@ -179,6 +190,7 @@ public class MyProfileController {
 		efService.updateCareer(cVO);
 		efService.updateComp(cpVO);
 		efService.updatePartners(pVO);
+		efService.updatePortf(poVO);
 		
 		logger.debug(" Controller : ( •̀ ω •́ )y /views/myProfile/modifyB.jsp 페이지 연결 ");
 		

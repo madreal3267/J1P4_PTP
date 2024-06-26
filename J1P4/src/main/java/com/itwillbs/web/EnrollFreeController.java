@@ -14,6 +14,7 @@ import com.itwillbs.domain.CompanyVO;
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.LicenseVO;
 import com.itwillbs.domain.PartnersVO;
+import com.itwillbs.domain.PortfolioVO;
 import com.itwillbs.domain.RegionVO;
 import com.itwillbs.domain.SkillVO;
 import com.itwillbs.service.EnrollFreeService;
@@ -36,7 +37,7 @@ public class EnrollFreeController {
 	}
 	
 	@PostMapping(value="/enrollFree")
-	public String enrollFreePOST(FreelancerVO fVO,CareerVO cVO, LicenseVO lVO, SkillVO sVO, RegionVO rVO) {		
+	public String enrollFreePOST(FreelancerVO fVO,CareerVO cVO, LicenseVO lVO, SkillVO sVO, RegionVO rVO,PortfolioVO pVO) {		
 		logger.debug(" Controller : ( •̀ ω •́ )y /enrollFree -> enrollFreePOST() 실행 ");
 				
 		fService.updateFree(fVO);
@@ -44,6 +45,7 @@ public class EnrollFreeController {
 		fService.updateLicense(lVO);
 		fService.updateSkill(sVO);
 		fService.updateReg(rVO);
+		fService.updatePortf(pVO);
 		
 		return "redirect:/enroll/enrollFreeSuccess";
 	}
@@ -57,7 +59,7 @@ public class EnrollFreeController {
 	}
 	
 	@PostMapping(value="/enrollFreeB")
-	public String enrollFreeBPOST(FreelancerVO fVO,CareerVO cVO, PartnersVO pVO, CompanyVO cpVO, SkillVO sVO, RegionVO rVO) {		
+	public String enrollFreeBPOST(FreelancerVO fVO,CareerVO cVO, PartnersVO pVO, CompanyVO cpVO, SkillVO sVO, RegionVO rVO, PortfolioVO poVO) {		
 		logger.debug(" Controller : ( •̀ ω •́ )y /enrollFreeB -> enrollFreeBPOST() 실행 ");
 		
 		
@@ -67,6 +69,7 @@ public class EnrollFreeController {
 		fService.updateComp(cpVO);
 		fService.updateSkill(sVO);
 		fService.updateReg(rVO);
+		fService.updatePortf(poVO);
 		
 		return "redirect:/enroll/enrollFreeSuccess";
 	}
