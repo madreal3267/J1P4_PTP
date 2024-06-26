@@ -37,7 +37,6 @@
 	<div class="col-md-9">
 		<div class="tab-content">
 			<div class="tab-pane fade active show">
-<!-- ------------------------------------------------------------------------------------------------------------------------  -->
 				<!-- card body 시작 -->
 				<div class="card-body border-start" >
 					<div class="border-bottom" style="position: relative; right:16px; width:1000px; padding-bottom: 10px;" >
@@ -89,21 +88,20 @@
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">×</span>
-								</button>
 								<h4 class="modal-title">클라이언트가 사전미팅을 제안했습니다..</h4>
+								<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+								</button>
 							</div>
 							<div class="modal-body">
 								
-									<label for="md">미팅 날짜를</label><input id="md" type="datetime-local" name="meeting_dt" value="${projDTO.meeting_dt }" readonly="readonly"><br>
+									<label for="md">미팅 날짜</label><input id="md" type="datetime-local" name="meeting_dt" value="${projDTO.meeting_dt }" readonly="readonly"><br>
 									<label for="mp">미팅 장소와 내용</label><br>
 									<textarea id="mp" name="meeting_pc" rows="6" cols="80" readonly="readonly">${projDTO.meeting_pc }</textarea>
 									<input type="hidden" name="proj_no" value="${projDTO.proj_no }">
 									<input type="hidden" name="free_no" value="${projDTO.free_no }">								
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
+								<button type="button" class="btn btn-default pull-left" data-bs-dismiss="modal">닫기</button>
 								<input type="submit" class="btn btn-primary" value="제안 동의">
 							</div>
 						</div>
@@ -120,16 +118,15 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">×</span>
-				</button>
 				<h4 class="modal-title">지원하기 성공</h4>
+				<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+				</button>
 			</div>
 			<div class="modal-body">
 				<p>프로젝트에 지원하여 '지원내역'-'지원중'으로 이동합니다.</p>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
+				<button type="button" class="btn btn-default pull-left" data-bs-dismiss="modal">닫기</button>
 				<button type="button" class="btn btn-primary">동작 X</button>
 			</div>
 		</div>
@@ -141,20 +138,17 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">×</span>
-				</button>
 				<h4 class="modal-title">지원 취소 성공</h4>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+				</button>
 			</div>
 			<div class="modal-body">
 				<p>성공적으로 '지원중' 프로젝트에서 지원을 취소하였습니다.</p>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
-				<button type="button" class="btn btn-primary">동작 X</button>
+				<button type="button" class="btn btn-primary" data-bs-dismiss="modal">닫기</button>
 			</div>
 		</div>	
-<!-- ------------------------------------------------------------------------------------------------------------------------  -->
 						</div>
 					</div>
 				</div>

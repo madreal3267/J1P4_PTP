@@ -36,7 +36,6 @@
 	<div class="col-md-9">
 		<div class="tab-content">
 			<div class="tab-pane fade active show"  >
-<!-- ------------------------------------------------------------------------------------------------------------------------  -->
 				<!-- card body 시작 -->
 				<div class="card-body border-start" >
 					<div class="border-bottom" style="position: relative; right:16px; width:1000px; padding-bottom: 10px;" >
@@ -55,15 +54,14 @@
 						${projectVO.ct_id } 클라이언트<span class="pull-right">작성기간 <fmt:formatDate value="${projectVO.mod_date }" pattern="yyyy-mm-dd"/></span>
 						 <br>
 						<!-- 모달창 생성하기 -->
-						<div class="modal fade" id="modal-${projectVO.ct_no}">
+						<div class="modal fade text-center" id="modal-${projectVO.ct_no}">
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<form action="/myProManage/waitEvaluationProject" method="post"">
 										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true">×</span>
-											</button>
 											<h4 class="modal-title">프로젝트 평가하기</h4>
+											<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+											</button>
 										</div>
 										<div class="modal-body">
 											별점을 매겨주세요<br>
