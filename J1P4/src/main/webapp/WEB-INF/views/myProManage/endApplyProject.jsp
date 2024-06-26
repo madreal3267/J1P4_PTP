@@ -42,7 +42,6 @@
 	<div class="col-md-9">
 		<div class="tab-content">
 			<div class="tab-pane fade active show"  >
-<!-- ------------------------------------------------------------------------------------------------------------------------  -->
 			<!-- card body 시작 -->
 			<div class="card-body border-start" >
 				<div class="border-bottom" style="position: relative; right:16px; width:1000px; padding-bottom: 10px;" >
@@ -77,7 +76,6 @@
 				 </div> <hr>
 				 </c:forEach>
 			</div>
-<!-- ------------------------------------------------------------------------------------------------------------------------  -->
 						</div>
 					</div>
 				</div>
@@ -89,16 +87,15 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">×</span>
-				</button>
 				<h4 class="modal-title">지원 목록에서 삭제하였습니다.</h4>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+				</button>
 			</div>
 			<div class="modal-body">
 				<p>성공적으로 지원 목록에서 삭제하였습니다.</p>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default pull-right" data-dismiss="modal">닫기</button>
+				<button type="button" class="btn btn-default pull-right" data-bs-dismiss="modal">닫기</button>
 			</div>
 		</div>
 	</div>

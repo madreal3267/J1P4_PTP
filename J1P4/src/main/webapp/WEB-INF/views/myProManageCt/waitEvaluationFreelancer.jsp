@@ -54,15 +54,13 @@
 								<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-${freeDTO.free_no}">평가하기</button>
 							</p>
 								<!-- 모달창 생성하기 -->
-								<div class="modal fade" id="modal-${freeDTO.free_no}">
+								<div class="modal fade  text-center" id="modal-${freeDTO.free_no}">
 									<div class="modal-dialog">
 										<div class="modal-content">
 											<form action="/myProManageCt/waitEvaluationFreelancer" method="post">
 												<div class="modal-header">
-													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-														<span aria-hidden="true">×</span>
-													</button>
-													<h4 class="modal-title text-center">프리랜서 평가하기</h4>
+													<h4 class="modal-title">프리랜서 평가하기</h4>
+													<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
 												</div>
 												<div class="modal-body">
 													별점을 매겨주세요<br>

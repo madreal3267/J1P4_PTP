@@ -75,7 +75,7 @@
 									</span>
 		 
 										<!-- 모달창 생성하기 -->
-										<div class="modal fade" id="modal-${cflDTO.free_no}">
+										<div class="modal fade text-center" id="modal-${cflDTO.free_no}">
 											<div class="modal-dialog">
 												<div class="modal-content">
 													<form action="/myProManageCt/completedFreelancer" method="post">
@@ -98,7 +98,7 @@
 													<input type="radio" id="rating1-${cflDTO.free_no}" name="score" value="1" <c:if test="${cflDTO.score == 1}">checked</c:if>><label class="half" for="rating1-${cflDTO.free_no}" title="0.5점"></label>
 												</fieldset>
 															<hr>
-															<textarea name="content" placeholder="프로젝트를 평가해주세요" rows="4" cols="30">${cflDTO.content}</textarea>
+															<textarea name="content" placeholder="프로젝트를 평가해주세요" rows="4" cols="50">${cflDTO.content}</textarea>
 															<input type="hidden" name="ct_no" value="${cflDTO.ct_no }">
 															<input type="hidden" name="proj_no" value="${cflDTO.proj_no }">										
 															<input type="hidden" name="free_no" value="${cflDTO.free_no }">										
@@ -124,22 +124,21 @@
 		</div>
 	</div>
 </div>
+
 <!-- '평가하기'로 페이지 이동시 생성 modal 창 -->
 <div class="modal fade" id="myModal" style="display: none;">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">×</span>
-				</button>
 				<h4 class="modal-title">평가하기 성공</h4>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+				</button>
 			</div>
 			<div class="modal-body">
 				<p>평가가 성공적으로 완료되어'종료된 프로젝트'의 '완료한 프로젝트'로 이동합니다.</p>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
-				<button type="button" class="btn btn-primary">동작 X</button>
+				<button type="button" class="btn btn-primary pull-left" data-bs-dismiss="modal">닫기</button>
 			</div>
 		</div>
 	</div>
@@ -150,17 +149,15 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">×</span>
-				</button>
 				<h4 class="modal-title">평가 수정 완료</h4>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+				</button>
 			</div>
 			<div class="modal-body">
 				<p>성공적으로 평가를 수정하였습니다.</p>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
-				<button type="button" class="btn btn-primary">동작 X</button>
+				<button type="button" class="btn btn-primary pull-left" data-bs-dismiss="modal">닫기</button>
 			</div>
 		</div>
 	</div>

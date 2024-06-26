@@ -47,8 +47,6 @@
 						북마크한 프리랜서를 관리할 수 있습니다.	
 					</div><br>	
 			 	<c:forEach var="free" items="${interestFreelancerList}">
-			 		
-			 		<!-- div에서 onclick으로 프리랜서 상세페이지로 이동 -->
 					<div style=" background-color: white; padding:10px; width: 750px; height: auto; cursor: pointer;" onclick="location.href='/myProfile/profile?free_no=${free.free_no}'">
 						[프로필사진]
 						<b>${free.name }</b>

@@ -4,7 +4,8 @@
 
 <!-- sweetalert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<!-- jQuery 2.1.4 -->
+<script src="${pageContext.request.contextPath }/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <%@ include file="../include/ctHeader.jsp"%>
 
 <!-- 폼태그 -->
@@ -80,13 +81,7 @@
 	
 <script type="text/javascript">
 	$(document).ready(function(){
-		
-		// http://localhost:8088/enroll/getSavedProj?proj_no=412
-// 		$(".btn-warning").click(function(){
-// 			$("form[role='form']").attr("action","/myProManageCt/temSaveProject");
-// 			$("form[role='form']").submit();			
-			
-// 		});				
+				
 		// '삭제하기' 버튼 클릭시 삭제 후 
 		$(".btn-danger").click(function(){
 			$("form[role='form']").attr("action","/myProManageCt/temSaveProject");

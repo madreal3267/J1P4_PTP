@@ -4,7 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<!-- jQuery 2.1.4 -->
+<script src="${pageContext.request.contextPath }/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <%@ include file="../include/ctHeader.jsp"%>
 
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">

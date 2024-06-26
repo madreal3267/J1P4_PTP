@@ -81,10 +81,9 @@
 										<div class="modal-content">
 											<form action="/myProManage/completedProject" method="post">
 												<div class="modal-header">
-													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-														<span aria-hidden="true">×</span>
-													</button>
 													<h4 class="modal-title">프로젝트 평가하기</h4>
+													<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+													</button>
 												</div>
 												<div class="modal-body">
 													별점을 매겨주세요<br>
@@ -107,7 +106,7 @@
 													<input type="hidden" name="free_no" value="${projDTO.free_no }">										
 												</div>
 												<div class="modal-footer">
-													<button type="button" class="btn btn-default pull-left" data-dismiss="modal">취소</button>
+													<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 													<button type="submit" class="btn btn-primary">등록하기</button>
 												</div>
 											</form>	
@@ -128,6 +127,8 @@
 				</div>
 			</div>
 		</div>
+		</div>
+
 
 <script>
 $(document).ready(function() {
