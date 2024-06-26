@@ -167,7 +167,7 @@
 	
 	<!-- 제안한 프리랜서 -->
 	<select id="proposeFreelancerList" resultType="com.itwillbs.domain.proposeFreeDTO">
-		SELECT p.proj_title, u.name, 
+		SELECT p.proj_title, u.name, f.free_no,
 		    COALESCE(GROUP_CONCAT(DISTINCT s.skill_nm SEPARATOR ' | '), 'No Skills') AS skills, 
 		    COALESCE(MAX(TRUNCATE(DATEDIFF(NOW(), c.join_date) / 365, 0) + 1), 0) AS yeoncha, 
 		    CASE 
@@ -183,7 +183,7 @@
 		LEFT JOIN career c ON c.free_no = f.free_no
 		LEFT JOIN apply_mgmt a ON p.proj_no = a.proj_no AND a.free_no = f.free_no
 		WHERE ct.ct_id = #{user_id}
-		GROUP BY p.proj_title, u.name, p.proj_no
+		GROUP BY p.proj_title, u.name, p.proj_no, f.free_no
 		ORDER BY p.proj_no
 	</select>
 	

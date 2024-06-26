@@ -23,4 +23,5 @@ public class proposeFreeDTO {
 	private Timestamp meeting_dt;
 	private String meeting_pc;
 	private int meetingOK;
+	
 }
