@@ -64,7 +64,7 @@
                                 <td>${item.work_period} 일</td>
                                 <td>
                                     <c:if test="${item.proj_status == '검수 단계'}">
-                                        <form action="/admin/project/approve?proj_no=${item.proj_no }" method="post" style="display:inline;">
+                                        <form action="/admin/project/approve?proj_no=${item.proj_no}" method="post" style="display:inline;">
                                             <input type="hidden" name="proj_no" value="${item.proj_no}">
                                             <button type="submit" class="btn btn-success">승인</button>
                                         </form>
@@ -111,6 +111,48 @@
     </div>
 </div>
 
+<!-- Reject Modal -->
+<div class="modal fade" id="rejectPopup" tabindex="-1" role="dialog" aria-labelledby="rejectPopupLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="rejectPopupLabel">프로젝트 반려</h4>
+            </div>
+            <div class="modal-body">
+                <form id="rejectForm" action="/admin/project/reject" method="post">
+                    <input type="hidden" id="rejectProjNo" name="proj_no">
+                    <div class="form-group">
+                        <label for="rejectReason">반려 사유</label>
+                        <textarea id="rejectReason" name="reject_reason" class="form-control" required></textarea>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="submitRejectForm()">반려</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Reject Reason Modal -->
+<div class="modal fade" id="rejectReasonPopup" tabindex="-1" role="dialog" aria-labelledby="rejectReasonPopupLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="rejectReasonPopupLabel">반려 사유</h4>
+            </div>
+            <div class="modal-body">
+                <p id="rejectReasonText"></p>
+                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <%@ include file="../include/footer.jsp" %>
 
 <script>
@@ -118,7 +160,7 @@
         const urlParams = new URLSearchParams(window.location.search);
         urlParams.set('pageSize', pageSize);
         urlParams.set('page', 1); // Reset to page 1 when changing page size
-        urlParams.set('proj_status', '${projStatus}'); // Ensure the proj_status parameter is included
+        urlParams.set('proj_status', '${param.proj_status}'); // Ensure the proj_status parameter is included
         window.location.search = urlParams.toString();
     }
 
