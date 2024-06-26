@@ -89,9 +89,9 @@
                                 <!-- 정산 처리 버튼 -->
                                 <td>    
                                     <c:if test="${item.price_check == true && item.settlement_check == false}">
-                                        <form class="process-form" action="/admin/settlements/${item.settlement_no}/update" method="post">
-                                            <input type="hidden" name="settled_cost" value="${item.settled_cost}" />
-                                            <input type="hidden" name="fee" value="${item.fee}" />
+                                        <form class="process-form" action="/admin/settlements/process" method="post">
+                                            <input type="hidden" name="settlement_no" value="${item.settlement_no}" />
+                                            <input type="hidden" name="settlement_requested" value="${item.settlement_requested}" />
                                             <button type="submit" class="btn btn-primary">정산 처리</button>
                                         </form>
                                     </c:if>
