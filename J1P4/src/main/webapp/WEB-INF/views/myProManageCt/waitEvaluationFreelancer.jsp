@@ -5,6 +5,28 @@
 
 <%@ include file="../include/ctHeader.jsp"%>
 
+<style>
+#linkG {color: black; text-decoration: none; font-weight: bolder;}
+#linkG:hover {
+	color: #31b9a9;
+	}
+	
+.project-item {
+    position: relative;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.apply-form {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+	
+}
+</style>
+
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
 	<div class="card overflow-hidden card-2" >
 		<div class="row no-gutters row-bordered row-border-light">
@@ -47,12 +69,14 @@
 							</div><br>				
 							<i class="fa fa-fw fa-exclamation"></i>평가는 평가 기간 내에만 작성하실 수 있습니다.<hr>
 						<c:forEach var="freeDTO" items="${waitEvaluationFreelancerList}">
-							<p>
-								<b>${freeDTO.name }</b><br>
-								${freeDTO.proj_title}<br>
+							<div class="project-item">
+								<a style="font-size: x-large;" id="linkG" href="/board/detailListFreeC?free_no=${freeDTO.free_no }">${freeDTO.name }</a><br><br>
+								<a id="linkG" href="/board/detailList?proj_no=${freeDTO.proj_no }">${freeDTO.proj_title}</a>
+								<span style="float: right;">
 								작성기간 <fmt:formatDate value="${freeDTO.mod_date }" pattern="yyyy-MM-dd"/>-<span id="formatted-date-${freeDTO.free_no}"></span>
-								<button id="button-${freeDTO.free_no}"  type="button" class="btn btn-dark" data-toggle="modal" data-target="#modal-${freeDTO.free_no}">평가하기</button>
-							</p>
+								</span>
+								<button id="button-${freeDTO.free_no}"  type="button" class="btn btn-dark apply-form" data-toggle="modal" data-target="#modal-${freeDTO.free_no}">평가하기</button><br>
+							</div>
 								<!-- 모달창 생성하기 -->
 								<div class="modal fade  text-center" id="modal-${freeDTO.free_no}">
 									<div class="modal-dialog">
@@ -89,7 +113,7 @@
 											</form>	
 										</div>
 									</div>
-								</div><hr>
+								</div>
 							</c:forEach>
 						</div>
 					</div>

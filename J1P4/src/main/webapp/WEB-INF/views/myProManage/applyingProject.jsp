@@ -6,6 +6,27 @@
 
 <%@ include file="../include/freeHeader.jsp"%>
 
+<style>
+.project-item {
+    position: relative;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.apply-form {
+    position: absolute;
+    top: 40px;
+    right: 20px;
+}
+
+#linkG {color: black; text-decoration: none; font-weight: bolder;}
+#linkG:hover {
+	color: #31b9a9;
+}
+</style>
+
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
 	<div class="card overflow-hidden card-2" >
 		<div class="row no-gutters row-bordered row-border-light">
@@ -50,7 +71,7 @@
 					<br>
 	 
 					 <c:forEach var="projDTO" items="${applyingProjectList}">
-						 <div>
+						 <div class="project-item">
 							<c:choose>
 								<c:when test="${projDTO.proj_status == '모집중'}">
 									<span style="background-color: #31b9a9;" class="badge">모집중</span>
@@ -60,7 +81,8 @@
 								</c:otherwise>
 							</c:choose>			
 										 					 
-						 	<h4>${projDTO.proj_title }</h4> 
+						 	<h4><a id="linkG" href="/board/detailList?proj_no=${projDTO.proj_no }">${projDTO.proj_title }</a></h4> 
+						 
 						 	예상 금액 ${projDTO.proj_cost } 만원 | 예상 기간 ${projDTO.work_period } 개월<br>
 							${projDTO.work_field }	|  ${projDTO.region } ${projDTO.district } | 
 						<!-- 스킬 나열 -->
@@ -75,13 +97,14 @@
 							<c:if test="${not empty projDTO.meeting_dt and not empty projDTO.meeting_pc}">
 								<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-${projDTO.proj_no}">제안 확인</button>
 							</c:if>
-							<form action="/myProManage/applyingProject" method="post">
+							<form class="apply-form"  action="/myProManage/applyingProject" method="post">
 								<input type="hidden" name="free_no" value="${projDTO.free_no }">
 								<input type="hidden" name="proj_no" value="${projDTO.proj_no }">
 								<input class="btn btn-dark" type="submit" value="지원 취소"> 
 							</form>
-							등록일자 <fmt:formatDate value="${projDTO.reg_date }" pattern="yyyy-mm-dd"/>
+							<span style="float: right;">등록일자 <fmt:formatDate value="${projDTO.reg_date }" pattern="yyyy-mm-dd"/></span>
 						 </div>
+						 
 			 <!--제안 확인 modal 창 -->
 				<div class="modal fade" id="modal-${projDTO.proj_no}" style="display: none;">
 					<form action="/myProManageCt/agreeContract" method="post">
@@ -107,7 +130,7 @@
 						</div>
 					</div>
 					</form>
-				</div> <hr>
+				</div> 
 				 </c:forEach>
 			</div>
 		</div>

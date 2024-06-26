@@ -49,11 +49,8 @@ public class MyProManageController {
 	// http://localhost:8088/myProManage/interestProject
 	@RequestMapping(value = "/interestProject", method = RequestMethod.GET)
 	public void interestProjectList(HttpSession session, Model model) {
-		logger.debug("/interestProject -> interestProjectList() 호출");
-		
-		//임의로 세션에 user_id 입력 
-		session.setAttribute("user_id", "june");
-		
+		logger.debug("/interestProject -> interestProjectList() 호출");	
+	
 		// 로그로 아이디 확인
 		logger.debug("user_id : "+session.getAttribute("user_id")); 
 		String user_id = (String)session.getAttribute("user_id");

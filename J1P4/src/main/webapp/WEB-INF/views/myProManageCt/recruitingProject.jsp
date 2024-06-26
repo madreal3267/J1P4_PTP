@@ -7,6 +7,13 @@
 
 <%@ include file="../include/ctHeader.jsp"%>
 
+<style>
+#linkG {color: black; text-decoration: none; font-weight: bolder;}
+#linkG:hover {
+	color: #31b9a9;
+}
+</style>
+
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
 	<div class="card overflow-hidden card-2" >
 		<div class="row no-gutters row-bordered row-border-light">
@@ -68,8 +75,10 @@
 						                        <c:set var="rowCount" value="0" />
 						                    </c:if>
 						                    <tr>
-						                        <td rowspan="${rowCount+1}" id="proj${status.index}"><a href="#">${proFreeDTO.proj_title}</a></td>
-						                        <td><a href="#">${proFreeDTO.free_id}</a></td>
+						                        <td rowspan="${rowCount+1}" id="proj${status.index}">
+						                        	<a id="linkG" href="/board/detailList?proj_no=${proFreeDTO.proj_no }">${proFreeDTO.proj_title}</a>
+						                        </td>
+						                        <td><a id="linkG" href="/board/detailListFreeC?free_no=${proFreeDTO.free_no }">${proFreeDTO.free_id}</a></td>
 						                        <td>
 						                        	<c:set var="skillList" value="${proFreeDTO.skills }" />
 														<c:forEach items="${fn:split(skillList, ',')}" var="skill">
@@ -167,7 +176,7 @@
 									<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
 								</div>
 								<div class="modal-body">
-									<label for="md">미팅 날짜를 정해주세요</label><input type="datetime-local" name="meeting_dt" id="md" required><br>
+									<label for="date">미팅 날짜를 정해주세요</label><input type="date" id="date" name="meeting_dt">
 									<label for="mp">미팅 장소와 내용에 대해 알려주세요</label><br>
 									<textarea id="mp" name="meeting_pc" rows="6" cols="54" placeholder="미팅 장소와 내용에 대해 입력해주세요." required></textarea>
 									<input type="hidden" name="proj_no" value="${proFreeDTO.proj_no }">

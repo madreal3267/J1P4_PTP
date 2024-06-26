@@ -4,8 +4,8 @@
 
 <%@ include file="../include/ctHeader.jsp"%>
 <style>
-#link {color: black; text-decoration: none; font-weight: bolder;}
-#link:hover {
+#linkG {color: black; text-decoration: none; font-weight: bolder;}
+#linkG:hover {
 	color: #31b9a9;
 }
 </style>
@@ -71,8 +71,8 @@
 			                                    <c:set var="rowCount" value="0" />
 			                                </c:if>
 			                                <tr>
-			                                    <td rowspan="1" id="proj${status.index}"><a id="link" href="/board/detailListFreeC?free_no=${proFreeDTO.free_no }">${proFreeDTO.proj_title}</a>${proFreeDTO.free_no }</td>
-			                                    <td><a id="link" href="#">${proFreeDTO.name}</a></td>
+			                                    <td rowspan="1" id="proj${status.index}"><a id="linkG" href="/board/detailList?proj_no=${proFreeDTO.proj_no }">${proFreeDTO.proj_title}</a></td>
+			                                    <td><a id="linkG" href="/board/detailListFreeC?free_no=${proFreeDTO.free_no }">${proFreeDTO.name}</a></td>
 			                                    <td>${proFreeDTO.skills}</td>
 			                                    <td>${proFreeDTO.yeoncha}</td>
 			                                    <td><b>${proFreeDTO.apply_YN}</b></td>
@@ -82,7 +82,7 @@
 			                            </c:when>
 			                            <c:otherwise>
 			                                <tr>
-			                                    <td><a id="link" href="#">${proFreeDTO.name}</a></td>
+			                                    <td><a id="linkG" href="#">${proFreeDTO.name}</a></td>
 			                                    <td>${proFreeDTO.skills}</td>
 			                                    <td>${proFreeDTO.yeoncha}</td>
 			                                    <td><b>${proFreeDTO.apply_YN}</b></td>

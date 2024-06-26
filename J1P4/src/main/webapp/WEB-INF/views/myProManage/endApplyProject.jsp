@@ -6,6 +6,27 @@
 
 <%@ include file="../include/freeHeader.jsp"%>
 
+<style>
+.project-item {
+    position: relative;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.apply-form {
+    position: absolute;
+    top: 40px;
+    right: 20px;
+}
+
+#linkG {color: black; text-decoration: none; font-weight: bolder;}
+#linkG:hover {
+	color: #31b9a9;
+}
+</style>
+
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
 	<div class="card overflow-hidden card-2" >
 		<div class="row no-gutters row-bordered row-border-light">
@@ -51,8 +72,10 @@
 					프로젝트에 지원하였지만, 클라이언트와의 미팅이 성사되지 않은 프로젝트 목록입니다. <br>
 				<br>
 				<c:forEach var="projDTO" items="${endApplyProjectList}">
-				 <div>
-				 	<h2>${projDTO.proj_title }</h2> 
+				<div class="project-item">
+				 	<h4><a id="linkG" href="/board/detailList?proj_no=${projDTO.proj_no }">
+				 		${projDTO.proj_title }
+				 	</a></h4> 
 				 	예상 금액 ${projDTO.proj_cost } | 예상 기간 ${projDTO.work_period } <br>
 					${projDTO.work_field }	|  ${projDTO.region } ${projDTO.district }  |  
 				<!-- 스킬 나열 -->
@@ -61,19 +84,21 @@
 						<span style="background-color: #31b9a9;" class="badge">
 							<c:out value="${skill}" />
 						</span>
-					</c:forEach>
+					</c:forEach><br>
 					
 				<!-- 지원 종료 이유 설명 -->
 				<c:if test="${projDTO.reject_check == 1}"> 지원해 주셔서 감사드립니다. 이번에는 함께하지 못하지만, 향후 기회를 기대합니다. </c:if>
-				<c:if test="${projDTO.deadline < currentDate}"> <p>지원기간이 종료되었습니다. 이번에는 함께하지 못하지만, 향후 기회를 기대합니다.</p> </c:if>
+				<c:if test="${projDTO.deadline < currentDate}"> 지원기간이 종료되었습니다. 이번에는 함께하지 못하지만, 향후 기회를 기대합니다.</c:if>
 				<!-- 지원 종료 목록에서 삭제 -->	
-					<form action="/myProManage/endApplyProject" method="post">
+					<form class="apply-form"  action="/myProManage/endApplyProject" method="post">
 						<input type="hidden" name="free_no" value="${projDTO.free_no }">
 						<input type="hidden" name="proj_no" value="${projDTO.proj_no }">
 						<input class="btn btn-dark" type="submit" value="목록에서 삭제" >
 					</form>
-					등록일자 <fmt:formatDate value="${projDTO.reg_date }" pattern="yyyy-MM-dd"/>
-				 </div> <hr>
+					<span style="float: right;"> 
+						등록일자 <fmt:formatDate value="${projDTO.reg_date }" pattern="yyyy-MM-dd"/>
+					</span>	
+				 </div> 
 				 </c:forEach>
 			</div>
 						</div>

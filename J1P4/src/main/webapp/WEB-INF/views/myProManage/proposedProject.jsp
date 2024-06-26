@@ -5,6 +5,27 @@
 
 <%@ include file="../include/freeHeader.jsp"%>
 
+<style>
+.project-item {
+    position: relative;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.apply-form {
+    position: absolute;
+    top: 40px;
+    right: 20px;
+}
+
+#linkG {color: black; text-decoration: none; font-weight: bolder;}
+#linkG:hover {
+	color: #31b9a9;
+}
+</style>
+
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
 	<div class="card overflow-hidden card-2" >
 		<div class="row no-gutters row-bordered row-border-light">
@@ -49,7 +70,7 @@
 						4. 프로젝트 내용을 충분히 검토 후, 실제 진행 가능한 프로젝트에 지원하세요. <br>
 					<br>
 					<c:forEach var="projDTO" items="${proposedProjectList}">
-						<div>
+						<div class="project-item">
 							<c:choose>
 								<c:when test="${projDTO.proj_status == '모집중'}">
 									<span style="background-color: #31b9a9;" class="badge">모집중</span>
@@ -58,7 +79,7 @@
 									<span style="background-color: #31b9a9;" class="badge">모집종료</span>
 								</c:otherwise>
 							</c:choose>							
-							<h4>${projDTO.proj_title }</h4>
+							<h4><a id="linkG" href="/board/detailList?proj_no=${projDTO.proj_no }">${projDTO.proj_title }</a></h4>
 							예상 금액 ${projDTO.proj_cost } | 예상 기간 ${ProjectDTO.work_period } <br> 
 							${projDTO.work_field } | ${projDTO.region } ${projDTO.district } | 
 						<!-- 스킬 나열 -->
@@ -71,14 +92,15 @@
 							
 						<!-- 하트위치 -->
 						<!-- 지원하기 -->
-							<form action="/projectDetail/applyProj" method="get">
+							<form class="apply-form"  action="/projectDetail/applyProj" method="get">
 								<input type="hidden" name="free_no" value="${projDTO.free_no }"> 
 								<input type="hidden" name="proj_no" value="${projDTO.proj_no }">
-								<input class="btn btn-dark" type="submit" value="지원하기">
+								<input style="float: right;"  class="btn btn-dark" type="submit" value="지원하기">
 							</form>
-							등록일자 <fmt:formatDate value="${projDTO.reg_date }" pattern="yyyy-mm-dd" />
+							<span style="float: right;">
+								등록일자 <fmt:formatDate value="${projDTO.reg_date }" pattern="yyyy-mm-dd" />
+							</span>	
 						</div>
-						<hr>
 					</c:forEach>
 							</div>
 						</div>

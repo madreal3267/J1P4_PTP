@@ -8,6 +8,13 @@
 <script src="${pageContext.request.contextPath }/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <%@ include file="../include/ctHeader.jsp"%>
 
+<style>
+#linkG {color: black; text-decoration: none; font-weight: bolder;}
+#linkG:hover {
+	color: #31b9a9;
+}
+</style>
+
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
 	<div class="card overflow-hidden card-2" >
 		<div class="row no-gutters row-bordered row-border-light">
@@ -50,17 +57,17 @@
 							현재 상담 대기중인 프로젝트를 확인할 수 있습니다.
 						</div><br>	
 			
-					<table class="table table-bordered bg-light">
+					<table class="table table-bordered table-striped bg-light">
 						<tbody>
 							<tr class="text-center">
-								<td>프로젝트 이름</td>
-								<td>모집기간</td>
-								<td>진행상태</td>
-								<td>삭제</td>
+								<th>프로젝트 이름</th>
+								<th>모집기간</th>
+								<th>진행상태</th>
+								<th>삭제</th>
 							</tr>
 							<c:forEach var="projectVO" items="${underReviewProjectList}">
 								<tr>
-									<td>${projectVO.proj_title }</td>
+									<td><a id="linkG" href="/board/detailList?proj_no=${projectVO.proj_no }">${projectVO.proj_title }</a></td>
 									<td class="text-center">
 									${projectVO.reg_date.substring(0, 10)} ~ ${projectVO.deadline }
 									</td>

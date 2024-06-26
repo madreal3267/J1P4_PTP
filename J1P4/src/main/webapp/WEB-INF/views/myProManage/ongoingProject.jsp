@@ -3,6 +3,13 @@
 
 <%@ include file="../include/freeHeader.jsp"%>
 
+<style>
+#linkG {color: black; text-decoration: none; font-weight: bolder;}
+#linkG:hover {
+	color: #31b9a9;
+}
+</style>
+
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
 	<div class="card overflow-hidden card-2" >
 		<div class="row no-gutters row-bordered row-border-light">
@@ -39,28 +46,30 @@
 					<div class="border-bottom" style="position: relative; right:16px; width:1000px; padding-bottom: 10px;" >
 						<h4 class="font-weight-bold mx-4 my-3">프로젝트 진행 중</h4>
 						계약 완료 후 업무를 진행하는 단계의 프로젝트를 확인할 수 있습니다.
-					</div>
+					</div><br>
 					1. 진행중 <br> 
 					2. 프로젝트 완료 후 정산요청 <br> 
 					3. 정산금 대기중.
-					<br>
+					<hr>
 						<div class="col-md-12">
 							<div class="box box-default">
-								<div class="box-header with-border"> <br>
+								<div class="box-header with-border">
 									<section>
 										<table class="table table-bordered bg-light table-striped">
 											<tbody>
 												<tr class="text-center">
-													<td>프로젝트 번호</td>
-													<td>프로젝트 이름</td>
-													<td>클라이언트</td>
-													<td>담당 매니저</td>
-													<td>진행 상태</td>
+													<th>프로젝트 번호</th>
+													<th>프로젝트 이름</th>
+													<th>클라이언트</th>
+													<th>담당 매니저</th>
+													<th>진행 상태</th>
 												</tr>
 												<c:forEach var="onpro" items="${ongoingProjectList}">
 													<tr>
 														<td>${onpro.proj_no }</td>
-														<td>${onpro.proj_title }</td>
+														<td>
+															<a id="linkG" href="/board/detailList?proj_no=${onpro.proj_no }">${onpro.proj_title }</a>
+														</td>
 														<td>${onpro.ct_id }</td>
 														<td>${onpro.manager_nm }</td>
 														<td>${onpro.proj_status }</td>

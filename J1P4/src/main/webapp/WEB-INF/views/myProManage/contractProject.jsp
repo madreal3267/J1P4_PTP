@@ -4,6 +4,13 @@
 
 <%@ include file="../include/freeHeader.jsp"%>
 
+<style>
+#linkG {color: black; text-decoration: none; font-weight: bolder;}
+#linkG:hover {
+	color: #31b9a9;
+}
+</style>
+
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
 	<div class="card overflow-hidden card-2" >
 		<div class="row no-gutters row-bordered row-border-light">
@@ -50,11 +57,7 @@
 			</div>	
 			<h4 class="font-weight-bold mx-4 my-3">계약 진행 중</h4>
 			계약이 진행 중인 프로젝트를 확인 할 수 있습니다.
-			</div><br>	
-				<div class="box box-default">
-					<div class="box-header with-border">1. 계약서 업로드</div>
-				</div>
-					<br>
+			</div>	<br>
 				<div class="col-md-12">
 					<div class="box box-default">
 						<div class="box-header with-border">
@@ -62,16 +65,18 @@
 								<table class="table table-bordered bg-light table-striped">
 									<tbody>
 										<tr class="text-center">
-											<td>프로젝트 번호</td>
-											<td>프로젝트 이름</td>
-											<td>클라이언트</td>
-											<td>담당 매니저</td>
-											<td>진행 상태</td>
+											<th>프로젝트 번호</th>
+											<th>프로젝트 이름</th>
+											<th>클라이언트</th>
+											<th>담당 매니저</th>
+											<th>진행 상태</th>
 										</tr>
 										<c:forEach var="conProj" items="${contractProjectList}">
 											<tr>
 												<td>${conProj.proj_no }</td>
-												<td>${conProj.proj_title }</td>
+												<td>
+													<a id="linkG" href="/board/detailList?proj_no=${conProj.proj_no }">${conProj.proj_title }</a>
+												</td>
 												<td>${conProj.ct_id }</td>
 												<td id="mn">${conProj.manager_nm }</td>
 												<td>${conProj.proj_status } 진행중</td>
