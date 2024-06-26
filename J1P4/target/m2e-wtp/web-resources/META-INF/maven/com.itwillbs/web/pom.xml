@@ -15,9 +15,6 @@
 	</properties>
 	<dependencies>
 		<!-- Spring -->
-		
-		
-		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -30,8 +27,6 @@
 				 </exclusion>
 			</exclusions>
 		</dependency>
-		
-		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -182,11 +177,8 @@
 		    <version>4.0.3</version>
 		</dependency>
 		
-		<dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-databind</artifactId>
-		    <version>2.13.1</version>
-		</dependency>
+		
+ 		<!-- Jackson 라이브러리 -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-core</artifactId>
@@ -198,12 +190,11 @@
 		    <version>2.13.1</version>
 		</dependency>
 				
-		<!-- Jackson 라이브러리 -->
-<!-- 		<dependency> -->
-<!--     		<groupId>com.fasterxml.jackson.core</groupId> -->
-<!--     		<artifactId>jackson-databind</artifactId> -->
-<!--     		<version>2.9.2</version> -->
-<!-- 		</dependency> -->
+		<dependency>
+    		<groupId>com.fasterxml.jackson.core</groupId>
+    		<artifactId>jackson-databind</artifactId>
+    		<version>2.13.1</version>
+		</dependency>
 		<!-- Jackson 라이브러리 -->
 		
 		<!-- Apache commons(파일업로드) 라이브러리 -->
