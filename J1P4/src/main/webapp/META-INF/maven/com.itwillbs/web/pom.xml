@@ -183,8 +183,6 @@
 		    <version>4.0.3</version>
 		</dependency>
 		
-		
-<<<<<<< HEAD:J1P4/target/m2e-wtp/web-resources/META-INF/maven/com.itwillbs/web/pom.xml
  		<!-- Jackson 라이브러리 -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
