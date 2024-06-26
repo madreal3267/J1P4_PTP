@@ -55,6 +55,28 @@ public class UserDAOImpl implements UserDAO {
     public int getClientCount() {
         return sqlSession.selectOne(NAMESPACE + "getClientCount");
     }
+    
+    
+    
+ // 추가 메서드
+    @Override
+    public String getClientIdByCtNo(int ct_no) {
+        return sqlSession.selectOne(NAMESPACE + "getClientIdByCtNo", ct_no);
+    }
+
+    @Override
+    public String getFreelancerIdByFreeNo(int free_no) {
+        return sqlSession.selectOne(NAMESPACE + "getFreelancerIdByFreeNo", free_no);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
 //	유저 목록
 //	@Override
 //	public List<UserDTO> userList() {

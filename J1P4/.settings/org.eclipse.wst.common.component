@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+<<<<<<< HEAD
         	
     
     <wb-module deploy-name="web-1.0.0-BUILD-SNAPSHOT">
@@ -24,5 +25,37 @@
     
     </wb-module>
         
+=======
+            	
+    
+    
+    <wb-module deploy-name="web-1.0.0-BUILD-SNAPSHOT">
+                        		
+        
+        
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+                        		
+        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+                        		
+        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+                        		
+        
+        
+        <property name="java-output-path" value="target/classes"/>
+                                
+        
+        
+        <property name="context-root" value="web"/>
+                        	
+    
+    
+    </wb-module>
+            
+
+>>>>>>> 0506b79f4b1f1785aabc5be95304a942ac847746
 
 </project-modules>

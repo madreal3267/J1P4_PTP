@@ -181,5 +181,9 @@ public class EnrollProjDAOImpl implements EnrollProjDAO {
 	}
 	
 	
+	 @Override
+	 public int getLastInsertedProjNo() {
+	    return sqlSession.selectOne(NAMESPACE + "getLastInsertedProjNo");
+	}
 	
 }

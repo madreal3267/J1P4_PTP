@@ -86,7 +86,8 @@
                                         Yes
                                     </c:otherwise>
                                 </c:choose></td>
-                                <!-- 정산 처리 버튼 --><td>    
+                                <!-- 정산 처리 버튼 -->
+                                <td>    
                                     <c:if test="${item.price_check == true && item.settlement_check == false}">
                                         <form class="process-form" action="/admin/settlements/process" method="post">
                                             <input type="hidden" name="settlement_no" value="${item.settlement_no}" />
@@ -134,7 +135,6 @@
 
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/payment.js"></script> <!-- 결제 처리 -->
-
 
 <%@ include file="../include/footer.jsp" %>
 

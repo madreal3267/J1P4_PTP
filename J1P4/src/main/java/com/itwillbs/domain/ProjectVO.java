@@ -35,7 +35,7 @@ public class ProjectVO {
 	
 	private String dlvy_msg;
 	private String proj_status;
-	private int pay_check;
+	private int pay_check = 0; // Default 값 0 (false)
 	private int deadline_check;
 	private String reject_reason;
 	private String reg_date;

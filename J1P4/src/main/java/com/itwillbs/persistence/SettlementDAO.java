@@ -12,4 +12,5 @@ public interface SettlementDAO {
     List<SettlementDTO> getSettlementsByPriceCheck(boolean priceCheck);
     List<SettlementDTO> getSettlementsBySettlementCheck(boolean settlementCheck);
     SettlementDTO getSettlementByMerchantUid(String merchant_uid);
+    void insertSettlement(SettlementDTO settlement);
 }

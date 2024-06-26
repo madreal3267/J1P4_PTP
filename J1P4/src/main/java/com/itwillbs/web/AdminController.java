@@ -392,7 +392,7 @@ public class AdminController {
         return response;
     }
 
-    // 정산 리스트를 페이징 처리하여 조회하는 메서드
+ // 정산 리스트를 페이징 처리하여 조회하는 메서드
     @GetMapping("/settlements")
     public String getSettlements(Model model,
                                  @RequestParam(value = "price_check", required = false) Boolean priceCheck,
@@ -458,6 +458,8 @@ public class AdminController {
             return "서버 업데이트에 실패하였습니다. 에러 내용: " + e.getMessage();
         }
     }
+
+
 
 
 	 

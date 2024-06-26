@@ -35,7 +35,7 @@
           <li><a href="/board/listPro" class="nav-link px-3 link-body-emphasis nav-r1">프로젝트 찾기</a></li>
           <li><a href="/board/listFree" class="nav-link px-3 link-body-emphasis nav-r1">프리랜서 찾기</a></li>
           <li><a href="#" class="nav-link px-3 link-body-emphasis nav-r1" id="projButt">프로젝트 등록</a></li>
-          <li><a href="#" class="nav-link px-3 link-body-emphasis nav-r1">이용방법</a></li>
+          <li><a href="/member/guide" class="nav-link px-3 link-body-emphasis nav-r1">이용방법</a></li>
           <li><a href="/myProManageCt/interestFreelancer" class="nav-link px-2 link-body-emphasis nav-r4">내 프로젝트 관리</a></li>
         </ul>
 
@@ -44,8 +44,8 @@
             <img src="../resources/스마일감자.jpg" alt="profile" width="45" height="45" class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small">
-            <li><a class="dropdown-item" href="#">마이페이지</a></li>
-            <li><a class="dropdown-item" href="#">계정설정</a></li>
+            <li><a class="dropdown-item" href="/member/mypage">마이페이지</a></li>
+            <li><a class="dropdown-item" href="/member/account">계정설정</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="/member/logout">로그아웃</a></li>
           </ul>

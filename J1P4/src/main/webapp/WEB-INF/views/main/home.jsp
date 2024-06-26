@@ -33,14 +33,14 @@
 	</div>
 	
 	<div id="mainImg">
-	<img src="../resources/main.png" style="width:500px;" alt="mainImg"/>
+	<img src="../resources/main2.png" style="width:500px;" alt="mainImg"/>
 	</div>
 	
 	<!-- ============== 비회원 메인 메뉴 ================= -->
 	<c:if test="${empty sessionScope.user_id }">
 	<div class="mainButt">
 		<button class="rounded-3 p-3 butt1" type="button" onclick = "location.href = '/member/insert'">회원가입</button>
-		<button class="rounded-3 p-3 butt2" type="button" >이용방법</button>
+		<button class="rounded-3 p-3 butt2" type="button" onclick = "location.href = '/member/guide'">이용방법</button>
 	</div>
 	</c:if>
 	
@@ -48,15 +48,15 @@
 	<c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.equals('프리랜서') }">
 	<div class="mainButt">
 		<button class="rounded-3 p-3 butt1" type="button" onclick = "location.href = '/board/listPro'">프로젝트 찾기</button>
-		<button class="rounded-3 p-3 butt2" type="button" >이용방법</button>
+		<button class="rounded-3 p-3 butt2" type="button" onclick = "location.href = '/member/guide'">이용방법</button>
 	</div>
 	</c:if>
 	
 	<!-- ============== 클라이언트 메인 메뉴 ================= -->
 	<c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.equals('클라이언트') }">
 	<div class="mainButt" >
-		<button class="rounded-3 p-3 butt1" type="button" >프리랜서 찾기</button>
-		<button class="rounded-3 p-3 butt2" type="button" >이용방법</button>
+		<button class="rounded-3 p-3 butt1" type="button" onclick = "location.href = '/board/listFree'">프리랜서 찾기</button>
+		<button class="rounded-3 p-3 butt2" type="button" onclick = "location.href = '/member/guide'">이용방법</button>
 	</div>
 	</c:if>
 	  

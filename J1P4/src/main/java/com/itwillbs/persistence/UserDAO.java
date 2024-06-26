@@ -12,4 +12,8 @@ public interface UserDAO {
     int getUserCount();
     int getFreelancerCount();
     int getClientCount();
+    
+ // 추가 메서드
+    String getClientIdByCtNo(int ct_no);
+    String getFreelancerIdByFreeNo(int free_no);
 }

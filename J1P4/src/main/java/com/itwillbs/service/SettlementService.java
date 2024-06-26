@@ -12,6 +12,6 @@ public interface SettlementService {
     List<SettlementDTO> getSettlementsByPriceCheck(boolean priceCheck);
     List<SettlementDTO> getSettlementsBySettlementCheck(boolean settlementCheck);
     SettlementDTO getSettlementByMerchantUid(String merchant_uid);
-
+    void createSettlement(SettlementDTO settlement);
 }
 	    
