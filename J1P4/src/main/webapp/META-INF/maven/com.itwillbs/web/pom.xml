@@ -183,7 +183,6 @@
 		    <version>4.0.3</version>
 		</dependency>
 		
-		
 
  		<!-- Jackson 라이브러리 -->
 		<dependency>
@@ -248,6 +247,8 @@
 	    </dependency>
 	    <!-- commons-io -->
 		
+		
+
 		<!--메일라이브러리 
 		https://mvnrepository.com/artifact/javax.mail/mail -->
 		<dependency>
@@ -275,7 +276,7 @@
 		
 		<!-- Jackson라이브러리 -->
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-	<!-- <dependency>
+<!-- 	<dependency>
     	<groupId>com.fasterxml.jackson.core</groupId>
     	<artifactId>jackson-databind</artifactId>
     	<version>2.9.2</version>
@@ -289,7 +290,7 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
-		<!-- <dependency>	
+<!-- 		<dependency>	
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>1.4</version>

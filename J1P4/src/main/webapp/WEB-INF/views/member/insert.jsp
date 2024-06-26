@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file="../include/login.jsp" %>
+<%-- <%@ include file="../include/login.jsp" %> --%>
 <%-- <c:import url="../include/login.jsp"></c:import> --%>
 <form class="form-horizontal" method="post" name="form_join" id="form1">
 

@@ -16,15 +16,12 @@
 <c:import url="../include/ctHeader.jsp"></c:import>
 </c:if>
 
-	<div class="container light-style flex-grow-1 container-p-y text-center" style="width:1100px;padding-top:15px;">
-	<div class="alert alert-light mt-3 card-2">
-		임시 저장 프로젝트를 불러오거나, 등록했던 프로젝트를 다시 등록해 보세요. <a class="alert-link" href="">프로젝트 선택하기 ></a>
-		</div>
-	</div>
 
 	<form action="/enroll/enrollProj" method="post" id="fm1" name="fm1" class="fm">
 		<input type="hidden" value="${sessionScope.user_id }" name="user_id">
+		<input type="hidden" value="${param.proj_no }" name="proj_no">
 		<input type="hidden" value="" name="temporary" class="temporary">
+		
 	
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
  <div class="card overflow-hidden card-2" >

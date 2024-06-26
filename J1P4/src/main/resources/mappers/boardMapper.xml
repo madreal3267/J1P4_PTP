@@ -97,7 +97,7 @@
   	 </select> -->
   	 <!-- 프로젝트 상세페이지  -->
   	 <select id="dePro" resultType="com.itwillbs.domain.ProjectVO">
-  	 	select p.proj_no, p.proj_title, p.proj_cost , p.deadline, p.work_field, p.reg_date, p.job_level, r.region, r.district, s.skill_nm
+  	 	select p.proj_no, p.proj_title, p.proj_cost,p.ct_no, p.deadline, p.work_field, p.reg_date, p.job_level, r.region, r.district, s.skill_nm
 		from project p
 		left join skill s
 		on p.proj_no = s.proj_no
@@ -117,7 +117,7 @@
   	 <select id="fListPaging" resultType="com.itwillbs.domain.FreelancerVO" parameterType="com.itwillbs.domain.Criteria">
   		<![CDATA[
 			select f.free_no, f.free_id, f.enroll_status, f.work_field, f.school_type, f.school_nm, f.major, f.grad_status,
-			  f.entrance, f.graduation, f.work_check, f.work_date, f.proj_cost, f.oneline_bio, f.bio, r.region, r.district, s.skill_nm, c.job_lev
+			  f.entrance, f.graduation, f.work_check, f.work_date, f.proj_cost, f.oneline_bio, f.bio, r.region, r.district, s.skill_nm, c.job_lev, u.user_type
 			from freelancer f
 			left join skill s
 			on f.free_no = s.free_no
@@ -125,8 +125,10 @@
 			on f.free_no = r.free_no
 			left join career c
             on f.free_no = c.free_no
+            left join user u
+            on f.free_id = u.user_id
 			where work_field = "개발"
-			order by reg_date DESC
+			order by cast(f.reg_date as unsigned) DESC
 			limit #{amount} offset #{offset}
 			
   	 	]]>
@@ -466,5 +468,35 @@
   	 	#{skillCheck2},#{skillCheck3},#{skillCheck4},#{skillCheck5},#{skillCheck6},#{skillCheck7},#{skillCheck8},
   	 	#{skillCheck9},#{skillCheck10},#{content})
   	 </insert>
+  	 
+  	 <!-- 프로젝트 평점 -->
+  	 <select id="proSco" resultType="double">
+  	 	select avg(score)
+		from project_value
+		where valued_ct = #{ct_no}
+  	 </select>
+  	 <!-- 프로젝트 평가내용 -->
+  	  <select id="proScoC" resultType="int">
+  	 	select count(content)
+		from project_value
+		where valued_ct = #{ct_no}
+  	 </select>
+  	 
+  	 <!-- 프리랜서 포트폴리오 -->
+  	  <select id="getPortf" resultType="com.itwillbs.domain.PortfolioVO">
+      select free_no, p_responsibility, portfolio_title,
+      SUBSTRING_INDEX (SUBSTRING_INDEX(portfolio.file,',',numbers.n),',',-1) file
+      from (select 1 n union all select 2
+      union all select 3 union all select 4
+        union all select 5 union all select 6
+        union all select 7 union all select 8
+        union all select 9 union all select 10) numbers INNER JOIN portfolio
+        on char_length (portfolio.file) - char_length(replace(portfolio.file,',',''))>=numbers.n-1
+        where free_no = #{free_no}
+   </select>
+   
+   
+   
+   
   	 
   </mapper>
