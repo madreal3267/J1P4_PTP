@@ -293,7 +293,8 @@
 					</div>
 
 					<div style="display: flex; justify-content: end;">
-						<span style="font-size: 14px; color: #444">${v.reg_date }</span>
+						<span style="font-size: 14px; color: #444">
+						<c:out value="${fn:substring(v.reg_date, 0, 11)}"></c:out></span>
 					</div>
 				</div>
 
@@ -341,18 +342,6 @@
 	
 </form>
 
-<div class="container">
-	<footer class="py-3 my-4">
-	<ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
-    </ul>
-    <p class="text-center text-body-secondary">© 2024-06-06 Zip-Ga-Go-Ship-Da, Inc</p>
-   </footer>
-</div>
 
 <script>
 $(document).ready(function(){
@@ -582,5 +571,4 @@ $(document).ready(function(){
 
 
 </script>
-</body>
-</html>
+<%@ include file="../include/footer.jsp" %>

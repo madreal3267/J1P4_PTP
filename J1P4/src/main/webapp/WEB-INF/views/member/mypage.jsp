@@ -679,24 +679,4 @@ function checkBrn(){
 	
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<%@ include file="../include/footer.jsp" %>

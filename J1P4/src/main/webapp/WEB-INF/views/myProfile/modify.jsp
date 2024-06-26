@@ -412,18 +412,7 @@ ct_no: ${sessionScope.ct_no }
 </form>
 <!-- 포트폴리오 모달창 끝 -->
 
-<div class="container">
-	<footer class="py-3 my-4">
-	<ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
-    </ul>
-    <p class="text-center text-body-secondary">© 2024-06-06 Zip-Ga-Go-Ship-Da, Inc</p>
-   </footer>
-</div>
+
 	
 <!-- 자바스크립트 시작 -->	
 <script type="text/javascript">
@@ -459,8 +448,12 @@ $(function(){
 				
 				
 			},
-			error : function() {
-				alert("오류발생");
+			error : function(jqXHR, textStatus, errorThrown) {
+		        alert("@@@@@ 오류 발생: @@@@@" + textStatus);
+		        console.log("AJAX 오류 발생:");
+		        console.log("상태 코드:", jqXHR.status);
+		        console.log("응답 텍스트:", jqXHR.responseText);
+		        console.log("에러:", errorThrown);
 			}
 		});
 		
@@ -786,5 +779,5 @@ function addFile(){
 
 <!-- select2 (검색되는 select) 자바스크립트 -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-</body>
-</html>
+    
+<%@ include file="../include/footer.jsp" %>

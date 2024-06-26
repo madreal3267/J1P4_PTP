@@ -220,8 +220,8 @@
     <!-- 모집중, NEW!, 하트 영역 -->
     <div style="display: grid; grid-template-columns: 1fr 1fr;">
         <div style="display: flex;">
-            <div style="background-color: white; border: 1px solid #333; border-radius: 5px; padding: 3px 12px; margin-right: 6px;">구직중</div>
-            <div style="background-color: white; border: 1px solid #333; border-radius: 5px; padding: 3px 12px;">NEW!</div>
+           <div style="background-color: white; border: 1px solid #333; border-radius: 5px; padding: 3px 12px; margin-right: 6px; font-size: 12px;">구직중</div>
+            <div style="background-color: white; border: 1px solid #333; border-radius: 5px; padding: 3px 12px;font-size: 12px;">NEW!</div>
         </div>
     <!-- 로그인 여부, 북마크 여부체크 -->    
         <div style="display: flex; justify-content: end;">
@@ -276,17 +276,18 @@
     </div>
 
     <div style="margin-bottom: 6px;">
-        분야 <span style="font-weight: bold;">${v.work_field }</span> |${v.job_lev }  <span style="font-weight: bold;"></span>
+        분야 <span style="font-weight: bold;">${v.work_field }</span> | 레벨 <b>${v.job_lev }</b>&nbsp|
+        <c:if test="${v.user_type eq '개인' or v.user_type eq '팀' }">
+							학력&nbsp<b>${v.school_type }</b>&nbsp<b>${v.grad_status }</b>&nbsp|
+						</c:if>	
+							지역&nbsp<b>${v.region }</b>&nbsp<b>${v.district }</b><br>
     </div>
 
 				<!-- 기타 정보 / 등록일자 -->
 				<div style="display: grid; grid-template-columns: 1fr 1fr;">
-					<div style="display: flex; font-weight: bold;">
-						<span style="display: flex; align-items: center;">
-						<c:if test="${v.user_type eq '개인' or v.user_type eq '팀' }">
-							학력 | ${v.school_type } ${v.grad_status }
-						</c:if>	
-							지역 | ${v.region } ${v.district } |</span>
+					<div style="display: flex;">
+						<span style="display: flex; align-items: center;"></span>
+						
 						<c:forEach items="${fn:split(skillList, ',') }" var="skill">
 							<span class="badge bg-secondary mx-1" style="font-size: 14px; background-color:#31b9a9 !important;">
 								<c:out value="${skill}" />
@@ -341,22 +342,6 @@
 	<input id ="work_field2" type='hidden' name='work_field' value='개발'>
 	
 </form>
-
-<div class="container">
-	<footer class="py-3 my-4">
-	<ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
-    </ul>
-    <p class="text-center text-body-secondary">© 2024-06-06 Zip-Ga-Go-Ship-Da, Inc</p>
-   </footer>
-</div>
-
-
-
 
 
 <script>
@@ -592,5 +577,4 @@ $(document).ready(function(){
 
 
 </script>
-</body>
-</html>
+<%@ include file="../include/footer.jsp" %>

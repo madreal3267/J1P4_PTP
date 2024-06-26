@@ -169,3 +169,6 @@ ct_no: ${sessionScope.ct_no }
   </div>
  </div>
 </div>
+
+    
+<%@ include file="../include/footer.jsp" %>
