@@ -333,7 +333,9 @@ ct_no: ${sessionScope.ct_no }
 			<div class="gap">	
 				<h5>포트폴리오</h5>
 				<div class="content" style="margin-bottom: 281.42px; ">
-				<div class="filePlz"></div>				
+				<!-- 업로드된 파일 정보 출력 -->
+				<div class="filePlz"></div>		
+						
 				<div role="button" class="my-3" data-bs-toggle="modal" data-bs-target="#portfModal">+ 포트폴리오 추가</div>
 				</div>
 			</div>
@@ -368,18 +370,19 @@ ct_no: ${sessionScope.ct_no }
 				
 	<!-- 모달 본문 시작 -->   			   
 	<div class="modal-body">
-	프리랜서에게 제안할 프로젝트를 골라주떼욤 (❁´◡`❁)
+	포트폴리오를 올려주세요. (❁´◡`❁)
 	<hr>
 		<div>
 		  <div>
 			<div>
-			<label for="exampleInputEmail1">포트폴리오 제목</label>
-			<input type="text" name="work_field" id="exampleInputEmail1" placeholder="포트폴리오 제목을 입력하세요">
+			<label for="exampleInputEmail1">포트폴리오 제목</label><br>
+			<input type="text" name="portf_title" style="width: 720px;" placeholder="포트폴리오 제목을 입력하세요">
 			</div>
-		
+			<hr>
 			<div>
 			<label for="exampleInputPassword1">담당 업무</label>
-			<textarea cols="80" rows="30" name="responsibility" id="exampleInputPassword1" placeholder="담당 업무를 입력하세요"></textarea>
+			<br>
+			<textarea cols="85" rows="20" name="p_responsibility" placeholder="담당 업무를 입력하세요"></textarea>
 			</div>
 			
 			<div class="form-group fileDiv">
@@ -437,20 +440,24 @@ $(function(){
 			data : formData,
 			processData: false,
 			contentType: false,
-			success : function(a){
-				alert(" ╰(*°▽°*)╯ 전송 완료 ");
+			success : function(data){
 				
-				var resp = a.responsibility;
-				var wf = a.work_field
-				var fileName = a.fileNameList;
-				
-				
-				$.each(a, function(index, item) { // 데이터 =item
-					$(".filePlz").append(index + " "); // index가 끝날때까지 
-					$(".filePlz").append(item.wf + " ");
-					$(".filePlz").append(item.resp + " ");
-					$(".filePlz").append(item.fileName + " ");
+				var resp = data.p_responsibility;
+				var wf = data.portf_title;
+				var fileName = data.fileNameList;	
+				$.each(fileName, function(index, value){
+
 				});
+				
+				$(".filePlz").prepend(
+				'포트폴리오 제목 : '+resp+
+				'<br>담당업무 : '+wf+
+				'<br>업로드 된 파일 :<a href="/myProfile/download?fileName='+fileName+'">'+fileName+'</a><br>'+
+				'<input type="hidden" name="p_responsibility" value="'+resp+'"><input type="hidden" name="portfolio_title" value="'+wf+'">'+
+				'<input type="hidden" name="file" value="'+fileName+'">'
+				);
+				
+				
 			},
 			error : function() {
 				alert("오류발생");

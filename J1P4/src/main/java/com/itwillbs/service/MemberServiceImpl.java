@@ -220,6 +220,94 @@ public class MemberServiceImpl implements MemberService {
 	public Integer sessCtNo(MemberVO vo) throws Exception {
 		return mdao.sessCtNo(vo);
 	}
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	public Integer chkIdent(String id) {
+		return mdao.chkIdent(id);
+	}
+
+
+
+	@Override
+	public Integer chkIdentB(String id) {
+		return mdao.chkIdentB(id);
+	}
 	
 	
 	
@@ -232,5 +320,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	
 	
+	
+
 	
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 
 import com.itwillbs.domain.MemberVO;
+import com.itwillbs.domain.ProjectVO;
 
 /**
  *	 회원에 동작을 처리하는 객체 
@@ -85,6 +86,16 @@ public interface MemberDAO {
 	public Integer sessFreeNo(MemberVO vo) throws Exception;
 	public Integer sessCtNo(MemberVO vo) throws Exception;
 	
+	
+	
+	
+	
+	
+	
+	
+	// 신원인증 확인
+	public Integer chkIdent(String id);
+	public Integer chkIdentB(String id);
 	
 	
 	

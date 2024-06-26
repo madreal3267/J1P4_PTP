@@ -487,7 +487,7 @@
 						data : $("#fm1").serialize(),
 						async : false,
 						success : function(a) {
-							alert(" ╰(*°▽°*)╯ 저장 완료");
+							alert("임시저장 되었습니다.");
 							data = a.result;
 						},
 						error : function() {
@@ -501,7 +501,7 @@
 						type : "POST",
 						data : $("#fm1").serialize(),
 						success : function() {
-							alert(" ╰(*°▽°*)╯ 최초 임시저장 후 저장 완료");
+							alert("임시저장 되었습니다.");
 						},
 						error : function() {
 							alert("오류발생 - 최초 임시 저장 후");

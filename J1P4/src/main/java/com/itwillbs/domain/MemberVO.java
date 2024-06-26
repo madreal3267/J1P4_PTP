@@ -62,7 +62,7 @@ public class MemberVO {
 	//<계좌관리>
 	private String bank_nm; //은행명
 	private String depositor; //예금주
-	private int account; //계좌번호
+	private String account; //계좌번호
 
 	
 
