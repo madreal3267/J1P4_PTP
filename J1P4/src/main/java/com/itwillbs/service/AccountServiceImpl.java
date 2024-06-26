@@ -24,16 +24,25 @@ public class AccountServiceImpl implements AccountService {
 		
 	}
 
+	
 	//현재 비밀번호 맞는지
 	@Override
-	public String password(String user_id) {
-		return adao.password(user_id);
+	public int password(MemberVO vo) {
+		
+		return adao.password(vo);
+	}
+	//비밀번호조회
+	@Override
+	public String pass(String user_id) {
+		return adao.pass(user_id);
 	}
 
+	
+	
 	//비밀번호 수정
 	@Override
-	public void passwordUpdate(Map<String, Object> paramMap) {
-		adao.passwordUpdate(paramMap);
+	public void passwordUpdate(MemberVO vo)throws Exception {
+		 adao.passwordUpdate(vo);
 		
 	}
 
@@ -42,6 +51,9 @@ public class AccountServiceImpl implements AccountService {
 	public String selectId(String user_id) {
 		return adao.selectId(user_id);
 	}
+	
+	
+	
 	
 	
 	

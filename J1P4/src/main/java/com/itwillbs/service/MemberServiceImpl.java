@@ -206,6 +206,15 @@ public class MemberServiceImpl implements MemberService {
 	public String sessType(MemberVO vo) throws Exception {
 		return mdao.sessType(vo);
 	}
+
+
+
+	//회원탈퇴
+	@Override
+	public void memberDelete(MemberVO vo) throws Exception {
+		mdao.memberDelete(vo);
+		
+	}
 	
 	
 	

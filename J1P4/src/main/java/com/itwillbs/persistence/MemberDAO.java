@@ -83,7 +83,8 @@ public interface MemberDAO {
 	public String sessCf(MemberVO vo) throws Exception;
 	public String sessType(MemberVO vo) throws Exception;
 	
-	
+	//회원탈퇴
+	public void memberDelete(MemberVO vo)throws Exception;
 	
 	
 	
