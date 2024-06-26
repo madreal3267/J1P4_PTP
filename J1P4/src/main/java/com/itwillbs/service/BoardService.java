@@ -2,10 +2,18 @@ package com.itwillbs.service;
 
 import java.util.List;
 
+import com.itwillbs.domain.ApplyVO;
 import com.itwillbs.domain.BMarkVO;
+import com.itwillbs.domain.CareerVO;
+import com.itwillbs.domain.CompanyVO;
 import com.itwillbs.domain.Criteria;
 import com.itwillbs.domain.FreelancerVO;
+import com.itwillbs.domain.LicenseVO;
+import com.itwillbs.domain.OfferVO;
+import com.itwillbs.domain.PartnersVO;
 import com.itwillbs.domain.ProjectVO;
+import com.itwillbs.domain.RegionVO;
+import com.itwillbs.domain.SkillVO;
 
 public interface BoardService {
 	
@@ -65,7 +73,47 @@ public interface BoardService {
 	public int mofiNumFree(FreelancerVO vo);
 	public int mofiNumNsFree(FreelancerVO vo);
 	// 프리랜서 상세페이지
-	
-	
 
+	// 프로필 불러오기
+	public FreelancerVO getProfile(FreelancerVO vo);
+	
+	// 스킬 불러오기
+	public List<SkillVO> getSkill(FreelancerVO vo);
+	
+	// 지역 불러오기
+	public RegionVO getReg(FreelancerVO vo);
+	
+	// 경력 불러오기
+	public List<CareerVO> getCareer(FreelancerVO vo);
+	
+	// 자격증 불러오기
+	public List<LicenseVO> getLicense(FreelancerVO vo);
+	
+	// 회사연혁 불러오기
+	public List<CompanyVO> getComp(FreelancerVO vo);
+	
+	// 협력업체 불러오기
+	public List<PartnersVO> getPartn(FreelancerVO vo);
+	
+	// 북마크 등록
+	public void doBMarkC(BMarkVO vo);
+	
+	// 북마크 삭제
+	public void deleteBMarkC(BMarkVO vo);
+	
+	// 북마크된 프로젝트
+	public List<BMarkVO> bMarkC(int ct_no);
+	
+	// 클라이언트가 프리랜서에게 제안하기
+	// 프로젝트 상세내용 조회
+	public List<ProjectVO> getProj(int ct_no);
+	
+	// 제안하기
+	public void insertOffer(OfferVO vo);
+	
+	// 프로젝트 지원
+	// 스킬 출력
+	public List<SkillVO> getSkillA(int proj_no);
+	// 지원하기
+	public void insertApply(ApplyVO vo);
 }
