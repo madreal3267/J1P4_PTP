@@ -6,5 +6,5 @@
 	
 	<h2>서버시간 : ${serverTime }</h2>
 
-<%@ include file="../include/footer.jsp" %>
+
 	

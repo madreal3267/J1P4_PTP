@@ -25,5 +25,10 @@ public class Criteria {
 	
 	public int offset;
 	public String work_field;
+	public String job_level;
+	public String skill_nm;
+	public String region;
+	public String district;
+	private String job_lev;
 	
 }

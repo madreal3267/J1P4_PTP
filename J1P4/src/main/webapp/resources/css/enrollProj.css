@@ -109,3 +109,45 @@ width:300px !important;
 .select2-container--open .select2-dropdown {
 left: -1px !important;
 }
+
+.gap {
+	margin-bottom: 30px;
+	margin-top: 30px;
+/* 	border: solid; */
+}
+
+.checkGap{
+	margin-top: 10px;
+}
+
+h5{
+	margin-bottom:10px;
+	font-weight: bolder;
+}
+h6{
+	margin-bottom:15px;
+	line-height: 30px;
+	color:gray;
+}
+
+.wfRadio {
+	width:150px;
+}
+
+.radioLv {
+	width:150px;
+}
+
+body {
+	background-color: #f0f5f5;
+}
+
+.card-2{
+  box-shadow: 0 0 0 rgba(0,0,0,0.19), 0 3px 3px rgba(0,0,0,0.23);
+}
+
+
+.radioCp{
+	width: 200px !important;
+}
+

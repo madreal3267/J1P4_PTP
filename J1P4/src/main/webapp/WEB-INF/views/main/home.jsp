@@ -16,12 +16,14 @@
 <c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.equals('클라이언트') }">
 <c:import url="../include/ctHeader.jsp"></c:import>
 </c:if>
-<%-- ${sessionScope.user_id } --%>
-<%-- ${sessionScope.user_cf } --%>
-<%-- ${sessionScope.user_type } --%>
+
+<c:if test="${not empty sessionScope.user_id && empty sessionScope.user_cf}">
+<meta http-equiv='refresh' content='0;url=../member/mailsend'>
+</c:if>
+
 <div style="position: relative;">
 	<div class="my-3 py-3" >
-	<h1 id="mainText">대한민국 NO.0 (허언사이트)<br>
+	<h1 id="mainText">대한민국 NO.1 <br>
 		IT 프리랜서 매칭 플랫폼</h1>
 	</div>
 	
@@ -31,7 +33,7 @@
 	</div>
 	
 	<div id="mainImg">
-	<img src="../resources/main_side.svg" alt="mainImg"/>
+	<img src="../resources/main.png" style="width:500px;" alt="mainImg"/>
 	</div>
 	
 	<!-- ============== 비회원 메인 메뉴 ================= -->
@@ -77,10 +79,10 @@
 <div style="position: relative; padding-top:80px;">
 	<h3 id="mainProjMenu">프로젝트 둘러보기</h3>
 	<div style="text-align: center;">
-		<button class="rounded-3 p-3 m-1 butt3" type="button"><b>⚙️ 개발</b></button>
-		<button class="rounded-3 p-3 m-1 butt3" type="button"><b>🛠️ 기획</b></button>
-		<button class="rounded-3 p-3 m-1 butt3" type="button"><b>🎨 디자인</b></button>
-		<button class="rounded-3 p-3 m-1 butt3" type="button"><b>🖋️ 퍼블리싱</b></button>
+		<button class="rounded-3 p-3 m-1 butt3" type="button" onclick = "location.href = '/board/listProP?pageNum=1&amount=6&sn=reg_date&work_field=개발'"><b>⚙️ 개발</b></button>
+		<button class="rounded-3 p-3 m-1 butt3" type="button" onclick = "location.href = '/board/listProP?pageNum=1&amount=6&sn=reg_date&work_field=기획'"><b>🛠️ 기획</b></button>
+		<button class="rounded-3 p-3 m-1 butt3" type="button" onclick = "location.href = '/board/listProP?pageNum=1&amount=6&sn=reg_date&work_field=디자인'"><b>🎨 디자인</b></button>
+		<button class="rounded-3 p-3 m-1 butt3" type="button" onclick = "location.href = '/board/listProP?pageNum=1&amount=6&sn=reg_date&work_field=퍼블리싱'"><b>🖋️ 퍼블리싱</b></button>
 	</div>
 </div>
 
@@ -143,19 +145,4 @@
 	</div>
 </div>
 
-<div class="container">
-	<footer class="py-3 my-4">
-	<ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
-    </ul>
-    <p class="text-center text-body-secondary">© 2024-06-06 Zip-Ga-Go-Ship-Da, Inc</p>
-   </footer>
-</div>
-
-
-</body>
-</html>
+<%@ include file="../include/footer.jsp" %>

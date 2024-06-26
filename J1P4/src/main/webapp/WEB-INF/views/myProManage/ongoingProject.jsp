@@ -1,69 +1,83 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%@ include file="../include/header.jsp"%>
+<%@ include file="../include/freeHeader.jsp"%>
 
-<h1>/myProManage/ongoingProject.jsp</h1>
-<br>
+<div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
+	<div class="card overflow-hidden card-2" >
+		<div class="row no-gutters row-bordered row-border-light">
 
-<div class="col-md-12">
-	<div class="box box-default">
-		<div class="box-header with-border">
-			<h1>프로젝트 진행 중</h1>
-			계약 완료 후 업무를 진행하는 단계의 프로젝트를 확인할 수 있습니다.
-		</div>
-	</div>
-</div>
-<section>
-	<div class="col-md-12">
-		<div class="box box-default">
-			<div class="box-header with-border">
-				1. 진행중 <br> 2. 프로젝트 완료 후 정산요청 <br> 3. 정산금 대기중.
+		    <!-- 사이드 메뉴 시작 -->
+			<div class="col-md-3 pt-0">
+				<div class="list-group list-group-flush account-settings-links" style="width:274px;">
+					<h4 class="font-weight-bold py-1 mx-4 my-3">내 프로젝트 관리</h4>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManage/interestProject">관심프로젝트</a>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManage/proposedProject">제안받은 프로젝트</a>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManage/applyingProject">지원중</a>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManage/endApplyProject">지원종료</a>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManage/contractProject">계약 진행중</a>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManage/ongoingProject">프로젝트 진행중</a>
+					<a class="list-group-item list-group-item-action"
+					href="${pageContext.request.contextPath}/myProManage/waitEvaluationProject">평가대기중</a>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManage/completedProject">완료한 프로젝트</a>
+				</div>
+			</div>
+			<!-- 사이드 메뉴 끝 -->
+
+	<div class="col-md-9">
+		<div class="tab-content">
+			<div class="tab-pane fade active show"  >
+				<!-- card body 시작 -->
+				<div class="card-body border-start" >
+					<div class="border-bottom" style="position: relative; right:16px; width:1000px; padding-bottom: 10px;" >
+						<h4 class="font-weight-bold mx-4 my-3">프로젝트 진행 중</h4>
+						계약 완료 후 업무를 진행하는 단계의 프로젝트를 확인할 수 있습니다.
+					</div>
+					1. 진행중 <br> 
+					2. 프로젝트 완료 후 정산요청 <br> 
+					3. 정산금 대기중.
+					<br>
+						<div class="col-md-12">
+							<div class="box box-default">
+								<div class="box-header with-border"> <br>
+									<section>
+										<table class="table table-bordered bg-light table-striped">
+											<tbody>
+												<tr class="text-center">
+													<td>프로젝트 번호</td>
+													<td>프로젝트 이름</td>
+													<td>클라이언트</td>
+													<td>담당 매니저</td>
+													<td>진행 상태</td>
+												</tr>
+												<c:forEach var="onpro" items="${ongoingProjectList}">
+													<tr>
+														<td>${onpro.proj_no }</td>
+														<td>${onpro.proj_title }</td>
+														<td>${onpro.ct_id }</td>
+														<td>${onpro.manager_nm }</td>
+														<td>${onpro.proj_status }</td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+									</section>
+								</div>
+							</div>
+						</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="col-md-12">
-		<div class="box box-default">
-			<div class="box-header with-border">
-				<section>
-					<table class="table table-bordered bg-light table-striped">
-						<tbody>
-							<tr class="text-center">
-								<td>프로젝트 번호</td>
-								<td>프로젝트 이름</td>
-								<td>클라이언트</td>
-								<td>담당 매니저</td>
-								<td>진행 상태</td>
-							</tr>
-							<c:forEach var="onpro" items="${ongoingProjectList}">
-								<tr>
-									<td>${onpro.proj_no }</td>
-									<td>${onpro.proj_title }</td>
-									<td>${onpro.ct_id }</td>
-									<td>${onpro.manager_nm }</td>
-									<td>${onpro.proj_status }</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</section>
-			</div>
-		</div>
-	</div>
-</section>
-
-<!-- 외형만 복사. 작동원리 탐구 필요. -->
-<div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-	<ul class="pagination">
-		<li class="paginate_button previous disabled" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0">Previous</a></li>
-		<li class="paginate_button active"><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0">1</a></li>
-		<li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0">2</a></li>
-		<li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0">3</a></li>
-		<li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0">4</a></li>
-		<li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0">5</a></li>
-		<li class="paginate_button "><a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0">6</a></li>
-		<li class="paginate_button next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0">Next</a></li>
-	</ul>
+	</div>		
 </div>
-
-<%@ include file="../include/footer.jsp"%>
+</body>
+</html>

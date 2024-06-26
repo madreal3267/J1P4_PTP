@@ -14,6 +14,7 @@ import com.itwillbs.domain.CompanyVO;
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.LicenseVO;
 import com.itwillbs.domain.PartnersVO;
+import com.itwillbs.domain.PortfolioVO;
 import com.itwillbs.domain.RegionVO;
 import com.itwillbs.domain.SkillVO;
 import com.itwillbs.service.EnrollFreeService;
@@ -36,34 +37,15 @@ public class EnrollFreeController {
 	}
 	
 	@PostMapping(value="/enrollFree")
-	public String enrollFreePOST(FreelancerVO fVO,CareerVO cVO, LicenseVO lVO, SkillVO sVO, RegionVO rVO) {		
+	public String enrollFreePOST(FreelancerVO fVO,CareerVO cVO, LicenseVO lVO, SkillVO sVO, RegionVO rVO,PortfolioVO pVO) {		
 		logger.debug(" Controller : ( •̀ ω •́ )y /enrollFree -> enrollFreePOST() 실행 ");
-		
-//		if(lVO.getLicense_nm() != null || lVO.getIssuer() != null || cVO.getResponsibility() != null || cVO.getCompany_nm() != null) {
-//			cVO.setCompany_nm(cVO.getCompany_nm().replace(",", "|"));
-//			cVO.setResponsibility(cVO.getResponsibility().replace(",", "|"));
-//			lVO.setIssuer(lVO.getIssuer().replace(",", "|"));
-//			lVO.setLicense_nm(lVO.getLicense_nm().replace(",", "|"));		
-//		}
-		
-		if(cVO.getCompany_nm() != null) {			
-			cVO.setCompany_nm(cVO.getCompany_nm().replace(",", "|"));
-		}
-		if(cVO.getResponsibility() != null) {
-			cVO.setResponsibility(cVO.getResponsibility().replace(",", "|"));
-		}
-		if(lVO.getIssuer() != null) {			
-			lVO.setIssuer(lVO.getIssuer().replace(",", "|"));
-		}
-		if(lVO.getLicense_nm() != null) {
-			lVO.setLicense_nm(lVO.getLicense_nm().replace(",", "|"));		
-		}
-		
+				
 		fService.updateFree(fVO);
 		fService.updateCareer(cVO);
 		fService.updateLicense(lVO);
 		fService.updateSkill(sVO);
 		fService.updateReg(rVO);
+		fService.updatePortf(pVO);
 		
 		return "redirect:/enroll/enrollFreeSuccess";
 	}
@@ -77,24 +59,9 @@ public class EnrollFreeController {
 	}
 	
 	@PostMapping(value="/enrollFreeB")
-	public String enrollFreeBPOST(FreelancerVO fVO,CareerVO cVO, PartnersVO pVO, CompanyVO cpVO, SkillVO sVO, RegionVO rVO) {		
+	public String enrollFreeBPOST(FreelancerVO fVO,CareerVO cVO, PartnersVO pVO, CompanyVO cpVO, SkillVO sVO, RegionVO rVO, PortfolioVO poVO) {		
 		logger.debug(" Controller : ( •̀ ω •́ )y /enrollFreeB -> enrollFreeBPOST() 실행 ");
 		
-		if(cVO.getCompany_nm() != null) {
-			cVO.setCompany_nm(cVO.getCompany_nm().replace(",", "|"));			
-		}
-		if(cVO.getResponsibility() != null) {
-			cVO.setResponsibility(cVO.getResponsibility().replace(",", "|"));			
-		}
-		if(pVO.getPartners_nm() != null) {
-			pVO.setPartners_nm(pVO.getPartners_nm().replace(",", "|"));			
-		}
-		if(pVO.getPDetails() != null) {			
-			pVO.setPDetails(pVO.getPDetails().replace(",", "|"));
-		}
-		if(cpVO.getHDetails() != null) {			
-			cpVO.setHDetails(cpVO.getHDetails().replaceAll(",", "|"));
-		}
 		
 		fService.updateFreeB(fVO);
 		fService.updateCareer(cVO);
@@ -102,6 +69,7 @@ public class EnrollFreeController {
 		fService.updateComp(cpVO);
 		fService.updateSkill(sVO);
 		fService.updateReg(rVO);
+		fService.updatePortf(poVO);
 		
 		return "redirect:/enroll/enrollFreeSuccess";
 	}

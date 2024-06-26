@@ -74,10 +74,10 @@ public class MemberController {
 		//디비에 회원가입 정보 입력
 //		mService.join(vo);
 //		logger.debug("vo : "+vo);
-		HttpSession session = request.getSession();
-		String user_id =  vo.getUser_id();
-		session.setAttribute("user_id",user_id);
-		logger.debug("@@@@@@@@@@user_id: "+ user_id);
+//		HttpSession session = request.getSession();
+//		String user_id =  vo.getUser_id();
+//		session.setAttribute("user_id",user_id);
+//		logger.debug("@@@@@@@@@@user_id: "+ user_id);
 		
 		mailSend.join(vo);
 		// 회원가입하기 눌렀을때 mailsend에 인증메일 확인링크를 클릭해달라는 페이지로 이동
@@ -88,8 +88,8 @@ public class MemberController {
 	//회원가입 버튼을 누르면 mailsend와  연결해주기 위해서 매핑을 한번 더 해야함.
 	//http://localhost:8088/member/mailsend
 	@RequestMapping(value = "/mailsend", method = RequestMethod.GET)
-	public void test() {
-		
+	public void test(HttpSession session) {
+		session.invalidate();
 	}
 	
 	
@@ -195,8 +195,18 @@ public class MemberController {
 			HttpSession Session = request.getSession();
 			if(resultVO != null) {
 				Session.setAttribute("user_id", resultVO.getUser_id());
+				id = ((String)Session.getAttribute("user_id"));
 				Session.setAttribute("user_cf", mService.sessCf(vo));
 				Session.setAttribute("user_type", mService.sessType(vo));
+				Session.setAttribute("free_no", mService.sessFreeNo(vo));
+				Session.setAttribute("ct_no", mService.sessCtNo(vo));
+//				if(Session.getAttribute("user_type").equals("개인") || Session.getAttribute("user_type").equals("팀")) {					
+					Session.setAttribute("ident", mService.chkIdent(id));
+					
+//				} else {					
+					Session.setAttribute("identB", mService.chkIdentB(id));
+//				}
+				
 				return"redirect:/main/home";
 				
 			}else {

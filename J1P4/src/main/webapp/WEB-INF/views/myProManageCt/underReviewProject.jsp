@@ -1,35 +1,62 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ include file="../include/headerCt.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- jQuery 2.1.4 -->
+<script src="${pageContext.request.contextPath }/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<%@ include file="../include/ctHeader.jsp"%>
 
-<h1>/myProManageCt/underReviewProject</h1>
-<hr>
+<div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
+	<div class="card overflow-hidden card-2" >
+		<div class="row no-gutters row-bordered row-border-light">
 
-<div class="col-md-12">
-	<div class="box box-default">
-		<div class="box-header with-border">
-			<h1>검수 중</h1>
-			현재 상담 대기중인 프로젝트를 확인할 수 있습니다.		
-		</div>
-	</div>
-</div>
+		    <!-- 사이드 메뉴 시작 -->
+			<div class="col-md-3 pt-0">
+				<div class="list-group list-group-flush account-settings-links" style="width:274px;">
+					<h4 class="font-weight-bold py-1 mx-4 my-3">내 프로젝트 관리</h4>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManageCt/interestFreelancer">관심 프리랜서</a>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManageCt/proposeFreelancer">제안한 프리랜서</a>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManageCt/underReviewProject">검수중</a>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManageCt/temSaveProject">임시저장</a>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManageCt/regFailedProject">등록실패</a>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManageCt/recruitingProject">지원자 모집중 </a>
+					<a class="list-group-item list-group-item-action"
+					href="${pageContext.request.contextPath}/myProManageCt/ctContractProject">계약 진행중</a>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManageCt/ctOngoingProject">프로젝트 진행중</a>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManageCt/waitEvaluationFreelancer">평가대기중</a>
+					<a class="list-group-item list-group-item-action" 
+					href="${pageContext.request.contextPath}/myProManageCt/completedFreelancer">완료한 프로젝트</a>
+				</div>
+			</div>
+			<!-- 사이드 메뉴 끝 -->
 
-<section>
-	<div class="col-md-12">
-		<div class="box box-default">
-			<div class="box-header with-border">
-				<section>
+	<div class="col-md-9">
+		<div class="tab-content">
+			<div class="tab-pane fade active show"  >
+				<!-- card body 시작 -->
+				<div class="card-body border-start" >
+					<div class="border-bottom" style="position: relative; right:16px; width:1000px; padding-bottom: 10px;" >
+						<h4 class="font-weight-bold mx-4 my-3">검수 중</h4>
+							현재 상담 대기중인 프로젝트를 확인할 수 있습니다.
+						</div><br>	
+			
 					<table class="table table-bordered bg-light">
 						<tbody>
 							<tr class="text-center">
 								<td>프로젝트 이름</td>
 								<td>모집기간</td>
 								<td>진행상태</td>
-								<td>수정 / 삭제</td>
+								<td>삭제</td>
 							</tr>
 							<c:forEach var="projectVO" items="${underReviewProjectList}">
 								<tr>
@@ -45,20 +72,20 @@
 											<input type="hidden" name="proj_no" value="${projectVO.proj_no }">
 										</form>
 										
-									<!-- 제이쿼리 사용 버튼 -->	
-			<!-- 수정하기 버튼 프로젝트 수정페이지와 연결 필요 -->									
-										<button type="submit" class="btn btn-warning">수정하기</button>
-										<button type="submit" class="btn btn-danger">삭제하기</button>
+										<!-- 제이쿼리 사용 버튼 -->	
+										<button type="submit" class="btn btn-dark">삭제하기</button>
 									</td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
-				</section>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-</section>
+</div>
 
 <!--  -->
 <script>
@@ -76,11 +103,9 @@
 			  confirmButtonText: "확인"
 			});
 		}	
-		
-		// '수정하기' 버튼 클릭시 프로젝트 수정 페이지로 이동
-		
+
 		// '삭제하기' 버튼 클릭시 삭제후 현재 페이지로 redirect
-		$(".btn_danger").click(function(){
+		$(".btn-danger").click(function(){
 			$("form[role='form']").attr("action","/myProManageCt/underReviewProject");
 			$("form[role='form']").submit();
 		});
@@ -88,6 +113,8 @@
 	});
 </script>
 
-<%@ include file="../include/footer.jsp" %>
+</body>
+</html>
+
 	
 	
