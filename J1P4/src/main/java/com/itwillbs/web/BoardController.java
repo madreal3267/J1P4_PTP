@@ -267,12 +267,24 @@ public class BoardController {
 	}
 	
 	@GetMapping(value = "/detailList")
-	public String detailGET(@RequestParam("proj_no") int proj_no, Model model, HttpServletRequest request) {
+	public String detailGET(@RequestParam("proj_no") int proj_no, Model model, HttpServletRequest request, ProjectVO vo) {
 		// 프로젝트 리스트 상세정보
 		
 		ProjectVO resultVO = bService.dePro(proj_no);
 		model.addAttribute(resultVO);
-		// 로그인 여부 조회
+		int ct_no = resultVO.getCt_no();
+		// 평점 전달
+		String sc = String.valueOf(bService.proScoC(ct_no));
+		
+		if(sc.equals("0")){
+			logger.debug("널값 확인용000000000000");
+			model.addAttribute("score", 0);
+		}else {
+			logger.debug("널값 확인용");
+			logger.debug("ct_no"+ct_no);
+			double score = bService.proSco(ct_no);
+			model.addAttribute("score", score);	
+		}
 		// 북마크 체크
 			Integer fn = (Integer)request.getSession().getAttribute("free_no");
 			if(request.getSession().getAttribute("free_no") != null) {
@@ -749,6 +761,8 @@ public class BoardController {
 
 		model.addAttribute("free_no",vo.getFree_no());
 		logger.debug("vo : "+vo);
+		
+		model.addAttribute("myPortf", bService.getPortf(vo));
 
 		
 		// 북마크 체크, 프리랜서에게 제안할 정보 전달
@@ -764,7 +778,7 @@ public class BoardController {
 			List<ProjectVO> pvo = bService.getProj(ct);
 			model.addAttribute("proj",pvo);
 		}
-		
+		logger.debug("vo.getUser_type"+vo.getUser_type());
 		if(vo.getUser_type()!=null) {
 			if(vo.getUser_type().equals("개인") || vo.getUser_type().equals("팀")) {
 				model.addAttribute("myProfile", bService.getProfile(vo));
@@ -791,6 +805,43 @@ public class BoardController {
 		// 뷰페이지 이동
 		return "/board/detailListFree";
 	}
+	// 프리랜서 상세페이지 이동
+	@GetMapping(value = "/detailListFreeC")
+	public String detailFreeCGET(@RequestParam int free_no, Model model,FreelancerVO vo,HttpSession session,HttpServletResponse response, HttpServletRequest request) {
+		// 프로젝트 리스트 상세정보
+
+		model.addAttribute("free_no",vo.getFree_no());
+		logger.debug("vo : "+vo);
+		
+		model.addAttribute("myPortf", bService.getPortf(vo));
+
+		
+		// 북마크 체크, 프리랜서에게 제안할 정보 전달
+		Integer ct = (Integer)request.getSession().getAttribute("ct_no");
+		if(request.getSession().getAttribute("ct_no") != null) {
+			logger.debug("클라이언트 로그인!");
+			logger.debug("ct"+ct);
+			List<BMarkVO> bMproj_no = bService.bMarkC(ct);
+			logger.debug("bMproj_no"+bMproj_no);
+			
+			model.addAttribute("bMproj_no", bMproj_no);
+			// 클라이언트가 프리랜서에게 제안
+			List<ProjectVO> pvo = bService.getProj(ct);
+			model.addAttribute("proj",pvo);
+		}
+					
+		model.addAttribute("myProfile", bService.getProfile(vo));
+		model.addAttribute("mySkill", bService.getSkill(vo));
+		model.addAttribute("myReg",bService.getReg(vo));
+		model.addAttribute("myCareer", bService.getCareer(vo));
+		model.addAttribute("myComp", bService.getComp(vo));
+		model.addAttribute("myPartn", bService.getPartn(vo));
+		return "/board/detailListFreeC";		
+					
+	}
+	
+	
+	
 	
 	// 클라이언트가 프리랜서를 북마크 등록
 	@GetMapping(value = "/dobMarkC")

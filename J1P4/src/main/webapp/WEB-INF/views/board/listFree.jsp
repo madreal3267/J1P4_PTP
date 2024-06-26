@@ -267,7 +267,12 @@
 
     <!-- 제목 -->
    <div style="font-weight: bold; font-size: 20px; margin: 6px 0;">
+   		<c:if test="${v.user_type eq '개인' or v.user_type eq '팀' }">
         <a href="/board/detailListFree?free_no=${v.free_no}" class="titleCss">${v.oneline_bio }</a>
+        </c:if>
+   		<c:if test="${v.user_type eq '사업자'}">
+        <a href="/board/detailListFreeC?free_no=${v.free_no}" class="titleCss">${v.oneline_bio }</a>
+        </c:if>
     </div>
 
     <div style="margin-bottom: 6px;">
@@ -278,7 +283,9 @@
 				<div style="display: grid; grid-template-columns: 1fr 1fr;">
 					<div style="display: flex; font-weight: bold;">
 						<span style="display: flex; align-items: center;">
+						<c:if test="${v.user_type eq '개인' or v.user_type eq '팀' }">
 							학력 | ${v.school_type } ${v.grad_status }
+						</c:if>	
 							지역 | ${v.region } ${v.district } |</span>
 						<c:forEach items="${fn:split(skillList, ',') }" var="skill">
 							<span class="badge bg-secondary mx-1" style="font-size: 14px; background-color:#31b9a9 !important;">

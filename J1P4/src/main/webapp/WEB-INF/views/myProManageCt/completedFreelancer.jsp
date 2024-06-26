@@ -55,7 +55,7 @@
 						<div class="box-header with-border">
 							<h4>${cflDTO.name }</h4>
 							${cflDTO.proj_title }<br>
-								<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-${cflDTO.free_no}">수정하기</button>
+								<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modal-${cflDTO.free_no}">수정하기</button>
 							<div class="rating-display">
 								<c:set var="score" value="${cflDTO.score}" />
 								<c:forEach begin="1" end="5" var="i">

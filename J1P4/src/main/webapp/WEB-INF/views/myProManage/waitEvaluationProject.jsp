@@ -44,12 +44,12 @@
 					</div><br>		
 				<div>
 					<i class="fa fa-fw fa-exclamation"></i>평가 기간 내에만 작성하실 수 있습니다.
-				</div>
-
+				</div><hr>
+				
 				<c:forEach var="projectVO" items="${waitEvaluationProjectList}">
 					
 						<b style="font-size: large;">${projectVO.proj_title }</b>
-						<button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#modal-${projectVO.ct_no}">평가하기</button>
+						<button style="float: right;" type="button" class="btn btn-dark text-right pull right" data-toggle="modal" data-target="#modal-${projectVO.ct_no}">평가하기</button>
 						<br><br>
 						${projectVO.ct_id } 클라이언트<span class="pull-right">작성기간 <fmt:formatDate value="${projectVO.mod_date }" pattern="yyyy-mm-dd"/></span>
 						 <br>
@@ -84,8 +84,8 @@
 											<input type="hidden" name="free_no" value="${projectVO.free_no }">										
 										</div>
 										<div class="modal-footer">
-											<button type="button" class="btn btn-default pull-left" data-dismiss="modal">취소</button>
-											<button type="submit" class="btn btn-primary">등록하기</button>
+											<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+											<button type="submit" class="btn btn-dark">등록하기</button>
 										</div>
 									</form>	
 								</div>			

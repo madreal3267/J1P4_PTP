@@ -46,7 +46,7 @@
 									1. 관심 프로젝트로 추가한 프로젝트 목록입니다. <br> 
 									2. [프로젝트 지원하기]버튼을 클릭하여 해당 프로젝트에 지원할 수 있습니다. <br>
 								<br>
-			                <table class="table table-bordered bg-light" border="1">
+			                <table class="table table-bordered table-striped bg-light" border="1">
 			                    <tr>
 			                        <td>프로젝트 이름</td>
 			                        <td>프리랜서 이름</td>
@@ -62,7 +62,7 @@
 			                                <!-- 이전 프로젝트 이름과 현재 프로젝트 이름이 다른 경우 -->
 			                                <c:if test="${status.index > 0}">
 			                                    <!-- 이전 프로젝트의 행 끝 -->
-			                                    <c:out value="${rowCount}" />
+			                                    
 			                                    <c:set var="rowCount" value="0" />
 			                                </c:if>
 			                                <tr>

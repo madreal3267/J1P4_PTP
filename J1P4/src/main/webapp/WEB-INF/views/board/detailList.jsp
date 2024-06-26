@@ -21,95 +21,173 @@
 <%-- user_id: ${sessionScope.user_id }, --%>
 <%-- user_cf: ${sessionScope.user_cf }, --%>
 <%-- user_type: ${sessionScope.user_type }, --%>
-<%-- free_no: ${sessionScope.free_no }, --%>
+free_no: ${sessionScope.free_no },
 <%-- ct_no: ${sessionScope.ct_no } --%>
 
+<div class="container light-style flex-grow-1 container-p-y text-center" style="width:1100px; padding-top:15px;padding-bottom: 10px;">
+	<!-- 프로젝트 상세페이지 상단 박스 시작 -->
+	<div class="card overflow-hidden card-2" style="height: 150px;">
+		<!-- 프로젝트 정보 출력 -->
+		<p class="userName" style="position: absolute; left:180px; top:35px; font-size: 30px; font-weight: bold;"></p>
+		<div style="display: inline-block; position: absolute; left:20px;top:35px;">
+		<span class="workField" style="font-size: 16px; margin-right:7px;">예상 금액</span>
+		<span class="userWf" style="font-size: 16px; font-weight: bold; border-right: 1px solid gray; padding-right: 10px;">${projectVO.proj_cost } 원</span>
+		<span class="level" style="margin-left:7px; margin-right:7px;font-size: 16px;">모집 마감일</span>
+		<span class ="userLev" style="font-size: 16px; font-weight: bold;">${projectVO.deadline }</span> <br>
+		</div>
+		<div style="display: inline-block; position: absolute; left:20px;bottom:60px;">
+		<span class="workField" style="font-size: 16px; margin-right:7px; ">분야</span>
+		<span class="userWf" style="font-size: 16px; font-weight: bold; border-right: 1px solid gray; padding-right: 10px;">${projectVO.work_field }</span>
+		<span class="level" style="margin-left:7px; margin-right:7px;font-size: 16px;">지역</span>
+		<span class ="userLev" style="font-size: 16px; font-weight: bold;">${projectVO.region} ${projectVO.district}</span> <br>
+		</div>
+		<div style="display: inline-block; position: absolute; left:20px;bottom:15px;">
+		       <div class="rating-display">
+		<span class="workField" style="font-size: 16px; margin-right:7px; ">클라이언트 평점</span>
+                        <c:set var="score" value="${score}" />
+                        <c:forEach begin="1" end="5" var="i">
+                        
+                           <span class="star ${ score >= (i * 2)-1 ? 'filled' : ''}">
+                              <c:choose>
+                                 <c:when test="${score >= i * 2}">
+                                    <i class="fa fa-star fa-2x" ></i>
+                                 </c:when>
+                                 <c:when test="${score >= (i * 2) - 1}">
+                                    <i class="fa fa-star-half-empty fa-2x"></i>
+                                 </c:when>
+                                 <c:otherwise>
+                                    <i class="fa fa-star-o fa-2x" ></i>
+                                 </c:otherwise>
+                              </c:choose>
+                           </span>
+                           </c:forEach>
+      			</div>
+		</div>
+		<!-- 프로젝트 타이틀 말풍선 -->
+		<div class="border border-secondary rounded p-2" style="padding-left:5px;position: absolute; top:35px; right:54px; font-size: 20px; font-weight: bold;">" ${projectVO.proj_title} "</div>
+		
+		<!-- 스킬 -->
+		<div style="display: inline-block; position: absolute; right:54px; bottom:30px;">
+			<c:set var="skillList" value="${projectVO.skill_nm }" />
+			<c:forEach items="${fn:split(skillList, ',') }" var="skill">
+					<span style="font-size: 16px;" class="badge bg-light text-dark border">
+					<c:out value="${skill}" />
+					</span>
+			</c:forEach>
+		</div>
+	</div>	
+</div>
+	<!-- 프리랜서 상세페이지 상단 끝 -->
 
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
  <div class="card overflow-hidden card-2" >
   <div class="row no-gutters row-bordered row-border-light">
   
-      
-   <div class="col-md-9">
-   <div class="tab-content">
-   
 
-
-<div style="width: 60%; margin: 2px 3px; padding: 12px; background-color: #dddddd; border-radius: 7px; border: 1px solid black;">
-<h1>${projectVO.proj_title}</h1>
-			<div style="display: flex; justify-content: end;">
-				<div style="background-color: white; border: 1px solid #333; border-radius: 5px; padding: 3px 12px; margin-right: 6px;">모집중</div>
-				<div style="background-color: white; border: 1px solid #333; border-radius: 5px; padding: 3px 12px;">NEW!</div>
+		
+	<div class="col-md-9">
+	<div class="tab-content">
+	
+		<!-- 업무조건 탭 시작 -->
+		<div class="tab-pane fade active show" id="free_condition"  >
+		<!-- card body 시작 -->
+		<div class="card-body border-start" >
+			<div class="border-bottom" style="position: relative; right:16px; width:1000px; padding-bottom: 10px;" >
+				<h4 class="font-weight-bold mx-4 my-3">${projectVO.proj_title}</h4>
 			</div>
-	<br>
+			<div class="mx-4 my-3">
 
-	<div style="width: 95%; margin: 2px 3px; padding: 12px; background-color: #dddddd; border-radius: 7px; border: 1px solid black;">
-		<!-- 모집중, NEW!, 하트 영역 -->
-
-		<!-- 제목 -->
-		<div style="font-weight: bold; font-size: 20px; margin: 6px 0;">
-			${projectVO.proj_title }</div>
-
-		<!-- 예상 금액/ 예상 기간 -->
-		<div style="margin-bottom: 6px;">
-			예상금액 <span style="font-weight: bold;">${projectVO.proj_cost }원</span> | 모집 마감일
-			<span style="font-weight: bold;">${projectVO.deadline }일</span>
+			<hr>
+			<div class="gap">
+				<h5>클라이언트 위치</h5>
+				<div class="content">
+					<span style="margin-left:7px;">${projectVO.region} ${projectVO.district}</span>
+				</div>
+			</div>	
+			<hr>
+			<div class="gap">
+				<h5>미팅</h5>
+				<div class="content">
+				<b style="border-right: 1px solid gray; padding-right: 10px;">사전 미팅 방식</b>
+					<span style="margin-left:7px;"> ${projectVO.pmeet_meth}</span>
+				<br>
+				<div class="checkGap">
+				<b style="border-right: 1px solid gray; padding-right: 10px;">프로젝트 진행중 미팅</b>
+				<span style="margin-left:7px;">
+				${projectVO.meet_cycle}
+				</span>
+				</div>
+				</div>
+			</div>
+			<hr>
+			<div class="gap">	
+				<h5>희망 조건</h5>
+				<div class="content" style="margin-bottom: 60.71px; ">
+				<b style="border-right: 1px solid gray; padding-right: 10px;">주요 기술 스택</b>
+				<span style="margin-left:7px;">
+				${projectVO.skill_nm}<br>
+				</span>
+				<div class="checkGap">
+				<b style="border-right: 1px solid gray; padding-right: 10px;">구인 등급</b>
+				<span style="margin-left:7px;">
+				${projectVO.job_level}
+				</span>
+				</div>
+				<div class="checkGap">
+				<b style="border-right: 1px solid gray; padding-right: 10px;">희망 경력</b>
+				<span style="margin-left:7px;">
+				${projectVO.wanted_career}
+				</span>
+				</div>
+				<div class="checkGap">
+				<b style="border-right: 1px solid gray; padding-right: 10px;">경력 증빙 자료</b>
+				<span style="margin-left:7px;">
+				${projectVO.career_proof}
+				</span>
+				</div>
+				<div class="checkGap">
+				<b style="border-right: 1px solid gray; padding-right: 10px;">전달 사항 또는 우대 사항</b>
+				<span style="margin-left:7px;">
+				 ${projectVO.dlvy_msg}
+				</span>
+				</div>
+				</div>
+			</div>
+			<hr>
+			<div class="gap">
+				<h5>프로젝트 상세 내용</h5>
+				<div class="content">
+				<h4><span class="badge rounded-pill bg-secondary">${projectVO.proj_content}</span></h4>
+				</div>
+			</div>	
 		</div>
-
-		<!-- 기타 정보 / 등록일자 -->
-		<div style="display: grid; grid-template-columns: 1fr 1fr;">
-			<div style="display: flex; font-weight: bold;">
-				<span style="display: flex; align-items: center;">${projectVO.work_field }
-					| ${projectVO.region} ${projectVO.district} |</span>
-				<!-- <div
-					style="margin: 0 6px; padding: 3px 12px; border: 1px solid #333; border-radius: 5px; background-color: white;">
-					JAVA</div>
-				<div
-					style="padding: 3px 12px; border: 1px solid #333; border-radius: 5px; background-color: white;">
-					MySql</div> -->
-				<c:set var="skillList" value="${projectVO.skill_nm }" />
-                  <c:forEach items="${fn:split(skillList, ',')}" var="skill">
-                      <button type="button" class="btn btn-warning" ><c:out value="${skill}" /></button>
-                  </c:forEach>
-                  <br>
-			</div>
-
-			<div style="display: flex; justify-content: end;">
-				<span style="font-size: 14px; color: #444">${projectVO.reg_date }</span>
-			</div>
 		</div>
+		<!-- card body 끝 -->
+		</div>
+		<!-- 업무조건 탭 끝 -->
+	
+
+	
+	</div>		
 	</div>
-	<hr>
-사전 미팅 방식 ${projectVO.pmeet_meth} <br>
-프로젝트 진행 중 ${projectVO.meet_cycle} <br>
-클라이언트 위치-${projectVO.region} ${projectVO.district} <br>
-프로젝트 상세 내용 <br>
-${projectVO.proj_content} <br>
-<br>
-주요기술스택 ${projectVO.skill_nm}  <br>
-구인 등급 ${projectVO.job_level}  <br>
-희망 경력 ${projectVO.wanted_career} <br>
-경력 증빙 자료 ${projectVO.career_proof} <br>
-전달 사항 또는 우대 사항 ${projectVO.dlvy_msg} <br>
-   
 
 
-   </div>
-   </div>
-   
-  </div>
- </div>
+</div>
+</div>
 </div>
 
-   <div class="fixed bottom-14 md:bottom-0 w-full" style="background-color: white; border: 1px solid #333;">
-	<div class="eframe-pop-width py-0 mx-auto">
-		<div class="inline-block relative w-full py-4 px-3 md:py-8 md:px-14 bg-gray-c_43 md:rounded whitespace-nowrap">
-			<p class="float-left block etext-p leading-relaxed text-gray-c_ff">
-            n명이 지원했습니다<br>
-				<span class="text-e-pink">마감n일전</span>
-			</p>
-			   <!-- 로그인 여부, 북마크 여부체크 -->    
-        <div style="display: flex; justify-content: end;">
+
+   <c:if test="${sessionScope.free_no != null }">     
+	 <div style="background-color: white; border: 1px solid #333; position: fixed; bottom: 10px; right: 0; width: 200px; display: block; font-size: 0;">
+		<div class="eframe-pop-width py-0 mx-auto">
+			<div class="inline-block relative w-full py-4 px-3 md:py-8 md:px-14 bg-gray-c_43 md:rounded whitespace-nowrap">
+		
+		<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#applyModal" id="appBtn" style="display: inline-block; margin-right: 35px;">
+		  지원하기
+		</button>
+		
+		<!-- 로그인 여부, 북마크 여부체크 -->    
+        <div style="display: inline-block; justify-content: end;">
         <c:choose>
 	        <c:when test="${not empty sessionScope.free_no }">
 				<c:set var="Bookmarked" value="false" />
@@ -122,7 +200,7 @@ ${projectVO.proj_content} <br>
 					<c:when test="${Bookmarked}">
 					<!-- 북마크 확인용 임시 데이터, 수정 필요 -->
 						<a href="javascript:" class ="heart-click" value="${projectVO.proj_no }">
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16" >
+						<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="crimson" class="bi bi-heart-fill" viewBox="0 0 16 16" >
 		  				<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
 						</svg>
 						</a>
@@ -131,7 +209,7 @@ ${projectVO.proj_content} <br>
 					<c:otherwise>
 					<!-- 빈 하트 -->
 						<a href="javascript:" class ="heart-click" value="${projectVO.proj_no }">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16" >
+							<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="crimson" class="bi bi-heart" viewBox="0 0 16 16" >
 				 			<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
 							</svg>
 						</a>
@@ -141,30 +219,21 @@ ${projectVO.proj_content} <br>
 			<c:otherwise>
 					<!-- 프리랜서가 아닐때  -->
 						<a href="javascript:" class ="noHeart" value="${projectVO.proj_no }">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16" >
+							<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="crimson" class="bi bi-heart" viewBox="0 0 16 16" >
 				 			<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
 							</svg>
 						</a>
 			</c:otherwise>
 	</c:choose>	
-        </div>
+  </div>
 
-	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#applyModal" id="appBtn">
-	  지원하기
-	</button>
+
 
 		</div>
 	</div>
 </div>
+</c:if>
 
-<div id="box">
-<div style="background-color: #dddddd; position:sticky; top:30%; right:15px; border: 1px solid #333;
- border-radius:10px 10px 10px 10px;
- width: 400px;
- height: 150px;
- position: fixed;"> <h2>클라이언트 평점</h2></div>
-</div>
-	
 
 
 <!-- 지원하기 모달창 시작 -->
@@ -276,38 +345,45 @@ ${projectVO.proj_content} <br>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js' integrity='sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==' crossorigin='anonymous'></script>
 <script>
 
-$("#appBtn").click(function () {
-	if(${free_no == null}){
-	$('#applyModal').on('show.bs.modal', function (e) {
- 		 e.preventDefault();
-	})
-	
-	alert("프리랜서 로그인이 필요합니다")	
-	
-	}
-})
 
-$(function() {
-	$("#submitButt").click(function() {
-		$.ajax({
-			url : "/projectDetail/applyProj",
-			type : "POST",
-			data : $("#fm1").serialize(),
-			success : function() {
-			},
-			error : function() {
-				alert("오류발생");
-			}
-		});
+
+	$(function() {
+
+// 		alert("테스트!");
+// 		var free_no = ${sessionScope.free_no}
+// 		console.log(free_no);
+		
+// 		$("#appBtn").click(function() {
+
+// 			if(free_no == null){
+// 				alert("프리랜서 로그인이 필요합니다");
+// 			}else if(free_no != null){
+// 	            //$("#appBtn").attr("data-bs-target","#applyModal");
+// 				$('#applyModal').modal('show');
+// 			}
+// 		});
+            
+
+		$("#submitButt").click(function() {
+			$.ajax({
+				url : "/projectDetail/applyProj",
+				type : "POST",
+				data : $("#fm1").serialize(),
+				success : function() {
+				},
+				error : function() {
+					alert("오류발생");
+				}
+			});
+		
+		
 	});
-});
-
 </script>
 <script type="text/javascript">
 // 하트 클릭
 $(".heart-click").click(function(e){
 	 
-	e.stopImmediatePropagation();
+	//e.stopImmediatePropagation();
 	 
 	let proj_no = $(this).attr('value');
 	console.log(proj_no);
@@ -354,7 +430,12 @@ $(".heart-click").click(function(e){
 		
 	}
 });
+
+//클라이언트가 아닐때 하트 클릭
+$(".noHeart").click(function(e){
+	e.stopImmediatePropagation();
+	alert("프리랜서로 로그인 해야 합니다");
+});
 </script>
-</div>
 </body>
 </html>

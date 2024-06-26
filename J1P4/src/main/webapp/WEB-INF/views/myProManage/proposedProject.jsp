@@ -52,10 +52,10 @@
 						<div>
 							<c:choose>
 								<c:when test="${projDTO.proj_status == '모집중'}">
-									<span class="badge text-bg-warning">모집중</span>
+									<span style="background-color: #31b9a9;" class="badge">모집중</span>
 								</c:when>
 								<c:otherwise>
-									<span class="badge text-bg-warning">모집종료</span>
+									<span style="background-color: #31b9a9;" class="badge">모집종료</span>
 								</c:otherwise>
 							</c:choose>							
 							<h4>${projDTO.proj_title }</h4>
@@ -64,7 +64,7 @@
 						<!-- 스킬 나열 -->
 							<c:set var="skillList" value="${projDTO.skill_nm }" />
 							<c:forEach items="${fn:split(skillList, ',')}" var="skill">
-								<span class="badge text-bg-info">
+								<span style="background-color: #31b9a9;" class="badge">
 									<c:out value="${skill}" />
 								</span>
 							</c:forEach>
@@ -74,7 +74,7 @@
 							<form action="/projectDetail/applyProj" method="get">
 								<input type="hidden" name="free_no" value="${projDTO.free_no }"> 
 								<input type="hidden" name="proj_no" value="${projDTO.proj_no }">
-								<input type="submit" value="지원하기">
+								<input class="btn btn-dark" type="submit" value="지원하기">
 							</form>
 							등록일자 <fmt:formatDate value="${projDTO.reg_date }" pattern="yyyy-mm-dd" />
 						</div>

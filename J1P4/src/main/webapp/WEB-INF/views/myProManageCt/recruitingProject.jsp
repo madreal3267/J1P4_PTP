@@ -47,14 +47,14 @@
 								<h4 class="font-weight-bold mx-4 my-3">지원자 모집중</h4>
 								지원자를 모집 중인 프로젝트를 관리할 수 있습니다.
 							</div><br>	
-						    <table class="table table-bordered bg-light" border="1">
+						    <table class="table table-bordered table-striped bg-light" border="1">
 						        <tr>
-						            <td>모집 중인 프로젝트 </td>
-						            <td>지원한 프리랜서</td>
-						            <td>기술</td>
-						            <td>연차</td>
-						            <td>지원 거절/계약하기</td>
-						            <td>모집완료</td>
+						            <th>모집 중인 프로젝트</th>
+						            <th>지원한 프리랜서</th>
+						            <th>기술</th>
+						            <th>연차</th>
+						            <th>지원 거절/계약하기</th>
+						            <th>모집완료</th>
 						        </tr>
 						        <c:set var="prevProjectName" value="" />
 						        <c:set var="rowCount" value="0" />
@@ -71,24 +71,24 @@
 						                        <td rowspan="${rowCount+1}" id="proj${status.index}"><a href="#">${proFreeDTO.proj_title}</a></td>
 						                        <td><a href="#">${proFreeDTO.free_id}</a></td>
 						                        <td>
-						                        	<c:set var="skillList" value="${proFreeDTO.skill_nm }" />
+						                        	<c:set var="skillList" value="${proFreeDTO.skills }" />
 														<c:forEach items="${fn:split(skillList, ',')}" var="skill">
-														    <button type="button" class="btn btn-warning" ><c:out value="${skill}" /></button>
+														    <span style="background-color: #31b9a9;" class="badge" ><c:out value="${skill}" /></span>
 														</c:forEach><br>
 												</td>
 						                        <td>${proFreeDTO.yeoncha} </td>
 						                        <td> 
-						                        <form action="/myProManageCt/rejectApply" method="post">
+						                        <form action="/myProManageCt/rejectApply" method="post" style="display: inline-block;">
 						                            <input type="hidden" name="proj_no" value="${proFreeDTO.proj_no}">
 						                            <input type="hidden" name="free_no" value="${proFreeDTO.free_no}">
-						                            <button type="submit" class="btn btn-warning">지원 거절</button>
+						                            <button style="background-color: #31b9a9; color: white;" type="submit" class="btn">지원 거절</button>
 						                        </form>
 											    <c:choose>
 											        <c:when test="${proFreeDTO.meetingOK == 0}">
-											            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-${proFreeDTO.free_no}">계약하기</button>
+											            <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#modal-${proFreeDTO.free_no}">계약하기</button>
 											        </c:when>
 											        <c:otherwise>
-											            <button class="btn btn-success">계약 동의</button>
+											            <button class="btn btn-outline-dark">계약 동의</button>
 											        </c:otherwise>
 											    </c:choose>
 						                        </td>
@@ -97,7 +97,7 @@
 						                        <!-- <button type="submit" class="btn btn-danger">모집완료</button> -->
 						                       <form action="/myProManageCt/recruitmentCompleted" method="post">
 						                     		<input type="hidden" name="proj_no" value="${proFreeDTO.proj_no}">
-						                       		<button type="submit" class="btn btn-danger">모집완료</button>
+						                       		<button type="submit" class="btn btn-dark">모집완료</button>
 						                       </form>
 						                    </td>
 						                    <!-- 수정된 부분 끝 -->
@@ -109,9 +109,9 @@
 						                    <tr>
 						                        <td><a href="#">${proFreeDTO.free_id}</a></td>
 						                        <td>
-						                        	<c:set var="skillList" value="${proFreeDTO.skill_nm }" />
+						                        	<c:set var="skillList" value="${proFreeDTO.skills }" />
 														<c:forEach items="${fn:split(skillList, ',')}" var="skill">
-														    <button type="button" class="btn btn-warning" ><c:out value="${skill}" /></button>
+														    <span style="background-color: #31b9a9;" class="badge"><c:out value="${skill}" /></span>
 														</c:forEach><br>
 												</td>
 						                        <td>${proFreeDTO.yeoncha} </td>
@@ -119,14 +119,14 @@
 												 <form action="/myProManageCt/rejectApply" method="post">
 						                            <input type="hidden" name="proj_no" value="${proFreeDTO.proj_no}">
 						                            <input type="hidden" name="free_no" value="${proFreeDTO.free_no}">
-						                            <button type="submit" class="btn btn-warning">지원 거절</button>
+						                            <button style="background-color: #31b9a9; color: white;" type="submit" class="btn">지원 거절</button>
 						                        </form>
 											    <c:choose>
 											        <c:when test="${proFreeDTO.meetingOK == 0}">
-											            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-${proFreeDTO.free_no}">계약하기</button>
+											            <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#modal-${proFreeDTO.free_no}">계약하기</button>
 											        </c:when>
 											        <c:otherwise>
-											            <button class="btn btn-success">계약 동의</button>
+											            <button class="btn btn-outline-dark">계약 동의</button>
 											        </c:otherwise>
 											    </c:choose>
 						                        </td>
@@ -136,7 +136,7 @@
 						                            <!-- <button type="submit" class="btn btn-danger">모집완료</button> -->
 						                            <form action="/myProManageCt/recruitmentCompleted" method="post">
 						                                <input type="hidden" name="proj_no" value="${proFreeDTO.proj_no}">
-						                                <button type="submit" class="btn btn-danger">모집완료</button>
+						                                <button type="submit" class="btn btn-dark">모집완료</button>
 						                            </form>
 						                        </td>
 						                    </c:if>
@@ -157,30 +157,30 @@
 						                </script>
 						            </c:if>
 						            
-<!-- modal 창 -->
-<div class="modal fade" id="modal-${proFreeDTO.free_no}">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<form action="${pageContext.request.contextPath}/myProManageCt/offerContract" method="post">
-				<div class="modal-header">
-					<h4 class="modal-title">계약을 위한 사전미팅을 제안합니다.</h4>
-					<button type="button" class="btn-close pull-right" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<label for="md">미팅 날짜를 정해주세요</label><input type="datetime-local" name="meeting_dt" id="md"><br>
-					<label for="mp">미팅 장소와 내용에 대해 알려주세요</label><br>
-					<textarea id="mp" name="meeting_pc" rows="6" cols="54" placeholder="미팅 장소와 내용에 대해 입력해주세요."></textarea>
-					<input type="hidden" name="proj_no" value="${proFreeDTO.proj_no }">
-					<input type="hidden" name="free_no" value="${proFreeDTO.free_no }">
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-					<input type="submit" class="btn btn-primary" value="계약 제안">
-				</div>
-			</form>
-		</div>
-	</div>
-</div>	
+				<!-- modal 창 -->
+				<form action="/myProManageCt/offerContract" method="post">
+					<div class="modal fade" id="modal-${proFreeDTO.free_no}">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title">계약을 위한 사전미팅을 제안합니다.</h4>
+									<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<label for="md">미팅 날짜를 정해주세요</label><input type="datetime-local" name="meeting_dt" id="md" required><br>
+									<label for="mp">미팅 장소와 내용에 대해 알려주세요</label><br>
+									<textarea id="mp" name="meeting_pc" rows="6" cols="54" placeholder="미팅 장소와 내용에 대해 입력해주세요." required></textarea>
+									<input type="hidden" name="proj_no" value="${proFreeDTO.proj_no }">
+									<input type="hidden" name="free_no" value="${proFreeDTO.free_no }">
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+									<input type="submit" class="btn btn-dark" value="계약 제안">
+								</div>
+							</div>
+						</div>
+					</div>	
+				</form>
 				        		</c:forEach>
 				    		</table>
 				  		</div>
