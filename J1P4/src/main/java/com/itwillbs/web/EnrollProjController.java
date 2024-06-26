@@ -2,6 +2,7 @@ package com.itwillbs.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.util.HashMap;
 
 import javax.inject.Inject;
@@ -21,7 +22,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.itwillbs.domain.ProjectVO;
 import com.itwillbs.domain.RegionVO;
 import com.itwillbs.domain.SkillVO;
+import com.itwillbs.dto.SettlementDTO;
+import com.itwillbs.persistence.EnrollProjDAO;
 import com.itwillbs.service.EnrollProjService;
+import com.itwillbs.service.SettlementService;
 
 @Controller
 @RequestMapping(value = "/enroll/*")
@@ -32,6 +36,11 @@ public class EnrollProjController {
 	@Inject
 	private EnrollProjService eService;
 	
+	@Inject
+	private SettlementService sService;
+	
+	@Inject
+	private EnrollProjDAO eDao;
 	// 프로젝트 등록 페이지 연결
 	// http://localhost:8088/enroll/enrollProj
 	@GetMapping(value="/enrollProj")
@@ -50,6 +59,7 @@ public class EnrollProjController {
 		eService.insertProj(pVO);
 		eService.insertSkill(sVO);
 		eService.insertReg(rVO);
+     
 		
 		return "redirect:/enroll/enrollSuccess";
 	}

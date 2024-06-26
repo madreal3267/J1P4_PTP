@@ -156,6 +156,17 @@
         JOIN user u ON c.ct_id = u.user_id
         ORDER BY u.reg_date DESC
     </select>
+    
+    <!-- 클라이언트 ID를 가져오는 쿼리 -->
+    <select id="getClientIdByCtNo" parameterType="int" resultType="String">
+        SELECT ct_id FROM client WHERE ct_no = #{ct_no}
+    </select>
+
+    <!-- 프리랜서 ID를 가져오는 쿼리 -->
+    <select id="getFreelancerIdByFreeNo" parameterType="int" resultType="String">
+        SELECT free_id FROM freelancer WHERE free_no = #{free_no}
+    </select>
+    
   	 <!-- 회원정보 관리 -->
   	 
   	 <!-- 프로젝트 관리 -->
@@ -192,64 +203,74 @@
   	 <!-- 프로젝트 관리 -->
   	 
   	 <!-- 정산 관리 -->
-  	 <select id="getAllSettlements" resultType="com.itwillbs.dto.SettlementDTO">
+  	 <!-- 전체 정산 내역 조회 -->
+    <select id="getAllSettlements" resultType="com.itwillbs.dto.SettlementDTO">
         SELECT s.settlement_no, s.proj_no, p.proj_cost AS price, p.pay_check AS price_check, 
-		       s.settled_cost, s.fee, s.settlement_check, s.settlement_requested, s.merchant_uid,
-		       p.proj_title, c.ct_id, f.free_id, u.bank_nm, u.account, u.depositor
-		FROM project p
-		JOIN settlement s ON p.proj_no = s.proj_no
-		JOIN client c ON p.ct_no = c.ct_no
-		JOIN freelancer f ON p.free_no = f.free_no
-		JOIN user u ON f.free_id = u.user_id
-<!-- 		WHERE p.proj_status = '진행 중' -->
+               s.settled_cost, s.fee, s.settlement_check, s.settlement_requested, s.merchant_uid,
+               p.proj_title, c.ct_id, f.free_id, u.bank_nm, u.account, u.depositor
+        FROM project p
+        JOIN settlement s ON p.proj_no = s.proj_no
+        JOIN client c ON p.ct_no = c.ct_no
+        JOIN freelancer f ON p.free_no = f.free_no
+        JOIN user u ON f.free_id = u.user_id
+        <!-- Uncomment this if you want to filter by status -->
+        <!-- WHERE p.proj_status = '진행 중' -->
     </select>
 
+    <!-- 결제 여부에 따른 정산 내역 조회 -->
     <select id="getSettlementsByPriceCheck" parameterType="boolean" resultType="com.itwillbs.dto.SettlementDTO">
-	    SELECT s.settlement_no, s.proj_no, p.proj_cost AS price, p.pay_check AS price_check, 
-	           s.settled_cost, s.fee, s.settlement_check, s.settlement_requested, s.merchant_uid,
-	           p.proj_title, c.ct_id, f.free_id, u.bank_nm, u.account, u.depositor
-	    FROM project p
-	    JOIN settlement s ON p.proj_no = s.proj_no
-	    JOIN client c ON p.ct_no = c.ct_no
-	    JOIN freelancer f ON p.free_no = f.free_no
-	    JOIN user u ON f.free_id = u.user_id
-	    WHERE p.pay_check = #{priceCheck}
-	</select>
-	
-	<select id="getSettlementsBySettlementCheck" parameterType="boolean" resultType="com.itwillbs.dto.SettlementDTO">
-	    SELECT s.settlement_no, s.proj_no, p.proj_cost AS price, p.pay_check AS price_check, 
-	           s.settled_cost, s.fee, s.settlement_check, s.settlement_requested, s.merchant_uid,
-	           p.proj_title, c.ct_id, f.free_id, u.bank_nm, u.account, u.depositor
-	    FROM project p
-	    JOIN settlement s ON p.proj_no = s.proj_no
-	    JOIN client c ON p.ct_no = c.ct_no
-	    JOIN freelancer f ON p.free_no = f.free_no
-	    JOIN user u ON f.free_id = u.user_id
-	    WHERE s.settlement_check = #{settlementCheck}
-	</select>
-	
-	<select id="getSettlementById" parameterType="int" resultType="com.itwillbs.dto.SettlementDTO">
-	    SELECT s.settlement_no, s.proj_no, p.proj_cost AS price, p.pay_check AS price_check, 
-	           s.settled_cost, s.fee, s.settlement_check, s.settlement_requested, s.merchant_uid,
-	           p.proj_title, c.ct_id, f.free_id, u.bank_nm, u.account, u.depositor
-	    FROM project p
-	    JOIN settlement s ON p.proj_no = s.proj_no
-	    JOIN client c ON p.ct_no = c.ct_no
-	    JOIN freelancer f ON p.free_no = f.free_no
-	    JOIN user u ON f.free_id = u.user_id
-	    WHERE s.settlement_no = #{settlement_no}
-	</select>
-	
-	<update id="updateSettlement" parameterType="com.itwillbs.dto.SettlementDTO">
-	    UPDATE settlement
-	    SET settled_cost = #{settled_cost},
-	        fee = #{fee},
-	        settlement_check = #{settlement_check},
-	        settlement_requested = #{settlement_requested},
-	        merchant_uid = #{merchant_uid}
-	    WHERE settlement_no = #{settlement_no}
-	</update>
+        SELECT s.settlement_no, s.proj_no, p.proj_cost AS price, p.pay_check AS price_check, 
+               s.settled_cost, s.fee, s.settlement_check, s.settlement_requested, s.merchant_uid,
+               p.proj_title, c.ct_id, f.free_id, u.bank_nm, u.account, u.depositor
+        FROM project p
+        JOIN settlement s ON p.proj_no = s.proj_no
+        JOIN client c ON p.ct_no = c.ct_no
+        JOIN freelancer f ON p.free_no = f.free_no
+        JOIN user u ON f.free_id = u.user_id
+        WHERE p.pay_check = #{priceCheck}
+    </select>
 
+    <!-- 정산 여부에 따른 정산 내역 조회 -->
+    <select id="getSettlementsBySettlementCheck" parameterType="boolean" resultType="com.itwillbs.dto.SettlementDTO">
+        SELECT s.settlement_no, s.proj_no, p.proj_cost AS price, p.pay_check AS price_check, 
+               s.settled_cost, s.fee, s.settlement_check, s.settlement_requested, s.merchant_uid,
+               p.proj_title, c.ct_id, f.free_id, u.bank_nm, u.account, u.depositor
+        FROM project p
+        JOIN settlement s ON p.proj_no = s.proj_no
+        JOIN client c ON p.ct_no = c.ct_no
+        JOIN freelancer f ON p.free_no = f.free_no
+        JOIN user u ON f.free_id = u.user_id
+        WHERE s.settlement_check = #{settlementCheck}
+    </select>
+
+    <!-- 특정 정산 내역 조회 -->
+    <select id="getSettlementById" parameterType="int" resultType="com.itwillbs.dto.SettlementDTO">
+        SELECT s.settlement_no, s.proj_no, p.proj_cost AS price, p.pay_check AS price_check, 
+               s.settled_cost, s.fee, s.settlement_check, s.settlement_requested, s.merchant_uid,
+               p.proj_title, c.ct_id, f.free_id, u.bank_nm, u.account, u.depositor
+        FROM project p
+        JOIN settlement s ON p.proj_no = s.proj_no
+        JOIN client c ON p.ct_no = c.ct_no
+        JOIN freelancer f ON p.free_no = f.free_no
+        JOIN user u ON f.free_id = u.user_id
+        WHERE s.settlement_no = #{settlement_no}
+    </select>
+
+    <!-- 정산 내역 업데이트 -->
+    <update id="updateSettlement" parameterType="com.itwillbs.dto.SettlementDTO">
+        UPDATE settlement
+        SET settled_cost = #{settled_cost},
+            fee = #{fee},
+            settlement_check = #{settlement_check},
+            settlement_requested = #{settlement_requested},
+            merchant_uid = #{merchant_uid}
+        WHERE settlement_no = #{settlement_no}
+    </update>
+	
+	<insert id="insertSettlement" parameterType="com.itwillbs.dto.SettlementDTO">
+    INSERT INTO settlement (proj_no, ct_no, free_no, settled_cost, fee, settlement_check, settlement_requested)
+    VALUES (#{proj_no}, #{ct_no}, #{free_no}, #{settled_cost}, #{fee}, #{settlement_check}, #{settlement_requested})
+</insert>
 
     <!-- 계약서 -->
     <insert id="insertContract" parameterType="com.itwillbs.dto.ContractDTO">
