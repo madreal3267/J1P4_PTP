@@ -47,4 +47,9 @@ public class SettlementDAOImpl implements SettlementDAO {
     public SettlementDTO getSettlementByMerchantUid(String merchant_uid) {
         return sqlSession.selectOne(namespace + ".getSettlementByMerchantUid", merchant_uid);
     }
+    
+    @Override
+    public void insertSettlement(SettlementDTO settlement) {
+        sqlSession.insert(namespace + ".insertSettlement", settlement);
+    }
 }

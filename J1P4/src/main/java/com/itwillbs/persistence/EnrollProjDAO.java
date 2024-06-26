@@ -54,4 +54,5 @@ public interface EnrollProjDAO {
 	public Integer chkTemp(ProjectVO vo);
 	
 	
+	
 }

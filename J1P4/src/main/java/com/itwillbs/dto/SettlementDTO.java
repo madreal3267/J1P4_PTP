@@ -9,7 +9,9 @@ public class SettlementDTO {
 	
 	private int settlement_no;
     private int proj_no;
-    private String proj_title;
+    private int ct_no;
+    private int free_no;
+    private String proj_title;	
     private String ct_id;
     private String free_id;
     private BigDecimal price;

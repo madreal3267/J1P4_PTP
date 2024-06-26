@@ -49,5 +49,8 @@ public class SettlementServiceImpl implements SettlementService {
         return settlementDAO.getSettlementByMerchantUid(merchant_uid);
     }
 
-    
+    @Override
+    public void createSettlement(SettlementDTO settlement) {
+        settlementDAO.insertSettlement(settlement);
+    }
 }
