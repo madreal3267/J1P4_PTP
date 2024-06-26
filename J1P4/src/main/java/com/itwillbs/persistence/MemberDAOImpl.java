@@ -242,6 +242,11 @@ public class MemberDAOImpl implements MemberDAO {
 
 
 
+	//회원탈퇴
+	@Override
+	public void memberDelete(MemberVO vo) throws Exception {
+		sqlSession.delete(NAMESPACE+"memberDelete", vo);
+	}
 	@Override
 	public Integer sessFreeNo(MemberVO vo) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+"sessFreeNo",vo);

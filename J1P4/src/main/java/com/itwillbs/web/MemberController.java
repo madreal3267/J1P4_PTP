@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itwillbs.domain.MemberVO;
 import com.itwillbs.persistence.MailHandler;
@@ -305,7 +306,7 @@ public class MemberController {
 			mService.findpw(vo);
 			
 			MailHandler mailhandler = new MailHandler(mailSender);
-			mailhandler.setSubject("[캐프리 비밀번호 재설정 메일입니다.]"); //메일제목
+			mailhandler.setSubject("[PTP 비밀번호 재설정 메일입니다.]"); //메일제목
 			mailhandler.setText(
 					"<h1>메일인증</h1>" +
 							"<br/>"+vo.getUser_id()+"님 "+
@@ -314,7 +315,7 @@ public class MemberController {
 							"<a href='http://localhost:8088/member/findpw?user_email=" + vo.getUser_email() +
 							"&key=" + key +
 							"' target='_blank'>비밀번호 변경하기</a>");
-			mailhandler.setFrom("itwil_j1p4@naver.com", "캐프리");
+			mailhandler.setFrom("itwil_j1p4@naver.com", "PTP");
 			mailhandler.setTo(vo.getUser_email());
 			mailhandler.send();
 			
@@ -382,9 +383,33 @@ public class MemberController {
 		
 	}
 		
-			
+		
+	//회원탈퇴
+	@GetMapping(value = "/delete")
+	public String memberDeleteGET() throws Exception{
+		return"/member/account";
+	}
 	
-
+	@PostMapping(value = "/delete")
+	public String memberDeletePOST(MemberVO vo, HttpSession session, RedirectAttributes rttr ) throws Exception{
+		
+		//세션에 있는 user_id를 가져와서 member변수에 넣어준다
+		MemberVO member = (MemberVO)session.getAttribute("user_id");
+		//세션에 있는 비밀번호
+		String sessionPw = member.getUser_pw();
+		logger.debug("@@@@@@@@@@@@ sessionPw @@@@@@@@@@@@ :"+sessionPw);
+		//vo로 들어오는 비밀번호
+		String pass= vo.getUser_pw();
+		logger.debug("@@@@@@@@@@@@ pass @@@@@@@@@@@@ :"+pass);
+		
+		if(!(sessionPw.equals(pass))) {
+			rttr.addFlashAttribute("msg", false);
+			return "redirect:/member/account";
+		}
+		mService.memberDelete(vo);
+		session.invalidate();
+		return"redirect:/member/login";
+	}
 	
 	
 	

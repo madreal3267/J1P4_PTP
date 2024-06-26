@@ -209,6 +209,12 @@ public class MemberServiceImpl implements MemberService {
 
 
 
+	//회원탈퇴
+	@Override
+	public void memberDelete(MemberVO vo) throws Exception {
+		mdao.memberDelete(vo);
+	}
+		
 	@Override
 	public Integer sessFreeNo(MemberVO vo) throws Exception {
 		return mdao.sessFreeNo(vo);
@@ -307,6 +313,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Integer chkIdentB(String id) {
 		return mdao.chkIdentB(id);
+>>>>>>> a62ef28b1049a913396d33381b9c51ba8c04c42a
 	}
 	
 	

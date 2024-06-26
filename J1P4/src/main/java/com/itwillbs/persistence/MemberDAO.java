@@ -86,7 +86,8 @@ public interface MemberDAO {
 	public Integer sessFreeNo(MemberVO vo) throws Exception;
 	public Integer sessCtNo(MemberVO vo) throws Exception;
 	
-	
+	//회원탈퇴
+	public void memberDelete(MemberVO vo)throws Exception;
 	
 	
 	
