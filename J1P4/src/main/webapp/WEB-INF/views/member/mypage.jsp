@@ -69,33 +69,34 @@ ct_no: ${sessionScope.ct_no }
          
          <!-- 본문 내용 시작 -->
     <input type="hidden" value="${sessionScope.user_id}" name="user_id100">
-	<div class="form-group">		
+	<div class="form-group" style="margin: 30px;">
+	
 	<label>회원유형</label>
 	<select id="select_type" name="user_type" >
-	<option>회원유형 선택</option>		
+	<option>회원유형 선택</option>	
 	<option value="개인">개인</option>		
 	<option value="모임">팀</option>
 	<option value="사업자">사업자</option>
 	</select>
-	</div>
 
 	<div class="business"></div>
 	<!--회원유형별 정보  -->
 	<br>
 	<br>
 	우편번호 <input type="text" id="sample6_postcode" placeholder="우편번호" name="addr">
-	<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+	<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn btn-dark btn-sm"><br>
 	주소<input type="text" id="sample6_address" placeholder="주소" name="addr"><br>
 	상세주소<input type="text" id="sample6_detailAddress" placeholder="상세주소" name="addr"> 
 	참고항목<input type="text" id="sample6_extraAddress" placeholder="참고항목" name="addr">
 
 	<br>
-	<br>
-	<h2>연락처 정보</h2>
-	핸드폰 번호 <input type="text" name="phone_no"><br>
+	<hr>
+	<h4>연락처 정보</h4>
+	핸드폰 번호 <input type="text" name="phone_no" onkeyup="this.value = num_mask(this.value)" maxlength="13"><br>
 	전화번호 <input type="text" name="phone_no"><br>
-	세금계산서용 이메일 <input type="email" name="tax_email"><br>
-	<button type="button" class="info">등록하기</button>
+	세금계산서용 이메일 <input type="email" name="tax_email"><br><br>
+	<button type="button" class="info btn btn-dark btn-sm">등록하기</button>
+	</div>
          <!-- 본문 내용 끝 -->
          
          </div>
@@ -117,31 +118,46 @@ ct_no: ${sessionScope.ct_no }
          <!-- 본문 내용 시작 -->
      <div>
 	<c:if test="${sessionScope.user_type.equals('사업자')}">
-	<div class="type_business">
+	<div class="type_business" style="margin: 30px;">
 	회원유형<input type="text" value="${sessionScope.user_type }" readonly="readonly" class="type"><br>
 	사업자등록번호 <input type="text" name="business_registration" id="brn">
-	<input type="button" value="확인" onclick="checkBrn()"><br>
+	<input type="button" value="확인" onclick="checkBrn()" class="btn btn-dark btn-sm"><br>
 	<div id="resultbrn"></div>
 	<input type="hidden" value="" id="result3"> <!-- 유효한 값만 등록되도록 -->
 	법인명 <input type="text" name="team_nm" id="brn2"><br>
 	대표자명 <input type="text" name="rep_nm" id="brn3"><br>
-	사업장 소재지 <input type="text" name="addr" id="brn4"><br>
-	<button type="button" class="identiBrn" >등록</button>
+	사업장 소재지 <input type="text" name="addr" id="brn4"><br><br>
+	<button type="button" class="identiBrn" >등록하기</button>
 	</div>
 	</c:if>
 	
-	<c:if test="${sessionScope.user_type.equals('모임') || sessionScope.user_type.equals('개인')}">
-	<div class="type_pt">
+	<c:if test="${sessionScope.user_type.equals('개인')}">
+	<div class="type_pt" style="margin: 30px;">
 	회원유형<input type="text" value="${sessionScope.user_type}" readonly="readonly" class="type"><br>
 	이름(한글실명) <input type="text" name="name" id="nameid"><br>
-	주민등록번호 <input type="text" name="jumin_no" id="juminid">
-	<input type="button" value="확인" class="juminButton" onclick="juminCheck()"><br>
+	주민등록번호 <input type="number" name="jumin_no" id="juminid" onkeyup="this.value = jumin_mask(this.value)" maxlength="14">
+	<input type="button" value="확인" class="juminButton btn btn-dark btn-sm" onclick="juminCheck()"><br>
 	<div id="result"></div>
 	
 <!-- 	<div id="result2"></div> -->
 	<input type="hidden" value="" id="result2">
 	
-	<button type="button" class="identi">등록</button>
+	<button type="button" class="identi btn btn-dark btn-sm">등록</button>
+	</div>
+	</c:if>
+	
+	<c:if test="${sessionScope.user_type.equals('모임')}" >
+	<div class="type_pt" style="margin: 30px;">
+	회원유형<input type="text" value="팀" readonly="readonly" class="type"><br>
+	이름(한글실명) <input type="text" name="name" id="nameid"><br>
+	주민등록번호 <input type="text" name="jumin_no" id="juminid">
+	<input type="button" value="확인" class="juminButton btn btn-dark btn-sm" onclick="juminCheck()"><br>
+	<div id="result"></div>
+	
+<!-- 	<div id="result2"></div> -->
+	<input type="hidden" value="" id="result2">
+	
+	<button type="button" class="identi btn btn-dark btn-sm">등록</button>
 	</div>
 	</c:if>
         
@@ -163,7 +179,7 @@ ct_no: ${sessionScope.ct_no }
             </div>
          
          <!-- 본문 내용 시작 -->
-         <h2>등록된 계좌</h2><br>
+         <h4 style="margin: 30px;">등록된 계좌</h4><br>
 	<input type="hidden" value="${sessionScope.user_id}" name="user_id">
 	<div class="banklist"></div>
 	<!-- [추가하기] 클릭시 추가되는 은행명/계좌/예금주-->
@@ -171,10 +187,10 @@ ct_no: ${sessionScope.ct_no }
 	<div id="inputPt"></div>
 	<!-- <!-- [+계좌 추가]클릭시 [select버튼] 출력되는 공간 -->
 	
-	<div role="button" class="addBank">+계좌 추가</div>
+	<div role="button" class="addBank" style="margin: 30px;">+계좌 추가</div>
 	<br>
 	<br>
-	<button type="button" class="bank" id="bankid">등록하기</button>
+	<button type="button" class="bank btn btn-dark btn-sm" id="bankid" style="margin: 30px;">등록하기</button>
 	         
          <!-- 본문 내용 끝 -->
          
@@ -236,7 +252,7 @@ ct_no: ${sessionScope.ct_no }
 	$(function(){
 		 $('.addBank').click(function(){
 			$('#inputPt').html(
-			'<div class="form-group">'+		
+			'<div class="form-group" style="margin: 30px;">'+		
 			'<label>은행선택</label>'+
 			'<select class="select_Bank">'+
 			'<option>부산은행</option>'+		
@@ -248,14 +264,14 @@ ct_no: ${sessionScope.ct_no }
 			'<option>카카오뱅크</option>'+		
 			'</select>'+		
 			'</div>'+		
-			'<div class="form-group">'+
+			'<div class="form-group" style="margin: 30px;">'+
 			'<label>예금주</label>'+		
 			'<input type="text" class="name" placeholder="예금주" id="bankname">'+		
 			'</div>'+		
-			'<div class="form-group">'+		
+			'<div class="form-group" style="margin: 30px;">'+		
 			'<label>계좌번호</label>'+
 			'<input type="number" class="account" placeholder="계좌번호" id="bankaccount">'+
-			'<button type="button" class="addButton">추가</button>'+
+			'<button type="button" class="addButton btn btn-dark btn-sm">추가</button>'+
 			'</div>	'); 
 			
 			$(function(){
@@ -328,14 +344,14 @@ ct_no: ${sessionScope.ct_no }
 	 		if(sum == juminlast){
   		
  			document.getElementById('result').innerHTML = "유효한 주민등록번호 입니다.";
- 			document.getElementById('result3').value = "1";
+ 			document.getElementById('result2').value = "1";
  			
   			}
  			
  			if(sum != juminlast && juminlast != undefined){
 			
 			document.getElementById('result').innerHTML = '유효하지 않은 주민등록번호 입니다.';
-			document.getElementById('result3').value = '2';
+			document.getElementById('result2').value = '2';
 		}
 		
  	}
@@ -484,6 +500,20 @@ function checkBrn(){
 		        	return;
 		        }
 		    };
+		    
+		    
+		    $.ajax({
+				url:"/member/addidentity",
+				type: "POST",
+				data:$("#fm01").serialize(),
+				success : function(){
+					alert("신원인증이 완료되었습니다.");
+					location.reload();
+				},
+				error : function() {
+					alert("오류발생");
+				}
+			});
 		
 			
 		});
@@ -622,6 +652,31 @@ function checkBrn(){
 	});
 
 	$('#select_type').val('${sessionScope.user_type}');
+	
+	// 전화번호를 xxx-xxxx-xxxx 형식으로 만들어 줌.
+	function num_mask(objValue) {
+	 var v = objValue.replace("--", "-");
+
+	    if (v.match(/^\d{3}$/) !== null) {
+	        v = v + '-';
+	    } else if (v.match(/^\d{3}\-\d{4}$/) !== null) {
+	        v = v + '-';
+	    }
+	 
+	    return v;
+	}
+	
+// 	function jumin_mask(objValue) {
+// 	 var ju = objValue.replace("--", "-");
+
+// 	    if (ju.match(/^\d{6}$/) !== null) {
+// 	        ju = ju + '-';
+// 	    }
+	 
+// 	    return ju;
+// 	}
+	
+	
 </script>
 
 

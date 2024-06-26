@@ -194,11 +194,11 @@ $(document).ready(function() {
         alert("비밀번호가 변경ㅇㅇ");
         // 서버로 AJAX 요청을 통해 비밀번호를 변경하는 로직을 여기에 추가
         $.ajax({
-			url:"/member/chagePass",
+			url:"/member/changePass",
 			type: "POST",
 			data:$("#fm02").serialize(),
 			success : function(){
-				alert("비번변경완료");
+				alert("비밀번호가 변경 되었습니다.");
 				location.reload();
 			},
 			error : function() {

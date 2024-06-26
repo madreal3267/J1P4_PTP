@@ -74,35 +74,18 @@ public class AccountController {
 		}
 		
 		
-		//변경 할 비밀번호
-		@GetMapping(value = "/chagePass")
-		public void passwordupdateGET() {
-			
-		}
-		
-		
-		
-//		@PostMapping(value = "/chagePass")
-//		public void passwordupdate(String user_id, String user_pw) {
-//			logger.debug("/account -> passwordUpdate() 호출 ");
-//			Map<String, Object> paramMap = new HashMap<String, Object>();
-//			paramMap.put("user_id", user_id);
-//			paramMap.put("user_pw", user_pw); //현재비밀번호
+//		//변경 할 비밀번호
+//		@GetMapping(value = "/chagePass")
+//		public void passwordupdateGET() {
 //			
-//			logger.debug("@@@@@@@@@@@@ user_id @@@@@@@@@@@@ :"+user_id);
-//			logger.debug("@@@@@@@@@@@@ user_pw @@@@@@@@@@@@ :"+user_pw);
-//			
-//			aService.passwordUpdate(paramMap);//비밀번호 변경 메서드 -> 비밀번호가 변경됨.
-//			logger.debug("@@@@@@@@"+paramMap);
-//			
-//			
-//			logger.debug("비밀번호 변경완료");
-			
 //		}
+		
+		
 	
 		
 		 // 회원정보 수정 - 변경된 내용을 DB에 전달 및 수정
-	    @RequestMapping(value = "/chagePass", method = RequestMethod.POST)
+	    @RequestMapping(value = "/changePass", method = RequestMethod.POST)
+	    @ResponseBody
 	    public String updatePost(@RequestParam("user_id") String user_id, 
 	                             @RequestParam("user_pw2") String user_pw,
 	                             MemberVO vo, HttpSession session, Model model) throws Exception {
@@ -111,24 +94,17 @@ public class AccountController {
 	        // 사용자 ID로 현재 비밀번호 조회
 	        String currentPw = aService.pass(user_id);
 	        logger.debug(" ############# "+currentPw);
+	        logger.debug(" %%%%%%%%%%% "+user_pw);
 	        
-	        //세션에 있는 user_id를 가져와서 member변수에 넣어준다
-			//MemberVO member = (MemberVO)session.getAttribute("user_id");
-			//세션에 있는 비밀번호
-			//String sessionPw = member.getUser_pw();
-			  //logger.debug(" %%%%%%%%%%% "+sessionPw);
-			  
-	        // 입력한 비밀번호와 현재 비밀번호를 비교
-	        if (!user_pw.equals(currentPw)) {
-	            session.setAttribute("alertMessage", "비밀번호가 틀려 수정에 실패했습니다");
-	          
-	           return "/member/account"; // 수정 페이지로 다시 이동
-	        }
-	        
+	        vo.setUser_id(user_id);
+	        logger.debug(" @@@@@@@@@@ 아이디 %%%%%%%%%%% "+vo.getUser_id());
+	        vo.setUser_pw(user_pw);
+	        logger.debug(" @@@@@@@@@@ 비밀번호 %%%%%%%%%%% "+vo.getUser_pw());
 	        // 비밀번호가 일치하면 회원정보 수정
+	       
 	        aService.passwordUpdate(vo);
 	        
-	        return "redirect:/member/account";
+	        return "redirect:/member/accountHOME";
 	    }
 		
 		
