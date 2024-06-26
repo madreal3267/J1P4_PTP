@@ -516,18 +516,18 @@
 			$(".submButt").click(function() {
 				/* 프로젝트 등록 */
 				
-				if( fm1.proj_title.value == "" ) {
-		        alert("성명을 입력해 주십시오.");
+// 				if( fm1.proj_title.value == "" ) {
+// 		        alert("성명을 입력해 주십시오.");
 		        
-		        return;
+// 		        return;
 		        
-		   		 }
-				if( $("#startDate").val() = "" ) {
-		        alert("시작일을 입력해 주십시오.");
+// 		   		 }
+// 				if( $("#startDate").val() = "" ) {
+// 		        alert("시작일을 입력해 주십시오.");
 		        
-		        return;
+// 		        return;
 		        
-		   		 }
+// 		   		 }
 				
 				$('.temporary').val("등록성공");
 				
@@ -539,6 +539,8 @@
 					$(".fm").attr("action","/enroll/enrollSaveProj");
 					$(".fm").submit();
 				}
+				
+				alert("aaaaaaa");
 		
 			});
 		});	

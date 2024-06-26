@@ -156,6 +156,7 @@ public class EnrollProjController {
 	public void savedProjSavePOST(ProjectVO pVO,SkillVO sVO,RegionVO rVO) {
 		logger.debug(" Controller : (＃°Д°) /savedProjSave -> savedProjSavePOST 실행 ");
 		
+		System.out.println(pVO.getWork_field()+"@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		eService.savedProjSave(pVO);
 		eService.savedSkSave(sVO);
 		eService.savedRegSave(rVO);
