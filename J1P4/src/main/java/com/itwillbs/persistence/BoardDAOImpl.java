@@ -147,6 +147,42 @@ public class BoardDAOImpl implements BoardDAO{
 		return result;
 	}
 
+	@Override
+	public List<FreelancerVO> freeLSort(Criteria cri) {
+		List<FreelancerVO> resultVO = sqlSession.selectList(NAMESPACE+"freeLSort",cri);
+		return resultVO;
+	}
+
+	@Override
+	public int fiNumFree(FreelancerVO vo) {
+		int result = sqlSession.selectOne(NAMESPACE+"fiNumFree",vo);
+		return result;
+	}
+
+	@Override
+	public List<FreelancerVO> moFiFree(Criteria cri) {
+		List<FreelancerVO> resultVO = sqlSession.selectList(NAMESPACE+"moFiFree",cri);
+		return resultVO;
+	}
+
+	@Override
+	public List<FreelancerVO> moFiFreeNs(Criteria cri) {
+		List<FreelancerVO> resultVO = sqlSession.selectList(NAMESPACE+"moFiFreeNs",cri);
+		return resultVO;
+	}
+
+	@Override
+	public int mofiNumFree(FreelancerVO vo) {
+		int result = sqlSession.selectOne(NAMESPACE+"mofiNumFree",vo);
+		return result;
+	}
+
+	@Override
+	public int mofiNumNsFree(FreelancerVO vo) {
+		int result = sqlSession.selectOne(NAMESPACE+"mofiNumNsFree",vo);
+		return result;
+	}
+
 	
 
 	

@@ -110,18 +110,21 @@
   	 <select id="fNum" resultType="int">
   	 	select count(*)
 		from freelancer
+		where work_field="개발"
   	 </select>
   	 
   	 <!-- 프리랜서 페이징 처리 -->
   	 <select id="fListPaging" resultType="com.itwillbs.domain.FreelancerVO" parameterType="com.itwillbs.domain.Criteria">
   		<![CDATA[
 			select f.free_no, f.free_id, f.enroll_status, f.work_field, f.school_type, f.school_nm, f.major, f.grad_status,
-			  f.entrance, f.graduation, f.work_check, f.work_date, f.proj_cost, f.oneline_bio, f.bio, r.region, r.district, s.skill_nm
+			  f.entrance, f.graduation, f.work_check, f.work_date, f.proj_cost, f.oneline_bio, f.bio, r.region, r.district, s.skill_nm, c.job_lev
 			from freelancer f
 			left join skill s
 			on f.free_no = s.free_no
 			left join region r
 			on f.free_no = r.free_no
+			left join career c
+            on f.free_no = c.free_no
 			where work_field = "개발"
 			order by reg_date DESC
 			limit #{amount} offset #{offset}
@@ -239,6 +242,101 @@
 		where free_no = #{free_no}
   	 </select>
   	 
+  	 <!-- 프리랜서 찾기 정렬 -->
+  	 <select id="freeLSort" resultType="com.itwillbs.domain.FreelancerVO">
+	  	 <![CDATA[
+			select f.free_no, f.free_id, f.enroll_status, f.work_field, f.school_type, f.school_nm, f.major, f.grad_status,
+			  f.entrance, f.graduation, f.work_check, f.work_date, f.proj_cost, f.oneline_bio, f.bio, r.region, r.district, s.skill_nm, c.job_lev
+			from freelancer f
+			left join skill s
+			on f.free_no = s.free_no
+			left join region r
+			on f.free_no = r.free_no
+			left join career c
+            on f.free_no = c.free_no
+			where work_field=#{work_field}
+			order by cast(${sn} as unsigned) DESC
+			limit ${amount} offset #{offset}
+		]]>
+  	 </select>
+  	   	 
+  	 <!-- 필터된 프리랜서 숫자 -->
+  	 <select id="fiNumFree" resultType="int" parameterType="com.itwillbs.domain.FreelancerVO" >
+  		 <![CDATA[
+  	 	select count(*)
+		from freelancer
+		where work_field = #{work_field}
+		]]>
+  	 </select>
   	 
+  	 <!-- 모달 필터(후 정렬, 필터포함) -->
+  	 <select id="moFiFree" resultType="com.itwillbs.domain.FreelancerVO">
+		<![CDATA[
+			select f.free_no, f.free_id, f.enroll_status, f.work_field, f.school_type, f.school_nm, f.major, f.grad_status,
+			  f.entrance, f.graduation, f.work_check, f.work_date, f.proj_cost, f.oneline_bio, f.bio, r.region, r.district, s.skill_nm, c.job_lev
+			from freelancer f
+			left join skill s
+			on f.free_no = s.free_no
+			left join region r
+			on f.free_no = r.free_no
+			left join career c
+            on f.free_no = c.free_no
+			where work_field = #{work_field}
+					and s.skill_nm regexp(select REPLACE(GROUP_CONCAT(#{skill_nm}),',','|') AS skill_nm) and c.job_lev like CONCAT_WS('','%',#{job_lev},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
+			order by cast(${sn} as unsigned) DESC
+			limit #{amount} offset #{offset}
+  	 	]]>
+  	 </select>
+  	 
+  	 <!-- 모달 필터(후 정렬, 필터포함) skill_nm null일때 -->
+  	 <select id="moFiFreeNs" resultType="com.itwillbs.domain.FreelancerVO">
+		<![CDATA[
+			select f.free_no, f.free_id, f.enroll_status, f.work_field, f.school_type, f.school_nm, f.major, f.grad_status,
+			  f.entrance, f.graduation, f.work_check, f.work_date, f.proj_cost, f.oneline_bio, f.bio, r.region, r.district, s.skill_nm, c.job_lev
+			from freelancer f
+			left join skill s
+			on f.free_no = s.free_no
+			left join region r
+			on f.free_no = r.free_no
+			left join career c
+            on f.free_no = c.free_no
+			where work_field = #{work_field}
+					and c.job_lev like CONCAT_WS('','%',#{job_lev},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
+			order by cast(${sn} as unsigned) DESC
+			limit #{amount} offset #{offset}
+  	 	]]>
+  	 </select>
+  	 
+  	 <!-- 모달필터 게시물 숫자 -->
+  	 <select id="mofiNumFree" resultType="int"  parameterType="com.itwillbs.domain.FreelancerVO" >
+  		 <![CDATA[
+	  	 	select count(*)
+	 	 	from freelancer f
+			left join skill s
+			on f.free_no = s.free_no
+			left join region r
+			on f.free_no = r.free_no
+			left join career c
+            on f.free_no = c.free_no
+			where work_field = #{work_field}
+					and s.skill_nm regexp(select REPLACE(GROUP_CONCAT(#{skill_nm}),',','|') AS skill_nm) and c.job_lev like CONCAT_WS('','%',#{job_lev},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
+		]]>
+  	 </select>
+
+  	 <!-- 모달필터 게시물 숫자 skill_nm null일때 -->
+  	 <select id="mofiNumNsFree" resultType="int"  parameterType="com.itwillbs.domain.FreelancerVO" >
+  		 <![CDATA[
+	  	 	select count(*)
+	 	 	from freelancer f
+			left join skill s
+			on f.free_no = s.free_no
+			left join region r
+			on f.free_no = r.free_no
+			left join career c
+            on f.free_no = c.free_no
+			where work_field = #{work_field}
+					and c.job_lev like CONCAT_WS('','%',#{job_lev},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
+		]]>
+  	 </select>
   	 
   </mapper>

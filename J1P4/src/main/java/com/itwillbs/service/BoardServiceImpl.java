@@ -139,6 +139,37 @@ public class BoardServiceImpl implements BoardService {
 		return bdao.freebMark(free_no);
 	}
 	
+	// 프리랜서찾기 정렬
+	@Override
+	public List<FreelancerVO> freeLSort(Criteria cri) {
+		return bdao.freeLSort(cri);
+	}
+
+	@Override
+	public int fiNumFree(FreelancerVO vo) {
+		return bdao.fiNumFree(vo);
+	}
+
+	@Override
+	public List<FreelancerVO> moFiFree(Criteria cri) {
+		return bdao.moFiFree(cri);
+	}
+
+	@Override
+	public List<FreelancerVO> moFiFreeNs(Criteria cri) {
+		return bdao.moFiFreeNs(cri);
+	}
+
+	@Override
+	public int mofiNumFree(FreelancerVO vo) {
+		return bdao.mofiNumFree(vo);
+	}
+
+	@Override
+	public int mofiNumNsFree(FreelancerVO vo) {
+		return bdao.mofiNumNsFree(vo);
+	}
+	
 	
 	
 	

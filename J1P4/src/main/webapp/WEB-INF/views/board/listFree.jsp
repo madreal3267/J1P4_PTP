@@ -33,7 +33,7 @@ ct_no: ${sessionScope.ct_no }
 
    <div class="tab-content">
 
-	<h1>${fNum}명의 프리랜서가 등록되었습니다.</h1> <br>
+	<h1>${pNum}명의 프리랜서가 등록되었습니다.</h1> <br>
 <%-- ${param.work_field } --%>
 ${skill_nm }
 ${modalCheck }
@@ -154,7 +154,7 @@ ${modalCheck }
 					<div class="btn-group" role="group"
 						aria-label="Basic checkbox toggle button group">
 						<input type="radio" value="주니어" class="btn-check"
-							name="job_level" id="radioLev1"> <label
+							name="job_lev" id="radioLev1"> <label
 							class="btn btn-outline-dark" for="radioLev1">주니어</label> <input
 							type="radio" value="미들" class="btn-check" name="job_level"
 							id="radioLev2"> <label class="btn btn-outline-dark"
@@ -205,7 +205,7 @@ ${modalCheck }
 	<form id="sort">
 		<select name="sn" id="ss" style="display: inline-block; float: right; font-size: 1.2rem; width: 10rem; padding: 7px ;">
 			<option value="reg_date" <c:if test="${param.sn eq 'reg_date'}" >selected</c:if>>최신 등록 순</option>
-			<option value="proj_cost" <c:if test="${param.sn eq 'proj_cost'}" >selected</c:if>>견적 높은 순</option>
+			<option value="work_date" <c:if test="${param.sn eq 'work_date'}" >selected</c:if>>경력 높은 순</option>
 <%-- 			<option value="deadline" <c:if test="${param.sn eq 'deadline'}" >selected</c:if>>마감 임박 순</option> --%>
 		</select>
 		 <input type="hidden" name="sn">
@@ -220,7 +220,7 @@ ${modalCheck }
 <!-- 회색 박스 -->
 <c:forEach var="v" items="${list }">
 <c:set var="skillList" value="${v.skill_nm }" />
-<div OnClick="location.href ='/board/detailList?proj_no=${v.free_no}'" style="width : full; margin: 2px 3px; padding: 12px; background-color: #f2f2f2; border-radius: 7px; border: 1px solid black;">
+<div OnClick="location.href ='#'" style="width : full; margin: 2px 3px; padding: 12px; background-color: #f2f2f2; border-radius: 7px; border: 1px solid black;">
     <form role="form" method="post">
     	<input type="hidden" id="free_no" value="${v.free_no }">
     </form>
@@ -277,16 +277,17 @@ ${modalCheck }
         ${v.oneline_bio }
     </div>
 
-    <!-- 예상 금액/ 예상 기간 -->
     <div style="margin-bottom: 6px;">
-        예상금액 <span style="font-weight: bold;">원</span> |  <span style="font-weight: bold;">일</span>
+        분야 <span style="font-weight: bold;">${v.work_field }</span> |${v.job_lev }  <span style="font-weight: bold;"></span>
     </div>
 
 				<!-- 기타 정보 / 등록일자 -->
 				<div style="display: grid; grid-template-columns: 1fr 1fr;">
 					<div style="display: flex; font-weight: bold;">
-						<span style="display: flex; align-items: center;">${v.work_field }
-							| ${v.region } ${v.district } |</span>
+						<span style="display: flex; align-items: center;">
+							경력 | <br>
+							학력 | ${v.school_type } ${v.grad_status } <br>
+							지역 | ${v.region } ${v.district } |</span>
 						<c:forEach items="${fn:split(skillList, ',') }" var="skill">
 							<button type="button" class="btn btn-warning">
 								<c:out value="${skill}" />
@@ -330,7 +331,7 @@ ${modalCheck }
     </ul>
 </div>
 	
-<form id='actionForm' action="/board/listProP" method='get'>
+<form id='actionForm' action="/board/listFreeP" method='get'>
 	<input id="pageNum" type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
 	<input id ="amount" type='hidden' name='amount' value='${pageMaker.cri.amount}'>
 	<input id ="sn2" type='hidden' name='sn' value='reg_date'>
@@ -367,7 +368,7 @@ $(document).ready(function(){
 		actionForm.append("<input id ='region' type='hidden' name='region' value='${region}'>");
 		actionForm.append("<input id ='district' type='hidden' name='district' value='${district}'>");
 		actionForm.append("<input id ='modalCheck' type='hidden' name='modalCheck' value='${modalCheck}'>");
-		actionForm.attr("action","/board/moFiListPro");
+		actionForm.attr("action","/board/moFiListFree");
 		actionForm.attr("method","post");
 		actionForm.submit();
 	}
@@ -390,7 +391,7 @@ $(document).ready(function(){
 			actionForm.append("<input id ='region' type='hidden' name='region' value='${region}'>");
 			actionForm.append("<input id ='district' type='hidden' name='district' value='${district}'>");
 			actionForm.append("<input id ='modalCheck' type='hidden' name='modalCheck' value='${modalCheck}'>");
-			actionForm.attr("action","/board/moFiListPro");
+			actionForm.attr("action","/board/moFiListFree");
 			actionForm.attr("method","post");
 			actionForm.submit();
 		}
@@ -560,8 +561,8 @@ $(document).ready(function(){
 		});
 		
 		// 프리랜서가 아닐때 하트 클릭
-		$(".noHeart").unbinc(click);
-		$(".noHeart").click(function(){
+		$(".noHeart").click(function(e){
+			e.stopImmediatePropagation();
 			alert("프리랜서로 로그인 해야 합니다");
 		});
 		

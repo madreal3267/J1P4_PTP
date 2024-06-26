@@ -29,5 +29,6 @@ public class Criteria {
 	public String skill_nm;
 	public String region;
 	public String district;
+	private String job_lev;
 	
 }

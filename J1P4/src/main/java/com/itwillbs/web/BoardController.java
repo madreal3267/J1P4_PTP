@@ -290,8 +290,8 @@ public class BoardController {
 	@GetMapping(value = "/listFree")
 	public void flist(Criteria cri, Model model, HttpServletRequest request) {
 		
-		int fNum = bService.fNum();
-		model.addAttribute("fNum", fNum);
+		int pNum = bService.fNum();
+		model.addAttribute("pNum", pNum);
 		
 		int pageNum = 1;
 		int amount = 6;
@@ -314,7 +314,7 @@ public class BoardController {
 		logger.debug("offset : "+offset);
 		
 		model.addAttribute("list", bService.fListPaging(cri));
-		model.addAttribute("pageMaker", new PageDTO(cri, fNum));
+		model.addAttribute("pageMaker", new PageDTO(cri, pNum));
 
 
 	}
@@ -385,6 +385,11 @@ public class BoardController {
 		if(vo.getWork_field() == null) {
 			cri.setWork_field("개발");
 			vo.setWork_field("개발");
+		}
+		// district를 선택안했을 시는 ""으로 변경
+		if(vo.getDistrict().equals("전체")) {
+			cri.setDistrict("");
+			vo.setDistrict("");
 		}
 
 	
@@ -523,9 +528,203 @@ public class BoardController {
 	}
 
 	
+	// 프리랜서 필터, 정렬, 페이징 페이지
+	@GetMapping(value = "/listFreeP")
+	public String listPageFree(Criteria cri, Model model, HttpServletRequest request,@RequestParam("sn") String sn, String work_field, FreelancerVO vo) {
+		logger.debug("/listFreeP 실행 ");
+		logger.debug("work_field " + work_field);
+
+		
+		int pNum = bService.fiNumFree(vo);
+		model.addAttribute("pNum", pNum);
+		
+		int pageNum = 1;
+		int amount = 6;
+		
+		if(request.getParameter("pageNum") != null) {
+			pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		}
+		if(request.getParameter("amount") != null) {
+			amount = Integer.parseInt(request.getParameter("amount"));
+		}
+		
+		int offset = (pageNum-1)*amount;
+		
+		cri.setAmount(amount);
+		
+		cri.setOffset(offset);
+
+		logger.debug("pageNum : "+pageNum);
+		logger.debug("offset : "+offset);
+		model.addAttribute("pageMaker", new PageDTO(cri, pNum));
+		
+		// 북마크 체크
+		Integer ct = (Integer)request.getSession().getAttribute("ct_no");
+		if(request.getSession().getAttribute("ct_no") != null) {
+			logger.debug("클라이언트 로그인!");
+			logger.debug("ct"+ct);
+			List<BMarkVO> bMproj_no = bService.freebMark(ct);
+			logger.debug("bMproj_no"+bMproj_no);
+			
+			model.addAttribute("bMproj_no", bMproj_no);
+		}
+		
+		
+		logger.debug("@@@@ 222222222@@@@");
+		
+		model.addAttribute("list", bService.freeLSort(cri));
+		
+		return "/board/listFree";
+		
+	}
 	
+	// 모달 필터 프리랜서 찾기
+	@RequestMapping(value = "/moFiListFree", method = RequestMethod.POST)
+	public String moFiFree(FreelancerVO vo, Criteria cri, String skill_nm,String sn, Model model, String modalCheck, HttpServletRequest request) {
+		
+		logger.debug("vo : "+vo);
+		logger.debug("sn : "+sn);
+		
+		// 북마크 체크
+		Integer ct = (Integer)request.getSession().getAttribute("ct_no");
+		if(request.getSession().getAttribute("ct_no") != null) {
+			logger.debug("클라이언트 로그인!");
+			logger.debug("ct"+ct);
+			List<BMarkVO> bMproj_no = bService.freebMark(ct);
+			logger.debug("bMproj_no"+bMproj_no);
+			
+			model.addAttribute("bMproj_no", bMproj_no);
+		}
+
+		// worke_fiel를 선택안했을 시는 기본 "개발"
+		if(vo.getWork_field() == null) {
+			cri.setWork_field("개발");
+			vo.setWork_field("개발");
+		}
+		// district를 선택안했을 시는 ""으로 변경
+		if(vo.getDistrict().equals("전체")) {
+			cri.setDistrict("");
+			vo.setDistrict("");
+		}
+
 	
-	
+		
+		model.addAttribute("skill_nm", skill_nm);
+		model.addAttribute("job_level", vo.getJob_lev());
+		model.addAttribute("region", vo.getRegion());
+		model.addAttribute("district", vo.getDistrict());
+		
+		model.addAttribute("modalCheck", modalCheck);
+
+		
+		// skill_nm 없을때
+		if(vo.getSkill_nm() == null) {
+			int pNum = bService.mofiNumNsFree(vo);
+			model.addAttribute("pNum", pNum);
+			
+			int pageNum = 1;
+			int amount = 6;
+			
+			if(request.getParameter("pageNum") != null) {
+				pageNum = Integer.parseInt(request.getParameter("pageNum"));
+			}
+			if(request.getParameter("amount") != null) {
+				amount = Integer.parseInt(request.getParameter("amount"));
+			}
+			
+			int offset = (pageNum-1)*amount;
+			
+			cri.setAmount(amount);
+			
+			cri.setOffset(offset);
+			model.addAttribute("pageMaker", new PageDTO(cri, pNum));
+			// sn 없을때
+			if(sn == null) {
+				cri.setSn("reg_date");
+				logger.debug("@@@@ 정렬 확인용 sn vo.getSkill_nm() @@@@");
+				model.addAttribute("list", bService.moFiFreeNs(cri));
+				return "/board/listFree";		
+			}
+			
+			model.addAttribute("list", bService.moFiFreeNs(cri));
+			logger.debug("@@@@ 정렬 확인용 vo.getSkill_nm @@@@");
+			return "/board/listFree";		
+		}
+		if(skill_nm == "") {
+			int pNum = bService.mofiNumNsFree(vo);
+			model.addAttribute("pNum", pNum);
+			
+			int pageNum = 1;
+			int amount = 6;
+			
+			if(request.getParameter("pageNum") != null) {
+				pageNum = Integer.parseInt(request.getParameter("pageNum"));
+			}
+			if(request.getParameter("amount") != null) {
+				amount = Integer.parseInt(request.getParameter("amount"));
+			}
+			
+			int offset = (pageNum-1)*amount;
+			
+			cri.setAmount(amount);
+			
+			cri.setOffset(offset);
+			
+			model.addAttribute("pageMaker", new PageDTO(cri, pNum));
+			// sn 예외
+			if(sn == null) {
+				cri.setSn("reg_date");
+				logger.debug("@@@@ 정렬 확인용 sn skill_nm @@@@");
+				model.addAttribute("list", bService.moFiFreeNs(cri));
+				return "/board/listFree";		
+			}
+			
+			logger.debug("@@@@ 정렬 확인용 skill_nm @@@@");
+			model.addAttribute("list", bService.moFiFreeNs(cri));
+			return "/board/listFree";		
+		}
+		
+		int pNum = bService.mofiNumFree(vo);
+		model.addAttribute("pNum", pNum);
+		
+		int pageNum = 1;
+		int amount = 6;
+		
+		if(request.getParameter("pageNum") != null) {
+			pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		}
+		if(request.getParameter("amount") != null) {
+			amount = Integer.parseInt(request.getParameter("amount"));
+		}
+		
+		int offset = (pageNum-1)*amount;
+		
+		cri.setAmount(amount);
+		
+		cri.setOffset(offset);
+		
+		logger.debug("pageNum : "+pageNum);
+		logger.debug("offset : "+offset);
+		logger.debug("skill_nm : "+skill_nm);
+		model.addAttribute("pageMaker", new PageDTO(cri, pNum));
+		
+		// sn 예외
+		if(sn == null) {
+			cri.setSn("reg_date");
+			logger.debug("@@@@ 정렬 확인용 sn @@@@");
+			if(skill_nm == null) {
+				model.addAttribute("list", bService.moFiFreeNs(cri));
+				return "/board/listFree";		
+			}
+			model.addAttribute("list", bService.moFiFree(cri));
+			return "/board/listFree";			
+		}
+		
+		logger.debug("@@@@ 정렬 확인용 XXX @@@@");
+		model.addAttribute("list", bService.moFiFree(cri));
+		
+		return "/board/listFree";
+	}
 	
 	
 	

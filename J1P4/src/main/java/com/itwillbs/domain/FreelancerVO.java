@@ -36,5 +36,9 @@ public class FreelancerVO {
 	private String region;
 	private String district;
 	
+	// career
+	private String job_lev;
+	
+	
 
 }
