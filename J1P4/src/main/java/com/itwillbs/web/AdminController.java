@@ -25,6 +25,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +38,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itwillbs.domain.ProjectVO;
@@ -52,6 +54,7 @@ import com.itwillbs.service.ManagerService;
 import com.itwillbs.service.ProjectService;
 import com.itwillbs.service.SettlementService;
 import com.itwillbs.service.UserService;
+import com.itwillbs.util.DuplicateProjNoException;
 import com.itwillbs.util.Pagination;
 import com.itwillbs.util.PaginationService;
 
@@ -254,6 +257,20 @@ public class AdminController {
             managerService.approveManager(managerNo);
             return "redirect:/admin/managers";
         }
+    
+    // 매니저를 삭제하는 메서드("admin" 계정으로만 가능)
+    @PostMapping("/managers/delete")
+    public String deleteManager(@RequestParam("manager_no") int managerNo, HttpSession session) {
+        ManagerDTO loggedInManager = (ManagerDTO) session.getAttribute("manager");
+        if (loggedInManager != null && "admin".equals(loggedInManager.getManager_id())) {
+            managerService.deleteManager(managerNo);
+            return "redirect:/admin/managers";
+        } else {
+            return "redirect:/admin/login";
+        }
+    }
+    
+    
 
     // 회원가입 폼 페이지로 이동하는 메서드
     @GetMapping("/join")
@@ -466,18 +483,26 @@ public class AdminController {
 
 	     model.addAttribute("contracts", pagedContracts);
 	     model.addAttribute("pagination", pagination);
+	     model.addAttribute("pageSize", pageSize);
 
 	     return "admin/contractList";
 	 }
+	 //
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 	 // 계약서 업로드 메서드
 	 @PostMapping("/contracts/upload")
-	 public String uploadContract(@RequestParam("proj_no") int projNo,
-	                              @RequestParam("contract_title") String contractTitle,
-	                              @RequestParam("file") MultipartFile file) {
-		 // 파일이 비어있는지 확인
+	 @ResponseBody
+	 public ResponseEntity<String> uploadContract(@RequestParam("proj_no") int projNo,
+	                                              @RequestParam("contract_title") String contractTitle,
+	                                              @RequestParam("file") MultipartFile file) {
 	     if (!file.isEmpty()) {
 	         try {
-	        	 
 	             logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + UPLOAD_DIR);
 
 	             File uploadDirFile = new File(UPLOAD_DIR);
@@ -485,50 +510,54 @@ public class AdminController {
 	                 uploadDirFile.mkdirs(); // 경로가 존재하지 않으면 생성
 	             }
 
-	             // 파일을 저장할 경로를 지정
 	             String filePath = UPLOAD_DIR + File.separator + file.getOriginalFilename();
 	             File dest = new File(filePath);
-	             // 파일을 지정된 경로에 저장
 	             file.transferTo(dest);
 
-	             // ContractDTO 객체를 생성하고 필요한 정보를 설정
 	             ContractDTO contract = new ContractDTO();
 	             contract.setProj_no(projNo);
 	             contract.setContract_title(contractTitle);
 	             contract.setContract_path(filePath);
 	             contract.setUpload_date(new Date(System.currentTimeMillis()));
 
-	             // 서비스 호출
 	             contractService.saveContract(contract);
 
-	             // 프로젝트 상태를 "진행 중"으로 변경
 	             ProjectVO pvo = projectService.getProjectById(projNo);
 	             if (pvo != null) {
-	            	 pvo.setProj_status("진행 중");
+	                 pvo.setProj_status("진행 중");
 	                 projectService.updateProjectStatus(pvo);
 	             }
 
+	             return ResponseEntity.ok("Contract uploaded successfully.");
+
+	         } catch (DuplicateProjNoException e) {
+	             return ResponseEntity.status(HttpStatus.CONFLICT).body("Duplicate project number.");
 	         } catch (IOException e) {
 	             e.printStackTrace();
-	             return "admin/uploadError"; // 예외 발생 시 uploadError.jsp로 이동
+	             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Upload failed.");
 	         }
 	     } else {
-	         return "admin/uploadError"; // 파일이 비어있을 경우 uploadError.jsp로 이동
+	         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("File is empty.");
 	     }
-	     return "redirect:/admin/contracts";
 	 }
+
+
+
+
+	 
+	 
 	 
 	 
 	 @GetMapping("/contract/download")
 	    public void downloadFile(@RequestParam("contract_no") int contractNo, HttpServletResponse response) {
 	        ContractDTO contract = contractService.getContractById(contractNo);
 	        if (contract == null) {
-	            throw new IllegalArgumentException("Invalid contract ID: " + contractNo);
+	            throw new IllegalArgumentException("유효하지 않은 계약번호 : " + contractNo);
 	        }
 
 	        File file = new File(contract.getContract_path());
 	        if (!file.exists()) {
-	            throw new IllegalArgumentException("File not found: " + contract.getContract_path());
+	            throw new IllegalArgumentException("파일을 찾지 못했습니다. : " + contract.getContract_path());
 	        }
 
 	        // MIME 타입을 설정하여 브라우저가 파일 형식을 인식

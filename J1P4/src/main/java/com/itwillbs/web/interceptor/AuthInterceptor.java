@@ -22,7 +22,7 @@ public class AuthInterceptor implements HandlerInterceptor {
             return false;
         }
         
-        if (!"admin".equals(loggedInManager.getManager_id()) && request.getRequestURI().contains("/admin/managers/")) {
+        if (!"admin".equals(loggedInManager.getManager_id()) && request.getRequestURI().contains("/admin/managers")) {
             response.setContentType("text/html; charset=UTF-8");
             response.getWriter().write("<script>alert('관리자만 접근 가능한 메뉴입니다. 메인 페이지로 이동합니다.'); window.location.href = '/admin/main';</script>");
             response.getWriter().flush();
@@ -30,7 +30,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         }
         if (!"admin".equals(loggedInManager.getManager_id()) && request.getRequestURI().contains("/admin/announcement/")) {
         	response.setContentType("text/html; charset=UTF-8");
-        	response.getWriter().write("<script>alert('관리자만 접근 가능한 메뉴입니다. 메인 페이지로 이동합니다.'); window.location.href = '/admin/main';</script>");
+        	response.getWriter().write("<script>alert('관리자만 접근 가능한 메뉴입니다. 메인 페이지로 이동합니다.!!!!s'); window.location.href = '/admin/main';</script>");
         	response.getWriter().flush();
         	return false;
         }

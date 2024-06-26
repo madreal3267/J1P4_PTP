@@ -16,4 +16,6 @@ public interface ManagerService {
     int getManagerCount();
     
     int getUnapprovedManagerCount();
+    
+    void deleteManager(int managerNo);
 }

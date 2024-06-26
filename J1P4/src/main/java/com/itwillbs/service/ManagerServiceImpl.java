@@ -33,6 +33,11 @@ public class ManagerServiceImpl implements ManagerService {
     }
     
     @Override
+    public void deleteManager(int managerNo) {
+        managerDAO.deleteManager(managerNo);
+    }
+    
+    @Override
     public int getManagerCount() {
         return managerDAO.getManagerCount();
     }

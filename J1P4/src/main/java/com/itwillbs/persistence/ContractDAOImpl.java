@@ -27,6 +27,12 @@ public class ContractDAOImpl implements ContractDAO {
     public void insertContract(ContractDTO contract) {
         sqlSession.insert(NAMESPACE + "insertContract", contract);
     }
+    
+    @Override
+    public boolean existsByProjNo(int proj_no) {
+        Integer count = sqlSession.selectOne(NAMESPACE + "existsByProjNo", proj_no);
+        return count != null && count > 0;
+    }
 
     @Override
     public ContractDTO selectContractById(int contract_no) {

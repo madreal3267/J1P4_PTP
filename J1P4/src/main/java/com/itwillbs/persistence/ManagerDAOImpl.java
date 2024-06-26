@@ -34,6 +34,11 @@ public class ManagerDAOImpl implements ManagerDAO {
     }
     
     @Override
+    public void deleteManager(int managerNo) {
+        sqlSession.delete(namespace + ".deleteManager", managerNo);
+    }
+    
+    @Override
     public int getManagerCount() {
         return sqlSession.selectOne(namespace + ".getManagerCount");
     }

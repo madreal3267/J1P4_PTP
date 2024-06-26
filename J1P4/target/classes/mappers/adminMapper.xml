@@ -193,63 +193,74 @@
   	 
   	 <!-- 정산 관리 -->
   	 <select id="getAllSettlements" resultType="com.itwillbs.dto.SettlementDTO">
-        SELECT s.settlement_no, s.proj_no, s.price, s.price_check, s.settled_cost, s.fee, s.settlement_check, s.settlement_requested, s.merchant_uid,
-               p.proj_title, c.ct_id, f.free_id, u.bank_nm, u.account, u.depositor
-        FROM settlement s
-        JOIN project p ON s.proj_no = p.proj_no
-        JOIN client c ON s.ct_no = c.ct_no
-        JOIN freelancer f ON s.free_no = f.free_no
-        JOIN user u ON f.free_id = u.user_id
+        SELECT s.settlement_no, s.proj_no, p.proj_cost AS price, p.pay_check AS price_check, 
+		       s.settled_cost, s.fee, s.settlement_check, s.settlement_requested, s.merchant_uid,
+		       p.proj_title, c.ct_id, f.free_id, u.bank_nm, u.account, u.depositor
+		FROM project p
+		JOIN settlement s ON p.proj_no = s.proj_no
+		JOIN client c ON p.ct_no = c.ct_no
+		JOIN freelancer f ON p.free_no = f.free_no
+		JOIN user u ON f.free_id = u.user_id
+<!-- 		WHERE p.proj_status = '진행 중' -->
     </select>
 
     <select id="getSettlementsByPriceCheck" parameterType="boolean" resultType="com.itwillbs.dto.SettlementDTO">
-        SELECT s.*, p.proj_title, c.ct_id, f.free_id, u.bank_nm, u.account, u.depositor
-        FROM settlement s
-        JOIN project p ON s.proj_no = p.proj_no
-        JOIN client c ON s.ct_no = c.ct_no
-        JOIN freelancer f ON s.free_no = f.free_no
-        JOIN user u ON f.free_id = u.user_id
-        WHERE s.price_check = #{priceCheck}
-    </select>
+	    SELECT s.settlement_no, s.proj_no, p.proj_cost AS price, p.pay_check AS price_check, 
+	           s.settled_cost, s.fee, s.settlement_check, s.settlement_requested, s.merchant_uid,
+	           p.proj_title, c.ct_id, f.free_id, u.bank_nm, u.account, u.depositor
+	    FROM project p
+	    JOIN settlement s ON p.proj_no = s.proj_no
+	    JOIN client c ON p.ct_no = c.ct_no
+	    JOIN freelancer f ON p.free_no = f.free_no
+	    JOIN user u ON f.free_id = u.user_id
+	    WHERE p.pay_check = #{priceCheck}
+	</select>
+	
+	<select id="getSettlementsBySettlementCheck" parameterType="boolean" resultType="com.itwillbs.dto.SettlementDTO">
+	    SELECT s.settlement_no, s.proj_no, p.proj_cost AS price, p.pay_check AS price_check, 
+	           s.settled_cost, s.fee, s.settlement_check, s.settlement_requested, s.merchant_uid,
+	           p.proj_title, c.ct_id, f.free_id, u.bank_nm, u.account, u.depositor
+	    FROM project p
+	    JOIN settlement s ON p.proj_no = s.proj_no
+	    JOIN client c ON p.ct_no = c.ct_no
+	    JOIN freelancer f ON p.free_no = f.free_no
+	    JOIN user u ON f.free_id = u.user_id
+	    WHERE s.settlement_check = #{settlementCheck}
+	</select>
+	
+	<select id="getSettlementById" parameterType="int" resultType="com.itwillbs.dto.SettlementDTO">
+	    SELECT s.settlement_no, s.proj_no, p.proj_cost AS price, p.pay_check AS price_check, 
+	           s.settled_cost, s.fee, s.settlement_check, s.settlement_requested, s.merchant_uid,
+	           p.proj_title, c.ct_id, f.free_id, u.bank_nm, u.account, u.depositor
+	    FROM project p
+	    JOIN settlement s ON p.proj_no = s.proj_no
+	    JOIN client c ON p.ct_no = c.ct_no
+	    JOIN freelancer f ON p.free_no = f.free_no
+	    JOIN user u ON f.free_id = u.user_id
+	    WHERE s.settlement_no = #{settlement_no}
+	</select>
+	
+	<update id="updateSettlement" parameterType="com.itwillbs.dto.SettlementDTO">
+	    UPDATE settlement
+	    SET settled_cost = #{settled_cost},
+	        fee = #{fee},
+	        settlement_check = #{settlement_check},
+	        settlement_requested = #{settlement_requested},
+	        merchant_uid = #{merchant_uid}
+	    WHERE settlement_no = #{settlement_no}
+	</update>
 
-    <select id="getSettlementsBySettlementCheck" parameterType="boolean" resultType="com.itwillbs.dto.SettlementDTO">
-        SELECT s.*, p.proj_title, c.ct_id, f.free_id, u.bank_nm, u.account, u.depositor
-        FROM settlement s
-        JOIN project p ON s.proj_no = p.proj_no
-        JOIN client c ON s.ct_no = c.ct_no
-        JOIN freelancer f ON s.free_no = f.free_no
-        JOIN user u ON f.free_id = u.user_id
-        WHERE s.settlement_check = #{settlementCheck}
-    </select>
-
-    <select id="getSettlementById" parameterType="int" resultType="com.itwillbs.dto.SettlementDTO">
-        SELECT s.settlement_no, s.proj_no, s.price, s.price_check, s.settled_cost, s.fee, s.settlement_check, s.settlement_requested, s.merchant_uid,
-               p.proj_title, c.ct_id, f.free_id, u.bank_nm, u.account, u.depositor
-        FROM settlement s
-        JOIN project p ON s.proj_no = p.proj_no
-        JOIN client c ON s.ct_no = c.ct_no
-        JOIN freelancer f ON s.free_no = f.free_no
-        JOIN user u ON f.free_id = u.user_id
-        WHERE s.settlement_no = #{settlement_no}
-    </select>
-
-    <update id="updateSettlement" parameterType="com.itwillbs.dto.SettlementDTO">
-        UPDATE settlement
-        SET price = #{price},
-            price_check = #{price_check},
-            settled_cost = #{settled_cost},
-            fee = #{fee},
-            settlement_check = #{settlement_check},
-            settlement_requested = #{settlement_requested},
-            merchant_uid = #{merchant_uid}
-        WHERE settlement_no = #{settlement_no}
-    </update>
 
     <!-- 계약서 -->
     <insert id="insertContract" parameterType="com.itwillbs.dto.ContractDTO">
         INSERT INTO contract (proj_no, contract_title, contract_path, upload_date)
         VALUES (#{proj_no}, #{contract_title}, #{contract_path}, #{upload_date})
     </insert>
+    
+    <!-- 중복여부 체크 -->
+    <select id="existsByProjNo" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM contract WHERE proj_no = #{proj_no}
+    </select>
 
     <select id="selectContractById" parameterType="int" resultType="com.itwillbs.dto.ContractDTO">
         SELECT c.contract_no, c.proj_no, c.contract_title, c.contract_path, c.upload_date, 
@@ -298,5 +309,9 @@
 	    INSERT INTO manager (manager_nm, manager_call, manager_email, manager_id, manager_pw, approved)
 	    VALUES (#{manager_nm}, #{manager_call}, #{manager_email}, #{manager_id}, #{manager_pw}, FALSE)
 	</insert>
+	
+	<delete id="deleteManager" parameterType="int">
+        DELETE FROM manager WHERE manager_no = #{managerNo}
+    </delete>
   	 <!-- 관리자 관리 -->
   </mapper>

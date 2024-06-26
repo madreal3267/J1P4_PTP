@@ -100,7 +100,7 @@
 </section>
 
 <section class="content">
-<!-- 공지사항 리스트 -->
+    <!-- 공지사항 리스트 -->
     <div class="row">
         <div class="col-lg-12 col-xs-12">
             <div class="box">
@@ -121,7 +121,7 @@
             </div>
         </div>
     </div>
-<!-- 공지사항 리스트 -->
+    <!-- 공지사항 리스트 -->
     
     <div class="row">
         <div class="col-lg-3 col-xs-6">
@@ -148,21 +148,23 @@
                 <a href="/admin/projects" class="small-box-footer">자세히 <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
-        <div class="col-lg-3 col-xs-6">
-            <div class="small-box bg-yellow">
-                <div class="inner">
-                    <h3>${managerCount}</h3>
-                    <p>매니저</p>
-                    <c:if test="${unapprovedManagerCount > 0}">
-                        <span class="badge badge-danger">미승인된 매니저 수: ${unapprovedManagerCount}</span>
-                    </c:if>
+        <c:if test="${sessionScope.manager.manager_id == 'admin'}">
+            <div class="col-lg-3 col-xs-6">
+                <div class="small-box bg-yellow">
+                    <div class="inner">
+                        <h3>${managerCount}</h3>
+                        <p>매니저</p>
+                        <c:if test="${unapprovedManagerCount > 0}">
+                            <span class="badge badge-danger">미승인된 매니저 수: ${unapprovedManagerCount}</span>
+                        </c:if>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person"></i>
+                    </div>
+                    <a href="/admin/managers" class="small-box-footer">자세히 <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
-                <div class="icon">
-                    <i class="ion ion-person"></i>
-                </div>
-                <a href="/admin/managers" class="small-box-footer">자세히 <i class="fa fa-arrow-circle-right"></i></a>
             </div>
-        </div>
+        </c:if>
     </div>
 
     <div class="row">
@@ -187,9 +189,6 @@
             </div>
         </div>
     </div>
-
-    
-
 </section>
 
 <!-- 공지사항 모달 -->

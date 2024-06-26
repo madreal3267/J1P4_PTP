@@ -13,6 +13,8 @@ public interface ManagerDAO {
     
     void insertManager(ManagerDTO manager);
     
+    void deleteManager(int managerNo);
+    
     int getManagerCount();
     
     int getUnapprovedManagerCount();

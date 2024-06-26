@@ -106,7 +106,7 @@
                 <h4 class="modal-title" id="uploadContractModalLabel">Upload Contract</h4>
             </div>
             <div class="modal-body">
-                <form id="uploadForm" action="/admin/contracts/upload" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+                <form id="uploadForm" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
                     <div class="form-group">
                         <label for="proj_no">Project No:</label>
                         <input type="text" class="form-control" id="proj_no" name="proj_no">
@@ -143,21 +143,54 @@
         console.log("File:", file);    
 
         if (projNo === '') {
-            alert('Project No is required');
+            alert('프로젝트 번호를 입력하세요!');
             return false;
         }
 
         if (contractTitle === '') {
-            alert('Contract Title is required');
+            alert('계약서 제목을 입력하세요!');
             return false;
         }
 
         if (file === '') {
-            alert('Please select a file to upload');
+            alert('업로드 할 파일을 선택해 주세요!');
             return false;
         }
 
-        alert('Submitting form with Project No: ' + projNo);
         return true;
     }
+
+    document.getElementById('uploadForm').onsubmit = function(e) {
+        e.preventDefault(); // 기본 폼 제출 동작 방지
+
+        if (!validateForm()) {
+            return;
+        }
+
+        var formData = new FormData(this);
+        fetch('/admin/contracts/upload', {
+            method: 'POST',
+            body: formData
+        })
+        .then(function(response) {
+            return response.text().then(function(text) {
+                if (response.status === 409) {
+                    alert('중복된 프로젝트 번호입니다.');
+                    throw new Error('중복된 프로젝트 번호입니다.');
+                }
+                if (!response.ok) {
+                    throw new Error('업로드 실패');
+                }
+                return text;
+            });
+        })
+        .then(function(text) {
+            $('#uploadContractModal').modal('hide');
+            alert(text);
+            window.location.reload(); // 페이지 새로고침하여 목록 갱신
+        })
+        .catch(function(error) {
+            console.error('문제가 발생하였습니다. :', error);
+        });
+    };
 </script>
