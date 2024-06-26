@@ -23,22 +23,44 @@
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+<<<<<<< HEAD
+                                                                
+        
+        
+=======
                                                 
+>>>>>>> b005db92adf0240b74addbabeb441acb4cf7724f
         
         
         
         
         <property name="context-root" value="web"/>
+<<<<<<< HEAD
+                                
+        
+        
+        <property name="java-output-path" value="/J1P4/target/classes"/>
+                                                        	
+    
+    
+=======
                         
         
         <property name="java-output-path" value="/J1P4/target/classes"/>
                                         	
+>>>>>>> b005db92adf0240b74addbabeb441acb4cf7724f
     
     
     
     
     </wb-module>
+<<<<<<< HEAD
+                            
+
+
+=======
                     
+>>>>>>> b005db92adf0240b74addbabeb441acb4cf7724f
 
 
 
