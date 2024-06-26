@@ -39,6 +39,8 @@ public class FreelancerVO {
 	// career
 	private String job_lev;
 	
+	private String user_type;
+	
 	
 
 }

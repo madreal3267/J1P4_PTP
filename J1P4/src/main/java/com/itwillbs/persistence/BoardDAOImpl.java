@@ -12,10 +12,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.itwillbs.domain.ApplyVO;
 import com.itwillbs.domain.BMarkVO;
+import com.itwillbs.domain.CareerVO;
+import com.itwillbs.domain.CompanyVO;
 import com.itwillbs.domain.Criteria;
 import com.itwillbs.domain.FreelancerVO;
+import com.itwillbs.domain.LicenseVO;
+import com.itwillbs.domain.OfferVO;
+import com.itwillbs.domain.PartnersVO;
 import com.itwillbs.domain.ProjectVO;
+import com.itwillbs.domain.RegionVO;
+import com.itwillbs.domain.SkillVO;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO{
@@ -183,9 +191,90 @@ public class BoardDAOImpl implements BoardDAO{
 		return result;
 	}
 
-	
+	// 프로필 불러오기
+	@Override
+	public FreelancerVO getProfile(FreelancerVO vo) {
+		return sqlSession.selectOne(NAMESPACE+"getProfile",vo);
+	}
 
+	@Override
+	public List<SkillVO> getSkill(FreelancerVO vo) {
+		return sqlSession.selectList(NAMESPACE+"getSkill",vo);
+	}
+
+	@Override
+	public RegionVO getReg(FreelancerVO vo) {
+		return sqlSession.selectOne(NAMESPACE+"getReg",vo);
+	}
+
+	@Override
+	public List<CareerVO> getCareer(FreelancerVO vo) {
+		return sqlSession.selectList(NAMESPACE+"getCareer",vo);
+	}
+
+	@Override
+	public List<LicenseVO> getLicense(FreelancerVO vo) {
+		return sqlSession.selectList(NAMESPACE+"getLicense",vo);
+	}
+
+	@Override
+	public List<CompanyVO> getComp(FreelancerVO vo) {
+		return sqlSession.selectList(NAMESPACE+"getComp",vo);
+	}
+
+	@Override
+	public List<PartnersVO> getPartn(FreelancerVO vo) {
+		return sqlSession.selectList(NAMESPACE+"getPartn",vo);
+	}
+
+	@Override
+	public void doBMarkC(BMarkVO vo) {
+		logger.debug(" doBMark(BMarkVO vo) 실행 ");
+		sqlSession.insert(NAMESPACE+"doBMarkC", vo);
+	}
+
+	@Override
+	public void deleteBMarkC(BMarkVO vo) {
+		sqlSession.delete(NAMESPACE+"deleteBMarkC", vo);
+	}
+
+	@Override
+	public List<BMarkVO> bMarkC(int ct_no) {
+		List<BMarkVO> result = sqlSession.selectList(NAMESPACE+"bMarkC",ct_no);
+		return result;
+	}
 	
+	// 프로젝트 상세내용 조회
+	@Override
+	public List<ProjectVO> getProj(int ct_no) {
+		logger.debug(" DAO : getProj(vo) 호출 (❁´◡`❁) ");
+		
+		return sqlSession.selectList(NAMESPACE + "getProj",ct_no);
+	}
+
+	// 제안하기
+	@Override
+	public void insertOffer(OfferVO vo) {
+		
+		sqlSession.selectOne(NAMESPACE+"insertOffer", vo);
+	}
+
+	// 클라이언트가 요구하는 스킬 출력
+	@Override
+	public List<SkillVO> getSkillA(int proj_no) {
+		logger.debug(" DAO : getSkill() 호출 (❁´◡`❁) ");
+		
+		return sqlSession.selectList(NAMESPACE+"getSkillA",proj_no);
+	}
+	
+	// 지원하기
+	@Override
+	public void insertApply(ApplyVO vo) {
+		logger.debug(" DAO : insertApply(vo) 호출 (❁´◡`❁) ");
+		
+		sqlSession.insert(NAMESPACE+"applyProj",vo);
+
+	}
 	
 
 }

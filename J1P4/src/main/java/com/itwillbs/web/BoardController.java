@@ -35,6 +35,8 @@ import com.itwillbs.domain.ProjectVO;
 import com.itwillbs.domain.RegionVO;
 import com.itwillbs.domain.SkillVO;
 import com.itwillbs.service.BoardService;
+import com.itwillbs.service.MyProfileService;
+import com.itwillbs.service.OfferProjServie;
 
 @Controller
 @RequestMapping(value = "/board/*")
@@ -46,6 +48,7 @@ public class BoardController {
 
 	@Inject
 	private BoardService bService;
+
 	
 	// http://localhost:8088/board/listPro
 	// 기본 페이지
@@ -279,6 +282,8 @@ public class BoardController {
 				logger.debug("bMproj_no"+bMproj_no);
 				
 				model.addAttribute("bMproj_no", bMproj_no);
+				// 프로젝트 지원
+				model.addAttribute("skill",bService.getSkillA(proj_no));
 			}
 		// 뷰페이지 이동
 		return "/board/detailList";
@@ -289,6 +294,17 @@ public class BoardController {
 	// http://localhost:8088/board/listFree
 	@GetMapping(value = "/listFree")
 	public void flist(Criteria cri, Model model, HttpServletRequest request) {
+		
+		// 북마크 체크
+		Integer ct = (Integer)request.getSession().getAttribute("ct_no");
+		if(request.getSession().getAttribute("ct_no") != null) {
+			logger.debug("클라이언트 로그인!");
+			logger.debug("ct"+ct);
+			List<BMarkVO> bMproj_no = bService.bMarkC(ct);
+			logger.debug("bMproj_no"+bMproj_no);
+			
+			model.addAttribute("bMproj_no", bMproj_no);
+		}
 		
 		int pNum = bService.fNum();
 		model.addAttribute("pNum", pNum);
@@ -563,7 +579,7 @@ public class BoardController {
 		if(request.getSession().getAttribute("ct_no") != null) {
 			logger.debug("클라이언트 로그인!");
 			logger.debug("ct"+ct);
-			List<BMarkVO> bMproj_no = bService.freebMark(ct);
+			List<BMarkVO> bMproj_no = bService.bMarkC(ct);
 			logger.debug("bMproj_no"+bMproj_no);
 			
 			model.addAttribute("bMproj_no", bMproj_no);
@@ -590,7 +606,7 @@ public class BoardController {
 		if(request.getSession().getAttribute("ct_no") != null) {
 			logger.debug("클라이언트 로그인!");
 			logger.debug("ct"+ct);
-			List<BMarkVO> bMproj_no = bService.freebMark(ct);
+			List<BMarkVO> bMproj_no = bService.bMarkC(ct);
 			logger.debug("bMproj_no"+bMproj_no);
 			
 			model.addAttribute("bMproj_no", bMproj_no);
@@ -726,9 +742,99 @@ public class BoardController {
 		return "/board/listFree";
 	}
 	
+	// 프리랜서 상세페이지 이동
+	@GetMapping(value = "/detailListFree")
+	public String detailFreeGET(@RequestParam int free_no, Model model,FreelancerVO vo,HttpSession session,HttpServletResponse response, HttpServletRequest request) {
+		// 프로젝트 리스트 상세정보
+
+		model.addAttribute("free_no",vo.getFree_no());
+		logger.debug("vo : "+vo);
+
+		
+		// 북마크 체크, 프리랜서에게 제안할 정보 전달
+		Integer ct = (Integer)request.getSession().getAttribute("ct_no");
+		if(request.getSession().getAttribute("ct_no") != null) {
+			logger.debug("클라이언트 로그인!");
+			logger.debug("ct"+ct);
+			List<BMarkVO> bMproj_no = bService.bMarkC(ct);
+			logger.debug("bMproj_no"+bMproj_no);
+			
+			model.addAttribute("bMproj_no", bMproj_no);
+			// 클라이언트가 프리랜서에게 제안
+			List<ProjectVO> pvo = bService.getProj(ct);
+			model.addAttribute("proj",pvo);
+		}
+		
+		if(vo.getUser_type()!=null) {
+			if(vo.getUser_type().equals("개인") || vo.getUser_type().equals("팀")) {
+				model.addAttribute("myProfile", bService.getProfile(vo));
+				model.addAttribute("mySkill", bService.getSkill(vo));
+				model.addAttribute("myReg",bService.getReg(vo));
+				model.addAttribute("myCareer", bService.getCareer(vo));
+				model.addAttribute("myLicense", bService.getLicense(vo));
+				return "/board/detailListFree";
+			}else if(vo.getUser_type().equals("사업자")) {			
+					model.addAttribute("myProfile", bService.getProfile(vo));
+					model.addAttribute("mySkill", bService.getSkill(vo));
+					model.addAttribute("myReg",bService.getReg(vo));
+					model.addAttribute("myCareer", bService.getCareer(vo));
+					model.addAttribute("myComp", bService.getComp(vo));
+					model.addAttribute("myPartn", bService.getPartn(vo));
+					return "/board/detailListFreeC";
+			}
+		}
+		model.addAttribute("myProfile", bService.getProfile(vo));
+		model.addAttribute("mySkill", bService.getSkill(vo));
+		model.addAttribute("myReg",bService.getReg(vo));
+		model.addAttribute("myCareer", bService.getCareer(vo));
+		model.addAttribute("myLicense", bService.getLicense(vo));
+		// 뷰페이지 이동
+		return "/board/detailListFree";
+	}
 	
+	// 클라이언트가 프리랜서를 북마크 등록
+	@GetMapping(value = "/dobMarkC")
+	@ResponseBody
+	public void dobMarkC(@RequestParam int free_no, HttpSession session, BMarkVO vo, HttpServletRequest request){
+		
+		// 게시물 번호
+		vo.setFree_no(free_no);
+		
+		// 로그인한 클라이언트
+		Integer ct_no = (Integer)request.getSession().getAttribute("ct_no");
+		
+		// 테스트용 프리랜서
+		//int Free_no = 349;
+		vo.setCt_no(ct_no);;
+
+		// 디비에 북마크 저장
+		bService.doBMarkC(vo);
+		
+		
+		logger.debug("북마크 저장");
+	}
 	
-	
+	// 클라이언트가 프리랜서를 북마크 해제
+	@GetMapping(value = "/deletebMarkC")
+	@ResponseBody
+	public void deleteBMarkC(@RequestParam int free_no, HttpSession session, BMarkVO vo, HttpServletRequest request){
+		
+		// 게시물 번호
+		vo.setFree_no(free_no);
+		
+		// 로그인한 클라이언트
+		Integer ct_no = (Integer)request.getSession().getAttribute("ct_no");
+		
+		// 테스트용 프리랜서
+		//int Free_no = 349;
+		vo.setCt_no(ct_no);
+		
+		
+		// 디비에 북마크 해제
+		bService.deleteBMarkC(vo);
+		
+		logger.debug("북마크 해제");
+	}
 	
 	
 	

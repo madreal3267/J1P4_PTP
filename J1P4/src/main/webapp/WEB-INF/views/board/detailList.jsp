@@ -18,11 +18,12 @@
 </c:if>
 
 <!-- ============== 로그인 했을 때 담기는 세션 값 (추후 삭제 예정) ================= -->
-user_id: ${sessionScope.user_id },
-user_cf: ${sessionScope.user_cf },
-user_type: ${sessionScope.user_type },
-free_no: ${sessionScope.free_no },
-ct_no: ${sessionScope.ct_no }
+<%-- user_id: ${sessionScope.user_id }, --%>
+<%-- user_cf: ${sessionScope.user_cf }, --%>
+<%-- user_type: ${sessionScope.user_type }, --%>
+<%-- free_no: ${sessionScope.free_no }, --%>
+<%-- ct_no: ${sessionScope.ct_no } --%>
+
 
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
  <div class="card overflow-hidden card-2" >
@@ -147,12 +148,11 @@ ${projectVO.proj_content} <br>
 			</c:otherwise>
 	</c:choose>	
         </div>
-			<p class="float-left absolute top-5 right-3 md:top-8 md:right-14">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#applyModal">
+
+	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#applyModal" id="appBtn">
 	  지원하기
 	</button>
-                
-			</p>
+
 		</div>
 	</div>
 </div>
@@ -165,6 +165,7 @@ ${projectVO.proj_content} <br>
  position: fixed;"> <h2>클라이언트 평점</h2></div>
 </div>
 	
+
 
 <!-- 지원하기 모달창 시작 -->
 <form id="fm1">
@@ -184,7 +185,13 @@ ${projectVO.proj_content} <br>
 	<div class="modal-body">
 	<div class="m-2">
 	최근 프로필 업데이트일은 ㅇㅇㅇ입니다. 
-	<a href="" >내 프로필 관리 ></a>
+<!-- 	<a href="" >내 프로필 관리 ></a> -->
+	  <c:if test="${sessionScope.user_type.equals('개인') or sessionScope.user_type.equals('팀') }">
+          <a href="/myProfile/profile?free_no=${sessionScope.free_no }" >내 프로필 관리</a>
+      </c:if>
+      <c:if test="${sessionScope.user_type.equals('사업자') }">
+          <a href="/myProfile/profileB?free_no=${sessionScope.free_no }" >내 프로필 관리</a>
+      </c:if>
 	</div>
 	<hr>
 	<div class="m-2">
@@ -193,9 +200,9 @@ ${projectVO.proj_content} <br>
 		
 	<c:forEach var="skill" items="${skill }" varStatus="status">
 	<div class="border border-1 rounded-3 m-2 p-4" role="group" style="width: 230px; display: inline-block;">
-	<input type="hidden" name="free_no" value=4>
+	<input type="hidden" name="free_no" value="${sessionScope.free_no }">
 	<!-- value에 원활한 테스트를 위해 임시로 상수 4를 넣음 추후 세션으로 아이디값을 받아 select로 free_no를 받아 넣을 예정 -->
-	<input type="hidden" name="proj_no" value=101>
+	<input type="hidden" name="proj_no" value="${projectVO.proj_no }">
 	<!-- value에 원활한 테스트를 위해 임시로 상수 101을 넣음 추후 상세 페이지 주소줄에서 파라미터값을 받아 넣을 예정  -->
 	<h4><span class="badge bg-warning">${skill.skill_nm }</span></h4>
 	<input type="radio" value="${skill.skill_nm }" name="skillCheck${status.count}" id="radioSk${status.index}">
@@ -264,11 +271,22 @@ ${projectVO.proj_content} <br>
 </div>
 <!-- 지원 성공 후 모달창 끝 -->
 
-<!-- 부트스트랩 자바스크립트 -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 <!-- JQuery 자바스크립트 -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js' integrity='sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==' crossorigin='anonymous'></script>
 <script>
+
+$("#appBtn").click(function () {
+	if(${free_no == null}){
+	$('#applyModal').on('show.bs.modal', function (e) {
+ 		 e.preventDefault();
+	})
+	
+	alert("프리랜서 로그인이 필요합니다")	
+	
+	}
+})
+
 $(function() {
 	$("#submitButt").click(function() {
 		$.ajax({
@@ -283,6 +301,7 @@ $(function() {
 		});
 	});
 });
+
 </script>
 <script type="text/javascript">
 // 하트 클릭

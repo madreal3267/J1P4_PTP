@@ -8,10 +8,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.itwillbs.domain.ApplyVO;
 import com.itwillbs.domain.BMarkVO;
+import com.itwillbs.domain.CareerVO;
+import com.itwillbs.domain.CompanyVO;
 import com.itwillbs.domain.Criteria;
 import com.itwillbs.domain.FreelancerVO;
+import com.itwillbs.domain.LicenseVO;
+import com.itwillbs.domain.OfferVO;
+import com.itwillbs.domain.PartnersVO;
 import com.itwillbs.domain.ProjectVO;
+import com.itwillbs.domain.RegionVO;
+import com.itwillbs.domain.SkillVO;
 import com.itwillbs.persistence.BoardDAO;
 
 @Service
@@ -170,10 +178,80 @@ public class BoardServiceImpl implements BoardService {
 		return bdao.mofiNumNsFree(vo);
 	}
 	
+	// 프로필 불러오기
+	@Override
+	public FreelancerVO getProfile(FreelancerVO vo) {
+		return bdao.getProfile(vo);
+	}
+
+	@Override
+	public List<SkillVO> getSkill(FreelancerVO vo) {
+		return bdao.getSkill(vo);
+	}
+
+	@Override
+	public RegionVO getReg(FreelancerVO vo) {
+		return bdao.getReg(vo);
+	}
+
+	@Override
+	public List<CareerVO> getCareer(FreelancerVO vo) {
+		return bdao.getCareer(vo);
+	}
+
+	@Override
+	public List<LicenseVO> getLicense(FreelancerVO vo) {
+		return bdao.getLicense(vo);
+	}
+
+	@Override
+	public List<CompanyVO> getComp(FreelancerVO vo) {
+		return bdao.getComp(vo);
+	}
+
+	@Override
+	public List<PartnersVO> getPartn(FreelancerVO vo) {
+		return bdao.getPartn(vo);
+	}
+
+	@Override
+	public void doBMarkC(BMarkVO vo) {
+		bdao.doBMarkC(vo);
+		
+	}
+
+	@Override
+	public void deleteBMarkC(BMarkVO vo) {
+		bdao.deleteBMarkC(vo);
+	}
+
+	@Override
+	public List<BMarkVO> bMarkC(int ct_no) {
+		return bdao.bMarkC(ct_no);
+	}
 	
+	@Override
+	public List<ProjectVO> getProj(int ct_no) {
+		logger.debug(" (●'◡'●) Service: getProj(vo) 실행 ");
+		return bdao.getProj(ct_no);
+	}
+
+	@Override
+	public void insertOffer(OfferVO vo) {
+		bdao.insertOffer(vo);
+	}
 	
-	
-	
+	@Override
+	public List<SkillVO> getSkillA(int proj_no) {
+		logger.debug(" (●'◡'●) Service: getSkill() 실행 ");
+		return bdao.getSkillA(proj_no);
+	}
+
+	@Override
+	public void insertApply(ApplyVO vo) {
+		logger.debug(" (●'◡'●) Service: insertApply() 실행 ");
+		bdao.insertApply(vo);
+	}
 	
 	
 	
