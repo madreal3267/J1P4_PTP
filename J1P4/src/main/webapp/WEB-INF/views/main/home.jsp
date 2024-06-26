@@ -33,7 +33,7 @@
 	</div>
 	
 	<div id="mainImg">
-	<img src="../resources/main.png" style="width:500px;" alt="mainImg"/>
+	<img src="../resources/main2.png" style="width:500px;" alt="mainImg"/>
 	</div>
 	
 	<!-- ============== 비회원 메인 메뉴 ================= -->
