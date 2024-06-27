@@ -222,7 +222,7 @@
 		select p.*
 		from project p 
 		join client c on c.ct_no = p.ct_no
-		where p.proj_status = '등록 실패' and c.ct_id = #{user_id}
+		where p.proj_status = '반려' and c.ct_id = #{user_id}
 	</select>	
 	
 	<!-- 지원자 모집중 프로젝트 -->

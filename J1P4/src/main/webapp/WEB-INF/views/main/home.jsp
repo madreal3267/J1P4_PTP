@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 
 <!-- ============== 비회원 헤더 ================= -->
-
+${sessionScope }
 <c:if test="${empty sessionScope.user_id }">
 <c:import url="../include/header.jsp"></c:import>
 </c:if>
@@ -17,9 +17,9 @@
 <c:import url="../include/ctHeader.jsp"></c:import>
 </c:if>
 
-<c:if test="${not empty sessionScope.user_id && empty sessionScope.user_cf}">
-<meta http-equiv='refresh' content='0;url=../member/mailsend'>
-</c:if>
+<%-- <c:if test="${not empty sessionScope.user_id && empty sessionScope.user_cf}"> --%>
+<!-- <meta http-equiv='refresh' content='0;url=../member/mailsend'> -->
+<%-- </c:if> --%>
 
 <div style="position: relative;">
 	<div class="my-3 py-3" >

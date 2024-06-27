@@ -314,6 +314,13 @@ public class MemberServiceImpl implements MemberService {
 	public Integer chkIdentB(String id) {
 		return mdao.chkIdentB(id);
 	}
+
+
+
+	@Override
+	public String chkEmail(String email) {
+		return mdao.chkEmail(email);
+	}
 	
 	
 	

@@ -46,8 +46,8 @@ public class MyProManageCtController {
 	@RequestMapping(value = "/interestFreelancer",method = RequestMethod.GET)
 	public void interestFreelancerList(HttpSession session, Model model) {
 		logger.debug("/interestFreelancer -> interestFreelancerList() 호출");
-		//임의로 세션에 user_id 입력 
-		session.setAttribute("user_id", "jyjeon");
+//		//임의로 세션에 user_id 입력 
+//		session.setAttribute("user_id", "jyjeon");
 		String user_id = (String)session.getAttribute("user_id");
 		
 		List<freeInfoDTO> interestFreelancerList = myService.interestFreelancerList(user_id);

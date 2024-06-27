@@ -99,5 +99,7 @@ public interface MemberService {
 		// 신원인증 확인
 		public Integer chkIdent(String id);
 		public Integer chkIdentB(String id);
+		
+		public String chkEmail(String email);
 	
 }

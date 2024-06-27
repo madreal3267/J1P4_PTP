@@ -260,47 +260,54 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	public String chkEmail(String email) {
+		return sqlSession.selectOne(NAMESPACE+"chkEmail",email);
+	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
 	@Override
 	public Integer chkIdent(String id) {
 		return sqlSession.selectOne(NAMESPACE+"chkIdent",id);

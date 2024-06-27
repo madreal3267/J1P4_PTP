@@ -27,7 +27,7 @@
   	 <update id="updateMailAuth" parameterType="com.itwillbs.domain.MemberVO">
   	 	update user
   	 	set mail_auth=1
-  	 	where mail_auth=#{mail_auth} and user_email=#{user_email} 
+  	 	where user_email=#{user_email} 
   	 </update>	
   	 
   	 <!-- 유형을 선택하고, 확인버튼을 눌렀을때 mail_auth=1로 바뀌고 user_cf, user_type이 업데이트된다. -->
@@ -317,6 +317,13 @@
 		select * from user
 		where user_id=#{user_id} and bussiness_registration is not null
 		) as isB
+	</select>
+	
+	<select id="chkEmail" resultType="string">
+		select user_id from user
+		where user_email = #{user_email}
+	
+	
 	</select>
 
 

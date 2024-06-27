@@ -68,7 +68,7 @@ public class MemberController {
 	// 입력받은 회원정보를 보여줘야 하니깐 DB가 필요!! -> 매개변수 MemberVO vo를 써준다.
 	// 입력받은 정보를 처리해야하니깐 -> POST
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public String insertjoinPOST(@ModelAttribute MemberVO vo,HttpServletRequest request) throws Exception {
+	public String insertjoinPOST(@ModelAttribute MemberVO vo,HttpServletRequest request, HttpSession session) throws Exception {
 		logger.debug("/insert -> insertjoinPOST() 호출 ");
 		
 		//디비에 회원가입 정보 입력
@@ -76,7 +76,7 @@ public class MemberController {
 //		logger.debug("vo : "+vo);
 //		HttpSession session = request.getSession();
 //		String user_id =  vo.getUser_id();
-//		session.setAttribute("user_id",user_id);
+		session.setAttribute("user_id",vo.getUser_id());
 //		logger.debug("@@@@@@@@@@user_id: "+ user_id);
 		
 		mailSend.join(vo);
@@ -99,8 +99,18 @@ public class MemberController {
 	public String emailConfirm(String user_email, Model model, String user_id, HttpSession session )throws Exception{
 		mailSend.updateMailAuth(user_email);
 		model.addAttribute("user_email", user_email);
-		String id = (String)session.getAttribute("user_id");
-		logger.debug("@@@@@@@@@@id22 "+ id);
+		
+		user_id = mService.chkEmail(user_email);
+		
+		
+		
+		
+		
+		
+		//session.setAttribute("user_id",user_id);
+		//String id = (String)session.getAttribute("user_id");
+		
+		//logger.debug("@@@@@@@@@@id22 "+ id);
 		
 		return "/member/registerEmail"; //인증 성공 후 이동하는 페이지
 	}
@@ -111,13 +121,18 @@ public class MemberController {
 		//프리랜서, 클라이언트 유형 선택 -> 개인,팀,사업자 선택하는 페이지
 		// http://localhost:8088/member/registerEmail
 		@GetMapping(value = "/registerEmail")
-		public void typeGET( HttpSession session, String user_id) {
+		public void typeGET( HttpSession session, String user_email, String user_id) {
 		
+			user_id = mService.chkEmail(user_email);
+			
+
+			session.setAttribute("user_id",user_id);
 		
 		}
 		
 		@PostMapping(value = "/registerEmailChage")
 		public String type(MemberVO vo, HttpSession session, String free_id, String ct_id) throws Exception {
+			
 			String cf = vo.getUser_cf();
 			String type = vo.getUser_type();
 			logger.debug("@@@@@@@@@@@@ cf @@@@@@@@@@@@ :"+cf);
@@ -132,7 +147,7 @@ public class MemberController {
 			if(cf.equals("클라이언트")) {
 				mService.insertCt(ct_id);
 			}else {
-				if(type.equals("개인") || type.equals("팀")) {
+				if(type.equals("개인") || type.equals("모임")) {
 					mService.insertFree(free_id);
 					mService.insertLicense(free_id);
 					mService.insertSkill(free_id);
@@ -148,6 +163,7 @@ public class MemberController {
 				}
 			}
 			
+			session.invalidate();
 			
 			return"redirect:/main/home";
 		}

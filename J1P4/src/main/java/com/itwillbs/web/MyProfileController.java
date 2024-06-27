@@ -49,7 +49,7 @@ public class MyProfileController {
 		vo.setFree_no(free_no);
 		vo.setFree_id(String.valueOf(session.getAttribute("user_id")));
 		
-		if(session.getAttribute("user_type").equals("개인") || session.getAttribute("user_type").equals("팀")) {
+		if(session.getAttribute("user_type").equals("개인") || session.getAttribute("user_type").equals("모임")) {
 			if(session.getAttribute("free_no").equals(free_no)) {				
 				model.addAttribute("myProfile", mpService.getProfile(vo));
 				model.addAttribute("mySkill", mpService.getSkill(vo));

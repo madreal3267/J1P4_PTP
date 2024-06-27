@@ -99,7 +99,7 @@ public interface MemberDAO {
 	public Integer chkIdentB(String id);
 	
 	
-	
+	public String chkEmail(String email);
 	
 	
 }

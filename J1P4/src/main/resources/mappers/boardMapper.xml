@@ -16,7 +16,7 @@
   	 <select id="pNum" resultType="int">
   	 	select count(*)
 		from project
-		where deadline > now() and work_field="개발"
+		where deadline > now() and work_field="개발" and proj_status="진행중"
   	 </select>
 
   	 <!-- 페이징 처리 skill, region 조인  -->
@@ -28,7 +28,7 @@
 			on p.proj_no = s.proj_no
 			left join region r
 			on p.proj_no = r.proj_no
-			where deadline > now() and work_field = "개발"
+			where deadline > now() and work_field = "개발" and proj_status="진행중"
 			order by reg_date DESC
 			limit #{amount} offset #{offset}
 			
@@ -44,7 +44,7 @@
 			on p.proj_no = s.proj_no
 			left join region r
 			on p.proj_no = r.proj_no
-			where deadline > now() and work_field=#{work_field}
+			where deadline > now() and work_field=#{work_field} and proj_status="진행중"
 			order by cast(${sn} as unsigned) DESC
 			limit ${amount} offset #{offset}
 		]]>
@@ -59,7 +59,7 @@
 			on p.proj_no = s.proj_no
 			left join region r
 			on p.proj_no = r.proj_no
-			where deadline > now()  and work_field=#{work_field}
+			where deadline > now()  and work_field=#{work_field} and proj_status="진행중"
 			order by cast(${sn} as date)
 			limit ${amount} offset #{offset}
 		]]>
@@ -75,7 +75,7 @@
 			on p.proj_no = s.proj_no
 			left join region r
 			on p.proj_no = r.proj_no
-			where deadline > now() and work_field = #{work_field}
+			where deadline > now() and work_field = #{work_field} and proj_status="진행중"
 			order by reg_date DESC
 			limit #{amount} offset #{offset}
   	 	]]>
@@ -86,7 +86,7 @@
   		 <![CDATA[
   	 	select count(*)
 		from project
-		where deadline > now() and work_field = #{work_field}
+		where deadline > now() and work_field = #{work_field} and proj_status="진행중"
 		]]>
   	 </select>
   	 
@@ -112,7 +112,7 @@
   	 <select id="fNum" resultType="int">
   	 	select count(*)
 		from freelancer
-		where work_field="개발"
+		where work_field="개발" and work_check=1
   	 </select>
   	 
   	 <!-- 프리랜서 페이징 처리 -->
@@ -129,7 +129,7 @@
             on f.free_no = c.free_no
             left join user u
             on f.free_id = u.user_id
-			where work_field = "개발"
+			where work_field = "개발" and work_check=1
 			order by cast(f.reg_date as unsigned) DESC
 			limit #{amount} offset #{offset}
 			
@@ -158,7 +158,7 @@
 			left join region r
 			on p.proj_no = r.proj_no
 			where deadline > now() and work_field = #{work_field}
-					and s.skill_nm regexp(select REPLACE(GROUP_CONCAT(#{skill_nm}),',','|') AS skill_nm) and job_level like CONCAT_WS('','%',#{job_level},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
+					and s.skill_nm regexp(select REPLACE(GROUP_CONCAT(#{skill_nm}),',','|') AS skill_nm) and job_level like CONCAT_WS('','%',#{job_level},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%') and proj_status="진행중" 
 			order by cast(${sn} as unsigned) DESC
 			limit #{amount} offset #{offset}
   	 	]]>
@@ -173,7 +173,7 @@
 			left join region r
 			on p.proj_no = r.proj_no
 			where deadline > now() and work_field = #{work_field}
-					and p.job_level like CONCAT_WS('','%',#{job_level},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
+					and p.job_level like CONCAT_WS('','%',#{job_level},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')  and proj_status="진행중"
 			order by cast(${sn} as unsigned) DESC
 			limit #{amount} offset #{offset}
   	 	]]>
@@ -189,7 +189,7 @@
 			left join region r
 			on p.proj_no = r.proj_no
 			where deadline > now() and work_field = #{work_field}
-					and s.skill_nm regexp(select REPLACE(GROUP_CONCAT(#{skill_nm}),',','|') AS skill_nm) and job_level like CONCAT_WS('','%',#{job_level},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
+					and s.skill_nm regexp(select REPLACE(GROUP_CONCAT(#{skill_nm}),',','|') AS skill_nm) and job_level like CONCAT_WS('','%',#{job_level},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%') and proj_status="진행중" 
 			order by cast(${sn} as date)
 			limit #{amount} offset #{offset}
   	 	]]>
@@ -205,7 +205,7 @@
 			left join region r
 			on p.proj_no = r.proj_no
 			where deadline > now() and work_field = #{work_field}
-					and job_level like CONCAT_WS('','%',#{job_level},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
+					and job_level like CONCAT_WS('','%',#{job_level},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%') and proj_status="진행중" 
 			order by cast(${sn} as date)
 			limit #{amount} offset #{offset}
   	 	]]>
@@ -220,7 +220,7 @@
 			on p.proj_no = s.proj_no
 			left join region r
 			on p.proj_no = r.proj_no
-			where deadline > now() and work_field = #{work_field}
+			where deadline > now() and work_field = #{work_field} and proj_status="진행중" 
 					and s.skill_nm regexp(select REPLACE(GROUP_CONCAT(#{skill_nm}),',','|') AS skill_nm) and job_level like CONCAT_WS('','%',#{job_level},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
 		]]>
   	 </select>
@@ -234,7 +234,7 @@
 			on p.proj_no = s.proj_no
 			left join region r
 			on p.proj_no = r.proj_no
-			where deadline > now() and work_field = #{work_field}
+			where deadline > now() and work_field = #{work_field} and proj_status="진행중" 
 					and job_level like CONCAT_WS('','%',#{job_level},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
 		]]>
   	 </select>
@@ -260,7 +260,7 @@
             on f.free_no = c.free_no
         	left join user u
         	on f.free_id = u.user_id
-			where work_field=#{work_field}
+			where work_field=#{work_field} and work_check=1
 			order by cast(f.reg_date as unsigned) DESC
 			limit ${amount} offset #{offset}
 		]]>
@@ -271,7 +271,7 @@
   		 <![CDATA[
   	 	select count(*)
 		from freelancer
-		where work_field = #{work_field}
+		where work_field = #{work_field} and work_check=1
 		]]>
   	 </select>
   	 
@@ -289,7 +289,7 @@
             on f.free_no = c.free_no
             left join user u
         	on f.free_id = u.user_id
-			where work_field = #{work_field}
+			where work_field = #{work_field} and work_check=1 
 					and s.skill_nm regexp(select REPLACE(GROUP_CONCAT(#{skill_nm}),',','|') AS skill_nm) and c.job_lev like CONCAT_WS('','%',#{job_lev},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
 			order by cast(f.reg_date as unsigned) DESC
 			limit #{amount} offset #{offset}
@@ -310,7 +310,7 @@
             on f.free_no = c.free_no
             left join user u
         	on f.free_id = u.user_id
-			where work_field = #{work_field}
+			where work_field = #{work_field} and work_check=1 
 					and c.job_lev like CONCAT_WS('','%',#{job_lev},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
 			order by cast(f.reg_date as unsigned) DESC
 			limit #{amount} offset #{offset}
@@ -328,7 +328,7 @@
 			on f.free_no = r.free_no
 			left join career c
             on f.free_no = c.free_no
-			where work_field = #{work_field}
+			where work_field = #{work_field} and work_check=1
 					and s.skill_nm regexp(select REPLACE(GROUP_CONCAT(#{skill_nm}),',','|') AS skill_nm) and c.job_lev like CONCAT_WS('','%',#{job_lev},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
 		]]>
   	 </select>
@@ -344,7 +344,7 @@
 			on f.free_no = r.free_no
 			left join career c
             on f.free_no = c.free_no
-			where work_field = #{work_field}
+			where work_field = #{work_field} and work_check=1
 					and c.job_lev like CONCAT_WS('','%',#{job_lev},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
 		]]>
   	 </select>
