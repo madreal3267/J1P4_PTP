@@ -26,16 +26,16 @@ public class OfferController {
 	private OfferProjServie oService;
 	
 	// http://localhost:8088/freelancerDetail/offerProj
-	@GetMapping(value="/offerProj")
-	public void offerProjGET(Model model) {
-		logger.debug(" Controller : ( •̀ ω •́ )y /offerProj -> offerProjGET() 실행 ");
-		
-		List<ProjectVO> vo = oService.getProj();
-		model.addAttribute("proj",vo);
-		
-		logger.debug(" Controller : ( •̀ ω •́ )y /views/freelancerDetail/offerProj.jsp 페이지 연결 ");
-		
-	}
+//	@GetMapping(value="/offerProj")
+//	public void offerProjGET(Model model) {
+//		logger.debug(" Controller : ( •̀ ω •́ )y /offerProj -> offerProjGET() 실행 ");
+//		
+//		List<ProjectVO> vo = oService.getProj();
+//		model.addAttribute("proj",vo);
+//		
+//		logger.debug(" Controller : ( •̀ ω •́ )y /views/freelancerDetail/offerProj.jsp 페이지 연결 ");
+//		
+//	}
 	
 	@PostMapping(value="/offerProj")
 	public void offerProjPOST(OfferVO vo) {

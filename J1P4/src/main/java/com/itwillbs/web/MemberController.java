@@ -89,7 +89,7 @@ public class MemberController {
 	//http://localhost:8088/member/mailsend
 	@RequestMapping(value = "/mailsend", method = RequestMethod.GET)
 	public void test(HttpSession session) {
-		session.invalidate();
+//		session.invalidate();
 	}
 	
 	

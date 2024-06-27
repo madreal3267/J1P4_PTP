@@ -22,7 +22,7 @@
 <%-- user_id: ${sessionScope.user_id }, --%>
 <%-- user_cf: ${sessionScope.user_cf }, --%>
 <%-- user_type: ${sessionScope.user_type }, --%>
-free_no: ${sessionScope.free_no },
+<%-- free_no: ${sessionScope.free_no }, --%>
 <%-- ct_no: ${sessionScope.ct_no } --%>
 
 <div class="container light-style flex-grow-1 container-p-y text-center" style="width:1100px; padding-top:15px;padding-bottom: 10px;">
@@ -32,7 +32,8 @@ free_no: ${sessionScope.free_no },
 		<p class="userName" style="position: absolute; left:180px; top:35px; font-size: 30px; font-weight: bold;"></p>
 		<div style="display: inline-block; position: absolute; left:20px;top:35px;">
 		<span class="workField" style="font-size: 16px; margin-right:7px;">예상 금액</span>
-		<span class="userWf" style="font-size: 16px; font-weight: bold; border-right: 1px solid gray; padding-right: 10px;">원</span>
+		<span class="userWf" style="font-size: 16px; font-weight: bold; border-right: 1px solid gray; padding-right: 10px;">
+		<fmt:formatNumber value="${projectVO.proj_cost }" pattern="#,###"/>원</span>
 		<span class="level" style="margin-left:7px; margin-right:7px;font-size: 16px;">모집 마감일</span>
 		<span class ="userLev" style="font-size: 16px; font-weight: bold;">${projectVO.deadline }</span> <br>
 		</div>
@@ -114,7 +115,7 @@ free_no: ${sessionScope.free_no },
 				<div class="checkGap">
 				<b style="border-right: 1px solid gray; padding-right: 10px;">프로젝트 진행중 미팅</b>
 				<span style="margin-left:7px;">
-				${projectVO.meet_cycle}
+				${projectVO.pmeet_meth}, ${projectVO.meet_cycle}
 				</span>
 				</div>
 				</div>
@@ -146,7 +147,7 @@ free_no: ${sessionScope.free_no },
 				</span>
 				</div>
 				<div class="checkGap">
-				<b style="border-right: 1px solid gray; padding-right: 10px;">전달 사항 또는 우대 사항</b>
+				<b style="padding-right: 10px;">전달 사항 또는 우대 사항</b><br>
 				<span style="margin-left:7px;">
 				 ${projectVO.dlvy_msg}
 				</span>
@@ -157,7 +158,7 @@ free_no: ${sessionScope.free_no },
 			<div class="gap">
 				<h5>프로젝트 상세 내용</h5>
 				<div class="content">
-				<h4><span class="badge rounded-pill bg-secondary">${projectVO.proj_content}</span></h4>
+				<span style="margin-left:7px;">${projectVO.proj_content}</span>
 				</div>
 			</div>	
 		</div>
@@ -178,7 +179,7 @@ free_no: ${sessionScope.free_no },
 
 
    <c:if test="${sessionScope.free_no != null }">     
-	 <div style="background-color: white; border: 1px solid #333; position: fixed; bottom: 10px; right: 317px; width: 200px; display: block; font-size: 0;">
+	 <div style="background-color: white; border: 1px solid #333; position: fixed; bottom: 10px; right: 420px; width: 200px; display: block; font-size: 0;">
 		<div class="eframe-pop-width py-0 mx-auto">
 			<div class="inline-block relative w-full py-4 px-3 md:py-8 md:px-14 bg-gray-c_43 md:rounded whitespace-nowrap">
 		
@@ -366,19 +367,30 @@ free_no: ${sessionScope.free_no },
 
 		$("#submitButt").click(function() {
 			$.ajax({
-				url : "/projectDetail/applyProj",
+				url : "/board/applyProj",
 				type : "POST",
 				data : $("#fm1").serialize(),
 				success : function() {
+// 					alert("성공");
+// 					alert("${projectVO.proj_no }");
+// 					alert("${sessionScope.free_no }");
 				},
-				error : function() {
-					alert("오류발생");
+				error : function(jqXHR, textStatus, errorThrown) {
+			        alert("@@@@@ 오류 발생: @@@@@" + textStatus);
+			        console.log("AJAX 오류 발생:");
+			        console.log("상태 코드:", jqXHR.status);
+			        console.log("응답 텍스트:", jqXHR.responseText);
+			        console.log("에러:", errorThrown);
 				}
 			});
 		
 		
 	});
+		
+	});
 </script>
+
+
 <script type="text/javascript">
 // 하트 클릭
 $(".heart-click").click(function(e){
@@ -406,10 +418,10 @@ $(".heart-click").click(function(e){
 			}
 		});
 		
-		$(this).html("<svg xmlns='http://www.w3.org/2000/svg' width='25' height='25' fill='crimson' class='bi bi-heart-fill' viewBox='0 0 16 16'> <path fill-rule='evenodd' d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314'/></svg>")
+		$(this).html("<svg xmlns='http://www.w3.org/2000/svg' width='25' height='25' fill='crimson' class='bi bi-heart-fill' viewBox='0 0 16 16'> <path fill-rule='evenodd' d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314'/></svg>");
 		
 	// 하트 클릭
-	}else if($(this).children('svg').attr('class') == "bi bi-heart-fill"){
+	} else if($(this).children('svg').attr('class') == "bi bi-heart-fill"){
 		console.log("하트 클릭");
 		
 		$.ajax({

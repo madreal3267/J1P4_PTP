@@ -16,5 +16,23 @@
 </div>
      
      
+     <script type="text/javascript">
+     $(function(){
+			
+			$("#projButt").click(function(){
+// 				alert("@@@@@");
+				if("${sessionScope.ident }"== 1 || "${sessionScope.identB}"== 1){
+					location.href="/enroll/enrollProj";
+				} else {
+					alert("신원인증이 필요합니다");
+					
+					location.href="/member/mypage";
+				}
+				
+			});
+			
+		});
+     </script>
+     
      </body>
 </html>

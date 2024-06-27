@@ -76,7 +76,7 @@
 				 	<h4><a id="linkG" href="/board/detailList?proj_no=${projDTO.proj_no }">
 				 		${projDTO.proj_title }
 				 	</a></h4> 
-				 	예상 금액 ${projDTO.proj_cost } | 예상 기간 ${projDTO.work_period } <br>
+				 	예상 금액 <b><fmt:formatNumber value="${projDTO.proj_cost }" pattern="#,###"/>원</b> | 예상 기간 <b>${projDTO.work_period }일</b> <br>
 					${projDTO.work_field }	|  ${projDTO.region } ${projDTO.district }  |  
 				<!-- 스킬 나열 -->
 					<c:set var="skillList" value="${projDTO.skill_nm }" />

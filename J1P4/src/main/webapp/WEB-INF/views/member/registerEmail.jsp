@@ -55,7 +55,7 @@ $(function(){
 		$('.inputType').html(
 		'<div style="text-align: center;"><input type="radio" value="개인" name="user_type" class="btn-check" id="radioIndividual">'+
 		'<label for="radioIndividual" class="btn btn-outline-dark userType p-4" style="padding:30px;"><h4><b>🙋 개인</b></h4></label>'+
-		' <input type="radio" value="팀" name="user_type" class="btn-check" id="radioTeam">'+
+		' <input type="radio" value="모임" name="user_type" class="btn-check" id="radioTeam">'+
 		'<label for="radioTeam" class="btn btn-outline-dark userType p-4"><h4><b>👨‍👩‍👧‍👦 팀</b></h4></label>'+
 		' <input type="radio" value="사업자" name="user_type" class="btn-check" id="radioBusiness">'+
 		'<label for="radioBusiness" class="btn btn-outline-dark userType p-4"><h4><b>🏢 개인/법인 사업자</b></h4></label></div>');

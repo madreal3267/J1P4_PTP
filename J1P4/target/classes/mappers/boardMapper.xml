@@ -97,7 +97,9 @@
   	 </select> -->
   	 <!-- 프로젝트 상세페이지  -->
   	 <select id="dePro" resultType="com.itwillbs.domain.ProjectVO">
-  	 	select p.proj_no, p.proj_title, p.proj_cost,p.ct_no, p.deadline, p.work_field, p.reg_date, p.job_level, r.region, r.district, s.skill_nm
+  	 	select p.pmeet_meth, p.meet_meth, p.meet_cycle, p.cost_nego, p.date_nego, p.wanted_career,
+		p.proj_content, p.dlvy_msg, p.proj_no, p.proj_title, p.proj_cost,p.ct_no, p.deadline,
+		p.work_field, p.reg_date, p.job_level, r.region, r.district, s.skill_nm
 		from project p
 		left join skill s
 		on p.proj_no = s.proj_no

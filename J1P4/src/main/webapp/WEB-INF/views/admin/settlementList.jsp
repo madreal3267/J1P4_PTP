@@ -136,7 +136,7 @@
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/payment.js"></script> <!-- 결제 처리 -->
 
-<%@ include file="../include/footer.jsp" %>
+<%@ include file="../include/adminFooter.jsp" %>
 
 <script>
     function changePageSize(pageSize) {

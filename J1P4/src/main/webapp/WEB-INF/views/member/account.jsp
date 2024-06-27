@@ -22,11 +22,11 @@
 </c:if>
 
 <!-- ============== 로그인 했을 때 담기는 세션 값 (추후 삭제 예정) ================= -->
-user_id: ${sessionScope.user_id },
-user_cf: ${sessionScope.user_cf },
-user_type: ${sessionScope.user_type },
-free_no: ${sessionScope.free_no },
-ct_no: ${sessionScope.ct_no }
+<%-- user_id: ${sessionScope.user_id }, --%>
+<%-- user_cf: ${sessionScope.user_cf }, --%>
+<%-- user_type: ${sessionScope.user_type }, --%>
+<%-- free_no: ${sessionScope.free_no }, --%>
+<%-- ct_no: ${sessionScope.ct_no } --%>
 
 <!-- ============== 페이지 시작 ================= -->
 <form role="form" action="/member/account" method="post" name="account_form" id="fm02">

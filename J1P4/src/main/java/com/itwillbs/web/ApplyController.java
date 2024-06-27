@@ -26,15 +26,15 @@ public class ApplyController {
 	private ApplyProjService aSerivce;
 	
 	// http://localhost:8088/projectDetail/applyProj
-	@GetMapping(value="/applyProj")
-	public void ApplyProjGET(Model model) {
-		logger.debug(" Controller : ( •̀ ω •́ )y /applyProj -> ApplyProjGET() 실행 ");
-		
-		model.addAttribute("skill",aSerivce.getSkill());
-		
-		logger.debug(" Controller : ( •̀ ω •́ )y /views/projectDetail/applyProj.jsp 페이지 연결 ");
-		
-	}
+//	@GetMapping(value="/applyProj")
+//	public void ApplyProjGET(Model model) {
+//		logger.debug(" Controller : ( •̀ ω •́ )y /applyProj -> ApplyProjGET() 실행 ");
+//		
+//		model.addAttribute("skill",aSerivce.getSkill());
+//		
+//		logger.debug(" Controller : ( •̀ ω •́ )y /views/projectDetail/applyProj.jsp 페이지 연결 ");
+//		
+//	}
 	
 	@PostMapping(value="/applyProj")
 	public void ApplyProjPOST(ApplyVO vo) {

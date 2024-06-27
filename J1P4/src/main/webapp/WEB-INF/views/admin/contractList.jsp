@@ -126,7 +126,7 @@
     </div>
 </div>
 
-<%@ include file="../include/footer.jsp" %>
+<%@ include file="../include/adminFooter.jsp" %>
 
 <script>
     function changePageSize(pageSize) {

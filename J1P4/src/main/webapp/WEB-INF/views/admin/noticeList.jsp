@@ -78,7 +78,7 @@
     </div>
 </div>
 
-<%@ include file="../include/footer.jsp"%>
+<%@ include file="../include/adminFooter.jsp"%>
 
 <!-- 공지사항 모달 -->
 <div class="modal fade" id="announcementModal" tabindex="-1" role="dialog" aria-labelledby="announcementModalLabel">

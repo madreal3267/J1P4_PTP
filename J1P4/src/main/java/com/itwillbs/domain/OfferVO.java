@@ -6,5 +6,5 @@ import lombok.Data;
 public class OfferVO {
 	
 	private int free_no;
-	private int proj_no;
+	private String proj_no;
 }

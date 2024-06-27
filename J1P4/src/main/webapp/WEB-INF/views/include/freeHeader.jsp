@@ -40,7 +40,7 @@
 <!--           <li><a href="/enroll/enrollFreeB" class="nav-link px-3 link-body-emphasis nav-r1">프리랜서 등록</a></li> -->
 <%--           </c:if> --%>
           <li><a href="/member/guide" class="nav-link px-3 link-body-emphasis nav-r1">이용방법</a></li>
-          <c:if test="${sessionScope.user_type.equals('개인') or sessionScope.user_type.equals('팀') }">
+          <c:if test="${sessionScope.user_type.equals('개인') or sessionScope.user_type.equals('모임') }">
           <li><a href="/myProfile/profile?free_no=${sessionScope.free_no }" class="nav-link px-2 link-body-emphasis nav-r4">내 프로필</a></li>
           </c:if>
           <c:if test="${sessionScope.user_type.equals('사업자') }">

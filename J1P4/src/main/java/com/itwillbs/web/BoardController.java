@@ -26,10 +26,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.itwillbs.domain.ApplyVO;
 import com.itwillbs.domain.BMarkVO;
 import com.itwillbs.domain.Criteria;
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.MemberVO;
+import com.itwillbs.domain.OfferVO;
 import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.ProjectVO;
 import com.itwillbs.domain.RegionVO;
@@ -887,8 +889,23 @@ public class BoardController {
 		logger.debug("북마크 해제");
 	}
 	
+	@PostMapping(value="/offerProj")
+	@ResponseBody
+	public void offerProjPOST(OfferVO vo) {
+		logger.debug(" Controller : ( •̀ ω •́ )y /offerProj -> offerProjPOST() 실행 ");
+		
+		bService.insertOffer(vo);
+		
+	}
 	
-	
+	@PostMapping(value="/applyProj")
+	@ResponseBody
+	public void ApplyProjPOST(ApplyVO vo) {
+		logger.debug(" Controller : ( •̀ ω •́ )y /applyProj -> ApplyProjPOST() 실행 ");
+		
+		bService.insertApply(vo);
+		
+	}
 	
 	
 	

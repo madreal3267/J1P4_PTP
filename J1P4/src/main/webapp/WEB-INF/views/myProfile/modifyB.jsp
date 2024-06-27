@@ -16,11 +16,11 @@
 <c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.equals('클라이언트') }">
 <c:import url="../include/ctHeader.jsp"></c:import>
 </c:if>
-user_id: ${sessionScope.user_id },
-user_cf: ${sessionScope.user_cf },
-user_type: ${sessionScope.user_type },
-free_no: ${sessionScope.free_no },
-ct_no: ${sessionScope.ct_no }
+<%-- user_id: ${sessionScope.user_id }, --%>
+<%-- user_cf: ${sessionScope.user_cf }, --%>
+<%-- user_type: ${sessionScope.user_type }, --%>
+<%-- free_no: ${sessionScope.free_no }, --%>
+<%-- ct_no: ${sessionScope.ct_no } --%>
 
 	<form action="" method="post" name="fm1" id="modifyBFm">
 	<input type="hidden" value="${sessionScope.user_id }" name="free_id">
@@ -769,7 +769,7 @@ function addFile(){
 					type:"POST",
 					data : $("#modifyBFm").serialize(),
 					success : function(){
-						alert(" ╰(*°▽°*)╯ 수정 완료 ")
+						alert("임시저장 되었습니다.")
 					},
 					error : function() {
 						alert("오류발생");

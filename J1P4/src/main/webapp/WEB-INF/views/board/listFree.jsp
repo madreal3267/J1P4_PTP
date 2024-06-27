@@ -61,17 +61,17 @@
 						<span aria-hidden="true"></span>
 					</button>
 				</div>
-				<div class="modal-body p-4">
+				<div class="modal-body p-3">
 				<!-- form -->
 					<form action="/board/moFiListFree" method="post" id="fm1" name="fm1">
 						<h6 class="modalText"> 업무 분야 </h6> 
-						<input type="radio" value="개발" class="btn-check" name="work_field" id="radio1"> 
-						<label class="btn btn-outline-dark modalWf" for="radio1">⚙️ 개발</label> 
-						<input type="radio" value="기획" class="btn-check" name="work_field" id="radio2"> 
-						<label class="btn btn-outline-dark modalWf" for="radio2">🛠️ 기획</label> 
-						<input type="radio" value="디자인" class="btn-check" name="work_field" id="radio3"> 
-						<label class="btn btn-outline-dark modalWf" for="radio3">🎨 디자인</label> 
-						<input type="radio" value="퍼블리싱" class="btn-check" name="work_field" id="radio4"> 
+						<input type="radio" value="개발" class="btn-check" name="work_field" id="radio1">
+						<label class="btn btn-outline-dark modalWf" for="radio1">⚙️ 개발</label>
+						<input type="radio" value="기획" class="btn-check" name="work_field" id="radio2">
+						<label class="btn btn-outline-dark modalWf" for="radio2">🛠️ 기획</label>
+						<input type="radio" value="디자인" class="btn-check" name="work_field" id="radio3">
+						<label class="btn btn-outline-dark modalWf" for="radio3">🎨 디자인</label>
+						<input type="radio" value="퍼블리싱" class="btn-check" name="work_field" id="radio4">
 						<label class="btn btn-outline-dark modalWf" for="radio4">🖋️ 퍼블리싱</label>
 						<hr>
 						<h6 class="modalText">관련 기술</h6>
@@ -140,7 +140,7 @@
 						
 					<div class="listPt"></div>
 					<!-- [추가하기] 클릭 시 추가되는 기술 리스트 출력되는 공간-->
-					모달
+<!-- 					모달 -->
 					<hr>
 					<h6 class="modalText">숙련도</h6>
 					<div class="btn-group" role="group"
@@ -267,7 +267,7 @@
 
     <!-- 제목 -->
    <div style="font-weight: bold; font-size: 20px; margin: 6px 0;">
-   		<c:if test="${v.user_type eq '개인' or v.user_type eq '팀' }">
+   		<c:if test="${v.user_type eq '개인' or v.user_type eq '모임' }">
         <a href="/board/detailListFree?free_no=${v.free_no}" class="titleCss">${v.oneline_bio }</a>
         </c:if>
    		<c:if test="${v.user_type eq '사업자'}">
@@ -277,7 +277,7 @@
 
     <div style="margin-bottom: 6px;">
         분야 <span style="font-weight: bold;">${v.work_field }</span> | 레벨 <b>${v.job_lev }</b>&nbsp|
-        <c:if test="${v.user_type eq '개인' or v.user_type eq '팀' }">
+        <c:if test="${v.user_type eq '개인' or v.user_type eq '모임' }">
 							학력&nbsp<b>${v.school_type }</b>&nbsp<b>${v.grad_status }</b>&nbsp|
 						</c:if>	
 							지역&nbsp<b>${v.region }</b>&nbsp<b>${v.district }</b><br>
