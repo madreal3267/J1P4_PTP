@@ -222,6 +222,13 @@ public class MemberDAOImpl implements MemberDAO {
 
 
 	@Override
+	public void insertPort(String free_id) throws Exception {
+		sqlSession.insert(NAMESPACE+"insertPortf", free_id);
+	}
+
+
+
+	@Override
 	public void insertCt(String ct_id) throws Exception {
 		sqlSession.insert(NAMESPACE+"clientId", ct_id);
 		

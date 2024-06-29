@@ -15,7 +15,7 @@
 <c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.equals('클라이언트') }">
 <c:import url="../include/ctHeader.jsp"></c:import>
 </c:if>
-${sessionScope }
+<%-- ${sessionScope } --%>
 	<div class="container light-style flex-grow-1 container-p-y text-center" style="width:1100px;padding-top:15px;">
 	<div class="alert alert-light mt-3 card-2">
 		임시 저장 프로젝트를 불러오거나, 등록했던 프로젝트를 다시 등록해 보세요. <a class="alert-link" href="/myProManageCt/temSaveProject">프로젝트 선택하기 ></a>

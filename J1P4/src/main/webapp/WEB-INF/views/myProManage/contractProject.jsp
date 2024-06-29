@@ -108,5 +108,4 @@
 	});
 
 </script> 
-</body>
-</html>
+<%@ include file="../include/footer.jsp" %>
