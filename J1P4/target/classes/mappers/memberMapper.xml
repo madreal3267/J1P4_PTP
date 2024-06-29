@@ -160,6 +160,13 @@
 		(select free_no from freelancer
 		where free_id=#{free_id})
 	</insert>
+	
+	<!-- 프리랜서 포트폴리오 -->
+	<insert id="insertPortf">
+		insert into portfolio (free_no)
+		(select free_no from freelancer
+		where free_id=#{free_id})
+	</insert>
     
     
    <!--클라이언트 테이블에 아이디 등록  -->
