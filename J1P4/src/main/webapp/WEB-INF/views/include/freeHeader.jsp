@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body style="padding-top: 75px;">
-
+<%-- ${sessionScope.free_no } --%>
 <!-- =============================== 프리랜서 헤더 =============================== -->
 <header class="mb-3 border-bottom" style="background-color:#fff; position: fixed; top: 0; left: 0; right: 0; z-index: 999;">
     <div class="container p-3" style="width: 1100px;">

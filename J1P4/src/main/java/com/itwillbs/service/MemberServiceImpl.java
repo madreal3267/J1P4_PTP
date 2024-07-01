@@ -187,6 +187,14 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 
+	
+
+
+	@Override
+	public void insertPort(String free_id) throws Exception {
+		mdao.insertPort(free_id);
+	}
+
 
 
 	@Override

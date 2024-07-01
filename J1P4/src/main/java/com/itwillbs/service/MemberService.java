@@ -69,7 +69,8 @@ public interface MemberService {
 		public void insertSkill(String free_id) throws Exception;
 		//지역
 		public void insertReg(String free_id) throws Exception;
-		
+		//포트폴리오
+		public void insertPort(String free_id) throws Exception;
 
 		//클라이언트 등록여부
 		public void insertCt(String ct_id) throws Exception; 

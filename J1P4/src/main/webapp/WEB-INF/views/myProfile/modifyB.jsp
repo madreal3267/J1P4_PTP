@@ -769,7 +769,7 @@ function addFile(){
 					type:"POST",
 					data : $("#modifyBFm").serialize(),
 					success : function(){
-						alert("임시저장 되었습니다.")
+						alert("저장되었습니다.")
 					},
 					error : function() {
 						alert("오류발생");

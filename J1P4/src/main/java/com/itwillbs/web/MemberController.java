@@ -153,6 +153,7 @@ public class MemberController {
 					mService.insertSkill(free_id);
 					mService.insertCareer(free_id);
 					mService.insertReg(free_id);
+					mService.insertPort(free_id);
 				}else {
 					mService.insertFree(free_id);
 					mService.insertReg(free_id);
@@ -160,6 +161,7 @@ public class MemberController {
 					mService.insertComp(free_id);
 					mService.insertPartners(free_id);
 					mService.insertCareer(free_id);
+					mService.insertPort(free_id);
 				}
 			}
 			

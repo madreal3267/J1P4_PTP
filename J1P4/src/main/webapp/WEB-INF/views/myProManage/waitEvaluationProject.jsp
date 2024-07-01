@@ -123,7 +123,6 @@
 			</div>
 		</div>
 	</div>
-</body>
-</html>
+<%@ include file="../include/footer.jsp" %>
 
 	

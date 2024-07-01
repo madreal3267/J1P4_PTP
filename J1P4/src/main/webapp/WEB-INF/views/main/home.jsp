@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 
 <!-- ============== 비회원 헤더 ================= -->
-${sessionScope }
+<%-- ${sessionScope } --%>
 <c:if test="${empty sessionScope.user_id }">
 <c:import url="../include/header.jsp"></c:import>
 </c:if>
