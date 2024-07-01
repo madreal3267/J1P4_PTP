@@ -219,11 +219,6 @@ $(document).ready(function() {
 });
     
     
-    
-    
-    
-    
-    
 
 
 
@@ -231,26 +226,49 @@ $(document).ready(function() {
 	$('#phoneButton').click(function(){
 		alert("수정되었습니다.");
 		
-		$('#phoneButton').attr("type","submit");
-		location.href = '/member/account';
+// 		$('#phoneButton').attr("type","submit");
+// 		location.href = '/member/account';
+
+		 $.ajax({
+				url:"/member/phone",
+				type: "POST",
+				data:$("#fm02").serialize(),
+				success : function(){
+					alert("연락처가 수정되었습니다.");
+					location.reload();
+				},
+				error : function() {
+					alert("오류발생");
+				}
+			});
+	
+
 		
 	});
 	
 	
-// 	//비밀번호 변경
-// 	$('#passChage').click(function(){
-// 		alert("변경되었습니다.");
-		
-// 		$('#passChage').attr("type","submit");
-// 		location.href = '/member/account';
-		
-// 	});
 
 	//탈퇴
 	$('#bye').click(function(){
 		alert("탈퇴");
-		$("form[role='form']").attr("action","/member/delete");
-		$("form[role='form']").submit();
+// 		$("form[role='form']").attr("action","/member/delete");
+// 		$("form[role='form']").submit();
+		
+		 $.ajax({
+				url:"/member/delete",
+				type: "POST",
+				data:$("#fm02").serialize(),
+				success : function(){
+					alert("탈퇴완료");
+					location.reload();
+				},
+				error : function() {
+					alert("오류발생");
+				}
+			});
+	
+		
+	
 		
 	});
       

@@ -219,14 +219,27 @@ public class MemberServiceImpl implements MemberService {
 
 	//회원탈퇴
 	@Override
-	public void memberDelete(MemberVO vo) throws Exception {
-		mdao.memberDelete(vo);
+	public String memberDelete(MemberVO vo) throws Exception {
+		return mdao.memberDelete(vo);
 	}
+	
+	//유형탈퇴
+	@Override
+	public void typeDelete(String user_id) throws Exception {
+		mdao.typeDelete(user_id);
+		
+	}
+	
+	
+	
 		
 	@Override
 	public Integer sessFreeNo(MemberVO vo) throws Exception {
 		return mdao.sessFreeNo(vo);
 	}
+
+
+
 
 
 

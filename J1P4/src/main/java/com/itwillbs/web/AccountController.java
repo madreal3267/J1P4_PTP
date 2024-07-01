@@ -42,11 +42,12 @@ public class AccountController {
 	
 	
 	//폰 번호 입력/수정
-		@RequestMapping(value = "/phone", method = RequestMethod.GET)
-		public void phoneNoGET(MemberVO vo){
-			logger.debug("/account -> phoneNoGET() 호출 ");
-
-		}
+//		@RequestMapping(value = "/phone", method = RequestMethod.GET)
+//		public void phoneNoGET(MemberVO vo){
+//			logger.debug("/account -> phoneNoGET() 호출 ");
+//
+//		}
+		@ResponseBody
 		@RequestMapping(value = "/phone", method = RequestMethod.POST)
 		public void phoneNoPOST(MemberVO vo){
 			aService.phonNo(vo);

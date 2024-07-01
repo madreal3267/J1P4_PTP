@@ -90,8 +90,10 @@ public interface MemberDAO {
 	public Integer sessCtNo(MemberVO vo) throws Exception;
 	
 	//회원탈퇴
-	public void memberDelete(MemberVO vo)throws Exception;
+	public String memberDelete(MemberVO vo)throws Exception;
 	
+	//유형탈퇴
+	public void typeDelete(String user_id)throws Exception;
 	
 	
 	

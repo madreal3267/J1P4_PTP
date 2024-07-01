@@ -275,12 +275,20 @@
   	</select>
 
 
-	<!-- 회원탈퇴 -->
-	<delete id="memberDelete">
-		delete from user
-		where user_id=#{user_id} and user_pw=#{user_pw}
-	</delete>
-
+	<!-- 탈퇴회원 로그인x -->
+	<select id="memberDelete" resultType="string">
+		select user_type from user
+		where user_id=#{user_id} 
+	</select>
+	
+	<!-- 유형을 탈퇴회원으로 수정하기 -->
+	<update id="typeDelete" parameterType="String">
+		update user
+		set user_type="탈퇴"
+		where user_id=#{user_id}
+	</update>
+	
+	<!--  -->
 
 	<!-- 신원인증 -->
 	<update id="identity">
