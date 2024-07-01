@@ -38,16 +38,16 @@ public class MailSendServiceImpl implements MailSendService{
 		String key = new TempKey().getKey(8, false); //난수를 생성하는 키
 		
 		MailHandler mailhandler = new MailHandler(mailSender);
-		mailhandler.setSubject("[ICEWATER 커뮤니티 이메일 인증메일 입니다.]"); //메일제목
+		mailhandler.setSubject("[PTP 이메일 인증메일 입니다.]"); //메일제목
 		mailhandler.setText(
 				"<h1>메일인증</h1>" +
 						"<br/>"+vo.getUser_id()+"님 "+
-						"<br/>캐프리에 회원가입해주셔서 감사합니다."+
+						"<br/>PTP에 회원가입해주셔서 감사합니다."+
 						"<br/>아래 [이메일 인증 확인]을 눌러주세요."+
 						"<a href='http://localhost:8088/member/registerEmail?user_email=" + vo.getUser_email() +
 						"&key=" + key +
 						"' target='_blenk'>이메일 인증 확인</a>");
-		mailhandler.setFrom("itwil_j1p4@naver.com", "캐프리");
+		mailhandler.setFrom("itwil_j1p4@naver.com", "PTP");
 		mailhandler.setTo(vo.getUser_email());
 		mailhandler.send();
 		

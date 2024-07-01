@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.itwillbs.domain.MemberVO;
 import com.itwillbs.persistence.MailHandler;
 import com.itwillbs.persistence.TempKey;
+import com.itwillbs.service.AccountService;
 import com.itwillbs.service.MailSendService;
 import com.itwillbs.service.MemberService;
 
@@ -49,6 +51,9 @@ public class MemberController {
 	
 	@Autowired
 	private JavaMailSender mailSender;
+	
+	@Inject
+	private AccountService aService;
 	
 	//---------------------------------------------------------------------------------------
 	
@@ -197,11 +202,17 @@ public class MemberController {
 		
 		return"/member/login";
 	}
-	
+		
 	
 		//POST
 		@RequestMapping(value = "/login", method = RequestMethod.POST)
-		public String loginPOST(HttpSession session, MemberVO vo, HttpServletRequest request,String id ) throws Exception {
+		public String loginPOST(HttpSession session, MemberVO vo, HttpServletRequest request, String id) throws Exception {
+			
+			if(mService.memberDelete(vo).equals("탈퇴")) {
+				logger.info("탈퇴한 회원");
+
+				return "redirect:/main/home";
+			}
 			
 			MemberVO resultVO= mService.memberLogin(vo);
 			
@@ -230,7 +241,7 @@ public class MemberController {
 			}else {
 				Session.setAttribute("user_id", null);
 				logger.debug("로그인 실패");
-				return "redirect:/member/login";
+				return "redirect:/include/login";
 			}
 			
 		}
@@ -403,30 +414,33 @@ public class MemberController {
 		
 		
 	//회원탈퇴
-	@GetMapping(value = "/delete")
-	public String memberDeleteGET() throws Exception{
-		return"/member/account";
-	}
+//	@GetMapping(value = "/delete")
+//	public String memberDeleteGET() throws Exception{
+//		return"/member/account";
+//	}
 	
 	@PostMapping(value = "/delete")
-	public String memberDeletePOST(MemberVO vo, HttpSession session, RedirectAttributes rttr ) throws Exception{
+	@ResponseBody
+	public String memberDeletePOST(@RequestParam("user_id")String user_id, @RequestParam("user_pw1")String user_pw, MemberVO vo, HttpSession session, RedirectAttributes rttr ) throws Exception{
 		
-		//세션에 있는 user_id를 가져와서 member변수에 넣어준다
-		MemberVO member = (MemberVO)session.getAttribute("user_id");
-		//세션에 있는 비밀번호
-		String sessionPw = member.getUser_pw();
-		logger.debug("@@@@@@@@@@@@ sessionPw @@@@@@@@@@@@ :"+sessionPw);
-		//vo로 들어오는 비밀번호
-		String pass= vo.getUser_pw();
-		logger.debug("@@@@@@@@@@@@ pass @@@@@@@@@@@@ :"+pass);
+		//디비에 저장된 비밀번호 조회
+		String pass = aService.pass(user_id);
+		logger.info("@@@@@@@@@@@@ pass @@@@@@@@@@@@ :"+pass);
+		//입력한 비번
+		logger.info("@@@@@@@@@@@@ user_pw @@@@@@@@@@@@ :"+user_pw);
+		vo.setUser_pw(user_pw);
+		logger.info("@@@@@@@@@@@@ user_id @@@@@@@@@@@@ :"+vo.getUser_id());
+		logger.info("########### user_id ######## :"+user_id);
 		
-		if(!(sessionPw.equals(pass))) {
-			rttr.addFlashAttribute("msg", false);
+		if(!(pass.equals(user_pw))) {
 			return "redirect:/member/account";
+		}else {
+			mService.typeDelete(user_id);
+			session.invalidate();
+			return"redirect:/main/home";
+			
 		}
-		mService.memberDelete(vo);
-		session.invalidate();
-		return"redirect:/member/login";
+		
 	}
 	
 	
