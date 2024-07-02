@@ -56,7 +56,17 @@
 	
 	<c:forEach var="tspl" items="${temSaveProjectList}">
 		<div style=" background-color: white; padding:10px; width: 350px; height: 180px; cursor: pointer; display:inline-block; border: 1px solid gray; border-radius: 10px;" class="text-center">
-			<h4><b>${tspl.proj_title }</b></h4>		
+			<h4><b>
+				<c:set var="title" value="${tspl.proj_title}" />
+				<c:choose>
+				    <c:when test="${fn:length(title) > 10}">
+				        ${fn:substring(title, 0, 10)}...
+				    </c:when>
+				    <c:otherwise>
+				        ${title}
+				    </c:otherwise>
+				</c:choose> 
+			</b></h4>		
 			<span style="background-color: #31b9a9;" class="badge">분야</span>${tspl.work_field } <span style="background-color: #31b9a9;" class="badge">작업기간</span>${tspl.work_period } <br>
 			<span style="background-color: #31b9a9;" class="badge">단가</span>${tspl.proj_cost } <span style="background-color: #31b9a9;" class="badge">작업내용</span>
 				<c:set var="content" value="${tspl.proj_content}" />
