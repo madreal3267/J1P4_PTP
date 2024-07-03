@@ -120,12 +120,12 @@
 	<c:if test="${sessionScope.user_type.equals('사업자')}">
 	<div class="type_business" style="margin: 30px;">
 	회원유형<input type="text" value="${sessionScope.user_type }" readonly="readonly" class="type"><br>
-	사업자등록번호 <input type="text" name="business_registration" id="brn">
+	사업자등록번호 <input type="text" name="bussiness_registration" id="brn">
 	<input type="button" value="확인" onclick="checkBrn()" class="btn btn-dark btn-sm"><br>
 	<div id="resultbrn"></div>
 	<input type="hidden" value="" id="result3"> <!-- 유효한 값만 등록되도록 -->
 	법인명 <input type="text" name="team_nm" id="brn2"><br>
-	대표자명 <input type="text" name="rep_nm" id="brn3"><br>
+	대표자명 <input type="text" name="rep_name" id="brn3"><br>
 	사업장 소재지 <input type="text" name="addr" id="brn4"><br><br>
 	<button type="button" class="identiBrn" >등록하기</button>
 	</div>
@@ -666,16 +666,7 @@ function checkBrn(){
 	    return v;
 	}
 	
-// 	function jumin_mask(objValue) {
-// 	 var ju = objValue.replace("--", "-");
 
-// 	    if (ju.match(/^\d{6}$/) !== null) {
-// 	        ju = ju + '-';
-// 	    }
-	 
-// 	    return ju;
-// 	}
-	
 	
 </script>
 

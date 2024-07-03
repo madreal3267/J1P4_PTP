@@ -130,7 +130,7 @@
             left join user u
             on f.free_id = u.user_id
 			where work_field = "개발" and work_check=1
-			order by cast(f.reg_date as unsigned) DESC
+			order by cast(f.mod_date as unsigned) DESC
 			limit #{amount} offset #{offset}
 			
   	 	]]>
@@ -261,7 +261,7 @@
         	left join user u
         	on f.free_id = u.user_id
 			where work_field=#{work_field} and work_check=1
-			order by cast(f.reg_date as unsigned) DESC
+			order by cast(f.mod_date as unsigned) DESC
 			limit ${amount} offset #{offset}
 		]]>
   	 </select>
@@ -291,7 +291,7 @@
         	on f.free_id = u.user_id
 			where work_field = #{work_field} and work_check=1 
 					and s.skill_nm regexp(select REPLACE(GROUP_CONCAT(#{skill_nm}),',','|') AS skill_nm) and c.job_lev like CONCAT_WS('','%',#{job_lev},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
-			order by cast(f.reg_date as unsigned) DESC
+			order by cast(f.mod_date as unsigned) DESC
 			limit #{amount} offset #{offset}
   	 	]]>
   	 </select>
@@ -312,7 +312,7 @@
         	on f.free_id = u.user_id
 			where work_field = #{work_field} and work_check=1 
 					and c.job_lev like CONCAT_WS('','%',#{job_lev},'%')  and r.region like CONCAT_WS('','%',#{region},'%') and r.district like CONCAT_WS('','%',#{district},'%')
-			order by cast(f.reg_date as unsigned) DESC
+			order by cast(f.mod_date as unsigned) DESC
 			limit #{amount} offset #{offset}
   	 	]]>
   	 </select>
