@@ -42,15 +42,9 @@ public class MyPageController {
 		
 	}
 	
-//	//회원정보 추가
-//	@GetMapping(value = "/addinfo")
-//	public void enrollInfoGET(Model model, MemberVO vo) {
-//		logger.debug("/addinfo-> enrollInfoGET()호출 ");
-//		
-//		
-//	}
+
 	
-	
+	//회원정보 추가
 	@PostMapping(value = "/addinfo")
 	@ResponseBody
 	public void  enrollInfoPOST(MemberVO vo, HttpSession session) {
@@ -62,24 +56,16 @@ public class MyPageController {
 		
 	}
 	
-//	@GetMapping(value = "/addinfo2")
-//	public void infoOk() {
-//		logger.debug("회원정보 수정완료 ");
-//	}
+
 	
-//	
-//	//신원정보 추가
-//	@GetMapping(value = "/addidentity")
-//	public void enrollIdentiGET() {
-//		logger.debug("/addidentity -> enrollIdentiGET()호출 ");
-//	}
-	
-	
+	//신원정보 추가
 	@PostMapping(value = "/addidentity")
 	@ResponseBody
 	public void enrollIdentiPOST(MemberVO vo) {
 		logger.debug("@@@@@@@@@@@@@@@@@@/addidentity -> enrollIdentiPOST()호출 ");
 		logger.debug("vo :"+vo);
+		logger.info("vo:"+vo);
+
 		myService.addIdentity(vo);
 	}
 	
