@@ -12,6 +12,7 @@ import com.itwillbs.domain.CareerVO;
 import com.itwillbs.domain.CompanyVO;
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.LicenseVO;
+import com.itwillbs.domain.MemberVO;
 import com.itwillbs.domain.PartnersVO;
 import com.itwillbs.domain.PortfolioVO;
 import com.itwillbs.domain.RegionVO;
@@ -65,6 +66,11 @@ public class MyProfileServiceImpl implements MyProfileService {
 	@Override
 	public List<PortfolioVO> getPortf(FreelancerVO vo) {
 		return mDAO.getPortf(vo);
+	}
+
+	@Override
+	public MemberVO getUser(FreelancerVO vo) {
+		return mDAO.getUser(vo);
 	}
 
 	

@@ -497,6 +497,10 @@
         where free_no = #{free_no}
    </select>
    
+   	<select id="getUser" resultType="com.itwillbs.domain.MemberVO">
+		select name, profile from user join freelancer on user_id = free_id
+		where free_no = #{free_no};
+	</select>
    
    
    

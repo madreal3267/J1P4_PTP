@@ -26,7 +26,7 @@
 	<!-- 프리랜서 상세페이지 상단 박스 시작 -->
 	<div class="card overflow-hidden card-2">
 		<!-- 프리랜서 정보 출력 : 이름 / 분야 / 레벨 -->
-		<p class="userName" style="position: absolute; left:180px; top:35px; font-size: 30px; font-weight: bold;">전지윤</p>
+		<p class="userName" style="position: absolute; left:180px; top:35px; font-size: 30px; font-weight: bold;">${myUser.name}</p>
 		<div style="display: inline-block; position: absolute; left:180px;bottom:40px;">
 		<span class="workField" style="font-size: 16px; margin-right:7px;">분야</span>
 		<span class="userWf" style="font-size: 16px; font-weight: bold; border-right: 1px solid gray; padding-right: 10px;">${myProfile.work_field }</span>

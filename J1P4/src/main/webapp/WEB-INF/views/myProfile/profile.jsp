@@ -21,7 +21,7 @@
 	<!-- 프리랜서 상세페이지 상단 박스 시작 -->
 	<div class="card overflow-hidden card-2">
 		<!-- 프리랜서 정보 출력 : 이름 / 분야 / 레벨 -->
-		<p class="userName" style="position: absolute; left:180px; top:35px; font-size: 30px; font-weight: bold;">전지윤</p>
+		<p class="userName" style="position: absolute; left:180px; top:35px; font-size: 30px; font-weight: bold;">${myUser.name}</p>
 		<div style="display: inline-block; position: absolute; left:180px;bottom:40px;">
 		<span class="workField" style="font-size: 16px; margin-right:7px;">분야</span>
 		<span class="userWf" style="font-size: 16px; font-weight: bold; border-right: 1px solid gray; padding-right: 10px;">${myProfile.work_field }</span>
@@ -31,7 +31,8 @@
 		
 		<!-- 한줄 소개 말풍선 -->
 		<div class="border border-secondary rounded p-2" style="padding-left:5px;position: absolute; top:35px; right:54px; font-size: 20px; font-weight: bold;">" ${myProfile.oneline_bio} "</div>
-		
+<%-- 		스킬: ${mySkill } --%>
+<%-- 		지역: ${myReg } --%>
 		<!-- 스킬 -->
 		<div style="display: inline-block; position: absolute; right:54px; bottom:30px;">
 			<c:forEach items="${mySkill }" var="mySkill">

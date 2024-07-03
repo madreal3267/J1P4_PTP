@@ -54,6 +54,8 @@
             <img src="../resources/증명1.jpg" alt="profile" width="45" height="45" class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small">
+        	<li><div style="margin-left: 15px;">${sessionScope.user_id } 님</div></li>
+            <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="/member/mypage">마이페이지</a></li>
             <li><a class="dropdown-item" href="/member/account">계정설정</a></li>
             <li><hr class="dropdown-divider"></li>

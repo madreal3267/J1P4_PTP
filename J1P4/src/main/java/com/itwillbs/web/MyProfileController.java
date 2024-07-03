@@ -43,11 +43,14 @@ public class MyProfileController {
 	// 내 프로필 페이지 연결 - 개인 / 팀
 	// http://localhost:8088/myProfile/profile?free_no=366
 	@GetMapping(value="/profile")
-	public String profileGET(@RequestParam int free_no, Model model,FreelancerVO vo,HttpSession session,HttpServletResponse response) throws IOException {
+	public String profileGET(@RequestParam int free_no, Model model,FreelancerVO vo,HttpSession session,HttpServletResponse response,String id) throws IOException {
 		logger.debug(" Controller : ( •̀ ω •́ )y /profile -> profileGET 실행 ");
 		
 		vo.setFree_no(free_no);
+		
+		logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+vo.getFree_no());
 		vo.setFree_id(String.valueOf(session.getAttribute("user_id")));
+		id = String.valueOf(session.getAttribute("user_id"));
 		
 		if(session.getAttribute("user_type").equals("개인") || session.getAttribute("user_type").equals("모임")) {
 			if(session.getAttribute("free_no").equals(free_no)) {				
@@ -57,6 +60,7 @@ public class MyProfileController {
 				model.addAttribute("myCareer", mpService.getCareer(vo));
 				model.addAttribute("myLicense", mpService.getLicense(vo));
 				model.addAttribute("myPortf", mpService.getPortf(vo));
+				model.addAttribute("myUser",mpService.getUser(vo));
 				return "/myProfile/profile";
 			} else {
 				PrintWriter out = response.getWriter();
@@ -117,14 +121,14 @@ public class MyProfileController {
 	// 내 프로필 페이지 연결 - 사업자
 	// http://localhost:8088/myProfile/profileB?free_no=366
 	@GetMapping(value="/profileB")
-	public String profileBGET(@RequestParam int free_no, Model model,FreelancerVO vo,HttpSession session,HttpServletResponse response) throws IOException {
+	public String profileBGET(@RequestParam int free_no, Model model,FreelancerVO vo,HttpSession session,HttpServletResponse response,String id) throws IOException {
 		logger.debug(" Controller : ( •̀ ω •́ )y /profileB -> profileBGET 실행 ");
 		logger.debug("@@@@@@@@@@@@@@"+vo.getFree_id());
 		logger.debug("@@@@@@@@@@@@@@"+vo.getFree_no());
 		
 		vo.setFree_no(free_no);
 		vo.setFree_id(String.valueOf(session.getAttribute("user_id")));
-		
+		id = String.valueOf(session.getAttribute("user_id"));
 		logger.debug("@@@@@@@@@@@@@@"+vo.getFree_id());
 		logger.debug("@@@@@@@@@@@@@@"+vo.getFree_no());
 		
@@ -137,6 +141,7 @@ public class MyProfileController {
 				model.addAttribute("myComp", mpService.getComp(vo));
 				model.addAttribute("myPartn", mpService.getPartn(vo));
 				model.addAttribute("myPortf", mpService.getPortf(vo));
+				model.addAttribute("myUser",mpService.getUser(vo));
 				return "/myProfile/profileB";
 			} else {
 				PrintWriter out = response.getWriter();
