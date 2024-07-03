@@ -29,7 +29,7 @@
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
  <div class="card overflow-hidden card-2" >
   <div class="row no-gutters row-bordered row-border-light">
-  
+
       <!-- 사이드 메뉴 시작 -->
 	<div class="col-md-3 pt-0">
 		<div class="list-group list-group-flush account-settings-links" style="width:274px;">
@@ -44,7 +44,6 @@
 		</div>
 	</div>
 	<!-- 사이드 메뉴 끝 -->
-		
 	<div class="col-md-9">
 	<div class="tab-content">
 	

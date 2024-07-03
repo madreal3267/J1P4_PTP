@@ -40,12 +40,12 @@
 	</update>
 	
 	<update id="updateSkill">
-		update skill set skill_nm=#{skill_nm},skill_lev=#{skill_lev}
+		update skill set skill_nm=#{skill_nm},skill_lev=#{skill_lev},user_id=#{user_id}
 		where free_no = (select free_no from freelancer where free_id=#{user_id})		
 	</update>
   
   	<update id="updateReg">
-  		update region set region=#{region},district=#{district}
+  		update region set region=#{region},district=#{district},user_id=#{user_id}
 		where free_no = (select free_no from freelancer where free_id=#{user_id})	
   	</update>
   	

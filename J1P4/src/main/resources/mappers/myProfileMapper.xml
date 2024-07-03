@@ -19,12 +19,12 @@
         union all select 7 union all select 8
         union all select 9 union all select 10) numbers INNER JOIN skill
         on char_length (skill.skill_nm) - char_length(replace(skill.skill_nm,',',''))>=numbers.n-1
-        where free_no = #{free_no} and user_id=#{free_id} order by skill_nm
+        where free_no = #{free_no} order by skill_nm
 	</select>
 	
 	<select id="getReg" resultType="com.itwillbs.domain.RegionVO">
 		select * from region
-		where free_no = #{free_no} and user_id=#{free_id}
+		where free_no = #{free_no}
 	</select>
 	
 	<select id="getCareer" resultType="com.itwillbs.domain.CareerVO">
@@ -88,6 +88,10 @@
         union all select 9 union all select 10) numbers INNER JOIN portfolio
         on char_length (portfolio.file) - char_length(replace(portfolio.file,',',''))>=numbers.n-1
         where free_no = #{free_no}
+	</select>
+	
+	<select id="getUser" resultType="com.itwillbs.domain.MemberVO">
+		select name, profile from user where user_id = #{free_id}
 	</select>
 	
  

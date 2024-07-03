@@ -765,6 +765,8 @@ public class BoardController {
 		logger.debug("vo : "+vo);
 		
 		model.addAttribute("myPortf", bService.getPortf(vo));
+		
+		vo.setFree_no(free_no);
 
 		
 		// 북마크 체크, 프리랜서에게 제안할 정보 전달
@@ -788,6 +790,7 @@ public class BoardController {
 				model.addAttribute("myReg",bService.getReg(vo));
 				model.addAttribute("myCareer", bService.getCareer(vo));
 				model.addAttribute("myLicense", bService.getLicense(vo));
+				model.addAttribute("myUser", bService.getUser(vo));
 				return "/board/detailListFree";
 			}else if(vo.getUser_type().equals("사업자")) {			
 					model.addAttribute("myProfile", bService.getProfile(vo));
@@ -796,6 +799,7 @@ public class BoardController {
 					model.addAttribute("myCareer", bService.getCareer(vo));
 					model.addAttribute("myComp", bService.getComp(vo));
 					model.addAttribute("myPartn", bService.getPartn(vo));
+					model.addAttribute("myUser", bService.getUser(vo));
 					return "/board/detailListFreeC";
 			}
 		}
@@ -804,6 +808,7 @@ public class BoardController {
 		model.addAttribute("myReg",bService.getReg(vo));
 		model.addAttribute("myCareer", bService.getCareer(vo));
 		model.addAttribute("myLicense", bService.getLicense(vo));
+		model.addAttribute("myUser", bService.getUser(vo));
 		// 뷰페이지 이동
 		return "/board/detailListFree";
 	}
@@ -817,7 +822,7 @@ public class BoardController {
 		
 		model.addAttribute("myPortf", bService.getPortf(vo));
 
-		
+		vo.setFree_no(free_no);
 		// 북마크 체크, 프리랜서에게 제안할 정보 전달
 		Integer ct = (Integer)request.getSession().getAttribute("ct_no");
 		if(request.getSession().getAttribute("ct_no") != null) {
@@ -838,6 +843,7 @@ public class BoardController {
 		model.addAttribute("myCareer", bService.getCareer(vo));
 		model.addAttribute("myComp", bService.getComp(vo));
 		model.addAttribute("myPartn", bService.getPartn(vo));
+		model.addAttribute("myUser", bService.getUser(vo));
 		return "/board/detailListFreeC";		
 					
 	}

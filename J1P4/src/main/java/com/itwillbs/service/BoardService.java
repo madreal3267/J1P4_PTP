@@ -10,6 +10,7 @@ import com.itwillbs.domain.Criteria;
 import com.itwillbs.domain.EvaluateProjectDTO;
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.LicenseVO;
+import com.itwillbs.domain.MemberVO;
 import com.itwillbs.domain.OfferVO;
 import com.itwillbs.domain.PartnersVO;
 import com.itwillbs.domain.PortfolioVO;
@@ -126,4 +127,7 @@ public interface BoardService {
 	
 	// 포트폴리오 불러오기
 	public List<PortfolioVO> getPortf(FreelancerVO vo);
+	
+	// 이름& 프로필 불러오기
+	public MemberVO getUser(FreelancerVO vo);
 }

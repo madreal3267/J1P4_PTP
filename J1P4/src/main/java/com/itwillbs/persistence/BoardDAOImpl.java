@@ -20,6 +20,7 @@ import com.itwillbs.domain.Criteria;
 import com.itwillbs.domain.EvaluateProjectDTO;
 import com.itwillbs.domain.FreelancerVO;
 import com.itwillbs.domain.LicenseVO;
+import com.itwillbs.domain.MemberVO;
 import com.itwillbs.domain.OfferVO;
 import com.itwillbs.domain.PartnersVO;
 import com.itwillbs.domain.PortfolioVO;
@@ -296,4 +297,10 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 	
 
+	@Override
+	public MemberVO getUser(FreelancerVO vo) {
+		return sqlSession.selectOne(NAMESPACE+"getUser",vo);
+	}
+	
+	
 }
