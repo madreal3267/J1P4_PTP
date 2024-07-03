@@ -86,7 +86,7 @@
 	
 	<!-- 프로젝트 진행중 -->
 	<select id="ongoingProjectList" resultType="com.itwillbs.domain.ProjectDTO">		
-		select p.proj_no, p.proj_title, c.ct_id, m.manager_nm, p.proj_status
+		select p.proj_no, p.proj_title, c.ct_id, m.manager_nm, p.proj_status, s.price_check
 		from project p 
 		join client c on c.ct_no = p.ct_no
 		join apply_mgmt a on a.proj_no = p.proj_no
@@ -238,7 +238,7 @@
 	JOIN user u ON u.user_id = f.free_id 
 	LEFT JOIN skill s ON s.free_no = f.free_no 
 	LEFT JOIN career c ON c.free_no = f.free_no 
-	WHERE p.proj_status = '모집중' AND a.reject_check = 0 AND ct.ct_id = #{user_id}
+	WHERE p.proj_status = '모집중' AND (a.reject_check = 0 OR a.reject_check IS NULL) AND ct.ct_id = #{user_id}
 	GROUP BY p.proj_title, u.name, f.free_id, p.proj_no, f.free_no, meeting_dt, meeting_pc, meetingOK
 	ORDER BY p.proj_title
 	</select>

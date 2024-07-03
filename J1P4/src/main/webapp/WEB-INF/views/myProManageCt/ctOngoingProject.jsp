@@ -79,7 +79,7 @@
 										<td>${copDTO.manager_nm }</td>
 										<td class="text-center">
 					                        <c:choose>
-					                            <c:when test="${copDTO.proj_status == '계약'}">
+					                            <c:when test="${copDTO.proj_status == '진행 중'}">
 													<form role="form" action="/myProManageCt/payment" method="post">
 														<input type="hidden" name="proj_no" value="${copDTO.proj_no }">
 														<input type="hidden" name="free_no" value="${copDTO.free_no }">
@@ -89,14 +89,14 @@
 														
 													</form>
 					                            </c:when>
-						                            <c:otherwise>
+						                           <c:when test="${copDTO.proj_status == '진행 중' and copDTO.price_check == 1}">
 														<form role="form" action="/myProManageCt/requestSettlement" method="post">
 															<input type="hidden" name="proj_no" value="${copDTO.proj_no }">
 															<input type="hidden" name="free_no" value="${copDTO.free_no }">
 															<input type="hidden" name="ct_no" value="${copDTO.ct_no }">
 						                               <input type="submit" class="btn btn-dark" value="완료하기">										
 														</form>		                               
-						                            </c:otherwise>
+						                           </c:when>
 					                        </c:choose>
 										</td>
 									</tr>

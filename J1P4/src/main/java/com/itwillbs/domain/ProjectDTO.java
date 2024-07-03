@@ -54,6 +54,7 @@ public class ProjectDTO {
 	private Timestamp meeting_dt;
 	private String meeting_pc;
 	private int meetingOK;
+	private int price_check;
 	
 	//지원 종료에 필요
 	private int reject_check;
