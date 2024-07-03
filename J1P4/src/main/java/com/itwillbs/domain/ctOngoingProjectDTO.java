@@ -16,5 +16,5 @@ public class ctOngoingProjectDTO {
 	private int ct_no;
 	private int free_no;
 	private int manager_no;
-	private int price_check;
+	private int pay_check;
 }

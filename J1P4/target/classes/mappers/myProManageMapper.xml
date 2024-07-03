@@ -255,7 +255,7 @@
 	
 	<!-- 프로젝트 진행중 목록 조회-->
 	<select id="ctOngoingProjectList" resultType="com.itwillbs.domain.ctOngoingProjectDTO">
-		select p.proj_no, p.proj_title, m.manager_nm, p.proj_status, p.proj_cost, c.ct_no, m.manager_no, a.free_no 
+		select p.proj_no, p.proj_title, m.manager_nm, p.proj_status, p.proj_cost, c.ct_no, m.manager_no, a.free_no, p.pay_check
 		from project p 
 		join client c on p.ct_no = c.ct_no
 		join apply_mgmt a on a.proj_no = p.proj_no
@@ -266,14 +266,9 @@
 	
 	<!-- 프로젝트 진행중 - 결제하기 -->
 	<update id="payment">
-		update settlement
-		set price = cast(#{proj_cost} as unsigned), price_check = 1
-		where proj_no = #{proj_no}
-	
 		update project
-		set proj_cost=#{proj_cost},  pay_check=1
+		set proj_cost=#{proj_cost}, pay_check=1
 		where proj_no = #{proj_no}
-	
 	</update>
 	
 	

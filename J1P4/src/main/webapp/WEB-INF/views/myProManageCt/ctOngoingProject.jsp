@@ -89,7 +89,7 @@
 														
 													</form>
 					                            </c:when>
-						                           <c:when test="${copDTO.proj_status == '진행 중' and copDTO.price_check == 1}">
+						                           <c:when test="${copDTO.proj_status == '진행 중' and copDTO.pay_check == 1}">
 														<form role="form" action="/myProManageCt/requestSettlement" method="post">
 															<input type="hidden" name="proj_no" value="${copDTO.proj_no }">
 															<input type="hidden" name="free_no" value="${copDTO.free_no }">
