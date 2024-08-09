@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+.roginButt {
+	background-color: #31b9a9;
+	border: solid 2px #31b9a9;
+	color: #fff;
+	width:400px;
+	padding: 8px;
+	margin: 20px;
+	font-size: 20px;
+}
+
+.inputInfo {
+	width:400px;
+	height:45px;
+	padding-left: 10px;
+}
+
+.aLink {
+	text-decoration: none;
+	color : gray;
+}
+
+#aLinkId {
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 100px;
+}
+
+.insertFont {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}

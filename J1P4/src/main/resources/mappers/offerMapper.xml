@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.itwillbs.mapper.OfferMapper">
+  	 
+  	 <select id="getProj" resultType="com.itwillbs.domain.ProjectVO">
+  	 	select proj_no,work_field,proj_title,start_date,work_period,proj_cost,proj_content
+  	 	from project where ct_no = 3
+  	 </select>
+  	 
+  	 <insert id="insertOffer">
+  	 	insert into offer_mgmt (free_no,proj_no)
+  	 	values (#{free_no},#{proj_no})
+  	 </insert> 
+  
+  </mapper>

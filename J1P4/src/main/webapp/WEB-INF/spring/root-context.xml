@@ -68,5 +68,29 @@
 	<!-- Service 객체 인식 -->
 	<context:component-scan base-package="com.itwillbs.service"></context:component-scan>
 	
+	<context:component-scan base-package="com.itwillbs.util"></context:component-scan>
+	<!-- Property Placeholder Configuration -->
+    <context:property-placeholder location="classpath:application.properties"/>			
+	
+	<!-- naver mail설정 -->
+<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
+ <property name="host" value="smtp.naver.com"/> 
+ <property name="port" value="465"/> 
+ <property name="username" value="itwil_j1p4@naver.com"/> 
+ <property name="password" value="itwill1234"/> 
+   <!-- 보안연결 SSL과 관련된 설정 -->
+ <property name="javaMailProperties">
+  <props>
+  <prop key="mail.smtp.auth">true</prop>
+  <prop key="mail.smtp.starttls.enable">true</prop>
+  <prop key="mail.smtps.checkserveridentity">true</prop>
+  <prop key="mail.smtps.ssl.trust">*</prop>
+  <prop key="mail.debug">true</prop>
+  <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+  </props>
+ </property>
+</bean>
+
+	
 		
 </beans>
