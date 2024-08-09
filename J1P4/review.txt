@@ -20,3 +20,5 @@ review.txt
 	   order by 절을 지원하지 않아 서브쿼리로 union 결과를 먼저 생성 한 후 정렬하였음.
 	   
 	4. DataTables 클래스 사용 난감...
+	
+	
