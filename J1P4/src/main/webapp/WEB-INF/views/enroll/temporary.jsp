@@ -33,7 +33,7 @@ h5 { color: gray !important; }
 
 	<hr>
 	<div>
-	<form action="/enroll/enrollProj" method="post" id="fm1" name="fm1">
+	<form action="/J1P4_PTP/enroll/enrollProj" method="post" id="fm1" name="fm1">
 		<input type="hidden" value="user_10" name="user_id">
 		<input type="hidden" value=119 name="proj_no">
 		<!-- 사용자 아이디 정보 세션에 담아서 hidden 으로 전달 -> project 테이블 컬럼 ct_no 저장에 필요하기 때문 -->
@@ -344,7 +344,7 @@ h5 { color: gray !important; }
 				/* 최초 임시 저장 - insert문 실행 */
 				if(data) {
 					$.ajax({
-						url : "/enroll/saveProj",
+						url : "/J1P4_PTP/enroll/saveProj",
 						type : "POST",
 						data : $("#fm1").serialize(),
 						async : false,
@@ -359,7 +359,7 @@ h5 { color: gray !important; }
 				} else {
 					/* 최초 임시 저장 이후 임시 저장 - update문 실행*/
 					$.ajax({
-						url : "/enroll/multiSaveProj",
+						url : "/J1P4_PTP/enroll/multiSaveProj",
 						type : "POST",
 						data : $("#fm1").serialize(),
 						success : function() {

@@ -17,7 +17,7 @@
 </c:if>
 
 
-	<form action="/enroll/enrollProj" method="post" id="fm1" name="fm1" class="fm">
+	<form action="/J1P4_PTP/enroll/enrollProj" method="post" id="fm1" name="fm1" class="fm">
 		<input type="hidden" value="${sessionScope.user_id }" name="user_id">
 		<input type="hidden" value="${param.proj_no }" name="proj_no">
 		<input type="hidden" value="" name="temporary" class="temporary">
@@ -491,7 +491,7 @@
 				$('.temporary').val("임시저장");
 				
 					$.ajax({
-						url : "/enroll/savedProjSave",
+						url : "/J1P4_PTP/enroll/savedProjSave",
 						type : "POST",
 						data : $("#fm1").serialize(),
 						success : function() {
@@ -512,7 +512,7 @@
 				
 				$('.temporary').val("등록성공");
 	
-					$(".fm").attr("action","/enroll/savedProjEnroll");
+					$(".fm").attr("action","/J1P4_PTP/enroll/savedProjEnroll");
 					$(".fm").submit();
 		
 			});

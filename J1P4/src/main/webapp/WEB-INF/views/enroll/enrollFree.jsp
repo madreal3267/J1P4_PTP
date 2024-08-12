@@ -4,16 +4,16 @@
 <!-- ============== 비회원 헤더 ================= -->
 
 <c:if test="${empty sessionScope.user_id }">
-<c:import url="../include/header.jsp"></c:import>
+<c:import url="../J1P4_PTP/include/header.jsp"></c:import>
 </c:if>
 <!-- ============== 프리랜서 헤더 ================= -->
 <c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.equals('프리랜서') }">
-<c:import url="../include/freeHeader.jsp"></c:import>
+<c:import url="../J1P4_PTP/include/freeHeader.jsp"></c:import>
 </c:if>
 
 <!-- ============== 클라이언트 헤더 ================= -->
 <c:if test="${not empty sessionScope.user_id && sessionScope.user_cf.equals('클라이언트') }">
-<c:import url="../include/ctHeader.jsp"></c:import>
+<c:import url="../J1P4_PTP/include/ctHeader.jsp"></c:import>
 </c:if>
 
 	

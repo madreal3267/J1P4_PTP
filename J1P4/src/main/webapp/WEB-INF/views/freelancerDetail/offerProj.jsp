@@ -126,7 +126,7 @@ integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEw
 $(function() {
 	$("#submitButt").click(function() {
 		$.ajax({
-			url : "/freelancerDetail/offerProj",
+			url : "/J1P4_PTP/freelancerDetail/offerProj",
 			type : "POST",
 			data : $("#fm1").serialize(),
 			success : function() {

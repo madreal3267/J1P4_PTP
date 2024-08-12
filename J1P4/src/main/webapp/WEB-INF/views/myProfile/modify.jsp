@@ -56,17 +56,16 @@
 			</div>
 			<div class="mx-4 my-3">
 			<div class="gap">
-				<h5>업무 가능 분야</h5>
+				<h5>회원등급</h5>
 				<div class="content">
-					<input type="radio" value="개발" class="btn-check" name="work_field" id="radioWf1">
-					<label class="btn btn-outline-dark radioField" for="radioWf1">⚙️ 개발</label>
-					<input type="radio" value="기획" class="btn-check" name="work_field" id="radioWf2">
-					<label class="btn btn-outline-dark radioField" for="radioWf2">🛠️ 기획</label>
-					<input type="radio" value="디자인" class="btn-check" name="work_field" id="radioWf3">
-					<label class="btn btn-outline-dark radioField" for="radioWf3">🎨 디자인</label>
-					<input type="radio" value="퍼블리싱" class="btn-check" name="work_field" id="radioWf4">
-					<label class="btn btn-outline-dark radioField" for="radioWf4">🖋️ 퍼블리싱</label>
+					<input type="radio" value="신규회원" class="btn-check" name="work_field" id="radioWf1">
+					<label class="btn btn-outline-dark radioField" for="radioWf1">신규회원</label>
+					<input type="radio" value="일반회원" class="btn-check" name="work_field" id="radioWf2">
+					<label class="btn btn-outline-dark radioField" for="radioWf2">일반회원</label>
+					<input type="radio" value="장기회원" class="btn-check" name="work_field" id="radioWf3">
+					<label class="btn btn-outline-dark radioField" for="radioWf3">장기회원</label>
 				</div>
+				<hr>
 			</div>	
 			<hr>
 			<div class="gap">

@@ -22,7 +22,7 @@
 		</div>
 	</div>
 
-	<form action="/enroll/enrollProj" method="post" id="fm1" name="fm1" class="fm">
+	<form action="/J1P4_PTP/enroll/enrollProj" method="post" id="fm1" name="fm1" class="fm">
 		<input type="hidden" value="${sessionScope.user_id }" name="user_id">
 		<input type="hidden" value="" name="temporary" class="temporary">
 	
@@ -469,7 +469,7 @@
 				/* 최초 임시 저장 - insert문 실행 */
 				if(data) {
 					$.ajax({
-						url : "/enroll/saveProj",
+						url : "/J1P4_PTP/enroll/saveProj",
 						type : "POST",
 						data : $("#fm1").serialize(),
 						async : false,
@@ -484,7 +484,7 @@
 				} else {
 					/* 최초 임시 저장 이후 임시 저장 - update문 실행*/
 					$.ajax({
-						url : "/enroll/multiSaveProj",
+						url : "/J1P4_PTP/enroll/multiSaveProj",
 						type : "POST",
 						data : $("#fm1").serialize(),
 						success : function() {
@@ -519,11 +519,11 @@
 				$('.temporary').val("등록성공");
 				
 				if(data) {
-					$(".fm").attr("action","/enroll/enrollProj");
+					$(".fm").attr("action","/J1P4_PTP/enroll/enrollProj");
 					$(".fm").submit();
 				} else {
 					/* 임시 저장 이후 등록 - delete후 insert문 실행*/
-					$(".fm").attr("action","/enroll/enrollSaveProj");
+					$(".fm").attr("action","/J1P4_PTP/enroll/enrollSaveProj");
 					$(".fm").submit();
 				}
 				
