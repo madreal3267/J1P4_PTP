@@ -106,7 +106,7 @@
 
     function showAnnouncement(id) {
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/admin/announcement?id=' + id, true);
+        xhr.open('GET', '/J1P4_PTP/admin/announcement?id=' + id, true);
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4) {
                 if (xhr.status == 200) {

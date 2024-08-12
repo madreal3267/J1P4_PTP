@@ -54,7 +54,7 @@
                                 <td>${contract.contract_path}</td>
                                 <td>${contract.upload_date}</td>
                                 <td>
-                                    <a href="/admin/contract/download?contract_no=${contract.contract_no}" class="btn btn-success">Download</a>
+                                    <a href="/J1P4_PTP/admin/contract/download?contract_no=${contract.contract_no}" class="btn btn-success">Download</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -130,7 +130,7 @@
 
 <script>
     function changePageSize(pageSize) {
-        window.location.href = '/admin/contracts?pageSize=' + pageSize;
+        window.location.href = '/J1P4_PTP/admin/contracts?pageSize=' + pageSize;
     }
 
     function validateForm() {
@@ -168,7 +168,7 @@
         }
 
         var formData = new FormData(this);
-        fetch('/admin/contracts/upload', {
+        fetch('/J1P4_PTP/admin/contracts/upload', {
             method: 'POST',
             body: formData
         })

@@ -22,7 +22,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">관리자 계정으로 로그인 하세요.</p>
 
-    <form action="<c:url value='/admin/login'/>" method="post">
+    <form action="<c:url value='/J1P4_PTP/admin/login'/>" method="post">
       <div class="form-group has-feedback">
         <input type="text" name="manager_id" class="form-control" placeholder="ID" required>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -33,7 +33,7 @@
       </div>
       <div class="row">
         <div class="col-xs-8">
-    		<a href="/admin/join">회원가입</a>
+    		<a href="/J1P4_PTP/admin/join">회원가입</a>
         </div>
         <div class="col-xs-4">
           <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>

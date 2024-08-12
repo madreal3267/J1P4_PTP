@@ -44,7 +44,7 @@
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
-            <a href="/admin/main" class="logo">
+            <a href="/J1P4_PTP/admin/main" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>A</b>LT</span>
                 <!-- logo for regular state and mobile devices -->
@@ -70,7 +70,7 @@
                       <ul class="dropdown-menu" style="width: auto; padding: 0;">
                           <!-- Menu Footer-->
                           <li class="user-footer" style="padding: 10px; text-align: center;">
-                              <a href="/admin/logout" class="btn btn-default btn-flat" style="width: 100%;">Sign out</a>
+                              <a href="/J1P4_PTP/admin/logout" class="btn btn-default btn-flat" style="width: 100%;">Sign out</a>
                           </li>
                       </ul>
                   </li>
@@ -100,11 +100,11 @@
                     
                     <c:if test="${sessionScope.manager.manager_id == 'admin'}">
                        <li>
-                           <a href="/admin/announcement/new"><i class="fa fa-edit"></i> <span>공지사항 작성</span></a>
+                           <a href="/J1P4_PTP/admin/announcement/new"><i class="fa fa-edit"></i> <span>공지사항 작성</span></a>
                        </li>
                    </c:if>
                     <li>
-                    <a href="/admin/notices">
+                    <a href="/J1P4_PTP/admin/notices">
                         <i class="fa fa-bell"></i> <span>공지사항</span>
                     </a>
                 </li>
@@ -117,9 +117,9 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="/admin/users?type=all"><i class="fa fa-circle"></i> 전체</a></li>
-                            <li><a href="/admin/users?type=clients"><i class="fa fa-circle-o"></i> 클라이언트</a></li>
-                            <li><a href="/admin/users?type=freelancers"><i class="fa fa-circle-o"></i> 프리랜서</a></li>
+                            <li><a href="/J1P4_PTP/admin/users?type=all"><i class="fa fa-circle"></i> 전체</a></li>
+                            <li><a href="/J1P4_PTP/admin/users?type=clients"><i class="fa fa-circle-o"></i> 클라이언트</a></li>
+                            <li><a href="/J1P4_PTP/admin/users?type=freelancers"><i class="fa fa-circle-o"></i> 프리랜서</a></li>
                         </ul>
                     </li>
                     <!-- 회원정보 관리 -->
@@ -132,7 +132,7 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="/admin/projects"><i class="fa fa-circle"></i> 전체</a></li>
+                            <li><a href="/J1P4_PTP/admin/projects"><i class="fa fa-circle"></i> 전체</a></li>
                         </ul>
                     </li>
                     <!-- 프로젝트 관리 -->
@@ -145,8 +145,8 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="/admin/settlements"><i class="fa fa-circle-o"></i> 대금내역</a></li>
-                            <li><a href="/admin/contracts"><i class="fa fa-circle-o"></i> 계약서</a></li>
+                            <li><a href="/J1P4_PTP/admin/settlements"><i class="fa fa-circle-o"></i> 대금내역</a></li>
+                            <li><a href="/J1P4_PTP/admin/contracts"><i class="fa fa-circle-o"></i> 계약서</a></li>
                         </ul>
                     </li>
                     <!-- 정산 관리 -->
@@ -159,7 +159,7 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="/admin/managers"><i class="fa fa-circle-o"></i> 담당매니저</a></li>
+                            <li><a href="/J1P4_PTP/admin/managers"><i class="fa fa-circle-o"></i> 담당매니저</a></li>
                         </ul>
                     </li>
                     <!-- 매니저 관리 -->

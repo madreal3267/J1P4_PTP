@@ -29,7 +29,7 @@ import com.itwillbs.service.EnrollFreeService;
 import com.itwillbs.service.MyProfileService;
 
 @Controller
-@RequestMapping(value = "/myProfile/*")
+@RequestMapping(value = "J1P4_PTP/myProfile/*")
 public class MyProfileController {
 
 	private static final Logger logger = LoggerFactory.getLogger(MyProfileController.class);

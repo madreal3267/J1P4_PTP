@@ -59,7 +59,7 @@ import com.itwillbs.util.Pagination;
 import com.itwillbs.util.PaginationService;
 
 @Controller
-@RequestMapping(value = "/admin/*")
+@RequestMapping(value = "J1P4_PTP/admin/*")
 public class AdminController {
 	
 
@@ -102,7 +102,7 @@ public class AdminController {
         if (manager != null && manager.getManager_pw().equals(managerPw)) {
             if (manager.isApproved()) {
                 session.setAttribute("manager", manager);
-                return "redirect:/admin/main";
+                return "redirect:/J1P4_PTP/admin/main";
             } else {
                 model.addAttribute("error", "승인 처리 진행중입니다.");
                 return "admin/login";
@@ -117,7 +117,7 @@ public class AdminController {
     public String logout(HttpSession session) {
     	// 세션 초기화
         session.invalidate();
-        return "redirect:/admin/login";
+        return "redirect:/J1P4_PTP/admin/login";
     }
 
     
@@ -194,7 +194,7 @@ public class AdminController {
         announcementService.createAnnouncement(announcement);
 
         // 공지사항 생성 후 메인 페이지로 리다이렉트
-        return "redirect:/admin/main";
+        return "redirect:/J1P4_PTP/admin/main";
     }
 
     // 공지사항 리스트를 페이징 처리하여 조회하는 메서드
@@ -255,7 +255,7 @@ public class AdminController {
     public String approveManager(@RequestParam("manager_no") int managerNo, HttpSession session) {
         
             managerService.approveManager(managerNo);
-            return "redirect:/admin/managers";
+            return "redirect:/J1P4_PTP/admin/managers";
         }
     
     // 매니저를 삭제하는 메서드("admin" 계정으로만 가능)
@@ -264,9 +264,9 @@ public class AdminController {
         ManagerDTO loggedInManager = (ManagerDTO) session.getAttribute("manager");
         if (loggedInManager != null && "admin".equals(loggedInManager.getManager_id())) {
             managerService.deleteManager(managerNo);
-            return "redirect:/admin/managers";
+            return "redirect:/J1P4_PTP/admin/managers";
         } else {
-            return "redirect:/admin/login";
+            return "redirect:/J1P4_PTP/admin/login";
         }
     }
     
@@ -369,7 +369,7 @@ public class AdminController {
         pvo.setProj_status("모집중");
         projectService.updateProjectStatus(pvo);
         logger.debug("승인 proj_no : " + proj_no);
-        return "redirect:/admin/projects";
+        return "redirect:/J1P4_PTP/admin/projects";
     }
 
     // 프로젝트를 반려하는 메서드
@@ -379,7 +379,7 @@ public class AdminController {
         pvo.setProj_no(proj_no);
         pvo.setReject_reason(reject_reason);
         projectService.rejectProject(pvo);
-        return "redirect:/admin/projects";
+        return "redirect:/J1P4_PTP/admin/projects";
     }
 
     // 프로젝트 반려 사유를 가져오는 메서드

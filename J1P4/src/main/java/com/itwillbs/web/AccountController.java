@@ -22,7 +22,7 @@ import com.itwillbs.domain.MemberVO;
 import com.itwillbs.service.AccountService;
 
 @Controller
-@RequestMapping(value = "/member/*")
+@RequestMapping(value = "J1P4_PTP/member/*")
 public class AccountController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);

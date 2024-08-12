@@ -12,15 +12,15 @@
 </div>
 <!-- 상태 필터 메뉴 -->
 <div class="btn-group" role="group" aria-label="Project Status Filter">
-    <a href="/admin/projects?proj_status=검수 단계" class="btn btn-default">검수 단계</a>
-    <a href="/admin/projects?proj_status=모집중" class="btn btn-default">모집 중</a>
-    <a href="/admin/projects?proj_status=반려" class="btn btn-default">반려</a>
-    <a href="/admin/projects?proj_status=임시 저장" class="btn btn-default">임시 저장</a>
-    <a href="/admin/projects?proj_status=등록 실패" class="btn btn-default">등록 실패</a>
-    <a href="/admin/projects?proj_status=계약" class="btn btn-default">계약</a>
-    <a href="/admin/projects?proj_status=진행 중" class="btn btn-default">진행 중</a>
-    <a href="/admin/projects?proj_status=완료" class="btn btn-default">완료</a>
-    <a href="/admin/projects" class="btn btn-default">전체</a>
+    <a href="/J1P4_PTP/admin/projects?proj_status=검수 단계" class="btn btn-default">검수 단계</a>
+    <a href="/J1P4_PTP/admin/projects?proj_status=모집중" class="btn btn-default">모집 중</a>
+    <a href="/J1P4_PTP/admin/projects?proj_status=반려" class="btn btn-default">반려</a>
+    <a href="/J1P4_PTP/admin/projects?proj_status=임시 저장" class="btn btn-default">임시 저장</a>
+    <a href="/J1P4_PTP/admin/projects?proj_status=등록 실패" class="btn btn-default">등록 실패</a>
+    <a href="/J1P4_PTP/admin/projects?proj_status=계약" class="btn btn-default">계약</a>
+    <a href="/J1P4_PTP/admin/projects?proj_status=진행 중" class="btn btn-default">진행 중</a>
+    <a href="/J1P4_PTP/admin/projects?proj_status=완료" class="btn btn-default">완료</a>
+    <a href="/J1P4_PTP/admin/projects" class="btn btn-default">전체</a>
 </div>
 
 <div class="box-body">
@@ -64,7 +64,7 @@
                                 <td>${item.work_period} 일</td>
                                 <td>
                                     <c:if test="${item.proj_status == '검수 단계'}">
-                                        <form action="/admin/project/approve?proj_no=${item.proj_no}" method="post" style="display:inline;">
+                                        <form action="/J1P4_PTP/admin/project/approve?proj_no=${item.proj_no}" method="post" style="display:inline;">
                                             <input type="hidden" name="proj_no" value="${item.proj_no}">
                                             <button type="submit" class="btn btn-success">승인</button>
                                         </form>
@@ -122,7 +122,7 @@
                 <h4 class="modal-title" id="rejectPopupLabel">프로젝트 반려</h4>
             </div>
             <div class="modal-body">
-                <form id="rejectForm" action="/admin/project/reject" method="post">
+                <form id="rejectForm" action="/J1P4_PTP/admin/project/reject" method="post">
                     <input type="hidden" id="rejectProjNo" name="proj_no">
                     <div class="form-group">
                         <label for="rejectReason">반려 사유</label>
@@ -176,7 +176,7 @@
     function showRejectReason(proj_no) {
         // AJAX 요청을 통해 반려 사유 가져옴
         $.ajax({
-            url: '/admin/project/rejectReason',
+            url: '/J1P4_PTP/admin/project/rejectReason',
             method: 'GET',
             data: { proj_no: proj_no },
             success: function(response) {

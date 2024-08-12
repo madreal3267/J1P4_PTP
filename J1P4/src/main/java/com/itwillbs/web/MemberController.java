@@ -34,7 +34,7 @@ import com.itwillbs.service.MemberService;
 
 
 @Controller
-@RequestMapping(value = "/member/*")
+@RequestMapping(value = "J1P4_PTP/member/*")
 public class MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);

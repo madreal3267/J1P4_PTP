@@ -16,7 +16,7 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" action="/admin/announcement/create" method="post">
+                <form role="form" action="/J1P4_PTP/admin/announcement/create" method="post">
                     <div class="box-body">
                         <div class="form-group">
                             <label for="title">제목</label>

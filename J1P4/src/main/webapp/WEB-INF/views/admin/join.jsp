@@ -29,7 +29,7 @@
   <div class="register-box-body">
     <p class="login-box-msg">회원가입</p>
 
-    <form action="<c:url value='/admin/join'/>" method="post">
+    <form action="<c:url value='/J1P4_PTP/admin/join'/>" method="post">
       <div class="form-group has-feedback">
         <input type="text" name="manager_nm" class="form-control" placeholder="Full name" required>
         <span class="glyphicon glyphicon-user form-control-feedback"></span>

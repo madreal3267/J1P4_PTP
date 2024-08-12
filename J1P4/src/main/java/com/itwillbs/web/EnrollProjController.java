@@ -27,7 +27,7 @@ import com.itwillbs.service.EnrollProjService;
 import com.itwillbs.service.SettlementService;
 
 @Controller
-@RequestMapping(value = "/enroll/*")
+@RequestMapping(value = "J1P4_PTP/enroll/*")
 public class EnrollProjController {
 
 	private static final Logger logger = LoggerFactory.getLogger(EnrollProjController.class);

@@ -52,13 +52,13 @@
                                     <c:otherwise>미승인</c:otherwise>
                                 </c:choose></td>
                                 <td><c:if test="${!manager.approved}">
-                                    <form action="/admin/managers/approve" method="post" style="display:inline;">
+                                    <form action="/J1P4_PTP/admin/managers/approve" method="post" style="display:inline;">
                                         <input type="hidden" name="manager_no" value="${manager.manager_no}" />
                                         <button type="submit" class="btn btn-primary btn-sm">승인</button>
                                     </form>
                                 </c:if></td>
                                 <td>
-                                    <form action="/admin/managers/delete" method="post" style="display:inline;">
+                                    <form action="/J1P4_PTP/admin/managers/delete" method="post" style="display:inline;">
                                         <input type="hidden" name="manager_no" value="${manager.manager_no}" />
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</button>
                                     </form>

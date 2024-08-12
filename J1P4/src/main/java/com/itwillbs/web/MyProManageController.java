@@ -27,7 +27,7 @@ import com.itwillbs.persistence.MyProManageDAO;
 import com.itwillbs.service.MyProManageService;
 
 @Controller
-@RequestMapping(value = "/myProManage/*")
+@RequestMapping(value = "J1P4_PTP/myProManage/*")
 public class MyProManageController {
 
 	private static final Logger logger = LoggerFactory.getLogger(MyProManageController.class);

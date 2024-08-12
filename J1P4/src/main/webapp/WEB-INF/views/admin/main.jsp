@@ -51,7 +51,7 @@
     
     function showAnnouncement(id) {
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/admin/announcement?id=' + id, true);
+        xhr.open('GET', '/J1P4_PTP/admin/announcement?id=' + id, true);
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4) {
                 if (xhr.status == 200) {
@@ -96,7 +96,7 @@
                             </li>
                         </c:forEach>
                     </ul>
-                    <a href="/admin/notices" class="btn btn-primary">전체 공지사항 보기</a>
+                    <a href="/J1P4_PTP/admin/notices" class="btn btn-primary">전체 공지사항 보기</a>
                 </div>
             </div>
         </div>
@@ -113,7 +113,7 @@
                 <div class="icon">
                     <i class="ion ion-person-add"></i>
                 </div>
-                <a href="/admin/users?type=all" class="small-box-footer">자세히 <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="/J1P4_PTP/admin/users?type=all" class="small-box-footer">자세히 <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <div class="col-lg-3 col-xs-6">
@@ -125,7 +125,7 @@
                 <div class="icon">
                     <i class="ion ion-pie-graph"></i>
                 </div>
-                <a href="/admin/projects" class="small-box-footer">자세히 <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="/J1P4_PTP/admin/projects" class="small-box-footer">자세히 <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <c:if test="${sessionScope.manager.manager_id == 'admin'}">
@@ -141,7 +141,7 @@
                     <div class="icon">
                         <i class="ion ion-person"></i>
                     </div>
-                    <a href="/admin/managers" class="small-box-footer">자세히 <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="/J1P4_PTP/admin/managers" class="small-box-footer">자세히 <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
         </c:if>

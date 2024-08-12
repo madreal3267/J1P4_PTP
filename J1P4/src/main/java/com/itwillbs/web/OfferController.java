@@ -17,7 +17,7 @@ import com.itwillbs.domain.ProjectVO;
 import com.itwillbs.service.OfferProjServie;
 
 @Controller
-@RequestMapping(value = "/freelancerDetail/*")
+@RequestMapping(value = "J1P4_PTP/freelancerDetail/*")
 public class OfferController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(OfferController.class);

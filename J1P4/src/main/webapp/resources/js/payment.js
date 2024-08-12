@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
             // 결제 성공 시
             if (rsp.success) {
                 var xhr = new XMLHttpRequest(); // 새로운 XMLHttpRequest 객체 생성
-                xhr.open('POST', '/admin/settlements/' + settlementNo + '/update', true); // 서버로 POST 요청 전송
+                xhr.open('POST', 'J1P4_PTP/admin/settlements/' + settlementNo + '/update', true); // 서버로 POST 요청 전송
                 xhr.setRequestHeader('Content-Type', 'application/json'); // 요청 헤더 설정
 
                 // 서버 응답 처리
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             var xhr = new XMLHttpRequest(); // 새로운 XMLHttpRequest 객체 생성
             // /calculate 엔드포인트로 GET 요청 전송
-            xhr.open('GET', '/admin/settlements/' + settlementNo + '/calculate', true);
+            xhr.open('GET', 'J1P4_PTP/admin/settlements/' + settlementNo + '/calculate', true);
 
             // 서버 응답 처리
             xhr.onload = function () {

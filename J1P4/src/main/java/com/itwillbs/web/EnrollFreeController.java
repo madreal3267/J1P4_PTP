@@ -20,7 +20,7 @@ import com.itwillbs.domain.SkillVO;
 import com.itwillbs.service.EnrollFreeService;
 
 @Controller
-@RequestMapping(value="/enroll/*")
+@RequestMapping(value="J1P4_PTP/enroll/*")
 public class EnrollFreeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(EnrollFreeController.class);

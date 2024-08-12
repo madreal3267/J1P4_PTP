@@ -7,11 +7,11 @@
 </div>
 
 <div class="btn-group" role="group" aria-label="Settlement Filter">
-    <a href="/admin/settlements" class="btn btn-default">전체</a>
-    <a href="/admin/settlements?price_check=true" class="btn btn-default">대금지불</a>
-    <a href="/admin/settlements?price_check=false" class="btn btn-default">대금미지불</a>
-    <a href="/admin/settlements?settlement_check=true" class="btn btn-default">정산완료</a>
-    <a href="/admin/settlements?settlement_check=false" class="btn btn-default">정산미완료</a>
+    <a href="/J1P4_PTP/admin/settlements" class="btn btn-default">전체</a>
+    <a href="/J1P4_PTP/admin/settlements?price_check=true" class="btn btn-default">대금지불</a>
+    <a href="/J1P4_PTP/admin/settlements?price_check=false" class="btn btn-default">대금미지불</a>
+    <a href="/J1P4_PTP/admin/settlements?settlement_check=true" class="btn btn-default">정산완료</a>
+    <a href="/J1P4_PTP/admin/settlements?settlement_check=false" class="btn btn-default">정산미완료</a>
 </div>
 
 <div class="box-body">
@@ -89,7 +89,7 @@
                                 <!-- 정산 처리 버튼 -->
                                 <td>    
                                     <c:if test="${item.price_check == true && item.settlement_check == false}">
-                                        <form class="process-form" action="/admin/settlements/process" method="post">
+                                        <form class="process-form" action="/J1P4_PTP/admin/settlements/process" method="post">
                                             <input type="hidden" name="settlement_no" value="${item.settlement_no}" />
                                             <input type="hidden" name="settlement_requested" value="${item.settlement_requested}" />
                                             <button type="submit" class="btn btn-primary">정산 처리</button>
@@ -142,6 +142,6 @@
     function changePageSize(pageSize) {
         var priceCheck = '<c:out value="${priceCheck}" />';
         var settlementCheck = '<c:out value="${settlementCheck}" />';
-        window.location.href = '/admin/settlements?pageSize=' + pageSize + '&price_check=' + priceCheck + '&settlement_check=' + settlementCheck;
+        window.location.href = '/J1P4_PTP/admin/settlements?pageSize=' + pageSize + '&price_check=' + priceCheck + '&settlement_check=' + settlementCheck;
     }
 </script>
