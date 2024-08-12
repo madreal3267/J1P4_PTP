@@ -56,7 +56,7 @@ String key = request.getParameter("key");
 		</div>
 
 
-		<form class="form-horizontal" action="/member/chage" method="post">
+		<form class="form-horizontal" action="/J1P4_PTP/member/chage" method="post">
 			<div class="box-body">
 			
 				<input type="hidden" name="user_email" value="${param.user_email}" >

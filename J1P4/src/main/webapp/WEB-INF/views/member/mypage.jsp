@@ -35,9 +35,6 @@
 
 <!-- ============== 페이지 시작 ================= -->
 <form action="" method="post" role="form" id="fm01" name="jumin_form"> 
-<!-- <form action="/member/addinfo" method="post" >  회원정보-->
-<!-- <form action="/member/addidentity" method="post"> 신원인증 -->
-<!-- <form action="/member/bank" method="post" > 계좌관리 -->
 
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
  <div class="card overflow-hidden card-2" >
@@ -440,7 +437,7 @@ function checkBrn(){
 		$('.info').click(function(){
 			
 			$.ajax({
-				url:"/member/addinfo",
+				url:"/J1P4_PTP/member/addinfo",
 				type: "POST",
 				data:$("#fm01").serialize(),
 				success : function(){
@@ -503,7 +500,7 @@ function checkBrn(){
 		    
 		    
 		    $.ajax({
-				url:"/member/addidentity",
+				url:"/J1P4_PTP/member/addidentity",
 				type: "POST",
 				data:$("#fm01").serialize(),
 				success : function(){
@@ -572,7 +569,7 @@ function checkBrn(){
 		
 		
 		$.ajax({
-			url:"/member/addidentity",
+			url:"/J1P4_PTP/member/addidentity",
 			type: "POST",
 			data:$("#fm01").serialize(),
 			success : function(){
@@ -633,7 +630,7 @@ function checkBrn(){
 			
 			 
 			$.ajax({
-				url:"/member/bank",
+				url:"/J1P4_PTP/member/bank",
 				type: "POST",
 				data:$("#fm01").serialize(),
 				success : function(){

@@ -29,7 +29,7 @@
 <%-- ct_no: ${sessionScope.ct_no } --%>
 
 <!-- ============== 페이지 시작 ================= -->
-<form role="form" action="/member/account" method="post" name="account_form" id="fm02">
+<form role="form" action="/J1P4_PTP/member/account" method="post" name="account_form" id="fm02">
 <input type="hidden" value="${sessionScope.user_id }" name="user_id" id="userId">
 
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
@@ -145,7 +145,7 @@ $(document).ready(function() {
         var userid = $("#userId").val(); //아이디 값을 가져옴
         //alert(userid)
         $.ajax({
-            url: "/member/nowPass",
+            url: "/J1P4_PTP/member/nowPass",
             type: "post",
             data: { user_id : userid , user_pw: userpw }, // 비밀번호와 아이디값을 전송함
             success: function(member) {
@@ -194,7 +194,7 @@ $(document).ready(function() {
         alert("비밀번호가 변경ㅇㅇ");
         // 서버로 AJAX 요청을 통해 비밀번호를 변경하는 로직을 여기에 추가
         $.ajax({
-			url:"/member/changePass",
+			url:"/J1P4_PTP/member/changePass",
 			type: "POST",
 			data:$("#fm02").serialize(),
 			success : function(){
@@ -230,7 +230,7 @@ $(document).ready(function() {
 // 		location.href = '/member/account';
 
 		 $.ajax({
-				url:"/member/phone",
+				url:"/J1P4_PTP/member/phone",
 				type: "POST",
 				data:$("#fm02").serialize(),
 				success : function(){
@@ -255,7 +255,7 @@ $(document).ready(function() {
 // 		$("form[role='form']").submit();
 		
 		 $.ajax({
-				url:"/member/delete",
+				url:"/J1P4_PTP/member/delete",
 				type: "POST",
 				data:$("#fm02").serialize(),
 				success : function(){

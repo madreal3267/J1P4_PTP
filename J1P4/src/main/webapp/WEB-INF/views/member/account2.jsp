@@ -51,7 +51,7 @@
 </div>
 
 
-<form role="form" action="/member/account" method="post" name="account_form">
+<form role="form" action="/J1P4_PTP/member/account" method="post" name="account_form">
 <input type="hidden" value="${sessionScope.user_id}" name="user_id">
 <div class="box-body">
 <div class="form-group">
@@ -128,7 +128,7 @@ currpass = 현재비밀번호 id값
             var passwordButton = $('.passwordButton').val();
         	 $.ajax({
         	 	var userpw = document.account_form.user_pw.value;
-        		 url:"/member/nowPass",
+        		 url:"/J1P4_PTP/member/nowPass",
         		 type:"post",
         		 data:{passwordButton:passwordButton},
         	 	 success:function(member){

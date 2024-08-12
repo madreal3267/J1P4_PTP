@@ -6,7 +6,7 @@
 <form class="form-horizontal" method="post" name="form_join" id="form1">
 
 	<div style="text-align: center; margin-bottom: 30px;">
-		<a href="/main/home"> <img src="../resources/ptp_logo.png"
+		<a href="/J1P4_PTP/main/home"> <img src="../resources/ptp_logo.png"
 			alt="logo" height="100" class="nav-r1" />
 		</a> <br>
 		<div style="margin-top: 30px; font-size: 20px;">
@@ -119,7 +119,7 @@
 											//alert("아이디");
 											$
 													.ajax({
-														url : "/member/idcheck",
+														url : "/J1P4_PTP/member/idcheck",
 														type : "get",
 														data : {
 															userid : userid
@@ -247,7 +247,7 @@
 			return;
 		}
 		$('#insertMember').attr("type", "submit");
-		location.href = '/member/insert';
+		location.href = '/J1P4_PTP/member/insert';
 
 	});
 </script>

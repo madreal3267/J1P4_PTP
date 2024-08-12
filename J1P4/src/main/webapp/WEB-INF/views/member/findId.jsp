@@ -28,8 +28,8 @@
   		</c:choose>
   		
   	<h2>입니다</h2>
-  <button type="submit" class="btn btn-primary" onclick="location.href='/member/login'">로그인페이지</button>
-  <button type="submit" class="btn btn-primary" onclick="location.href='/member/main'">메인페이지</button>
+  <button type="submit" class="btn btn-primary" onclick="location.href='/J1P4_PTP/member/login'">로그인페이지</button>
+  <button type="submit" class="btn btn-primary" onclick="location.href='/J1P4_PTP/member/main'">메인페이지</button>
   
   
 </div>

@@ -23,7 +23,7 @@
 <!-- <img class="select-card-img active-select-card-img" src="/static/renewal/img/project/submit/select_card_icon_development_selected.svg"> -->
 <!-- <p class="body-2-medium">개발</p></div></div> -->
 
-<form action="/member/registerEmailChage" method="post">
+<form action="/J1P4_PTP/member/registerEmailChage" method="post">
    
    <!--input 아이디랑 label for 이름이 같아야함 !! -->
      <input type="hidden" value="${user_id }" name="user_id"> <!-- 아이디값을 세션에 담아 보내주는 것!! 히든은 숨겨서 보내줌 -->

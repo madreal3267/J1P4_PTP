@@ -40,7 +40,7 @@
 <body>
 
 <h1>계좌관리</h1>
-<form action="/member/bank" method="post" >
+<form action="/J1P4_PTP/member/bank" method="post" >
 <h2>등록된 계좌</h2><br>
 <input type="hidden" value="${sessionScope.user_id}" name="user_id">
 <div class="banklist"></div>
@@ -58,7 +58,7 @@
 
 
 <h1>회원정보 - 사업자 & 개인/팀</h1>
-<form action="/member/addinfo" method="post" name="jumin_form">
+<form action="/J1P4_PTP/member/addinfo" method="post" name="jumin_form">
 <input type="hidden" value="${sessionScope.user_id}" name="user_id">
 <div class="form-group">		
 	<label>회원유형</label>
@@ -88,7 +88,7 @@
 
 
 <h1>신원인증</h1>
-<form action="/member/" method="post">
+<form action="/J1P4_PTP/member/" method="post">
 <div>
 <%-- <c:if test="${sessionScope.user_type.equals.('사업자') }"> --%>
 <div class="type_business">

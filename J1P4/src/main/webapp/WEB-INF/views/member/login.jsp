@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="../include/login.jsp"></c:import>
-<form action="/member/login" class="form-horizontal" method="post" name="loginform">
+<form action="/J1P4_PTP/member/login" class="form-horizontal" method="post" name="loginform">
 
  	<div style="text-align: center; margin-bottom: 30px;">
-<a href="/main/home">
+<a href="/J1P4_PTP/main/home">
   <img src="../resources/ptp_logo.png" alt="logo" height="100" class="nav-r1"/>
   </a>
   <br>
@@ -32,9 +32,9 @@ PTP에서 성공적인 IT 프로젝트를 경험하세요.
 </div>
 </div>
 <div id="aLinkId">
-<a href="/member/insert" class="register aLink">회원가입</a> &nbsp;|&nbsp;
-<a href="/member/idfind" class="idfind aLink">아이디 찾기</a>  &nbsp;|&nbsp;
-<a href="/member/pwfind" class="pwfind aLink">비밀번호 찾기</a>
+<a href="/J1P4_PTP/member/insert" class="register aLink">회원가입</a> &nbsp;|&nbsp;
+<a href="/J1P4_PTP/member/idfind" class="idfind aLink">아이디 찾기</a>  &nbsp;|&nbsp;
+<a href="/J1P4_PTP/member/pwfind" class="pwfind aLink">비밀번호 찾기</a>
 </div>
 
 </form>
@@ -70,7 +70,7 @@ PTP에서 성공적인 IT 프로젝트를 경험하세요.
 		}
 		
 		$('#loginButton').attr("type","submit");
-		location.href = '/member/loginmain';
+		location.href = '/J1P4_PTP/member/loginmain';
 		 
 	 	});
 	

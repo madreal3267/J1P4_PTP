@@ -51,7 +51,7 @@
 		</div>
 
 
-		<form class="form-horizontal" action="/member/findpw" method="post" name="pwform">
+		<form class="form-horizontal" action="/J1P4_PTP/member/findpw" method="post" name="pwform">
 			<div class="box-body">
 				<div class="form-group">
 					<label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
@@ -79,8 +79,8 @@
 
 			<div class="box-footer">
 				<button type="button" class="btn btn-default" id="pwButton">비밀번호 재설정</button>
-				<a href="/member/insert" class="register">회원가입</a>
-				<a href="/member/idfind" class="idfind">아이디 찾기</a>
+				<a href="/J1P4_PTP/member/insert" class="register">회원가입</a>
+				<a href="/J1P4_PTP/member/idfind" class="idfind">아이디 찾기</a>
 
 			</div>
 
@@ -124,7 +124,7 @@
 	  	}
 	   
 	  	$('#pwButton').attr("type","submit");
-		location.href = '/member/findpw';
+		location.href = '/J1P4_PTP/member/findpw';
 	  	
    		});
     

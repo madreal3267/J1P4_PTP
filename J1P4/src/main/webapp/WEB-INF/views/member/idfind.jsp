@@ -44,7 +44,7 @@
 </div>
 
 
-<form action="/member/findId" class="form-horizontal" method="post" name="idform"> 
+<form action="/J1P4_PTP/member/findId" class="form-horizontal" method="post" name="idform"> 
 <div class="box-body">
 <div class="form-group">
 <label for="inputEmail3" class="col-sm-2 control-label">이름</label>
@@ -71,7 +71,7 @@
 
 <div class="box-footer">
 <button type="button" class="btn btn-default" id="idButton">아이디 찾기</button>
-<a href="/member/pwfind" class="pwfind">비밀번호 찾기</a>
+<a href="/J1P4_PTP/member/pwfind" class="pwfind">비밀번호 찾기</a>
 </div>
 
 </form>
@@ -113,7 +113,7 @@
 	  	}
 	   
 	  	$('#idButton').attr("type","submit");
-		location.href = '/member/findId';
+		location.href = '/J1P4_PTP/member/findId';
 	  	
    		});
     
