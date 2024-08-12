@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping(value = "J1P4_PTP/main/*")
+@RequestMapping(value = "/main/*")
 public class MainController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
@@ -22,7 +22,7 @@ public class MainController {
 		logger.debug(" /main -> mainGET() 호출 ");
 		// 연결된 뷰페이지 실행 /WEB-INF/views/main.jsp
 		logger.debug("/views/main.jsp 페이지 연결");
-		return "main/home";
+		return "/main/home";
 		
 	}
 	

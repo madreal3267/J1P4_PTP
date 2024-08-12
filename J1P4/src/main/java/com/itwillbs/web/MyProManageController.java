@@ -27,7 +27,7 @@ import com.itwillbs.persistence.MyProManageDAO;
 import com.itwillbs.service.MyProManageService;
 
 @Controller
-@RequestMapping(value = "J1P4_PTP/myProManage/*")
+@RequestMapping(value = "/myProManage/*")
 public class MyProManageController {
 
 	private static final Logger logger = LoggerFactory.getLogger(MyProManageController.class);
@@ -110,7 +110,7 @@ public class MyProManageController {
 		// 지원 취소 정보를 전달
 		rttr.addFlashAttribute("msg", "deletApply");
 		
-		return "redirect:/J1P4_PTP/myProManage/applyingProject";
+		return "redirect:/myProManage/applyingProject";
 	}
 	
 	// 지원 중 프로젝트 목록 - 제안 동의
@@ -123,7 +123,7 @@ public class MyProManageController {
 		// 지원 취소 정보를 전달
 		rttr.addFlashAttribute("msg", "deletApply");
 		
-		return "redirect:/J1P4_PTP/myProManage/applyingProject";
+		return "redirect:/myProManage/applyingProject";
 	}
 	
 		
@@ -157,7 +157,7 @@ public class MyProManageController {
 		// 지원 취소 정보를 전달
 		rttr.addFlashAttribute("msg", "deletApply");
 		
-		return "redirect:/J1P4_PTP/myProManage/endApplyProject";
+		return "redirect:/myProManage/endApplyProject";
 	}
 	
 	// 계약 진행 중 프로젝트 목록 조회
@@ -186,7 +186,7 @@ public class MyProManageController {
 		if(result == 1) {
 			logger.debug("지원 취소되었습니다.");
 		}
-		return "redirect:/J1P4_PTP/myProManage/contractProject";
+		return "redirect:/myProManage/contractProject";
 	}
 	
 	// 프로젝트 진행중 목록 조회
@@ -241,7 +241,7 @@ public class MyProManageController {
 		
 		rttr.addFlashAttribute("msg", "evaluateOK");
 		
-		return "redirect:/J1P4_PTP/myProManage/completedProject";
+		return "redirect:/myProManage/completedProject";
 		
 	}			
 	
@@ -283,7 +283,7 @@ public class MyProManageController {
 		
 		rttr.addFlashAttribute("msg", "modifyOK");
 		
-		return "redirect:/J1P4_PTP/myProManage/completedProject";
+		return "redirect:/myProManage/completedProject";
 	}
 	
 	

@@ -27,7 +27,7 @@ import com.itwillbs.service.EnrollProjService;
 import com.itwillbs.service.SettlementService;
 
 @Controller
-@RequestMapping(value = "J1P4_PTP/enroll/*")
+@RequestMapping(value = "/enroll/*")
 public class EnrollProjController {
 
 	private static final Logger logger = LoggerFactory.getLogger(EnrollProjController.class);
@@ -62,7 +62,7 @@ public class EnrollProjController {
 		eService.insertReg(rVO);
      
 		
-		return "redirect:/J1P4_PTP/enroll/enrollSuccess";
+		return "redirect:/enroll/enrollSuccess";
 	}
 	
 	
@@ -92,7 +92,7 @@ public class EnrollProjController {
 		eService.multiSaveSk(sVO);
 		eService.multiSaveReg(rVO);
 		
-		return "redirect:/J1P4_PTP/enroll/enrollSuccess";
+		return "redirect:/enroll/enrollSuccess";
 		
 	}
 	
@@ -184,7 +184,7 @@ public class EnrollProjController {
 		eService.savedSkSave(sVO);
 		eService.savedRegSave(rVO);
 		
-		return "redirect:/J1P4_PTP/enroll/enrollSuccess";
+		return "redirect:/enroll/enrollSuccess";
 		
 	}
 	

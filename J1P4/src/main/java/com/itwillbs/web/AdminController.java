@@ -59,7 +59,7 @@ import com.itwillbs.util.Pagination;
 import com.itwillbs.util.PaginationService;
 
 @Controller
-@RequestMapping(value = "J1P4_PTP/admin/*")
+@RequestMapping(value = "/admin/*")
 public class AdminController {
 	
 
@@ -89,7 +89,7 @@ public class AdminController {
 	// 관리자 로그인 페이지
 	@GetMapping("/login")
     public String login() {
-        return "admin/login";
+        return "/admin/login";
     }
 	
 	// 로그인 시 manager 테이블의 approved 컬럼 값을 체크해서 조건 처리
@@ -102,14 +102,14 @@ public class AdminController {
         if (manager != null && manager.getManager_pw().equals(managerPw)) {
             if (manager.isApproved()) {
                 session.setAttribute("manager", manager);
-                return "redirect:/J1P4_PTP/admin/main";
+                return "redirect:/admin/main";
             } else {
                 model.addAttribute("error", "승인 처리 진행중입니다.");
-                return "admin/login";
+                return "/admin/login";
             }
         } else {
             model.addAttribute("error", "ID 또는 비밀번호가 일치하지 않습니다.");
-            return "admin/login";
+            return "/admin/login";
         }
     }
     
@@ -117,7 +117,7 @@ public class AdminController {
     public String logout(HttpSession session) {
     	// 세션 초기화
         session.invalidate();
-        return "redirect:/J1P4_PTP/admin/login";
+        return "redirect:/admin/login";
     }
 
     
@@ -158,7 +158,7 @@ public class AdminController {
         List<AnnouncementDTO> latestNotices = announcementService.getLatestNotices(5);
         model.addAttribute("latestNotices", latestNotices);
 
-        return "admin/main";
+        return "/admin/main";
     }
     
     
@@ -179,7 +179,7 @@ public class AdminController {
         ManagerDTO loggedInManager = (ManagerDTO) session.getAttribute("manager");
         
         // 'admin' 매니저일 경우 공지사항 작성 페이지로 이동
-        return "admin/newAnnouncement";
+        return "/admin/newAnnouncement";
     }
 
     // 새로운 공지사항을 생성하는 메서드
@@ -194,7 +194,7 @@ public class AdminController {
         announcementService.createAnnouncement(announcement);
 
         // 공지사항 생성 후 메인 페이지로 리다이렉트
-        return "redirect:/J1P4_PTP/admin/main";
+        return "redirect:/admin/main";
     }
 
     // 공지사항 리스트를 페이징 처리하여 조회하는 메서드
@@ -218,7 +218,7 @@ public class AdminController {
         model.addAttribute("pageSize", pageSize);
         
         // 공지사항 리스트 페이지로 이동
-        return "admin/noticeList";
+        return "/admin/noticeList";
     }
 
     // 매니저 리스트를 페이징 처리하여 조회하는 메서드
@@ -245,7 +245,7 @@ public class AdminController {
             model.addAttribute("pageSize", pageSize);
             
             // 매니저 리스트 페이지로 이동
-            return "admin/managerList";
+            return "/admin/managerList";
             
             // 매니저가 'admin'이 아닌 경우 메인 페이지로 이동(AuthInterceptor 설정)
     }
@@ -255,7 +255,7 @@ public class AdminController {
     public String approveManager(@RequestParam("manager_no") int managerNo, HttpSession session) {
         
             managerService.approveManager(managerNo);
-            return "redirect:/J1P4_PTP/admin/managers";
+            return "redirect:/admin/managers";
         }
     
     // 매니저를 삭제하는 메서드("admin" 계정으로만 가능)
@@ -264,9 +264,9 @@ public class AdminController {
         ManagerDTO loggedInManager = (ManagerDTO) session.getAttribute("manager");
         if (loggedInManager != null && "admin".equals(loggedInManager.getManager_id())) {
             managerService.deleteManager(managerNo);
-            return "redirect:/J1P4_PTP/admin/managers";
+            return "redirect:/admin/managers";
         } else {
-            return "redirect:/J1P4_PTP/admin/login";
+            return "redirect:/admin/login";
         }
     }
     
@@ -275,7 +275,7 @@ public class AdminController {
     // 회원가입 폼 페이지로 이동하는 메서드
     @GetMapping("/join")
     public String joinForm() {
-        return "admin/join";
+        return "/admin/join";
     }
 
     // 회원가입을 처리하는 메서드
@@ -299,11 +299,11 @@ public class AdminController {
             // 매니저를 데이터베이스에 삽입
             managerService.insertManager(manager);
             model.addAttribute("message", "회원가입이 완료되었습니다. 관리자의 승인을 기다려주세요.");
-            return "admin/login";
+            return "/admin/login";
         } catch (Exception e) {
             // 회원가입 중 에러가 발생할 경우 에러 메시지를 모델에 추가하고 회원가입 페이지로 이동
             model.addAttribute("error", "회원가입 중 오류가 발생하였습니다: " + e.getMessage());
-            return "admin/join";
+            return "/admin/join";
         }
     }
 
@@ -334,7 +334,7 @@ public class AdminController {
         model.addAttribute("type", type);
         model.addAttribute("pagination", pagination);
 
-        return "admin/userList";
+        return "/admin/userList";
     }
 
     // 프로젝트 리스트를 페이징 처리하여 조회하는 메서드
@@ -358,7 +358,7 @@ public class AdminController {
         model.addAttribute("projStatus", projStatus);
         model.addAttribute("pagination", pagination);
 
-        return "admin/projectList";
+        return "/admin/projectList";
     }
 
     // 프로젝트를 승인하는 메서드
@@ -369,7 +369,7 @@ public class AdminController {
         pvo.setProj_status("모집중");
         projectService.updateProjectStatus(pvo);
         logger.debug("승인 proj_no : " + proj_no);
-        return "redirect:/J1P4_PTP/admin/projects";
+        return "redirect:/admin/projects";
     }
 
     // 프로젝트를 반려하는 메서드
@@ -379,7 +379,7 @@ public class AdminController {
         pvo.setProj_no(proj_no);
         pvo.setReject_reason(reject_reason);
         projectService.rejectProject(pvo);
-        return "redirect:/J1P4_PTP/admin/projects";
+        return "redirect:/admin/projects";
     }
 
     // 프로젝트 반려 사유를 가져오는 메서드
@@ -418,7 +418,7 @@ public class AdminController {
         model.addAttribute("priceCheck", priceCheck);
         model.addAttribute("settlementCheck", settlementCheck);
 
-        return "admin/settlementList";
+        return "/admin/settlementList";
     }
 
     // 정산 금액과 수수료를 계산하는 메서드
@@ -487,7 +487,7 @@ public class AdminController {
 	     model.addAttribute("pagination", pagination);
 	     model.addAttribute("pageSize", pageSize);
 
-	     return "admin/contractList";
+	     return "/admin/contractList";
 	 }
 	 //
 	 

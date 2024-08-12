@@ -22,7 +22,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">관리자 계정으로 로그인 하세요.</p>
 
-    <form action="<c:url value='/J1P4_PTP/admin/login'/>" method="post">
+    <form action="/J1P4_PTP/admin/login" method="post">
       <div class="form-group has-feedback">
         <input type="text" name="manager_id" class="form-control" placeholder="ID" required>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

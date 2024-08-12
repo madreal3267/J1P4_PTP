@@ -17,7 +17,7 @@ import com.itwillbs.domain.MemberVO;
 import com.itwillbs.service.MyPageService;
 
 @Controller
-@RequestMapping(value = "J1P4_PTP/member/*")
+@RequestMapping(value = "/member/*")
 public class MyPageController {
 
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);

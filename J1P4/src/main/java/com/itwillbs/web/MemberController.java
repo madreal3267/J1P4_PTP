@@ -34,7 +34,7 @@ import com.itwillbs.service.MemberService;
 
 
 @Controller
-@RequestMapping(value = "J1P4_PTP/member/*")
+@RequestMapping(value = "/member/*")
 public class MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
@@ -88,7 +88,7 @@ public class MemberController {
 		
 		mailSend.join(vo);
 		// 회원가입하기 눌렀을때 mailsend에 인증메일 확인링크를 클릭해달라는 페이지로 이동
-		return "redirect:/J1P4_PTP/member/mailsend"; 
+		return "redirect:/member/mailsend"; 
 	}
 		
 	
@@ -177,7 +177,7 @@ public class MemberController {
 			
 			session.invalidate();
 			
-			return"redirect:/J1P4_PTP/main/home";
+			return"redirect:/main/home";
 		}
 	
 
@@ -216,7 +216,7 @@ public class MemberController {
 			if(mService.memberDelete(vo).equals("탈퇴")) {
 				logger.info("탈퇴한 회원");
 
-				return "redirect:/J1P4_PTP/main/home";
+				return "redirect:/main/home";
 			}
 			
 			MemberVO resultVO= mService.memberLogin(vo);
@@ -241,12 +241,12 @@ public class MemberController {
 					Session.setAttribute("identB", mService.chkIdentB(id));
 //				}
 				
-				return"redirect:/J1P4_PTP/main/home";
+				return"redirect:/main/home";
 				
 			}else {
 				Session.setAttribute("user_id", null);
 				logger.debug("로그인 실패");
-				return "redirect:/J1P4_PTP/include/login";
+				return "redirect:/include/login";
 			}
 			
 		}
@@ -265,7 +265,7 @@ public class MemberController {
 			logger.debug("/logoutPOST()호출");
 			session.invalidate();//세션무효화
 			
-			return "redirect:/J1P4_PTP/main/home";
+			return "redirect:/main/home";
 		}
 		
 		
@@ -409,7 +409,7 @@ public class MemberController {
 			model.addAttribute("msg", msg);
 		}
 		
-		return "redirect:/J1P4_PTP/member/login";
+		return "redirect:/member/login";
 	}
 	
 	
@@ -439,11 +439,11 @@ public class MemberController {
 		logger.info("########### user_id ######## :"+user_id);
 		
 		if(!(pass.equals(user_pw))) {
-			return "redirect:/J1P4_PTP/member/account";
+			return "redirect:/member/account";
 		}else {
 			mService.typeDelete(user_id);
 			session.invalidate();
-			return"redirect:/J1P4_PTP/main/home";
+			return"redirect:/main/home";
 			
 		}
 		

@@ -33,7 +33,7 @@ import com.itwillbs.persistence.MyProManageDAO;
 import com.itwillbs.service.MyProManageService;
 
 @Controller
-@RequestMapping(value ="J1P4_PTP/myProManageCt/*")
+@RequestMapping(value ="/myProManageCt/*")
 public class MyProManageCtController {
 
 	private static final Logger logger = LoggerFactory.getLogger(MyProManageCtController.class);
@@ -103,7 +103,7 @@ public class MyProManageCtController {
 		// 삭제 성공 정보를 전달
 		rttr.addFlashAttribute("msg", "deleteProject");
 		
-		return "redirect:/J1P4_PTP/myProManageCt/underReviewProject";
+		return "redirect:/myProManageCt/underReviewProject";
 	}
 	
 	// 임시저장 프로젝트 목록 조회
@@ -135,7 +135,7 @@ public class MyProManageCtController {
 		// 삭제 성공 정보를 전달
 		rttr.addFlashAttribute("msg", "deleteProject");
 		
-		return "redirect:/J1P4_PTP/myProManageCt/temSaveProject";
+		return "redirect:/myProManageCt/temSaveProject";
 	}
 	
 	// 등록실패 프로젝트 목록 조회
@@ -178,7 +178,7 @@ public class MyProManageCtController {
 		myService.rejectApply(pfdto);
 		rttr.addFlashAttribute("msg", "rejectApply");
 		
-		return "redirect:/J1P4_PTP/myProManageCt/recruitingProject";
+		return "redirect:/myProManageCt/recruitingProject";
 	}
 	
 	// 지원자 모집중 프로젝트 목록 - 계약 제안
@@ -192,7 +192,7 @@ public class MyProManageCtController {
 		myService.offerContract(pfdto);
 		rttr.addFlashAttribute("msg", "offerContract");
 		
-		return "redirect:/J1P4_PTP/myProManageCt/recruitingProject";
+		return "redirect:/myProManageCt/recruitingProject";
 	}
 	
 	// 지원자 모집중 프로젝트 목록 - 모집완료
@@ -203,7 +203,7 @@ public class MyProManageCtController {
 		myService.recruitmentCompleted(pfdto);
 		rttr.addFlashAttribute("msg", "recruitmentCompleted");
 		
-		return "redirect:/J1P4_PTP/myProManageCt/recruitingProject";
+		return "redirect:/myProManageCt/recruitingProject";
 	}
 	
 	// 계약 진행중 프로젝트 목록 조회
@@ -246,7 +246,7 @@ public class MyProManageCtController {
 		
 		rttr.addFlashAttribute("msg", "payment");
 		
-		return "redirect:/J1P4_PTP/myProManageCt/ctOngoingProject";
+		return "redirect:/myProManageCt/ctOngoingProject";
 	}
 	
 	// 프로젝트 진행중 프로젝트 - 완료하기
@@ -257,7 +257,7 @@ public class MyProManageCtController {
 		
 		rttr.addFlashAttribute("msg", "requestSettlement");
 		
-		return "redirect:/J1P4_PTP/myProManageCt/ctOngoingProject";
+		return "redirect:/myProManageCt/ctOngoingProject";
 	}
 	
 	// 평가 대기중 프리랜서 목록 조회
@@ -297,7 +297,7 @@ public class MyProManageCtController {
 		
 		rttr.addFlashAttribute("msg", "evaluateOK");
 		
-		return "redirect:/J1P4_PTP/myProManageCt/completedFreelancer";
+		return "redirect:/myProManageCt/completedFreelancer";
 	}			
 	
 	// 완료한 프로젝트의 평가완료 프리랜서 목록 조회
@@ -325,7 +325,7 @@ public class MyProManageCtController {
 		
 		rttr.addFlashAttribute("msg", "modifyOK");
 		
-		return "redirect:/J1P4_PTP/myProManageCt/completedFreelancer";
+		return "redirect:/myProManageCt/completedFreelancer";
 	}	
 	
 }

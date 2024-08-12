@@ -22,7 +22,7 @@ import com.itwillbs.domain.MemberVO;
 import com.itwillbs.service.AccountService;
 
 @Controller
-@RequestMapping(value = "J1P4_PTP/member/*")
+@RequestMapping(value = "/member/*")
 public class AccountController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
@@ -109,7 +109,7 @@ public class AccountController {
 	       
 	        aService.passwordUpdate(vo);
 	        
-	        return "redirect:/J1P4_PTP/member/accountHOME";
+	        return "redirect:/member/accountHOME";
 	    }
 		
 		

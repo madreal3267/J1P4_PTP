@@ -17,7 +17,7 @@ import com.itwillbs.domain.SkillVO;
 import com.itwillbs.service.ApplyProjService;
 
 @Controller
-@RequestMapping(value="J1P4_PTP/projectDetail/*")
+@RequestMapping(value="/projectDetail/*")
 public class ApplyController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ApplyController.class);

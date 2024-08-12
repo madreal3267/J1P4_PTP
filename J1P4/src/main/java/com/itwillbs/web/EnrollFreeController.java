@@ -20,7 +20,7 @@ import com.itwillbs.domain.SkillVO;
 import com.itwillbs.service.EnrollFreeService;
 
 @Controller
-@RequestMapping(value="J1P4_PTP/enroll/*")
+@RequestMapping(value="/enroll/*")
 public class EnrollFreeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(EnrollFreeController.class);
@@ -49,7 +49,7 @@ public class EnrollFreeController {
 		fService.updateReg(rVO);
 		fService.updatePortf(pVO);
 		
-		return "redirect:/J1P4_PTP/enroll/enrollFreeSuccess";
+		return "redirect:/enroll/enrollFreeSuccess";
 	}
 	
 	// http://localhost:8088/enroll/enrollFreeB
@@ -75,7 +75,7 @@ public class EnrollFreeController {
 		fService.updateReg(rVO);
 		fService.updatePortf(poVO);
 		
-		return "redirect:/J1P4_PTP/enroll/enrollFreeSuccess";
+		return "redirect:/enroll/enrollFreeSuccess";
 	}
 	
 	// 등록 성공 후

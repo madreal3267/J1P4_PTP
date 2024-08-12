@@ -41,7 +41,7 @@ import com.itwillbs.service.MyProfileService;
 import com.itwillbs.service.OfferProjServie;
 
 @Controller
-@RequestMapping(value = "J1P4_PTP/board/*")
+@RequestMapping(value = "/board/*")
 public class BoardController {
 
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
