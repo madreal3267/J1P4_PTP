@@ -37,10 +37,12 @@ public class ApplyController {
 //	}
 	
 	@PostMapping(value="/applyProj")
-	public void ApplyProjPOST(ApplyVO vo) {
+	public String ApplyProjPOST(ApplyVO vo) {
 		logger.debug(" Controller : ( •̀ ω •́ )y /applyProj -> ApplyProjPOST() 실행 ");
 		
 		aSerivce.insertApply(vo);
+		
+		return "/projectDetail/applyProj";
 		
 	}
 

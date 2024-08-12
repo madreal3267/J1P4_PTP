@@ -82,7 +82,7 @@ public class MyProfileController {
 	
 	// 내 프로필 수정하기 페이지 연결 - 개인 / 팀
 	@GetMapping(value="/modify")
-	public void profModifyGET(@RequestParam int free_no, Model model,FreelancerVO vo,HttpSession session) {
+	public String profModifyGET(@RequestParam int free_no, Model model,FreelancerVO vo,HttpSession session) {
 		logger.debug(" Controller : ( •̀ ω •́ )y /modify -> profModifyGET 실행 ");
 		
 		vo.setFree_no(free_no);
@@ -96,11 +96,13 @@ public class MyProfileController {
 		
 		logger.debug(" Controller : ( •̀ ω •́ )y /views/myProfile/modify.jsp 페이지 연결 ");
 		
+		return "/myProfile/modify";
+		
 	}
 	
 	// 내 프로필 수정하기 - 개인 / 팀
 	@PostMapping(value="/modify")
-	public void profModifyPOST(FreelancerVO fVO,SkillVO sVO, RegionVO rVO, CareerVO cVO, LicenseVO lVO,PortfolioVO pVO,HttpSession session){
+	public String profModifyPOST(FreelancerVO fVO,SkillVO sVO, RegionVO rVO, CareerVO cVO, LicenseVO lVO,PortfolioVO pVO,HttpSession session){
 		logger.debug(" Controller : ( •̀ ω •́ )y /modify -> profModifyPOST 실행 ");
 		
 		int free_no = (int) session.getAttribute("free_no");
@@ -114,7 +116,8 @@ public class MyProfileController {
 		efService.updatePortf(pVO);
 		
 		logger.debug(" Controller : ( •̀ ω •́ )y /views/myProfile/modify.jsp 페이지 연결 ");
-
+		
+		return "/myProfile/modify";
 
 	}
 	

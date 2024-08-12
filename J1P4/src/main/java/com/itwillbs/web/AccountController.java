@@ -36,8 +36,10 @@ public class AccountController {
 		
 	// http://localhost:8088/member/account
 		@GetMapping(value = "/account")
-		public void accountHOME() {
+		public String accountHOME() {
 			logger.debug("/account -> accountHOME() 호출 ");
+			
+			return "/member/account";
 		}
 	
 	
@@ -49,10 +51,12 @@ public class AccountController {
 //		}
 		@ResponseBody
 		@RequestMapping(value = "/phone", method = RequestMethod.POST)
-		public void phoneNoPOST(MemberVO vo){
+		public String phoneNoPOST(MemberVO vo){
 			aService.phonNo(vo);
 			logger.debug("/account -> phoneNoPOST() 호출 ");
 			logger.debug("vo : "+ vo);
+			
+			return "/member/phone";
 			
 		}
 		
@@ -112,7 +116,9 @@ public class AccountController {
 	
 		//이용방법
 		@GetMapping(value = "/guide")
-		public void guideGET() {
+		public String guideGET() {
+			
+			return "/member/guide";
 			
 		}
 
