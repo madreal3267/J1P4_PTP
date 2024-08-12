@@ -27,7 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Controller
-@RequestMapping(value = "/myProfile/*")
+@RequestMapping(value = "J1P4_PTP/myProfile/*")
 public class FileUploadController {
 	
 	

@@ -36,21 +36,21 @@
 				<div class="list-group list-group-flush account-settings-links" style="width:274px;">
 					<h4 class="font-weight-bold py-1 mx-4 my-3">내 프로젝트 관리</h4>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManage/interestProject">관심프로젝트</a>
+					href="/J1P4_PTP/myProManage/interestProject">관심프로젝트</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManage/proposedProject">제안받은 프로젝트</a>
+					href="/J1P4_PTP/myProManage/proposedProject">제안받은 프로젝트</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManage/applyingProject">지원중</a>
+					href="/J1P4_PTP/myProManage/applyingProject">지원중</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManage/endApplyProject">지원종료</a>
+					href="/J1P4_PTP/myProManage/endApplyProject">지원종료</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManage/contractProject">계약 진행중</a>
+					href="/J1P4_PTP/myProManage/contractProject">계약 진행중</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManage/ongoingProject">프로젝트 진행중</a>
+					href="/J1P4_PTP/myProManage/ongoingProject">프로젝트 진행중</a>
 					<a class="list-group-item list-group-item-action"
-					href="${pageContext.request.contextPath}/myProManage/waitEvaluationProject">평가대기중</a>
+					href="/J1P4_PTP/myProManage/waitEvaluationProject">평가대기중</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManage/completedProject">완료한 프로젝트</a>
+					href="/J1P4_PTP/myProManage/completedProject">완료한 프로젝트</a>
 				</div>
 			</div>
 			<!-- 사이드 메뉴 끝 -->
@@ -97,7 +97,7 @@
 							<c:if test="${not empty projDTO.meeting_dt and not empty projDTO.meeting_pc}">
 								<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-${projDTO.proj_no}">제안 확인</button>
 							</c:if>
-							<form class="apply-form"  action="/myProManage/applyingProject" method="post">
+							<form class="apply-form"  action="/J1P4_PTP/myProManage/applyingProject" method="post">
 								<input type="hidden" name="free_no" value="${projDTO.free_no }">
 								<input type="hidden" name="proj_no" value="${projDTO.proj_no }">
 								<input class="btn btn-dark" type="submit" value="지원 취소"> 
@@ -107,7 +107,7 @@
 						 
 			 <!--제안 확인 modal 창 -->
 				<div class="modal fade" id="modal-${projDTO.proj_no}" style="display: none;">
-					<form action="/myProManageCt/agreeContract" method="post">
+					<form action="/J1P4_PTP/myProManageCt/agreeContract" method="post">
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">

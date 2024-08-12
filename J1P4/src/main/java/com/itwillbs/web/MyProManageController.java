@@ -48,7 +48,7 @@ public class MyProManageController {
 	// 관심 프로젝트 목록 - 조회
 	// http://localhost:8088/myProManage/interestProject
 	@RequestMapping(value = "/interestProject", method = RequestMethod.GET)
-	public void interestProjectList(HttpSession session, Model model) {
+	public String interestProjectList(HttpSession session, Model model) {
 		logger.debug("/interestProject -> interestProjectList() 호출");	
 	
 		// 로그로 아이디 확인
@@ -61,12 +61,14 @@ public class MyProManageController {
 		
 		// DAO 데이터 -> 뷰페이지
 		model.addAttribute("interestProjectList", interestProjectList);		
+		
+		return "/myProManage/interestProject";
 	}
 		
 	// 제안받은 프로젝트 목록 조회
 	// http://localhost:8088/myProManage/proposedProject
 	@RequestMapping(value = "/proposedProject",method = RequestMethod.GET)
-	public void proposedProjectList(HttpSession session, Model model) {
+	public String proposedProjectList(HttpSession session, Model model) {
 		logger.debug("/proposedProject -> propoesedProjectList() 호출");
 		 
 		String user_id = (String)session.getAttribute("user_id");
@@ -76,12 +78,13 @@ public class MyProManageController {
 		
 		model.addAttribute("proposedProjectList", proposedProjectList);
 		
+		return "/myProManage/proposedProject";
 	}	
 	
 	// 지원 중 프로젝트 목록 조회
 	// http://localhost:8088/myProManage/applyingProject
 	@RequestMapping(value = "/applyingProject",method = RequestMethod.GET)
-	public void applyingProjectList(HttpSession session, Model model) {
+	public String applyingProjectList(HttpSession session, Model model) {
 		logger.debug("/applyingProject -> applyingProjectList() 호출");
 		
 		String user_id = (String)session.getAttribute("user_id");
@@ -89,7 +92,9 @@ public class MyProManageController {
 		List<ProjectDTO> applyingProjectList = myService.applyingProjectList(user_id);
 		logger.debug("applyingProjectList : " + applyingProjectList.size());
 		
-		model.addAttribute("applyingProjectList", applyingProjectList);		
+		model.addAttribute("applyingProjectList", applyingProjectList);
+		
+		return "/myProManage/applyingProject";
 	}		
 	
 	// 지원 중 프로젝트 목록 - 지원 취소	
@@ -105,7 +110,7 @@ public class MyProManageController {
 		// 지원 취소 정보를 전달
 		rttr.addFlashAttribute("msg", "deletApply");
 		
-		return "redirect:/myProManage/applyingProject";
+		return "redirect:/J1P4_PTP/myProManage/applyingProject";
 	}
 	
 	// 지원 중 프로젝트 목록 - 제안 동의
@@ -118,14 +123,14 @@ public class MyProManageController {
 		// 지원 취소 정보를 전달
 		rttr.addFlashAttribute("msg", "deletApply");
 		
-		return "redirect:/myProManage/applyingProject";
+		return "redirect:/J1P4_PTP/myProManage/applyingProject";
 	}
 	
 		
 	// 지원 종료 프로젝트 목록 조회
 	// http://localhost:8088/myProManage/endApplyProject
 	@RequestMapping(value = "/endApplyProject",method = RequestMethod.GET)
-	public void endApplyProjectList(HttpSession session, Model model) {
+	public String endApplyProjectList(HttpSession session, Model model) {
 		logger.debug("/endApplyProject -> endApplyProjectList() 호출");
 		
 		String user_id = (String)session.getAttribute("user_id");
@@ -133,7 +138,9 @@ public class MyProManageController {
 		List<ProjectDTO> endApplyProjectList = myService.endApplyProjectList(user_id);
 		logger.debug("endApplyProjectList : " + endApplyProjectList.size());
 		
-		model.addAttribute("endApplyProjectList", endApplyProjectList);		
+		model.addAttribute("endApplyProjectList", endApplyProjectList);	
+		
+		return "/myProManage/endApplyProject";
 	}	
 	
 	// 지원 종료 프로젝트 목록 - 지원 종료 목록에서 삭제	
@@ -150,13 +157,13 @@ public class MyProManageController {
 		// 지원 취소 정보를 전달
 		rttr.addFlashAttribute("msg", "deletApply");
 		
-		return "redirect:/myProManage/endApplyProject";
+		return "redirect:/J1P4_PTP/myProManage/endApplyProject";
 	}
 	
 	// 계약 진행 중 프로젝트 목록 조회
 	// http://localhost:8088/myProManage/contractProject	
 	@RequestMapping(value = "/contractProject",method = RequestMethod.GET)
-	public void contractProjectList(HttpSession session, Model model) {
+	public String contractProjectList(HttpSession session, Model model) {
 		logger.debug("/contractProject -> contractProjectList() 호출");
 		
 		String user_id = (String)session.getAttribute("user_id");
@@ -165,6 +172,8 @@ public class MyProManageController {
 		logger.debug("contractProjectList : " + contractProjectList.size());
 		
 		model.addAttribute("contractProjectList", contractProjectList);		
+		
+		return "/myProManage/contractProject";
 	}
 	
 	// 계약 진행 중 프로젝트 목록 - 지원 취소	
@@ -177,13 +186,13 @@ public class MyProManageController {
 		if(result == 1) {
 			logger.debug("지원 취소되었습니다.");
 		}
-		return "redirect:/myProManage/contractProject";
+		return "redirect:/J1P4_PTP/myProManage/contractProject";
 	}
 	
 	// 프로젝트 진행중 목록 조회
 	// http://localhost:8088/myProManage/ongoingProject	
 	@RequestMapping(value = "/ongoingProject",method = RequestMethod.GET)
-	public void ongoingProjectList(HttpSession session, Model model) {
+	public String ongoingProjectList(HttpSession session, Model model) {
 		logger.debug("/ongoingProject -> ongoingProjectList() 호출");
 		
 		String user_id = (String)session.getAttribute("user_id");
@@ -191,13 +200,15 @@ public class MyProManageController {
 		List<ProjectDTO> ongoingProjectList = myService.ongoingProjectList(user_id);
 		logger.debug("ongoingProjectList : " + ongoingProjectList.size());
 		
-		model.addAttribute("ongoingProjectList", ongoingProjectList);		
+		model.addAttribute("ongoingProjectList", ongoingProjectList);	
+		
+		return "/myProManage/ongoingProject";
 	}	
 	
 	// 평가 대기중 프로젝트 목록 조회
 	// http://localhost:8088/myProManage/waitEvaluationProject	
 	@RequestMapping(value = "/waitEvaluationProject",method = RequestMethod.GET)
-	public void waitEvaluationProjectList(HttpSession session,Model model) {
+	public String waitEvaluationProjectList(HttpSession session,Model model) {
 		logger.debug("/waitEvaluationProject -> waitEvaluationProjectList() 호출");
 	
 		String user_id = (String)session.getAttribute("user_id");
@@ -218,6 +229,8 @@ public class MyProManageController {
 		} else {
 		    logger.debug("No projects found for evaluation.");
 		}
+		
+		return "/myProManage/waitEvaluationProject";
 	}		
 	
 	// 평가 대기중 프로젝트 - 평가하기
@@ -228,14 +241,14 @@ public class MyProManageController {
 		
 		rttr.addFlashAttribute("msg", "evaluateOK");
 		
-		return "redirect:/myProManage/completedProject";
+		return "redirect:/J1P4_PTP/myProManage/completedProject";
 		
 	}			
 	
 	// 완료한 프로젝트 목록 조회
 	// http://localhost:8088/myProManage/completedProject
 	@RequestMapping(value = "/completedProject",method = RequestMethod.GET)
-	public void completedProjectList(HttpSession session, Model model) {
+	public String completedProjectList(HttpSession session, Model model) {
 		logger.debug("/completedProject -> completedProjectList() 호출");
 		
 		String user_id = (String)session.getAttribute("user_id");
@@ -255,7 +268,9 @@ public class MyProManageController {
 		    model.addAttribute("completedProjectList", filteredProjList);
 		} else {
 		    logger.debug("No projects found for evaluation.");
-		}		
+		}	
+		
+		return "/myProManage/completedProject";
 		
 	}	
 	
@@ -268,7 +283,7 @@ public class MyProManageController {
 		
 		rttr.addFlashAttribute("msg", "modifyOK");
 		
-		return "redirect:/myProManage/completedProject";
+		return "redirect:/J1P4_PTP/myProManage/completedProject";
 	}
 	
 	

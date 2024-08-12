@@ -334,7 +334,7 @@
 </form>
 
 <!-- 포트폴리오 모달창 시작 -->
-<form action="/myProfile/upload" method="post" id="portf" enctype="multipart/form-data">
+<form action="/J1P4_PTP/myProfile/upload" method="post" id="portf" enctype="multipart/form-data">
 
 <div class="modal fade" id="portfModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
@@ -403,7 +403,7 @@ $(function(){
 		var formData = new FormData($('#portf')[0]);
 		
 		$.ajax({
-			url:"/myProfile/upload",
+			url:"/J1P4_PTP/myProfile/upload",
 			type:"POST",
 			data : formData,
 			processData: false,
@@ -420,7 +420,7 @@ $(function(){
 				$(".filePlz").prepend(
 				'포트폴리오 제목 : '+resp+
 				'<br>담당업무 : '+wf+
-				'<br>업로드 된 파일 :<a href="/myProfile/download?fileName='+fileName+'">'+fileName+'</a><br>'+
+				'<br>업로드 된 파일 :<a href="/J1P4_PTP/myProfile/download?fileName='+fileName+'">'+fileName+'</a><br>'+
 				'<input type="hidden" name="p_responsibility" value="'+resp+'"><input type="hidden" name="portfolio_title" value="'+wf+'">'+
 				'<input type="hidden" name="file" value="'+fileName+'">'
 				);
@@ -765,7 +765,7 @@ function addFile(){
 			$(".saveButt").click(function(){
 				
 				$.ajax({
-					url:"/myProfile/modifyB",
+					url:"/J1P4_PTP/myProfile/modifyB",
 					type:"POST",
 					data : $("#modifyBFm").serialize(),
 					success : function(){

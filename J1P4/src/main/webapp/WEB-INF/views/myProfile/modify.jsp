@@ -56,16 +56,17 @@
 			</div>
 			<div class="mx-4 my-3">
 			<div class="gap">
-				<h5>회원등급</h5>
+				<h5>업무 가능 분야</h5>
 				<div class="content">
-					<input type="radio" value="신규회원" class="btn-check" name="work_field" id="radioWf1">
-					<label class="btn btn-outline-dark radioField" for="radioWf1">신규회원</label>
-					<input type="radio" value="일반회원" class="btn-check" name="work_field" id="radioWf2">
-					<label class="btn btn-outline-dark radioField" for="radioWf2">일반회원</label>
-					<input type="radio" value="장기회원" class="btn-check" name="work_field" id="radioWf3">
-					<label class="btn btn-outline-dark radioField" for="radioWf3">장기회원</label>
+					<input type="radio" value="개발" class="btn-check" name="work_field" id="radioWf1">
+					<label class="btn btn-outline-dark radioField" for="radioWf1">⚙️ 개발</label>
+					<input type="radio" value="기획" class="btn-check" name="work_field" id="radioWf2">
+					<label class="btn btn-outline-dark radioField" for="radioWf2">🛠️ 기획</label>
+					<input type="radio" value="디자인" class="btn-check" name="work_field" id="radioWf3">
+					<label class="btn btn-outline-dark radioField" for="radioWf3">🎨 디자인</label>
+					<input type="radio" value="퍼블리싱" class="btn-check" name="work_field" id="radioWf4">
+					<label class="btn btn-outline-dark radioField" for="radioWf4">🖋️ 퍼블리싱</label>
 				</div>
-				<hr>
 			</div>	
 			<hr>
 			<div class="gap">
@@ -353,7 +354,7 @@
 </form>
 
 <!-- 포트폴리오 모달창 시작 -->
-<form action="/myProfile/upload" method="post" id="portf" enctype="multipart/form-data">
+<form action="/J1P4_PTP/myProfile/upload" method="post" id="portf" enctype="multipart/form-data">
 
 <div class="modal fade" id="portfModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
@@ -422,7 +423,7 @@ $(function(){
 		var formData = new FormData($('#portf')[0]);
 		
 		$.ajax({
-			url:"/myProfile/upload",
+			url:"/J1P4_PTP/myProfile/upload",
 			type:"POST",
 			data : formData,
 			processData: false,
@@ -439,7 +440,7 @@ $(function(){
 				$(".filePlz").prepend(
 				'포트폴리오 제목 : '+resp+
 				'<br>담당업무 : '+wf+
-				'<br>업로드 된 파일 :<a href="/myProfile/download?fileName='+fileName+'">'+fileName+'</a><br>'+
+				'<br>업로드 된 파일 :<a href="/J1P4_PTP/myProfile/download?fileName='+fileName+'">'+fileName+'</a><br>'+
 				'<input type="hidden" name="p_responsibility" value="'+resp+'"><input type="hidden" name="portfolio_title" value="'+wf+'">'+
 				'<input type="hidden" name="file" value="'+fileName+'">'
 				);
@@ -743,7 +744,7 @@ function addFile(){
 			$(".saveButt").click(function(){
 				
 				$.ajax({
-					url:"/myProfile/modify",
+					url:"/J1P4_PTP/myProfile/modify",
 					type:"POST",
 					data : $("#modifyFm").serialize(),
 					success : function(){

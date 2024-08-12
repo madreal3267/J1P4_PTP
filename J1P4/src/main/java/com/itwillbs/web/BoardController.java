@@ -55,7 +55,7 @@ public class BoardController {
 	// http://localhost:8088/board/listPro
 	// 기본 페이지
 	@GetMapping(value = "/listPro")
-	public void list(Criteria cri, Model model, HttpServletRequest request,BMarkVO vo) {
+	public String list(Criteria cri, Model model, HttpServletRequest request,BMarkVO vo) {
 		logger.debug("/listPro 실행 ");
 		// 북마크 체크
 		Integer fn = (Integer)request.getSession().getAttribute("free_no");
@@ -93,7 +93,8 @@ public class BoardController {
 		
 		model.addAttribute("list", bService.pListPaging(cri));
 		model.addAttribute("pageMaker", new PageDTO(cri, pNum));
-
+		
+		return "/board/listPro";
 
 	}
 	// 정렬 후 페이지
@@ -238,7 +239,7 @@ public class BoardController {
 	
 	// 필터
 	@RequestMapping(value = "/listPro",method = RequestMethod.POST)
-	public void fiterList(@RequestParam("work_field") String work_field, Model model,ProjectVO pvo, Criteria cri, HttpServletRequest request) {
+	public String fiterList(@RequestParam("work_field") String work_field, Model model,ProjectVO pvo, Criteria cri, HttpServletRequest request) {
 		logger.debug("work_field : "+work_field);
 		
 		// 북마크 체크
@@ -264,7 +265,7 @@ public class BoardController {
 		
 		model.addAttribute("pageMaker", new PageDTO(cri, fiNum));
 	
-
+		return "/board/listPro";
 		
 	}
 	
@@ -307,7 +308,7 @@ public class BoardController {
 	
 	// http://localhost:8088/board/listFree
 	@GetMapping(value = "/listFree")
-	public void flist(Criteria cri, Model model, HttpServletRequest request) {
+	public String flist(Criteria cri, Model model, HttpServletRequest request) {
 		
 		// 북마크 체크
 		Integer ct = (Integer)request.getSession().getAttribute("ct_no");
@@ -345,6 +346,8 @@ public class BoardController {
 		
 		model.addAttribute("list", bService.fListPaging(cri));
 		model.addAttribute("pageMaker", new PageDTO(cri, pNum));
+		
+		return "/board/listFree";
 
 
 	}

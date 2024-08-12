@@ -49,7 +49,7 @@
 		</div>
 		
 		<!-- 프로필 사진 -->
-		<img src="../resources/증명1.jpg" alt="profile" width="100" height="100" class="border border-secondary rounded-circle my-4 mx-5">
+		<img src="${pageContext.request.contextPath}/resources/증명1.jpg" alt="profile" width="100" height="100" class="border border-secondary rounded-circle my-4 mx-5">
 	</div>
 	<!-- 프리랜서 상세페이지 상단 끝 -->
 </div>
@@ -513,7 +513,7 @@ $(function() {
 	$("#submitButt").click(function() {
 
 		$.ajax({
-			url : "/board/offerProj",
+			url : "/J1P4_PTP/board/offerProj",
 			type : "POST",
 			data : $("#fm1").serialize(),
 			success : function() {
@@ -555,7 +555,7 @@ console.log(ct_no);
 				console.log("빈하트 클릭");
 				
 				$.ajax({
-					url : '/board/dobMarkC',
+					url : '/J1P4_PTP/board/dobMarkC',
 					type: 'get',
 					data:{
 						free_no : free_no
@@ -575,7 +575,7 @@ console.log(ct_no);
 				console.log("하트 클릭");
 				
 				$.ajax({
-					url : '/board/deletebMarkC',
+					url : '/J1P4_PTP/board/deletebMarkC',
 					type: 'get',
 					data:{
 						free_no : free_no

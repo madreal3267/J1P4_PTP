@@ -257,10 +257,10 @@
 	최근 프로필 업데이트일은 ㅇㅇㅇ입니다. 
 <!-- 	<a href="" >내 프로필 관리 ></a> -->
 	  <c:if test="${sessionScope.user_type.equals('개인') or sessionScope.user_type.equals('팀') }">
-          <a href="/myProfile/profile?free_no=${sessionScope.free_no }" >내 프로필 관리</a>
+          <a href="/J1P4_PTP/myProfile/profile?free_no=${sessionScope.free_no }" >내 프로필 관리</a>
       </c:if>
       <c:if test="${sessionScope.user_type.equals('사업자') }">
-          <a href="/myProfile/profileB?free_no=${sessionScope.free_no }" >내 프로필 관리</a>
+          <a href="/J1P4_PTP/myProfile/profileB?free_no=${sessionScope.free_no }" >내 프로필 관리</a>
       </c:if>
 	</div>
 	<hr>
@@ -367,7 +367,7 @@
 
 		$("#submitButt").click(function() {
 			$.ajax({
-				url : "/board/applyProj",
+				url : "/J1P4_PTP/board/applyProj",
 				type : "POST",
 				data : $("#fm1").serialize(),
 				success : function() {
@@ -405,7 +405,7 @@ $(".heart-click").click(function(e){
 		console.log("빈하트 클릭");
 		
 		$.ajax({
-			url : '/board/dobMark',
+			url : '/J1P4_PTP/board/dobMark',
 			type: 'get',
 			data:{
 				proj_no : proj_no
@@ -425,7 +425,7 @@ $(".heart-click").click(function(e){
 		console.log("하트 클릭");
 		
 		$.ajax({
-			url : '/board/deletebMark',
+			url : '/J1P4_PTP/board/deletebMark',
 			type: 'get',
 			data:{
 				proj_no : proj_no

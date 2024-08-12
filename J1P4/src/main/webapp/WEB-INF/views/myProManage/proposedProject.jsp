@@ -35,21 +35,21 @@
 				<div class="list-group list-group-flush account-settings-links" style="width:274px;">
 					<h4 class="font-weight-bold py-1 mx-4 my-3">내 프로젝트 관리</h4>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManage/interestProject">관심프로젝트</a>
+					href="/J1P4_PTP/myProManage/interestProject">관심프로젝트</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManage/proposedProject">제안받은 프로젝트</a>
+					href="/J1P4_PTP/myProManage/proposedProject">제안받은 프로젝트</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManage/applyingProject">지원중</a>
+					href="/J1P4_PTP/myProManage/applyingProject">지원중</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManage/endApplyProject">지원종료</a>
+					href="/J1P4_PTP/myProManage/endApplyProject">지원종료</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManage/contractProject">계약 진행중</a>
+					href="/J1P4_PTP/myProManage/contractProject">계약 진행중</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManage/ongoingProject">프로젝트 진행중</a>
+					href="/J1P4_PTP/myProManage/ongoingProject">프로젝트 진행중</a>
 					<a class="list-group-item list-group-item-action"
-					href="${pageContext.request.contextPath}/myProManage/waitEvaluationProject">평가대기중</a>
+					href="/J1P4_PTP/myProManage/waitEvaluationProject">평가대기중</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManage/completedProject">완료한 프로젝트</a>
+					href="/J1P4_PTP/myProManage/completedProject">완료한 프로젝트</a>
 				</div>
 			</div>
 			<!-- 사이드 메뉴 끝 -->
@@ -92,7 +92,7 @@
 							
 						<!-- 하트위치 -->
 						<!-- 지원하기 -->
-							<form class="apply-form"  action="/projectDetail/applyProj" method="get">
+							<form class="apply-form"  action="/J1P4_PTP/projectDetail/applyProj" method="get">
 								<input type="hidden" name="free_no" value="${projDTO.free_no }"> 
 								<input type="hidden" name="proj_no" value="${projDTO.proj_no }">
 								<input style="float: right;"  class="btn btn-dark" type="submit" value="지원하기">

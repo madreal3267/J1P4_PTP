@@ -88,7 +88,7 @@ public class MemberController {
 		
 		mailSend.join(vo);
 		// 회원가입하기 눌렀을때 mailsend에 인증메일 확인링크를 클릭해달라는 페이지로 이동
-		return "redirect:/member/mailsend"; 
+		return "redirect:/J1P4_PTP/member/mailsend"; 
 	}
 		
 	

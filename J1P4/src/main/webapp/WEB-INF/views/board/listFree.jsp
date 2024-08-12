@@ -30,7 +30,7 @@
 <h3>${pNum} 명의 프리랜서가 등록되었습니다.</h3> <br>
 	<!-- 필터 -->
 	<div style="">
-<form action="/board/listFreeFi" method="post" id="fbtn" style="display: inline-block;">	
+<form action="/J1P4_PTP/board/listFreeFi" method="post" id="fbtn" style="display: inline-block;">	
 
 		<input type="radio" value="개발" class="btn-check" name="work_field" id="radioWf1"  <c:if test='${param.work_field eq "개발"}' >checked</c:if>> 
 		<label class="btn btn-outline-dark filterWf" for="radioWf1">⚙️ 개발</label> 
@@ -63,7 +63,7 @@
 				</div>
 				<div class="modal-body p-3">
 				<!-- form -->
-					<form action="/board/moFiListFree" method="post" id="fm1" name="fm1">
+					<form action="/J1P4_PTP/board/moFiListFree" method="post" id="fm1" name="fm1">
 						<h6 class="modalText"> 업무 분야 </h6> 
 						<input type="radio" value="개발" class="btn-check" name="work_field" id="radio1">
 						<label class="btn btn-outline-dark modalWf" for="radio1">⚙️ 개발</label>
@@ -268,10 +268,10 @@
     <!-- 제목 -->
    <div style="font-weight: bold; font-size: 20px; margin: 6px 0;">
    		<c:if test="${v.user_type eq '개인' or v.user_type eq '모임' }">
-        <a href="/board/detailListFree?free_no=${v.free_no}" class="titleCss">${v.oneline_bio }</a>
+        <a href="/J1P4_PTP/board/detailListFree?free_no=${v.free_no}" class="titleCss">${v.oneline_bio }</a>
         </c:if>
    		<c:if test="${v.user_type eq '사업자'}">
-        <a href="/board/detailListFreeC?free_no=${v.free_no}" class="titleCss">${v.oneline_bio }</a>
+        <a href="/J1P4_PTP/board/detailListFreeC?free_no=${v.free_no}" class="titleCss">${v.oneline_bio }</a>
         </c:if>
     </div>
 
@@ -335,7 +335,7 @@
     </ul>
 </div>
 	
-<form id='actionForm' action="/board/listFreeP" method='get'>
+<form id='actionForm' action="/J1P4_PTP/board/listFreeP" method='get'>
 	<input id="pageNum" type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
 	<input id ="amount" type='hidden' name='amount' value='${pageMaker.cri.amount}'>
 	<input id ="sn2" type='hidden' name='sn' value='reg_date'>
@@ -361,7 +361,7 @@ $(document).ready(function(){
 		actionForm.append("<input id ='region' type='hidden' name='region' value='${region}'>");
 		actionForm.append("<input id ='district' type='hidden' name='district' value='${district}'>");
 		actionForm.append("<input id ='modalCheck' type='hidden' name='modalCheck' value='${modalCheck}'>");
-		actionForm.attr("action","/board/moFiListFree");
+		actionForm.attr("action","/J1P4_PTP/board/moFiListFree");
 		actionForm.attr("method","post");
 		actionForm.submit();
 	}
@@ -384,7 +384,7 @@ $(document).ready(function(){
 			actionForm.append("<input id ='region' type='hidden' name='region' value='${region}'>");
 			actionForm.append("<input id ='district' type='hidden' name='district' value='${district}'>");
 			actionForm.append("<input id ='modalCheck' type='hidden' name='modalCheck' value='${modalCheck}'>");
-			actionForm.attr("action","/board/moFiListFree");
+			actionForm.attr("action","/J1P4_PTP/board/moFiListFree");
 			actionForm.attr("method","post");
 			actionForm.submit();
 		}
@@ -512,7 +512,7 @@ $(document).ready(function(){
 				console.log("빈하트 클릭");
 				
 				$.ajax({
-					url : '/board/dobMarkC',
+					url : '/J1P4_PTP/board/dobMarkC',
 					type: 'get',
 					data:{
 						free_no : free_no
@@ -532,7 +532,7 @@ $(document).ready(function(){
 				console.log("하트 클릭");
 				
 				$.ajax({
-					url : '/board/deletebMarkC',
+					url : '/J1P4_PTP/board/deletebMarkC',
 					type: 'get',
 					data:{
 						free_no : free_no

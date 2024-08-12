@@ -109,7 +109,7 @@ public class AccountController {
 	       
 	        aService.passwordUpdate(vo);
 	        
-	        return "redirect:/member/accountHOME";
+	        return "redirect:/J1P4_PTP/member/accountHOME";
 	    }
 		
 		

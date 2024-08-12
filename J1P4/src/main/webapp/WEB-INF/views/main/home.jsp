@@ -33,7 +33,7 @@
 	</div>
 	
 	<div id="mainImg">
-	<img src="/J1P4_PTP/resources/main2.png" style="width:500px;" alt="mainImg"/>
+	<img src="${pageContext.request.contextPath}/resources/main2.png" style="width:500px;" alt="mainImg"/>
 	</div>
 	
 	<!-- ============== 비회원 메인 메뉴 ================= -->
@@ -79,10 +79,10 @@
 <div style="position: relative; padding-top:80px;">
 	<h3 id="mainProjMenu">프로젝트 둘러보기</h3>
 	<div style="text-align: center;">
-		<button class="rounded-3 p-3 m-1 butt3" type="button" onclick = "location.href = '/board/listProP?pageNum=1&amount=6&sn=reg_date&work_field=개발'"><b>⚙️ 개발</b></button>
-		<button class="rounded-3 p-3 m-1 butt3" type="button" onclick = "location.href = '/board/listProP?pageNum=1&amount=6&sn=reg_date&work_field=기획'"><b>🛠️ 기획</b></button>
-		<button class="rounded-3 p-3 m-1 butt3" type="button" onclick = "location.href = '/board/listProP?pageNum=1&amount=6&sn=reg_date&work_field=디자인'"><b>🎨 디자인</b></button>
-		<button class="rounded-3 p-3 m-1 butt3" type="button" onclick = "location.href = '/board/listProP?pageNum=1&amount=6&sn=reg_date&work_field=퍼블리싱'"><b>🖋️ 퍼블리싱</b></button>
+		<button class="rounded-3 p-3 m-1 butt3" type="button" onclick = "location.href = '/J1P4_PTP/board/listProP?pageNum=1&amount=6&sn=reg_date&work_field=개발'"><b>⚙️ 개발</b></button>
+		<button class="rounded-3 p-3 m-1 butt3" type="button" onclick = "location.href = '/J1P4_PTP/board/listProP?pageNum=1&amount=6&sn=reg_date&work_field=기획'"><b>🛠️ 기획</b></button>
+		<button class="rounded-3 p-3 m-1 butt3" type="button" onclick = "location.href = '/J1P4_PTP/board/listProP?pageNum=1&amount=6&sn=reg_date&work_field=디자인'"><b>🎨 디자인</b></button>
+		<button class="rounded-3 p-3 m-1 butt3" type="button" onclick = "location.href = '/J1P4_PTP/board/listProP?pageNum=1&amount=6&sn=reg_date&work_field=퍼블리싱'"><b>🖋️ 퍼블리싱</b></button>
 	</div>
 </div>
 
@@ -91,57 +91,67 @@
   
 <div class="slider my-3">
 	<div class="image-box">
-	    <div><img class="logo" src="../resources/logo/logo_1.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_2.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_3.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_4.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_5.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_6.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_7.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_8.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_9.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_10.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_11.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_12.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_13.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_14.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_15.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_16.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_17.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_18.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_19.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_20.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_21.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_22.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_23.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_24.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_25.svg" alt=""></div>         
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_1.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_2.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_3.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_4.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/기렬.png" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/명규.png" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/연지.png" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/지영.png" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/지윤.png" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_5.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_6.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_7.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_8.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_9.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_10.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_11.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_12.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_13.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_14.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_15.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_16.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_17.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_18.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_19.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_20.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_21.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_22.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_23.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_24.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_25.svg" alt=""></div>         
 	    <!-- clone -->     
-	    <div><img class="logo" src="../resources/logo/logo_1.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_2.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_3.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_4.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_5.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_6.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_7.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_8.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_9.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_10.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_11.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_12.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_13.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_14.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_15.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_16.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_17.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_18.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_19.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_20.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_21.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_22.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_23.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_24.svg" alt=""></div>        
-	    <div><img class="logo" src="../resources/logo/logo_25.svg" alt=""></div>                
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_1.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_2.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_3.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_4.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/기렬.png" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/명규.png" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/연지.png" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/지영.png" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/지윤.png" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_5.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_6.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_7.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_8.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_9.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_10.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_11.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_12.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_13.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_14.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_15.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_16.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_17.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_18.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_19.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_20.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_21.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_22.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_23.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_24.svg" alt=""></div>        
+	    <div><img class="logo" src="${pageContext.request.contextPath}/resources/logo/logo_25.svg" alt=""></div>         
 	</div>
 </div>
 

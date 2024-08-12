@@ -44,7 +44,7 @@
 		</div>
 		
 		<!-- 프로필 사진 -->
-		<img src="../resources/차은우.jpg" alt="profile" width="100" height="100" class="border border-secondary rounded-circle my-4 mx-5">
+		<img src="${pageContext.request.contextPath}/resources/차은우.jpg" alt="profile" width="100" height="100" class="border border-secondary rounded-circle my-4 mx-5">
 	</div>
 	<!-- 프리랜서 상세페이지 상단 끝 -->
 </div>
@@ -317,7 +317,7 @@
 						<span style="padding-left: 20px;font-size: 18px; font-weight: bold;">${myPortf.portfolio_title }</span><br>
 						<span style="padding-left: 20px;">${myPortf.p_responsibility }</span><br>
 						<span style="padding-left: 20px;">
-						<a href="/myProfile/download?fileName=${myPortf.file }">${myPortf.file }</a></span><br>
+						<a href="/J1P4_PTP/myProfile/download?fileName=${myPortf.file }">${myPortf.file }</a></span><br>
 					</div>
 					</c:if>
 				</c:forEach>
@@ -330,10 +330,10 @@
 		<!-- 포트폴리오 탭 끝 -->
 		
 		<c:if test="${sessionScope.identB == 1}">
-		<button type="button" class="btn btn-dark" style="position: absolute; right:54px; top:25px;" onclick = "location.href = '/myProfile/modifyB?free_no=${sessionScope.free_no}'">수정하기</button>		
+		<button type="button" class="btn btn-dark" style="position: absolute; right:54px; top:25px;" onclick = "location.href = '/J1P4_PTP/myProfile/modifyB?free_no=${sessionScope.free_no}'">수정하기</button>		
 		</c:if>
 		<c:if test="${sessionScope.identB == 0}">
-		<button type="button" class="btn btn-dark" style="position: absolute; right:54px; top:15px;" onclick = "location.href = '/member/mypage'">신원인증</button>
+		<button type="button" class="btn btn-dark" style="position: absolute; right:54px; top:15px;" onclick = "location.href = '/J1P4_PTP/member/mypage'">신원인증</button>
 		<div style="position: absolute; right:54px; top:57px; font-size: 12px;">
 		신원인증이 필요합니다.
 		</div>		

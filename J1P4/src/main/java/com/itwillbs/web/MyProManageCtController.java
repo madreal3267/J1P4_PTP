@@ -44,7 +44,7 @@ public class MyProManageCtController {
 	// 관심 프리랜서 목록 조회
 	// http://localhost:8088/myProManageCt/interestFreelancer
 	@RequestMapping(value = "/interestFreelancer",method = RequestMethod.GET)
-	public void interestFreelancerList(HttpSession session, Model model) {
+	public String interestFreelancerList(HttpSession session, Model model) {
 		logger.debug("/interestFreelancer -> interestFreelancerList() 호출");
 //		//임의로 세션에 user_id 입력 
 //		session.setAttribute("user_id", "jyjeon");
@@ -54,12 +54,14 @@ public class MyProManageCtController {
 		logger.debug("interestFreelancerList : " + interestFreelancerList.size());
 		
 		model.addAttribute("interestFreelancerList", interestFreelancerList);
+		
+		return "/myProManageCt/interestFreelancer";
 	}
 	
 	// 제안한 프리랜서 목록 조회
 	// http://localhost:8088/myProManageCt/proposeFreelancer
 	@RequestMapping(value = "/proposeFreelancer",method = RequestMethod.GET)
-	public void proposeFreelancerList(HttpSession session, Model model) {
+	public String proposeFreelancerList(HttpSession session, Model model) {
 		logger.debug("/proposeFreelancer -> proposeFreelancerList() 호출");
 		
 		String user_id = (String)session.getAttribute("user_id");
@@ -68,12 +70,14 @@ public class MyProManageCtController {
 		logger.debug("proposeFreelancerList : " + proposeFreelancerList.size());
 		
 		model.addAttribute("proposeFreelancerList", proposeFreelancerList);
+		
+		return "/myProManageCt/proposeFreelancer";
 	}		
 	
 	// 검수중 프로젝트 목록 조회
 	// http://localhost:8088/myProManageCt/underReviewProject
 	@RequestMapping(value = "/underReviewProject",method = RequestMethod.GET)
-	public void underReviewProjectList(HttpSession session, Model model) {
+	public String underReviewProjectList(HttpSession session, Model model) {
 		logger.debug("/underReviewProject -> underReviewProjectList() 호출");
 		
 		String user_id = (String)session.getAttribute("user_id");
@@ -82,6 +86,8 @@ public class MyProManageCtController {
 		logger.debug("underReviewProjectList : " + underReviewProjectList.size());
 		
 		model.addAttribute("underReviewProjectList", underReviewProjectList);		
+		
+		return "/myProManageCt/underReviewProject";
 	}	
 	
 	// 검수중 프로젝트 목록 - 프로젝트 삭제하기
@@ -97,13 +103,13 @@ public class MyProManageCtController {
 		// 삭제 성공 정보를 전달
 		rttr.addFlashAttribute("msg", "deleteProject");
 		
-		return "redirect:/myProManageCt/underReviewProject";
+		return "redirect:/J1P4_PTP/myProManageCt/underReviewProject";
 	}
 	
 	// 임시저장 프로젝트 목록 조회
 	// http://localhost:8088/myProManageCt/temSaveProject
 	@RequestMapping(value = "/temSaveProject",method = RequestMethod.GET)
-	public void temSaveProjectList(HttpSession session, Model model) {
+	public String temSaveProjectList(HttpSession session, Model model) {
 		logger.debug("/temSaveProject -> temSaveProjectList() 호출");
 		
 		String user_id = (String)session.getAttribute("user_id");
@@ -111,7 +117,9 @@ public class MyProManageCtController {
 		List<ProjectVO> temSaveProjectList = myService.temSaveProjectList(user_id);
 		logger.debug("temSaveProjectList : " + temSaveProjectList.size());
 		
-		model.addAttribute("temSaveProjectList", temSaveProjectList);		
+		model.addAttribute("temSaveProjectList", temSaveProjectList);	
+		
+		return "/myProManageCt/temSaveProject";
 	}		
 	
 	// 임시저장 프로젝트 목록 - 프로젝트 삭제하기
@@ -127,13 +135,13 @@ public class MyProManageCtController {
 		// 삭제 성공 정보를 전달
 		rttr.addFlashAttribute("msg", "deleteProject");
 		
-		return "redirect:/myProManageCt/temSaveProject";
+		return "redirect:/J1P4_PTP/myProManageCt/temSaveProject";
 	}
 	
 	// 등록실패 프로젝트 목록 조회
 	// http://localhost:8088/myProManageCt/regFailedProject
 	@RequestMapping(value = "/regFailedProject",method = RequestMethod.GET)
-	public void regFailedProjectList(HttpSession session, Model model) {
+	public String regFailedProjectList(HttpSession session, Model model) {
 		logger.debug("/regFailedProject -> regFailedProjectList() 호출");
 		
 		String user_id = (String)session.getAttribute("user_id");
@@ -141,13 +149,15 @@ public class MyProManageCtController {
 		List<ProjectVO> regFailedProjectList = myService.regFailedProjectList(user_id);
 		logger.debug("regFailedProjectList : " + regFailedProjectList.size());
 		
-		model.addAttribute("regFailedProjectList", regFailedProjectList);		
+		model.addAttribute("regFailedProjectList", regFailedProjectList);	
+		
+		return "/myProManageCt/regFailedProject";
 	}		
 	
 	// 지원자 모집중 프로젝트 목록 조회
 	// http://localhost:8088/myProManageCt/recruitingProject
 	@RequestMapping(value = "/recruitingProject",method = RequestMethod.GET)
-	public void recruitingProjectList(HttpSession session, Model model) {
+	public String recruitingProjectList(HttpSession session, Model model) {
 		logger.debug("/recruitingProject -> recruitingProjectList() 호출");
 		
 		String user_id = (String)session.getAttribute("user_id");
@@ -155,7 +165,9 @@ public class MyProManageCtController {
 		List<proposeFreeDTO> recruitingProjectList = myService.recruitingProjectList(user_id);
 		logger.debug("recruitingProjectList : " + recruitingProjectList.size());
 		
-		model.addAttribute("recruitingProjectList", recruitingProjectList);		
+		model.addAttribute("recruitingProjectList", recruitingProjectList);	
+		
+		return "/myProManageCt/recruitingProject";
 	}		
 	
 	// 지원자 모집중 프로젝트 목록 - 지원 거절
@@ -166,7 +178,7 @@ public class MyProManageCtController {
 		myService.rejectApply(pfdto);
 		rttr.addFlashAttribute("msg", "rejectApply");
 		
-		return "redirect:/myProManageCt/recruitingProject";
+		return "redirect:/J1P4_PTP/myProManageCt/recruitingProject";
 	}
 	
 	// 지원자 모집중 프로젝트 목록 - 계약 제안
@@ -180,7 +192,7 @@ public class MyProManageCtController {
 		myService.offerContract(pfdto);
 		rttr.addFlashAttribute("msg", "offerContract");
 		
-		return "redirect:/myProManageCt/recruitingProject";
+		return "redirect:/J1P4_PTP/myProManageCt/recruitingProject";
 	}
 	
 	// 지원자 모집중 프로젝트 목록 - 모집완료
@@ -191,13 +203,13 @@ public class MyProManageCtController {
 		myService.recruitmentCompleted(pfdto);
 		rttr.addFlashAttribute("msg", "recruitmentCompleted");
 		
-		return "redirect:/myProManageCt/recruitingProject";
+		return "redirect:/J1P4_PTP/myProManageCt/recruitingProject";
 	}
 	
 	// 계약 진행중 프로젝트 목록 조회
 	// http://localhost:8088/myProManageCt/ctContractProject
 	@RequestMapping(value = "/ctContractProject",method = RequestMethod.GET)
-	public void ctContractProjectList(HttpSession session, Model model) {
+	public String ctContractProjectList(HttpSession session, Model model) {
 		logger.debug("/ctContractProject -> ctContractProjectList() 호출");
 		
 		String user_id = (String)session.getAttribute("user_id");
@@ -205,13 +217,15 @@ public class MyProManageCtController {
 		List<ProjectVO> ctContractProjectList = myService.ctContractProjectList(user_id);
 		logger.debug("ctContractProjectList : " + ctContractProjectList.size());
 		
-		model.addAttribute("ctContractProjectList", ctContractProjectList);		
+		model.addAttribute("ctContractProjectList", ctContractProjectList);
+		
+		return "/myProManageCt/ctContractProject";
 	}		
 	
 	// 프로젝트 진행중 목록 조회
 	// http://localhost:8088/myProManageCt/ctOngoingProject
 	@RequestMapping(value = "/ctOngoingProject",method = RequestMethod.GET)
-	public void ctOngoingProjectList(HttpSession session, Model model) {
+	public String ctOngoingProjectList(HttpSession session, Model model) {
 		logger.debug("/ctOngoingProject -> ctOngoingProjectList() 호출");
 		
 		String user_id = (String)session.getAttribute("user_id");
@@ -219,7 +233,9 @@ public class MyProManageCtController {
 		List<ctOngoingProjectDTO> ctOngoingProjectList = myService.ctOngoingProjectList(user_id);
 		logger.debug("ctOngoingProjectList : " + ctOngoingProjectList.size());
 		
-		model.addAttribute("ctOngoingProjectList", ctOngoingProjectList);		
+		model.addAttribute("ctOngoingProjectList", ctOngoingProjectList);	
+		
+		return "/myProManageCt/ctOngoingProject";
 	}		
 	
 	// 프로젝트 진행중 프로젝트 - 결제하기
@@ -230,7 +246,7 @@ public class MyProManageCtController {
 		
 		rttr.addFlashAttribute("msg", "payment");
 		
-		return "redirect:/myProManageCt/ctOngoingProject";
+		return "redirect:/J1P4_PTP/myProManageCt/ctOngoingProject";
 	}
 	
 	// 프로젝트 진행중 프로젝트 - 완료하기
@@ -241,13 +257,13 @@ public class MyProManageCtController {
 		
 		rttr.addFlashAttribute("msg", "requestSettlement");
 		
-		return "redirect:/myProManageCt/ctOngoingProject";
+		return "redirect:/J1P4_PTP/myProManageCt/ctOngoingProject";
 	}
 	
 	// 평가 대기중 프리랜서 목록 조회
 	// http://localhost:8088/myProManageCt/waitEvaluationFreelancer
 	@RequestMapping(value = "/waitEvaluationFreelancer",method = RequestMethod.GET)
-	public void waitEvaluationFreelancerList(HttpSession session ,Model model) {
+	public String waitEvaluationFreelancerList(HttpSession session ,Model model) {
 		logger.debug("/waitEvaluationFreelancer -> waitEvaluationFreelancerList() 호출");
 		
 		String user_id = (String)session.getAttribute("user_id");
@@ -269,6 +285,8 @@ public class MyProManageCtController {
 		} else {
 		    logger.debug("No freelancer found for evaluation.");
 		}
+		
+		return "/myProManageCt/waitEvaluationFreelancer";
 	}	
 	
 	// 평가 대기중 프리랜서 - 평가하기
@@ -279,13 +297,13 @@ public class MyProManageCtController {
 		
 		rttr.addFlashAttribute("msg", "evaluateOK");
 		
-		return "redirect:/myProManageCt/completedFreelancer";
+		return "redirect:/J1P4_PTP/myProManageCt/completedFreelancer";
 	}			
 	
 	// 완료한 프로젝트의 평가완료 프리랜서 목록 조회
 	// http://localhost:8088/myProManageCt/completedFreelancer
 	@RequestMapping(value = "/completedFreelancer",method = RequestMethod.GET)
-	public void completedFreelancerList(HttpSession session, Model model) {
+	public String completedFreelancerList(HttpSession session, Model model) {
 		logger.debug("/completedFreelancer -> completedFreelancerList() 호출");
 		
 		String user_id = (String)session.getAttribute("user_id");
@@ -293,7 +311,9 @@ public class MyProManageCtController {
 		List<EvaluateFreelancerDTO> completedFreelancerList = myService.completedFreelancerList(user_id);
 		logger.debug("completedFreelancerList : " + completedFreelancerList.size());
 		
-		model.addAttribute("completedFreelancerList", completedFreelancerList);		
+		model.addAttribute("completedFreelancerList", completedFreelancerList);	
+		
+		return "/myProManageCt/completedFreelancer";
 	}	
 	
 	// 완료한 프로젝트 - 프리랜서 평가 수정하기
@@ -305,7 +325,7 @@ public class MyProManageCtController {
 		
 		rttr.addFlashAttribute("msg", "modifyOK");
 		
-		return "redirect:/myProManageCt/completedFreelancer";
+		return "redirect:/J1P4_PTP/myProManageCt/completedFreelancer";
 	}	
 	
 }
