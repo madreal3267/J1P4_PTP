@@ -44,7 +44,7 @@ public class MailSendServiceImpl implements MailSendService{
 						"<br/>"+vo.getUser_id()+"님 "+
 						"<br/>PTP에 회원가입해주셔서 감사합니다."+
 						"<br/>아래 [이메일 인증 확인]을 눌러주세요."+
-						"<a href='http://localhost:8088/member/registerEmail?user_email=" + vo.getUser_email() +
+						"<a href='http://localhost:8088/J1P4_PTP/member/registerEmail?user_email=" + vo.getUser_email() +
 						"&key=" + key +
 						"' target='_blank'>이메일 인증 확인</a>");
 		mailhandler.setFrom("itwil_j1p4@naver.com", "PTP");

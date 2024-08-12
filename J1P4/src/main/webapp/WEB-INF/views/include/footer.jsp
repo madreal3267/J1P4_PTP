@@ -22,11 +22,11 @@
 			$("#projButt").click(function(){
 // 				alert("@@@@@");
 				if("${sessionScope.ident }"== 1 || "${sessionScope.identB}"== 1){
-					location.href="/enroll/enrollProj";
+					location.href="/J1P4_PTP/enroll/enrollProj";
 				} else {
 					alert("신원인증이 필요합니다");
 					
-					location.href="/member/mypage";
+					location.href="/J1P4_PTP/member/mypage";
 				}
 				
 			});

@@ -18,30 +18,30 @@
 	<div class="card overflow-hidden card-2" >
 		<div class="row no-gutters row-bordered row-border-light">
 
-		    <!-- 사이드 메뉴 시작 -->
-			<div class="col-md-3 pt-0">
+		    		    <!-- 사이드 메뉴 시작 -->
+			<div class="col-md-3 pt-0" >
 				<div class="list-group list-group-flush account-settings-links" style="width:274px;">
 					<h4 class="font-weight-bold py-1 mx-4 my-3">내 프로젝트 관리</h4>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/interestFreelancer">관심 프리랜서</a>
+					href="/J1P4_PTP/myProManageCt/interestFreelancer">관심 프리랜서</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/proposeFreelancer">제안한 프리랜서</a>
+					href="/J1P4_PTP/myProManageCt/proposeFreelancer">제안한 프리랜서</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/underReviewProject">검수중</a>
+					href="/J1P4_PTP/myProManageCt/underReviewProject">검수중</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/temSaveProject">임시저장</a>
+					href="/J1P4_PTP/myProManageCt/temSaveProject">임시저장</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/regFailedProject">등록실패</a>
+					href="/J1P4_PTP/myProManageCt/regFailedProject">등록실패</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/recruitingProject">지원자 모집중 </a>
+					href="/J1P4_PTP/myProManageCt/recruitingProject">지원자 모집중 </a>
 					<a class="list-group-item list-group-item-action"
-					href="${pageContext.request.contextPath}/myProManageCt/ctContractProject">계약 진행중</a>
+					href="/J1P4_PTP/myProManageCt/ctContractProject">계약 진행중</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/ctOngoingProject">프로젝트 진행중</a>
+					href="/J1P4_PTP/myProManageCt/ctOngoingProject">프로젝트 진행중</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/waitEvaluationFreelancer">평가대기중</a>
+					href="/J1P4_PTP/myProManageCt/waitEvaluationFreelancer">평가대기중</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/completedFreelancer">완료한 프로젝트</a>
+					href="/J1P4_PTP/myProManageCt/completedFreelancer">완료한 프로젝트</a>
 				</div>
 			</div>
 			<!-- 사이드 메뉴 끝 -->
@@ -76,9 +76,9 @@
 						                    </c:if>
 						                    <tr>
 						                        <td rowspan="${rowCount+1}" id="proj${status.index}">
-						                        	<a id="linkG" href="/board/detailList?proj_no=${proFreeDTO.proj_no }">${proFreeDTO.proj_title}</a>
+						                        	<a id="linkG" href="/J1P4_PTP/board/detailList?proj_no=${proFreeDTO.proj_no }">${proFreeDTO.proj_title}</a>
 						                        </td>
-						                        <td><a id="linkG" href="/board/detailListFreeC?free_no=${proFreeDTO.free_no }">${proFreeDTO.free_id}</a></td>
+						                        <td><a id="linkG" href="/J1P4_PTP/board/detailListFreeC?free_no=${proFreeDTO.free_no }">${proFreeDTO.free_id}</a></td>
 						                        <td>
 						                        	<c:set var="skillList" value="${proFreeDTO.skills }" />
 														<c:forEach items="${fn:split(skillList, ',')}" var="skill">
@@ -87,7 +87,7 @@
 												</td>
 						                        <td>${proFreeDTO.yeoncha} </td>
 						                        <td> 
-						                        <form action="/myProManageCt/rejectApply" method="post" style="display: inline-block;">
+						                        <form action="/J1P4_PTP/myProManageCt/rejectApply" method="post" style="display: inline-block;">
 						                            <input type="hidden" name="proj_no" value="${proFreeDTO.proj_no}">
 						                            <input type="hidden" name="free_no" value="${proFreeDTO.free_no}">
 						                            <button style="background-color: #31b9a9; color: white;" type="submit" class="btn">지원 거절</button>
@@ -104,7 +104,7 @@
 						                    <!-- 수정된 부분 시작: 모집완료 버튼을 합치기 위해 rowspan 추가 -->
 						                    <td rowspan="${rowCount + 1}" id="complete${status.index}">
 						                        <!-- <button type="submit" class="btn btn-danger">모집완료</button> -->
-						                       <form action="/myProManageCt/recruitmentCompleted" method="post">
+						                       <form action="/J1P4_PTP/myProManageCt/recruitmentCompleted" method="post">
 						                     		<input type="hidden" name="proj_no" value="${proFreeDTO.proj_no}">
 						                       		<button type="submit" class="btn btn-dark">모집완료</button>
 						                       </form>
@@ -125,7 +125,7 @@
 												</td>
 						                        <td>${proFreeDTO.yeoncha} </td>
 						                        <td>
-												 <form action="/myProManageCt/rejectApply" method="post">
+												 <form action="/J1P4_PTP/myProManageCt/rejectApply" method="post">
 						                            <input type="hidden" name="proj_no" value="${proFreeDTO.proj_no}">
 						                            <input type="hidden" name="free_no" value="${proFreeDTO.free_no}">
 						                            <button style="background-color: #31b9a9; color: white;" type="submit" class="btn">지원 거절</button>
@@ -143,7 +143,7 @@
 						                    <c:if test="${prevProjectName != proFreeDTO.proj_title}">
 						                        <td rowspan="${rowCount + 1}" id="complete${status.index}">
 						                            <!-- <button type="submit" class="btn btn-danger">모집완료</button> -->
-						                            <form action="/myProManageCt/recruitmentCompleted" method="post">
+						                            <form action="/J1P4_PTP/myProManageCt/recruitmentCompleted" method="post">
 						                                <input type="hidden" name="proj_no" value="${proFreeDTO.proj_no}">
 						                                <button type="submit" class="btn btn-dark">모집완료</button>
 						                            </form>
@@ -167,7 +167,7 @@
 						            </c:if>
 						            
 				<!-- modal 창 -->
-				<form action="/myProManageCt/offerContract" method="post">
+				<form action="/J1P4_PTP/myProManageCt/offerContract" method="post">
 					<div class="modal fade" id="modal-${proFreeDTO.free_no}">
 						<div class="modal-dialog">
 							<div class="modal-content">

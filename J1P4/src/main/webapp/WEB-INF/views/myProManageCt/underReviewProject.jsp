@@ -19,30 +19,30 @@
 	<div class="card overflow-hidden card-2" >
 		<div class="row no-gutters row-bordered row-border-light">
 
-		    <!-- 사이드 메뉴 시작 -->
-			<div class="col-md-3 pt-0">
+		    		    <!-- 사이드 메뉴 시작 -->
+			<div class="col-md-3 pt-0" >
 				<div class="list-group list-group-flush account-settings-links" style="width:274px;">
 					<h4 class="font-weight-bold py-1 mx-4 my-3">내 프로젝트 관리</h4>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/interestFreelancer">관심 프리랜서</a>
+					href="/J1P4_PTP/myProManageCt/interestFreelancer">관심 프리랜서</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/proposeFreelancer">제안한 프리랜서</a>
+					href="/J1P4_PTP/myProManageCt/proposeFreelancer">제안한 프리랜서</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/underReviewProject">검수중</a>
+					href="/J1P4_PTP/myProManageCt/underReviewProject">검수중</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/temSaveProject">임시저장</a>
+					href="/J1P4_PTP/myProManageCt/temSaveProject">임시저장</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/regFailedProject">등록실패</a>
+					href="/J1P4_PTP/myProManageCt/regFailedProject">등록실패</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/recruitingProject">지원자 모집중 </a>
+					href="/J1P4_PTP/myProManageCt/recruitingProject">지원자 모집중 </a>
 					<a class="list-group-item list-group-item-action"
-					href="${pageContext.request.contextPath}/myProManageCt/ctContractProject">계약 진행중</a>
+					href="/J1P4_PTP/myProManageCt/ctContractProject">계약 진행중</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/ctOngoingProject">프로젝트 진행중</a>
+					href="/J1P4_PTP/myProManageCt/ctOngoingProject">프로젝트 진행중</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/waitEvaluationFreelancer">평가대기중</a>
+					href="/J1P4_PTP/myProManageCt/waitEvaluationFreelancer">평가대기중</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/completedFreelancer">완료한 프로젝트</a>
+					href="/J1P4_PTP/myProManageCt/completedFreelancer">완료한 프로젝트</a>
 				</div>
 			</div>
 			<!-- 사이드 메뉴 끝 -->
@@ -67,7 +67,7 @@
 							</tr>
 							<c:forEach var="projectVO" items="${underReviewProjectList}">
 								<tr>
-									<td><a id="linkG" href="/board/detailList?proj_no=${projectVO.proj_no }">${projectVO.proj_title }</a></td>
+									<td><a id="linkG" href="/J1P4_PTP/board/detailList?proj_no=${projectVO.proj_no }">${projectVO.proj_title }</a></td>
 									<td class="text-center">
 									${projectVO.reg_date.substring(0, 10)} ~ ${projectVO.deadline }
 									</td>
@@ -113,7 +113,7 @@
 
 		// '삭제하기' 버튼 클릭시 삭제후 현재 페이지로 redirect
 		$(".btn-danger").click(function(){
-			$("form[role='form']").attr("action","/myProManageCt/underReviewProject");
+			$("form[role='form']").attr("action","/J1P4_PTP/myProManageCt/underReviewProject");
 			$("form[role='form']").submit();
 		});
 		

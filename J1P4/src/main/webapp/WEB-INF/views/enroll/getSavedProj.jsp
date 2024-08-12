@@ -256,6 +256,7 @@
 		<!-- [추가하기] 클릭 시 추가되는 기술 리스트 출력되는 공간 -->
 		
 		<c:forEach var="sk" items="${resultSk }">
+		${sk }
 		<p><div class="border border-1 rounded-3 p-2" role="group" style="width: 700px; margin-bottom: 20px;">
 		<button class="removeButt btn-close" aria-label="Close" style="width: 1px; position: absolute; right:78px;"></button>
 		<input type="hidden" value="${sk.skill_nm }" name="skill_nm"><input type="hidden" value="${sk.skill_lev }" name="skill_lev">

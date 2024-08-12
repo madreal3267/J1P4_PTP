@@ -46,7 +46,7 @@
 	
 	<update id="multiSaveSk">
 		update skill set skill_nm=#{skill_nm},skill_lev=#{skill_lev},temporary=#{temporary}
-		where proj_no=(select c.proj_no from (select max(proj_no) as proj_no from project where ct_no = (select ct_no from client where ct_id = #{user_id})) c)
+		where proj_no=((select max(proj_no) as proj_no from project where ct_no = (select ct_no from client where ct_id = #{user_id})))
 		and temporary = "임시저장"
 	</update>
 	
@@ -70,12 +70,12 @@
         union all select 7 union all select 8
         union all select 9 union all select 10) numbers INNER JOIN skill
         on char_length (skill.skill_nm) - char_length(replace(skill.skill_nm,',',''))>=numbers.n-1
-		where proj_no = #{proj_no} and user_id = #{user_id}
+		where proj_no = #{proj_no}
 	</select>
 	
 	<select id="getSavedReg" resultType="com.itwillbs.domain.RegionVO">
 		select * from region
-		where proj_no = #{proj_no} and user_id = #{user_id}
+		where proj_no = #{proj_no}
 	</select>
 	
 	<update id="savedProjSave">

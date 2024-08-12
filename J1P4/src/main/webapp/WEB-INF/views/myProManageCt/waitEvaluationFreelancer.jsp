@@ -31,30 +31,30 @@
 	<div class="card overflow-hidden card-2" >
 		<div class="row no-gutters row-bordered row-border-light">
 
-		    <!-- 사이드 메뉴 시작 -->
+		    		    <!-- 사이드 메뉴 시작 -->
 			<div class="col-md-3 pt-0" >
 				<div class="list-group list-group-flush account-settings-links" style="width:274px;">
 					<h4 class="font-weight-bold py-1 mx-4 my-3">내 프로젝트 관리</h4>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/interestFreelancer">관심 프리랜서</a>
+					href="/J1P4_PTP/myProManageCt/interestFreelancer">관심 프리랜서</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/proposeFreelancer">제안한 프리랜서</a>
+					href="/J1P4_PTP/myProManageCt/proposeFreelancer">제안한 프리랜서</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/underReviewProject">검수중</a>
+					href="/J1P4_PTP/myProManageCt/underReviewProject">검수중</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/temSaveProject">임시저장</a>
+					href="/J1P4_PTP/myProManageCt/temSaveProject">임시저장</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/regFailedProject">등록실패</a>
+					href="/J1P4_PTP/myProManageCt/regFailedProject">등록실패</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/recruitingProject">지원자 모집중 </a>
+					href="/J1P4_PTP/myProManageCt/recruitingProject">지원자 모집중 </a>
 					<a class="list-group-item list-group-item-action"
-					href="${pageContext.request.contextPath}/myProManageCt/ctContractProject">계약 진행중</a>
+					href="/J1P4_PTP/myProManageCt/ctContractProject">계약 진행중</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/ctOngoingProject">프로젝트 진행중</a>
+					href="/J1P4_PTP/myProManageCt/ctOngoingProject">프로젝트 진행중</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/waitEvaluationFreelancer">평가대기중</a>
+					href="/J1P4_PTP/myProManageCt/waitEvaluationFreelancer">평가대기중</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/completedFreelancer">완료한 프로젝트</a>
+					href="/J1P4_PTP/myProManageCt/completedFreelancer">완료한 프로젝트</a>
 				</div>
 			</div>
 			<!-- 사이드 메뉴 끝 -->
@@ -70,8 +70,8 @@
 							<i class="fa fa-fw fa-exclamation"></i>평가는 평가 기간 내에만 작성하실 수 있습니다.<hr>
 						<c:forEach var="freeDTO" items="${waitEvaluationFreelancerList}">
 							<div class="project-item">
-								<a style="font-size: x-large;" id="linkG" href="/board/detailListFreeC?free_no=${freeDTO.free_no }">${freeDTO.name }</a><br><br>
-								<a id="linkG" href="/board/detailList?proj_no=${freeDTO.proj_no }">${freeDTO.proj_title}</a>
+								<a style="font-size: x-large;" id="linkG" href="/J1P4_PTP/board/detailListFreeC?free_no=${freeDTO.free_no }">${freeDTO.name }</a><br><br>
+								<a id="linkG" href="/J1P4_PTP/board/detailList?proj_no=${freeDTO.proj_no }">${freeDTO.proj_title}</a>
 								<span style="float: right;">
 								작성기간 <fmt:formatDate value="${freeDTO.mod_date }" pattern="yyyy-MM-dd"/>-<span id="formatted-date-${freeDTO.free_no}"></span>
 								</span>
@@ -81,7 +81,7 @@
 								<div class="modal fade  text-center" id="modal-${freeDTO.free_no}">
 									<div class="modal-dialog">
 										<div class="modal-content">
-											<form action="/myProManageCt/waitEvaluationFreelancer" method="post">
+											<form action="/J1P4_PTP/myProManageCt/waitEvaluationFreelancer" method="post">
 												<div class="modal-header">
 													<h4 class="modal-title">프리랜서 평가하기</h4>
 													<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>

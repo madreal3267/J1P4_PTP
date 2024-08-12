@@ -12,30 +12,30 @@
 <div class="container light-style flex-grow-1 container-p-y" style="width:1100px; ">
 	<div class="card overflow-hidden card-2" >
 		<div class="row no-gutters row-bordered row-border-light">
-		    <!-- 사이드 메뉴 시작 -->
-			<div class="col-md-3 pt-0">
+		    		    <!-- 사이드 메뉴 시작 -->
+			<div class="col-md-3 pt-0" >
 				<div class="list-group list-group-flush account-settings-links" style="width:274px;">
 					<h4 class="font-weight-bold py-1 mx-4 my-3">내 프로젝트 관리</h4>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/interestFreelancer">관심 프리랜서</a>
+					href="/J1P4_PTP/myProManageCt/interestFreelancer">관심 프리랜서</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/proposeFreelancer">제안한 프리랜서</a>
+					href="/J1P4_PTP/myProManageCt/proposeFreelancer">제안한 프리랜서</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/underReviewProject">검수중</a>
+					href="/J1P4_PTP/myProManageCt/underReviewProject">검수중</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/temSaveProject">임시저장</a>
+					href="/J1P4_PTP/myProManageCt/temSaveProject">임시저장</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/regFailedProject">등록실패</a>
+					href="/J1P4_PTP/myProManageCt/regFailedProject">등록실패</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/recruitingProject">지원자 모집중 </a>
+					href="/J1P4_PTP/myProManageCt/recruitingProject">지원자 모집중 </a>
 					<a class="list-group-item list-group-item-action"
-					href="${pageContext.request.contextPath}/myProManageCt/ctContractProject">계약 진행중</a>
+					href="/J1P4_PTP/myProManageCt/ctContractProject">계약 진행중</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/ctOngoingProject">프로젝트 진행중</a>
+					href="/J1P4_PTP/myProManageCt/ctOngoingProject">프로젝트 진행중</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/waitEvaluationFreelancer">평가대기중</a>
+					href="/J1P4_PTP/myProManageCt/waitEvaluationFreelancer">평가대기중</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/completedFreelancer">완료한 프로젝트</a>
+					href="/J1P4_PTP/myProManageCt/completedFreelancer">완료한 프로젝트</a>
 				</div>
 			</div>
 			<!-- 사이드 메뉴 끝 -->
@@ -71,8 +71,8 @@
 			                                    <c:set var="rowCount" value="0" />
 			                                </c:if>
 			                                <tr>
-			                                    <td rowspan="1" id="proj${status.index}"><a id="linkG" href="/board/detailList?proj_no=${proFreeDTO.proj_no }">${proFreeDTO.proj_title}</a></td>
-			                                    <td><a id="linkG" href="/board/detailListFreeC?free_no=${proFreeDTO.free_no }">${proFreeDTO.name}</a></td>
+			                                    <td rowspan="1" id="proj${status.index}"><a id="linkG" href="/J1P4_PTP/board/detailList?proj_no=${proFreeDTO.proj_no }">${proFreeDTO.proj_title}</a></td>
+			                                    <td><a id="linkG" href="/J1P4_PTP/board/detailListFreeC?free_no=${proFreeDTO.free_no }">${proFreeDTO.name}</a></td>
 			                                    <td>${proFreeDTO.skills}</td>
 			                                    <td>${proFreeDTO.yeoncha}</td>
 			                                    <td><b>${proFreeDTO.apply_YN}</b></td>

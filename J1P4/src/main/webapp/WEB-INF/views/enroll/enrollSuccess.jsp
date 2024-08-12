@@ -28,13 +28,13 @@
  <div class="card overflow-hidden card-2 py-5" >
   <div class="row no-gutters row-bordered row-border-light">
   	<div style="text-align: center">
-	<h5 style="font-weight: normal;">등록 요청한 프로젝트는 PTP 전문 매니저의 24시간 내 최종 검수를 거쳐 등록됩니다.<br><br>
+	<h5 style="font-weight: normal;">${sessionScope.user_id }등록 요청한 프로젝트는 PTP 전문 매니저의 24시간 내 최종 검수를 거쳐 등록됩니다.<br><br>
 	문제 발생 시 프로젝트 등록이 반려될 수 있으며<br>
 	프로젝트 등록 여부는 <b>[내 프로젝트 관리]</b>에서 확인 가능합니다.
 	</h5>
 	<br><hr><br>
-	<button type="button" class="btn btn-dark" onclick="location.href='/myProManageCt/underReviewProject'">내 프로젝트 관리</button>
-	<button type="button" class="btn btn-outline-dark" onclick="location.href='/board/listFree'">프리랜서 찾기</button>
+	<button type="button" class="btn btn-dark" onclick="location.href='/J1P4_PTP/myProManageCt/underReviewProject'">내 프로젝트 관리</button>
+	<button type="button" class="btn btn-outline-dark" onclick="location.href='/J1P4_PTP/board/listFree'">프리랜서 찾기</button>
   	</div>	
 	
 	</div>

@@ -34,25 +34,25 @@
 				<div class="list-group list-group-flush account-settings-links" style="width:274px;">
 					<h4 class="font-weight-bold py-1 mx-4 my-3">내 프로젝트 관리</h4>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/interestFreelancer">관심 프리랜서</a>
+					href="/J1P4_PTP/myProManageCt/interestFreelancer">관심 프리랜서</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/proposeFreelancer">제안한 프리랜서</a>
+					href="/J1P4_PTP/myProManageCt/proposeFreelancer">제안한 프리랜서</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/underReviewProject">검수중</a>
+					href="/J1P4_PTP/myProManageCt/underReviewProject">검수중</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/temSaveProject">임시저장</a>
+					href="/J1P4_PTP/myProManageCt/temSaveProject">임시저장</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/regFailedProject">등록실패</a>
+					href="/J1P4_PTP/myProManageCt/regFailedProject">등록실패</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/recruitingProject">지원자 모집중 </a>
+					href="/J1P4_PTP/myProManageCt/recruitingProject">지원자 모집중 </a>
 					<a class="list-group-item list-group-item-action"
-					href="${pageContext.request.contextPath}/myProManageCt/ctContractProject">계약 진행중</a>
+					href="/J1P4_PTP/myProManageCt/ctContractProject">계약 진행중</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/ctOngoingProject">프로젝트 진행중</a>
+					href="/J1P4_PTP/myProManageCt/ctOngoingProject">프로젝트 진행중</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/waitEvaluationFreelancer">평가대기중</a>
+					href="/J1P4_PTP/myProManageCt/waitEvaluationFreelancer">평가대기중</a>
 					<a class="list-group-item list-group-item-action" 
-					href="${pageContext.request.contextPath}/myProManageCt/completedFreelancer">완료한 프로젝트</a>
+					href="/J1P4_PTP/myProManageCt/completedFreelancer">완료한 프로젝트</a>
 				</div>
 			</div>
 			<!-- 사이드 메뉴 끝 -->
@@ -74,8 +74,8 @@
 					<hr>
 					<c:forEach var="cflDTO" items="${completedFreelancerList}">
 						<div class="box-header with-border project-item">
-							<h5><a id="linkG" href="/board/detailListFreeC?free_no=${cflDTO.free_no }">${cflDTO.name }</a></h5>
-							<a id="linkG" href="/board/detailList?proj_no=${cflDTO.proj_no }">${cflDTO.proj_title }</a><br>
+							<h5><a id="linkG" href="/J1P4_PTP/board/detailListFreeC?free_no=${cflDTO.free_no }">${cflDTO.name }</a></h5>
+							<a id="linkG" href="/J1P4_PTP/board/detailList?proj_no=${cflDTO.proj_no }">${cflDTO.proj_title }</a><br>
 								<button style="float: right;" type="button" class="btn btn-dark  apply-form" data-toggle="modal" data-target="#modal-${cflDTO.free_no}">수정하기</button>
 							<div class="rating-display">
 								<c:set var="score" value="${cflDTO.score}" />
@@ -99,7 +99,7 @@
 										<div class="modal fade text-center" id="modal-${cflDTO.free_no}">
 											<div class="modal-dialog">
 												<div class="modal-content">
-													<form action="/myProManageCt/completedFreelancer" method="post">
+													<form action="/J1P4_PTP/myProManageCt/completedFreelancer" method="post">
 														<div class="modal-header">
 															<h4 class="modal-title">프로젝트 평가하기</h4>
 															<button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
