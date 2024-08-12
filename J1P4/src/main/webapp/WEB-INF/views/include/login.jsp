@@ -11,9 +11,9 @@
 <meta charset="UTF-8">
 <title>프투프 PTP</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="../resources/css/header.css" rel="stylesheet" />
-<link href="../resources/css/login.css" rel="stylesheet" />
-<link href="../resources/css/main.css" rel="stylesheet" />
+<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" />
+<link href="${pageContext.request.contextPath}/resources/css/login.css" rel="stylesheet" />
+<link href="${pageContext.request.contextPath}/resources/css/main.css" rel="stylesheet" />
 </head>
 <body style="padding-top: 75px;">
 

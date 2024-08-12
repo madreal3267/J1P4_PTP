@@ -150,7 +150,7 @@
 			* 에스크로는 거래의 안전성을 위한 보호장치로 클라이언트와 프리랜서 모두에게 이점이 있습니다.
         	</p>
         	<br>
-        	<img width="800" height="400" alt="에스크로" src="../../resources/스크린샷(2).png">
+        	<img width="800" height="400" alt="에스크로" src="${pageContext.request.contextPath}/resources/스크린샷(2).png">
         	
         	
          <!-- 본문 내용 끝 -->
