@@ -22,7 +22,7 @@
 		</div>
 	</div>
 
-	<form action="${pageContext.request.contextPath}/enroll/enrollProj" method="post" id="fm1" name="fm1" class="fm">
+	<form action="/J1P4_PTP/enroll/enrollProj" method="post" id="fm1" name="fm1" class="fm">
 		<input type="hidden" value="${sessionScope.user_id }" name="user_id">
 		<input type="hidden" value="" name="temporary" class="temporary">
 	

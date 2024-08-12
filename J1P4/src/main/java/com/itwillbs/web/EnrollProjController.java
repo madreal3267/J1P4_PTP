@@ -43,10 +43,12 @@ public class EnrollProjController {
 	// 프로젝트 등록 페이지 연결
 	// http://localhost:8088/enroll/enrollProj
 	@GetMapping(value="/enrollProj")
-	public void enrollProjGET() {
+	public String enrollProjGET() {
 		logger.debug(" Controller : ( •̀ ω •́ )y /enrollProj -> enrollGET() 실행 ");
 		
 		logger.debug(" Controller : ( •̀ ω •́ )y /views/enroll/enrollProj.jsp 페이지 연결 ");
+		
+		return "/enroll/enrollProj";
 		
 	}
 	
@@ -60,7 +62,7 @@ public class EnrollProjController {
 		eService.insertReg(rVO);
      
 		
-		return "redirect:/enroll/enrollSuccess";
+		return "redirect:/J1P4_PTP/enroll/enrollSuccess";
 	}
 	
 	
@@ -90,7 +92,7 @@ public class EnrollProjController {
 		eService.multiSaveSk(sVO);
 		eService.multiSaveReg(rVO);
 		
-		return "redirect:/enroll/enrollSuccess";
+		return "redirect:/J1P4_PTP/enroll/enrollSuccess";
 		
 	}
 	
@@ -109,11 +111,12 @@ public class EnrollProjController {
 	// 프로젝트 등록 후 성공 페이지
 	// http://localhost:8088/enroll/enrollSuccess
 	@GetMapping(value="/enrollSuccess")
-	public void enrollProjSuccessGET() {
+	public String enrollProjSuccessGET() {
 		logger.debug(" Controller : ( •̀ ω •́ )y /enrollSuccess -> enrollSuccessGET() 실행 ");
 		
 		logger.debug(" Controller : ( •̀ ω •́ )y /views/enroll/enrollSuccess.jsp 페이지 연결 ");
 		
+		return "/enroll/enrollSuccess";
 	}
 	
 	// ----------------------------- 머지 후 파트 분리 해야됨 -----------------------------
@@ -181,7 +184,7 @@ public class EnrollProjController {
 		eService.savedSkSave(sVO);
 		eService.savedRegSave(rVO);
 		
-		return "redirect:/enroll/enrollSuccess";
+		return "redirect:/J1P4_PTP/enroll/enrollSuccess";
 		
 	}
 	

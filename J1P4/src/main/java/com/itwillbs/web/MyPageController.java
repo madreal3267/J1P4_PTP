@@ -29,8 +29,10 @@ public class MyPageController {
 	//은행계좌 추가
 	// http://localhost:8088/member/mypage
 	@GetMapping(value = "/mypage")
-	public void enrollBankGET() {
+	public String enrollBankGET() {
 		logger.debug("/bank ->  enrollBankGET()호출 ");
+		
+		return "/member/mypage";
 	}
 	
 	@PostMapping(value = "/bank")

@@ -64,8 +64,10 @@ public class MemberController {
 	//회원정보를 입력하는 것은 DB가 필요없으니깐 매개변수가 없는 것!
 	// 정보를 보여주는 형태는 - GET
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
-	public void insertjoinGET() {
+	public String insertjoinGET() {
 		logger.debug("/insert -> insertjoinGET() 호출 ");
+		
+		return "/member/insert";
 	
 
 	}
@@ -93,8 +95,9 @@ public class MemberController {
 	//회원가입 버튼을 누르면 mailsend와  연결해주기 위해서 매핑을 한번 더 해야함.
 	//http://localhost:8088/member/mailsend
 	@RequestMapping(value = "/mailsend", method = RequestMethod.GET)
-	public void test(HttpSession session) {
+	public String test(HttpSession session) {
 //		session.invalidate();
+		return "/member/mailsend";
 	}
 	
 	
@@ -126,12 +129,14 @@ public class MemberController {
 		//프리랜서, 클라이언트 유형 선택 -> 개인,팀,사업자 선택하는 페이지
 		// http://localhost:8088/member/registerEmail
 		@GetMapping(value = "/registerEmail")
-		public void typeGET( HttpSession session, String user_email, String user_id) {
+		public String typeGET( HttpSession session, String user_email, String user_id) {
 		
 			user_id = mService.chkEmail(user_email);
 			
 
 			session.setAttribute("user_id",user_id);
+			
+			return "/member/registerEmail";
 		
 		}
 		
@@ -172,7 +177,7 @@ public class MemberController {
 			
 			session.invalidate();
 			
-			return"redirect:/main/home";
+			return"redirect:/J1P4_PTP/main/home";
 		}
 	
 
@@ -211,7 +216,7 @@ public class MemberController {
 			if(mService.memberDelete(vo).equals("탈퇴")) {
 				logger.info("탈퇴한 회원");
 
-				return "redirect:/main/home";
+				return "redirect:/J1P4_PTP/main/home";
 			}
 			
 			MemberVO resultVO= mService.memberLogin(vo);
@@ -236,12 +241,12 @@ public class MemberController {
 					Session.setAttribute("identB", mService.chkIdentB(id));
 //				}
 				
-				return"redirect:/main/home";
+				return"redirect:/J1P4_PTP/main/home";
 				
 			}else {
 				Session.setAttribute("user_id", null);
 				logger.debug("로그인 실패");
-				return "redirect:/include/login";
+				return "redirect:/J1P4_PTP/include/login";
 			}
 			
 		}
@@ -260,7 +265,7 @@ public class MemberController {
 			logger.debug("/logoutPOST()호출");
 			session.invalidate();//세션무효화
 			
-			return "redirect:/main/home";
+			return "redirect:/J1P4_PTP/main/home";
 		}
 		
 		
@@ -294,8 +299,8 @@ public class MemberController {
 	}
 	
 	@GetMapping(value = "/findId")
-	public void findIdGET() {
-		
+	public String findIdGET() {
+		return "/member/findId";
 	}
 	
 	//Post로 처리하고, count한 값이 0이면 
@@ -309,8 +314,8 @@ public class MemberController {
 	//비밀번호 찾기 페이지 
 	// http://localhost:8088/member/pwfind
 	@RequestMapping(value = "/pwfind", method = RequestMethod.GET)
-	public void search_pw() {
-		
+	public String search_pw() {
+		return "/member/pwfind";
 	}
 	
 	
@@ -341,7 +346,7 @@ public class MemberController {
 							"<br/>"+vo.getUser_id()+"님 "+
 							"<br/>비밀번호 변경을 위해서"+
 							"<br/>아래 [비밀번호 변경하기]를 눌러주세요."+
-							"<a href='http://localhost:8088/member/findpw?user_email=" + vo.getUser_email() +
+							"<a href='http://localhost:8088/J1P4_PTP/member/findpw?user_email=" + vo.getUser_email() +
 							"&key=" + key +
 							"' target='_blank'>비밀번호 변경하기</a>");
 			mailhandler.setFrom("itwil_j1p4@naver.com", "PTP");
@@ -372,9 +377,10 @@ public class MemberController {
 	//변경한 비밀번호 DB에 전달
 	
 	@GetMapping(value = "/findpw")
-	public void main(HttpServletRequest request, Model model, String user_email) throws Exception {
+	public String main(HttpServletRequest request, Model model, String user_email) throws Exception {
 		logger.debug("비번변경 Post()호출");
 		
+		return "/member/findpw";
 		
 	}
 	
@@ -403,7 +409,7 @@ public class MemberController {
 			model.addAttribute("msg", msg);
 		}
 		
-		return "redirect:/member/login";
+		return "redirect:/J1P4_PTP/member/login";
 	}
 	
 	
@@ -433,11 +439,11 @@ public class MemberController {
 		logger.info("########### user_id ######## :"+user_id);
 		
 		if(!(pass.equals(user_pw))) {
-			return "redirect:/member/account";
+			return "redirect:/J1P4_PTP/member/account";
 		}else {
 			mService.typeDelete(user_id);
 			session.invalidate();
-			return"redirect:/main/home";
+			return"redirect:/J1P4_PTP/main/home";
 			
 		}
 		

@@ -29,16 +29,16 @@
 <header class="mb-3 border-bottom" style="background-color:#fff; position: fixed; top: 0; left: 0; right: 0; z-index: 999;">
     <div class="container p-3" style="width: 1100px;">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="${pageContext.request.contextPath}/main/home" class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
+        <a href="/J1P4_PTP/main/home" class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
          <img src="${pageContext.request.contextPath}/resources/ptp_logo.png" alt="logo" height="50" class="nav-r1"/>
         </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" >
-          <li><a href="${pageContext.request.contextPath}/board/listPro" class="nav-link px-3 link-body-emphasis nav-r1">프로젝트 찾기</a></li>
-          <li><a href="${pageContext.request.contextPath}/board/listFree" class="nav-link px-3 link-body-emphasis nav-r1">프리랜서 찾기</a></li>
-          <li><a href="${pageContext.request.contextPath}/member/guide" class="nav-link px-3 link-body-emphasis nav-r1">이용방법</a></li>
-          <li><a href="${pageContext.request.contextPath}/member/login" class="nav-link px-2 link-body-emphasis nav-r4">로그인</a></li>
-          <li><a href="${pageContext.request.contextPath}/member/insert" class="nav-link px-2 link-body-emphasis nav-r4">회원가입</a></li>
+          <li><a href="/J1P4_PTP/board/listPro" class="nav-link px-3 link-body-emphasis nav-r1">프로젝트 찾기</a></li>
+          <li><a href="/J1P4_PTP/board/listFree" class="nav-link px-3 link-body-emphasis nav-r1">프리랜서 찾기</a></li>
+          <li><a href="/J1P4_PTP/member/guide" class="nav-link px-3 link-body-emphasis nav-r1">이용방법</a></li>
+          <li><a href="/J1P4_PTP/member/login" class="nav-link px-2 link-body-emphasis nav-r4">로그인</a></li>
+          <li><a href="/J1P4_PTP/member/insert" class="nav-link px-2 link-body-emphasis nav-r4">회원가입</a></li>
         </ul>
         
       </div>

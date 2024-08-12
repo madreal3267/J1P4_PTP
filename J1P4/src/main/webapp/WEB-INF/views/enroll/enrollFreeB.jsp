@@ -22,7 +22,7 @@ h5 {
 <!-- JQuery -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js' integrity='sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==' crossorigin='anonymous'></script>
 <!-- enrollFree.css -->
-<link href="../resources/css/enrollFree.css" rel="stylesheet" />
+<link href="${pageContext.request.contextPath}/resources/css/enrollFree.css" rel="stylesheet" />
 <!-- select2 (검색되는 select) CSS -->
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <!-- 부트스트랩 CSS -->
